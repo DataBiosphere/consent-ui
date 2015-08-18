@@ -1,0 +1,64 @@
+<div ng-include src="'app/header/header.html'"></div>
+<div class="container" ng-controller="DatasetCatalog">
+    <div class="row no-margin">
+        <h2 class="col-lg-9 col-md-9 col-sm-9 col-xs-8 cm-title common-color no-padding">
+            <img src="assets/images/icon_dataset.png" alt="Reviewed cases icon" class="cm-icons">Dataset Catalog<br>
+            <div class="cm-title-description">List of datasets with an associated DUL to apply for secondary use.</div>
+        </h2>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 search-catalog">
+            <div class="search-text">
+                <i class="glyphicon glyphicon-search common-color"></i>
+                <input type="search" class="form-control users-search" placeholder="Enter search term..." ng-model="searchDataset"/>
+            </div>
+        </div>
+    </div>
+    <div class="table-wrap">
+        <div class="table-scroll">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="table-titles common-color large-cell">Dataset Name</th>
+                        <th class="table-titles common-color medium-cell">Data Type</th>
+                        <th class="table-titles common-color small-cell">Species</th>
+                        <th class="table-titles common-color medium-cell">Phenotype Indicator</th>
+                        <th class="table-titles common-color small-cell"># of Participants</th>
+                        <th class="table-titles common-color large-cell">Description</th>
+                        <th class="table-titles common-color small-cell">dbGAP</th>
+                        <th class="table-titles common-color medium-cell">Data Depositor</th>
+                        <th class="table-titles common-color medium-cell">Principal Investigator</th>
+                        <th class="table-titles common-color small-cell">Dataset ID</th>
+                        <th class="table-titles common-color small-cell">Consent ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="election in DatasetCatalog.electionsList.dul | filter: searchDataset">
+                        <td class="table-items large-cell">{{election.datasetName}}</td>
+                        <td class="table-items medium-cell">{{election.dataType}}</td>
+                        <td class="table-items small-cell">{{election.species}}</td>
+                        <td class="table-items medium-cell">{{election.phenotype}}</td>
+                        <td class="table-items small-cell">{{election.participants}}</td>
+                        <td class="table-items large-cell">{{election.description}}</td>
+                        <td class="table-items small-cell">
+                            <a href="{{election.database.url}}" class="{{election.database.available}}">Link</a>
+                        </td>
+                        <td class="table-items medium-cell">{{election.dataDepositor}}</td>
+                        <td class="table-items medium-cell">{{election.investigator}}</td>
+                        <td class="table-items small-cell">{{election.datasetID}}</td>
+                        <td class="table-items small-cell">{{election.consentID}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="catalog-pagination">
+            <ul class="pagination">
+                <li><a ng-click="DatasetCatalog.changePage('dul', DatasetCatalog.activePage.dul - 1)">&laquo;</a></li>
+                <li ng-repeat="page in DatasetCatalog.currentPages.dul">
+                    <a ng-click="DatasetCatalog.changePage('dul', page)"
+                       ng-class="{'active-case': DatasetCatalog.activePage.dul == page}">{{page + 1}}</a>
+                </li>
+                <li><a ng-click="DatasetCatalog.changePage('dul', DatasetCatalog.activePage.dul + 1)">&raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+

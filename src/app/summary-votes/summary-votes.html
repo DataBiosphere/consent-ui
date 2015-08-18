@@ -11,12 +11,12 @@
                 <img src="assets/images/icon_dul.png" alt="Translation icon" class="pvotes-icons">Data Use Limitations Statistics<br>
                 <div class="pvotes-box-title-description">Summary of votes on whether the consent limitations were accurately converted into a structured format</div>
             </h2>
-            <a  download="content.txt" ng-href="{{SummaryVotes.downloadUrl}}"  name="Download" class="col-lg-3 col-md-3 col-sm-4 col-xs-12 download-button dul-background"><span>Download stats</span><span class="cm-icon-button glyphicon glyphicon-download caret-margin" aria-hidden="true"></span></a>
+            <a download="content.txt" ng-href="{{SummaryVotes.downloadUrl}}" name="Download" class="col-lg-3 col-md-3 col-sm-4 col-xs-12 download-button dul-background"><span>Download stats</span><span class="cm-icon-button glyphicon glyphicon-download caret-margin" aria-hidden="true"></span></a>
         </div>
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="jumbotron box-vote-singleresults">
-                    <h4 class="cm-results-subtitle">Total cases: <span class="dul-color">{{SummaryVotes.chartData.dulTotal[1][1] + SummaryVotes.chartData.dulTotal[2][1]}}</span></h4><!--REPLACE THIS WITH DINAMYC CONTENT-->
+                    <h4 class="cm-results-subtitle">Total cases: <span class="dul-color">{{SummaryVotes.chartData.dulTotal[1][1] + SummaryVotes.chartData.dulTotal[2][1]}}</span></h4>
                     <div class="row">
                         <hr class="box-separator-white separator-margin">
                         <div cm-chart cm-chart-data="SummaryVotes.chartData.dulTotal"
@@ -26,7 +26,7 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="jumbotron box-vote-singleresults">
-                    <h4 class="cm-results-subtitle">Reviewed cases: <span class="dul-color">{{SummaryVotes.chartData.dulReviewed[1][1] + SummaryVotes.chartData.dulReviewed[2][1]}}</span></h4><!--REPLACE THIS WITH DINAMYC CONTENT-->
+                    <h4 class="cm-results-subtitle">Reviewed cases: <span class="dul-color">{{SummaryVotes.chartData.dulReviewed[1][1] + SummaryVotes.chartData.dulReviewed[2][1]}}</span></h4>
                     <div class="row">
                         <hr class="box-separator-white separator-margin">
                         <div cm-chart cm-chart-data="SummaryVotes.chartData.dulReviewed"
@@ -35,19 +35,17 @@
                 </div>
             </div>
         </div>
-
-        <!--THE CODE BELOW CORRESPONDING TO ACCESS STATISTICS WON'T BE IMPLEMENTED YET-->
         <div class="row">
             <h2 class="col-lg-9 col-md-9 col-sm-8 col-xs-12 pvotes-box-title access-color">
                 <img src="assets/images/icon_access.png" alt="Access icon" class="pvotes-icons">Data Access Request Statistics<br>
                 <div class="pvotes-box-title-description">Summary of votes on whether the researcher should be allowed to access a research study</div>
             </h2>
-            <a href="summary-tabfile.txt" download="summary-tabfile.txt" name="Download" class="col-lg-3 col-md-3 col-sm-4 col-xs-12 download-button access-background"><span>Download stats</span><span class="cm-icon-button glyphicon glyphicon-download caret-margin" aria-hidden="true"></span></a>
+            <a href="#" name="Download" class="col-lg-3 col-md-3 col-sm-4 col-xs-12 download-button access-background"><span>Download stats</span><span class="cm-icon-button glyphicon glyphicon-download caret-margin" aria-hidden="true"></span></a>
         </div>
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="jumbotron box-vote-singleresults">
-                    <h4 class="cm-results-subtitle">Total cases: <span class="access-color">{{SummaryVotes.chartData.accessTotal[1][1] + SummaryVotes.chartData.accessTotal[2][1]}}</span></h4><!--REPLACE THIS WITH DINAMYC CONTENT-->
+                    <h4 class="cm-results-subtitle">Total cases: <span class="access-color">{{SummaryVotes.chartData.accessTotal[1][1] + SummaryVotes.chartData.accessTotal[2][1]}}</span></h4>
                     <hr class="box-separator-white">
                     <div class="row">
                         <div cm-chart cm-chart-data="SummaryVotes.chartData.accessTotal"
@@ -57,7 +55,7 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="jumbotron box-vote-singleresults">
-                    <h4 class="cm-results-subtitle">Reviewed cases: <span class="access-color">{{SummaryVotes.chartData.accessReviewed[1][1] + SummaryVotes.chartData.accessReviewed[2][1]}}</span></h4><!--REPLACE THIS WITH DINAMYC CONTENT-->
+                    <h4 class="cm-results-subtitle">Reviewed cases: <span class="access-color">{{SummaryVotes.chartData.accessReviewed[1][1] + SummaryVotes.chartData.accessReviewed[2][1]}}</span></h4>
                     <hr class="box-separator-white">
                     <div class="row">
                         <div cm-chart cm-chart-data="SummaryVotes.chartData.accessReviewed"
