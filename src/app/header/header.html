@@ -37,7 +37,9 @@
                     <ul class="dropdown-menu user-dropdown" role="menu">
                         <li><a href="#/summary_votes" class="f-left">Votes Statistics</a></li>
                         <hr>
-                        <li><a href="#/reviewed_cases" class="f-left">Reviewed Cases Record</a></li>
+                        <li ng-show="$root.currentUser.memberStatus !== 'RESEARCHER'">
+                            <a href="#/reviewed_cases" class="f-left">Reviewed Cases Record</a>
+                        </li>
                     </ul>
                 </li>
                 <li><a href="#/dataset_catalog">Dataset Catalog</a></li>
