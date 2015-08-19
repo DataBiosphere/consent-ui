@@ -15,10 +15,17 @@
                 controller: 'ReviewedCases',
                 controllerAs: 'ReviewedCases',
                 data: {
-                    authorizedRoles: [USER_ROLES.admin]
+                    authorizedRoles: [USER_ROLES.member, USER_ROLES.chairperson, USER_ROLES.admin, USER_ROLES.alumni]
+                },
+                resolve: {
+                    reviewedConsents: function(cmElectionService){
+                        return cmElectionService.findReviewedConsents();
+                    },
+                    reviewedDRs: function(cmElectionService){
+                        return cmElectionService.findReviewedDRs();
+                    }
                 }
-
-        });
+            });
     }
 
 })();
