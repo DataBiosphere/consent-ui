@@ -35,12 +35,9 @@
 
             var modalInstance = $modal.open({
                 animation: false,
-                templateUrl: 'app/modals/modal-users/add-user-modal.html',
-                controller: 'ModalUsers',
-                controllerAs: 'ModalUsers',
-                resolve: {
-                             user: new Object()
-                         }
+                 templateUrl: 'app/modals/modal-users/add-user/add-user-modal.html',
+                 controller: 'ModalUsersAdd',
+                 controllerAs: 'ModalUsersAdd'
             });
 
             modalInstance.result.then(function (selectedItem) {//selectedItem - params to apply when the fc was successful
