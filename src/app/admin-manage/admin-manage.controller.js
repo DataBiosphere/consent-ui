@@ -37,28 +37,26 @@
             cmConsentService.findConsentManage(lists, vm);
         }
 
-        function openCreate (consentId) {
+        function openCreate(consentId) {
 
             var modalInstance = $modal.open({
                 animation: false,
-                templateUrl: 'app/modals/create-modal.html',
-                controller: 'Modal',
-                controllerAs: 'Modal',
+                templateUrl: 'app/modals/create-election-modal/create-modal.html',
+                controller: 'ModalCreate',
+                controllerAs: 'ModalCreate',
                 resolve: {
-                    consentId : function(){
+                    consentId: function () {
                         vm.selectedConsentId = consentId;
                     }
                 }
             });
 
             modalInstance.result.then(function () {
-                cmElectionService.createElection(vm.selectedConsentId).$promise.then(function() {
-                    init();
-                });
+
             });
         }
 
-        function openCancel (election) {
+        function openCancel(election) {
 
             var modalInstance = $modal.open({
                 animation: false,
@@ -66,7 +64,7 @@
                 controller: 'Modal',
                 controllerAs: 'Modal',
                 resolve: {
-                    election: function(){
+                    election: function () {
                         vm.selectedElection = election;
                     }
                 }
@@ -77,22 +75,22 @@
                 electionToUpdate.status = 'Canceled';
                 electionToUpdate.referenceId = vm.selectedElection.consentId;
                 electionToUpdate.electionId = vm.selectedElection.electionId;
-                cmElectionService.updateElection(electionToUpdate).$promise.then(function() {
+                cmElectionService.updateElection(electionToUpdate).$promise.then(function () {
                     init();
                 });
             });
-          }
+        }
 
-        function addDul () {
+        function addDul() {
 
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/dul-modal/add-dul-modal.html',
                 controller: 'DULModal',
                 controllerAs: 'DULModal',
-                 resolve: {
-                                consent: new Object()
-                          }
+                resolve: {
+                    consent: new Object()
+                }
             });
 
             modalInstance.result.then(function () {//selectedItem - params to apply when the fc was successful
@@ -103,7 +101,7 @@
             });
         }
 
-        function editDul (consentId) {
+        function editDul(consentId) {
 
             var modalInstance = $modal.open({
                 animation: false,
@@ -111,11 +109,11 @@
                 controller: 'DULModal',
                 controllerAs: 'DULModal',
                 resolve: {
-                consent: function(cmConsentService){
-                             return cmConsentService.findConsent(consentId);
-                         }
-                       }
-             });
+                    consent: function (cmConsentService) {
+                        return cmConsentService.findConsent(consentId);
+                    }
+                }
+            });
 
             modalInstance.result.then(function (selectedItem) {//selectedItem - params to apply when the fc was successful
                 //what to do if it was accepted
@@ -124,5 +122,7 @@
                 //what to do if the modal was canceled
             });
         }
+
+
     }
 })();

@@ -17,15 +17,15 @@
             $scope.user.roles = [];
         }
 
-           $scope.$on("chairpersonAlert", function (event, arg) {
-                                                     $scope.$apply(function () {
-                                                     if(arg.alert){
-                                                       $scope.changeChairpersonRoleAlert();
-                                                     }else{
-                                                       $scope.closeAlert();
-                                                     }
-                                                    });
-                                                   });
+        $scope.$on("chairpersonAlert", function (event, arg) {
+            $scope.$apply(function () {
+                if (arg.alert) {
+                    $scope.changeChairpersonRoleAlert();
+                } else {
+                    $scope.closeAlert();
+                }
+            });
+        });
 
         vm.ok = function (user) {
             cmUserService.postUser(user).$promise.then(
@@ -56,8 +56,8 @@
             $scope.alerts.splice(index, 1);
             $scope.alerts.push({
                 type: 'danger',
-                title: 'Conflicts to resolve!',
-                msg: 'You must delegate the user responsibilities.',
+                title: "Edition can't be made!",
+                msg: 'There must be at least one Admin in the system.',
                 alertType: 1
             });
         };
@@ -67,7 +67,7 @@
             $scope.alerts.push({
                 type: 'danger',
                 title: 'Conflicts to resolve!',
-                msg: 'You must create a new user to delegate responsibilities to.',
+                msg: 'If Chairperson is replaced, every open election will be canceled and re-opened with the new Chairperson assigned. Besides, the previous Chairperson is going to become an Alumni.',
                 alertType: 2
             });
         };

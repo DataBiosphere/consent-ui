@@ -1280,7 +1280,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     padding: 0 30px 20px 30px !important;
 }
 
-.modal-add-dul .admin-modal-footer button {
+.modal-add-dul .admin-modal-footer button{
     float: right;
     margin: 10px;
 }
@@ -1289,9 +1289,13 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     color: #777777;
 }
 
-.modal-add-dul .admin-modal-footer button:first-child {
+.modal-add-dul .admin-modal-footer button:first-child{
     color: #ffffff !important;
     margin-right: 0 !important;
+}
+
+.admin-modal-footer button:focus{
+    color: #ffffff !important;
 }
 
 .admin-modals {
@@ -1436,6 +1440,14 @@ input[type="checkbox"][disabled] + label {
 }
 
 /***************************************************Alerts*/
+
+.admin-create-alerts {
+    margin: 5px 10px 0 10px!important;
+}
+
+.admin-create-alerts .alert {
+   margin-bottom: 0!important;
+}
 
 .admin-alerts {
     margin: 20px;
