@@ -13,7 +13,7 @@
         </div>
         <div class="modal-footer admin-modal-footer">
             <button type="button" class="btn dismiss-background" ng-click='ModalCreate.cancel()'>No</button>
-            <button type="button" class="btn dul-background" ng-click='ModalCreate.ok()'>Yes</button>
+            <button type="button" ng-disabled="disableButton" class="btn dul-background" ng-click='ModalCreate.ok(consentId)'>Yes</button>
         </div>
     </div>
 </div>

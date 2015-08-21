@@ -5,16 +5,17 @@
         .controller('ModalCreate', ModalCreate);
 
     /* ngInject */
-    function ModalCreate($modalInstance, $scope, cmElectionService) {
+    function ModalCreate($modalInstance, $scope, $state, cmElectionService) {
 
         var vm = this;
-
-        vm.ok = function () {
-            cmElectionService.createElection(vm.selectedConsentId).$promise.then(
+        $scope.disableButton = false;
+        vm.ok = function (value) {
+            cmElectionService.createElection(value).$promise.then(
                 function (value) {
-                    $state.go('admin_manage_dul')
+                   $modalInstance.close();
                 }, function (value) {
                     $scope.createElectionAlert(0);
+                    $scope.disableButton = true;
                 });
         };
 

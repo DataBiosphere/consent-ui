@@ -5,7 +5,7 @@
         .controller('AdminManage', AdminManage);
 
     /* ngInject */
-    function AdminManage(cmPaginatorService, $modal, cmConsentService, cmElectionService) {
+    function AdminManage(cmPaginatorService, $modal, cmConsentService, cmElectionService, $scope) {
 
         var lists = {'dul': []};
         var list_max_items = 10;
@@ -38,21 +38,18 @@
         }
 
         function openCreate(consentId) {
-
+            $scope.consentId = consentId;
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/create-election-modal/create-modal.html',
                 controller: 'ModalCreate',
                 controllerAs: 'ModalCreate',
-                resolve: {
-                    consentId: function () {
-                        vm.selectedConsentId = consentId;
-                    }
-                }
+                scope: $scope
+
             });
 
             modalInstance.result.then(function () {
-
+                init();
             });
         }
 
