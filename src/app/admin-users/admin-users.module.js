@@ -2,6 +2,7 @@
     'use strict';
 
     angular
-        .module('cmAdminUsers', ['ui.router', 'ui.bootstrap', 'cmModal', 'cmModalUsers', 'cmUserRoles','cmUser']);
+         .module('cmAdminUsers', ['ui.router', 'ui.bootstrap', 'cmModal', 'cmModalUsersAdd','cmModalUsersEdit' , 'cmUserRoles','cmUser']);
+
 
 })();

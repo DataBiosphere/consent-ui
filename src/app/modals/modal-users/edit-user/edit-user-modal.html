@@ -1,0 +1,81 @@
+<div class="modal-dialog modal-add-dul">
+    <div class="modal-content">
+        <div class="modal-header admin-modal-header">
+            <button type="button" class=" modal-close-btn close" ng-click="ModalUsersEdit.cancel()"><span aria-hidden="true">&times;</span></button>
+            <h2 class="cm-title-admin common-color">
+                <img src="../assets/images/icon_edit_user.png" alt="Edit User icon" class="cm-icons">
+                <span>Edit User</span>
+                <div class="cm-title-description">Edit a User in the system</div>
+            </h2>
+        </div>
+        <div class="modal-footer">
+            <form class="form-horizontal" name="userForm" novalidate>
+                <fieldset>
+                    <div class="form-group admin-form-group first-form-group">
+                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label common-color">Name</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 admin-input">
+                            <input type="text" ng-model="user.displayName"
+                                   name="inputName"
+                                   class="form-control col-lg-12 vote-input"
+                                   placeholder="User name" required>
+                        </div>
+                    </div>
+                    <div class="form-group admin-form-group ">
+                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label common-color">Google account id</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 admin-input">
+                            <input type="email"  ng-model="user.email"
+                                   name="inputGoogleId"
+                                   class="form-control col-lg-12 vote-input"
+                                   placeholder="e.g. username@broadinstitute.org" required>
+                        </div>
+                    </div>
+                    <div  ng-show="!enableRolEdit" class="form-group admin-form-group ">
+                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label common-color">Roles</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="checkbox">
+                                    <input type="checkbox" id="MEMBER" class="checkbox-inline user-checkbox" ng-model="checkModel.MEMBER" add-role-edit ng-disabled="checkModel.CHAIRPERSON || checkModel.ALUMNI || checkModel.RESEARCHER" checked="checked" >
+                                    <label class="regular-checkbox rp-choice-questions" for="MEMBER">Member</label>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox" id="CHAIRPERSON" class="checkbox-inline user-checkbox" ng-model="checkModel.CHAIRPERSON" add-role-edit ng-disabled="checkModel.MEMBER || checkModel.ALUMNI || checkModel.RESEARCHER">
+                                    <label class="regular-checkbox rp-choice-questions" for="CHAIRPERSON">Chairperson</label>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox" id="ALUMNI" class="checkbox-inline user-checkbox" ng-model="checkModel.ALUMNI" add-role-edit ng-click="replaceRoleAlert()" ng-disabled="checkModel.MEMBER || checkModel.CHAIRPERSON">
+                                    <label class="regular-checkbox rp-choice-questions" for="ALUMNI">Alumni</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="checkbox">
+                                    <input id="ADMIN" type="checkbox" class="checkbox-inline user-checkbox" ng-model="checkModel.ADMIN" add-role-edit ng-click="newUserAlert()" >
+                                    <label class="regular-checkbox rp-choice-questions" for="ADMIN">Admin</label>
+                                </div>
+
+                                <div class="checkbox">
+                                    <input id="RESEARCHER" type="checkbox" class="checkbox-inline user-checkbox" ng-model="checkModel.RESEARCHER" add-role-edit  ng-click="replaceChairpersonAlert()" ng-disabled="checkModel.MEMBER || checkModel.CHAIRPERSON">
+                                    <label class="regular-checkbox rp-choice-questions" for="RESEARCHER">Researcher</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p  ng-show="enableRolEdit">*All the elections must be closed in order to edit User roles.</p>
+                    <div class="form-group alert-form-group">
+                        <div class="admin-alerts">
+                            <alert ng-repeat="alert in alerts" type="{{alert.type}}" class="alert-title cancel-color">
+                                <h4>{{alert.title}}</h4>{{alert.msg}}
+                                <div class="warning">{{alert.warning}}</div>
+                            </alert>
+                        </div>
+                    </div>
+                    <div class="admin-modal-footer">
+                        <a href="#/admin_users">
+                            <button  ng-disabled="userForm.$invalid || user.roles.length === 0 " class="col-lg-3 col-md-3 col-sm-4 col-xs-6 btn common-background" ng-click="ModalUsersEdit.edit(user)">Save</button>
+                        </a>
+                        <button class="col-lg-3 col-md-3 col-sm-4 col-xs-6 btn dismiss-background" ng-click="ModalUsersEdit.cancel()">Cancel</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

@@ -27,5 +27,8 @@
                     List: {method:'GET', isArray:true}
                 });
         })
-
+        .factory('openElectionsResource', function($resource, apiUrl){
+                    return $resource(apiUrl+"electionReview/openElection");
+                   });
 })();
+

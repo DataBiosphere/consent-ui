@@ -6,7 +6,7 @@
 
     /* ngInject */
 
-    function AdminUsers(cmPaginatorService, $modal, cmUserService) {
+    function AdminUsers(cmPaginatorService, $modal, cmUserService,cmElectionService) {
 
         var lists = {'dul': []};
         var list_max_items = 10;
@@ -44,12 +44,9 @@
 
             var modalInstance = $modal.open({
                 animation: false,
-                templateUrl: 'app/modals/modal-users/add-user-modal.html',
-                controller: 'ModalUsers',
-                controllerAs: 'ModalUsers',
-                resolve: {
-                    user: new Object()
-                }
+                templateUrl: 'app/modals/modal-users/add-user/add-user-modal.html',
+                controller: 'ModalUsersAdd',
+                controllerAs: 'ModalUsersAdd'
             });
 
             modalInstance.result.then(function () {
@@ -61,18 +58,21 @@
         function editUser(email) {
             var modalInstance = $modal.open({
                 animation: false,
-                templateUrl: 'app/modals/modal-users/edit-user-modal.html',
-                controller: 'ModalUsers',
-                controllerAs: 'ModalUsers',
+                templateUrl: 'app/modals/modal-users/edit-user/edit-user-modal.html',
+                controller: 'ModalUsersEdit',
+               controllerAs: 'ModalUsersEdit',
                 resolve: {
                     user: function (cmUserService) {
                         return cmUserService.findUser(email);
+                    },
+                   enableRolEdit: function (cmElectionService) {
+                                        return cmElectionService.openElections().$promise;
                     }
                 }
             });
 
             modalInstance.result.then(function (selectedItem) {
-
+                init();
             }, function () {
                 //what to do if the modal was canceled
             });
