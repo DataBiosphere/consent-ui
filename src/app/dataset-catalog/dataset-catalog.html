@@ -2,14 +2,14 @@
 <div class="container" ng-controller="DatasetCatalog">
     <div class="row no-margin">
         <h2 class="col-lg-6 col-md-6 col-sm-12 col-xs-12 cm-title dataset-color no-padding">
-            <img src="../assets/images/icon_dataset_.png" alt="Dataset Catalog icon" class="cm-icons">Dataset Catalog <br>
+            <img src="../assets/images/icon_dataset_.png" alt="Dataset Catalog icon" class="cm-icons">Dataset Catalog<br>
             <div class="cm-title-other-description">Datasets with an associated DUL to apply for secondary use.</div>
         </h2>
         <div class="f-right">
-            <a download="" ng-href="" name="Download" class="download-button dataset-download-button dataset-background">
+            <button download="" ng-disabled="objectIdList.length === 0" ng-click="DatasetCatalog.download(objectIdList)" class="download-button dataset-download-button dataset-background">
                 <span>Download selection</span>
                 <span class="cm-icon-button glyphicon glyphicon-download caret-margin" aria-hidden="true"></span>
-            </a>
+            </button>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 search-reviewed no-padding f-right">
             <div class="search-text">
@@ -21,50 +21,34 @@
     <div class="table-wrap">
         <form class="pos-relative">
             <div class="checkbox check-all">
-                <input type="checkbox" ng-model="selectAll" ng-click="checkAll()" class="checkbox-inline" id="all">
+                <input type="checkbox" select-all class="checkbox-inline" id="all">
                 <label class="regular-checkbox" for="all"></label>
             </div>
         </form>
         <div class="table-scroll">
             <table class="table">
                 <thead>
-                    <tr ng-repeat="election in DatasetCatalog.electionsList.properties">
-                        <th></th>
-                        <th class="table-titles dataset-color large-cell">{{election.id_01}}</th>
-                        <th class="table-titles dataset-color medium-cell">{{election.id_02}}</th>
-                        <th class="table-titles dataset-color small-cell">{{election.id_03}}</th>
-                        <th class="table-titles dataset-color medium-cell">{{election.id_04}}</th>
-                        <th class="table-titles dataset-color small-cell">{{election.id_05}}</th>
-                        <th class="table-titles dataset-color large-cell">{{election.id_06}}</th>
-                        <th class="table-titles dataset-color small-cell">{{election.id_07}}</th>
-                        <th class="table-titles dataset-color medium-cell">{{election.id_08}}</th>
-                        <th class="table-titles dataset-color medium-cell">{{election.id_09}}</th>
-                        <th class="table-titles dataset-color small-cell">{{election.id_10}}</th>
-                        <th class="table-titles dataset-color small-cell">{{election.id_11}}</th>
-                    </tr>
+                <tr>
+                    <th></th>
+                    <th ng-repeat="dictionary in DatasetCatalog.dataSetList.dictionary" class="table-titles dataset-color cell-size">{{dictionary.key}}</th>
+                    <th class="table-titles dataset-color cell-size">ConsentId</th>
+                 </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="election in DatasetCatalog.electionsList.catalog | filter: searchDataset">
-                        <th>
-                            <div class="checkbox no-margin no-padding">
-                                <input ng-model="Selected" id="{{election.datasetID}}" type="checkbox" class="checkbox-inline">
-                                <label class="regular-checkbox" for="{{election.datasetID}}"></label>
-                            </div>
-                        </th>
-                        <td class="table-items large-cell">{{election.datasetName}}</td>
-                        <td class="table-items medium-cell">{{election.dataType}}</td>
-                        <td class="table-items small-cell">{{election.species}}</td>
-                        <td class="table-items medium-cell">{{election.phenotype}}</td>
-                        <td class="table-items small-cell">{{election.participants}}</td>
-                        <td class="table-items large-cell">{{election.description}}</td>
-                        <td class="table-items small-cell">
-                            <a href="{{election.database.url}}" class="{{election.database.available}}">Link</a>
-                        </td>
-                        <td class="table-items medium-cell">{{election.dataDepositor}}</td>
-                        <td class="table-items medium-cell">{{election.investigator}}</td>
-                        <td class="table-items small-cell">{{election.datasetID}}</td>
-                        <td class="table-items small-cell">{{election.consentID}}</td>
-                    </tr>
+                <tr ng-repeat="dataSet in DatasetCatalog.dataSetList.catalog | filter: searchDataset">
+                    <td ng-repeat="property in dataSet.properties"  ng-if="property.propertyName =='Dataset ID'">
+                        <div class="checkbox" >
+                            <input type="checkbox" id="{{property.propertyValue}}"   ng-model="checkMod['field_' + $parent.$parent.$index]" ng-change="optionToggled()" class="checkbox-inline user-checkbox" add-object-id >
+                            <label class="regular-checkbox rp-choice-questions" for="{{property.propertyValue}}" ></label>
+                        </div>
+                    </td>
+                    <td ng-repeat="property in dataSet.properties" class="table-items">
+                        <p ng-if="property.propertyName !=='dbGAP' " >{{property.propertyValue}}</p>
+                        <a href="{{property.propertyValue}}" target="_blank"   ng-if="property.propertyName =='dbGAP' && property.propertyValue.length > 0  "  class="enabled">Link</a>
+                        <a href="{{property.propertyValue}}" ng-if="property.propertyName =='dbGAP' && property.propertyValue.length === 0   "  class="disabled">Link</a>
+                        <td class="table-items">{{dataSet.consentId}}</td>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -80,4 +64,3 @@
         </div>
     </div>
 </div>
-

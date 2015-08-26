@@ -1021,7 +1021,6 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 .download-button, .admin-add-button {
     float: right;
     font-size: 15px;
-    padding: 8px 15px 0 15px !important;
 }
 
 .download-button {
@@ -1030,6 +1029,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 
 .admin-add-button {
     margin: 35px 0 0 0;
+    padding: 8px 15px 0 15px !important;
 }
 
 .upload-button {
