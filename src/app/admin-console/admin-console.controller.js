@@ -35,10 +35,17 @@
 
             var modalInstance = $modal.open({
                 animation: false,
-                 templateUrl: 'app/modals/modal-users/add-user/add-user-modal.html',
-                 controller: 'ModalUsersAdd',
-                 controllerAs: 'ModalUsersAdd'
+                templateUrl: 'app/modals/dataset-modal/dataset-modal.html',
+                controller: 'DataSetModal',
+                controllerAs: 'DataSetModal'
             });
+
+            //var modalInstance = $modal.open({
+            //    animation: false,
+            //     templateUrl: 'app/modals/modal-users/add-user/add-user-modal.html',
+            //     controller: 'ModalUsersAdd',
+            //     controllerAs: 'ModalUsersAdd'
+            //});
 
             modalInstance.result.then(function (selectedItem) {//selectedItem - params to apply when the fc was successful
                 //what to do if it was accepted
