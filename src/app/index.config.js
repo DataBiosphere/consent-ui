@@ -6,7 +6,7 @@
         .config(logConfig)
         .config(routeConfig)
         .config(httpConfig)
-        .constant("apiUrl", "http://localhost:8180/");
+        .constant("apiUrl", "https://consent-ci.broadinstitute.org/");
 
     /* ngInject */
     function logConfig($logProvider) {
