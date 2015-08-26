@@ -2,6 +2,6 @@
     'use strict';
 
     angular
-        .module('cmModalUsers', ['ui.bootstrap']);
+        .module('cmModalCreate', ['ui.bootstrap']);
 
 })();

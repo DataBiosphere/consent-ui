@@ -22,7 +22,7 @@
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 center-text pvotes-box-subtitle dul-color">Logged
                     </div>
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 center-text pvotes-box-subtitle dul-color">Vote
-                          <div ng-show="UserConsole.totalDulPendingVotes > 0" class="pcases-small-tag">{{UserConsole.totalDulPendingVotes}}</div>
+                        <div ng-show="UserConsole.totalDulPendingVotes > 0" class="pcases-small-tag">{{UserConsole.totalDulPendingVotes}}</div>
                     </div>
                     <hr class="pvotes-main-separator">
                 </div>
@@ -32,8 +32,8 @@
                         <div class="row pvotes-main-list">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4 pvotes-list-id">{{pendingCase.referenceId}}</div>
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pvotes-list bold">
-                                <span ng-if="pendingCase.status == 'urgent'">URGENT!</span>
-                                <span ng-if="pendingCase.status == 'pending'">Pending</span>
+                                <span ng-if="pendingCase.isReminderSent == true">URGENT!</span>
+                                <span ng-if="pendingCase.status == 'pending' && pendingCase.isReminderSent != true">Pending</span>
                                 <span ng-if="pendingCase.status == 'editable'">Editable</span>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pvotes-list">{{pendingCase.logged}}</div>

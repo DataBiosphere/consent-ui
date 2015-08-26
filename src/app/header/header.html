@@ -29,18 +29,20 @@
                 <li ng-repeat="rol in $root.currentUser.roles" ng-show="'{{rol.name}}' === '{{$root.userRoles.admin}}'">
                     <a href="#/admin_console">Admin Console</a>
                 </li>
-                <li><a href="#">About</a></li>
-                <li class="dropdown drop-li navbar-right" dropdown on-toggle="toggled(open)">
+                <li class="dropdown drop-li" dropdown on-toggle="toggled(open)">
                     <a role="button" class="dropdown-toggle" href="#" dropdown-toggle>
                         <div>Statistics <span class="caret caret-margin"></span></div>
                     </a>
                     <ul class="dropdown-menu user-dropdown" role="menu">
                         <li><a href="#/summary_votes" class="f-left">Votes Statistics</a></li>
                         <hr>
-                        <li><a href="#/reviewed_cases" class="f-left">Reviewed Cases Record</a></li>
+                        <li ng-show="$root.currentUser.memberStatus !== 'RESEARCHER'">
+                            <a href="#/reviewed_cases" class="f-left">Reviewed Cases Record</a>
+                        </li>
                     </ul>
                 </li>
                 <li><a href="#/dataset_catalog">Dataset Catalog</a></li>
+                <li><a href="#">About</a></li>
             </ul>
         </div>
     </div>

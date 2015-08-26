@@ -5,7 +5,7 @@
         .service('cmUserService', cmUserService);
 
     /* ngInject */
-    function cmUserService(UserResource, GetUserResource) {
+    function cmUserService(UserResource, GetUserResource ,UpdateUserResource) {
 
 
         function getUserByEmail(email){
@@ -22,8 +22,9 @@
         }
 
         function updateUser(user){
-             return UserResource.update(user);
+             return UpdateUserResource.update({userId: user.dacUserId}, user);
         }
+
 
         return{
             findUser: function(email) {

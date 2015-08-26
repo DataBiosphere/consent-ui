@@ -5,7 +5,7 @@
         .service('cmElectionService', cmElectionService);
 
     /* ngInject */
-    function cmElectionService(ElectionResource, ElectionUpdateResource, ElectionReviewConsent) {
+    function cmElectionService(ElectionResource, ElectionUpdateResource, ElectionReviewedConsents, ElectionReviewedDRs, ElectionReviewConsent,openElectionsResource) {
 
         /**
          * Find data for the election related to the consentId sent as a parameter
@@ -47,6 +47,24 @@
             return ElectionResource.post({consentId: consentId}, postElection);
         }
 
+        function openElections(){
+            return openElectionsResource.get();
+        }
+
+        /**
+         * Find closed elections for consents
+         */
+        function getReviewedConsents(){
+            return ElectionReviewedConsents.List().$promise;
+        }
+
+        /**
+         * Find closed elections for Data Requests
+         */
+        function getReviewedDRs(){
+            return ElectionReviewedDRs.List().$promise;
+        }
+
         return{
             findElection: function(id) {
                 return findElectionByConsentId(id);
@@ -60,7 +78,16 @@
 
             createElection: function(consentId){
                 return createElection(consentId);
-            }
+            },
+            findReviewedConsents: function() {
+                return getReviewedConsents();
+            },
+            findReviewedDRs: function() {
+                return getReviewedDRs();
+            },
+            openElections: function(){
+                return openElections();
+             }
         }
     }
 

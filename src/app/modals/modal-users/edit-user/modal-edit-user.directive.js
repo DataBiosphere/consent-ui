@@ -1,8 +1,8 @@
 (function () {
     'use strict';
 
-    angular.module('cmModalUsers')
-        .directive('addRole', addRoleRadioDirective);
+    angular.module('cmModalUsersEdit')
+        .directive('addRoleEdit', addRoleRadioDirective);
 
     /* ngInject */
     function addRoleRadioDirective() {
@@ -10,9 +10,9 @@
         return {
            restrict: "EA",
            scope: false,
-                    link: function (scope, element, attributes) {
+                    link: function (scope, element, attributes,USER_ROLES) {
+                        USER_ROLES=scope.USER_ROLES;
                         element.bind("change", function () {
-
                             if(element.context.checked){
                                 var rol =  new Object();
                                 rol.name=element.context.id;
@@ -31,17 +31,18 @@
                                   }
                                }
                              }
-                          if(element.context.id=== "CHAIRPERSON"  ){
-                               if(element.context.checked){
-                              scope.$emit("chairpersonAlert", { alert : true });
-                               }else{
-                                  scope.$emit("chairpersonAlert", { alert : false });
-                              }
-                              }
-                        });
+                                if(element.context.id=== USER_ROLES.chairperson){
+                                             if(element.context.checked && !scope.user.was(USER_ROLES.chairperson)){
+                                                 scope.$emit("changeChairpersonRoleAlert", { alert : true });
+                                             }else{
+                                                 scope.$emit("changeChairpersonRoleAlert", { alert : false });
+                                                  }
+                                             }
+                          });
+                     }
                   }
               }
-          }
+
 
 
 })();

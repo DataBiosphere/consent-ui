@@ -10,7 +10,7 @@
         var vm = this;
 
         vm.ok = function () {
-            $modalInstance.close();//add params to handle what to do if it succeds on admin-manage.controller
+            $modalInstance.close();
         };
 
         vm.cancel = function () {
