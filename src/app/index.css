@@ -129,6 +129,14 @@ small {
     background: #8E307A !important;
 }
 
+.dataset-color {
+    color: #00928A !important;
+}
+
+.dataset-background {
+    background: #00928A !important;
+}
+
 .cancel-color {
     color: #D13B07 !important;
 }
@@ -1151,7 +1159,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     display: inline-block;
     width: 35px;
     height: 40px;
-    background: url('../assets/images/admin_icons_new.png') no-repeat 0 0;
+    background: url('../assets/images/admin_icons.png') no-repeat 0 0;
     overflow: hidden;
     text-indent: -15000px;
     margin: 7px 3px 0 0;
@@ -1189,14 +1197,6 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     background-position: -105px -40px !important;
 }
 
-.edit-dul {
-    background-position: -175px 0;
-}
-
-.edit-user {
-    background-position: -175px -40px;
-}
-
 .add-dul_white {
     background-position: -140px 0;
     margin: -10px 0 0 0;
@@ -1205,6 +1205,34 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 .add-user_white {
     background-position: -140px -40px;
     margin: -10px 0 0 0;
+}
+
+.edit-dul {
+    background-position: -175px 0;
+}
+
+.edit-user {
+    background-position: -175px -40px;
+}
+
+.download-dataset {
+    background-position: -209px 0;
+    width: 41px !important;
+}
+
+.admin-icons:hover .download-dataset {
+    background-position: -209px -40px;
+    width: 41px !important;
+}
+
+.add-dataset {
+    background-position: -251px 0;
+    width: 41px !important;
+}
+
+.admin-icons:hover .add-dataset {
+    background-position: -251px -40px;
+    width: 41px !important;
 }
 
 .admin-manage-buttons .enabled, .admin-manage-buttons .disabled, .admin-manage-buttons .create, .admin-manage-buttons .cancel {
@@ -1249,7 +1277,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 
 .modal-content {
     position: absolute;
-    top: 50%;
+    top: 40%;
     -ms-transform: translate(0, -50%);
     -moz-transform: translate(0, -50%);
     -webkit-transform: translate(0, -50%);
@@ -1268,33 +1296,47 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     width: 600px !important;
 }
 
+.modal-add-dataset{
+    width: 600px;
+}
+
 .modal-add-dul {
     width: 750px !important;
 }
 
-.modal-add-dul .admin-modal-header {
+.modal-add-dul .admin-modal-header,
+.modal-add-dataset. admin-modal-header{
     padding: 20px 20px 0 20px !important;
 }
 
-.modal-add-dul .modal-footer {
-    padding: 0 30px 20px 30px !important;
+.modal-add-dul .modal-footer,
+.modal-add-dataset .modal-body{
+    padding: 0 30px 10px 30px !important;
+    border-top: 1px solid #e5e5e5;
 }
 
-.modal-add-dul .admin-modal-footer button{
+.modal-add-dataset .modal-footer{
+    padding: 0 30px 15px 30px !important;
+}
+
+.modal-add-dul .admin-modal-footer button,
+.modal-add-dataset .admin-modal-footer button{
     float: right;
-    margin: 10px;
+    margin: 0 10px 10px 10px;
 }
 
-.modal-add-dul .admin-modal-footer button:last-child {
+.modal-add-dul .admin-modal-footer button:last-child,
+.modal-add-dataset .admin-modal-footer button:last-child{
     color: #777777;
 }
 
-.modal-add-dul .admin-modal-footer button:first-child{
+.modal-add-dul .admin-modal-footer button:first-child,
+.modal-add-dataset .admin-modal-footer button:first-child{
     color: #ffffff !important;
     margin-right: 0 !important;
 }
 
-.admin-modal-footer button:focus{
+.admin-modal-footer button:focus {
     color: #ffffff !important;
 }
 
@@ -1446,7 +1488,7 @@ input[type="checkbox"][disabled] + label {
 }
 
 .admin-create-alerts .alert {
-   margin-bottom: 0!important;
+    margin-bottom: 0!important;
 }
 
 .admin-alerts {
@@ -1895,3 +1937,38 @@ input[type="checkbox"][disabled] + label {
     background: #00609f !important;
 }
 
+/*///////////////////////////////////////////////////////DATASETS*/
+
+
+.dataset-label{
+    font-size: 14px;
+    font-weight: 500 !important;
+    color: #00928A;
+    float: left;
+    text-align: left;
+    margin-bottom: 0;
+    padding: 10px 15px 0 0;
+    display: inline;
+}
+
+.dataset-footer {
+    float: left;
+    color: #777777;
+    margin-top: 12px;
+}
+
+.dataset-upload-button{
+    color: #00928A;
+    font-weight: 500;
+    float: left;
+    display: inline !important;
+}
+
+.dataset-admin-alerts{
+    margin: 10px 15px;
+}
+
+.dataset-form-group{
+    text-align: left;
+    margin-bottom: 0!important;
+}

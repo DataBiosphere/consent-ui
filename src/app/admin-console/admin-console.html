@@ -11,22 +11,34 @@
                 <span class="admin-icon-subtitles dul-color">Manage Data Use Limitations</span>
                 <div class="cm-title-description">Select and manage Data Use Limitations Record for review</div>
             </a>
-            <a href="#/admin_users" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 console-boxes admin-icons">
-                <div class="all-icons manage-user"></div>
-                <span class="admin-icon-subtitles common-color">Manage Users</span>
-                <div class="cm-title-description">Select and manage Users and their roles</div>
-            </a>
-        </div>
-        <div class="row fsi-row-lg-level fsi-row-md-level">
             <a href="#" ng-click="AdminConsole.addDul()" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 console-boxes admin-icons">
                 <div class="all-icons add-dul"></div>
                 <span class="admin-icon-subtitles dul-color">Add Data Use Limitations</span>
                 <div class="cm-title-description">Catalog a Data Use Limitation Record in the system</div>
             </a>
+        </div>
+        <div class="row fsi-row-lg-level fsi-row-md-level">
+            <a href="#/admin_users" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 console-boxes admin-icons">
+                <div class="all-icons manage-user"></div>
+                <span class="admin-icon-subtitles common-color">Manage Users</span>
+                <div class="cm-title-description">Select and manage Users and their roles</div>
+            </a>
             <a href="#" ng-click="AdminConsole.addUser()" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 console-boxes admin-icons">
                 <div class="all-icons add-user"></div>
                 <span class="admin-icon-subtitles common-color">Add User</span>
                 <div class="cm-title-description">Catalog a new User in the system</div>
+            </a>
+        </div>
+        <div class="row fsi-row-lg-level fsi-row-md-level">
+            <a download="content.txt" ng-href="{{AdminConsole.downloadUrl}}" name="Download" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 console-boxes admin-icons">
+                <div class="all-icons download-dataset"></div>
+                <span class="admin-icon-subtitles dataset-color">Download Dataset Spreadsheet</span>
+                <div class="cm-title-description">Download a Datasets tab delimited file model</div>
+            </a>
+            <a href="#" ng-click="AdminConsole.addDataSets()" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 console-boxes admin-icons">
+                <div class="all-icons add-dataset"></div>
+                <span class="admin-icon-subtitles dataset-color">Add Datasets</span>
+                <div class="cm-title-description">Store Datasets associated with Data Use Limitations</div>
             </a>
         </div>
     </div>
