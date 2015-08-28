@@ -11,7 +11,7 @@
         vm.addDul = addDul;
         vm.addUser = addUser;
         vm.addDataSets = addDataSets;
-        vm.downloadUrl = apiUrl + "consent/cases/datasets/datasets_spreadsheet";
+        vm.downloadUrl = apiUrl + "consent/cases/datasets/dataset_spreadsheet";
 
         function addDul() {
 

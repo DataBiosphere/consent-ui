@@ -8,13 +8,14 @@
     /* ngInject */
     function DatasetCatalog($http, cmPaginatorService, $scope) {
 
-        var lists = {'dul': []};
+        var lists = {'catalog': [], 'properties': []};
+
         var list_max_items = 10;
 
         var vm = this;
-        vm.activePage = {'dul': 0};
-        vm.currentPages = {'dul': []};
-        vm.electionsList = {'dul': []};
+        vm.activePage = {'catalog': 0, 'properties': 0};
+        vm.currentPages = {'catalog': [], 'properties': []};
+        vm.electionsList = {'catalog': [], 'properties': []};
         // changePage function from the service with the first 2 parameters locked
         vm.changePage = _.partial(cmPaginatorService.changePage,
             // first parameter to lock from changePage
@@ -31,10 +32,26 @@
 
         function init() {
             $http.get('json/cm_dataset_catalog.json').then(function (response) {
-                lists['dul'] = response.data['catalog'];
-                vm.changePage('dul', 0);
+                lists['catalog'] = response.data['catalog'];
+                lists['properties'] = response.data['properties'];
+                vm.changePage('catalog', 0);
+                vm.changePage('properties', 0);
+
             });
         }
+
+        $scope.Selected = false;
+
+        $scope.checkAll = function () {
+                if ($scope.selectAll) {
+                $scope.selectAll = true;
+            } else {
+                $scope.selectAll = false;
+            }
+            angular.forEach(vm.electionsList.catalog, function () {
+                $scope.Selected = $scope.selectAll;
+            });
+        };
 
       }
 

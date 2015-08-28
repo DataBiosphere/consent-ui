@@ -8,24 +8,26 @@
                 <div class="cm-title-description">Store Datasets associated with Data Use Limitations</div>
             </h2>
         </div>
-
         <div class="modal-body">
             <form class="form-horizontal" name="consentForm" novalidate class="css-form" enctype="multipart/form-data">
                 <fieldset>
                     <div class="form-group admin-form-group first-form-group">
-                        <div class="container">
-                            <div class="fileUpload upload-button dataset-upload-button">
-                                <span>Upload Datasets file</span>
+                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label dataset-color">Datasets File</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 bold">
+                            <div class="fileUpload col-lg-3 col-md-3 col-sm-4 col-xs-12 dataset-color upload-button">
+                                <span>Upload file</span>
                                 <span class="cm-icon-button glyphicon glyphicon-upload caret-margin" aria-hidden="true"></span>
-                                <input type="file" ng-model="file.name" file-upload class="upload" required />
+                                <input type="file" ng-model="file.name"  file-upload class="upload" required />
                             </div>
                             <p class="fileName">{{file.name}}dataset_file.tsv</p>
                         </div>
-                        <div class="container">
+                    </div>
+                    <div class="form-group admin-form-group">
+                        <div class="col-lg-9 col-lg-offset-3 col-md-9 col-lg-offset-3 col-sm-9 col-lg-offset-3 col-xs-8 col-lg-offset-4 bold">
                             <div class="checkbox dataset-label">
                                 <input ng-model="formData.other" id="overwriteDataSets" type="checkbox" class="checkbox-inline"
                                        name="checkOther" onclick="">
-                                <label class="regular-checkbox dataset-label" for="overwriteDataSets"><span>Overwrite existing Datasets</span></label>
+                                <label class="regular-checkbox dataset-label" for="overwriteDataSets">Overwrite existing Datasets</label>
                             </div>
                         </div>
                     </div>

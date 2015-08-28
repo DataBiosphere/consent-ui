@@ -240,5 +240,21 @@
                     "url": "#"
                 }
         }
-    ]
+    ],
+
+    "properties": [
+        {
+            "id_01": "Dataset Name",
+            "id_02": "Data Type",
+            "id_03": "Species",
+            "id_04": "Phenotype Indicator",
+            "id_05": "# of Participants",
+            "id_06": "Description",
+            "id_07": "dbGAP",
+            "id_08": "Data Depositor",
+            "id_09": "Principal Investigator",
+            "id_10": "Dataset ID",
+            "id_11": "Consent ID"
+        }
+   ]
 }

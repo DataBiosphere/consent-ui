@@ -46,7 +46,7 @@ html, body {
 
 .main {
     overflow: auto;
-    padding-bottom: 85px; /* must be same height as the footer */
+    padding-bottom: 80px; /* must be same height as the footer */
 }
 
 a, input, button {
@@ -65,6 +65,10 @@ small {
 
 .no-margin {
     margin: 0 !important;
+}
+
+.pos-relative{
+    position: relative;
 }
 
 .no-padding {
@@ -623,6 +627,15 @@ input[type=checkbox]:checked + label:before, input[type=radio]:checked + label:b
     border: 1px solid #2FA4E7;
     text-align: center;
     line-height: 15px;
+}
+
+.check-all{
+    margin: 0!important;
+    padding: 0 !important;
+    display: inline !important;
+    position: absolute;
+    left: 28px;
+    top: 25px;
 }
 
 .vote-button, .vote-reminder {
@@ -1296,44 +1309,45 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     width: 600px !important;
 }
 
-.modal-add-dataset{
-    width: 600px;
-}
-
-.modal-add-dul {
+.modal-add-dul,
+.modal-add-dataset {
     width: 750px !important;
 }
 
 .modal-add-dul .admin-modal-header,
-.modal-add-dataset. admin-modal-header{
+.modal-add-dataset. admin-modal-header {
     padding: 20px 20px 0 20px !important;
 }
 
 .modal-add-dul .modal-footer,
-.modal-add-dataset .modal-body{
+.modal-add-dataset .modal-body {
     padding: 0 30px 10px 30px !important;
     border-top: 1px solid #e5e5e5;
 }
 
-.modal-add-dataset .modal-footer{
+.modal-add-dataset .modal-footer {
     padding: 0 30px 15px 30px !important;
 }
 
 .modal-add-dul .admin-modal-footer button,
-.modal-add-dataset .admin-modal-footer button{
+.modal-add-dataset .admin-modal-footer button {
     float: right;
     margin: 0 10px 10px 10px;
 }
 
 .modal-add-dul .admin-modal-footer button:last-child,
-.modal-add-dataset .admin-modal-footer button:last-child{
+.modal-add-dataset .admin-modal-footer button:last-child {
     color: #777777;
 }
 
 .modal-add-dul .admin-modal-footer button:first-child,
-.modal-add-dataset .admin-modal-footer button:first-child{
+.modal-add-dataset .admin-modal-footer button:first-child {
     color: #ffffff !important;
     margin-right: 0 !important;
+}
+
+.modal-add-dataset .cm-title-description {
+    padding-left: 7px !important;
 }
 
 .admin-modal-footer button:focus {
@@ -1484,11 +1498,11 @@ input[type="checkbox"][disabled] + label {
 /***************************************************Alerts*/
 
 .admin-create-alerts {
-    margin: 5px 10px 0 10px!important;
+    margin: 5px 10px 0 10px !important;
 }
 
 .admin-create-alerts .alert {
-    margin-bottom: 0!important;
+    margin-bottom: 0 !important;
 }
 
 .admin-alerts {
@@ -1714,7 +1728,6 @@ input[type="checkbox"][disabled] + label {
 .footer {
     position: relative;
     margin-top: -85px; /* negative value of footer height */
-    /*height: 30px;*/
     clear: both;
     background-color: #f4f4f4;
 }
@@ -1858,7 +1871,8 @@ input[type="checkbox"][disabled] + label {
 
 .table-scroll {
     overflow-x: scroll;
-    margin: 0 25px !important;
+    margin: 0 25px 0 60px !important;
+    overflow-y: visible;
 }
 
 .table-scroll thead {
@@ -1869,6 +1883,10 @@ input[type="checkbox"][disabled] + label {
     margin: 15px 0 !important;
 }
 
+.table > thead > tr > th {
+    border-bottom: none !important;
+}
+
 .table-titles {
     font-style: italic;
     font-weight: 500 !important;
@@ -1877,6 +1895,15 @@ input[type="checkbox"][disabled] + label {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.table-titles label {
+    padding-top: 5px;
+}
+
+th:first-child {
+    position: absolute;
+    margin-left: -40px;
 }
 
 .table-items {
@@ -1939,15 +1966,14 @@ input[type="checkbox"][disabled] + label {
 
 /*///////////////////////////////////////////////////////DATASETS*/
 
-
-.dataset-label{
+.dataset-label {
     font-size: 14px;
     font-weight: 500 !important;
     color: #00928A;
     float: left;
     text-align: left;
     margin-bottom: 0;
-    padding: 10px 15px 0 0;
+    padding: 0 15px 0 0;
     display: inline;
 }
 
@@ -1955,20 +1981,25 @@ input[type="checkbox"][disabled] + label {
     float: left;
     color: #777777;
     margin-top: 12px;
+    font-size: 13px;
 }
 
-.dataset-upload-button{
+.dataset-download-button{
+    margin: 35px 0 0 20px!important;
+}
+
+.dataset-upload-button {
     color: #00928A;
     font-weight: 500;
     float: left;
     display: inline !important;
 }
 
-.dataset-admin-alerts{
+.dataset-admin-alerts {
     margin: 10px 15px;
 }
 
-.dataset-form-group{
+.dataset-form-group {
     text-align: left;
-    margin-bottom: 0!important;
+    margin-bottom: 0 !important;
 }
