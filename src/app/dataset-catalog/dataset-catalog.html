@@ -45,7 +45,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="election in DatasetCatalog.electionsList.catalog | filter: searchDataset">
-                        <th class="table-titles">
+                        <th>
                             <div class="checkbox no-margin no-padding">
                                 <input ng-model="Selected" id="{{election.datasetID}}" type="checkbox" class="checkbox-inline">
                                 <label class="regular-checkbox" for="{{election.datasetID}}"></label>

@@ -1,32 +1,25 @@
 <div ng-include src="'app/header/header.html'"></div>
 <div class="container">
     <h2 class="cm-title dul-color">
-        <img src="assets/images/icon_dul.png" alt="translation icon" class="cm-icons">Data Use Limitations Congruence
-        Review<br>
-        <div class="cm-title-description">Where the data use limitations accurately converted to a structured format?
-        </div>
+        <img src="assets/images/icon_dul.png" alt="translation icon" class="cm-icons">Data Use Limitations Congruence Review<br>
+        <div class="cm-title-description">Where the data use limitations accurately converted to a structured format?</div>
     </h2>
     <hr class="section-separator">
-    <h3 id="datasetName" class="cm-subtitle">Name of the Dataset</h3>
-
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <div class="panel panel-primary cm-boxes">
-                <div class="panel-heading cm-boxhead dul-color">
-                    <h4>Data Use Limitations</h4>
-                </div>
-                <div id="dul" class="panel-body cm-boxbody">
-                    <a href="{{downloadUrl}}" target="_blank">{{consentDulName}}</a>
-                </div>
+    <div class="row fsi-row-lg-level fsi-row-md-level">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
+            <div class="panel-heading cm-boxhead dul-color">
+                <h4>Data Use Limitations</h4>
+            </div>
+            <div id="dul" class="panel-body cm-boxbody">
+                <a href="{{downloadUrl}}" target="_blank">{{consentDulName}}</a>
             </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <div class="panel panel-primary cm-boxes">
-                <div class="panel-heading cm-boxhead dul-color">
-                    <h4>Structured Limitations</h4>
-                </div>
-                <div id="ssdur" class="panel-body cm-boxbody">{{consentSDul}}
-                </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
+            <div class="panel-heading cm-boxhead dul-color">
+                <h4>Structured Limitations</h4>
+            </div>
+            <div id="ssdur" class="panel-body cm-boxbody">
+                {{consentSDul}}
             </div>
         </div>
     </div>
@@ -38,18 +31,22 @@
             <form class="form-horizontal" id="voteForm">
                 <fieldset ng-disabled="isFormDisabled">
                     <div class="form-group first-form-group">
-                        <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label dul-color">Vote</label>
+                        <label
+                            class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label dul-color">Vote</label>
+
                         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
                             <div class="button-holder">
                                 <div class="radio-inline group-regular-radio">
                                     <input type="radio" ng-model="voteStatus" ng-click="positiveVote()"
-                                           ng-value="true" class="regular-radio" id="inputVotePositive" name="inputVote"><label
+                                           ng-value="true" class="regular-radio" id="inputVotePositive"
+                                           name="inputVote"><label
                                     for="inputVotePositive"><span class="radio-button-text">Yes</span></label>
                                 </div>
                                 <div class="radio-inline">
                                     <input type="radio" ng-model="voteStatus"
                                            ng-value="false" class="regular-radio" id="inputVoteNegative"
-                                           name="inputVote"><label for="inputVoteNegative"><span class="radio-button-text">No</span></label>
+                                           name="inputVote"><label for="inputVoteNegative"><span
+                                    class="radio-button-text">No</span></label>
                                 </div>
                             </div>
                         </div>
@@ -78,13 +75,8 @@
                                 Please check your vote.
                             </div>
                         </div>
-
-                        <!--<div ng-controller="Review">-->
-                        <!--<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>-->
-                        <!--</div>-->
-
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                            <button ng-disabled="voteStatus === null"  ng-click="logVote()"
+                            <button ng-disabled="voteStatus === null" ng-click="logVote()"
                                     class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button dul-background">
                                 Vote
                             </button>
