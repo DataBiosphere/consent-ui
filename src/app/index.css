@@ -520,7 +520,7 @@ small {
 
 .results-box{
     line-height: 26px !important;
-    font-size: 18px !important;
+    font-size: 17px !important;
     margin: 10px 0 15px 0!important;
 }
 
@@ -620,8 +620,8 @@ small {
     outline: 0 none;
     top: 0;
     left: 0;
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
 }
 
 .regular-checkbox {
@@ -645,8 +645,8 @@ small {
 }
 
 /*input[type=checkbox], input[type=radio] {*/
-     /*display: none;*/
- /*}*/
+/*display: none;*/
+/*}*/
 
 input[type=checkbox]{
     display: none;
@@ -669,7 +669,7 @@ input[type=checkbox]:checked + label:before{
     display: inline !important;
     position: absolute;
     left: 28px;
-    top: 25px;
+    top: 21px;
 }
 
 .vote-button, .vote-reminder {
@@ -1925,23 +1925,40 @@ input[type="checkbox"][disabled] + label {
     border-bottom: none !important;
 }
 
+.table > thead > tr > th {
+    border-bottom: none !important;
+}
+
 .table-titles {
     font-style: italic;
     font-weight: 500 !important;
     font-size: 16px !important;
-    padding: 5px 10px 10px 10px;
+    padding: 5px 50px 10px 8px !important;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
 }
 
 .table-titles label {
     padding-top: 5px;
 }
 
-th:first-child {
+td:first-child {
     position: absolute;
     margin-left: -40px;
+}
+
+td:first-child .checkbox {
+    margin-top: 0px !important;
+}
+
+.table-items {
+    font-weight: normal !important;
+    font-size: 14px !important;
+    padding: 10px 10px 5px 10px !important;
+    margin: 0!important;
+    color: #777777;
+    min-height: 100% !important;
 }
 
 .table-items {
@@ -1951,30 +1968,23 @@ th:first-child {
     color: #777777;
 }
 
-.table-items .yes, .table-items .no {
+.table-items .enabled, .table-items .disabled {
     font-weight: 500 !important;
 }
 
-.table-items .yes {
+.table-items .enabled {
     color: #2FA4E7 !important;
     cursor: pointer;
 }
 
-.table-items .no {
+.table-items .disabled {
     color: #cccccc !important;
     cursor: default !important;
 }
 
-.small-cell {
-    min-width: 120px !important;
-}
 
-.medium-cell {
-    min-width: 200px !important;
-}
-
-.large-cell {
-    min-width: 400px !important;
+.cell-size {
+    min-width: 250px !important;
 }
 
 .catalog-pagination {
@@ -2045,7 +2055,6 @@ th:first-child {
 .accordion,
 .accordion .panel-heading{
     background-color: #ffffff !important;
-    /*padding: 0!important;*/
 }
 
 .accordion h3{

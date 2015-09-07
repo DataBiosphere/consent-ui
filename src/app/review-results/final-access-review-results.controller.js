@@ -6,17 +6,6 @@
 
     function FinalAccessReviewResults($scope){
 
-        //vm.voteForm = {
-        //    vote: undefined,
-        //    rationale: ''
-        //};
-        //vm.positiveVote = positiveVote;
-        //vm.logVote = logVote;
-        //
-        //function positiveVote() {
-        //    vm.voteForm.rationale = '';
-        //}
-
         $scope.alerts = [
             { type: 'danger', msg: 'Please check your vote.' },
             { type: 'success', msg: 'Vote successfully logged.' }
