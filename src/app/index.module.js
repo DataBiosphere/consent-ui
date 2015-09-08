@@ -3,5 +3,6 @@
 
     angular
         .module('ConsentManagement', ['cmChairConsole', 'cmReview', 'cmReviewResults','cmRPApplication',
-            'cmUserConsole','cmLogin','cmAuthenticate','cmSummaryVotes','cmAdminConsole', 'cmAdminManage','cmHeader','cmAdminUsers', 'cmReviewedCases', 'cmFooter', 'cmDatasetCatalog']);
+            'cmUserConsole','cmLogin','cmAuthenticate','cmSummaryVotes','cmAdminConsole', 'cmAdminManage','cmHeader',
+            'cmAdminUsers', 'cmReviewedCases', 'cmFooter', 'cmDatasetCatalog', 'cmResultsRecord']);
 })();

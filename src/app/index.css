@@ -363,6 +363,12 @@ small {
     display: inline;
 }
 
+.cm-title-record{
+    padding: 0!important;
+    font-size: 22px;
+    font-weight: 500;
+}
+
 .cm-inside-box-title {
     font-size: 17px;
     font-style: italic;
@@ -430,6 +436,7 @@ small {
     border: 0 inset rgba(204, 204, 204, 0.5);
     padding: 0;
     box-shadow: 2px 2px 0 #cccccc;
+    margin: 10px 15px 20px 15px;
 }
 
 .cm-boxhead {
@@ -445,9 +452,15 @@ small {
 .cm-boxbody {
     font-weight: 500;
     margin-left: 5px;
+    font-size: 15px;
+    color: #777777;
 }
 
-.box-vote, .box-vote-results, .box-vote-singleresults, .pvotes-box {
+.box-vote,
+.box-vote-results,
+.box-vote-singleresults,
+.box-vote-lightresults,
+.pvotes-box {
     padding: 15px 25px !important;
     margin: 10px 0 20px 0;
     box-shadow: 3px 3px 0 #cccccc;
@@ -457,19 +470,30 @@ small {
     margin-top: 0 !important;
 }
 
-.box-vote-singleresults, .pvotes-box {
-    height: 100%;
-    min-height: 100%;
-}
-
 .box-vote {
     padding: 15px 30px;
     margin: 10px 0 20px 0;
     box-shadow: 3px 3px 0 #cccccc;
 }
 
-.box-vote-results {
+.box-vote-results{
     background: #d8d8d8;
+    margin: 10px 15px 20px 15px !important;
+}
+
+.box-vote-singleresults{
+    background: #eeeeee;
+    /*margin: 10px 15px 20px 15px !important;*/
+}
+
+.box-vote-singleresults, .pvotes-box {
+    height: 100%;
+    min-height: 100%;
+}
+
+.box-vote-lightresults{
+    background: #eeeeee;
+    margin: 10px 15px 20px 15px !important;
 }
 
 .first-form-group {
@@ -492,6 +516,12 @@ small {
 .vote-label, .admin-label {
     font-weight: normal;
     padding-left: 10px
+}
+
+.results-box{
+    line-height: 26px !important;
+    font-size: 17px !important;
+    margin: 10px 0 15px 0!important;
 }
 
 .admin-label {
@@ -577,22 +607,21 @@ small {
 }
 
 .regular-radio:checked + label {
-    background-color: #2FA4E7;
     box-shadow: 0 0 8px #2FA4E7;
-    border: 1px solid #2FA4E7;
+    border: 2px solid #2FA4E7;
 }
 
 .regular-radio:checked + label:before, .regular-radio:checked + label:after {
-    background: none repeat scroll 0 0 #2FA4E7;
+    background: #2FA4E7 none no-repeat center;
     content: " ";
     position: absolute;
     border-radius: 50%;
     -webkit-border-radius: 50%;
     outline: 0 none;
-    top: 3px;
-    left: 3px;
-    width: 10px;
-    height: 10px;
+    top: 0;
+    left: 0;
+    width: 14px;
+    height: 14px;
 }
 
 .regular-checkbox {
@@ -615,11 +644,16 @@ small {
     border-radius: 3px;
 }
 
-input[type=checkbox], input[type=radio] {
+/*input[type=checkbox], input[type=radio] {*/
+/*display: none;*/
+/*}*/
+
+input[type=checkbox]{
     display: none;
 }
 
-input[type=checkbox]:checked + label:before, input[type=radio]:checked + label:before {
+/*input[type=checkbox]:checked + label:before, input[type=radio]:checked + label:before {*/
+input[type=checkbox]:checked + label:before{
     content: "\2713";
     text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
     color: #ffffff;
@@ -635,7 +669,7 @@ input[type=checkbox]:checked + label:before, input[type=radio]:checked + label:b
     display: inline !important;
     position: absolute;
     left: 28px;
-    top: 25px;
+    top: 21px;
 }
 
 .vote-button, .vote-reminder {
@@ -973,7 +1007,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     color: #ffffff;
     border: none;
     height: 40px;
-    padding: 10px 15px 7px 15px !important;
+    padding: 8px 15px 7px 15px !important;
     width: auto;
     transition: background 0.3s ease;
     cursor: pointer !important;
@@ -987,6 +1021,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 .download-button, .admin-add-button {
     float: right;
     font-size: 15px;
+    padding: 8px 15px 0 15px !important;
 }
 
 .download-button {
@@ -1168,6 +1203,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     background: #2FA4E7 !important;
 }
 
+
 .all-icons {
     display: inline-block;
     width: 35px;
@@ -1180,6 +1216,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 
 .manage-dul {
     background-position: 0 0;
+    width: 34px !important;
 }
 
 .admin-icons:hover .manage-dul {
@@ -1196,6 +1233,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 
 .manage-user {
     background-position: -70px 0;
+    width: 34px !important;
 }
 
 .admin-icons:hover .manage-user {
@@ -1229,23 +1267,23 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 }
 
 .download-dataset {
-    background-position: -209px 0;
-    width: 41px !important;
+    background-position: -210px 0;
+    width: 40px !important;
 }
 
 .admin-icons:hover .download-dataset {
-    background-position: -209px -40px;
-    width: 41px !important;
+    background-position: -210px -40px;
+    width: 40px !important;
 }
 
 .add-dataset {
-    background-position: -251px 0;
-    width: 41px !important;
+    background-position: -250px 0;
+    width: 40px !important;
 }
 
 .admin-icons:hover .add-dataset {
-    background-position: -251px -40px;
-    width: 41px !important;
+    background-position: -250px -40px;
+    width: 40px !important;
 }
 
 .admin-manage-buttons .enabled, .admin-manage-buttons .disabled, .admin-manage-buttons .create, .admin-manage-buttons .cancel {
@@ -1887,23 +1925,40 @@ input[type="checkbox"][disabled] + label {
     border-bottom: none !important;
 }
 
+.table > thead > tr > th {
+    border-bottom: none !important;
+}
+
 .table-titles {
     font-style: italic;
     font-weight: 500 !important;
     font-size: 16px !important;
-    padding: 5px 10px 10px 10px;
+    padding: 5px 50px 10px 8px !important;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
 }
 
 .table-titles label {
     padding-top: 5px;
 }
 
-th:first-child {
+td:first-child {
     position: absolute;
     margin-left: -40px;
+}
+
+td:first-child .checkbox {
+    margin-top: 0px !important;
+}
+
+.table-items {
+    font-weight: normal !important;
+    font-size: 14px !important;
+    padding: 10px 10px 5px 10px !important;
+    margin: 0!important;
+    color: #777777;
+    min-height: 100% !important;
 }
 
 .table-items {
@@ -1913,30 +1968,23 @@ th:first-child {
     color: #777777;
 }
 
-.table-items .yes, .table-items .no {
+.table-items .enabled, .table-items .disabled {
     font-weight: 500 !important;
 }
 
-.table-items .yes {
+.table-items .enabled {
     color: #2FA4E7 !important;
     cursor: pointer;
 }
 
-.table-items .no {
+.table-items .disabled {
     color: #cccccc !important;
     cursor: default !important;
 }
 
-.small-cell {
-    min-width: 120px !important;
-}
 
-.medium-cell {
-    min-width: 200px !important;
-}
-
-.large-cell {
-    min-width: 400px !important;
+.cell-size {
+    min-width: 250px !important;
 }
 
 .catalog-pagination {
@@ -2002,4 +2050,14 @@ th:first-child {
 .dataset-form-group {
     text-align: left;
     margin-bottom: 0 !important;
+}
+
+.accordion,
+.accordion .panel-heading{
+    background-color: #ffffff !important;
+}
+
+.accordion h3{
+    margin: 10px 0 5px 0!important;
+    padding: 0 5px;
 }

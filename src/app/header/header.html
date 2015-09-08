@@ -1,9 +1,9 @@
 <nav class="navbar top-navigator-bar" ng-controller="Header as Header">
     <div class="row top-navigator">
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6 no-padding">
+        <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 no-padding">
             <div class="brand"><img src="../assets/images/broad_logo_allwhite.png" alt="Broad Institute Logo"></div>
         </div>
-        <div class="navbar navbar-right col-lg-3 col-md-3 col-sm-3 col-xs-6 no-margin"
+        <div class="navbar navbar-right col-lg-3 col-md-3 col-sm-6 col-xs-6 no-margin"
              ng-controller="Header">
             <li class="dropdown navbar-right user-li" dropdown is-open="status.isopen">
                 <a role="button" class="dropdown-toggle" data-toggle="dropdown" href="#" dropdown-toggle
@@ -16,7 +16,7 @@
                 </ul>
             </li>
         </div>
-        <div class="navbar col-lg-7 col-md-7 col-sm-7 col-xs-12 no-padding">
+        <div class="navbar col-lg-7 col-md-7 col-sm-12 col-xs-12 no-padding">
             <ul class="navbar-left no-margin">
                 <li ng-repeat="rol in $root.currentUser.roles"
                     ng-show="'{{rol.name}}' === '{{$root.userRoles.chairperson}}'">
