@@ -43,9 +43,9 @@
                 </div>
             </div>
         </div>
-        <form id="signup-form" ng-submit="processForm()">
+        <form name="form" novalidate>
             <!-- our nested state views will be injected here -->
-            <div id="form-views" ui-view></div>
+            <div id="form-views" ui-view autoscroll="true"></div>
         </form>
     </div>
 </div>

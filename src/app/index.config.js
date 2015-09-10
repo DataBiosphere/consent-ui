@@ -7,7 +7,8 @@
         .config(routeConfig)
         .config(httpConfig)
         .config(compileProvider)
-        .constant("apiUrl", "https://consent.dsde-dev.broadinstitute.org/");
+        .constant("apiUrl", "https://consent.dsde-dev.broadinstitute.org/")
+        .constant("ontologyApiUrl", "https://consent-ontology.dsde-dev.broadinstitute.org/");
 
     /* ngInject */
     function logConfig($logProvider) {
@@ -31,8 +32,5 @@
         $httpProvider.defaults.withCredentials = false;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
     }
-
-
-
 
 })();

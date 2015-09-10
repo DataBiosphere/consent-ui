@@ -1,18 +1,18 @@
 <div ng-include src="'app/header/header.html'"></div>
 <div class="container" ng-controller="AdminManage">
     <div class="row no-margin">
-        <h2 class="col-lg-6 col-md-6 col-sm-6 col-xs-6 cm-title dul-color no-padding">
+        <h2 class="col-lg-6 col-md-6 col-sm-12 col-xs-12 cm-title dul-color no-padding">
             <img src="../assets/images/icon_manage_dul.png" alt="Manage DUL icon" class="cm-icons">Manage Data Use Limitations
             <div class="cm-title-admin-description">Select and manage Data Use Limitations for DAC review</div>
         </h2>
-        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 search-reviewed">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 search-reviewed">
             <div class="search-text">
                 <i class="glyphicon glyphicon-search dul-color"></i>
                 <input type="search" class="form-control users-search" placeholder="Enter search term..." ng-model="searchDUL"/>
             </div>
         </div>
         <div>
-            <a class="col-lg-3 col-md-3 col-sm-3 col-xs-3 admin-add-button dul-background" ng-click="AdminManage.addDul()">
+            <a class="col-lg-3 col-md-3 col-sm-6 col-xs-6 admin-add-button dul-background" ng-click="AdminManage.addDul()">
                 <div class="all-icons add-dul_white"></div>
                 <span>Add Data Use Limitations</span>
             </a>

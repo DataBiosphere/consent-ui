@@ -1,0 +1,174 @@
+[
+   {
+      "id":"http://purl.obolibrary.org/obo/DOID_602",
+      "label":"cancerophobia",
+      "definition":null,
+      "synonyms":[
+         "cancer phobia",
+         "Fear of getting cancer (finding)"
+      ]
+   },
+   {
+      "id":"http://purl.obolibrary.org/obo/DOID_0060058",
+      "label":"lymphoma",
+      "definition":"A hematologic cancer that affects lymphocytes that reside in the lymphatic system and in blood-forming organs.",
+      "synonyms":[
+         "lymphoid cancer"
+      ]
+   },
+   {
+      "id":"http://purl.obolibrary.org/obo/DOID_162",
+      "label":"cancer",
+      "definition":"A disease of cellular proliferation that is malignant and primary, characterized by uncontrolled cellular proliferation, local cell invasion and metastasis.",
+      "synonyms":[
+         "malignant tumor ",
+         "malignant neoplasm",
+         "primary cancer"
+      ]
+   },
+   {
+      "id":"http://purl.obolibrary.org/obo/DOID_10021",
+      "label":"duodenum cancer",
+      "definition":null,
+      "synonyms":[
+         "duodenal cancer",
+         "cancer of duodenum",
+         "Duodenal cancer",
+         "Duodenal Ca"
+      ]
+   },
+   {
+      "id":"http://purl.obolibrary.org/obo/DOID_7084",
+      "label":"recurrent adult primary liver cancer",
+      "definition":null,
+      "synonyms":[
+         "relapsed adult Liver cancer"
+      ]
+   },
+   {
+      "id":"http://purl.obolibrary.org/obo/DOID_6980",
+      "label":"recurrent rectosigmoid cancer",
+      "definition":null,
+      "synonyms":[
+         "relapsed Rectosigmoid cancer"
+      ]
+   },
+   {
+      "id":"http://purl.obolibrary.org/obo/DOID_3316",
+      "label":"perivascular tumor",
+      "definition":null,
+      "synonyms":[
+         "malignant perivascular cancer"
+      ]
+   },
+   {
+      "id":"http://purl.obolibrary.org/obo/DOID_4931",
+      "label":"nasal cavity carcinoma",
+      "definition":null,
+      "synonyms":[
+         "cancer of nasal cavity"
+      ]
+   },
+   {
+      "id":"http://purl.obolibrary.org/obo/DOID_1293",
+      "label":"labia minora carcinoma",
+      "definition":null,
+      "synonyms":[
+         "Labia Minora cancer"
+      ]
+   },
+   {
+      "id":"http://purl.obolibrary.org/obo/DOID_14521",
+      "label":"cutaneous breast cancer",
+      "definition":null,
+      "synonyms":[
+         "cutaneous breast cancer"
+      ]
+   },
+   {
+      "id":"http://purl.obolibrary.org/obo/DOID_7486",
+      "label":"metastatic renal cell carcinoma",
+      "definition":null,
+      "synonyms":[
+         "metastatic renal cell cancer"
+      ]
+   },
+   {
+      "id":"http://purl.obolibrary.org/obo/DOID_10541",
+      "label":"microinvasive gastric cancer",
+      "definition":null,
+      "synonyms":[
+         "early gastric cancer (disorder)",
+         "Surface gastric cancer"
+      ]
+   },
+   {
+      "id":"http://purl.obolibrary.org/obo/DOID_6835",
+      "label":"recurrent anal cancer",
+      "definition":null,
+      "synonyms":[
+         "recurrent anal canal cancer"
+      ]
+   },
+   {
+      "id":"http://purl.obolibrary.org/obo/DOID_5933",
+      "label":"resectable bile duct cancer",
+      "definition":null,
+      "synonyms":[
+         "Resectable bile duct cancer"
+      ]
+   },
+   {
+      "id":"http://purl.obolibrary.org/obo/DOID_3119",
+      "label":"gastrointestinal system cancer",
+      "definition":"An organ system cancer located_in gastrointestinal tract that is manifested in organs of the gastrointestinal system.",
+      "synonyms":[
+         "digestive system cancer",
+         "gastrointestinal tract cancer",
+         "GI tumor"
+      ]
+   },
+   {
+      "id":"http://purl.obolibrary.org/obo/DOID_5028",
+      "label":"recurrent cancer of Liver",
+      "definition":null,
+      "synonyms":[
+         "relapsed cancer of the Liver"
+      ]
+   },
+   {
+      "id":"http://purl.obolibrary.org/obo/DOID_14110",
+      "label":"anus cancer",
+      "definition":"A gastrointestinal system cancer that is located_in the anus.",
+      "synonyms":[
+         "anal cancer",
+         "malignant anal tumor"
+      ]
+   },
+   {
+      "id":"http://purl.obolibrary.org/obo/DOID_2600",
+      "label":"laryngeal carcinoma",
+      "definition":null,
+      "synonyms":[
+         "cancer of larynx",
+         "cancer of Larynx",
+         "carcinoma of larynx (disorder)"
+      ]
+   },
+   {
+      "id":"http://purl.obolibrary.org/obo/DOID_7011",
+      "label":"recurrent thyroid carcinoma",
+      "definition":null,
+      "synonyms":[
+         "relapsed cancer of the Thyroid"
+      ]
+   },
+   {
+      "id":"http://purl.obolibrary.org/obo/DOID_6861",
+      "label":"recurrent cancer of gallbladder",
+      "definition":null,
+      "synonyms":[
+         "relapsed cancer of the gallbladder"
+      ]
+   }
+]

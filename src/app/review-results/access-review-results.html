@@ -29,8 +29,8 @@
             <h3 class="cm-results-subtitle access-color">Vote Results</h3>
             <hr class="box-separator-white">
             <div class="row">
-                <div cm-chart cm-chart-data="ReviewResults.chartData.access"
-                     cm-chart-options="ReviewResults.chartOptions.access" class="result_chart"></div>
+                <div cm-chart cm-chart-data="DulReviewResults.chartData.access"
+                     cm-chart-options="DulReviewResults.chartOptions.access" class="result_chart"></div>
             </div>
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-results">
@@ -39,22 +39,20 @@
             <form class="form-horizontal" id="voteForm">
                 <div class="form-group first-form-group">
                     <label class="col-lg-2 col-md-2 col-sm-2 col-xs-4 control-label vote-label">Vote</label>
-
                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
-                        <div class="button-holder">
-                            <div class="radio-inline group-regular-radio">
-                                <input type="radio" ng-model="ReviewResults.voteForm.vote"
-                                       ng-click="ReviewResults.positiveVote()"
-                                       value="true" class="regular-radio" id="inputVotePositive"
-                                       name="inputVote"><label
-                                for="inputVotePositive"><span class="radio-button-text">Yes</span></label>
-                            </div>
-                            <div class="radio-inline">
-                                <input type="radio" ng-model="ReviewResults.voteForm.vote"
-                                       value="false" class="regular-radio" id="inputVoteNegative"
-                                       name="inputVote"><label for="inputVoteNegative"><span
-                                class="radio-button-text">No</span></label>
-                            </div>
+                        <div class="radio-inline">
+                            <input type="radio" ng-model="DulReviewResults.voteForm.vote"
+                                   ng-click="DulReviewResults.positiveVote()"
+                                   value="true" class="regular-radio" id="inputVotePositive"
+                                   name="inputVote">
+                            <label for="inputVotePositive"></label>
+                            <div class="radio-button-text">Yes</div>
+
+                            <input type="radio" ng-model="ReviewResults.voteForm.vote"
+                                   value="false" class="regular-radio" id="inputVoteNegative"
+                                   name="inputVote">
+                            <label for="inputVoteNegative"></label>
+                            <div class="radio-button-text">No</div>
                         </div>
                     </div>
                 </div>
@@ -62,9 +60,9 @@
                     <label class="col-lg-2 col-md-2 col-sm-2 col-xs-4 control-label vote-label">Rationale</label>
 
                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
-                        <input type="text" ng-model="ReviewResults.voteForm.rationale"
-                               ng-disabled="!ReviewResults.voteForm.vote || ReviewResults.voteForm.vote == 'true'"
-                               cm-focus="{{!ReviewResults.voteForm.vote || ReviewResults.voteForm.vote == 'true' ? 'false' : 'true'}}"
+                        <input type="text" ng-model="DulReviewResults.voteForm.rationale"
+                               ng-disabled="!DulReviewResults.voteForm.vote || DulReviewResults.voteForm.vote == 'true'"
+                               cm-focus="{{!DulReviewResults.voteForm.vote || DulReviewResults.voteForm.vote == 'true' ? 'false' : 'true'}}"
                                name="inputRationale"
                                class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
                                placeholder="Describe your rationale here (be as specific as possible).">
@@ -82,7 +80,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
-                        <button ng-click="ReviewResults.logVote()"
+                        <button ng-click="DulReviewResults.logVote()"
                                 class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button access-background">
                             Vote
                         </button>
@@ -159,9 +157,9 @@
                         </div>
                         <div class="col-lg-6 col-lg-offset-6 col-md-6 col-md-offset-6 col-sm-6 col-xs-6 no-padding">
                             <input type="button" class="sendReminder btn btn-primary vote-reminder access-color"
-                                   ng-value="ReviewResults.reminder.text"
-                                   ng-class="{clickedBtn: ReviewResults.reminder.sent}"
-                                   ng-click="ReviewResults.sendReminder()"/>
+                                   ng-value="DulReviewResults.reminder.text"
+                                   ng-class="{clickedBtn: DulReviewResults.reminder.sent}"
+                                   ng-click="DulReviewResults.sendReminder()"/>
                         </div>
                     </div>
                 </div>

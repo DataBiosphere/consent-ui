@@ -1,18 +1,18 @@
 <div ng-include src="'app/header/header.html'"></div>
 <div class="container" ng-controller="AdminUsers">
     <div class="row no-margin">
-        <h2 class="col-lg-7 col-md-7 col-sm-6 col-xs-6 cm-title common-color no-padding">
+        <h2 class="col-lg-7 col-md-7 col-sm-12 col-xs-12 cm-title common-color no-padding">
             <img src="../assets/images/icon_manage_users.png" alt="Manage DUL icon" class="cm-icons">Manage Users
             <div class="cm-title-admin-description">Select and manage users and their roles</div>
         </h2>
-        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 search-reviewed">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 search-reviewed">
             <div class="search-text">
                 <i class="glyphicon glyphicon-search common-color"></i>
                 <input type="search" class="form-control users-search" placeholder="Enter search term..." ng-model="searchUsers"/>
             </div>
         </div>
         <div>
-            <a class="col-lg-2 col-md-2 col-sm-3 col-xs-3 admin-add-button common-background"
+            <a class="col-lg-2 col-md-2 col-sm-6 col-xs-6 admin-add-button common-background"
                ng-click="AdminUsers.addUser()">
                 <div class="all-icons add-user_white"></div>
                 <span>Add User</span>

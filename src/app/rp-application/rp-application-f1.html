@@ -1,12 +1,16 @@
+<ng-form name="step1">
 <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
     <div class="cm-subtitle request-color"><h3>1. Researcher Information</h3></div>
     <div class="form-group">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
             <label class="control-label rp-title-question">1.1 Principal Investigator<span>By typing in the name of the principal investigator, I certify that he or she is aware of this research study.</span></label>
         </div>
+        <span class="cancel-color required-field-error-span" ng-show="step1.inputInvestigator.$invalid && showValidationMessages">
+            <span>* Required field</span>
+        </span>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
             <input ng-model="formData.investigator" type="text" name="inputInvestigator" id="inputInvestigator"
-                   class="form-control" required="required" placeholder="Principal Investigator">
+                   ng-class="step1.inputInvestigator.$invalid && showValidationMessages  ?   'form-control required-field-error' : 'form-control'  " required="required" placeholder="Principal Investigator">
         </div>
     </div>
     <div class="form-group">
@@ -14,65 +18,98 @@
             <label class="control-label rp-title-question">1.2 Applicant Organization</label>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <label class="control-label">Institution Name</label>
+            <label class="control-label">Institution Name
+               <span class="cancel-color required-field-error-span"  ng-show="step1.inputInstitution.$invalid && showValidationMessages">
+                    <span>* Required field</span>
+               </span>
+            </label>
             <input ng-model="formData.institution" type="text" name="inputInstitution" id="inputInstitution"
-                   class="form-control" required="required" placeholder="">
+                   ng-class="step1.inputInstitution.$invalid && showValidationMessages  ?   'form-control required-field-error' : 'form-control'  " required="required" placeholder="">
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-            <label class="control-label">Department</label>
+            <label class="control-label">Department
+                <span class="cancel-color required-field-error-span" ng-show="step1.inputDepartment.$invalid && showValidationMessages">
+                    <span>* Required field</span>
+                </span>
+            </label>
             <input ng-model="formData.department" type="text" name="inputDepartment" id="inputDepartment"
-                   class="form-control" required="required" placeholder="">
+                   ng-class="step1.inputDepartment.$invalid && showValidationMessages  ?   'form-control required-field-error' : 'form-control'  " required="required" placeholder="">
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-            <label class="control-label">Division</label>
-            <input ng-model="formData.division" type="text" name="inputDivision" id="inputDivision" class="form-control"
-                   required="required" placeholder="">
+            <label class="control-label">Division
+            </label>
+            <input ng-model="formData.division" type="text" name="inputDivision" id="inputDivision" class="form-control">
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <label class="control-label">Street Address 1</label>
-            <input ng-model="formData.address1" type="text" name="inputAddress1" id="inputAddress1" class="form-control"
+            <label class="control-label">Street Address 1
+                 <span class="cancel-color required-field-error-span" ng-show="step1.inputAddress1.$invalid && showValidationMessages">
+                    <span>* Required field</span>
+                 </span>
+            </label>
+            <input ng-model="formData.address1" type="text" name="inputAddress1" id="inputAddress1" ng-class="step1.inputAddress1.$invalid && showValidationMessages  ?   'form-control required-field-error' : 'form-control'"
                    required="required" placeholder="">
+
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <label class="control-label">Street Address 2</label>
-            <input ng-model="formData.address2" type="text" name="inputAddress2" id="inputAddress2" class="form-control"
+            <input ng-model="formData.address2" type="text" name="inputAddress2" id="inputAddress2" class="form-control">
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <label class="control-label">City
+                <span class="cancel-color required-field-error-span" ng-show="step1.inputCity.$invalid && showValidationMessages">
+                    <span>* Required field</span>
+                </span>
+            </label>
+            <input ng-model="formData.city" type="text" name="inputCity" id="inputCity"ng-class="step1.inputCity.$invalid && showValidationMessages  ?   'form-control required-field-error' : 'form-control'  "
                    required="required" placeholder="">
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-            <label class="control-label">City</label>
-            <input ng-model="formData.city" type="text" name="inputCity" id="inputCity" class="form-control"
-                   required="required" placeholder="">
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-            <label class="control-label">State</label>
-            <input ng-model="formData.state" type="text" name="inputState" id="inputState" class="form-control"
+            <label class="control-label">State
+                <span class="cancel-color required-field-error-span" ng-show="step1.inputState.$invalid && showValidationMessages">
+                    <span>* Required field</span>
+                </span>
+            </label>
+            <input ng-model="formData.state" type="text" name="inputState" id="inputState" ng-class="step1.inputState.$invalid && showValidationMessages  ?   'form-control required-field-error' : 'form-control'  "
                    required="required" placeholder="">
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-            <label class="control-label">Zip/Postal Code</label>
-            <input ng-model="formData.zipcode" type="text" name="inputZipCode" id="inputZipCode" class="form-control"
+            <label class="control-label">Zip/Postal Code
+                 <span class="cancel-color required-field-error-span" ng-show="step1.inputZipCode.$invalid && showValidationMessages">
+                    <span>* Required field</span>
+                 </span>
+            </label>
+            <input ng-model="formData.zipcode" type="text" name="inputZipCode" id="inputZipCode" ng-class="step1.inputZipCode.$invalid && showValidationMessages  ?   'form-control required-field-error' : 'form-control'  "
                    required="required" placeholder="">
         </div>
-        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-            <label class="control-label">Country</label>
-            <input ng-model="formData.country" type="text" name="inputCountry" id="inputCountry" class="form-control"
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 rp-group">
+            <label class="control-label">Country
+                <span class="cancel-color required-field-error-span" ng-show="step1.inputCountry.$invalid && showValidationMessages">
+                    <span>* Required field</span>
+                </span>
+            </label>
+            <input ng-model="formData.country" type="text" name="inputCountry" id="inputCountry" ng-class="step1.inputCountry.$invalid && showValidationMessages  ?   'form-control required-field-error' : 'form-control'  "
                    required="required" placeholder="">
         </div>
     </div>
-
     <div class="form-group">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-            <label class="control-label rp-title-question">1.3 Descriptive Title of Project<span>Please note that coordinated requests by collaborating institutions should each use the same title.</span></label>
+            <label class="control-label rp-title-question">1.3 Descriptive Title of Project<span>Please note that coordinated requests by collaborating institutions should each use the same title.</span>
+            </label>
         </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-            <input ng-model="formData.projectTitle" type="text" name="inputTitle" id="inputTitle" class="form-control"
+        <span class="cancel-color required-field-error-span" ng-show="step1.inputTitle.$invalid && showValidationMessages">
+            <span>* Required field</span>
+        </span>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group rp-last-group">
+            <input ng-model="formData.projectTitle" type="text" name="inputTitle" id="inputTitle" ng-class="step1.inputTitle.$invalid && showValidationMessages  ?   'form-control required-field-error' : 'form-control'  "
                    required="required" placeholder="Title of the project">
         </div>
     </div>
     <ul class="pager wizard">
         <div class="row multi-step-pager">
-            <li class="previous f-left multi-step-prev disabled"><a href=""><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous Step</a></li>
-            <li class="next f-right multi-step-next"><a href="#/rp_application/step2" class="request-background">Next Step<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a></li>
+            <li class="next f-right multi-step-next"><a href="#/rp_application/step2"  class="request-background">Next Step<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a></li>
         </div>
     </ul>
 </div>
+</ng-form>
+
+
