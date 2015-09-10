@@ -995,6 +995,41 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     color: #cccccc !important;
 }
 
+
+.multi-step-fields-disabled,
+.multi-step-fields-enabled{
+    margin-left: 20px;
+    display: inline !important;
+}
+
+.multi-step-fields-disabled label,
+.multi-step-fields-enabled label{
+    margin: 0 15px 0 10px !important;
+    padding: 0 !important;
+}
+
+.multi-step-fields-disabled,
+.multi-step-fields-disabled label div{
+    color: #cccccc !important;
+    cursor: not-allowed !important;
+}
+
+.multi-step-fields-enabled,
+.multi-step-fields-enabled label div{
+    color: #777777;
+    cursor: default;
+}
+
+.multi-step-fields-disabled label div,
+.multi-step-fields-enabled label div{
+    padding-right: 30px !important;
+}
+
+.multi-step-fields-disabled label{
+    border: 1px solid #cccccc!important;
+    cursor: not-allowed;
+}
+
 /***************************************************Paginator*/
 
 .multi-step-pager {
@@ -1021,7 +1056,6 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 .download-button, .admin-add-button {
     float: right;
     font-size: 15px;
-    padding: 8px 15px 0 15px !important;
 }
 
 .download-button {
@@ -1030,6 +1064,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 
 .admin-add-button {
     margin: 35px 0 0 0;
+    padding: 8px 15px 0 15px !important;
 }
 
 .upload-button {
