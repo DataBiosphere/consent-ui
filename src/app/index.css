@@ -1285,12 +1285,12 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 
 .add-dul_white {
     background-position: -140px 0;
-    margin: -10px 0 0 0;
+    margin: -8px 0 0 0;
 }
 
 .add-user_white {
     background-position: -140px -40px;
-    margin: -10px 0 0 0;
+    margin: -8px 0 0 0;
 }
 
 .edit-dul {
@@ -1322,7 +1322,6 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 }
 
 .admin-manage-buttons .enabled, .admin-manage-buttons .disabled, .admin-manage-buttons .create, .admin-manage-buttons .cancel {
-    width: 70px !important;
     text-align: center;
     margin: 4px auto 0 auto !important;
 }
@@ -1948,7 +1947,7 @@ input[type="checkbox"][disabled] + label {
     overflow-y: visible;
 }
 
-.table-scroll thead {
+.table-scroll thead{
     padding: 0 10px 0 10px;
 }
 
@@ -1970,8 +1969,6 @@ input[type="checkbox"][disabled] + label {
     font-size: 16px !important;
     padding: 5px 50px 10px 8px !important;
     white-space: nowrap;
-    /*overflow: hidden;*/
-    /*text-overflow: ellipsis;*/
 }
 
 .table-titles label {
@@ -2017,6 +2014,9 @@ td:first-child .checkbox {
     cursor: default !important;
 }
 
+.small-size {
+    min-width: 100px !important;
+}
 
 .cell-size {
     min-width: 250px !important;
