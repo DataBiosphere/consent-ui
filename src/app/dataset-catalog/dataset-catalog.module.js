@@ -2,6 +2,5 @@
     'use strict';
 
     angular
-        .module('cmDatasetCatalog', ['ui.router', 'ui.bootstrap', 'cmUserRoles']);
-
+        .module('cmDatasetCatalog', ['ui.router', 'ui.bootstrap', 'cmUserRoles','cmDataset']);
 })();

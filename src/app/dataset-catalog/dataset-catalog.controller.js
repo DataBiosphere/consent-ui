@@ -6,16 +6,14 @@
         .controller('DatasetCatalog', DatasetCatalog);
 
     /* ngInject */
-    function DatasetCatalog($http, cmPaginatorService, $scope) {
+    function DatasetCatalog($http, cmPaginatorService, $scope ,cmDatasetService) {
 
-        var lists = {'catalog': [], 'properties': []};
-
+        var lists = {'catalog': [], 'dictionary': []};
         var list_max_items = 10;
-
         var vm = this;
-        vm.activePage = {'catalog': 0, 'properties': 0};
-        vm.currentPages = {'catalog': [], 'properties': []};
-        vm.electionsList = {'catalog': [], 'properties': []};
+        vm.activePage = {'catalog': 0, 'dictionary': 0};
+        vm.currentPages = {'catalog': [], 'dictionary': []};
+        vm.dataSetList = {'catalog': [], 'dictionary': []};
         // changePage function from the service with the first 2 parameters locked
         vm.changePage = _.partial(cmPaginatorService.changePage,
             // first parameter to lock from changePage
@@ -24,35 +22,42 @@
             {
                 activePage: vm.activePage,
                 currentPages: vm.currentPages,
-                electionsList: vm.electionsList
+                electionsList: vm.dataSetList
             }
         );
 
         init();
 
         function init() {
-            $http.get('json/cm_dataset_catalog.json').then(function (response) {
-                lists['catalog'] = response.data['catalog'];
-                lists['properties'] = response.data['properties'];
-                vm.changePage('catalog', 0);
-                vm.changePage('properties', 0);
+                $scope.checkMod = {}
+                $scope.objectIdList=[];
+                cmDatasetService.findDictionary().then(
+                                function (data) {
+                                    lists['dictionary'] = data;
+                                    vm.changePage('dictionary', 0);
+                                });
 
+                cmDatasetService.findDataSets().then(
+                                function (data) {
+                                    lists['catalog'] = data;
+                                    vm.changePage('catalog', 0);
             });
         }
 
-        $scope.Selected = false;
-
-        $scope.checkAll = function () {
-                if ($scope.selectAll) {
-                $scope.selectAll = true;
-            } else {
-                $scope.selectAll = false;
-            }
-            angular.forEach(vm.electionsList.catalog, function () {
-                $scope.Selected = $scope.selectAll;
-            });
-        };
-
+         vm.download = function (objectIdList) {
+           cmDatasetService.downloadDataSets(objectIdList).then(function (value) {
+             var blob = new Blob([value.datasets], { type : 'text/plain' });
+             var downloadElement = angular.element('<a/>');
+             downloadElement.css({display: 'none'});
+             angular.element(document.body).append(downloadElement);
+             downloadElement.attr({
+                 href:  (window.URL || window.webkitURL).createObjectURL( blob ),
+                 target: '_blank',
+                 download: 'datasets.tsv'
+             })[0].click();
+           }, function (reason) {
+           }
+         )};
       }
 
 })();

@@ -15,7 +15,7 @@
                 controller: 'SummaryVotes',
                 controllerAs: 'SummaryVotes',
                 data: {
-                                         authorizedRoles: [USER_ROLES.member,USER_ROLES.chairperson,USER_ROLES.admin]
+                                         authorizedRoles: [USER_ROLES.member, USER_ROLES.chairperson, USER_ROLES.admin, USER_ROLES.alumni]
                       }
             });
     }
