@@ -15,6 +15,12 @@
             $scope.alerts.splice(index, 1);
         };
 
+        function positiveVote() {
+        };
+
+        function agreementVote() {
+        };
+
 
         /*ACCORDION*/
         $scope.oneAtATime = false;

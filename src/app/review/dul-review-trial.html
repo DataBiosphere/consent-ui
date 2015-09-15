@@ -4,25 +4,7 @@
         <img src="assets/images/icon_dul.png" alt="translation icon" class="cm-icons">Data Use Limitations Congruence Review<br>
         <div class="cm-title-description">Where the data use limitations accurately converted to a structured format?</div>
     </h2>
-    <hr class="section-separator">
-    <div class="row fsi-row-lg-level fsi-row-md-level">
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
-            <div class="panel-heading cm-boxhead dul-color">
-                <h4>Data Use Limitations</h4>
-            </div>
-            <div id="dul" class="panel-body cm-boxbody">
-                <a href="{{downloadUrl}}" target="_blank">{{consentDulName}}</a>
-            </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
-            <div class="panel-heading cm-boxhead dul-color">
-                <h4>Structured Limitations</h4>
-            </div>
-            <div id="ssdur" class="panel-body cm-boxbody">
-                {{consentSDul}}
-            </div>
-        </div>
-    </div>
+
     <hr class="section-separator">
     <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
         <div class="jumbotron box-vote">
@@ -34,6 +16,7 @@
                         <label
                             class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label dul-color">Vote</label>
                         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
+
                             <div class="radio-inline">
                                 <input type="radio" ng-model="voteStatus" ng-click="positiveVote()"
                                        ng-value="true" class="regular-radio" id="inputVotePositive"
@@ -47,6 +30,7 @@
                                 <label for="inputVoteNegative"></label>
                                 <div class="radio-button-text">No</div>
                             </div>
+
                         </div>
                     </div>
                     <div class="form-group">
