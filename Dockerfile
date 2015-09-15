@@ -9,7 +9,6 @@ USER root
 RUN apt-get update \
     && apt-get install -y \
     && apt-get clean \
-    && apt-get -yq install libfontconfig imagemagick \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Copy source files to the app directory
@@ -25,18 +24,24 @@ COPY karma.conf.js /app/
 COPY package.json /app/
 COPY protractor.conf.js /app/
 
+# Some dependencies require node v0.12.7
+RUN npm install -g npm
+RUN npm cache clean -f \
+    && npm install -g n \
+    && n 0.12.7
+
 #install bower and gulp, and local gulp
 WORKDIR /app
 RUN npm install -g wrench \
     && npm install -g bower \
     && npm install -g gulp \
+    && npm install -g http-server \
     && npm install --save-dev gulp \
     && npm install \
     && bower install --allow-root
 
-# Default ports for gulp
-EXPOSE 8000
-EXPOSE 3001
+RUN gulp
 
-WORKDIR /app
-CMD ["gulp", "serve:dist"]
+EXPOSE 8000
+
+CMD ["http-server", "/app/dist", "-p 8000"]
