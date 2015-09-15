@@ -7,7 +7,7 @@
         .config(routeConfig)
         .config(httpConfig)
         .config(compileProvider)
-        .constant("apiUrl", "https://consent-ci.broadinstitute.org/");
+        .constant("apiUrl", "https://consent.dsde-dev.broadinstitute.org/");
 
     /* ngInject */
     function logConfig($logProvider) {
