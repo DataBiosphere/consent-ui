@@ -22,7 +22,7 @@
     /* ngInject */
     function httpConfig($httpProvider) {
         $httpProvider.defaults.useXDomain = true;
-        $httpProvider.defaults.withCredentials = true;
+        $httpProvider.defaults.withCredentials = false;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
     }
 
