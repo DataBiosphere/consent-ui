@@ -6,7 +6,8 @@
         .config(logConfig)
         .config(routeConfig)
         .config(httpConfig)
-        .constant("apiUrl", "https://consent-ci.broadinstitute.org/");
+        .config(compileProvider)
+        .constant("apiUrl", "https://consent.dsde-dev.broadinstitute.org/");
 
     /* ngInject */
     function logConfig($logProvider) {
@@ -17,6 +18,11 @@
     function routeConfig($urlRouterProvider) {
         $urlRouterProvider.when('', '/login');
         $urlRouterProvider.otherwise("components/HtmlResource/404.html");
+    }
+
+    /* ngInject */
+    function compileProvider($compileProvider) {
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|blob):/);
     }
 
     /* ngInject */

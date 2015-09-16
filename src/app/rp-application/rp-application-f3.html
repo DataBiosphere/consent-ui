@@ -10,15 +10,17 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
             <div class="radio-inline radio-choices">
                 <input ng-model="formData.exclusive" ng-value=true type="radio" class="regular-radio" id="exclusiveYes"
-                       name="exclusive"><label for="exclusiveYes">
-                <div class="radio-choices-text">Yes</div>
-            </label>
+                       name="exclusive">
+                <label for="exclusiveYes">
+                    <div class="radio-choices-text">Yes</div>
+                </label>
             </div>
             <div class="radio-inline radio-choices">
                 <input ng-model="formData.exclusive" ng-value=false type="radio" class="regular-radio" id="exclusiveNo"
-                       name="exclusive"><label for="exclusiveNo">
-                <div class="radio-choices-text">No</div>
-            </label>
+                       name="exclusive">
+                <label for="exclusiveNo">
+                    <div class="radio-choices-text">No</div>
+                </label>
             </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
@@ -28,15 +30,34 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
             <div class="radio-inline radio-choices">
                 <input ng-model="formData.onegender" ng-value=true type="radio" class="regular-radio" name="oneGender"
-                       id="oneGenderYes" onclick="votePositiveFunction()"><label for="oneGenderYes">
-                <div class="radio-choices-text">Yes</div>
-            </label>
+                       id="oneGenderYes" onclick="GenderFunction()">
+                <label for="oneGenderYes">
+                    <div class="radio-choices-text">Yes</div>
+                </label>
             </div>
             <div class="radio-inline radio-choices">
                 <input ng-model="formData.onegender" ng-value=false type="radio" class="regular-radio" name="oneGender"
-                       id="oneGenderNo" onclick="voteNegativeFunction()"><label for="oneGenderNo">
-                <div class="radio-choices-text">No</div>
-            </label>
+                       id="oneGenderNo">
+                <label for="oneGenderNo">
+                    <div class="radio-choices-text">No</div>
+                </label>
+            </div>
+            <div class="multi-step-fields-disabled"> <!--THIS CLASS SHOULD CHANGE TO multi-step-fields-enabled if YES is selected-->
+                <span>Please specify</span>
+                <div class="radio-inline radio-choices">
+                    <input ng-model="formData.whichgender" ng-value=true type="radio" class="regular-radio" name="oneGender"
+                           id="genderFemale">
+                    <label for="genderFemale">
+                        <div class="radio-choices-text">Female</div>
+                    </label>
+                </div>
+                <div class="radio-inline radio-choices">
+                    <input ng-model="formData.whichgender" ng-value=false type="radio" class="regular-radio" name="oneGender"
+                           id="genderMale">
+                    <label for="genderMale">
+                        <div class="radio-choices-text">Male</div>
+                    </label>
+                </div>
             </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">

@@ -995,6 +995,41 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     color: #cccccc !important;
 }
 
+
+.multi-step-fields-disabled,
+.multi-step-fields-enabled{
+    margin-left: 20px;
+    display: inline !important;
+}
+
+.multi-step-fields-disabled label,
+.multi-step-fields-enabled label{
+    margin: 0 15px 0 10px !important;
+    padding: 0 !important;
+}
+
+.multi-step-fields-disabled,
+.multi-step-fields-disabled label div{
+    color: #cccccc !important;
+    cursor: not-allowed !important;
+}
+
+.multi-step-fields-enabled,
+.multi-step-fields-enabled label div{
+    color: #777777;
+    cursor: default;
+}
+
+.multi-step-fields-disabled label div,
+.multi-step-fields-enabled label div{
+    padding-right: 30px !important;
+}
+
+.multi-step-fields-disabled label{
+    border: 1px solid #cccccc!important;
+    cursor: not-allowed;
+}
+
 /***************************************************Paginator*/
 
 .multi-step-pager {
@@ -1021,7 +1056,6 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 .download-button, .admin-add-button {
     float: right;
     font-size: 15px;
-    padding: 8px 15px 0 15px !important;
 }
 
 .download-button {
@@ -1030,6 +1064,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 
 .admin-add-button {
     margin: 35px 0 0 0;
+    padding: 8px 15px 0 15px !important;
 }
 
 .upload-button {
@@ -1250,12 +1285,12 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 
 .add-dul_white {
     background-position: -140px 0;
-    margin: -10px 0 0 0;
+    margin: -8px 0 0 0;
 }
 
 .add-user_white {
     background-position: -140px -40px;
-    margin: -10px 0 0 0;
+    margin: -8px 0 0 0;
 }
 
 .edit-dul {
@@ -1287,7 +1322,6 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 }
 
 .admin-manage-buttons .enabled, .admin-manage-buttons .disabled, .admin-manage-buttons .create, .admin-manage-buttons .cancel {
-    width: 70px !important;
     text-align: center;
     margin: 4px auto 0 auto !important;
 }
@@ -1913,7 +1947,7 @@ input[type="checkbox"][disabled] + label {
     overflow-y: visible;
 }
 
-.table-scroll thead {
+.table-scroll thead{
     padding: 0 10px 0 10px;
 }
 
@@ -1935,8 +1969,6 @@ input[type="checkbox"][disabled] + label {
     font-size: 16px !important;
     padding: 5px 50px 10px 8px !important;
     white-space: nowrap;
-    /*overflow: hidden;*/
-    /*text-overflow: ellipsis;*/
 }
 
 .table-titles label {
@@ -1982,6 +2014,9 @@ td:first-child .checkbox {
     cursor: default !important;
 }
 
+.small-size {
+    min-width: 100px !important;
+}
 
 .cell-size {
     min-width: 250px !important;

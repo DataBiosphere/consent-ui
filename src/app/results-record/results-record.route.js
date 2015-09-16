@@ -20,7 +20,7 @@
                 controller: 'DulResultsRecord',
                 controllerAs: 'DulResultsRecord',
                 data: {
-                    authorizedRoles: [USER_ROLES.chairperson]
+                    authorizedRoles: [USER_ROLES.member, USER_ROLES.chairperson, USER_ROLES.alumni, USER_ROLES.admin]
                 }
                 //resolve: {
                 //    electionReview: function($stateParams, cmElectionService){
@@ -36,7 +36,7 @@
                 controller: 'AccessResultsRecord',
                 controllerAs: 'AccessResultsRecord',
                 data: {
-                authorizedRoles: [USER_ROLES.chairperson]
+                authorizedRoles: [USER_ROLES.member, USER_ROLES.chairperson, USER_ROLES.alumni, USER_ROLES.admin]
             }
                 //resolve: {
                 //    electionReview: function($stateParams, cmElectionService){
@@ -47,3 +47,6 @@
 
     }
 })();
+
+
+
