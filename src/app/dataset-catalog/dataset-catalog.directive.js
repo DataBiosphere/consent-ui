@@ -62,7 +62,6 @@
                         scope.$apply(function () {
                             while(i--){
                                 var checkboxModel= 'field_'+i;
-                                console.log
                                 scope.checkMod[checkboxModel] = false;
                             }
                             scope.objectIdList=[];

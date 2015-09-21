@@ -33,21 +33,19 @@
                     <div class="form-group first-form-group">
                         <label
                             class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label dul-color">Vote</label>
-
                         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
-                            <div class="button-holder">
-                                <div class="radio-inline group-regular-radio">
-                                    <input type="radio" ng-model="voteStatus" ng-click="positiveVote()"
-                                           ng-value="true" class="regular-radio" id="inputVotePositive"
-                                           name="inputVote"><label
-                                    for="inputVotePositive"><span class="radio-button-text">Yes</span></label>
-                                </div>
-                                <div class="radio-inline">
-                                    <input type="radio" ng-model="voteStatus"
-                                           ng-value="false" class="regular-radio" id="inputVoteNegative"
-                                           name="inputVote"><label for="inputVoteNegative"><span
-                                    class="radio-button-text">No</span></label>
-                                </div>
+                            <div class="radio-inline">
+                                <input type="radio" ng-model="voteStatus" ng-click="positiveVote()"
+                                       ng-value="true" class="regular-radio" id="inputVotePositive"
+                                       name="inputVote">
+                                <label for="inputVotePositive"></label>
+                                <div class="radio-button-text">Yes</div>
+
+                                <input type="radio" ng-model="voteStatus"
+                                       ng-value="false" class="regular-radio" id="inputVoteNegative"
+                                       name="inputVote">
+                                <label for="inputVoteNegative"></label>
+                                <div class="radio-button-text">No</div>
                             </div>
                         </div>
                     </div>

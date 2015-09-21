@@ -11,13 +11,15 @@
 
             function onSignIn(googleUser) {
                 var profile = googleUser.getBasicProfile();
-                cmLoginUserService.loginUser(profile.getEmail());
-            };
+                var accessToken = googleUser.wc.access_token;
+                cmLoginUserService.loginUser(profile.getEmail(), accessToken);
+            }
 
             function signOut() {
                 cmLoginUserService.logoutUser();
 
-            };
+            }
+
             window.signOut = signOut;
             window.onSignIn = onSignIn;
         }

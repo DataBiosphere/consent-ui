@@ -5,20 +5,84 @@
         .controller('RPApplication', RPApplication);
 
     /* ngInject */
-    function RPApplication($state) {
+    function RPApplication($http, $state, $scope, $modal, cmRPService) {
 
         var vm = this;
-
         vm.$state = $state;
-        // we will store all of our form data in this object
-        vm.formData = {};
+        vm.attestAndSave = attestAndSave;
+        $scope.showValidationMessages = false;
+        $scope.atLeastOneCheckboxChecked = false;
 
-        //function to process the form
-        vm.processForm = function () {
-            alert('awesome!');
+        $scope.formData = Object();
+
+        $scope.$watch("form.step1.$valid", function (value1) {
+            if ($state.current.url === "/step1") {
+                $scope.step1isValidated = value1;
+            }
+        });
+
+        $scope.$watch("form.step2.$valid", function (value2) {
+            if ($state.current.url === "/step2") {
+                $scope.step2isValidated = value2;
+            }
+        });
+
+        $scope.$watch("form.step3.$valid", function (value3) {
+            if ($state.current.url === "/step3") {
+                $scope.step3isValidated = value3;
+            }
+        });
+
+        function attestAndSave() {
+
+           verifyCheckboxes();
+
+
+            if ( $scope.step1isValidated &&  $scope.step2isValidated &&  $scope.step3isValidated && $scope.atLeastOneCheckboxChecked){
+            $scope.showValidationMessages = false;
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/data-access-request-modal/data-access-request-modal.html',
+                controller: 'DARModal',
+                controllerAs: 'DARModal',
+                scope: $scope
+            });
+
+            modalInstance.result.then(function (value) {
+                 if(value){$state.go('rp_application_confirm');};
+                 if(!value){$scope.problemSavingRequest = true;};
+            });
+          } else {
+             $scope.showValidationMessages = true;
+          }
+        }
+
+
+
+        function verifyCheckboxes(){
+
+        if ($scope.formData.control != true &&
+            $scope.formData.population != true &&
+            $scope.formData.diseases != true &&
+            $scope.formData.methods != true &&
+            $scope.formData.other != true
+           ){
+              $scope.atLeastOneCheckboxChecked = false;
+           }else {
+           $scope.atLeastOneCheckboxChecked = true;
+           }
+        }
+
+
+        //function to process get datasets
+        $scope.search_datasets = function (partial) {
+            return cmRPService.getAutoCompleteDS(partial);
         };
 
+        //function to process get datasets
+        $scope.search_ontologies = function (partial) {
+            return cmRPService.getAutoCompleteOT(partial);
+        };
     }
 
 })();
-

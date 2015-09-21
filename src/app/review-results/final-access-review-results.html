@@ -31,13 +31,20 @@
                 <div class="form-group first-form-group">
                     <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label vote-label">Vote</label>
                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                        <div class="button-holder">
-                            <div class="radio-inline group-regular-radio">
-                                <input type="radio" class="regular-radio" name="inputFinalVote" id="inputVotePositive" onclick="votePositiveFunction()"><label for="inputVotePositive"><div class ="radio-button-text">Yes</div></label>
-                            </div>
-                            <div class="radio-inline">
-                                <input type="radio" class="regular-radio" name="inputFinalVote" id="inputVoteNegative" onclick="voteNegativeFunction()"><label for="inputVoteNegative"><div class ="radio-button-text">No</div></label>
-                            </div>
+
+                        <div class="radio-inline">
+                            <input type="radio" ng-model="FinalAccessReviewResults.voteForm.vote"
+                                   ng-click="FinalAccessReviewResults.positiveVote()"
+                                   value="true" class="regular-radio" id="inputVotePositive"
+                                   name="inputVote">
+                            <label for="inputVotePositive"></label>
+                            <div class="radio-button-text">Yes</div>
+
+                            <input type="radio" ng-model="FinalAccessReviewResults.voteForm.vote"
+                                   value="false" class="regular-radio" id="inputVoteNegative"
+                                   name="inputVote">
+                            <label for="inputVoteNegative"></label>
+                            <div class="radio-button-text">No</div>
                         </div>
                     </div>
                 </div>
@@ -74,13 +81,19 @@
                 <div class="form-group first-form-group">
                     <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label vote-label">Vote</label>
                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                        <div class="button-holder">
-                            <div class="radio-inline group-regular-radio">
-                                <input type="radio" class="regular-radio" name="inputFinalVote" id="inputAgreement" onclick="voteAgreeFunction()"><label for="inputAgreement"><div class ="radio-button-text">Yes</div></label>
-                            </div>
-                            <div class="radio-inline">
-                                <input type="radio" class="regular-radio" name="inputFinalVote" id="inputDisagreement" onclick="voteDisagreeFunction()"><label for="inputDisagreement"><div class ="radio-button-text">No</div></label>
-                            </div>
+                        <div class="radio-inline">
+                            <input type="radio" ng-model="FinalAccessReviewResults.voteForm.agree"
+                                   ng-click="FinalAccessReviewResults.agreementVote()"
+                                   value="true" class="regular-radio" id="inputAgreement"
+                                   name="inputAgree">
+                            <label for="inputAgreement"></label>
+                            <div class="radio-button-text">Yes</div>
+
+                            <input type="radio" ng-model="FinalAccessReviewResults.voteForm.agree"
+                                   value="false" class="regular-radio" id="inputDisagreement"
+                                   name="inputAgree">
+                            <label for="inputDisagreement"></label>
+                            <div class="radio-button-text">No</div>
                         </div>
                     </div>
                 </div>
