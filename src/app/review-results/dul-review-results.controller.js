@@ -4,7 +4,7 @@
     angular.module('cmReviewResults')
         .controller('DulReviewResults', DulReviewResults);
 
-    function DulReviewResults($scope, $modal, $state, cmElectionService, electionReview, apiUrl){
+    function DulReviewResults(apiUrl, $scope, $modal, $state, cmElectionService, electionReview){
 
         $scope.chartData = {
             'dul': [

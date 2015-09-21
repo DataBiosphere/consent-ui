@@ -14,7 +14,7 @@
                 url: '/dul_review',
                 params: {
                     consentId: null,
-                    voteId: null,
+                    voteId: null
                 },
                 templateUrl: 'app/review/dul-review.html',
 
@@ -25,13 +25,19 @@
                 },
                 resolve: {
                     vote: function($stateParams, cmVoteService){
-                        return cmVoteService.getVote($stateParams.consentId, $stateParams.voteId);
+                        if($stateParams.consentId != null){
+                            return cmVoteService.getVote($stateParams.consentId, $stateParams.voteId);
+                        }
                     },
                     consent: function($stateParams, cmConsentService){
-                        return cmConsentService.findConsent($stateParams.consentId);
+                        if($stateParams.consentId != null) {
+                            return cmConsentService.findConsent($stateParams.consentId);
+                        }
                     },
                     election: function($stateParams, cmElectionService){
-                        return cmElectionService.findElection($stateParams.consentId);
+                        if($stateParams.consentId != null) {
+                            return cmElectionService.findElection($stateParams.consentId);
+                        }
                     }
 
                 }

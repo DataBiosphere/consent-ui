@@ -25,7 +25,9 @@
                 },
                 resolve: {
                     electionReview: function($stateParams, cmElectionService){
-                        return cmElectionService.findElectionReview($stateParams.consentId).$promise;
+                        if($stateParams.consentId != null){
+                            return cmElectionService.findElectionReview($stateParams.consentId).$promise;
+                        }
                     }
                 }
             })

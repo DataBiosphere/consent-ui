@@ -1,7 +1,8 @@
 <div ng-include src="'app/header/header.html'"></div>
 <div class="container">
     <h2 class="cm-title dul-color">
-        <img src="assets/images/icon_dul.png" alt="translation icon" class="cm-icons">Data Use Limitations - Results Record<br>
+        <img src="assets/images/icon_dul.png" alt="translation icon" class="cm-icons">Data Use Limitations - Results
+        Record<br>
         <div class="cm-title-description">Where the data use limitations accurately converted to a structured format?
         </div>
     </h2>
@@ -11,17 +12,20 @@
             <div class="panel-heading cm-boxhead dul-color">
                 <h4>Data Use Limitations</h4>
             </div>
-            <div id="dul" class="panel-body cm-boxbody"><a href="#" class="hover-color">dul_file.pdf</a></div>
+            <div id="dul" class="panel-body cm-boxbody">
+                <a href="{{downloadUrl}}" target="_blank">{{dulName}}</a>
+            </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
             <div class="panel-heading cm-boxhead dul-color">
                 <h4>Structured Limitations</h4>
             </div>
-            <div id="ssdur" class="panel-body cm-boxbody">Structured limitations</div>
+            <div id="ssdur" class="panel-body cm-boxbody">
+                {{structuredDataUseLetter}}
+            </div>
         </div>
     </div>
     <hr class="section-separator">
-
     <h3 class="cm-subtitle">Data Access Committee Votes</h3>
     <div class="row fsi-row-lg-level fsi-row-md-level">
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 jumbotron box-vote-results">
@@ -37,85 +41,62 @@
             <hr class="box-separator-white">
             <div class="row results-box">
                 <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label vote-label dul-color">Vote: </label>
-                <div class="singleVote col-lg-4 col-md-4 col-sm-4 col-xs-4 vote-label bold">NO</div>
+                <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold {{election.finalVote}}">
+                    <span ng-if="election.finalVote == '1'">YES</span>
+                    <span ng-if="election.finalVote == '0'">NO</span>
+                    <span ng-if="election.finalVote == 'null'"></span>
+                </div>
                 <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label vote-label dul-color">Date: </label>
-                <div class="voteDate col-lg-4 col-md-4 col-sm-4 col-xs-4 vote-label">0000-00-00</div>
-                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label vote-label dul-color">Rationale: </label>
-                <div class="inputRationale col-lg-10 col-md-10 col-sm-10 col-xs-10 vote-label">Here goes the reason why I think so.</div>
+                <div class="voteDate col-lg-4 col-md-4 col-sm-4 col-xs-4 vote-label">{{election.finalVoteDate}}</div>
+                <label
+                    class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label vote-label dul-color">Rationale: </label>
+                <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">
+                    <span ng-if="election.finalVote == '1'">---</span>
+                    <span ng-if="election.finalVote == '0'">{{election.finalRationale}}</span>
+                    <span ng-if="election.finalVote == 'null'">----</span>
+                </div>
             </div>
         </div>
-     </div>
+    </div>
     <accordion close-others="oneAtATime">
-        <accordion-group is-open="status.open" class="accordion">
+        <accordion-group  class="accordion">
             <accordion-heading>
                 <h3 class="dul-color">Member's Votes
-                    <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
+                    <i class="pull-right glyphicon"
+                       ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
                 </h3>
             </accordion-heading>
-            <div class="row">
-                <div id="voteResultsList" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill">
+            <div class="row" ng-repeat="row in voteList">
+                <div id="voteResultsList" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill" ng-repeat="vm in row">
                     <div class="jumbotron box-vote-singleresults">
                         <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">Member 01</div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">{{vm.displayName}}
+                            </div>
                         </div>
                         <hr class="box-separator">
                         <div class="row">
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Vote: </label>
-                            <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">NO</div>
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Date: </label>
-                            <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">0000-00-00</div>
+                            <label
+                                class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Vote: </label>
+                            <div
+                                class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold {{vm.vote.vote}}">
+                                <span ng-if="vm.vote.vote == '1'">YES</span>
+                                <span ng-if="vm.vote.vote == '0'">NO</span>
+                                <span ng-if="vm.vote.vote == 'null'"></span>
+                            </div>
+                            <label
+                                class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Date: </label>
+                            <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">
+                                <span ng-if="vm.vote.createDate == null">---</span>
+                                <span ng-if="vm.vote.createDate != null && vm.vote.updateDate == null">{{vm.vote.createDate}}</span>
+                                <span ng-if="vm.vote.createDate != null && vm.vote.updateDate != null">{{vm.vote.updateDate}}</span>
+                            </div>
                             <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Rationale: </label>
-                            <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">Some rationale.</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill">
-                    <div class="jumbotron box-vote-singleresults">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">Member 02</div>
-                        </div>
-                        <hr class="box-separator">
-                        <div class="row">
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Vote: </label>
-                            <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">YES</div>
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Date:</label>
-                            <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">0000-00-00</div>
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Rationale: </label>
-                            <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">---</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill">
-                    <div class="jumbotron box-vote-singleresults">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">Member 03</div>
-                        </div>
-                        <hr class="box-separator">
-                        <div class="row">
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Vote: </label>
-                            <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">NO</div>
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Date: </label>
-                            <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">0000-00-00</div>
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Rationale: </label>
-                            <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">Some other rationale.</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill">
-                    <div class="jumbotron box-vote-singleresults">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">Member 04</div>
-                        </div>
-                        <hr class="box-separator">
-                        <div class="row">
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Vote: </label>
-                            <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">NO</div>
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Date:</label>
-                            <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">0000-00-00</div>
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Rationale: </label>
-                            <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">And another one.</div>
+                            <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">
+                                <span ng-if="vm.vote.vote == '1'">---</span>
+                                <span ng-if="vm.vote.vote == '0'">{{vm.vote.rationale}}</span>
+                                <span ng-if="vm.vote.vote == 'null'">----</span>
+                            </div>
+
                         </div>
                     </div>
                 </div>

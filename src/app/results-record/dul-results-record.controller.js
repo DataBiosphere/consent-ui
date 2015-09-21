@@ -5,13 +5,14 @@
         .controller('DulResultsRecord', DulResultsRecord);
 
 
-    function DulResultsRecord($scope){
+    function DulResultsRecord($scope, electionReview, apiUrl) {
+
 
         $scope.chartData = {
             'dulTotal': [
                 ['Results', 'Votes'],
-                ['YES', 1],
-                ['NO', 4],
+                ['YES', 0],
+                ['NO', 0],
                 ['Pending', 0]
             ]
         };
@@ -59,6 +60,54 @@
             }
         }
 
-    }
 
-    })();
+        $scope.election = electionReview.election;
+
+        if (electionReview.election.finalRationale === 'null') {
+            $scope.election.finalRationale = '';
+        }
+        $scope.dul = electionReview.consent.dataUseLetter;
+        $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
+        $scope.dulName = electionReview.consent.dulName;
+        $scope.structuredDataUseLetter = electionReview.consent.structuredDataUseLetter;
+        $scope.finalRationale = electionReview.election.finalRationale;
+        $scope.status = electionReview.election.status;
+        $scope.finalVote = electionReview.election.finalVote;
+        $scope.voteList = chunk(electionReview.reviewVote, 2);
+        $scope.chartData = getGraphData(electionReview.reviewVote);
+        function chunk(arr, size) {
+            var newArr = [];
+            for (var i = 0; i < arr.length; i += size) {
+                newArr.push(arr.slice(i, i + size));
+            }
+            return newArr;
+        }
+
+        function getGraphData(reviewVote) {
+            var yes = 0, no = 0, empty = 0;
+            for (var i = 0; i < reviewVote.length; i++) {
+                switch (reviewVote[i].vote.vote) {
+                    case true:
+                        yes++;
+                        break;
+                    case false:
+                        no++;
+                        break;
+                    default:
+                        empty++;
+                        break;
+                }
+            }
+            var chartData = {
+                'dulTotal': [
+                    ['Results', 'Votes'],
+                    ['YES', yes],
+                    ['NO', no],
+                    ['Pending', empty]
+                ]
+            };
+            return chartData;
+        }
+
+    }
+})();
