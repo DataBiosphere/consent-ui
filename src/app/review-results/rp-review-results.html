@@ -1,0 +1,202 @@
+<div ng-include src="'app/header/header.html'"></div>
+    <div class="container">
+        <h2 class="cm-title rp-color">
+            <img src="assets/images/icon_rp_review.png" alt="Research Purpose Review icon" class="cm-icons">DAC voting for Research Purpose Review<br>
+            <div class="cm-title-description">Was the research purpose accurately converted to a structured format?</div>
+        </h2>
+        <hr class="section-separator">
+        <div class="row fsi-row-lg-level fsi-row-md-level">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
+                <div class="panel-heading cm-boxhead rp-color">
+                    <h4>Research Purpose</h4>
+                </div>
+                <div id="dul" class="panel-body cm-boxbody">Brief description of the applicant’s proposed use of the dataset(s). This RUS will be reviewed by all parties responsible for data covered by this Data Access rp.<br>
+                    This RUS should be one or two paragraphs in length and include research objectives, the study design, and an analysis plan (including the phenotypic characteristics that will be tested for association with genetic variants). If you are rping multiple datasets, please describe how you will use them.
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
+                <div class="panel-heading cm-boxhead rp-color">
+                    <h4>Structured Research Purpose</h4>
+                </div>
+                <div id="rp" class="panel-body cm-boxbody">
+                    Automated Structured format of the Research Purpose will be displayed over here. We need to decide the best way to show this information, if it will be displayed in a json format or some sort of string instead.
+                </div>
+            </div>
+        </div>
+        <hr class="section-separator">
+        <h3 class="cm-subtitle">Data Access Committee Votes</h3>
+        <div class="row fsi-row-lg-level fsi-row-md-level">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 jumbotron box-vote-results">
+                <h3 class="cm-results-subtitle rp-color">Vote Results</h3>
+                <hr class="box-separator-white">
+                    <div cm-chart cm-chart-data="chartData.rpChart"
+                         cm-chart-options="chartOptions.rpChart" class="result_chart">
+                    </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-results">
+                <h3 class="cm-results-subtitle rp-color">Final decision</h3>
+                <hr class="box-separator-white">
+                <form class="form-horizontal" id="voteForm">
+                    <div class="form-group first-form-group">
+                        <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label rp-color">Vote</label>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
+                            <div class="radio-inline">
+                                <input type="radio" ng-model="RPReviewResults.voteForm.vote" ng-click="RPReviewResults.positiveVote()"
+                                       value="true" class="regular-radio" id="inputVotePositive"
+                                       name="inputVote">
+                                <label for="inputVotePositive"></label>
+                                <div class="radio-button-text">Yes</div>
+                                <input type="radio" ng-model="RPReviewResults.voteForm.vote"
+                                       value="false" class="regular-radio" id="inputVoteNegative"
+                                       name="inputVote">
+                                <label for="inputVoteNegative"></label>
+                                <div class="radio-button-text">No</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label rp-color">Rationale</label>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
+                            <input type="text" ng-model="RPReviewResults.voteForm.rationale"
+                                   ng-disabled="!RPReviewResults.voteForm.vote || RPReviewResults.voteForm.vote == 'true'"
+                                   cm-focus="{{!RPReviewResults.voteForm.vote || RPReviewResults.voteForm.vote == 'true' ? 'false' : 'true'}}"
+                                   name="inputRationale"
+                                   class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
+                                   placeholder="Describe your rationale here (be as specific as possible).">
+                        </div>
+                    </div>
+                    <div class="form-group form-group-bottom">
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                            <div id="successMsg" class="alert alert-success validation-message hidden">
+                                <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+                                Vote successfully logged.
+                            </div>
+                            <div id="errorMsg" class="alert alert-danger validation-message hidden">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                Please check your vote.
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <button ng-click="RPReviewResults.logVote()"
+                                    class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button rp-background">
+                                Vote
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill">
+                <div class="jumbotron box-vote-singleresults">
+                    <div class="row">
+                        <div class="userName col-lg-6 col-md-6 col-sm-12 col-xs-12 cm-user-name">DAC User 01 Vote</div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div
+                                class="updatedVote col-lg-5 col-lg-offset-7 col-md-5 col-md-offset-6 col-sm-6 col-xs-6 vote-update hidden">
+                                Updated vote!
+                            </div>
+                            <div class="col-lg-6 col-lg-offset-6 col-md-6 col-md-offset-6 col-sm-6 col-xs-6 no-padding">
+                                <input type="button" class="sendReminder btn btn-primary vote-reminder rp-color hidden"
+                                       value="Send a reminder"/>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="box-separator">
+                    <div class="row">
+                        <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Vote: </label>
+                        <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">YES</div>
+                        <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Date: </label>
+                        <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">00/00/0000</div>
+                    </div>
+                    <div class="row">
+                        <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Rationale: </label>
+                        <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label"> ---</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="jumbotron box-vote-singleresults">
+                    <div class="row">
+                        <div class="userName col-lg-6 col-md-6 col-sm-12 col-xs-12 cm-user-name">DAC User 02 Vote</div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="updatedVote col-lg-5 col-lg-offset-7 col-md-5 col-md-offset-6 col-sm-6 col-xs-6 vote-update hidden">
+                                Updated vote!
+                            </div>
+                            <div class="col-lg-6 col-lg-offset-6 col-md-6 col-md-offset-6 col-sm-6 col-xs-6 no-padding">
+                                <input type="button" class="sendReminder btn btn-primary vote-reminder rp-color hidden"
+                                       value="Send a reminder"/>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="box-separator">
+                    <div class="row">
+                        <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Vote: </label>
+                        <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">NO</div>
+                        <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Date: </label>
+                        <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">00/00/0000</div>
+                    </div>
+                    <div class="row">
+                        <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Rationale: </label>
+                        <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">Some rationale should be displayed over here.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="jumbotron box-vote-singleresults">
+                    <div class="row">
+                        <div class="userName col-lg-6 col-md-6 col-sm-12 col-xs-12 cm-user-name">DAC User 03 Vote</div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="updatedVote col-lg-5 col-lg-offset-7 col-md-5 col-md-offset-6 col-sm-6 col-xs-6 vote-update hidden">
+                                Updated vote!
+                            </div>
+                            <div class="col-lg-6 col-lg-offset-6 col-md-6 col-md-offset-6 col-sm-6 col-xs-6 no-padding">
+                                <input type="button" class="sendReminder btn btn-primary vote-reminder rp-color"
+                                       value="Send a reminder"/>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="box-separator">
+                    <div class="row">
+                        <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Vote: </label>
+                        <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold"> ---</div>
+                        <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Date: </label>
+                        <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label"> ---</div>
+                    </div>
+                    <div class="row">
+                        <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Rationale: </label>
+                        <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label"> ---</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="jumbotron box-vote-singleresults">
+                    <div class="row">
+                        <div class="userName col-lg-6 col-md-6 col-sm-12 col-xs-12 cm-user-name">DAC User 04 Vote</div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="updatedVote col-lg-5 col-lg-offset-7 col-md-5 col-md-offset-6 col-sm-6 col-xs-6 vote-update hidden">
+                                Updated vote!
+                            </div>
+                            <div class="col-lg-6 col-lg-offset-6 col-md-6 col-md-offset-6 col-sm-6 col-xs-6 no-padding">
+                                <input type="button" class="sendReminder btn btn-primary vote-reminder rp-color hidden"
+                                       value="Send a reminder"/>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="box-separator">
+                    <div class="row">
+                        <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Vote: </label>
+                        <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">YES</div>
+                        <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Date: </label>
+                        <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">00/00/0000</div>
+                    </div>
+                    <div class="row">
+                        <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Rationale: </label>
+                        <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label"> ---</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

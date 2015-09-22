@@ -62,7 +62,7 @@
     </div>
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
         <h2 class="pvotes-box-title access-color">
-            <img src="assets/images/icon_access.png" alt="Access icon" class="pvotes-icons">Data Access Request
+            <img src="assets/images/icon_access.png" alt="Access icon" class="pvotes-icons">Data Access Request Review
             <div class="pvotes-box-title-description">Should data access be granted to this applicant?
             </div>
         </h2>
@@ -113,6 +113,66 @@
                         </li>
                         <li><a
                             ng-click="UserConsole.changePage('access', UserConsole.activePage.access + 1)">&raquo;</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <h2 class="pvotes-box-title rp-color">
+            <img src="assets/images/icon_rp.png" alt="Research Purpose icon" class="pvotes-icons">Research Purpose Review
+            <div class="pvotes-box-title-description">Was the research purpose accurately converted to a structured format?
+            </div>
+        </h2>
+        <div class="jumbotron box-vote-singleresults">
+            <div class="row">
+                <div class="pvotes-box-head">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4 pvotes-box-subtitle rp-color">Some Id?
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 center-text pvotes-box-subtitle rp-color">
+                        Status
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 center-text pvotes-box-subtitle rp-color">
+                        Logged
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 center-text pvotes-box-subtitle rp-color">Vote
+                        <div ng-show="UserConsole.totalResearchPurposePendingVotes > 0" class="pcases-small-tag">{{UserConsole.totalResearchPurposePendingVotes}}</div>
+                    </div>
+                    <hr class="pvotes-main-separator">
+                </div>
+                <div class="pvotes-box-body">
+                    <div ng-repeat="pendingCase in UserConsole.electionsList.rp">
+                        <hr class="pvotes-separator">
+                        <div class="row pvotes-main-list">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4 pvotes-list-id">{{pendingCase.referenceId}}</div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pvotes-list {{pendingCase.status}}">
+                                <span ng-if="pendingCase.status == 'urgent'">URGENT!</span>
+                                <span ng-if="pendingCase.status == 'pending'">Pending</span>
+                                <span ng-if="pendingCase.status == 'editable'">Editable</span>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pvotes-list">{{pendingCase.logged}}</div>
+                            <a ng-href="#/rp_review/{{pendingCase.referenceId}}/{{pendingCase.voteId}}" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                <div class="{{pendingCase.status}}">
+                                    <span ng-if="pendingCase.alreadyVoted == false">Vote</span>
+                                    <span ng-if="pendingCase.alreadyVoted == true">Edit</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <hr class="pvotes-separator">
+                <div class="pvotes-pagination">
+                    <ul class="pagination">
+                        <li><a ng-click="UserConsole.changePage('rp', UserConsole.activePage.rp - 1)">&laquo;</a>
+                        </li>
+                        <li ng-repeat="page in UserConsole.currentPages.rp">
+                            <a ng-click="UserConsole.changePage('rp', page)"
+                               ng-class="{ 'active-case': UserConsole.activePage.rp == page}">{{page + 1}}</a>
+                        </li>
+                        <li><a
+                            ng-click="UserConsole.changePage('rp', UserConsole.activePage.rp + 1)">&raquo;</a>
                         </li>
                     </ul>
                 </div>
