@@ -125,11 +125,11 @@ small {
     background: #603B9B !important;
 }
 
-.request-color {
+.rp-color {
     color: #8E307A !important;
 }
 
-.request-background {
+.rp-background {
     background: #8E307A !important;
 }
 
@@ -450,7 +450,7 @@ small {
 }
 
 .cm-boxbody {
-    font-weight: 500;
+    /*font-weight: 500;*/
     margin-left: 5px;
     font-size: 15px;
     color: #777777;
@@ -519,7 +519,7 @@ small {
 
 .results-box{
     line-height: 26px !important;
-    font-size: 17px !important;
+    font-size: 15px !important;
     margin: 10px 0 15px 0!important;
 }
 
@@ -1036,7 +1036,6 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 .multi-step-fields span{
     padding-right: 15px;
     vertical-align: sub;
-
 }
 
 .multi-step-fields,
@@ -1179,8 +1178,8 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 }
 
 .rp-group {
-     margin-bottom: 10px !important;
- }
+    margin-bottom: 10px !important;
+}
 
 .rp-last-group{
     margin-bottom: 20px !important;

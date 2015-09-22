@@ -1,27 +1,54 @@
 (function () {
     'use strict';
 
-    angular.module('cmResultsRecord')
-        .controller('DulResultsRecord', DulResultsRecord);
+    angular.module('cmReviewResults')
+        .controller('AccessReviewResults', AccessReviewResults);
+
+    function AccessReviewResults($scope){
+
+        var vm = this;
+        vm.voteForm = {
+            vote: undefined,
+            rationale: ''
+        };
+        vm.positiveVote = positiveVote;
+        vm.logVote = logVote;
+
+        function positiveVote() {
+            vm.voteForm.rationale = '';
+        }
+
+        $scope.alerts = [
+            { type: 'danger', msg: 'Please check your vote.' },
+            { type: 'success', msg: 'Vote successfully logged.' }
+        ];
+
+        $scope.closeAlert = function(index) {
+            $scope.alerts.splice(index, 1);
+        };
+
+        function logVote() {
+
+        }
 
 
-    function DulResultsRecord($scope){
-
+        /*GOOGLE CHART*/
         $scope.chartData = {
-            'dulTotal': [
+            'accessChart': [
                 ['Results', 'Votes'],
                 ['YES', 1],
-                ['NO', 4],
+                ['NO', 2],
                 ['Pending', 0]
             ]
+
         };
 
         $scope.chartOptions = {
-            'dulTotal': {
+            'accessChart': {
                 pieHole: 0.4,
                 pieSliceTextStyle: {
                     color: 'white',
-                    fontSize: 16
+                    fontSize: 18
                 },
                 pieSliceText: 'none',
                 pieSliceBorderColor: 'transparent',
@@ -36,7 +63,7 @@
                 },
                 height: 138,
                 slices: {
-                    0: {color: '#C16B0C'},
+                    0: {color: '#603B9B'},
                     1: {color: '#777777'},
                     2: {color: '#c9c9c9'}
                 },
@@ -61,4 +88,4 @@
 
     }
 
-    })();
+})();

@@ -30,12 +30,24 @@
                 }
             })
 
+
+            .state('rp_review_results', {
+                name: 'rp_review_results',
+                url: '/rp_review_results',
+                templateUrl: 'app/review-results/rp-review-results.html',
+                controller: 'RPReviewResults',
+                controllerAs: 'RPReviewResults',
+                data: {
+                    authorizedRoles: [USER_ROLES.chairperson]
+                }
+            })
+
             .state('access_review_results', {
                 name: 'access_review_results',
                 url: '/access_review_results',
                 templateUrl: 'app/review-results/access-review-results.html',
-                controller: 'ReviewResults',
-                controllerAs: 'ReviewResults',
+                controller: 'AccessReviewResults',
+                controllerAs: 'AccessReviewResults',
                 data: {
                     authorizedRoles: [USER_ROLES.chairperson]
                 }
@@ -52,5 +64,5 @@
                 }
             });
 
-       }
+    }
 })();

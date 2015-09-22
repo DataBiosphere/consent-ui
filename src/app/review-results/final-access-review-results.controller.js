@@ -72,7 +72,7 @@
                         color: '#777777',
                         bold: true,
                         fontName: 'Roboto',
-                        fontSize: 16
+                        fontSize: 14
                     },
                     alignment: 'start'
                 },
@@ -112,7 +112,7 @@
                         color: '#777777',
                         bold: true,
                         fontName: 'Roboto',
-                        fontSize: 16
+                        fontSize: 14
                     },
                     alignment: 'start'
                 },

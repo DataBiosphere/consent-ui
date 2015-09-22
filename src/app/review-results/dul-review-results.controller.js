@@ -9,8 +9,8 @@
         $scope.chartData = {
             'dul': [
                 ['Results', 'Votes'],
-                ['Yes', 0],
-                ['No', 0],
+                ['YES', 0],
+                ['NO', 0],
                 ['Pending', 0]
             ]
         };
@@ -20,7 +20,7 @@
                 pieHole: 0.4,
                 pieSliceTextStyle: {
                     color: 'white',
-                    fontSize: 16
+                    fontSize: 15
                 },
                 pieSliceText: 'none',
                 pieSliceBorderColor: 'transparent',
@@ -155,8 +155,8 @@
         var chartData = {
             'dul': [
                 ['Results', 'Votes'],
-                ['Yes', yes],
-                ['No', no],
+                ['YES', yes],
+                ['NO', no],
                 ['Pending', empty]
             ]
         };

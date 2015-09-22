@@ -1,8 +1,7 @@
 <div ng-include src="'app/header/header.html'"></div>
 <div class="container">
     <h2 class="cm-title access-color">
-        <img src="assets/images/icon_access.png" alt="access icon" class="cm-icons">DAC voting for Data Access
-        review<br>
+        <img src="assets/images/icon_access.png" alt="access icon" class="cm-icons">DAC voting for Data Access Request Review<br>
         <div class="cm-title-description">Should data access be granted to this applicant?</div>
     </h2>
     <hr class="section-separator">
@@ -19,7 +18,7 @@
             <div class="panel-heading cm-boxhead access-color">
                 <h4>Research Purpose</h4>
             </div>
-            <div id="prf" class="panel-body cm-boxbody">I am studying breast cancer in a non-profit setting.</div>
+            <div id="rp" class="panel-body cm-boxbody">I am studying breast cancer in a non-profit setting.</div>
         </div>
     </div>
     <hr class="section-separator">
@@ -29,8 +28,8 @@
             <h3 class="cm-results-subtitle access-color">Vote Results</h3>
             <hr class="box-separator-white">
             <div class="row">
-                <div cm-chart cm-chart-data="DulReviewResults.chartData.access"
-                     cm-chart-options="DulReviewResults.chartOptions.access" class="result_chart"></div>
+                <div cm-chart cm-chart-data="chartData.accessChart"
+                     cm-chart-options="chartOptions.accessChart" class="result_chart"></div>
             </div>
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-results">
@@ -38,17 +37,15 @@
             <hr class="box-separator-white">
             <form class="form-horizontal" id="voteForm">
                 <div class="form-group first-form-group">
-                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-4 control-label vote-label">Vote</label>
+                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Vote</label>
                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
                         <div class="radio-inline">
-                            <input type="radio" ng-model="DulReviewResults.voteForm.vote"
-                                   ng-click="DulReviewResults.positiveVote()"
+                            <input type="radio" ng-model="AccessReviewResults.voteForm.vote" ng-click="AccessReviewResults.positiveVote()"
                                    value="true" class="regular-radio" id="inputVotePositive"
                                    name="inputVote">
                             <label for="inputVotePositive"></label>
                             <div class="radio-button-text">Yes</div>
-
-                            <input type="radio" ng-model="ReviewResults.voteForm.vote"
+                            <input type="radio" ng-model="AccessReviewResults.voteForm.vote"
                                    value="false" class="regular-radio" id="inputVoteNegative"
                                    name="inputVote">
                             <label for="inputVoteNegative"></label>
@@ -57,19 +54,18 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-4 control-label vote-label">Rationale</label>
-
-                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
-                        <input type="text" ng-model="DulReviewResults.voteForm.rationale"
-                               ng-disabled="!DulReviewResults.voteForm.vote || DulReviewResults.voteForm.vote == 'true'"
-                               cm-focus="{{!DulReviewResults.voteForm.vote || DulReviewResults.voteForm.vote == 'true' ? 'false' : 'true'}}"
+                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale</label>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
+                        <input type="text" ng-model="AccessReviewResults.voteForm.rationale"
+                               ng-disabled="!AccessReviewResults.voteForm.vote || AccessReviewResults.voteForm.vote == 'true'"
+                               cm-focus="{{!AccessReviewResults.voteForm.vote || AccessReviewResults.voteForm.vote == 'true' ? 'false' : 'true'}}"
                                name="inputRationale"
                                class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
                                placeholder="Describe your rationale here (be as specific as possible).">
                     </div>
                 </div>
                 <div class="form-group form-group-bottom">
-                    <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                         <div id="successMsg" class="alert alert-success validation-message hidden">
                             <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
                             Vote successfully logged.
@@ -79,8 +75,8 @@
                             Please check your vote.
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
-                        <button ng-click="DulReviewResults.logVote()"
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <button ng-click="AccessReviewResults.logVote()"
                                 class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button access-background">
                             Vote
                         </button>
@@ -108,13 +104,13 @@
                 <hr class="box-separator">
                 <div class="row">
                     <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label access-color">Vote: </label>
-                    <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">YES</div>
+                    <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">NO</div>
                     <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label access-color">Date: </label>
                     <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">00/00/0000</div>
                 </div>
                 <div class="row">
                     <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label access-color">Rationale: </label>
-                    <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label"> ---</div>
+                    <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">Some rationale should be displayed over here.</div>
                 </div>
             </div>
         </div>
@@ -157,9 +153,7 @@
                         </div>
                         <div class="col-lg-6 col-lg-offset-6 col-md-6 col-md-offset-6 col-sm-6 col-xs-6 no-padding">
                             <input type="button" class="sendReminder btn btn-primary vote-reminder access-color"
-                                   ng-value="DulReviewResults.reminder.text"
-                                   ng-class="{clickedBtn: DulReviewResults.reminder.sent}"
-                                   ng-click="DulReviewResults.sendReminder()"/>
+                                   value="Send a reminder"/>
                         </div>
                     </div>
                 </div>

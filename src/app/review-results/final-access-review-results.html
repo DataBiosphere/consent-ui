@@ -29,17 +29,14 @@
             <hr class="box-separator-white">
             <form class="form-horizontal" id="voteForm">
                 <div class="form-group first-form-group">
-                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label vote-label">Vote</label>
-                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-
+                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Vote</label>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
                         <div class="radio-inline">
-                            <input type="radio" ng-model="FinalAccessReviewResults.voteForm.vote"
-                                   ng-click="FinalAccessReviewResults.positiveVote()"
+                            <input type="radio" ng-model="FinalAccessReviewResults.voteForm.vote" ng-click="FinalAccessReviewResults.positiveVote()"
                                    value="true" class="regular-radio" id="inputVotePositive"
                                    name="inputVote">
                             <label for="inputVotePositive"></label>
                             <div class="radio-button-text">Yes</div>
-
                             <input type="radio" ng-model="FinalAccessReviewResults.voteForm.vote"
                                    value="false" class="regular-radio" id="inputVoteNegative"
                                    name="inputVote">
@@ -49,13 +46,18 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label vote-label">Rationale</label>
-                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                        <input type="text" name="inputRationale" id="inputRationale" class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input" placeholder="Describe your rationale here (be as specific as possible)." disabled>
+                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale</label>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
+                        <input type="text" ng-model="FinalAccessReviewResults.voteForm.rationale"
+                               ng-disabled="!FinalAccessReviewResults.voteForm.vote || FinalAccessReviewResults.voteForm.vote == 'true'"
+                               cm-focus="{{!FinalAccessReviewResults.voteForm.vote || FinalAccessReviewResults.voteForm.vote == 'true' ? 'false' : 'true'}}"
+                               name="inputRationale"
+                               class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
+                               placeholder="Describe your rationale here (be as specific as possible).">
                     </div>
                 </div>
                 <div class="form-group form-group-bottom">
-                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                         <div id="successMsg" class="alert alert-success validation-message hidden">
                             <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
                             Vote successfully logged.
@@ -65,8 +67,11 @@
                             Please check your vote.
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <button id="voteBtn" type="submit" class="col-lg-12 col-md-12 col-sm-12 col-xs-5 col-xs-offset-7 btn btn-primary vote-button access-background">Vote</button>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <button ng-click="FinalAccessReviewResults.logVote()"
+                                class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button access-background">
+                            Vote
+                        </button>
                     </div>
                 </div>
             </form>
@@ -77,45 +82,51 @@
                 <small>Were the Final votes of the DAC and the Vault consistent?</small>
             </h3>
             <hr class="box-separator-white">
-            <form class="form-horizontal" id="voteAgreementForm">
+            <form class="form-horizontal" id="voteAgreement">
                 <div class="form-group first-form-group">
-                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label vote-label">Vote</label>
-                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Vote</label>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
                         <div class="radio-inline">
-                            <input type="radio" ng-model="FinalAccessReviewResults.voteForm.agree"
-                                   ng-click="FinalAccessReviewResults.agreementVote()"
+                            <input type="radio" ng-model="FinalAccessReviewResults.voteAgreement.vote" ng-click="FinalAccessReviewResults.agreementVote()"
                                    value="true" class="regular-radio" id="inputAgreement"
-                                   name="inputAgree">
+                                   name="inputAgreement">
                             <label for="inputAgreement"></label>
                             <div class="radio-button-text">Yes</div>
-
-                            <input type="radio" ng-model="FinalAccessReviewResults.voteForm.agree"
+                            <input type="radio" ng-model="FinalAccessReviewResults.voteAgreement.vote"
                                    value="false" class="regular-radio" id="inputDisagreement"
-                                   name="inputAgree">
+                                   name="inputAgreement">
                             <label for="inputDisagreement"></label>
                             <div class="radio-button-text">No</div>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label vote-label">Comments</label>
-                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                        <input type="text" name="inputRationale" id="inputAgreeRationale" class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input" placeholder="Describe your rationale here (be as specific as possible)." disabled>
+                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale</label>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
+                        <input type="text" ng-model="FinalAccessReviewResults.voteForm.rationale"
+                               ng-disabled="!FinalAccessReviewResults.voteAgreement.vote || FinalAccessReviewResults.voteAgreement.vote == 'true'"
+                               cm-focus="{{!FinalAccessReviewResults.voteAgreement.vote || FinalAccessReviewResults.voteAgreement.vote == 'true' ? 'false' : 'true'}}"
+                               name="inputRationale"
+                               class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
+                               placeholder="Describe your rationale here (be as specific as possible).">
                     </div>
                 </div>
                 <div class="form-group form-group-bottom">
-                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                        <div id="agreeSuccessMsg" class="alert alert-success validation-message hidden">
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                        <div id="successAgreeMsg" class="alert alert-success validation-message hidden">
                             <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
                             Vote successfully logged.
                         </div>
-                        <div id="agreeErrorMsg" class="alert alert-danger validation-message hidden">
+                        <div id="errorAgreeMsg" class="alert alert-danger validation-message hidden">
                             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                             Please check your vote.
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <button ng-disabled="voteAgreement === null" class="col-lg-12 col-md-12 col-sm-12 col-xs-5 col-xs-offset-7 btn btn-primary vote-button access-background">Vote</button>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <button ng-click="FinalAccessReviewResults.logVote()"
+                                class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button access-background">
+                            Vote
+                        </button>
                     </div>
                 </div>
             </form>
