@@ -3,7 +3,7 @@
 
 
     angular
-        .module('cmChairConsole', ['ui.router', 'cmPaginator', 'cmPendingCase','cmUserRoles']);
+        .module('cmChairConsole', ['ui.router','cmPendingCase','cmUserRoles']);
 
 
     })();

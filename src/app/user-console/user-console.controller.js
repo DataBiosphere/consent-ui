@@ -10,7 +10,6 @@
 
         var vm = this;
         vm.electionsList = {'dul': [], 'access': [], 'rp':[]};
-
         vm.totalDulPendingVotes = 0;
         vm.totalAccessPendingVotes = 0;
         vm.totalResearchPurposePendingVotes = 0;

@@ -20,7 +20,7 @@
         }
 
         function findDataAccessElectionReview(id,isFinalAccess){
-             return DataAccessElectionReviewResource.get({electionId: id ,isFinalAccess: isFinalAccess });
+            return DataAccessElectionReviewResource.get({electionId: id ,isFinalAccess: isFinalAccess });
         }
         /**
          * Find all data needed to display an election Review for an specific election id

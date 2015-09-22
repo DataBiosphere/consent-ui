@@ -32,9 +32,9 @@
             <div class="row results-box">
                 <label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label vote-label access-color">Vote:  </label>
                 <div class="singleVote col-lg-2 col-md-2 col-sm-2 col-xs-2 vote-label bold">
-                        <span ng-if="finalDACVote.vote == '1'">YES</span>
-                        <span ng-if="finalDACVote.vote == '0'">NO</span>
-                        <span ng-if="finalDACVote.vote == 'null'"></span>
+                    <span ng-if="finalDACVote.vote == '1'">YES</span>
+                    <span ng-if="finalDACVote.vote == '0'">NO</span>
+                    <span ng-if="finalDACVote.vote == 'null'"></span>
                 </div>
                 <label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label vote-label access-color">Date: </label>
                 <div class="voteDate col-lg-4 col-md-4 col-sm-4 col-xs-4 vote-label">
@@ -50,7 +50,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 jumbotron box-vote-results">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 jumbotron box-vote-results box-vote-disabled">
             <h3 class="cm-results-subtitle access-color">
                 Decision agreement</br>
                 <small>Were the Final votes of the DAC and the Vault consistent?</small>
@@ -58,9 +58,9 @@
             <hr class="box-separator-white">
             <div class="row results-box">
                 <label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label vote-label access-color">Vote: </label>
-                <div class="singleVote col-lg-2 col-md-2 col-sm-2 col-xs-2 vote-label bold">YES</div>
+                <div class="singleVote col-lg-2 col-md-2 col-sm-2 col-xs-2 vote-label bold">---</div>
                 <label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label vote-label access-color">Date: </label>
-                <div class="voteDate col-lg-4 col-md-4 col-sm-4 col-xs-4 vote-label">0000-00-00</div>
+                <div class="voteDate col-lg-4 col-md-4 col-sm-4 col-xs-4 vote-label">---</div>
                 <label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label vote-label access-color">Comments: </label>
                 <div class="inputRationale col-lg-9 col-md-9 col-sm-9 col-xs-9 vote-label">---</div>
             </div>
@@ -214,6 +214,108 @@
                                 <span ng-if="vm.vote.vote == '0'">{{vm.vote.rationale}}</span>
                                 <span ng-if="vm.vote.vote == 'null'">----</span>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </accordion-group>
+    </accordion>
+
+
+    <accordion close-others="oneAtATime">
+        <accordion-group is-open="status.open" class="accordion">
+            <accordion-heading>
+                <h3 class="rp-color">Research Purpose Voting Results<br>
+                    <div class="cm-inside-box-title">Was the Research Purpose correctly converted into a machine-readable format?</div>
+                    <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
+                </h3>
+            </accordion-heading>
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10 jumbotron box-vote-lightresults no-padding">
+                    <div class="row">
+                        <div class="col-lg-7 col-md-7 col-sm-6 col-xs-6">
+                            <div class="cm-title-record rp-color">DAC Decision</div>
+                            <hr class="box-separator">
+                            <div class="row results-box">
+                                <label class="col-lg-3 col-md-3 col-sm-4 col-xs-4 control-label vote-label rp-color">Vote: </label>
+                                <div class="singleVote col-lg-3 col-md-3 col-sm-8 col-xs-8 vote-label bold">NO</div>
+                                <label class="col-lg-2 col-md-2 col-sm-4 col-xs-4 control-label vote-label rp-color-color">Date: </label>
+                                <div class="voteDate col-lg-4 col-md-4 col-sm-8 col-xs-8 vote-label">0000-00-00</div>
+                                <label class="col-lg-3 col-md-3 col-sm-4 col-xs-4 control-label vote-label rp-color">Rationale: </label>
+                                <div class="inputRationale col-lg-9 col-md-9 col-sm-8 col-xs-8 vote-label"> ---</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6">
+                            <div cm-chart cm-chart-data="chartData.RPTotal"
+                                 cm-chart-options="chartOptions.RPTotal" class="result_chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div id="voteResultsListRP" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill">
+                    <div class="jumbotron box-vote-singleresults">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">Member 01</div>
+                        </div>
+                        <hr class="box-separator">
+                        <div class="row">
+                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Vote: </label>
+                            <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">NO</div>
+                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Date: </label>
+                            <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">0000-00-00</div>
+                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Rationale: </label>
+                            <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">Some rationale.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill">
+                    <div class="jumbotron box-vote-singleresults">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">Member 02</div>
+                        </div>
+                        <hr class="box-separator">
+                        <div class="row">
+                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Vote: </label>
+                            <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">YES</div>
+                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Date:</label>
+                            <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">0000-00-00</div>
+                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Rationale: </label>
+                            <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">---</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill">
+                    <div class="jumbotron box-vote-singleresults">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">Member 03</div>
+                        </div>
+                        <hr class="box-separator">
+                        <div class="row">
+                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Vote: </label>
+                            <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">NO</div>
+                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Date: </label>
+                            <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">0000-00-00</div>
+                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Rationale: </label>
+                            <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">Some other rationale.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill">
+                    <div class="jumbotron box-vote-singleresults">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">Member 04</div>
+                        </div>
+                        <hr class="box-separator">
+                        <div class="row">
+                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Vote: </label>
+                            <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">NO</div>
+                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Date:</label>
+                            <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">0000-00-00</div>
+                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Rationale: </label>
+                            <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">And another one.</div>
                         </div>
                     </div>
                 </div>

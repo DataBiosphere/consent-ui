@@ -64,5 +64,35 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <h2 class="col-lg-9 col-md-9 col-sm-8 col-xs-12 pvotes-box-title rp-color">
+                <img src="assets/images/icon_rp.png" alt="Research Purpose icon" class="pvotes-icons">Research Purpose Review <br>
+                <div class="pvotes-box-title-description">Summary of votes on whether the research purpose was accurately converted into a structured format</div>
+            </h2>
+            <a download="content.txt" ng-href="{{SummaryVotes.downloadUrl}}" name="Download" class="col-lg-3 col-md-3 col-sm-4 col-xs-12 download-button rp-background"><span>Download stats</span><span class="cm-icon-button glyphicon glyphicon-download caret-margin" aria-hidden="true"></span></a>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="jumbotron box-vote-singleresults">
+                    <h4 class="cm-results-subtitle">Total cases: <span class="rp-color">7</span></h4>
+                    <hr class="box-separator-white">
+
+                    <div class="row">
+                        <div cm-chart cm-chart-data="SummaryVotes.chartData.RPTotal"
+                             cm-chart-options="SummaryVotes.chartOptions.RPTotal" class="result_chart"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="jumbotron box-vote-singleresults">
+                    <h4 class="cm-results-subtitle">Reviewed cases: <span class="rp-color">2</span></h4>
+                    <hr class="box-separator-white">
+                    <div class="row">
+                        <div cm-chart cm-chart-data="SummaryVotes.chartData.RPReviewed"
+                             cm-chart-options="SummaryVotes.chartOptions.RPReviewed" class="result_chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -33,7 +33,7 @@
         }
     }
 
-   function selectAllDatasetsDirective() {
+    function selectAllDatasetsDirective() {
         return {
             restrict: "EA",
             scope: false,
@@ -65,10 +65,10 @@
                                     }
                                 });
                             }
-                         });
+                        });
                     }else{
                         scope.$apply(function () {
-                          for(i ; i <= dataList.length; i++){
+                            for(i ; i <= dataList.length; i++){
                                 if(index == 10){
                                     index = 0;
                                     currentPage++;

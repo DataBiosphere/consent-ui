@@ -558,7 +558,7 @@ small {
     background: #eeeeee !important;
 }
 
-.box-vote-disabled, .box-vote-disabled h3, .box-vote-disabled label, .box-vote-disabled div, .box-vote-disabled input {
+.box-vote-disabled, .box-vote-disabled h3, .box-vote-disabled label, .box-vote-disabled div, .box-vote-disabled input, .box-vote-disabled small {
     color: #cccccc !important;
 }
 
@@ -2036,6 +2036,7 @@ input[type="checkbox"][disabled] + label {
     min-height: 100%;
     box-shadow: 3px 3px 0 #cccccc;
     border-radius: 6px;
+    padding-bottom: 15px;
 }
 
 .table-scroll {

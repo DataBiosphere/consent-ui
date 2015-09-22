@@ -29,10 +29,10 @@
                 get:{method: 'GET', params: {referenceId: 'referenceId'}}});
         })
 
-         .factory('DataAccessElectionReviewResource', function($resource, apiUrl){
-                             return $resource(apiUrl+"electionReview/access/:electionId", {}, {
-                                 get:{method: 'GET', params: {electionId: '@electionId', isFinalAccess: 'isFinalAccess'}}});
-         })
+        .factory('DataAccessElectionReviewResource', function($resource, apiUrl){
+            return $resource(apiUrl+"electionReview/access/:electionId", {}, {
+                get:{method: 'GET', params: {electionId: '@electionId', isFinalAccess: 'isFinalAccess'}}});
+        })
 
         .factory('ElectionReviewedConsents', function($resource, apiUrl){
             return $resource(apiUrl+"consent/cases/closed", {},

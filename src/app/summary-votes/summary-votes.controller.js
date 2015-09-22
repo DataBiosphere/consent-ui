@@ -28,7 +28,18 @@
                 ['Results', 'Votes'],
                 ['Yes', 0],
                 ['No', 0]
+            ],
+            'RPTotal': [
+                ['Results', 'Votes'],
+                ['Reviewed cases', 3],
+                ['Pending cases', 4]
+            ],
+            'RPReviewed': [
+                ['Results', 'Votes'],
+                ['Yes', 1],
+                ['No', 1]
             ]
+
         };
 
         var options = {
@@ -169,6 +180,84 @@
                 height: 138,
                 slices: {
                     0: { color: '#C16B0C' },
+                    1: { color: '#777777' }
+                },
+                legend: {
+                    position: 'right',
+                    textStyle: {
+                        color: '#777777',
+                        bold: true,
+                        fontName: 'Roboto',
+                        fontSize: 14
+                    },
+                    alignment: 'start'
+                },
+                tooltip: {
+                    textStyle: {
+                        color: 'black',
+                        fontSize: 14
+                    }
+                }
+            },
+            'RPTotal': {
+                pieHole: 0.4,
+                pieSliceTextStyle: {
+                    color: 'white',
+                    fontSize: 16
+                },
+                pieSliceText: 'none',
+                pieSliceBorderColor: 'transparent',
+                backgroundColor: 'transparent',
+                chartArea: {
+                    left: 0,
+                    top: 10,
+                    right: 0,
+                    bottom: 10,
+                    width:'100%',
+                    height:'85%'
+                },
+                height: 138,
+                slices: {
+                    0: { color: '#8E307A' },
+                    1: { color: '#777777' }
+                },
+                legend: {
+                    position: 'right',
+                    textStyle: {
+                        color: '#777777',
+                        bold: true,
+                        fontName: 'Roboto',
+                        fontSize: 14
+                    },
+                    alignment: 'start'
+                },
+                tooltip: {
+                    textStyle: {
+                        color: 'black',
+                        fontSize: 14
+                    }
+                }
+            },
+            'RPReviewed': {
+                pieHole: 0.4,
+                pieSliceTextStyle: {
+                    color: 'white',
+                    fontSize: 16
+                },
+                pieSliceText: 'none',
+                pieSliceBorderColor: 'transparent',
+                backgroundColor: 'transparent',
+                chartArea: {
+                    left: 0,
+                    top: 10,
+                    right: 0,
+                    bottom: 10,
+                    width:'100%',
+                    height:'85%'
+                },
+                height: 138,
+                slices: {
+                    0: { color: '#8E307A' },
                     1: { color: '#777777' }
                 },
                 legend: {

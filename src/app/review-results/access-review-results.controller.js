@@ -29,53 +29,53 @@
                 controllerAs: 'Modal',
                 scope: $scope
             });
-             modalInstance.result.then(function () {
-                                 $scope.election.status = 'Closed';
-                                 cmElectionService.updateElection($scope.election).$promise.then(
+            modalInstance.result.then(function () {
+                $scope.election.status = 'Closed';
+                cmElectionService.updateElection($scope.election).$promise.then(
 
-                                      function() {
-                                         $state.go('chair_console');
-                                      },
-                                     function(){ alert("Error while updating final vote.");}
-                              )
-                              });
-    }
-
-       function chunk(arr, size) {
-           var newArr = [];
-           for (var i=0; i<arr.length; i+=size) {
-               newArr.push(arr.slice(i, i+size));
-           }
-           return newArr;
-       }
-
-    function getGraphData(reviewVote){
-        var yes = 0, no = 0, empty = 0;
-        for (var i=0; i<reviewVote.length; i++) {
-            switch(reviewVote[i].vote.vote) {
-                case true:
-                    yes++;
-                    break;
-                case false:
-                    no++;
-                    break;
-                default:
-                    empty++;
-                    break;
-            }
+                    function() {
+                        $state.go('chair_console');
+                    },
+                    function(){ alert("Error while updating final vote.");}
+                )
+            });
         }
-        var chartData = {
-            'accessChart': [
-                ['Results', 'Votes'],
-                ['Yes', yes],
-                ['No', no],
-                ['Pending', empty]
-            ]
-        };
-        return chartData;
-    }
 
-      $scope.chartOptions = {
+        function chunk(arr, size) {
+            var newArr = [];
+            for (var i=0; i<arr.length; i+=size) {
+                newArr.push(arr.slice(i, i+size));
+            }
+            return newArr;
+        }
+
+        function getGraphData(reviewVote){
+            var yes = 0, no = 0, empty = 0;
+            for (var i=0; i<reviewVote.length; i++) {
+                switch(reviewVote[i].vote.vote) {
+                    case true:
+                        yes++;
+                        break;
+                    case false:
+                        no++;
+                        break;
+                    default:
+                        empty++;
+                        break;
+                }
+            }
+            var chartData = {
+                'accessChart': [
+                    ['Results', 'Votes'],
+                    ['Yes', yes],
+                    ['No', no],
+                    ['Pending', empty]
+                ]
+            };
+            return chartData;
+        }
+
+        $scope.chartOptions = {
             'accessChart': {
                 pieHole: 0.4,
                 pieSliceTextStyle: {
@@ -119,5 +119,5 @@
         }
 
 
-   }
+    }
 })();

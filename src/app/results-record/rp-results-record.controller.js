@@ -1,49 +1,27 @@
 (function () {
     'use strict';
 
-    angular.module('cmReviewResults')
-        .controller('RPReviewResults', RPReviewResults);
 
-    function RPReviewResults($scope){
+    angular.module('cmResultsRecord')
+        .controller('RPResultsRecord', RPResultsRecord);
 
-        var vm = this;
-        vm.voteForm = {
-            vote: undefined,
-            rationale: ''
-        };
-        vm.positiveVote = positiveVote;
-        vm.logVote = logVote;
+    function RPResultsRecord($scope){
 
-        function positiveVote() {
-            vm.voteForm.rationale = '';
-        }
-
-        $scope.alerts = [
-            { type: 'danger', msg: 'Please check your vote.' },
-            { type: 'success', msg: 'Vote successfully logged.' }
-        ];
-
-        $scope.closeAlert = function(index) {
-            $scope.alerts.splice(index, 1);
-        };
-
-        function logVote() {
-
-        }
+        /*ACCORDION*/
+        $scope.oneAtATime = false;
 
         /*GOOGLE CHART*/
         $scope.chartData = {
-            'rpChart': [
+            'RPTotal': [
                 ['Results', 'Votes'],
-                ['YES', 2],
-                ['NO', 1],
+                ['YES', 3],
+                ['NO', 2],
                 ['Pending', 0]
             ]
-
         };
 
         $scope.chartOptions = {
-            'rpChart': {
+            'RPTotal': {
                 pieHole: 0.4,
                 pieSliceTextStyle: {
                     color: 'white',
@@ -72,7 +50,7 @@
                         color: '#777777',
                         bold: true,
                         fontName: 'Roboto',
-                        fontSize: 16
+                        fontSize: 14
                     },
                     alignment: 'start'
                 },
@@ -84,7 +62,5 @@
                 }
             }
         }
-
     }
-
 })();

@@ -1,0 +1,6 @@
+{
+    "reviewed": [
+        {"rpId": "RP1500005", "date": "00-00-0000", "result": "yes", "record": "enabled"},
+        {"rpId": "RP1500002", "date": "00-00-0000", "result": "no", "record": "enabled"}
+    ]
+}

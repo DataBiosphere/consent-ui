@@ -1,0 +1,127 @@
+<div ng-include src="'app/header/header.html'"></div>
+<div class="container" ng-controller="RPResultsRecord">
+    <h2 class="cm-title rp-color">
+        <img src="assets/images/icon_rp.png" alt="Research Purpose icon" class="cm-icons">Research Purpose - Results Record<br>
+        <div class="cm-title-description">Where the data use limitations accurately converted to a structured format?
+        </div>
+    </h2>
+    <hr class="section-separator">
+    <div class="row fsi-row-lg-level fsi-row-md-level">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
+            <div class="panel-heading cm-boxhead rp-color">
+                <h4>Research Purpose</h4>
+            </div>
+            <div id="dul" class="panel-body cm-boxbody">Brief description of the applicant’s proposed use of the dataset(s). This RUS will be reviewed by all parties responsible for data covered by this Data Access rp.<br>
+                This RUS should be one or two paragraphs in length and include research objectives, the study design, and an analysis plan (including the phenotypic characteristics that will be tested for association with genetic variants). If you are rping multiple datasets, please describe how you will use them.
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
+            <div class="panel-heading cm-boxhead rp-color">
+                <h4>Structured Research Purpose</h4>
+            </div>
+            <div id="rp" class="panel-body cm-boxbody">Automated Structured format of the Research Purpose will be displayed over here. We need to decide the best way to show this information, if it will be displayed in a json format or some sort of string instead. </div>
+        </div>
+    </div>
+    <hr class="section-separator">
+
+    <h3 class="cm-subtitle">Data Access Committee Votes</h3>
+    <div class="row fsi-row-lg-level fsi-row-md-level">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 jumbotron box-vote-results">
+            <h3 class="cm-results-subtitle rp-color">Vote Results Stats</h3>
+            <hr class="box-separator-white">
+            <div class="row">
+                <div cm-chart cm-chart-data="chartData.RPTotal"
+                     cm-chart-options="chartOptions.RPTotal" class="result_chart"></div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-results">
+            <h3 class="cm-results-subtitle rp-color">Final decision</h3>
+            <hr class="box-separator-white">
+            <div class="row results-box">
+                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label vote-label rp-color">Vote: </label>
+                <div class="singleVote col-lg-4 col-md-4 col-sm-4 col-xs-4 vote-label bold">NO</div>
+                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label vote-label rp-color">Date: </label>
+                <div class="voteDate col-lg-4 col-md-4 col-sm-4 col-xs-4 vote-label">0000-00-00</div>
+                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label vote-label rp-color">Rationale: </label>
+                <div class="inputRationale col-lg-10 col-md-10 col-sm-10 col-xs-10 vote-label">Here goes the reason why I think so.</div>
+            </div>
+        </div>
+    </div>
+    <accordion close-others="oneAtATime">
+        <accordion-group is-open="status.open" class="accordion">
+            <accordion-heading>
+                <h3 class="rp-color">Member's Votes
+                    <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
+                </h3>
+            </accordion-heading>
+            <div class="row">
+                <div id="voteResultsList" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill">
+                    <div class="jumbotron box-vote-singleresults">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">Member 01</div>
+                        </div>
+                        <hr class="box-separator">
+                        <div class="row">
+                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Vote: </label>
+                            <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">NO</div>
+                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Date: </label>
+                            <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">0000-00-00</div>
+                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Rationale: </label>
+                            <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">Some rationale.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill">
+                    <div class="jumbotron box-vote-singleresults">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">Member 02</div>
+                        </div>
+                        <hr class="box-separator">
+                        <div class="row">
+                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Vote: </label>
+                            <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">YES</div>
+                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Date:</label>
+                            <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">0000-00-00</div>
+                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Rationale: </label>
+                            <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">---</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill">
+                    <div class="jumbotron box-vote-singleresults">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">Member 03</div>
+                        </div>
+                        <hr class="box-separator">
+                        <div class="row">
+                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Vote: </label>
+                            <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">NO</div>
+                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Date: </label>
+                            <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">0000-00-00</div>
+                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Rationale: </label>
+                            <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">Some other rationale.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill">
+                    <div class="jumbotron box-vote-singleresults">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">Member 04</div>
+                        </div>
+                        <hr class="box-separator">
+                        <div class="row">
+                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Vote: </label>
+                            <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">NO</div>
+                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Date:</label>
+                            <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">0000-00-00</div>
+                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label rp-color">Rationale: </label>
+                            <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">And another one.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </accordion-group>
+    </accordion>
+</div>
