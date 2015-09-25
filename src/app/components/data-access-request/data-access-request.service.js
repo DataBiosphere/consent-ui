@@ -5,11 +5,13 @@
         .service('cmRPService', cmDataAccessRequest);
 
     /* ngInject */
+
     function cmDataAccessRequest(dataAccessRequestResource, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields) {
 
         function findDarConsent(id){
             return darConsent.get({id: id}).$promise;
         }
+
 
         function findDarFields(id, fields){
             return darFields.get({id: id, fields: fields}).$promise;
@@ -28,9 +30,11 @@
         }
 
         return {
+
             getDarConsent: function(id){
                 return  findDarConsent(id);
             },
+
             getDarFields: function(id, fields){
                 return  findDarFields(id, fields);
             },

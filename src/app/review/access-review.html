@@ -10,15 +10,15 @@
             <div class="panel-heading cm-boxhead access-color">
                 <h4>Data Use Limitations</h4>
             </div>
-            <div id="dul" class="panel-body cm-boxbody">To be used for research on the causes and development of
-                cancer.
+            <div id="dul" class="panel-body cm-boxbody">
+                <a href="{{downloadUrl}}" target="_blank">{{consent.name}}</a>
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
             <div class="panel-heading cm-boxhead access-color">
                 <h4>Research Purpose</h4>
             </div>
-            <div id="rp" class="panel-body cm-boxbody">I am studying breast cancer in a non-profit setting.</div>
+            <div id="rp" class="panel-body cm-boxbody">{{dar.rus}}</div>
         </div>
     </div>
     <hr class="section-separator">
@@ -27,57 +27,48 @@
             <h3 class="cm-results-subtitle access-color">Your vote</h3>
             <hr class="box-separator">
             <form class="form-horizontal" id="voteForm">
-                <div class="form-group first-form-group">
-                    <label
-                        class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Vote</label>
+                <fieldset ng-disabled="isFormDisabled">
+                    <div class="form-group first-form-group">
+                        <label
+                            class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Vote</label>
 
-                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
-                        <div class="radio-inline">
-                            <input type="radio" ng-model="Review.voteForm.vote" ng-click="Review.positiveVote()"
-                                   value="true" class="regular-radio" id="inputVotePositive"
-                                   name="inputVote">
-                            <label for="inputVotePositive"></label>
-                            <div class="radio-button-text">Yes</div>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
+                            <div class="radio-inline">
+                                <input type="radio" ng-model="voteStatus" ng-click="positiveVote()"
+                                       ng-value="true" class="regular-radio" id="inputVotePositive"
+                                       name="inputVote">
+                                <label for="inputVotePositive"></label>
+                                <div class="radio-button-text">Yes</div>
 
-                            <input type="radio" ng-model="Review.voteForm.vote"
-                                   value="false" class="regular-radio" id="inputVoteNegative"
-                                   name="inputVote">
-                            <label for="inputVoteNegative"></label>
-                            <div class="radio-button-text">No</div>
+                                <input type="radio" ng-model="voteStatus"
+                                       ng-value="false" class="regular-radio" id="inputVoteNegative"
+                                       name="inputVote">
+                                <label for="inputVoteNegative"></label>
+                                <div class="radio-button-text">No</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label
-                        class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale</label>
+                    <div class="form-group">
+                        <label
+                            class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale</label>
 
-                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
-                        <input type="text" ng-model="Review.voteForm.rationale"
-                               ng-disabled="!Review.voteForm.vote || Review.voteForm.vote == 'true'"
-                               cm-focus="{{!Review.voteForm.vote || Review.voteForm.vote == 'true' ? 'false' : 'true'}}"
-                               name="inputRationale"
-                               class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
-                               placeholder="Describe your rationale here (be as specific as possible).">
-                    </div>
-                </div>
-                <div class="form-group form-group-bottom">
-                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                        <div id="successMsg" class="alert alert-success validation-message hidden">
-                            <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
-                            Vote successfully logged.
-                        </div>
-                        <div id="errorMsg" class="alert alert-danger validation-message hidden">
-                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            Please check your vote.
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
+                            <input type="text" ng-model="rationale"
+                                   ng-disabled="voteStatus == true"
+                                   name="inputRationale"
+                                   class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
+                                   placeholder="Describe your rationale here (be as specific as possible).">
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                        <button ng-click="Review.logVote()"
-                                class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button access-background">
-                            Vote
-                        </button>
+                    <div class="form-group form-group-bottom">
+                        <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-3 col-md-offset-9 col-xs-12">
+                            <button ng-disabled="voteStatus === null" ng-click="logVote()"
+                                    class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button access-background">
+                                Vote
+                            </button>
+                        </div>
                     </div>
-                </div>
+                </fieldset>
             </form>
         </div>
     </div>

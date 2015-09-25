@@ -70,6 +70,7 @@
         $scope.positiveVote = positiveVote;
         $scope.logVote = logVote;
         $scope.sendReminder = sendReminder;
+        $scope.electionType = null;
         // Final vote variables
         $scope.isFormDisabled = $scope.chartData.dul[3][1] > 0 || $scope.status != 'Open';
         $scope.finalRationale = electionReview.election.finalRationale;
@@ -93,11 +94,13 @@
         }
 
         function logVote() {
+            $scope.electionType = 'dul';
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/final-vote-modal.html',
                 controller: 'Modal',
-                controllerAs: 'Modal'
+                controllerAs: 'Modal',
+                scope: $scope
             });
 
             modalInstance.result.then(function () {

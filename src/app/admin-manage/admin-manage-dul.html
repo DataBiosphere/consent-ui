@@ -30,7 +30,7 @@
             </div>
             <div class="admin-box-body">
                 <hr class="pvotes-main-separator">
-                <div ng-repeat="election in AdminManage.electionsList.dul | filter: searchDUL">
+                <div dir-paginate="election in AdminManage.electionsList.dul | filter: searchDUL | itemsPerPage:8">
                     <div class="row pvotes-main-list">
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{election.consentId}}</div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">{{election.consentName}}</div>
@@ -63,15 +63,11 @@
                     <hr class="pvotes-separator">
                 </div>
             </div>
-            <div class="pvotes-pagination">
-                <ul class="pagination">
-                    <li><a ng-click="AdminManage.changePage('dul', AdminManage.activePage.dul - 1)">&laquo;</a></li>
-                    <li ng-repeat="page in AdminManage.currentPages.dul">
-                        <a ng-click="AdminManage.changePage('dul', page)"
-                           ng-class="{ 'active-case': AdminManage.activePage.dul == page}">{{page + 1}}</a>
-                    </li>
-                    <li><a ng-click="AdminManage.changePage('dul', AdminManage.activePage.dul + 1)">&raquo;</a></li>
-                </ul>
+            <div dir-pagination-controls
+                max-size="8"
+                direction-links="true"
+                boundary-links="true"
+                class="pvotes-pagination">
             </div>
         </div>
     </div>

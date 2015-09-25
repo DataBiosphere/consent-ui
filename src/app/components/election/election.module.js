@@ -11,10 +11,7 @@
             return $resource(apiUrl+"consent/:consentId/election/:electionId", {}, {
                 update:{method: 'PUT', params: {consentId: '@consentId', electionId: '@electionId'}}});
         })
-        .factory('ElectionReviewAccess', function($resource, apiUrl){
-            return $resource(apiUrl+"electionReview/access/:electionId", {}, {
-                get:{method: 'GET', params: {electionId: '@electionId'}}});
-        })
+
         .factory('LastElectionReview', function($resource, apiUrl){
             return $resource(apiUrl+"electionReview/last/:electionId", {}, {
                 get:{method: 'GET', params: {electionId: '@electionId'}}});
@@ -27,6 +24,16 @@
             return $resource(apiUrl+"electionReview/:electionId", {}, {
                 get:{method: 'GET', params: {electionId: '@electionId'}}});
         })
+        .factory('ElectionReviewResource', function($resource, apiUrl){
+            return $resource(apiUrl+"electionReview", {}, {
+                get:{method: 'GET', params: {referenceId: 'referenceId'}}});
+        })
+
+         .factory('DataAccessElectionReviewResource', function($resource, apiUrl){
+                             return $resource(apiUrl+"electionReview/access/:electionId", {}, {
+                                 get:{method: 'GET', params: {electionId: '@electionId', isFinalAccess: 'isFinalAccess'}}});
+         })
+
         .factory('ElectionReviewedConsents', function($resource, apiUrl){
             return $resource(apiUrl+"consent/cases/closed", {},
                 {
@@ -44,7 +51,7 @@
         })
         .factory('DarElectionResource', function($resource, apiUrl){
             return $resource(apiUrl+"dataRequest/:requestId/election", {}, {
-                  get:{method: 'GET', params: {requestId: '@requestId'}}});
+                get:{method: 'GET', params: {requestId: '@requestId'}}});
+
         });
 })();
-

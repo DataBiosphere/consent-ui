@@ -37,6 +37,34 @@
 
 
     /* ngInject */
+    //function selectAllDatasetsDirective() {
+    //    return {
+    //        restrict: "EA",
+    //        scope: false,
+    //        link: function (scope, element, attributes,USER_ROLES) {
+    //            element.bind("change", function () {
+    //                var dataList = scope.$parent.DatasetCatalog.dataSetList.catalog;
+    //                var pageNumber = scope.DatasetCatalog.activePage.catalog;
+    //                var pageIndex = pageNumber * 10;
+    //                var i = dataList.length;
+    //                if(element.context.checked){
+    //                    scope.objectIdList=[];
+    //                    scope.$apply(function () {
+    //                        while(i--){
+    //                            var checkboxModel= 'field_'+(pageIndex+i);
+    //                            scope.checkMod[checkboxModel] = true;
+    //                            angular.forEach(dataList[i].properties, function(obj) {
+    //                                if(obj.propertyName =='Dataset ID'){
+    //                                    scope.objectIdList.push(obj.propertyValue);
+    //                                }
+    //                            });
+    //                        }
+    //                    });
+    //                }
+    //
+
+
+
     function selectAllDatasetsDirective() {
         return {
             restrict: "EA",

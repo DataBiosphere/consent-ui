@@ -47,13 +47,32 @@
             .state('access_review', {
                 name: 'access_review',
                 url: '/access_review',
+                params: {
+                    darId: null,
+                    voteId: null
+                },
                 templateUrl: 'app/review/access-review.html',
-                controller: 'Review',
-                controllerAs: 'Review',
+                controller: 'DarReview',
+                controllerAs: 'DarReview',
                 data: {
                     authorizedRoles: [USER_ROLES.member, USER_ROLES.chairperson]
+                },
+                resolve: {
+                    dar: function($stateParams, cmRPService){
+                        return cmRPService.getDarFields($stateParams.darId, "rus");
+                     },
+                    consent: function($stateParams, cmRPService){
+                        return cmRPService.getDarConsent($stateParams.darId);
+                    },
+                    election: function ($stateParams, cmElectionService) {
+                        return cmElectionService.findDarElection($stateParams.darId);
+                    },
+                    vote: function ($stateParams, cmVoteService) {
+                        return cmVoteService.getDarVote($stateParams.darId, $stateParams.voteId);
+                    }
                 }
             });
+
     }
 
 })();

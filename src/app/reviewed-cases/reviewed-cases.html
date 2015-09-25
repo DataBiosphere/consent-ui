@@ -28,7 +28,7 @@
                     <hr class="pvotes-main-separator">
                 </div>
                 <div class="pvotes-box-body">
-                    <div ng-repeat="election in ReviewedCases.electionsList.dul | filter: searchDULcases">
+                    <div dir-paginate="election in ReviewedCases.electionsList.dul | filter: searchDULcases | itemsPerPage:5" pagination-id="dulCases">
                         <hr class="pvotes-separator">
                         <div class="row pvotes-main-list reviewed-cases-list">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">{{election.referenceId}}</div>
@@ -43,16 +43,13 @@
                         </div>
                     </div>
                     <hr class="pvotes-separator">
-                    <div class="pvotes-pagination">
-                        <ul class="pagination">
-                            <li><a ng-click="ReviewedCases.changePage('dul', ReviewedCases.activePage.dul - 1)">&laquo;</a></li>
-                            <li ng-repeat="page in ReviewedCases.currentPages.dul">
-                                <a ng-click="ReviewedCases.changePage('dul', page)"
-                                   ng-class="{ 'active-case': ReviewedCases.activePage.dul == page}">{{page + 1}}</a>
-                            </li>
-                            <li><a ng-click="ReviewedCases.changePage('dul', ReviewedCases.activePage.dul + 1)">&raquo;</a></li>
-                        </ul>
-                    </div>
+                </div>
+                <div dir-pagination-controls
+                     max-size="5"
+                     direction-links="true"
+                     boundary-links="true"
+                     class="pvotes-pagination"
+                     pagination-id="dulCases">
                 </div>
             </div>
         </div>
@@ -81,7 +78,7 @@
                     <hr class="pvotes-main-separator">
                 </div>
                 <div class="pvotes-box-body" id="searchTextResults">
-                    <div ng-repeat="election in ReviewedCases.electionsList.access | filter: searchAccessCases">
+                    <div dir-paginate="election in ReviewedCases.electionsList.access | filter: searchAccessCases | itemsPerPage:5" pagination-id="accessCases">
                         <hr class="pvotes-separator">
                         <div class="row pvotes-main-list admin-users-list">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">{{election.referenceId}}</div>
@@ -97,16 +94,13 @@
                         </div>
                     </div>
                     <hr class="pvotes-separator">
-                    <div class="pvotes-pagination">
-                        <ul class="pagination">
-                            <li><a ng-click="ReviewedCases.changePage('access', ReviewedCases.activePage.access - 1)">&laquo;</a></li>
-                            <li ng-repeat="page in ReviewedCases.currentPages.access">
-                                <a ng-click="ReviewedCases.changePage('access', page)"
-                                   ng-class="{ 'active-case': ReviewedCases.activePage.access == page}">{{page + 1}}</a>
-                            </li>
-                            <li><a ng-click="ReviewedCases.changePage('access', ReviewedCases.activePage.access + 1)">&raquo;</a></li>
-                        </ul>
-                    </div>
+                </div>
+                <div dir-pagination-controls
+                     max-size="5"
+                     direction-links="true"
+                     boundary-links="true"
+                     class="pvotes-pagination"
+                     pagination-id="accessCases">
                 </div>
             </div>
         </div>

@@ -5,36 +5,16 @@
         .controller('ReviewedCases', ReviewedCases);
 
     /* ngInject */
-    function ReviewedCases(cmPaginatorService, reviewedConsents, reviewedDRs) {
-
-        var lists = {'dul': [], 'access': []};
-        var list_max_items = 5;
-
+    function ReviewedCases(reviewedConsents, reviewedDRs, $scope) {
 
         var vm = this;
-        vm.activePage = {'dul': 0, 'access': 0};
-        vm.currentPages = {'dul': [], 'access': []};
         vm.electionsList = {'dul': [], 'access': []};
-
-        // changePage function from the service with the first 2 parameters locked
-        vm.changePage = _.partial(cmPaginatorService.changePage,
-            // first parameter to lock from changePage
-            lists, list_max_items,
-            // second parameter to lock from changePage
-            {
-                activePage: vm.activePage,
-                currentPages: vm.currentPages,
-                electionsList: vm.electionsList
-            }
-        );
 
         init();
 
         function init() {
-            lists['dul'] = transformElectionResultData(reviewedConsents);
-            lists['access'] = transformElectionResultData(reviewedDRs);
-            vm.changePage('dul', 0);
-            vm.changePage('access', 0);
+            vm.electionsList['dul'] = transformElectionResultData(reviewedConsents);
+            vm.electionsList['access'] = transformElectionResultData(reviewedDRs);
         }
     }
 

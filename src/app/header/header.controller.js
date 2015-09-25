@@ -11,6 +11,23 @@
             isopen: false
         };
 
+        $scope.showStatistics = function(roles, rootRoles){
+            if(containsOtherThanResearcher(roles, rootRoles)){
+                        return true;
+            }
+            return false;
+        }
+
+        function containsOtherThanResearcher(roles, rootRoles){
+            var i;
+            for (i = 0; i < roles.length; i++) {
+                if(roles[i].name !== rootRoles.researcher){
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 
 })();
