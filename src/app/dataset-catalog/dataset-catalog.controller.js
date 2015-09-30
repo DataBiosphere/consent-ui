@@ -10,8 +10,9 @@
 
         var vm = this;
         vm.dataSetList = {'catalog': [], 'dictionary': []};
-
-
+        $scope.pagination = {
+            current: 1
+        };
         init();
 
         function init() {

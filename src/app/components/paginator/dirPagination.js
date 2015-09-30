@@ -15,6 +15,7 @@
  */
 
 (function() {
+    'use strict';
 
     /**
      * Config
@@ -100,6 +101,7 @@
                         return collectionGetter(scope);
                     }, function(collection) {
                         if (collection) {
+                            scope.filteredCollection = collection;
                             paginationService.setCollectionLength(paginationId, collection.length);
                         }
                     });
@@ -500,7 +502,7 @@
         this.setItemsPerPage = function(instanceId, val) {
             instances[instanceId].itemsPerPage = val;
         };
-        this.getItemsPerPage = function(instanceId) {
+        this.getItemsPerPage = function(instanceId,scope) {
             return instances[instanceId].itemsPerPage;
         };
 

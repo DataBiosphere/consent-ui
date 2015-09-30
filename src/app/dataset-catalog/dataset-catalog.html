@@ -35,15 +35,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr dir-paginate="dataSet in DatasetCatalog.dataSetList.catalog | filter: searchDataset | itemsPerPage:10">
+                <tr dir-paginate="dataSet in DatasetCatalog.dataSetList.catalog | filter: searchDataset | itemsPerPage:10" current-page="pagination.current">
                     <td ng-repeat="property in dataSet.properties"  ng-if="property.propertyName =='Dataset ID'">
                         <div class="checkbox" >
-                            <input type="checkbox" id="{{property.propertyValue}}"   ng-model="checkMod['field_' + $parent.$parent.$index]" ng-change="optionToggled()" class="checkbox-inline user-checkbox" add-object-id >
+                            <input type="checkbox" id="{{property.propertyValue}}"   ng-model="checkMod['field_' + pagination.current + $parent.$parent.$index]" class="checkbox-inline user-checkbox" add-object-id >
                             <label class="regular-checkbox rp-choice-questions" for="{{property.propertyValue}}" ></label>
                         </div>
                     </td>
                     <td ng-repeat="property in dataSet.properties" class="table-items cell-size" >
-                        <p ng-if="property.propertyName !=='dbGAP' " >{{property.propertyValue}}</p>
+                        <p ng-if="property.propertyName !=='dbGAP' ">{{property.propertyValue}}</p>
                         <a href="{{property.propertyValue}}" target="_blank"   ng-if="property.propertyName =='dbGAP' && property.propertyValue.length > 0  "  class="enabled">Link</a>
                         <a href="{{property.propertyValue}}" ng-if="property.propertyName =='dbGAP' && property.propertyValue.length === 0   "  class="disabled">Link</a>
                     <td class="table-items cell-size">{{dataSet.consentId}}</td>

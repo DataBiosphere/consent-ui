@@ -59,16 +59,25 @@
                 },
                 resolve: {
                     dar: function($stateParams, cmRPService){
-                        return cmRPService.getDarFields($stateParams.darId, "rus");
+                        if($stateParams.darId != null){
+                            return cmRPService.getDarFields($stateParams.darId, "rus");
+                        }
                      },
                     consent: function($stateParams, cmRPService){
-                        return cmRPService.getDarConsent($stateParams.darId);
+                        if($stateParams.darId != null){
+                            return cmRPService.getDarConsent($stateParams.darId);
+                        }
                     },
                     election: function ($stateParams, cmElectionService) {
-                        return cmElectionService.findDarElection($stateParams.darId);
+                        if($stateParams.darId != null){
+                            return cmElectionService.findDarElection($stateParams.darId);
+                        }
+
                     },
                     vote: function ($stateParams, cmVoteService) {
-                        return cmVoteService.getDarVote($stateParams.darId, $stateParams.voteId);
+                        if($stateParams.darId != null) {
+                            return cmVoteService.getDarVote($stateParams.darId, $stateParams.voteId);
+                        }
                     }
                 }
             });

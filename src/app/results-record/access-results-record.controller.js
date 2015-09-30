@@ -95,7 +95,7 @@
 
 
         function init() {
-            cmElectionService.findReviewedAccess($scope.electionId).
+            cmElectionService.findDataAccessElectionReview($scope.electionId,null).
             $promise.then(function (data){
                     showAccessData(data);
                     cmElectionService.findLastElectionReviewByReferenceId(data.consent.consentId).$promise.then(function (data){

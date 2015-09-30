@@ -51,6 +51,7 @@
                 controller: 'ReviewResults',
                 controllerAs: 'ReviewResults',
                 params: {
+                            electionId: null,
                             referenceId: null
                       },
                 data: {
@@ -58,10 +59,15 @@
                 },
                 resolve: {
                     electionReview: function($stateParams, cmElectionService){
-                          return cmElectionService.findDataAccessElectionReview($stateParams.referenceId,false).$promise;
+                        if($stateParams.electionId != null){
+                            return cmElectionService.findDataAccessElectionReview($stateParams.electionId,false).$promise;
+                        }
                 },
                 dar: function($stateParams, cmRPService){
-                          return cmRPService.getDarFields($stateParams.referenceId, "rus");
+                    if($stateParams.referenceId != null){
+                        return cmRPService.getDarFields($stateParams.referenceId, "rus");
+                    }
+
                 }
               }
            })
@@ -70,8 +76,15 @@
                 name: 'final_access_review_results',
                 url: '/final_access_review_results',
                 templateUrl: 'app/review-results/final-access-review-results.html',
-                controller: 'FinalAccessReviewResults',
+                controller: function($scope, $stateParams){
+                                    $scope.electionId =$stateParams.electionId;
+                                    $scope.referenceId =$stateParams.referenceId;
+                                },
                 controllerAs: 'FinalAccessReviewResults',
+                params: {
+                         electionId: null,
+                         referenceId: null
+                       },
                 data: {
                     authorizedRoles: [USER_ROLES.chairperson]
                 }
