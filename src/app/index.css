@@ -583,7 +583,6 @@ small {
 }
 
 .radio-choices {
-    /*margin: 0 10px 0 0;*/
     margin: 0 10px 0 20px;
     padding: 0 25px 0 0 !important;
 }
@@ -598,6 +597,7 @@ small {
 .radio-inline label {
     display: inline;
     margin-bottom: 0 !important;
+    cursor: pointer;
 }
 
 .radio-inline input{
@@ -639,7 +639,7 @@ small {
     position: relative;
 }
 
-.regular-radio:checked + label:after {
+.regular-radio:checked + label:after{
     content: ' ';
     width: 12px;
     height: 12px;
@@ -744,8 +744,8 @@ input[type=checkbox]:checked + label:before{
 }
 
 .radio-button-text {
-    padding: 0 0 0 5px !important;
-    margin: 0 20px 0 0 !important;
+    padding: 0 20px 0 5px !important;
+    margin: 0 !important;
     vertical-align: 20% !important;
 }
 
@@ -926,7 +926,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 }
 
 .pvotes-pagination li a {
-    background: #eeeeee;
+    background: #eeeeee !important;
     border: 0;
     color: #777777;
     transition: background 0.3s ease;
@@ -934,12 +934,14 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 
 .pvotes-pagination li a:hover {
     background: #2FA4E7 !important;
-    color: #ffffff;
+    color: #ffffff !important;
     font-weight: 500;
 }
 
-.pvotes-pagination li a .pag-active {
-    background: #00609f !important;
+.pvotes-pagination .active a {
+    color: #2FA4E7 !important;
+    background: transparent !important;
+    font-weight: 500 !important;
 }
 
 .pcases-small-tag {
@@ -1172,6 +1174,9 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     float: right;
     text-align: right;
 }
+.multi-step-next button:hover{
+    background: #2FA4E7 !important;
+}
 
 .multi-step-next span {
     padding: 2px 0 0 5px;
@@ -1379,6 +1384,15 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     width: 40px !important;
 }
 
+.manage-access {
+    background-position: -290px 0;
+    width: 35px !important;
+}
+
+.admin-icons:hover .manage-access {
+    background-position: -290px -40px !important;
+}
+
 .admin-manage-buttons .enabled, .admin-manage-buttons .disabled, .admin-manage-buttons .create, .admin-manage-buttons .cancel {
     text-align: center;
     margin: 4px auto 0 auto !important;
@@ -1493,6 +1507,10 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     border: none !important;
 }
 
+.admin-modal-header{
+    padding-bottom: 5px !important;
+}
+
 .admin-modal-header h2 {
     padding: 0 10px 0 10px !important;
 }
@@ -1502,6 +1520,13 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     padding-top: 7px;
     font-size: 16px;
     line-height: 22px;
+}
+
+.admin-modal-content{
+    float: left;
+    text-align: left;
+    padding: 15px 30px 15px 30px !important;
+    border-top: 1px solid #e5e5e5;
 }
 
 .admin-modal-footer {
@@ -2039,7 +2064,7 @@ input[type="checkbox"][disabled] + label {
     font-style: italic;
     font-weight: 500 !important;
     font-size: 16px !important;
-    padding: 5px 50px 10px 8px !important;
+    padding: 5px 20px 10px 8px !important;
     white-space: nowrap;
 }
 
@@ -2059,10 +2084,9 @@ td:first-child .checkbox {
 .table-items {
     font-weight: normal !important;
     font-size: 14px !important;
-    padding: 10px 10px 5px 10px !important;
+    padding: 10px 20px 5px 10px !important;
     margin: 0!important;
     color: #777777;
-    min-height: 100% !important;
 }
 
 .table-items {
@@ -2091,7 +2115,16 @@ td:first-child .checkbox {
 }
 
 .cell-size {
-    min-width: 250px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 1%;
+}
+
+.cell-size p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 400px!important;
 }
 
 .catalog-pagination {

@@ -2,6 +2,6 @@
     'use strict';
 
     angular
-        .module('cmReviewedCases', ['ui.router', 'ui.bootstrap', 'cmUserRoles']);
+        .module('cmReviewedCases', ['ui.router', 'ui.bootstrap', 'cmUserRoles','cmResultsRecord']);
 
 })();

@@ -13,12 +13,11 @@
          * @param lists
          * @param vm
          */
-        function findDataRequestPendingCasesByUser(lists, userId, vm){
+        function findDataRequestPendingCasesByUser(userId, vm){
             DataRequestPendingCases.List({userId: userId}).$promise.then(
                 function(data){
-                    lists['access'] = data;
-                    vm.changePage('access', 0);
-                    lists['access'].forEach(
+                    vm.electionsList['access'] = data;
+                    vm.electionsList['access'].forEach(
                         function countCollectVotes(access) {
                             if (access.alreadyVoted == false) {
                                 vm.totalAccessPendingVotes += 1;
@@ -33,12 +32,11 @@
          * @param lists
          * @param vm
          */
-        function findConsentPendingCasesByUser(lists, userId, vm){
+        function findConsentPendingCasesByUser(userId, vm){
             ConsentPendingCases.List({userId: userId}).$promise.then(
                 function(data) {
-                    lists['dul'] = data;
-                    vm.changePage('dul', 0);
-                    lists['dul'].forEach(
+                    vm.electionsList['dul'] = data;
+                    vm.electionsList['dul'].forEach(
                         function countCollectVotes(dul) {
                             if (dul.alreadyVoted == false) {
                                 vm.totalDulPendingVotes += 1;
@@ -79,11 +77,11 @@
 
 
         return{
-            findDataRequestPendingCasesByUser: function(lists, userId, vm) {
-                return findDataRequestPendingCasesByUser(lists, userId, vm);
+            findDataRequestPendingCasesByUser: function(userId, vm) {
+                return findDataRequestPendingCasesByUser(userId, vm);
             },
-            findConsentPendingCasesByUser: function(lists, userId, vm){
-                return findConsentPendingCasesByUser(lists, userId, vm);
+            findConsentPendingCasesByUser: function(userId, vm){
+                return findConsentPendingCasesByUser(userId, vm);
             },
             findSummary: function(data, vm){
                 return findSummary(data, vm);

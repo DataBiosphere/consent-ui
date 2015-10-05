@@ -28,7 +28,7 @@
                     <hr class="pvotes-main-separator">
                 </div>
                 <div class="pvotes-box-body">
-                    <div ng-repeat="pendingCase in ChairConsole.electionsList.dul">
+                    <div dir-paginate="pendingCase in ChairConsole.electionsList.dul | itemsPerPage:5" pagination-id="dulCases">
                         <hr class="pvotes-separator">
                         <div class="row pvotes-main-list">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4 pvotes-list-id">{{pendingCase.referenceId}}</div>
@@ -48,21 +48,15 @@
                             </a>
                         </div>
                     </div>
+                    <hr class="pvotes-separator">
                 </div>
-                <hr class="pvotes-separator">
-                <div class="pvotes-pagination">
-                    <ul class="pagination">
-
-                        <li><a ng-click="ChairConsole.changePage('dul', ChairConsole.activePage.dul - 1)">&laquo;</a>
-                        </li>
-                        <li ng-repeat="page in ChairConsole.currentPages.dul">
-                            <a ng-click="ChairConsole.changePage('dul', page)"
-                               ng-class="{ 'active-case': ChairConsole.activePage.dul == page}">{{page + 1}}</a>
-                        </li>
-                        <li><a ng-click="ChairConsole.changePage('dul', ChairConsole.activePage.dul + 1)">&raquo;</a>
-                        </li>
-
-                    </ul>
+                <div dir-pagination-controls
+                     max-size="5"
+                     direction-links="true"
+                     boundary-links="true"
+                     class="pvotes-pagination"
+                     pagination-id="dulCases"
+                    >
                 </div>
             </div>
         </div>
@@ -91,49 +85,48 @@
                     <hr class="pvotes-main-separator">
                 </div>
                 <div class="pvotes-box-body">
-                    <div ng-repeat="pendingCase in ChairConsole.electionsList.access">
+                    <div dir-paginate="pendingCase in ChairConsole.electionsList.access | itemsPerPage:5" pagination-id="accessCases">
                         <hr class="pvotes-separator">
                         <div class="row pvotes-main-list">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4 pvotes-list-id">{{pendingCase.referenceId}}</div>
-
-                            <a ng-href="#/access_review/{{pendingCase.referenceId}}/{{pendingCase.voteId}}" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                                <div ng-if="pendingCase.isFinalVote" class="voteButton  disabled">
-                                    <span>---</span>
-                                </div>
-                                <div ng-if="pendingCase.alreadyVoted == true && pendingCase.isFinalVote == false" class="voteButton  editable">
-                                    <span>Edit</span>
-                                </div>
-                                <div ng-if="pendingCase.alreadyVoted == false" class="voteButton  enabled">
-                                    <span>Vote</span>
+                            <a ui-sref="access_review({darId: '{{pendingCase.referenceId}}', voteId: '{{pendingCase.voteId}}'})" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                <div class="voteButton {{pendingCase.alreadyVoted ? 'editable' : 'enabled'}}" ng-show="pendingCase.electionStatus !== 'Closed'" >
+                                    <span ng-if="pendingCase.alreadyVoted == false && pendingCase.electionStatus !== 'Closed'">Vote</span>
+                                    <span ng-if="pendingCase.alreadyVoted == true">Edit</span>
                                 </div>
                             </a>
 
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pvotes-list">{{pendingCase.logged}}</div>
-                            <a href="({{pendingCase.isFinalVote}} || {{!pendingCase.alreadyVoted}}) ? '' : '#/access_review_results/{{pendingCase.referenceId}}'"
-                               class="col-lg-2 col-md-2 col-sm-2 col-xs-3 no-padding">
-                                <div class="collectButton {{pendingCase.alreadyVoted ? 'enabled' : 'disabled'}}">
-                                    <span ng-if="pendingCase.alreadyVoted == false">---</span>
-                                    <span ng-if="pendingCase.alreadyVoted == true && pendingCase.isFinalVote == false">Collect Votes</span>
-                                    <span ng-if="pendingCase.isFinalVote">FINAL VOTE</span>
+                            <div ng-if="!pendingCase.alreadyVoted && pendingCase.electionStatus !== 'Closed'">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 no-padding collectButton {{pendingCase.alreadyVoted ? 'enabled' : 'disabled' }}">
+                                    <span>---</span>
                                 </div>
-                            </a>
+                                </a>
+                            </div>
+                            <div ng-if="pendingCase.alreadyVoted && !pendingCase.isFinalVote && pendingCase.electionStatus !== 'Closed' ">
+                                <a ui-sref="access_review_results({referenceId: '{{pendingCase.referenceId}}' , electionId: '{{pendingCase.electionId}}'})" class="col-lg-2 col-md-2 col-sm-2 col-xs-3 no-padding">
+                                    <div class="collectButton {{pendingCase.alreadyVoted ? 'enabled' : 'disabled'}}">
+                                        <span>Collect Votes</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div ng-if="pendingCase.electionStatus === 'Closed'">
+                                <a ui-sref="final_access_review_results({referenceId: '{{pendingCase.referenceId}}', electionId: '{{pendingCase.electionId}}'})" class="col-lg-2 col-md-2 col-sm-2 col-xs-3 no-padding">
+                                    <div class="collectButton {{pendingCase.alreadyVoted ? 'enabled' : 'disabled'}}">
+                                        <span>Final Vote</span>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
+                    <hr class="pvotes-separator">
                 </div>
-                <hr class="pvotes-separator">
-                <div class="pvotes-pagination">
-                    <ul class="pagination">
-                        <li><a
-                            ng-click="ChairConsole.changePage('access', ChairConsole.activePage.access - 1)">&laquo;</a>
-                        </li>
-                        <li ng-repeat="page in ChairConsole.currentPages.access">
-                            <a ng-click="ChairConsole.changePage('access', page)"
-                               ng-class="{ 'active-case': ChairConsole.activePage.access == page}">{{page + 1}}</a>
-                        </li>
-                        <li><a
-                            ng-click="ChairConsole.changePage('access', ChairConsole.activePage.access + 1)">&raquo;</a>
-                        </li>
-                    </ul>
+                <div dir-pagination-controls
+                     max-size="5"
+                     direction-links="true"
+                     boundary-links="true"
+                     class="pvotes-pagination"
+                     pagination-id="accessCases">
                 </div>
             </div>
         </div>
@@ -162,7 +155,7 @@
                     <hr class="pvotes-main-separator">
                 </div>
                 <div class="pvotes-box-body">
-                    <div ng-repeat="pendingCase in ChairConsole.electionsList.rp">
+                    <div dir-paginate="pendingCase in ChairConsole.electionsList.rp | itemsPerPage:5" pagination-id="rpCases">
                         <hr class="pvotes-separator">
                         <div class="row pvotes-main-list">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4 pvotes-list-id">{{pendingCase.referenceId}}</div>
@@ -189,23 +182,17 @@
                             </a>
                         </div>
                     </div>
+                    <hr class="pvotes-separator">
                 </div>
-                <hr class="pvotes-separator">
-                <div class="pvotes-pagination">
-                    <ul class="pagination">
-                        <li><a
-                            ng-click="ChairConsole.changePage('rp', ChairConsole.activePage.rp - 1)">&laquo;</a>
-                        </li>
-                        <li ng-repeat="page in ChairConsole.currentPages.rp">
-                            <a ng-click="ChairConsole.changePage('rp', page)"
-                               ng-class="{ 'active-case': ChairConsole.activePage.rp == page}">{{page + 1}}</a>
-                        </li>
-                        <li><a
-                            ng-click="ChairConsole.changePage('rp', ChairConsole.activePage.rp + 1)">&raquo;</a>
-                        </li>
-                    </ul>
+                <div dir-pagination-controls
+                     max-size="5"
+                     direction-links="true"
+                     boundary-links="true"
+                     class="pvotes-pagination"
+                     pagination-id="rpCases">
                 </div>
             </div>
         </div>
+
     </div>
 </div>

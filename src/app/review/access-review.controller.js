@@ -2,14 +2,13 @@
     'use strict';
 
     angular.module('cmReview')
-        .controller('DulReview', DulReview);
+        .controller('DarReview', DarReview);
 
-    function DulReview($scope, $modal, $state, $rootScope, USER_ROLES, vote, consent, election, cmVoteService, apiUrl, cmAuthenticateService)
+    function DarReview($scope, $modal, $state, $rootScope, USER_ROLES, vote, dar, election, consent, cmVoteService, apiUrl, cmAuthenticateService)
     {
         $scope.downloadUrl = apiUrl + 'consent/' + consent.consentId + '/dul';
-        $scope.consentDulUrl = consent.dataUseLetter;
-        $scope.consentDulName = consent.dulName;
-        $scope.consentSDul = consent.structuredDataUseLetter;
+        $scope.consent = consent;
+        $scope.dar = dar;
         $scope.voteStatus = vote.vote;
         $scope.isFormDisabled = (election.status == 'Closed');
         $scope.rationale = vote.rationale;
@@ -27,12 +26,12 @@
                 var result;
                 if(vote.createDate == null){
                     $scope.isNew = true;
-                    result = cmVoteService.postVote(consent.consentId, vote).$promise
+                    result = cmVoteService.postDarVote(election.referenceId, vote).$promise
                 } else {
                     $scope.isNew = false;
-                    result = cmVoteService.updateVote(consent.consentId, vote).$promise
+                    result = cmVoteService.updateDarVote(election.referenceId, vote).$promise
                 }
-                $scope.electionType = 'dul';
+                $scope.electionType = 'access';
                 result.then(
                     //success
                     function(){
@@ -44,7 +43,7 @@
                             scope: $scope
                         });
                         modalInstance.result.then(function () {
-                        cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles)
+                            cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles)
                             if(cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles)){
                                 $state.go('chair_console');
                             }else {

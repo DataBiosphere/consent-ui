@@ -23,11 +23,10 @@
             return ConsentDulResource.get({consentId: id}).$promise;
         }
 
-        function findConsentManage(lists, vm) {
+        function findConsentManage(vm) {
             ConsentManageResource.List().$promise.then(
                 function (data) {
-                    lists['dul'] = data;
-                    vm.changePage('dul', 0);
+                    vm.electionsList['dul'] = data;
                 });
         }
 
@@ -59,8 +58,8 @@
             findDataUseLetterForConsent: function(id){
                 return findDulForConsent(id);
             },
-            findConsentManage: function(lists, vm){
-                return findConsentManage(lists, vm);
+            findConsentManage: function(vm){
+                return findConsentManage(vm);
             },
             postConsent: function(consent){
                 return postConsent(consent);

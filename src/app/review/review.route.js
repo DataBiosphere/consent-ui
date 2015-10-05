@@ -14,7 +14,7 @@
                 url: '/dul_review',
                 params: {
                     consentId: null,
-                    voteId: null,
+                    voteId: null
                 },
                 templateUrl: 'app/review/dul-review.html',
 
@@ -25,13 +25,19 @@
                 },
                 resolve: {
                     vote: function($stateParams, cmVoteService){
-                        return cmVoteService.getVote($stateParams.consentId, $stateParams.voteId);
+                        if($stateParams.consentId != null){
+                            return cmVoteService.getVote($stateParams.consentId, $stateParams.voteId);
+                        }
                     },
                     consent: function($stateParams, cmConsentService){
-                        return cmConsentService.findConsent($stateParams.consentId);
+                        if($stateParams.consentId != null) {
+                            return cmConsentService.findConsent($stateParams.consentId);
+                        }
                     },
                     election: function($stateParams, cmElectionService){
-                        return cmElectionService.findElection($stateParams.consentId);
+                        if($stateParams.consentId != null) {
+                            return cmElectionService.findElection($stateParams.consentId);
+                        }
                     }
 
                 }
@@ -41,13 +47,41 @@
             .state('access_review', {
                 name: 'access_review',
                 url: '/access_review',
+                params: {
+                    darId: null,
+                    voteId: null
+                },
                 templateUrl: 'app/review/access-review.html',
-                controller: 'Review',
-                controllerAs: 'Review',
+                controller: 'DarReview',
+                controllerAs: 'DarReview',
                 data: {
                     authorizedRoles: [USER_ROLES.member, USER_ROLES.chairperson]
+                },
+                resolve: {
+                    dar: function($stateParams, cmRPService){
+                        if($stateParams.darId != null){
+                            return cmRPService.getDarFields($stateParams.darId, "rus");
+                        }
+                     },
+                    consent: function($stateParams, cmRPService){
+                        if($stateParams.darId != null){
+                            return cmRPService.getDarConsent($stateParams.darId);
+                        }
+                    },
+                    election: function ($stateParams, cmElectionService) {
+                        if($stateParams.darId != null){
+                            return cmElectionService.findDarElection($stateParams.darId);
+                        }
+
+                    },
+                    vote: function ($stateParams, cmVoteService) {
+                        if($stateParams.darId != null) {
+                            return cmVoteService.getDarVote($stateParams.darId, $stateParams.voteId);
+                        }
+                    }
                 }
             });
+
     }
 
 })();

@@ -9,13 +9,15 @@
             <div class="panel-heading cm-boxhead access-color">
                 <h4>Data Use Limitations</h4>
             </div>
-            <div id="dul" class="panel-body cm-boxbody"><a href="#" class="hover-color">dul_file.pdf</a></div>
+            <div id="dul" class="panel-body cm-boxbody">
+                <a href="{{downloadUrl}}" target="_blank">{{dulName}}</a>
+            </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
             <div class="panel-heading cm-boxhead access-color">
                 <h4>Research Purpose</h4>
             </div>
-            <div id="prf" class="panel-body cm-boxbody">I am studying breast cancer in a non-profit setting.</div>
+            <div id="rp" class="panel-body cm-boxbody">{{dar.rus}}</div>
         </div>
     </div>
     <hr class="section-separator">
@@ -32,12 +34,12 @@
                     <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Vote</label>
                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
                         <div class="radio-inline">
-                            <input type="radio" ng-model="FinalAccessReviewResults.voteForm.vote" ng-click="FinalAccessReviewResults.positiveVote()"
+                            <input type="radio" ng-model="vote.vote" ng-click="positiveVote()"
                                    value="true" class="regular-radio" id="inputVotePositive"
                                    name="inputVote">
                             <label for="inputVotePositive"></label>
                             <div class="radio-button-text">Yes</div>
-                            <input type="radio" ng-model="FinalAccessReviewResults.voteForm.vote"
+                            <input type="radio" ng-model="vote.vote"
                                    value="false" class="regular-radio" id="inputVoteNegative"
                                    name="inputVote">
                             <label for="inputVoteNegative"></label>
@@ -48,8 +50,8 @@
                 <div class="form-group">
                     <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale</label>
                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
-                        <input type="text" ng-model="FinalAccessReviewResults.voteForm.rationale"
-                               ng-disabled="!FinalAccessReviewResults.voteForm.vote || FinalAccessReviewResults.voteForm.vote == 'true'"
+                        <input type="text" ng-model="vote.rationale"
+                               ng-disabled="vote.vote != 'false' "
                                cm-focus="{{!FinalAccessReviewResults.voteForm.vote || FinalAccessReviewResults.voteForm.vote == 'true' ? 'false' : 'true'}}"
                                name="inputRationale"
                                class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
@@ -57,18 +59,8 @@
                     </div>
                 </div>
                 <div class="form-group form-group-bottom">
-                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                        <div id="successMsg" class="alert alert-success validation-message hidden">
-                            <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
-                            Vote successfully logged.
-                        </div>
-                        <div id="errorMsg" class="alert alert-danger validation-message hidden">
-                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            Please check your vote.
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                        <button ng-click="FinalAccessReviewResults.logVote()"
+                    <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-4 col-sm-offset-8 col-xs-12">
+                        <button ng-disabled="vote.vote === null" ng-click="logVote()"
                                 class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button access-background">
                             Vote
                         </button>
@@ -76,7 +68,7 @@
                 </div>
             </form>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 jumbotron box-vote-results">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 jumbotron box-vote-results box-vote-disabled">
             <h3 class="cm-results-subtitle access-color">
                 Decision agreement</br>
                 <small>Were the Final votes of the DAC and the Vault consistent?</small>
@@ -88,12 +80,12 @@
                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
                         <div class="radio-inline">
                             <input type="radio" ng-model="FinalAccessReviewResults.voteAgreement.vote" ng-click="FinalAccessReviewResults.agreementVote()"
-                                   value="true" class="regular-radio" id="inputAgreement"
+                                   ng-disabled="true" value="true" class="regular-radio" id="inputAgreement"
                                    name="inputAgreement">
                             <label for="inputAgreement"></label>
                             <div class="radio-button-text">Yes</div>
                             <input type="radio" ng-model="FinalAccessReviewResults.voteAgreement.vote"
-                                   value="false" class="regular-radio" id="inputDisagreement"
+                                   ng-disabled="true" value="false" class="regular-radio" id="inputDisagreement"
                                    name="inputAgreement">
                             <label for="inputDisagreement"></label>
                             <div class="radio-button-text">No</div>
@@ -112,29 +104,19 @@
                     </div>
                 </div>
                 <div class="form-group form-group-bottom">
-                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                        <div id="successAgreeMsg" class="alert alert-success validation-message hidden">
-                            <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
-                            Vote successfully logged.
-                        </div>
-                        <div id="errorAgreeMsg" class="alert alert-danger validation-message hidden">
-                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            Please check your vote.
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                    <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-4 col-sm-offset-8 col-xs-12">
+
                         <button ng-click="FinalAccessReviewResults.logVote()"
                                 class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button access-background">
                             Vote
                         </button>
-                    </div>
+                </div>
                 </div>
             </form>
         </div>
     </div>
-
     <accordion close-others="oneAtATime">
-        <accordion-group is-open="status.open" class="accordion">
+        <accordion-group class="accordion">
             <accordion-heading>
                 <h3 class="access-color">Data Access Request Voting Results<br>
                     <div class="cm-inside-box-title">Should data access be granted to this applicant?</div>
@@ -149,15 +131,23 @@
                             <hr class="box-separator">
                             <div class="row results-box">
                                 <label class="col-lg-3 col-md-3 col-sm-4 col-xs-4 control-label vote-label access-color">Vote: </label>
-                                <div class="singleVote col-lg-3 col-md-3 col-sm-8 col-xs-8 vote-label bold">YES</div>
+                                <div class="singleVote col-lg-3 col-md-3 col-sm-8 col-xs-8 vote-label bold {{electionAccess.finalVote}}">
+                                    <span ng-if="electionAccess.finalVote == '1'">YES</span>
+                                    <span ng-if="electionAccess.finalVote == '0'">NO</span>
+                                    <span ng-if="electionAccess.finalVote == 'null'"></span>
+                                </div>
                                 <label class="col-lg-2 col-md-2 col-sm-4 col-xs-4 control-label vote-label access-color">Date: </label>
-                                <div class="voteDate col-lg-4 col-md-4 col-sm-8 col-xs-8 vote-label">0000-00-00</div>
+                                <div class="voteDate col-lg-4 col-md-4 col-sm-8 col-xs-8 vote-label">{{electionAccess.finalVoteDate}}</div>
                                 <label class="col-lg-3 col-md-3 col-sm-4 col-xs-4 control-label vote-label access-color">Rationale: </label>
-                                <div class="inputRationale col-lg-9 col-md-9 col-sm-8 col-xs-8 vote-label"> ---</div>
+                                <div class="inputRationale col-lg-9 col-md-9 col-sm-8 col-xs-8 vote-label">
+                                    <span ng-if="electionAccess.finalVote == '1'">---</span>
+                                    <span ng-if="electionAccess.finalVote == '0'">{{electionAccess.finalRationale}}</span>
+                                    <span ng-if="electionAccess.finalVote == 'null'">---</span>
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6">
-                            <div cm-chart cm-chart-data="chartData.accessTotal"
+                            <div cm-chart cm-chart-data="chartDataAccess.Total"
                                  cm-chart-options="chartOptions.accessTotal" class="result_chart"></div>
                         </div>
                     </div>
@@ -173,70 +163,33 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div id="voteResultsList" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill">
-                    <div class="jumbotron box-vote-singleresults">
+
+            <div class="row" ng-repeat="row in voteAccessList">
+                <div id="voteResultsList" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill" ng-repeat="vm in row">
+                    <div class="jumbotron box-vote-singleresults"  ng-if="vm.vote.isFinalAccessVote != true">
                         <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">Member 01</div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">{{vm.displayName}}</div>
                         </div>
                         <hr class="box-separator">
                         <div class="row">
                             <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label access-color">Vote: </label>
-                            <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">NO</div>
+                            <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">
+                                <span ng-if="vm.vote.vote == '1'">YES</span>
+                                <span ng-if="vm.vote.vote == '0'">NO</span>
+                                <span ng-if="vm.vote.vote == 'null'"></span>
+                            </div>
                             <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label access-color">Date: </label>
-                            <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">0000-00-00</div>
+                            <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">
+                                <span ng-if="vm.vote.createDate == null">---</span>
+                                <span ng-if="vm.vote.createDate != null && vm.vote.updateDate == null">{{vm.vote.createDate}}</span>
+                                <span ng-if="vm.vote.createDate != null && vm.vote.updateDate != null">{{vm.vote.updateDate}}</span>
+                            </div>
                             <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label access-color">Rationale: </label>
-                            <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">Some rationale.</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill">
-                    <div class="jumbotron box-vote-singleresults">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">Member 02</div>
-                        </div>
-                        <hr class="box-separator">
-                        <div class="row">
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label access-color">Vote: </label>
-                            <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">NO</div>
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label access-color">Date:</label>
-                            <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">0000-00-00</div>
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label access-color">Rationale: </label>
-                            <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">Some other rationale.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill">
-                    <div class="jumbotron box-vote-singleresults">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">Member 03</div>
-                        </div>
-                        <hr class="box-separator">
-                        <div class="row">
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label access-color">Vote: </label>
-                            <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">YES</div>
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label access-color">Date: </label>
-                            <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">0000-00-00</div>
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label access-color">Rationale: </label>
-                            <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">---</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill">
-                    <div class="jumbotron box-vote-singleresults">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">Member 04</div>
-                        </div>
-                        <hr class="box-separator">
-                        <div class="row">
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label access-color">Vote: </label>
-                            <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">YES</div>
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label access-color">Date:</label>
-                            <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">0000-00-00</div>
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label access-color">Rationale: </label>
-                            <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">---</div>
+                            <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">
+                                <span ng-if="vm.vote.vote == '1'">---</span>
+                                <span ng-if="vm.vote.vote == '0'">{{vm.vote.rationale}}</span>
+                                <span ng-if="vm.vote.vote == 'null'">----</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -245,7 +198,7 @@
     </accordion>
 
     <accordion close-others="oneAtATime">
-        <accordion-group is-open="status.open" class="accordion">
+        <accordion-group  class="accordion">
             <accordion-heading>
                 <h3 class="dul-color">Data Use Limitations Voting Results<br>
                     <div class="cm-inside-box-title">Were the Data Use Limitations correctly converted into a machine-readable format?</div>
@@ -260,88 +213,61 @@
                             <hr class="box-separator">
                             <div class="row results-box">
                                 <label class="col-lg-3 col-md-3 col-sm-4 col-xs-4 control-label vote-label dul-color">Vote: </label>
-                                <div class="singleVote col-lg-3 col-md-3 col-sm-8 col-xs-8 vote-label bold">NO</div>
+                                <div class="singleVote col-lg-3 col-md-3 col-sm-8 col-xs-8 vote-label bold {{election.finalVote}}">
+                                    <span ng-if="election.finalVote == '1'">YES</span>
+                                    <span ng-if="election.finalVote == '0'">NO</span>
+                                    <span ng-if="election.finalVote == 'null'"></span>
+                                </div>
                                 <label class="col-lg-2 col-md-2 col-sm-4 col-xs-4 control-label vote-label dul-color">Date: </label>
-                                <div class="voteDate col-lg-4 col-md-4 col-sm-8 col-xs-8 vote-label">0000-00-00</div>
+                                <div class="voteDate col-lg-4 col-md-4 col-sm-8 col-xs-8 vote-label">{{election.finalVoteDate}}</div>
                                 <label class="col-lg-3 col-md-3 col-sm-4 col-xs-4 control-label vote-label dul-color">Rationale: </label>
-                                <div class="inputRationale col-lg-9 col-md-9 col-sm-8 col-xs-8 vote-label">Here goes the reason why I think so.</div>
+                                <div class="inputRationale col-lg-9 col-md-9 col-sm-8 col-xs-8 vote-label">
+                                    <span ng-if="election.finalVote == '1'"> ---</span>
+                                    <span ng-if="election.finalVote == '0'">{{election.finalRationale}}</span>
+                                    <span ng-if="election.finalVote == 'null'"> ---</span>
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6">
-                            <div cm-chart cm-chart-data="chartData.dulTotal"
+                            <div cm-chart cm-chart-data="chartDataDUL.Total"
                                  cm-chart-options="chartOptions.dulTotal" class="result_chart"></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div id="voteResultsListDul" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill">
+            <div class="row" ng-repeat="row in voteList">
+                <div id="voteResultsListDul" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill"  ng-repeat="vm in row">
                     <div class="jumbotron box-vote-singleresults">
                         <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">Member 01</div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">{{vm.displayName}}</div>
                         </div>
                         <hr class="box-separator">
                         <div class="row">
                             <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Vote: </label>
-                            <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">NO</div>
+                            <div
+                                class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold {{vm.vote.vote}}">
+                                <span ng-if="vm.vote.vote == '1'">YES</span>
+                                <span ng-if="vm.vote.vote == '0'">NO</span>
+                                <span ng-if="vm.vote.vote == 'null'"></span>
+                            </div>
                             <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Date: </label>
-                            <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">0000-00-00</div>
+                            <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">
+                                <span ng-if="vm.vote.createDate == null">---</span>
+                                <span ng-if="vm.vote.createDate != null && vm.vote.updateDate == null">{{vm.vote.createDate}}</span>
+                                <span ng-if="vm.vote.createDate != null && vm.vote.updateDate != null">{{vm.vote.updateDate}}</span>
+                            </div>
                             <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Rationale: </label>
-                            <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">Some rationale.</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill">
-                    <div class="jumbotron box-vote-singleresults">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">Member 02</div>
-                        </div>
-                        <hr class="box-separator">
-                        <div class="row">
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Vote: </label>
-                            <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">YES</div>
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Date:</label>
-                            <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">0000-00-00</div>
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Rationale: </label>
-                            <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">---</div>
+                            <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">
+                                <span ng-if="vm.vote.vote == '1'">---</span>
+                                <span ng-if="vm.vote.vote == '0'">{{vm.vote.rationale}}</span>
+                                <span ng-if="vm.vote.vote == 'null'">----</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill">
-                    <div class="jumbotron box-vote-singleresults">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">Member 03</div>
-                        </div>
-                        <hr class="box-separator">
-                        <div class="row">
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Vote: </label>
-                            <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">NO</div>
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Date: </label>
-                            <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">0000-00-00</div>
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Rationale: </label>
-                            <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">Some other rationale.</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill">
-                    <div class="jumbotron box-vote-singleresults">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">Member 04</div>
-                        </div>
-                        <hr class="box-separator">
-                        <div class="row">
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Vote: </label>
-                            <div class="singleVote col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label bold">NO</div>
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Date:</label>
-                            <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">0000-00-00</div>
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Rationale: </label>
-                            <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">And another one.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+
         </accordion-group>
     </accordion>
 </div>

@@ -5,36 +5,20 @@
         .controller('AdminManage', AdminManage);
 
     /* ngInject */
-    function AdminManage(cmPaginatorService, $modal, cmConsentService, cmElectionService, $scope) {
-
-        var lists = {'dul': []};
-        var list_max_items = 10;
+    function AdminManage($modal, cmConsentService, cmElectionService, $scope) {
 
         var vm = this;
-        vm.activePage = {'dul': 0};
-        vm.currentPages = {'dul': []};
         vm.electionsList = {'dul': []};
-        // changePage function from the service with the first 2 parameters locked
-        vm.changePage = _.partial(cmPaginatorService.changePage,
-            // first parameter to lock from changePage
-            lists, list_max_items,
-            // second parameter to lock from changePage
-            {
-                activePage: vm.activePage,
-                currentPages: vm.currentPages,
-                electionsList: vm.electionsList
-            }
-        );
+
         vm.openCreate = openCreate;
         vm.openCancel = openCancel;
         vm.addDul = addDul;
         vm.editDul = editDul;
 
-
         init();
 
         function init() {
-            cmConsentService.findConsentManage(lists, vm);
+            cmConsentService.findConsentManage(vm);
         }
 
         function openCreate(consentId) {
@@ -119,7 +103,6 @@
                 //what to do if the modal was canceled
             });
         }
-
 
     }
 })();

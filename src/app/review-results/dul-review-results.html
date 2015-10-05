@@ -71,24 +71,14 @@
                         </div>
                     </div>
                     <div class="form-group form-group-bottom">
-                        <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
-                            <div id="successMsg" class="alert alert-success validation-message hidden">
-                                <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
-                                Vote successfully logged.
-                            </div>
-                            <div id="errorMsg" class="alert alert-danger validation-message hidden">
-                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                Please check your vote.
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                        <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-4 col-sm-offset-8 col-xs-12">
                             <button ng-click="logVote()" ng-disabled="election.finalVote == null"
                                     class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button dul-background">
                                 Vote
                             </button>
                         </div>
                     </div>
-                </form>
+               </form>
             </fieldset>
         </div>
     </div>
