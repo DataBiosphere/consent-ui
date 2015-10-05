@@ -24,29 +24,39 @@
                 <input type="checkbox" select-all class="checkbox-inline" id="all">
                 <label class="regular-checkbox" for="all"></label>
             </div>
-        </form>
         <div class="table-scroll">
             <table class="table">
                 <thead>
                 <tr>
                     <th></th>
+                    <th></th>
                     <th ng-repeat="dictionary in DatasetCatalog.dataSetList.dictionary" class="table-titles dataset-color cell-size">{{dictionary.key}}</th>
                     <th class="table-titles dataset-color cell-size">ConsentId</th>
+                    <th class="table-titles dataset-color cell-size">Structured Data Use Limitations</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr dir-paginate="dataSet in DatasetCatalog.dataSetList.catalog | filter: searchDataset | itemsPerPage:10" current-page="pagination.current">
-                    <td ng-repeat="property in dataSet.properties"  ng-if="property.propertyName =='Dataset ID'">
-                        <div class="checkbox" >
-                            <input type="checkbox" id="{{property.propertyValue}}"   ng-model="checkMod['field_' + pagination.current + $parent.$parent.$index]" class="checkbox-inline user-checkbox" add-object-id >
+                    <td ng-repeat="property in dataSet.properties" ng-if="property.propertyName =='Dataset ID'" >
+                        <div class="checkbox">
+                            <input type="checkbox" id="{{property.propertyValue}}" ng-model="checkMod['field_' + pagination.current + $parent.$parent.$index]" class="checkbox-inline user-checkbox" add-object-id >
                             <label class="regular-checkbox rp-choice-questions" for="{{property.propertyValue}}" ></label>
                         </div>
                     </td>
+                    <td ng-repeat="property in dataSet.properties" ng-if="property.propertyName =='Dataset ID'" >
+                        <div ng-if="dataSet.deletable"  ng-click="DatasetCatalog.openDelete(property.propertyValue)">
+                            <span  class="cm-icon-button glyphicon glyphicon-trash caret-margin default-color" aria-hidden="true"></span>
+                        </div>
+                    </td>
+
+
+
                     <td ng-repeat="property in dataSet.properties" class="table-items cell-size" >
                         <p ng-if="property.propertyName !=='dbGAP' ">{{property.propertyValue}}</p>
                         <a href="{{property.propertyValue}}" target="_blank"   ng-if="property.propertyName =='dbGAP' && property.propertyValue.length > 0  "  class="enabled">Link</a>
                         <a href="{{property.propertyValue}}" ng-if="property.propertyName =='dbGAP' && property.propertyValue.length === 0   "  class="disabled">Link</a>
                     <td class="table-items cell-size">{{dataSet.consentId}}</td>
+                    <td class="table-items cell-size">{{dataSet.useRestriction}}</td>
                     </td>
                 </tr>
                 </tbody>

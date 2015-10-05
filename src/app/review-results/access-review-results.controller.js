@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('cmReviewResults')
-        .controller('ReviewResults', ReviewResults);
+        .controller('AccessReviewResults', ReviewResults);
 
     function ReviewResults($scope, $modal, $state, cmElectionService, electionReview ,dar,apiUrl){
 

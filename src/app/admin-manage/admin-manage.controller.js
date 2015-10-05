@@ -10,8 +10,8 @@
         var vm = this;
         vm.electionsList = {'dul': []};
 
-        vm.openCreate = openCreate;
-        vm.openCancel = openCancel;
+        vm.openCreate = openCreate;     vm.openCancel = openCancel;
+
         vm.addDul = addDul;
         vm.editDul = editDul;
 

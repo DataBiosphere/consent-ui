@@ -4,7 +4,9 @@
     angular.module('cmReviewResults')
         .controller('DulReviewResults', DulReviewResults);
 
-    function DulReviewResults(apiUrl, $scope, $modal, $state, cmElectionService, electionReview){
+    function DulReviewResults(apiUrl, $scope, $modal, $state, cmElectionService,cmTranslateService ,electionReview){
+
+
 
         $scope.chartData = {
             'dul': [
@@ -66,7 +68,10 @@
         $scope.dul = electionReview.consent.dataUseLetter;
         $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
         $scope.dulName = electionReview.consent.dulName;
-        $scope.structuredDataUseLetter = electionReview.consent.structuredDataUseLetter;
+        $scope.structuredDataUseLetter =  cmTranslateService.translate("purpose",electionReview.consent.useRestriction);
+        cmTranslateService.translate("sampleset",electionReview.consent.useRestriction).then(function(data) {
+        $scope.structuredDataUseLetter = data;
+          });
         $scope.positiveVote = positiveVote;
         $scope.logVote = logVote;
         $scope.sendReminder = sendReminder;
