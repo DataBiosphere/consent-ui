@@ -128,14 +128,6 @@ small {
     background: #603B9B !important;
 }
 
-.rp-color {
-    color: #8E307A !important;
-}
-
-.rp-background {
-    background: #8E307A !important;
-}
-
 .dataset-color {
     color: #00928A !important;
 }
@@ -1002,7 +994,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 }
 
 .multi-step-buttons .active {
-    background: #8E307A !important;
+    background: #603B9B !important;
     color: #ffffff !important;
 }
 
@@ -1228,7 +1220,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     font-size: 16px;
     line-height: 23px;
     font-weight: 500 !important;
-    color: #8E307A;
+    color: #603B9B;
 }
 
 .rp-choice-questions,
@@ -1251,7 +1243,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 
 .rp-choice-questions span {
     display: inline;
-    color: #8E307A;
+    color: #603B9B;
 }
 
 .rp-title-question span {
@@ -2423,8 +2415,8 @@ tags-input .tags .tag-item {
     height: 26px;
     line-height: 25px;
     border-radius: 3px;
-    background: rgba(142,48,122,0.2);
-    color: #8E307A;
+    background: rgba(96, 59, 155, 0.2)
+color: #603B9B;
     font-weight: 500;
     border: none !important;
 }
@@ -2551,4 +2543,8 @@ tags-input .autocomplete .suggestion-item em {
 
 .dropdown-menu > .active > a {
     background-color: #2FA4E7 !important;
+}
+
+.dropdown-menu li a:hover {
+    background-color: transparent !important;
 }

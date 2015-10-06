@@ -29,8 +29,12 @@
                 <li ng-repeat="rol in $root.currentUser.roles" ng-show="'{{rol.name}}' === '{{$root.userRoles.admin}}'">
                     <a href="#/admin_console">Admin Console</a>
                 </li>
+                <li ng-repeat="rol in $root.currentUser.roles"
+                    ng-show="'{{rol.name}}' === '{{$root.userRoles.researcher}}'">
+                    <a href="#/researcher_console">Researcher Console</a>
+                </li>
                 <li ng-repeat="rol in $root.currentUser.roles" ng-show="'{{rol.name}}' === '{{$root.userRoles.researcher}}'">
-                    <a href="#/rp_application/step1">Research Application</a>
+                    <a href="#/rp_application/step1">Request Application</a>
                 </li>
                 <li class="dropdown drop-li" dropdown on-toggle="toggled(open)" ng-show="showStatistics($root.currentUser.roles, $root.userRoles)">
                     <a role="button" class="dropdown-toggle" href="#" dropdown-toggle>
@@ -45,7 +49,17 @@
                     </ul>
                 </li>
                 <li><a href="#/dataset_catalog">Dataset Catalog</a></li>
-                <li><a href="#">About</a></li>
+                <!--<li><a href="#">About</a></li>-->
+                <li class="dropdown drop-li" dropdown on-toggle="toggled(open)">
+                    <a role="button" class="dropdown-toggle" href="#" dropdown-toggle>
+                        <div>Help me <span class="caret caret-margin"></span></div>
+                    </a>
+                    <ul class="dropdown-menu user-dropdown" role="menu">
+                        <li><a href="#" class="f-left" ng-click="Header.helpMeModal()">Create a Report</a></li>
+                        <hr>
+                        <li><a href="#/help_me" class="f-left">List of Reports</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>

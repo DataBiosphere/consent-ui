@@ -1,0 +1,46 @@
+<div ng-include src="'app/header/header.html'"></div>
+<div class="container" ng-controller="HelpMe">
+    <div class="row no-margin">
+        <h2 class="col-lg-8 col-md-8 col-sm-8 col-xs-8 cm-title common-color no-padding">
+            <img src="../assets/images/icon_manage_help.png" alt="Manage Help me icon" class="cm-icons">Help me Reports
+            <div class="cm-title-other-description">List of comments, suggestions and bug reports</div>
+        </h2>
+        <div>
+            <a class="col-lg-4 col-md-4 col-sm-4 col-xs-4 admin-add-button common-background"
+               ng-click="HelpMe.helpMeModal()">
+                <div class="all-icons add-help_white"></div>
+                <span>Create a Report</span>
+            </a>
+        </div>
+    </div>
+    <div class="jumbotron box-vote-singleresults">
+        <div class="row">
+            <div class="pvotes-box-head">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle common-color">Report Id</div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle common-color">User</div>
+                <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2 pvotes-box-subtitle common-color">Date</div>
+                <div class="col-lg-3 col-md-3 col-sm-2 col-xs-2 pvotes-box-subtitle common-color">Subject</div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-box-subtitle common-color">Description</div>
+            </div>
+            <div class="admin-box-body">
+                <hr class="pvotes-main-separator">
+                <div dir-paginate="report in reports | itemsPerPage:8">
+                    <div class="row pvotes-main-list">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{report.reportId}}</div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{report.user}}</div>
+                        <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2 pvotes-list-id">{{report.date}}</div>
+                        <div class="col-lg-3 col-md-3 col-sm-2 col-xs-2 pvotes-list-id">{{report.subject}}</div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list f-left">{{report.description}}</div>
+                    </div>
+                    <hr class="pvotes-separator">
+                </div>
+            </div>
+            <div dir-pagination-controls
+                 max-size="8"
+                 direction-links="true"
+                 boundary-links="true"
+                 class="pvotes-pagination">
+            </div>
+        </div>
+    </div>
+</div>

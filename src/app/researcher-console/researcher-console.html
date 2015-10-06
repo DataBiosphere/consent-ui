@@ -1,0 +1,68 @@
+<div ng-include src="'app/header/header.html'"></div>
+<div class="container" ng-controller="ResearcherConsole">
+    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <h2 class="cm-title common-color">
+            <div id="dacUser">Welcome {{currentUser.displayName}}!</div>
+            <small>These are your Data Access Request cases</small>
+        </h2>
+        <hr class="section-separator">
+    </div>
+    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <div class="row no-margin">
+            <h3 class="col-lg-8 col-md-8 col-sm-8 col-xs-6 cm-title access-color no-padding">
+                <img src="assets/images/icon_access.png" alt="data access icon" class="pvotes-icons">Data Access Request cases
+                <div class="pvotes-box-title-description">List of your requests for data access.</div>
+            </h3>
+            <a class="col-lg-4 col-md-4 col-sm-4 col-xs-6 admin-add-button access-background" href="/#/rp_application/step1">
+                <div class="all-icons add-access_white"></div>
+                <span>Create Data Access Request</span>
+            </a>
+        </div>
+        <div class="jumbotron box-vote-singleresults">
+            <div class="row">
+                <div class="pvotes-box-head">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle access-color">Data Request id</div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-box-subtitle access-color">Project title</div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle access-color">Date</div>
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pvotes-box-subtitle f-center access-color">+ Info</div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle f-center access-color">Status</div>
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pvotes-box-subtitle f-center access-color">Edit</div>
+                    <hr class="pvotes-main-separator">
+                </div>
+                <div class="pvotes-box-body">
+                    <div dir-paginate="dar in dars.researcher | filter: searchAccess | itemsPerPage:10" pagination-id="researcherConsole">
+                        <hr class="pvotes-separator">
+                        <div class="row pvotes-main-list">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{dar.darId}}</div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">{{dar.title}}</div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{dar.date}}</div>
+                            <a href="#" class="admin-manage-buttons col-lg-1 col-md-1 col-sm-1 col-xs-1 no-padding">
+                                <div class="{{dar.info}} hover-color" ng-click="ResearcherConsole.openRUS()">
+                                    <span>RUS</span>
+                                </div>
+                            </a>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list bold">
+                                <span ng-if="dar.status == 'submitted'">Submitted</span>
+                                <span ng-if="dar.status == 'review'">In review</span>
+                                <span ng-if="dar.status == 'canceled'">Canceled</span>
+                                <span ng-if="dar.status == 'denied'">DENIED</span>
+                                <span ng-if="dar.status == 'approved'">APPROVED</span>
+                            </div>
+                            <a href="/#/rp_application/step1" class="admin-manage-buttons col-lg-1 col-md-1 col-sm-1 col-xs-1 no-padding">
+                                <div class="{{dar.edit}} hover-color">Edit</div>
+                            </a>
+                        </div>
+                    </div>
+                    <hr class="pvotes-separator">
+                </div>
+                <div dir-pagination-controls
+                     max-size="10"
+                     direction-links="true"
+                     boundary-links="true"
+                     class="pvotes-pagination"
+                     pagination-id="researcherConsole">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
