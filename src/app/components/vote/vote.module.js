@@ -18,13 +18,13 @@
             return $resource(apiUrl+"consent/:consentId/vote");
         })
 
-       .factory('DarFinalAccessVoteResource', function($resource, apiUrl){
+        .factory('DarFinalAccessVoteResource', function($resource, apiUrl){
             return $resource(apiUrl+"dataRequest/:requestId/vote/final", {}, {
                 get: {method: 'GET', params: {requestId: '@requestId'}, isArray: false}
             })})
 
-         .factory('FinalAccessDarVoteResource', function($resource, apiUrl){
-                                             return $resource(apiUrl+"dataRequest/:requestId/vote/:voteId/final", {}, {
-                                                 post: {method: 'POST', params: {requestId: '@requestId', voteId: '@voteId'}}
-           })});
+        .factory('FinalAccessDarVoteResource', function($resource, apiUrl){
+            return $resource(apiUrl+"dataRequest/:requestId/vote/:voteId/final", {}, {
+                post: {method: 'POST', params: {requestId: '@requestId', voteId: '@voteId'}}
+            })});
 })();

@@ -17,6 +17,17 @@
                 data: {
                     authorizedRoles: [USER_ROLES.admin]
                 }
+            })
+
+            .state('admin_manage_access', {
+                name: 'admin_manage_access',
+                url: '/admin_manage_access',
+                templateUrl: 'app/admin-manage/admin-manage-access.html',
+                controller: 'AdminManageAccess',
+                controllerAs: 'AdminManageAccess',
+                data: {
+                    authorizedRoles: [USER_ROLES.admin]
+                }
             });
     }
 

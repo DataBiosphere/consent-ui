@@ -28,9 +28,10 @@
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle f-center dul-color">Election status</div>
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pvotes-box-subtitle f-center dul-color">Election actions</div>
             </div>
+
             <div class="admin-box-body">
                 <hr class="pvotes-main-separator">
-                <div dir-paginate="election in AdminManage.electionsList.dul | filter: searchDUL | itemsPerPage:8">
+                <div dir-paginate="election in AdminManage.electionsList.dul | filter: searchDUL | itemsPerPage:10">
                     <div class="row pvotes-main-list">
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{election.consentId}}</div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">{{election.consentName}}</div>
@@ -64,10 +65,10 @@
                 </div>
             </div>
             <div dir-pagination-controls
-                max-size="8"
-                direction-links="true"
-                boundary-links="true"
-                class="pvotes-pagination">
+                 max-size="10"
+                 direction-links="true"
+                 boundary-links="true"
+                 class="pvotes-pagination">
             </div>
         </div>
     </div>

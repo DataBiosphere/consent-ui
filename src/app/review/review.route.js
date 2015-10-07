@@ -62,7 +62,7 @@
                         if($stateParams.darId != null){
                             return cmRPService.getDarFields($stateParams.darId, "rus");
                         }
-                     },
+                    },
                     consent: function($stateParams, cmRPService){
                         if($stateParams.darId != null){
                             return cmRPService.getDarConsent($stateParams.darId);

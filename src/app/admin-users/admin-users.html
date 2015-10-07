@@ -43,11 +43,10 @@
                                 <span class="enabled default-color" ng-if="role.name == 'Alumni'">Alumni</span>
                                 <span class="enabled default-color" ng-if="role.name == 'Researcher'">Researcher</span>
                             </span>
-
                         </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 btn-edit">
-                            <a href="#" ng-click="AdminUsers.editUser(user.email)">Edit</a>
-                        </div>
+                        <a href="#" class="admin-manage-buttons col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <div ng-click="AdminUsers.editUser(user.email)" class="create hover-color">Edit</div>
+                        </a>
                     </div>
                     <hr class="pvotes-separator">
                 </div>

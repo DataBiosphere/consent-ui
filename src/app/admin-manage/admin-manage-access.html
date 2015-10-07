@@ -1,0 +1,59 @@
+<div ng-include src="'app/header/header.html'"></div>
+<div class="container" ng-controller="AdminManageAccess">
+    <div class="row no-margin">
+        <h2 class="col-lg-8 col-md-8 col-sm-12 col-xs-12 cm-title access-color no-padding">
+            <img src="../assets/images/icon_manage_access.png" alt="Manage DAR icon" class="cm-icons">Manage Data Access Request
+            <div class="cm-title-admin-description">Select and manage Data Access Request for DAC review</div>
+        </h2>
+        <div class="col-lg-4 col-md-4 col-sm-8 col-xs-8 search-reviewed no-padding">
+            <div class="search-text">
+                <i class="glyphicon glyphicon-search access-color"></i>
+                <input type="search" class="form-control users-search" placeholder="Enter search term..." ng-model="searchAccess"/>
+            </div>
+        </div>
+    </div>
+    <div class="jumbotron box-vote-singleresults">
+        <div class="row">
+            <div class="pvotes-box-head">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle access-color">Data Request id</div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-box-subtitle access-color">Project title</div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle access-color">Date</div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pvotes-box-subtitle f-center access-color">+ Info</div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle f-center access-color">Election status</div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle f-center access-color">Election actions</div>
+            </div>
+            <div class="admin-box-body">
+                <hr class="pvotes-main-separator">
+                <div dir-paginate="dar in dars | filter: searchAccess | itemsPerPage:10">
+                    <div class="row pvotes-main-list">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{dar.darId}}</div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id">{{dar.title}}</div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{dar.date}}</div>
+                        <a href="#" class="admin-manage-buttons col-lg-1 col-md-1 col-sm-1 col-xs-1 no-padding">
+                            <div class="{{dar.info}} hover-color" ng-click="AdminManageAccess.openRUS()">
+                                <span>RUS</span>
+                            </div>
+                        </a>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list bold">
+                            <span ng-if="dar.status == 'un-reviewed'">Un-reviewed</span>
+                            <span ng-if="dar.status == 'open'">Open</span>
+                            <span ng-if="dar.status == 'canceled'">Canceled</span>
+                            <span ng-if="dar.status == 'reviewed'">Reviewed</span>
+                        </div>
+                        <a href="#" class="admin-manage-buttons col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <div ng-if="dar.actions == 'create'" class="create hover-color" ng-click="AdminManageAccess.openCreate()">Create</div>
+                            <div ng-if="dar.actions == 'cancel'" class="cancel hover-color" ng-click="AdminManageAccess.openCancel()">Cancel</div>
+                        </a>
+                    </div>
+                    <hr class="pvotes-separator">
+                </div>
+            </div>
+            <div dir-pagination-controls
+                 max-size="10"
+                 direction-links="true"
+                 boundary-links="true"
+                 class="pvotes-pagination">
+            </div>
+        </div>
+    </div>
+</div>

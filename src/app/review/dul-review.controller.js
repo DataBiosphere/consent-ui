@@ -44,7 +44,7 @@
                             scope: $scope
                         });
                         modalInstance.result.then(function () {
-                        cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles)
+                            cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles)
                             if(cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles)){
                                 $state.go('chair_console');
                             }else {

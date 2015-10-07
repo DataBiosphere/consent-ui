@@ -25,7 +25,7 @@
                     electionReview: function($stateParams, cmElectionService){
                         if($stateParams.electionId != null){
                             return cmElectionService.findReviewedElections($stateParams.electionId).$promise;
-                       }
+                        }
                     }
                 }
             })
@@ -43,12 +43,21 @@
                     electionId: null
                 },
                 data: {
-                     authorizedRoles: [USER_ROLES.member, USER_ROLES.chairperson, USER_ROLES.alumni, USER_ROLES.admin]
+                    authorizedRoles: [USER_ROLES.member, USER_ROLES.chairperson, USER_ROLES.alumni, USER_ROLES.admin]
+                }
+            })
+
+            .state('rp_results_record', {
+                name: 'rp_results_record',
+                url: '/rp_results_record',
+                templateUrl: 'app/results-record/rp-results-record.html',
+                controller: 'RPResultsRecord',
+                controllerAs: 'RPResultsRecord',
+                data: {
+                    authorizedRoles: [USER_ROLES.member, USER_ROLES.chairperson, USER_ROLES.alumni, USER_ROLES.admin]
                 }
             });
 
     }
 })();
-
-
 

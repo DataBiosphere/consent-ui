@@ -5,7 +5,12 @@
         .controller('ReviewedCases', ReviewedCases);
 
     /* ngInject */
-    function ReviewedCases(reviewedConsents, reviewedDRs, $scope) {
+    function ReviewedCases(reviewedConsents, reviewedDRs, $scope, $http) {
+
+        $scope.rps = []; //declare an empty array
+        $http.get("json/cm_rp_reviewed_cases.json").success(function(response){
+            $scope.rps = response;  //ajax request to fetch data into $scope.data
+        });
 
         var vm = this;
         vm.electionsList = {'dul': [], 'access': []};
