@@ -1,5 +1,5 @@
 FROM phusion/baseimage:latest
-FROM google/nodejs
+FROM node
 
 MAINTAINER Belatrix Team <belatrix@broadinstitute.org>
 
