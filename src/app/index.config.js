@@ -7,7 +7,7 @@
         .config(routeConfig)
         .config(httpConfig)
         .config(compileProvider)
-        .constant("apiUrl", "http://localhost:8180/api/")
+        .constant("apiUrl", "https://consent.dsde-dev.broadinstitute.org/");
         .constant("ontologyApiUrl", "https://consent-ontology.dsde-dev.broadinstitute.org/");
 
     /* ngInject */
