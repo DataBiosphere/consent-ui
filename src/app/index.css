@@ -941,7 +941,9 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 }
 
 .pvotes-pagination ul {
-    margin: 10px 0 -5px 0;
+    /*margin: 10px 0 -5px 0;*/
+    margin: 10px 0 5px 0;
+
 }
 
 .pvotes-pagination li a {
@@ -1330,7 +1332,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     display: inline-block;
     width: 35px;
     height: 40px;
-    background: url('../assets/images/admin_icons_.png') no-repeat 0 0;
+    background: url('../assets/images/admin_icons.png') no-repeat 0 0;
     overflow: hidden;
     text-indent: -15000px;
     margin: 7px 3px 0 0;
@@ -2140,13 +2142,13 @@ input[type="checkbox"][disabled] + label {
 
 .table-scroll {
     overflow-x: scroll;
-    margin: 0 25px 0 60px;
+    margin: 0 25px 5px 60px;
     overflow-y: visible;
 }
 
 .table-scroll-admin{
     overflow-x: scroll;
-    margin: 0 25px 0 90px !important;
+    margin: 0 25px 5px 90px !important;
     overflow-y: visible;
 }
 

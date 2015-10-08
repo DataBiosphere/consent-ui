@@ -12,6 +12,10 @@
         $scope.data = '';
         $scope.disableButton = false;
 
+        if(typeof consent.useRestriction == 'object'){
+             consent.useRestriction = JSON.stringify(consent.useRestriction);
+        }
+
         if (consent !== undefined) {
             $scope.consent = consent;
             $scope.file = new Object();

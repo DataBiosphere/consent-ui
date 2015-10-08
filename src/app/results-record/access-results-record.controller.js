@@ -5,7 +5,13 @@
     angular.module('cmResultsRecord')
         .controller('AccessResultsRecord', AccessResultsRecord);
 
-    function AccessResultsRecord($scope, cmElectionService, apiUrl, cmRPService) {
+    function AccessResultsRecord($scope, $state ,cmElectionService, apiUrl, cmRPService) {
+
+
+         if(  $scope.electionId == null){
+                    $state.go('reviewed_cases')
+                    return;
+           }
 
         init();
 

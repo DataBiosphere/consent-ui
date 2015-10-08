@@ -4,11 +4,19 @@
     angular.module('cmReview')
         .controller('DulReview', DulReview);
 
-    function DulReview($scope, $modal, $state, $rootScope, USER_ROLES, vote, consent, election, cmVoteService,cmTranslateService, apiUrl, cmAuthenticateService)
+    function DulReview($scope, $modal, $state, $rootScope, USER_ROLES, vote, consent, election, cmVoteService,cmTranslateService,cmLoginUserService, apiUrl, cmAuthenticateService)
     {
+        if( typeof vote == 'undefined' ||
+        typeof consent == 'undefined'||
+        typeof election == 'undefined'){
+            cmLoginUserService.redirect($rootScope.currentUser)
+            return;
+        }
+
         $scope.downloadUrl = apiUrl + 'consent/' + consent.consentId + '/dul';
         $scope.consentDulUrl = consent.dataUseLetter;
         $scope.consentDulName = consent.dulName;
+        $scope.consentSDul = "Loading...";
 
         cmTranslateService.translate("sampleset",consent.useRestriction).then(function(data) {
                 $scope.consentSDul = data;

@@ -6,7 +6,7 @@
         .controller('DatasetCatalog', DatasetCatalog);
 
     /* ngInject */
-    function DatasetCatalog($scope ,$modal,$rootScope,cmDatasetService,cmTranslateService) {
+    function DatasetCatalog($scope ,$modal,$rootScope,cmDatasetService,cmTranslateService,cmAuthenticateService, USER_ROLES) {
 
         var vm = this;
         vm.dataSetList = {'catalog': [], 'dictionary': []};
@@ -18,6 +18,9 @@
         function init() {
             $scope.checkMod = {}
             $scope.objectIdList=[];
+
+            $scope.isAdmin = cmAuthenticateService.isAuthorized(USER_ROLES.admin,$rootScope.currentUser.roles);
+
             cmDatasetService.findDictionary().then(
                 function (data) {
                     vm.dataSetList['dictionary'] = data;

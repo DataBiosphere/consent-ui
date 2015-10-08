@@ -24,11 +24,13 @@
                 <input type="checkbox" select-all class="checkbox-inline" id="all">
                 <label class="regular-checkbox" for="all"></label>
             </div>
-        <div class="table-scroll">
+        </form>
+
+        <div ng-class="isAdmin ? 'table-scroll-admin' : 'table-scroll'">
+
             <table class="table">
                 <thead>
                 <tr>
-                    <th></th>
                     <th></th>
                     <th ng-repeat="dictionary in DatasetCatalog.dataSetList.dictionary" class="table-titles dataset-color cell-size">{{dictionary.key}}</th>
                     <th class="table-titles dataset-color cell-size">ConsentId</th>
@@ -43,14 +45,11 @@
                             <label class="regular-checkbox rp-choice-questions" for="{{property.propertyValue}}" ></label>
                         </div>
                     </td>
-                    <td ng-repeat="property in dataSet.properties" ng-if="property.propertyName =='Dataset ID'" >
-                        <div ng-if="dataSet.deletable"  ng-click="DatasetCatalog.openDelete(property.propertyValue)">
+                    <td class="remove-datasets-col" ng-repeat="property in dataSet.properties" ng-if=" isAdmin &&  property.propertyName =='Dataset ID'" >
+                        <a ng-if="dataSet.deletable"  ng-click="DatasetCatalog.openDelete(property.propertyValue)">
                             <span  class="cm-icon-button glyphicon glyphicon-trash caret-margin default-color" aria-hidden="true"></span>
-                        </div>
+                        </a>
                     </td>
-
-
-
                     <td ng-repeat="property in dataSet.properties" class="table-items cell-size" >
                         <p ng-if="property.propertyName !=='dbGAP' ">{{property.propertyValue}}</p>
                         <a href="{{property.propertyValue}}" target="_blank"   ng-if="property.propertyName =='dbGAP' && property.propertyValue.length > 0  "  class="enabled">Link</a>
@@ -61,8 +60,7 @@
                 </tr>
                 </tbody>
             </table>
-        </div>
-
+         </div>
         <div class="pvotes-pagination" dir-pagination-controls
              max-size="10"
              direction-links="true"

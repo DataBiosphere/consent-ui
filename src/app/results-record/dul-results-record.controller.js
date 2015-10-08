@@ -5,9 +5,14 @@
         .controller('DulResultsRecord', DulResultsRecord);
 
 
-    function DulResultsRecord($scope,cmTranslateService, electionReview, apiUrl) {
+    function DulResultsRecord($scope, $state, cmTranslateService, electionReview, apiUrl) {
 
 
+
+ if( typeof electionReview == 'undefined'){
+            $state.go('reviewed_cases')
+            return;
+        }
         $scope.chartData = {
             'dulTotal': [
                 ['Results', 'Votes'],
@@ -69,9 +74,10 @@
         $scope.dul = electionReview.consent.dataUseLetter;
         $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
         $scope.dulName = electionReview.consent.dulName;
-             cmTranslateService.translate("sampleset",electionReview.consent.useRestriction).then(function(data) {
-                $scope.structuredDataUseLetter = data;
-                  });
+        $scope.structuredDataUseLetter = "Loading...";
+        cmTranslateService.translate("sampleset",electionReview.consent.useRestriction).then(function(data) {
+            $scope.structuredDataUseLetter = data;
+        });
 
         $scope.finalRationale = electionReview.election.finalRationale;
         $scope.status = electionReview.election.status;

@@ -4,7 +4,13 @@
     angular.module('cmReviewResults')
         .controller('AccessReviewResults', ReviewResults);
 
-    function ReviewResults($scope, $modal, $state, cmElectionService, electionReview ,dar,apiUrl){
+    function ReviewResults($scope,$rootScope ,$modal, $state, cmElectionService,cmLoginUserService ,electionReview ,dar,apiUrl){
+
+
+        if( typeof electionReview == 'undefined'){
+                    cmLoginUserService.redirect($rootScope.currentUser)
+                    return;
+        }
 
         $scope.logVote = logVote;
         $scope.election = electionReview.election;

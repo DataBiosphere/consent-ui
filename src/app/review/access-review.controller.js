@@ -4,8 +4,16 @@
     angular.module('cmReview')
         .controller('DarReview', DarReview);
 
-    function DarReview($scope, $modal, $state, $rootScope, USER_ROLES, vote, dar, election, consent, cmVoteService, apiUrl, cmAuthenticateService)
+    function DarReview($scope, $modal, $state, $rootScope, USER_ROLES, vote, dar, election, consent, cmVoteService, apiUrl, cmAuthenticateService , cmLoginUserService)
     {
+          if( typeof vote == 'undefined' ||
+                typeof consent == 'undefined'||
+                typeof election == 'undefined'||
+                typeof dar == 'undefined'){
+                    cmLoginUserService.redirect($rootScope.currentUser)
+                 return;
+           }
+
         $scope.downloadUrl = apiUrl + 'consent/' + consent.consentId + '/dul';
         $scope.consent = consent;
         $scope.dar = dar;
