@@ -6,7 +6,7 @@
 
     /* ngInject */
 
-    function cmDataAccessRequest(dataAccessRequestResource, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields) {
+    function cmDataAccessRequest(dataAccessRequestResource, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields, dataAccessRequestManageResource) {
 
         function findDarConsent(id){
             return darConsent.get({id: id}).$promise;
@@ -29,6 +29,14 @@
             return typeAheadOntologiesResource.get({partial:partialReq}).$promise;
         }
 
+        function getDataAccessManage(vm){
+            dataAccessRequestManageResource.List().$promise.then(
+                function (data) {
+                    vm.dars = data;
+                });
+
+        }
+
         return {
 
             getDarConsent: function(id){
@@ -48,6 +56,10 @@
 
             getAutoCompleteOT: function(partialReq) {
                 return getAutoCompleteOT(partialReq);
+            },
+
+            getDataAccessManage: function(vm){
+                return getDataAccessManage(vm);
             }
         }
 

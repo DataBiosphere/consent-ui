@@ -40,7 +40,7 @@
             postObject.finalVote = election.finalVote;
             postObject.status = election.status;
             postObject.finalRationale = election.finalRationale;
-            return ElectionUpdateResource.update({consentId: election.referenceId, electionId: election.electionId}, postObject);
+            return ElectionUpdateResource.update({electionId: election.electionId}, postObject);
         }
 
         /**
@@ -59,6 +59,17 @@
          */
         function findElectionByDarId(id) {
             return DarElectionResource.get({requestId: id}).$promise;
+        }
+
+        /**
+         * Create election for the specified data access request
+         * @param consentId
+         */
+        function createDARElection(requestId) {
+            var postElection = new Object();
+            postElection.status = 'Open';
+            postElection.finalAccessVote = false;
+            return DarElectionResource.post({requestId: requestId}, postElection);
         }
 
         function openElections(){
@@ -123,6 +134,9 @@
             },
             findReviewedElections: function(electionId){
                 return findElectionReviewByElectionId(electionId);
+            },
+            createDARElection: function(requestId){
+                return createDARElection(requestId);
             }
         }
     }

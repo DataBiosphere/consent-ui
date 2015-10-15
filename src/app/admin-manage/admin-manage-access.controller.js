@@ -5,67 +5,98 @@
         .controller('AdminManageAccess', AdminManageAccess);
 
     /* ngInject */
-    function AdminManageAccess($modal, cmConsentService, $scope, $http) {
-
-
-        $scope.dars = []; //declare an empty array
-        $http.get("json/cm_admin_manage.json").success(function(response){
-            $scope.dars = response;  //ajax request to fetch data into $scope.data
-        });
+    function AdminManageAccess($modal, cmRPService, $scope, cmElectionService) {
 
         var vm = this;
-
         vm.openCreate = openCreate;
         vm.openCancel = openCancel;
         vm.openRUS = openRUS;
 
-
         init();
 
-        function init() {
-            cmConsentService.findConsentManage(vm);
-        }
 
-        function openCreate () {
-
-            var modalInstance = $modal.open({
-                animation: false,
-                templateUrl: 'app/modals/create-election-modal/create-access-modal.html',
-                controller: 'ModalAccessCreate',
-                controllerAs: 'ModalAccessCreate'
-            });
-
-            modalInstance.result.then(function (selectedItem) {//selectedItem - params to apply when the fc was successful
-                //what to do if it was accepted
-            }, function () {
-                //what to do if the modal was canceled
-            });
-        }
-
-        function openCancel () {
+        function openCancel(dar) {
 
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/cancel-modal.html',
                 controller: 'Modal',
-                controllerAs: 'Modal'
+                controllerAs: 'Modal',
+                resolve: {
+                    dar: function () {
+                        vm.dar = dar;
+                    }
+                }
             });
 
-            modalInstance.result.then(function (selectedItem) {//selectedItem - params to apply when the fc was successful
-                //what to do if it was accepted
-            }, function () {
-                //what to do if the modal was canceled
+            modalInstance.result.then(function () {
+                var electionToUpdate = new Object();
+                electionToUpdate.status = 'Canceled';
+                electionToUpdate.referenceId = vm.dar.dataRequestId;
+                electionToUpdate.electionId = vm.dar.electionId;
+                cmElectionService.updateElection(electionToUpdate).$promise.then(function () {
+                    init();
+                });
+            });
+        }
+
+        function init() {
+            cmRPService.getDataAccessManage(vm);
+        }
+
+
+        function openCreate(dataRequestId) {
+            $scope.dataRequestId = dataRequestId;
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/create-election-modal/create-access-modal.html',
+                controller: 'ModalAccessCreate',
+                controllerAs: 'ModalAccessCreate',
+                scope: $scope
+
+            });
+
+            modalInstance.result.then(function () {
+                init();
             });
         }
 
 
-        function openRUS() {
 
+        function openCancel(dar) {
+
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/cancel-modal.html',
+                controller: 'Modal',
+                controllerAs: 'Modal',
+                resolve: {
+                    dar: function () {
+                        vm.dar = dar;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function () {
+                var electionToUpdate = new Object();
+                electionToUpdate.status = 'Canceled';
+                electionToUpdate.referenceId = vm.dar.dataRequestId;
+                electionToUpdate.electionId = vm.dar.electionId;
+                cmElectionService.updateElection(electionToUpdate).$promise.then(function () {
+                    init();
+                });
+            });
+        }
+
+
+        function openRUS(rus) {
+            $scope.rus = rus;
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/extra-info-modal.html',
                 controller: 'Modal',
-                controllerAs: 'Modal'
+                controllerAs: 'Modal',
+                scope: $scope
             });
 
             modalInstance.result.then(function (selectedItem) {//selectedItem - params to apply when the fc was successful
