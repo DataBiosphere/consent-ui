@@ -23,6 +23,7 @@ COPY gulpfile.js /app/
 COPY karma.conf.js /app/
 COPY package.json /app/
 COPY protractor.conf.js /app/
+COPY swagger /app/swagger
 
 # Some dependencies require node v0.12.7
 RUN npm install -g npm
