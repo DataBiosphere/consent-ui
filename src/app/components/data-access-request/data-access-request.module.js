@@ -9,6 +9,13 @@
                 { post: {method: 'POST'},  headers: { 'Content-Type': "application/json" }}
             )})
 
+        .factory('dataAccessRequestManageResource', function($resource, apiUrl){
+            return $resource(apiUrl+"dar/manage", {},
+                {
+                    List: {method:'GET',isArray:true}
+                });
+        })
+
         .factory('typeAheadDatasetsResource', function($resource, apiUrl) {
             return $resource(apiUrl+"dataset/autocomplete/:partial", { },
                 {get: {method: 'GET', isArray: true, params: {partial: '@partial'}}}

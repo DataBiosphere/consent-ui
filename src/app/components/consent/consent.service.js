@@ -31,7 +31,7 @@
         }
 
         function postConsent(consent){
-             consent.requiresManualReview=true;
+             consent.requiresManualReview=false;
              consent.useRestriction= new Object();
              consent.useRestriction.type = "nothing"
              return CreateConsentResource.post({},consent);

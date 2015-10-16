@@ -24,26 +24,32 @@
             </div>
             <div class="admin-box-body">
                 <hr class="pvotes-main-separator">
-                <div dir-paginate="dar in dars | filter: searchAccess | itemsPerPage:10">
+                <div dir-paginate="dar in AdminManageAccess.dars | filter: searchAccess | itemsPerPage:10">
                     <div class="row pvotes-main-list">
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{dar.darId}}</div>
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id">{{dar.title}}</div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{dar.date}}</div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{dar.dataRequestId}}</div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id">{{dar.projectTitle}}</div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{dar.createDate | date:'yyyy-MM-dd HH:mm'}}</div>
                         <a href="#" class="admin-manage-buttons col-lg-1 col-md-1 col-sm-1 col-xs-1 no-padding">
-                            <div class="{{dar.info}} hover-color" ng-click="AdminManageAccess.openRUS()">
+                            <div class="enabled hover-color" ng-click="AdminManageAccess.openRUS(dar.rus)">
                                 <span>RUS</span>
                             </div>
                         </a>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list bold">
-                            <span ng-if="dar.status == 'un-reviewed'">Un-reviewed</span>
-                            <span ng-if="dar.status == 'open'">Open</span>
-                            <span ng-if="dar.status == 'canceled'">Canceled</span>
-                            <span ng-if="dar.status == 'reviewed'">Reviewed</span>
+                            <span ng-if="dar.electionStatus == 'un-reviewed'">Un-reviewed</span>
+                            <span ng-if="dar.electionStatus == 'Open'">Open</span>
+                            <span ng-if="dar.electionStatus == 'Canceled'">Canceled</span>
+                            <span ng-if="dar.electionStatus == 'Closed'">Reviewed</span>
                         </div>
-                        <a href="#" class="admin-manage-buttons col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                            <div ng-if="dar.actions == 'create'" class="create hover-color" ng-click="AdminManageAccess.openCreate()">Create</div>
-                            <div ng-if="dar.actions == 'cancel'" class="cancel hover-color" ng-click="AdminManageAccess.openCancel()">Cancel</div>
-                        </a>
+                        <div>
+                            <a class="admin-manage-buttons col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                <div ng-if="dar.electionStatus != 'Open'" class="create hover-color" ng-click="AdminManageAccess.openCreate(dar.dataRequestId)">
+                                    <span>Create</span>
+                                </div>
+                                <div ng-if="dar.electionStatus == 'Open'" class="cancel hover-color" ng-click="AdminManageAccess.openCancel(dar)">
+                                    <span>Cancel</span>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                     <hr class="pvotes-separator">
                 </div>

@@ -9,8 +9,9 @@
     function Modal($modalInstance, $scope,cmRPService) {
 
         var vm = this;
+        vm.disableButton = false
         vm.ok = function () {
-
+            vm.disableButton = true;
              $scope.showValidationMessages = false;
                             cmRPService.postDataAccessRequest($scope.formData).$promise.then(
                                           function () {

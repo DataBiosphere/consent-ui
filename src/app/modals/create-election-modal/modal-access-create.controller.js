@@ -5,12 +5,12 @@
         .controller('ModalAccessCreate', ModalAccessCreate);
 
     /* ngInject */
-    function ModalAccessCreate($modalInstance, $scope, $state, cmElectionService) {
+    function ModalAccessCreate($modalInstance, $scope,  cmElectionService) {
 
         var vm = this;
         $scope.disableButton = false;
         vm.ok = function (value) {
-            cmElectionService.createElection(value).$promise.then(
+            cmElectionService.createDARElection(value).$promise.then(
                 function (value) {
                     $modalInstance.close();
                 }, function (value) {

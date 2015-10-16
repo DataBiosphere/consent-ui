@@ -8,8 +8,8 @@
                 post: {method: 'POST', params: {consentId: '@consentId'}}});
         })
         .factory('ElectionUpdateResource', function($resource, apiUrl){
-            return $resource(apiUrl+"consent/:consentId/election/:electionId", {}, {
-                update:{method: 'PUT', params: {consentId: '@consentId', electionId: '@electionId'}}});
+            return $resource(apiUrl+"election/:electionId", {}, {
+                update:{method: 'PUT', params: {electionId: '@electionId'}}});
         })
 
         .factory('LastElectionReview', function($resource, apiUrl){
@@ -51,7 +51,7 @@
         })
         .factory('DarElectionResource', function($resource, apiUrl){
             return $resource(apiUrl+"dataRequest/:requestId/election", {}, {
-                get:{method: 'GET', params: {requestId: '@requestId'}}});
-
+                get:{method: 'GET', params: {requestId: '@requestId'}},
+                post: {method: 'POST', params: {requestId: '@requestId'}}});
         });
 })();
