@@ -8,7 +8,7 @@
         </div>
         <div class="modal-footer admin-modal-footer">
             <button type="button" class="btn dismiss-background" ng-click='DARModal.cancel()'>No</button>
-            <button type="button" class="{{DARModal.showButton}} btn rp-background" ng-click='DARModal.ok()'>Yes</button>
+            <button ng-disabled="DARModal.disableButton" type="button" class=" btn rp-background" ng-click='DARModal.ok()'>Yes</button>
         </div>
     </div>
 </div>
