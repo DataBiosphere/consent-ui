@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="jumbotron box-vote-singleresults">
-        <div class="row">
+        <div class="row manage-wrapper">
             <div class="pvotes-box-head">
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle dul-color">Consent id</div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-box-subtitle dul-color">Consent name</div>
@@ -59,6 +59,12 @@
                                     <span>Cancel</span>
                                 </div>
                             </a>
+                        </div>
+                        <div ng-repeat="election in AdminManage.electionsList.dul" class="remove-dul-col">
+                            <a href="#">
+                                <span class="cm-icon-button glyphicon glyphicon-trash caret-margin" aria-hidden="true"></span> <!--disabled class should be added here when status is either: open, canceled and reviewed-->
+                            </a>
+                            <hr class="pvotes-separator-longer">
                         </div>
                     </div>
                     <hr class="pvotes-separator">

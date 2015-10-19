@@ -22,7 +22,7 @@
             <div class="row">
                 <div class="pvotes-box-head">
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-box-subtitle dul-color">Consent id</div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-box-subtitle dul-color">Final Result Date</div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-box-subtitle dul-color">Result Date</div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 center-text pvotes-box-subtitle dul-color">Final Result</div>
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 center-text pvotes-box-subtitle dul-color">Record</div>
                     <hr class="pvotes-main-separator">
@@ -58,7 +58,7 @@
     <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
         <div class="row">
             <h2 class="col-lg-8 col-md-8 col-sm-8 col-xs-12 pvotes-box-title access-color">
-                <img src="assets/images/icon_access.png" alt="Access icon" class="pvotes-icons">Data Access Request Reviewed Cases
+                <img src="assets/images/icon_access.png" alt="Access icon" class="pvotes-icons">Data Access Reviewed Cases
                 <div class="pvotes-box-title-description">List of Data Access Request Reviewed Cases and their results</div>
             </h2>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 search-reviewed">
@@ -71,9 +71,10 @@
         <div class="jumbotron box-vote-singleresults">
             <div class="row">
                 <div class="pvotes-box-head">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-box-subtitle access-color">Data Request Id</div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-box-subtitle access-color">Final Result Date</div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 center-text pvotes-box-subtitle access-color">Final Result</div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle access-color">Data Request Id</div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle access-color">Result Date</div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 center-text pvotes-box-subtitle access-color"> Result 1.Data Access</div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 center-text pvotes-box-subtitle access-color"> Result 2.Research Purpose</div>
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 center-text pvotes-box-subtitle access-color">Record
                     </div>
                     <hr class="pvotes-main-separator">
@@ -82,11 +83,15 @@
                     <div dir-paginate="election in ReviewedCases.electionsList.access | filter: searchAccessCases | itemsPerPage:5" pagination-id="accessCases">
                         <hr class="pvotes-separator">
                         <div class="row pvotes-main-list admin-users-list">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">{{election.referenceId}}</div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id">{{election.finalVoteDate}}</div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{election.referenceId}}</div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{election.finalVoteDate}}</div>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id center-text bold">
                                 <span ng-if="election.finalVote == true" class="access-color">YES</span>
                                 <span ng-if="election.finalVote == false">NO</span>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id center-text bold">
+                                <span class="access-color">YES</span>
+                                <!--<span>NO</span>-->
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 btn-edit">
                                 <a ui-sref="access_results_record({electionId: '{{election.electionId}}'})">Record</a>
@@ -101,59 +106,6 @@
                      boundary-links="true"
                      class="pvotes-pagination"
                      pagination-id="accessCases">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-        <div class="row">
-            <h2 class="col-lg-8 col-md-8 col-sm-8 col-xs-12 pvotes-box-title rp-color">
-                <img src="assets/images/icon_rp.png" alt="Research Purpose icon" class="pvotes-icons">Research Purpose Review <br>
-                <div class="pvotes-box-title-description">List of Research Purpose Reviewed Cases and their results</div>
-            </h2>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 search-reviewed">
-                <div class="search-text">
-                    <i class="glyphicon glyphicon-search rp-color"></i>
-                    <input type="search" class="form-control" placeholder="Enter search term..." ng-model="searchRPCases"/>
-                </div>
-            </div>
-        </div>
-        <div class="jumbotron box-vote-singleresults">
-            <div class="row">
-                <div class="pvotes-box-head">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-box-subtitle rp-color">Data Request Id</div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-box-subtitle rp-color">Final Result Date</div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 center-text pvotes-box-subtitle rp-color">Final Result</div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 center-text pvotes-box-subtitle rp-color">Record
-                    </div>
-                    <hr class="pvotes-main-separator">
-                </div>
-                <div class="pvotes-box-body">
-                    <div dir-paginate="rp in rps.reviewed | filter: searchRPCases | itemsPerPage:5" pagination-id="RPCases">
-                        <hr class="pvotes-separator">
-                        <div class="row pvotes-main-list admin-users-list">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">{{rp.rpId}}</div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id">{{rp.date}}</div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id center-text bold">
-                                <span ng-if="rp.result == 'yes'" class="rp-color">YES</span>
-                                <span ng-if="rp.result == 'no'">NO</span>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 btn-edit">
-                                <a href="#/rp_results_record">Record</a>
-
-                            </div>
-                        </div>
-                    </div>
-                    <hr class="pvotes-separator">
-                </div>
-                <div dir-pagination-controls
-                     max-size="5"
-                     direction-links="true"
-                     boundary-links="true"
-                     class="pvotes-pagination"
-                     pagination-id="RPCases">
-
                 </div>
             </div>
         </div>

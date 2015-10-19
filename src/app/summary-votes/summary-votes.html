@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="jumbotron box-vote-singleresults">
-                    <h4 class="cm-results-subtitle">Amount of all cases: <span class="dul-color">{{SummaryVotes.chartData.dulTotal[1][1] + SummaryVotes.chartData.dulTotal[2][1]}}</span></h4>
+                    <h4 class="cm-results-subtitle">Total amount of cases: <span class="dul-color">{{SummaryVotes.chartData.dulTotal[1][1] + SummaryVotes.chartData.dulTotal[2][1]}}</span></h4>
                     <div class="row">
                         <hr class="box-separator-white separator-margin">
                         <div cm-chart cm-chart-data="SummaryVotes.chartData.dulTotal"
@@ -35,19 +35,29 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
-            <h2 class="col-lg-9 col-md-9 col-sm-8 col-xs-12 pvotes-box-title access-color">
-                <img src="assets/images/icon_access.png" alt="Access icon" class="pvotes-icons">Data Access Request Statistics<br>
+            <h2 class="pvotes-box-title access-color">
+                <img src="assets/images/icon_access.png" alt="Access icon" class="pvotes-icons">Data Access Statistics<br>
                 <div class="pvotes-box-title-description">Summary of votes on whether the researcher should be allowed to access a research study</div>
             </h2>
-            <a href="#" name="Download" class="col-lg-3 col-md-3 col-sm-4 col-xs-12 download-button access-background"><span>Download stats</span><span class="cm-icon-button glyphicon glyphicon-download caret-margin" aria-hidden="true"></span></a>
         </div>
+        <hr class="section-separator">
+        <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-8 col-xs-6">
+                <h3 class="stats-box-title no-margin">
+                    <div class="cm-inside-box-title access-color">1. Should data access be granted to this applicant?</div>
+                </h3>
+            </div>
+            <a href="#" name="Download" class="col-lg-3 col-md-3 col-sm-4 col-xs-6 download-button download-box-button access-background"><span>Download stats</span><span class="cm-icon-button glyphicon glyphicon-download caret-margin" aria-hidden="true"></span></a>
+        </div>
+
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="jumbotron box-vote-singleresults">
-                    <h4 class="cm-results-subtitle">Total cases: <span class="access-color">{{SummaryVotes.chartData.accessTotal[1][1] + SummaryVotes.chartData.accessTotal[2][1]}}</span></h4>
-                    <hr class="box-separator-white">
+                    <h4 class="cm-results-subtitle">Total amount of cases: <span class="access-color">{{SummaryVotes.chartData.accessTotal[1][1] + SummaryVotes.chartData.accessTotal[2][1]}}</span></h4>
                     <div class="row">
+                        <hr class="box-separator-white separator-margin">
                         <div cm-chart cm-chart-data="SummaryVotes.chartData.accessTotal"
                              cm-chart-options="SummaryVotes.chartOptions.accessTotal" class="result_chart"></div>
                     </div>
@@ -55,29 +65,31 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="jumbotron box-vote-singleresults">
-                    <h4 class="cm-results-subtitle">Reviewed cases: <span class="access-color">{{SummaryVotes.chartData.accessReviewed[1][1] + SummaryVotes.chartData.accessReviewed[2][1]}}</span></h4>
-                    <hr class="box-separator-white">
+                    <h4 class="cm-results-subtitle">Amount of Reviewed cases: <span class="access-color">{{SummaryVotes.chartData.accessReviewed[1][1] + SummaryVotes.chartData.accessReviewed[2][1]}}</span></h4>
                     <div class="row">
+                        <hr class="box-separator-white separator-margin">
                         <div cm-chart cm-chart-data="SummaryVotes.chartData.accessReviewed"
                              cm-chart-options="SummaryVotes.chartOptions.accessReviewed" class="result_chart"></div>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="row">
-            <h2 class="col-lg-9 col-md-9 col-sm-8 col-xs-12 pvotes-box-title rp-color">
-                <img src="assets/images/icon_rp.png" alt="Research Purpose icon" class="pvotes-icons">Research Purpose Review <br>
-                <div class="pvotes-box-title-description">Summary of votes on whether the research purpose was accurately converted into a structured format</div>
-            </h2>
-            <a download="content.txt" ng-href="{{SummaryVotes.downloadUrl}}" name="Download" class="col-lg-3 col-md-3 col-sm-4 col-xs-12 download-button rp-background"><span>Download stats</span><span class="cm-icon-button glyphicon glyphicon-download caret-margin" aria-hidden="true"></span></a>
+            <div class="col-lg-9 col-md-9 col-sm-8 col-xs-6">
+                <h3 class="stats-box-title no-margin">
+                    <div class="cm-inside-box-title access-color">2. Was the research purpose accurately converted to a structured format?</div>
+                </h3>
+            </div>
+            <a href="#" name="Download" class="col-lg-3 col-md-3 col-sm-4 col-xs-6 download-button download-box-button access-background"><span>Download stats</span><span class="cm-icon-button glyphicon glyphicon-download caret-margin" aria-hidden="true"></span></a>
         </div>
+
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="jumbotron box-vote-singleresults">
-                    <h4 class="cm-results-subtitle">Total cases: <span class="rp-color">7</span></h4>
-                    <hr class="box-separator-white">
-
+                    <h4 class="cm-results-subtitle">Total amount of cases: <span class="access-color">7</span></h4>
                     <div class="row">
+                        <hr class="box-separator-white separator-margin">
                         <div cm-chart cm-chart-data="SummaryVotes.chartData.RPTotal"
                              cm-chart-options="SummaryVotes.chartOptions.RPTotal" class="result_chart"></div>
                     </div>
@@ -85,9 +97,9 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="jumbotron box-vote-singleresults">
-                    <h4 class="cm-results-subtitle">Reviewed cases: <span class="rp-color">2</span></h4>
-                    <hr class="box-separator-white">
+                    <h4 class="cm-results-subtitle">Amount of Reviewed cases: <span class="access-color">2</span></h4>
                     <div class="row">
+                        <hr class="box-separator-white separator-margin">
                         <div cm-chart cm-chart-data="SummaryVotes.chartData.RPReviewed"
                              cm-chart-options="SummaryVotes.chartOptions.RPReviewed" class="result_chart"></div>
                     </div>

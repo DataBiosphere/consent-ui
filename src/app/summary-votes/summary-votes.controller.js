@@ -63,7 +63,7 @@
                 height: 138,
                 slices: {
                     0: { color: '#603B9B' },
-                    1: { color: '#777777' }
+                    1: { color: '#AC9EC6' }
                 },
                 legend: {
                     position: 'right',
@@ -102,7 +102,7 @@
                 height: 138,
                 slices: {
                     0: { color: '#603B9B' },
-                    1: { color: '#777777' }
+                    1: { color: '#AC9EC6' }
                 },
                 legend: {
                     position: 'right',
@@ -141,7 +141,7 @@
                 height: 138,
                 slices: {
                     0: { color: '#C16B0C' },
-                    1: { color: '#777777' }
+                    1: { color: '#D1B6A1' }
                 },
                 legend: {
                     position: 'right',
@@ -180,7 +180,7 @@
                 height: 138,
                 slices: {
                     0: { color: '#C16B0C' },
-                    1: { color: '#777777' }
+                    1: { color: '#D1B6A1' }
                 },
                 legend: {
                     position: 'right',
@@ -218,8 +218,8 @@
                 },
                 height: 138,
                 slices: {
-                    0: { color: '#8E307A' },
-                    1: { color: '#777777' }
+                    0: { color: '#603B9B' },
+                    1: { color: '#AC9EC6' }
                 },
                 legend: {
                     position: 'right',
@@ -257,8 +257,8 @@
                 },
                 height: 138,
                 slices: {
-                    0: { color: '#8E307A' },
-                    1: { color: '#777777' }
+                    0: { color: '#603B9B' },
+                    1: { color: '#AC9EC6' }
                 },
                 legend: {
                     position: 'right',

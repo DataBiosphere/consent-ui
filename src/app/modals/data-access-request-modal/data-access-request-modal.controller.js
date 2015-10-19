@@ -6,7 +6,7 @@
 
 
     /* ngInject */
-    function Modal($modalInstance, $scope,cmRPService) {
+    function Modal($modalInstance, $scope, cmRPService) {
 
         var vm = this;
         vm.disableButton = false

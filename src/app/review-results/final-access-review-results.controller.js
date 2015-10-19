@@ -65,7 +65,7 @@
                 height: 138,
                 slices: {
                     0: {color: '#603B9B'},
-                    1: {color: '#777777'},
+                    1: {color: '#AC9EC6'},
                     2: {color: '#c9c9c9'}
                 },
                 legend: {
@@ -105,7 +105,7 @@
                 height: 138,
                 slices: {
                     0: {color: '#C16B0C'},
-                    1: {color: '#777777'},
+                    1: {color: '#D1B6A1'},
                     2: {color: '#c9c9c9'}
                 },
                 legend: {
@@ -139,13 +139,13 @@
                     top: 15,
                     right: 0,
                     bottom: 10,
-                    width: '100%',
+                    width: 'auto',
                     height: '85%'
                 },
                 height: 138,
                 slices: {
-                    0: {color: '#8E307A'},
-                    1: {color: '#777777'},
+                    0: {color: '#603B9B'},
+                    1: {color: '#AC9EC6'},
                     2: {color: '#c9c9c9'}
                 },
                 legend: {

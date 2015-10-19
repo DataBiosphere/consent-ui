@@ -21,10 +21,76 @@
         $scope.isFormDisabled = (election.status == 'Closed');
         $scope.rationale = vote.rationale;
         $scope.isNew = null;
-        $scope.electionType = null;
+        $scope.electionType = 'access';
+
+
+        /*ALERTS*/
+        $scope.alertsDAR = [];
+        $scope.alertsRP = [];
+
+
+        $scope.reminderDARAlert = function (index) {
+            $scope.alertsDAR.splice(index, 1);
+            $scope.alertsDAR.push({
+                title: 'Remember to log a vote on:',
+                msg: ' 2. Was the research purpose accurately converted to a structured format?'
+            });
+        };
+
+        $scope.reminderRPAlert = function (index) {
+            $scope.alertsRP.splice(index, 1);
+            $scope.alertsRP.push({
+                title: 'Remember to log a vote on:',
+                msg: ' 1. Should data access be granted to this applicant?'
+            });
+        };
+
+        $scope.closeAlert = function (index) {
+            $scope.alerts.splice(index, 1);
+        };
+
+
 
         $scope.positiveVote = function(){
+            $scope.voteStatus = true;
             $scope.rationale = null;
+        }
+
+        $scope.negativeVote = function(){
+            $scope.voteStatus = false;
+        }
+
+
+        $scope.logDARVote = function() {
+            $scope.isNew = true;
+
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/confirmation-modal.html',
+                controller: 'Modal',
+                controllerAs: 'Modal',
+                scope: $scope
+            });
+
+            modalInstance.result.then(function () {
+                $scope.reminderDARAlert();
+            });
+        }
+
+        $scope.logRPVote = function() {
+            $scope.isNew = true;
+
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/confirmation-modal.html',
+                controller: 'Modal',
+                controllerAs: 'Modal',
+                scope: $scope
+            });
+
+            modalInstance.result.then(function () {
+                $scope.reminderRPAlert();
+            });
         }
 
         $scope.logVote = function() {
@@ -65,5 +131,6 @@
                 alert("Error: Your vote hasn't been changed.");
             }
         }
+
     }
 })();
