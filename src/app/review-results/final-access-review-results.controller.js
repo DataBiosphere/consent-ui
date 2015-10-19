@@ -4,8 +4,12 @@
     angular.module('cmReviewResults')
         .controller('FinalAccessReviewResults', FinalAccessReviewResults);
 
-    function FinalAccessReviewResults($scope,$modal,$state,cmElectionService,cmRPService,cmVoteService,apiUrl){
+    function FinalAccessReviewResults($scope, $rootScope ,$modal,$state,cmElectionService,cmRPService,cmVoteService,cmLoginUserService,apiUrl){
 
+        if( $scope.electionId == null || $scope.referenceId == null){
+                            cmLoginUserService.redirect($rootScope.currentUser)
+                            return;
+                }
 
         $scope.logVote = logVote;
         init();

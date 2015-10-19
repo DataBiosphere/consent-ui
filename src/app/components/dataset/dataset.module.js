@@ -18,9 +18,16 @@
 
         .factory('DataSetResource', function($resource, apiUrl){
                    return $resource(apiUrl+"dataset", {}, {
-                       List: {method:'GET',isArray:true}
+                       List: {method:'GET',params: {dacUserId: 'dacUserId'},isArray:true}
                    });
         })
+
+
+        .factory('DeleteDataSetResource', function($resource, apiUrl){
+                          return $resource(apiUrl+"dataset/:datasetObjectId", {}, {
+                              Delete: {method:'DELETE',params: {datasetObjectId: '@datasetObjectId'}}
+                          });
+               })
 
          .factory('DictionaryResource', function($resource, apiUrl){
                    return $resource(apiUrl+"dataset/dictionary", {}, {
@@ -35,6 +42,7 @@
                                             'Content-Type': "application/json" } }
                            });
                 })
+
 })();
 
 

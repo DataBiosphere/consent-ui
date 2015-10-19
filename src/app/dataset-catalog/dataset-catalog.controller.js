@@ -6,7 +6,7 @@
         .controller('DatasetCatalog', DatasetCatalog);
 
     /* ngInject */
-    function DatasetCatalog($scope ,cmDatasetService) {
+    function DatasetCatalog($scope ,$modal,$rootScope,cmDatasetService,cmTranslateService,cmAuthenticateService, USER_ROLES) {
 
         var vm = this;
         vm.dataSetList = {'catalog': [], 'dictionary': []};
@@ -18,15 +18,24 @@
         function init() {
             $scope.checkMod = {}
             $scope.objectIdList=[];
+
+            $scope.isAdmin = cmAuthenticateService.isAuthorized(USER_ROLES.admin,$rootScope.currentUser.roles);
+
             cmDatasetService.findDictionary().then(
                 function (data) {
                     vm.dataSetList['dictionary'] = data;
-
                 });
 
-            cmDatasetService.findDataSets().then(
+            cmDatasetService.findDataSets($rootScope.currentUser.dacUserId).then(
                 function (data) {
                     vm.dataSetList['catalog'] = data;
+                    vm.dataSetList.catalog.forEach( function (arrayItem)
+                                 {
+                                   cmTranslateService.translate("sampleset",arrayItem.useRestriction).then(function(data) {
+                                   arrayItem.useRestriction = data;
+                                 });
+                        arrayItem.useRestriction = "Loading...";  // Necessary ?
+                     });
                 });
         }
 
@@ -44,6 +53,34 @@
                 }, function (reason) {
                 }
             )};
-    }
 
+
+         vm.delete = function (datasetId) {
+                cmDatasetService.deleteDataset(datasetId);
+              };
+
+                 vm.openDelete = openDelete;
+                 function openDelete(datasetId)  {
+
+                     var modalInstance = $modal.open({
+                         animation: false,
+                         templateUrl: 'app/modals/delete-dataset-modal.html',
+                         controller: 'Modal',
+                         controllerAs: 'Modal'
+                     });
+
+                     modalInstance.result.then(function () {
+                         cmDatasetService.deleteDataset(datasetId).then(function () {
+                         init();
+                         });
+                     });
+                 }
+
+
+
+
+
+
+
+    }
 })();

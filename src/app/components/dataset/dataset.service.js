@@ -5,7 +5,7 @@
         .service('cmDatasetService', cmDatasetService);
 
     /* ngInject */
-    function cmDatasetService(PostDsFileResource,DataSetResource,DictionaryResource ,DownloadDatasetResource) {
+    function cmDatasetService(PostDsFileResource,DataSetResource,DictionaryResource ,DownloadDatasetResource, DeleteDataSetResource) {
 
         /**
          * Post the file that contains the datasets.
@@ -13,10 +13,10 @@
          */
         function postDataFile(file, overwrite){
           return PostDsFileResource.post({overwrite: overwrite}, file);
-        }
 
-        function getDataSets(){
-          return DataSetResource.List().$promise;
+        }
+        function getDataSets(dacUserId){
+          return DataSetResource.List({dacUserId: dacUserId}).$promise;
         }
 
         function getDictionary(){
@@ -27,6 +27,9 @@
            return DownloadDatasetResource.download(objectIdList).$promise;
         }
 
+          function deleteDataset(datasetObjectId){
+                   return DeleteDataSetResource.Delete({datasetObjectId: datasetObjectId}).$promise;
+                }
 
         return {
             postDatasetFile: function(file, overwrite){
@@ -36,11 +39,14 @@
               findDictionary: function() {
                 return getDictionary();
             },
-              findDataSets: function() {
-               return getDataSets();
+              findDataSets: function(dacUserId) {
+               return getDataSets(dacUserId);
             },
              downloadDataSets: function(objectIdList) {
                 return download(objectIdList);
+            },
+             deleteDataset: function(datasetId){
+                            return deleteDataset(datasetId);
             }
         };
      }

@@ -48,6 +48,9 @@ html, body {
     overflow: auto;
     padding-bottom: 80px; /* must be same height as the footer */
 }
+p{
+    margin-bottom: 3px;
+}
 
 a, input, button {
     outline: 0 !important;
@@ -77,7 +80,7 @@ small {
 
 .f-left {
     float: left;
-    text-align: left;
+    text-align: left !important;
 }
 
 .f-right {
@@ -341,7 +344,7 @@ small {
 }
 
 .cm-subtitle {
-    padding: 15px 0 0 0 !important;
+    padding: 15px 0 0 0;
 }
 
 .cm-subtitle h3 {
@@ -367,6 +370,18 @@ small {
     padding: 0!important;
     font-size: 22px;
     font-weight: 500;
+}
+
+.cm-title-access span{
+    vertical-align: middle ;
+}
+
+.stats-box-title{
+    padding: 15px 10px 0 10px;
+}
+
+.stats-box-title .cm-inside-box-title{
+    font-size: 20px !important;
 }
 
 .cm-inside-box-title {
@@ -416,7 +431,7 @@ small {
     margin: 5px 0 5px 0;
 }
 
-.pvotes-main-separator, .pvotes-separator {
+.pvotes-main-separator, .pvotes-separator, .pvotes-separator-longer {
     border-color: #d5d5d5;
     margin: 0;
     padding: 0 !important;
@@ -424,6 +439,10 @@ small {
 
 .pvotes-main-separator {
     border-width: 2px !important;
+}
+
+.pvotes-separator-longer {
+    margin-right: -20px !important;
 }
 
 .separator-margin {
@@ -436,7 +455,7 @@ small {
     border: 0 inset rgba(204, 204, 204, 0.5);
     padding: 0;
     box-shadow: 2px 2px 0 #cccccc;
-    margin: 10px 15px 20px 15px;
+    margin: 10px 15px 20px 15px !important;
 }
 
 .cm-boxhead {
@@ -922,7 +941,9 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 }
 
 .pvotes-pagination ul {
-    margin: 10px 0 -5px 0;
+    /*margin: 10px 0 -5px 0;*/
+    margin: 10px 0 5px 0;
+
 }
 
 .pvotes-pagination li a {
@@ -1105,6 +1126,11 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 
 .download-button {
     margin: 35px 15px 0 0;
+}
+
+.download-box-button{
+    margin: 10px 15px 5px 0 !important;
+
 }
 
 .admin-add-button {
@@ -1393,6 +1419,16 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     background-position: -290px -40px !important;
 }
 
+.add-access_white {
+    background-position: -325px 0;
+    margin: -8px 0 0 0;
+}
+
+.add-help_white {
+    background-position: -325px -40px;
+    margin: -8px 0 0 -5px;
+}
+
 .admin-manage-buttons .enabled, .admin-manage-buttons .disabled, .admin-manage-buttons .create, .admin-manage-buttons .cancel {
     text-align: center;
     margin: 4px auto 0 auto !important;
@@ -1416,6 +1452,45 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 .admin-manage-buttons .cancel:hover {
     background: #D13B07 !important;
     color: #ffffff !important;
+}
+
+.manage-wrapper{
+    position: relative;
+    margin-right: 30px !important;
+}
+
+.remove-dul-col{
+    position: absolute;
+    right: 0;
+    margin-right: -12px!important;
+}
+
+.remove-dul-col a{
+    margin: 15px 0 0 0;
+}
+
+.remove-dul-col a .disabled{
+    color: #cccccc !important;
+    cursor: not-allowed !important;
+    line-height: 1;
+    height: auto;
+}
+
+.remove-dul-col a span{
+    text-shadow: 1px 1px 0 #ffffff !important;
+    padding: 12px 0 9px 20px!important;
+    color: #777777 !important;
+}
+
+.remove-dul-col a span.glyphicon-trash {
+    vertical-align: bottom;
+    font-size: 1.15em;
+    top: 0!important;
+    left: 15px;
+}
+
+.remove-dul-col a:hover span{
+    color: #2FA4E7 !important;
 }
 
 /***************************************************Modals*/
@@ -1652,6 +1727,14 @@ input[type="checkbox"][disabled] + label {
 
 /***************************************************Alerts*/
 
+.votes-alerts {
+    margin: 0 10px 0 10px !important;
+}
+
+.votes-alerts .alert {
+    margin-right: 10px;
+}
+
 .admin-create-alerts {
     margin: 5px 10px 0 10px !important;
 }
@@ -1676,8 +1759,21 @@ input[type="checkbox"][disabled] + label {
     padding: 18px 20px 10px 20px !important;
 }
 
+.votes-alerts .alert-title {
+    padding: 10px;
+}
+
 .admin-alerts .alert-title {
     padding: 25px 30px 25px 30px;
+}
+
+.votes-alerts .alert-title h4 {
+    display: block;
+    font-weight: 500;
+    font-size: 17px !important;
+    line-height: 25px;
+    text-align: center;
+    margin: 0!important;
 }
 
 .admin-alerts .alert-title h4,
@@ -1771,8 +1867,14 @@ input[type="checkbox"][disabled] + label {
     border: none;
 }
 
-.alert-danger hr {
+.alert-danger hr,
+.alert-success hr {
     border-color: #cccccc !important;
+}
+
+.alert-success {
+    background-color: rgba(21, 188, 25, 0.1));
+    border: none;
 }
 
 .alert-dismissible .close {
@@ -1998,7 +2100,6 @@ input[type="checkbox"][disabled] + label {
 
 .custom-g-signin2 {
     display: inline-block;
-
     width: auto !important;
     border-radius: 2px;
     white-space: nowrap;
@@ -2036,15 +2137,22 @@ input[type="checkbox"][disabled] + label {
     min-height: 100%;
     box-shadow: 3px 3px 0 #cccccc;
     border-radius: 6px;
-    padding-bottom: 15px;
+    position: relative;
 }
 
 .table-scroll {
     overflow-x: scroll;
-    margin: 0 25px 0 60px !important;
+    margin: 0 25px 5px 60px;
     overflow-y: visible;
 }
 
+.table-scroll-admin{
+    overflow-x: scroll;
+    margin: 0 25px 5px 90px !important;
+    overflow-y: visible;
+}
+
+.table-scroll-admin thead,
 .table-scroll thead{
     padding: 0 10px 0 10px;
 }
@@ -2078,14 +2186,46 @@ td:first-child {
     margin-left: -40px;
 }
 
+.table-scroll-admin td:first-child {
+    position: absolute;
+    margin-left: -70px !important;
+}
+
+.table-scroll-admin td:first-child + .remove-datasets-col{
+    position: absolute;
+    margin-left: -35px;
+    padding: 8px 25px 8px 10px!important;
+}
+
 td:first-child .checkbox {
     margin-top: 0px !important;
+    display: inline;
+}
+
+td:first-child .checkbox label{
+    padding-top: 1px !important;
+}
+
+.remove-datasets-col a span{
+    text-shadow: 1px 1px 0 #ffffff !important;
+    padding-left: 0!important;
+    margin-left: 0!important;
+}
+
+.remove-datasets-col a span.glyphicon-trash {
+    vertical-align: bottom;
+    font-size: 1.15em;
+    top: 0!important;
+}
+
+.remove-datasets-col a:hover span{
+    color: #2FA4E7 !important;
 }
 
 .table-items {
     font-weight: normal !important;
     font-size: 14px !important;
-    padding: 10px 20px 5px 10px !important;
+    padding: 10px 20px 5px 5px !important;
     margin: 0!important;
     color: #777777;
 }
@@ -2109,10 +2249,6 @@ td:first-child .checkbox {
 .table-items .disabled {
     color: #cccccc !important;
     cursor: default !important;
-}
-
-.small-size {
-    min-width: 100px !important;
 }
 
 .cell-size {
@@ -2195,13 +2331,25 @@ td:first-child .checkbox {
 
 .accordion,
 .accordion .panel-heading{
-    background-color: #ffffff !important;
+    background-color: #ffffff;
+}
+
+accordion .panel-group{
+    margin-bottom: 10px !important;
 }
 
 .accordion h3{
     margin: 10px 0 5px 0!important;
     padding: 0 5px;
 }
+
+.accordion-title{
+    font-size: 22px;
+    font-style: italic;
+    padding: 5px 0 5px 0;
+    display: inline;
+}
+
 
 /***************************************************Tags*/
 

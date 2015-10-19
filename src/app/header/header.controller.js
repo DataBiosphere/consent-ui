@@ -20,6 +20,10 @@
 
         function containsOtherThanResearcher(roles, rootRoles){
             var i;
+                        if(roles == null){
+                          return false;
+                        }
+
             for (i = 0; i < roles.length; i++) {
                 if(roles[i].name !== rootRoles.researcher){
                     return true;
@@ -27,7 +31,6 @@
             }
             return false;
         }
-
     }
 
 })();

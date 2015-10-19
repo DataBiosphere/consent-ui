@@ -31,17 +31,17 @@
         }
 
         function postConsent(consent){
-             consent.requiresManualReview=false;
-             consent.useRestriction= new Object();
-             consent.useRestriction.type = "nothing"
+             consent.requiresManualReview=true;
+             var obj = JSON.parse(consent.useRestriction);
+             consent.useRestriction = obj;
              return CreateConsentResource.post({},consent);
 
         }
 
         function updateConsent(consent){
              consent.requiresManualReview=true;
-             consent.useRestriction= new Object();
-             consent.useRestriction.type = "nothing"
+             var obj = JSON.parse(consent.useRestriction);
+             consent.useRestriction = obj;
              return UpdateConsentResource.update({consentId: consent.consentId},consent);
         }
 

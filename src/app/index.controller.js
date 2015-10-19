@@ -21,21 +21,20 @@
     }
 
     /* ngInject */
-    function ApplicationController($rootScope, USER_ROLES) {
+    function ApplicationController($rootScope, USER_ROLES,cmLoginUserService) {
 
-        $rootScope.currentUser = null;
-        $rootScope.userRoles = USER_ROLES;
-        $rootScope.setCurrentUser = function(user) {
+            $rootScope.currentUser = null;
+            $rootScope.userRoles = USER_ROLES;
+            $rootScope.setCurrentUser = function(user) {
             $rootScope.currentUser = user;
+            sessionStorage.setItem('currentUser', JSON.stringify(user));
             var i = user.roles.length;
             while (i--) {
                 user.roles[i].name = user.roles[i].name.toUpperCase();
             }
         };
 
-        $rootScope.logoutUser = function() {
-            $rootScope.currentUser = null;
-        };
+
         $rootScope.loadScript = function(url, type, charset) {
             if (type === undefined) type = 'text/javascript';
             if (url) {
@@ -59,21 +58,22 @@
     }
 
 
-    angular.module('ConsentManagement').run(function($location, $rootScope, $state, cmAuthenticateService) {
+    angular.module('ConsentManagement').run(function($location, $rootScope, $state, cmAuthenticateService,cmLoginUserService) {
         $rootScope.$on('$stateChangeStart', function(event, next, toState, toParams, fromState, fromParams) {
             var authorizedRoles = next.data.authorizedRoles;
 
-            if ($state.current.name === "") {
-                $location.path("/login");
-            } else if ($rootScope.currentUser === null) {
-                event.preventDefault();
-
-            } else if ($state.current.name !== "login") {
-                if (!cmAuthenticateService.isAuthorized(authorizedRoles, $rootScope.currentUser.roles)) {
-                    event.preventDefault();
-                }
-            }
-
-        });
-    })
+              if ($rootScope.currentUser === null) {
+                                    if (sessionStorage.getItem('currentUser') != null && $state.current.name === "") {
+                                                      cmLoginUserService.refreshUser();
+                                        }else if(next.name !== "login"){
+                                                       event.preventDefault();
+                                                       $location.path("/login");
+                                           }
+                                        } else if ($state.current.name !== "login") {
+                                                         if (!cmAuthenticateService.isAuthorized(authorizedRoles, $rootScope.currentUser.roles)) {
+                                                             event.preventDefault();
+                                                         }
+                                        }
+                  });
+                })
 })();

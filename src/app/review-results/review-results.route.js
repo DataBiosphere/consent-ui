@@ -37,8 +37,8 @@
                 name: 'access_review_results',
                 url: '/access_review_results',
                 templateUrl: 'app/review-results/access-review-results.html',
-                controller: 'ReviewResults',
-                controllerAs: 'ReviewResults',
+                controller: 'AccessReviewResults',
+                controllerAs: 'AccessReviewResults',
                 params: {
                     electionId: null,
                     referenceId: null
