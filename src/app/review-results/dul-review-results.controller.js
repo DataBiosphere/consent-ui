@@ -41,7 +41,7 @@
                 height: 138,
                 slices: {
                     0: {color: '#C16B0C'},
-                    1: {color: '#777777'},
+                    1: {color: '#D1B6A1'},
                     2: {color: '#c9c9c9'}
                 },
                 legend: {
