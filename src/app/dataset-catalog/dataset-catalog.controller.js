@@ -34,7 +34,7 @@
                                    cmTranslateService.translate("sampleset",arrayItem.useRestriction).then(function(data) {
                                    arrayItem.useRestriction = data;
                                  });
-                        arrayItem.useRestriction = "Loading...";  // Necessary ?
+                        arrayItem.useRestriction = "Loading...";
                      });
                 });
         }

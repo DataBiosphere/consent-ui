@@ -22,7 +22,7 @@
         })
 
         .factory('DataRequestSummaryCases', function($resource, apiUrl){
-            return $resource(apiUrl+"dataRequest/cases/summary");
+            return $resource(apiUrl+"dataRequest/cases/summary/:type");
         })
 
         .factory('ConsentSummaryFile', function($resource, apiUrl){

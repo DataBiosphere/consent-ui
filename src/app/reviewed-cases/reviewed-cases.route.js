@@ -24,6 +24,7 @@
                     reviewedDRs: function(cmElectionService){
                         return cmElectionService.findReviewedDRs();
                     }
+
                 }
             });
     }

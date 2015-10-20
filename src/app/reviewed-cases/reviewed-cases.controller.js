@@ -15,6 +15,7 @@
         function init() {
             vm.electionsList['dul'] = transformElectionResultData(reviewedConsents);
             vm.electionsList['access'] = transformElectionResultData(reviewedDRs);
+
         }
     }
 

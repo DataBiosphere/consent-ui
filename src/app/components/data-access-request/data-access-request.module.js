@@ -35,4 +35,8 @@
             return $resource(apiUrl+"dar/find/:id", {},
                 { get: {method: 'GET'},  params: {id: '@id', fields: '@fields'}}
             )})
+        .factory('darRestriction', function($resource, apiUrl) {
+            return $resource(apiUrl+"dar/restriction/:id", {},
+                { get: {method: 'GET'},  params: {id: '@id'}}
+            )})
 })();

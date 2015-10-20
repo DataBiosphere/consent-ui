@@ -77,7 +77,7 @@
                     <hr class="box-separator-white separator-margin">
                     <div cm-chart cm-chart-data="SummaryVotes.chartData.RPTotal"
                          cm-chart-options="SummaryVotes.chartOptions.RPTotal" class="result_chart"></div>
-                    <h4 class="cm-results-amount">Amount of cases: <span class="access-color">7</span></h4>
+                    <h4 class="cm-results-amount">Amount of cases: <span class="access-color">{{SummaryVotes.chartData.RPTotal[1][1] + SummaryVotes.chartData.RPTotal[2][1]}}</span></h4>
                 </div>
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 jumbotron box-vote-singleresults">
@@ -86,7 +86,7 @@
                     <hr class="box-separator-white separator-margin">
                     <div cm-chart cm-chart-data="SummaryVotes.chartData.RPReviewed"
                          cm-chart-options="SummaryVotes.chartOptions.RPReviewed" class="result_chart"></div>
-                    <h4 class="cm-results-amount">Amount of cases: <span class="access-color">5</span></h4>
+                    <h4 class="cm-results-amount">Amount of cases: <span class="access-color">{{SummaryVotes.chartData.RPReviewed[1][1] + SummaryVotes.chartData.RPReviewed[2][1]}}</span></h4>
                 </div>
             </div>
         </div>

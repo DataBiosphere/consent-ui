@@ -75,7 +75,9 @@
             postObject.vote = vote.vote;
             postObject.dacUserId = vote.dacUserId;
             postObject.rationale = vote.rationale;
-            if(vote.isFinalAccessVote){postObject.isFinalAccessVote = vote.isFinalAccessVote;}
+            if(vote.type == 'FINAL'){
+                {postObject.type = 'FINAL';}
+            }
             return FinalAccessDarVoteResource.post({requestId: requestId, voteId: vote.voteId}, postObject);
         }
 

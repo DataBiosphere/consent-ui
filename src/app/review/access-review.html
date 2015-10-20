@@ -40,13 +40,13 @@
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
                                     <div class="radio-inline">
 
-                                        <input type="radio" ng-model="voteStatus" ng-click="positiveVote()"
+                                        <input type="radio" ng-model="selection.voteStatus" ng-click="positiveVote()"
                                                class="regular-radio" id="inputVotePositive"
                                                ng-value="true" name="inputVote">
                                         <label for="inputVotePositive"></label>
                                         <label for="inputVotePositive" class="radio-button-text">Yes</label>
 
-                                        <input type="radio" ng-model="voteStatus" ng-click="negativeVote()"
+                                        <input type="radio" ng-model="selection.voteStatus"
                                                ng-value="false" class="regular-radio" id="inputVoteNegative"
                                                name="inputVote">
                                         <label for="inputVoteNegative"></label>
@@ -59,23 +59,21 @@
                                     class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale</label>
 
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
-                                    <input type="text" ng-model="rationale"
-                                           ng-disabled="voteStatus == true"
+                                    <input type="text" ng-model="selection.rationale"
+                                           ng-disabled="selection.voteStatus == true"
                                            name="inputRationale"
                                            class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
                                            placeholder="Describe your rationale here (be as specific as possible).">
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 votes-alerts no-margin no-padding">
-                                <div class="no-margin no-padding">
+                            <div class="row">
+                                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 votes-alerts">
                                     <alert ng-repeat="alert in alertsDAR" type="danger" class="alert-title cancel-color f-left">
                                         <h4>{{alert.title}}<i>{{alert.msg}}</i></h4>
                                     </alert>
                                 </div>
-                            </div>
-                            <div class="form-group form-group-bottom">
-                                <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-3 col-sm-offset-9 col-xs-4 col-xs-offset-8 ">
-                                    <button ng-disabled="voteStatus === null" ng-click="logVote()"
+                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 col-xs-offset-8 f-right no-margin">
+                                    <button ng-disabled="selection.voteStatus === null" ng-click="logVote()"
                                             class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button access-background">
                                         Vote
                                     </button>
@@ -107,7 +105,7 @@
                     <div class="panel-heading cm-boxhead access-color">
                         <h4>Structured Research Purpose</h4>
                     </div>
-                    <div id="srp" class="panel-body cm-boxbody">Automated Structured format of the Research Purpose will be displayed over here. We need to decide the best way to show this information, if it will be displayed in a json format or some sort of string instead. </div>
+                    <div id="srp" class="panel-body cm-boxbody">{{rp}}</div>
                 </div>
             </div>
 
@@ -123,13 +121,13 @@
 
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
                                     <div class="radio-inline">
-                                        <input type="radio" ng-model="voteStatus" ng-click="positiveVote()"
+                                        <input type="radio" ng-model="selection.rpVoteStatus" ng-click="positiveRPVote()"
                                                ng-value="true" class="regular-radio" id="inputRPPositive"
                                                name="inputVote">
                                         <label for="inputRPPositive"></label>
                                         <label for="inputRPPositive" class="radio-button-text">Yes</label>
 
-                                        <input type="radio" ng-model="voteStatus"
+                                        <input type="radio" ng-model="selection.rpVoteStatus"
                                                ng-value="false" class="regular-radio" id="inputRPNegative"
                                                name="inputVote">
                                         <label for="inputRPNegative"></label>
@@ -142,23 +140,21 @@
                                     class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale</label>
 
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
-                                    <input type="text" ng-model="rationale"
-                                           ng-disabled="voteStatus == true"
+                                    <input type="text" ng-model="selection.rpRationale"
+                                           ng-disabled="selection.rpVoteStatus == true"
                                            name="inputRationale"
                                            class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
                                            placeholder="Describe your rationale here (be as specific as possible).">
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 votes-alerts no-margin no-padding">
-                                <div class="no-margin no-padding">
+                            <div class="row">
+                                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 votes-alerts">
                                     <alert ng-repeat="alert in alertsRP" type="danger" class="f-left alert-title cancel-color">
                                         <h4>{{alert.title}}<i>{{alert.msg}}</i></h4>
                                     </alert>
                                 </div>
-                            </div>
-                            <div class="form-group form-group-bottom">
-                                <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-3 col-sm-offset-9 col-xs-4 col-xs-offset-8 ">
-                                    <button ng-disabled="voteStatus === null" ng-click="logRPVote()"
+                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 col-xs-offset-8 f-right no-margin">
+                                    <button ng-disabled="selection.rpVoteStatus === null" ng-click="logRPVote()"
                                             class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button access-background">
                                         Vote
                                     </button>

@@ -4,22 +4,32 @@
     angular.module('cmReview')
         .controller('DarReview', DarReview);
 
-    function DarReview($scope, $modal, $state, $rootScope, USER_ROLES, vote, dar, election, consent, cmVoteService, apiUrl, cmAuthenticateService , cmLoginUserService)
+    function DarReview($scope, $modal, $state, $rootScope, USER_ROLES, vote, rpVote, dar, election, consent, cmVoteService, apiUrl, cmAuthenticateService , cmLoginUserService, cmTranslateService, researchPurpose)
     {
           if( typeof vote == 'undefined' ||
                 typeof consent == 'undefined'||
                 typeof election == 'undefined'||
                 typeof dar == 'undefined'){
-                    cmLoginUserService.redirect($rootScope.currentUser)
+                    cmLoginUserService.redirect($rootScope.currentUser);
                  return;
            }
 
+        if(researchPurpose == null){
+            $scope.rp = "this includes senesitive research objectives that requires manual review";
+        }else{
+            cmTranslateService.translate("sampleset",researchPurpose.restriction).then(function(data) {
+                $scope.rp = data;
+            })
+        }
+        $scope.selection = {};
         $scope.downloadUrl = apiUrl + 'consent/' + consent.consentId + '/dul';
         $scope.consent = consent;
         $scope.dar = dar;
-        $scope.voteStatus = vote.vote;
+        $scope.selection.voteStatus = vote.vote;
+        $scope.selection.rpVoteStatus = rpVote.vote;
         $scope.isFormDisabled = (election.status == 'Closed');
-        $scope.rationale = vote.rationale;
+        $scope.selection.rationale = vote.rationale;
+        $scope.selection.rpRationale = rpVote.rationale;
         $scope.isNew = null;
         $scope.electionType = 'access';
 
@@ -52,60 +62,30 @@
 
 
         $scope.positiveVote = function(){
-            $scope.voteStatus = true;
-            $scope.rationale = null;
-        }
-
-        $scope.negativeVote = function(){
-            $scope.voteStatus = false;
-        }
+            $scope.selection.voteStatus = true;
+            $scope.selection.rationale = null;
+        };
 
 
-        $scope.logDARVote = function() {
-            $scope.isNew = true;
+        $scope.positiveRPVote = function(){
+            $scope.selection.rpVoteStatus = true;
+            $scope.selection.rpRationale = null;
+        };
 
-            var modalInstance = $modal.open({
-                animation: false,
-                templateUrl: 'app/modals/confirmation-modal.html',
-                controller: 'Modal',
-                controllerAs: 'Modal',
-                scope: $scope
-            });
-
-            modalInstance.result.then(function () {
-                $scope.reminderDARAlert();
-            });
-        }
 
         $scope.logRPVote = function() {
-            $scope.isNew = true;
-
-            var modalInstance = $modal.open({
-                animation: false,
-                templateUrl: 'app/modals/confirmation-modal.html',
-                controller: 'Modal',
-                controllerAs: 'Modal',
-                scope: $scope
-            });
-
-            modalInstance.result.then(function () {
-                $scope.reminderRPAlert();
-            });
-        }
-
-        $scope.logVote = function() {
-            if((vote.vote != $scope.voteStatus)||($scope.rationale != vote.rationale)){
-                vote.vote = $scope.voteStatus;
-                vote.rationale = $scope.rationale;
+            if((rpVote.vote != $scope.selection.rpVoteStatus)||($scope.selection.rpRationale != vote.rpRationale)){
+                rpVote.vote = $scope.selection.rpVoteStatus;
+                rpVote.rationale = $scope.selection.rpRationale;
                 var result;
-                if(vote.createDate == null){
+                if(rpVote.createDate == null){
                     $scope.isNew = true;
-                    result = cmVoteService.postDarVote(election.referenceId, vote).$promise
+                    result = cmVoteService.postDarVote(election.referenceId, rpVote).$promise
                 } else {
                     $scope.isNew = false;
-                    result = cmVoteService.updateDarVote(election.referenceId, vote).$promise
+                    result = cmVoteService.updateDarVote(election.referenceId, rpVote).$promise
                 }
-                $scope.electionType = 'access';
+                $scope.logRpVote = true;
                 result.then(
                     //success
                     function(){
@@ -117,12 +97,61 @@
                             scope: $scope
                         });
                         modalInstance.result.then(function () {
+                        if($scope.logAccessVote || vote.vote != null){
                             cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles)
                             if(cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles)){
                                 $state.go('chair_console');
                             }else {
                                 $state.go('user_console');
                             }
+                        }else{
+                            $scope.reminderRPAlert();
+                        }
+                      });
+                    },
+                    //error
+                    function(){alert("Error updating vote.")});
+            } else  {
+                alert("Error: Your vote hasn't been changed.");
+            }
+        };
+
+
+        $scope.logVote = function() {
+            if((vote.vote != $scope.selection.voteStatus)||($scope.selection.rationale != vote.rationale)){
+                vote.vote = $scope.selection.voteStatus;
+                vote.rationale = $scope.selection.rationale;
+                var result;
+                if(vote.createDate == null){
+                    $scope.isNew = true;
+                    result = cmVoteService.postDarVote(election.referenceId, vote).$promise
+                } else {
+                    $scope.isNew = false;
+                    result = cmVoteService.updateDarVote(election.referenceId, vote).$promise
+                }
+                $scope.logAccessVote = true;
+                $scope.electionType = 'access';
+                result.then(
+                     function(){
+                        var modalInstance = $modal.open({
+                            animation: false,
+                            templateUrl: 'app/modals/confirmation-modal.html',
+                            controller: 'Modal',
+                            controllerAs: 'Modal',
+                            scope: $scope
+                        });
+                        modalInstance.result.then(function () {
+                          if($scope.logRpVote || rpVote.vote != null){
+                              cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles)
+                              if(cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles)){
+                                  $state.go('chair_console');
+                              }else {
+                                  $state.go('user_console');
+                              }
+                          }else {
+                              $scope.reminderDARAlert();
+                          }
+
                         });
                     },
                     //error
@@ -130,7 +159,7 @@
             } else  {
                 alert("Error: Your vote hasn't been changed.");
             }
-        }
+        };
 
     }
 })();

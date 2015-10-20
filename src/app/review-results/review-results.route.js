@@ -26,7 +26,7 @@
                 resolve: {
                     electionReview: function($stateParams, cmElectionService){
                         if($stateParams.consentId != null){
-                            return cmElectionService.findElectionReview($stateParams.consentId).$promise;
+                            return cmElectionService.findElectionReview($stateParams.consentId, 'TranslateDUL').$promise;
                         }
                     }
                 }
@@ -52,6 +52,16 @@
                             return cmElectionService.findDataAccessElectionReview($stateParams.electionId,false).$promise;
                         }
                     },
+                    rpElectionReview: function($stateParams, cmElectionService){
+                        if($stateParams.electionId != null){
+                            return cmElectionService.findRPElectionReview($stateParams.electionId,false).$promise;
+                        }
+                    },
+                    researchPurpose: function($stateParams, cmRPService){
+                        if($stateParams.referenceId != null){
+                            return cmRPService.getRestriction($stateParams.referenceId);
+                        }
+                    },
                     dar: function($stateParams, cmRPService){
                         if($stateParams.referenceId != null){
                             return cmRPService.getDarFields($stateParams.referenceId, "rus");
@@ -66,13 +76,15 @@
                 url: '/final_access_review_results',
                 templateUrl: 'app/review-results/final-access-review-results.html',
                 controller: function($scope, $stateParams){
-                    $scope.electionId =$stateParams.electionId;
-                    $scope.referenceId =$stateParams.referenceId;
+                    $scope.electionId = $stateParams.electionId;
+                    $scope.referenceId = $stateParams.referenceId;
+                    $scope.rpElectionId = $stateParams.rpElectionId;
                 },
                 controllerAs: 'FinalAccessReviewResults',
                 params: {
                     electionId: null,
-                    referenceId: null
+                    referenceId: null,
+                    rpElectionId: null
                 },
                 data: {
                     authorizedRoles: [USER_ROLES.chairperson]

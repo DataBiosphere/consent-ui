@@ -5,7 +5,7 @@
         .service('cmElectionService', cmElectionService);
 
     /* ngInject */
-    function cmElectionService(DarElectionResource,ElectionReviewResource , ElectionResource, ElectionUpdateResource, ElectionReviewedConsents, ElectionReviewedDRs, ElectionReviewConsent,openElectionsResource, ElectionReview,LastElectionReview, DataAccessElectionReviewResource) {
+    function cmElectionService(RPElectionReviewResource, DarElectionResource,ElectionReviewResource , ElectionResource, ElectionUpdateResource, ElectionReviewedConsents, ElectionReviewedDRs, ElectionReviewConsent,openElectionsResource, ElectionReview,LastElectionReview, DataAccessElectionReviewResource) {
         /**
          * Find data for the election related to the consentId sent as a parameter
          * @param consentId
@@ -14,14 +14,19 @@
             return ElectionResource.get({consentId: id});
         }
 
-        function findElectionReviewByReferenceId(id){
-            return ElectionReviewResource.get({referenceId: id});
+        function findElectionReviewByReferenceId(id, type){
+            return ElectionReviewResource.get({referenceId: id, type:type});
 
         }
 
         function findDataAccessElectionReview(id,isFinalAccess){
             return DataAccessElectionReviewResource.get({electionId: id ,isFinalAccess: isFinalAccess });
         }
+
+        function findRPElectionReview(id,isFinalAccess){
+            return RPElectionReviewResource.get({electionId: id ,isFinalAccess: isFinalAccess });
+        }
+
         /**
          * Find all data needed to display an election Review for an specific election id
          * @param electionId
@@ -105,12 +110,15 @@
             findElection: function(id) {
                 return findElectionByConsentId(id);
             },
-            findElectionReview: function(referenceId) {
-                return findElectionReviewByReferenceId(referenceId);
+            findElectionReview: function(referenceId, type) {
+                return findElectionReviewByReferenceId(referenceId, type);
             },
 
             findDataAccessElectionReview: function(referenceId , isFinalAccess) {
                 return findDataAccessElectionReview(referenceId , isFinalAccess);
+            },
+            findRPElectionReview: function(referenceId , isFinalAccess) {
+                return findRPElectionReview(referenceId , isFinalAccess);
             },
             updateElection: function(election){
                 return updateElection(election);
