@@ -10,7 +10,7 @@
         var vm = this;
         vm.electionsList = {'dul': []};
 
-        vm.openCreate = openCreate;     vm.openCancel = openCancel;
+        vm.openCreate = openCreate;     vm.openCancel = openCancel;  vm.openDelete = openDelete;
 
         vm.addDul = addDul;
         vm.editDul = editDul;
@@ -61,6 +61,22 @@
                 });
             });
         }
+
+        function openDelete(consentId)  {
+
+                             var modalInstance = $modal.open({
+                                 animation: false,
+                                 templateUrl: 'app/modals/delete-consent-modal.html',
+                                 controller: 'Modal',
+                                 controllerAs: 'Modal'
+                             });
+
+                             modalInstance.result.then(function () {
+                                 cmConsentService.deleteConsent(consentId).then(function () {
+                                 init();
+                                 });
+                             });
+                         }
 
         function addDul() {
 

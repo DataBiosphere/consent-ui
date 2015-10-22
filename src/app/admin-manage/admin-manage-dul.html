@@ -60,9 +60,12 @@
                                 </div>
                             </a>
                         </div>
-                        <div ng-repeat="election in AdminManage.electionsList.dul" class="remove-dul-col">
-                            <a href="#">
-                                <span class="cm-icon-button glyphicon glyphicon-trash caret-margin" aria-hidden="true"></span> <!--disabled class should be added here when status is either: open, canceled and reviewed-->
+                        <div class="remove-dul-col">
+                            <a ng-click="AdminManage.openDelete(election.consentId)" ng-if="election.electionStatus == 'un-reviewed'">
+                                <span class="cm-icon-button glyphicon glyphicon-trash caret-margin" ng-if="election.electionStatus == 'un-reviewed'" aria-hidden="true"></span>
+                            </a>
+                            <a ng-if="election.electionStatus !== 'un-reviewed'">
+                                <span class="cm-icon-button glyphicon glyphicon-trash caret-margin disabled" ng-if="election.electionStatus !== 'un-reviewed'" aria-hidden="true"></span>
                             </a>
                             <hr class="pvotes-separator-longer">
                         </div>

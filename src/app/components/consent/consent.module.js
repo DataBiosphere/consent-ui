@@ -32,6 +32,14 @@
                return $resource(apiUrl+"consent/:consentId", {}, {
                     update: {method: 'PUT', params: {consentId: '@consentId'}}
        })})
+
+
+       .factory('DeleteConsentResource', function($resource, apiUrl){
+                                 return $resource(apiUrl+"consent/:consentId", {}, {
+                                     Delete: {method:'DELETE',params: {consentId: '@consentId'}}
+                                 });
+                      })
+
 })();
 
 
