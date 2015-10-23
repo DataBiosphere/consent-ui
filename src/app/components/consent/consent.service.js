@@ -31,7 +31,7 @@
         }
 
         function postConsent(consent){
-             consent.requiresManualReview=true;
+             consent.requiresManualReview=false;
              var obj = JSON.parse(consent.useRestriction);
              consent.useRestriction = obj;
              return CreateConsentResource.post({},consent);
@@ -39,7 +39,7 @@
         }
 
         function updateConsent(consent){
-             consent.requiresManualReview=true;
+             consent.requiresManualReview=false;
              var obj = JSON.parse(consent.useRestriction);
              consent.useRestriction = obj;
              return UpdateConsentResource.update({consentId: consent.consentId},consent);
