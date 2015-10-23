@@ -10,12 +10,12 @@
         var vm = this;
         $scope.disableButton = false;
         vm.ok = function (value) {
+            $scope.disableButton = true;
             cmElectionService.createDARElection(value).$promise.then(
                 function (value) {
                     $modalInstance.close();
                 }, function (value) {
                     $scope.createElectionAlert(0);
-                    $scope.disableButton = true;
                 });
         };
 
