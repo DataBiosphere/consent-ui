@@ -1461,7 +1461,8 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     margin: 15px 0 0 0;
 }
 
-.remove-dul-col a .disabled{
+.remove-dul-col a .disabled,
+.remove-dul-col a:hover .disabled{
     color: #cccccc !important;
     cursor: not-allowed !important;
     line-height: 1;

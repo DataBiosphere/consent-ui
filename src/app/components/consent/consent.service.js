@@ -5,7 +5,7 @@
         .service('cmConsentService', cmConsentService);
 
     /* ngInject */
-    function cmConsentService(ConsentResource, ConsentDulResource, ConsentManageResource, CreateConsentResource, CreateDulResource, UpdateConsentResource) {
+    function cmConsentService(ConsentResource, DeleteConsentResource, ConsentDulResource, ConsentManageResource, CreateConsentResource, CreateDulResource, UpdateConsentResource) {
 
         /**
          * Find data for the consent related to the consentId sent as a parameter
@@ -51,6 +51,11 @@
             postObject.file=dul;
             return CreateDulResource.post({consentId: consentId},dul);
         }
+
+        function deleteConsent(consentId){
+                    return DeleteConsentResource.Delete({consentId: consentId}).$promise;
+                }
+
         return{
             findConsent: function(id) {
                 return findConsentById(id);
@@ -70,7 +75,10 @@
 
             updateConsent: function(consent){
                  return  updateConsent(consent);
-            }
+            },
+            deleteConsent: function(consentId){
+                             return  deleteConsent(consentId);
+                        }
 
         }
     }
