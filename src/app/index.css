@@ -369,7 +369,7 @@ small {
 }
 
 .stats-box-title{
-    padding: 15px 10px 0 10px;
+    padding: 15px 10px 10px 10px;
 }
 
 .stats-box-title .cm-inside-box-title{
@@ -403,7 +403,19 @@ small {
 
 .cm-results-subtitle {
     padding: 0 0 5px 0 !important;
-    margin: 10px 0 0 0;
+    margin: 8px 0 0 0;
+    line-height: 23px;
+}
+
+.cm-results-amount {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    font-size: 14px!important;
+    text-align: right;
+    color: #777777;
+    margin: 0!important;
+    padding: 0!important;
 }
 
 /***************************************************Hr*/
@@ -494,6 +506,8 @@ small {
 
 .box-vote-singleresults{
     background: #eeeeee;
+    margin: 10px 15px 20px 15px !important;
+    height: auto!important;
 }
 
 .box-vote-singleresults, .pvotes-box {
@@ -779,6 +793,20 @@ input[type=checkbox]:checked + label:before{
 .result_chart {
     width: 100%;
     height: 138px;
+}
+
+.result_chart svg g,
+.vault-result-chart svg g{
+    font-family: "Roboto", sans-serif !important;
+    font-weight: 500 !important;
+}
+
+.vault-result-chart{
+    width: 100%;
+    height: 138px;
+    /*float: left !important;*/
+    /*text-align: left;*/
+    /*margin-left: 50px;*/
 }
 
 .pvotes-icons {
@@ -1117,7 +1145,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 }
 
 .download-button {
-    margin: 35px 15px 0 0;
+    margin: 15px 15px 10px 0;
 }
 
 .download-box-button{
@@ -1257,6 +1285,14 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 }
 
 /*///////////////////////////////////////////////////////SUMMARY STATS*/
+
+.stats-title{
+    margin-top: 20px;
+}
+
+.stats-title h2{
+    margin-top: 0!important;
+}
 
 .cm-icon-button {
     padding: 2px 0 0 10px;
@@ -1484,6 +1520,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 
 .remove-dul-col a:hover span{
     color: #2FA4E7 !important;
+    cursor: pointer;
 }
 
 /***************************************************Modals*/
