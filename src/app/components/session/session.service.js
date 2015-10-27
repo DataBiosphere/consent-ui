@@ -53,7 +53,7 @@
                         });
                     }
                 });
-            }
+            };
             function signOut() {
                 logoutUser();
             }
@@ -68,6 +68,7 @@
                     sessionStorage.clear();
                     $rootScope.currentUser = null;
                     $location.path("/login");
+                    $rootScope.$apply();
                 });
         }
         return {

@@ -189,6 +189,10 @@ small {
     color: #2FA4E7;
 }
 
+.links-li{
+    padding: 0 0 10px 0 !important;
+}
+
 .brand {
     margin: 14px 0 0 0;
     padding: 0 0 0 20px !important;
@@ -961,9 +965,11 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 }
 
 .pvotes-pagination ul {
-    /*margin: 10px 0 -5px 0;*/
     margin: 10px 0 5px 0;
+}
 
+.dataset-pagination ul {
+    margin-bottom: 0 !important;
 }
 
 .pvotes-pagination li a {
@@ -985,7 +991,8 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     font-weight: 500 !important;
 }
 
-.pcases-small-tag {
+.pcases-small-tag,
+.pcases-medium-tag{
     position: absolute;
     top: 0;
     background: #D13B07;
@@ -997,9 +1004,17 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     font-weight: 500 !important;
     text-align: center;
     font-style: italic;
-    font-size: 12px;
     margin-left: 4px !important;
+}
+
+.pcases-small-tag {
+    font-size: 12px;
     padding: 2px 4px 0 3px;
+}
+
+.pcases-medium-tag {
+    font-size: 14px;
+    padding: 4px 6px 2px 4px;
 }
 
 .active-case {
@@ -1230,6 +1245,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 
 .rp-group {
     margin-bottom: 10px !important;
+    position: relative;
 }
 
 .rp-last-group{
@@ -2217,10 +2233,15 @@ td:first-child {
     margin-left: -70px !important;
 }
 
-.table-scroll-admin td:first-child + .remove-datasets-col{
+.table-scroll-admin td:first-child + .remove-datasets-col {
     position: absolute;
     margin-left: -35px;
-    padding: 8px 25px 8px 10px!important;
+    padding: 8px 25px 8px 10px !important;
+}
+
+.table-scroll-admin td:first-child + .remove-datasets-col a:hover .disabled{
+    cursor: not-allowed !important;
+    color: #cccccc !important;
 }
 
 td:first-child .checkbox {
@@ -2374,6 +2395,7 @@ accordion .panel-group{
     font-style: italic;
     padding: 5px 0 5px 0;
     display: inline;
+    position: relative;
 }
 
 

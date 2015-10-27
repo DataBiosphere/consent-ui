@@ -5,7 +5,7 @@
         .controller('RPApplication', RPApplication);
 
     /* ngInject */
-    function RPApplication($http, $state, $scope, $modal, cmRPService) {
+    function RPApplication($state, $scope, $modal, cmRPService, $rootScope) {
 
         var vm = this;
         vm.$state = $state;
@@ -33,44 +33,50 @@
             }
         });
 
+        $rootScope.$on('$stateChangeSuccess', function () {
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
+        });
+
         function attestAndSave() {
 
-           verifyCheckboxes();
+            verifyCheckboxes();
 
+            if ($scope.step1isValidated && $scope.step2isValidated && $scope.step3isValidated && $scope.atLeastOneCheckboxChecked) {
+                $scope.showValidationMessages = false;
+                var modalInstance = $modal.open({
+                    animation: false,
+                    templateUrl: 'app/modals/data-access-request-modal/data-access-request-modal.html',
+                    controller: 'DARModal',
+                    controllerAs: 'DARModal',
+                    scope: $scope
+                });
 
-            if ( $scope.step1isValidated &&  $scope.step2isValidated &&  $scope.step3isValidated && $scope.atLeastOneCheckboxChecked){
-            $scope.showValidationMessages = false;
-            var modalInstance = $modal.open({
-                animation: false,
-                templateUrl: 'app/modals/data-access-request-modal/data-access-request-modal.html',
-                controller: 'DARModal',
-                controllerAs: 'DARModal',
-                scope: $scope
-            });
-
-            modalInstance.result.then(function (value) {
-                 if(value){$state.go('rp_application_confirm');};
-                 if(!value){$scope.problemSavingRequest = true;};
-            });
-          } else {
-             $scope.showValidationMessages = true;
-          }
+                modalInstance.result.then(function (value) {
+                    if (value) {
+                        $state.go('rp_application_confirm');
+                    }
+                    if (!value) {
+                        $scope.problemSavingRequest = true;
+                    }
+                });
+            } else {
+                $scope.showValidationMessages = true;
+            }
         }
 
 
+        function verifyCheckboxes() {
 
-        function verifyCheckboxes(){
-
-        if ($scope.formData.control != true &&
-            $scope.formData.population != true &&
-            $scope.formData.diseases != true &&
-            $scope.formData.methods != true &&
-            $scope.formData.other != true
-           ){
-              $scope.atLeastOneCheckboxChecked = false;
-           }else {
-           $scope.atLeastOneCheckboxChecked = true;
-           }
+            if ($scope.formData.control != true &&
+                $scope.formData.population != true &&
+                $scope.formData.diseases != true &&
+                $scope.formData.methods != true &&
+                $scope.formData.other != true
+            ) {
+                $scope.atLeastOneCheckboxChecked = false;
+            } else {
+                $scope.atLeastOneCheckboxChecked = true;
+            }
         }
 
 
