@@ -26,11 +26,15 @@
         })
         .factory('ElectionReviewResource', function($resource, apiUrl){
             return $resource(apiUrl+"electionReview", {}, {
-                get:{method: 'GET', params: {referenceId: 'referenceId'}}});
+                get:{method: 'GET', params: {referenceId: 'referenceId', type: 'type'}}});
         })
 
         .factory('DataAccessElectionReviewResource', function($resource, apiUrl){
             return $resource(apiUrl+"electionReview/access/:electionId", {}, {
+                get:{method: 'GET', params: {electionId: '@electionId', isFinalAccess: 'isFinalAccess'}}});
+        })
+        .factory('RPElectionReviewResource', function($resource, apiUrl){
+            return $resource(apiUrl+"electionReview/rp/:electionId", {}, {
                 get:{method: 'GET', params: {electionId: '@electionId', isFinalAccess: 'isFinalAccess'}}});
         })
 

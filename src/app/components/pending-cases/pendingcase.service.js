@@ -60,7 +60,7 @@
                 // negative cases
                 data['dulReviewed'][2][1] = access.reviewedNegativeCases;
                 // find data request summary
-                DataRequestSummaryCases.get().$promise.then(function(dul) {
+                DataRequestSummaryCases.get({type: "DataAccess"}).$promise.then(function(dul) {
                     // reviewed cases
                     data['accessTotal'][1][1] = dul.reviewedPositiveCases + dul.reviewedNegativeCases;
                     // pending cases
@@ -69,9 +69,21 @@
                     data['accessReviewed'][1][1] = dul.reviewedPositiveCases;
                     // negative cases
                     data['accessReviewed'][2][1] = dul.reviewedNegativeCases;
-                    vm.chartData = data;
+                    DataRequestSummaryCases.get({type: "RP"}).$promise.then(function(rp) {
+                        // reviewed cases
+                        data['RPTotal'][1][1] = rp.reviewedPositiveCases + rp.reviewedNegativeCases;
+                        // pending cases
+                        data['RPTotal'][2][1] = rp.pendingCases;
+                        // positive cases
+                        data['RPReviewed'][1][1] = rp.reviewedPositiveCases;
+                        // negative cases
+                        data['RPReviewed'][2][1] = rp.reviewedNegativeCases;
+                        vm.chartData = data;
+
+                    });
 
                 });
+
             });
         }
 

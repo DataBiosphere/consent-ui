@@ -6,7 +6,7 @@
 
     /* ngInject */
 
-    function cmDataAccessRequest(dataAccessRequestResource, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields, dataAccessRequestManageResource) {
+    function cmDataAccessRequest(dataAccessRequestResource, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields, dataAccessRequestManageResource, darRestriction) {
 
         function findDarConsent(id){
             return darConsent.get({id: id}).$promise;
@@ -34,7 +34,10 @@
                 function (data) {
                     vm.dars = data;
                 });
+        }
 
+        function getRestriction(id) {
+            return darRestriction.get({id: id}).$promise;
         }
 
         return {
@@ -60,6 +63,9 @@
 
             getDataAccessManage: function(vm){
                 return getDataAccessManage(vm);
+            },
+            getRestriction: function(id){
+                return getRestriction(id);
             }
         }
 

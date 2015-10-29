@@ -4,29 +4,92 @@
     angular.module('cmReviewResults')
         .controller('FinalAccessReviewResults', FinalAccessReviewResults);
 
-    function FinalAccessReviewResults($scope, $rootScope ,$modal,$state,cmElectionService,cmRPService,cmVoteService,cmLoginUserService,apiUrl){
+    function FinalAccessReviewResults($scope, $rootScope, $modal, $state, cmElectionService, cmRPService, cmVoteService, cmLoginUserService, apiUrl, cmMatchService) {
 
-        if( $scope.electionId == null || $scope.referenceId == null){
-                            cmLoginUserService.redirect($rootScope.currentUser)
-                            return;
-                }
-
+        if ($scope.electionId == null || $scope.referenceId == null) {
+            cmLoginUserService.redirect($rootScope.currentUser);
+            return;
+        }
+        $scope.vote = {};
+        $scope.voteAgreement = {};
         $scope.logVote = logVote;
+        $scope.logVoteAgreement = logVoteAgreement;
+        $scope.electionType = null;
+
+        /*ALERTS*/
+        $scope.alertsDAR = [];
+        $scope.alertsAgree = [];
+
+
+        $scope.reminderDARAlert = function (index) {
+            $scope.alertsDAR.splice(index, 1);
+            $scope.alertsDAR.push({
+                title: 'Please log a vote on Decision Agreement.'
+            });
+        };
+
+        $scope.reminderAgreeAlert = function (index) {
+            $scope.alertsAgree.splice(index, 1);
+            $scope.alertsAgree.push({
+                title: 'Please log a vote on Final Access Decision'
+            });
+        };
+
+        $scope.closeAlert = function (index) {
+            $scope.alerts.splice(index, 1);
+        };
+
         init();
 
         function logVote() {
+            $scope.electionType = 'access';
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/final-access-vote-modal.html',
                 controller: 'Modal',
-                controllerAs: 'Modal'
+                controllerAs: 'Modal',
+                scope: $scope
             });
             modalInstance.result.then(function () {
                 cmVoteService.updateFinalAccessDarVote($scope.referenceId, $scope.vote).$promise.then(
-                    function() {
-                        $state.go('chair_console');
+                    function () {
+                        $scope.alreadyVote = true;
+                        if ($scope.agreementAlreadyVote) {
+                            $state.go('chair_console');
+                        } else {
+                            $scope.reminderDARAlert();
+                        }
+
                     },
-                    function(){ alert("Error while updating final access vote.");}
+                    function () {
+                        alert("Error while updating final access vote.");
+                    }
+                )
+            });
+        }
+
+        function logVoteAgreement() {
+            $scope.electionType = 'agreement';
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/final-access-vote-modal.html',
+                controller: 'Modal',
+                controllerAs: 'Modal',
+                scope: $scope
+            });
+            modalInstance.result.then(function () {
+                cmVoteService.updateFinalAccessDarVote($scope.referenceId, $scope.voteAgreement).$promise.then(
+                    function () {
+                        $scope.agreementAlreadyVote = true;
+                        if ($scope.alreadyVote) {
+                            $state.go('chair_console');
+                        } else {
+                            $scope.reminderAgreeAlert();
+                        }
+                    },
+                    function () {
+                        alert("Error while updating final access vote.");
+                    }
                 )
             });
         }
@@ -165,25 +228,42 @@
                     }
                 }
             }
-        }
+        };
 
         function init() {
             $scope.vote = cmVoteService.getDarFinalAccessVote($scope.electionId)
-                .then(function (data){
+                .then(function (data) {
                     $scope.vote = data;
-                })
+                    if(data.vote != null){
+                        $scope.alreadyVote = true;
+                    }
+                });
 
-            cmElectionService.findDataAccessElectionReview($scope.electionId,false).
-                $promise.then(function (data){
-                    showAccessData(data);
-                    cmElectionService.findLastElectionReviewByReferenceId(data.consent.consentId).$promise.then(function (data){
-                        showDULData(data);
-                    })
+            cmElectionService.findDataAccessElectionReview($scope.electionId, false).$promise.then(function (data) {
+                showAccessData(data);
+                cmElectionService.findRPElectionReview($scope.electionId, false).
+                    $promise.then(function (data) {
+                        $scope.electionRP = data.election;
+                        if (data.election.finalRationale === null) {
+                            $scope.electionRP.finalRationale = '';
+                        }
+                        $scope.statusRP = data.election.status;
+                        $scope.rpVoteAccessList = chunk(data.reviewVote, 2);
+                        $scope.chartRP = getGraphData(data.reviewVote);
+                    });
+
+                cmElectionService.findLastElectionReviewByReferenceId(data.consent.consentId).$promise.then(function (data) {
+                    showDULData(data);
+                    vaultVote(data.consent.consentId);
                 })
+            });
+
         }
 
         function showAccessData(electionReview) {
-            cmRPService.getDarFields(electionReview.election.referenceId, "rus").then(function (data){ $scope.dar = data});
+            cmRPService.getDarFields(electionReview.election.referenceId, "rus").then(function (data) {
+                $scope.dar = data;
+            });
             $scope.electionAccess = electionReview.election;
             if (electionReview.election.finalRationale === null) {
                 $scope.electionAccess.finalRationale = '';
@@ -191,6 +271,10 @@
             $scope.status = electionReview.election.status;
             $scope.voteAccessList = chunk(electionReview.reviewVote, 2);
             $scope.chartDataAccess = getGraphData(electionReview.reviewVote);
+            $scope.voteAgreement = electionReview.voteAgreement;
+            if(electionReview.voteAgreement.vote != null){
+                $scope.agreementAlreadyVote = true;
+            }
         }
 
         function showDULData(electionReview) {
@@ -218,7 +302,7 @@
         function getGraphData(reviewVote) {
             var yes = 0, no = 0, empty = 0;
             for (var i = 0; i < reviewVote.length; i++) {
-                if (reviewVote[i].vote.isFinalAccessVote != true) {
+                if (reviewVote[i].vote.type == 'DAC') {
                     switch (reviewVote[i].vote.vote) {
                         case true:
                             yes++;
@@ -239,18 +323,31 @@
                     ['NO', no],
                     ['Pending', empty]
                 ]
-            }
+            };
             return chartData;
         }
 
-        $scope.positiveVote = function(){
+        $scope.positiveVote = function () {
             $scope.vote.rationale = null;
-        }
-
-
-        function agreementVote() {
         };
 
+        $scope.positiveAgreementVote = function () {
+            $scope.voteAgreement.rationale = null;
+        };
+
+
+        function vaultVote(consentId) {
+            cmMatchService.findMatch(consentId, $scope.electionAccess.referenceId).then(function (data) {
+                if (data.match != null) {
+                    $scope.hideMatch = false;
+                    $scope.match = data.match;
+                    $scope.createDate = data.createDate;
+                } else {
+                    $scope.hideMatch = true;
+                }
+
+            });
+        }
     }
 
 })();

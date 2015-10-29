@@ -49,7 +49,8 @@
                 url: '/access_review',
                 params: {
                     darId: null,
-                    voteId: null
+                    voteId: null,
+                    rpVoteId: null
                 },
                 templateUrl: 'app/review/access-review.html',
                 controller: 'DarReview',
@@ -61,6 +62,11 @@
                     dar: function($stateParams, cmRPService){
                         if($stateParams.darId != null){
                             return cmRPService.getDarFields($stateParams.darId, "rus");
+                        }
+                    },
+                    researchPurpose: function($stateParams, cmRPService){
+                        if($stateParams.darId != null){
+                            return cmRPService.getRestriction($stateParams.darId);
                         }
                     },
                     consent: function($stateParams, cmRPService){
@@ -77,6 +83,11 @@
                     vote: function ($stateParams, cmVoteService) {
                         if($stateParams.darId != null) {
                             return cmVoteService.getDarVote($stateParams.darId, $stateParams.voteId);
+                        }
+                    },
+                    rpVote: function ($stateParams, cmVoteService) {
+                        if($stateParams.darId != null && $stateParams.rpVoteId != null) {
+                            return cmVoteService.getDarVote($stateParams.darId, $stateParams.rpVoteId);
                         }
                     }
                 }

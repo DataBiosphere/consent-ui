@@ -21,33 +21,33 @@
             ],
             'dulTotal': [
                 ['Results', 'Votes'],
-                ['Reviewed cases', 0],
+                ['Reviewed cases',0],
                 ['Pending cases',0]
             ],
             'dulReviewed': [
                 ['Results', 'Votes'],
-                ['Yes', 0],
+                ['Yes',0],
                 ['No', 0]
             ],
             'RPTotal': [
                 ['Results', 'Votes'],
-                ['Reviewed cases', 3],
-                ['Pending cases', 4]
+                ['Reviewed cases', 0],
+                ['Pending cases', 0]
             ],
             'RPReviewed': [
                 ['Results', 'Votes'],
-                ['Yes', 1],
-                ['No', 1]
+                ['Yes', 0],
+                ['No',0]
             ],
             'VaultReviewed': [
                 ['Results', 'Votes'],
-                ['Yes', 3],
-                ['No', 2]
+                ['Yes', 4],
+                ['No', 3]
             ],
             'Agreement': [
                 ['Results', 'Votes'],
-                ['Agreement', 4],
-                ['Disagreement', 1]
+                ['Agreement', 5],
+                ['Disagreement', 8]
             ]
 
 
