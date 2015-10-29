@@ -91,7 +91,7 @@
                         </div>
                         <div ng-show="vm.vote.vote == null" class="no-padding f-right">
                             <input type="button" class="sendReminder btn btn-primary vote-reminder dul-color"
-                                   value="Send a reminder" ng-click="sendReminder(vm.vote.voteId)"/>
+                                   value="Send a reminder" ng-disabled="buttonDisabled" ng-click="sendReminder(vm.vote.voteId)"/>
                         </div>
 
                     </div>

@@ -15,31 +15,6 @@
         init();
 
 
-        function openCancel(dar) {
-
-            var modalInstance = $modal.open({
-                animation: false,
-                templateUrl: 'app/modals/cancel-modal.html',
-                controller: 'Modal',
-                controllerAs: 'Modal',
-                resolve: {
-                    dar: function () {
-                        vm.dar = dar;
-                    }
-                }
-            });
-
-            modalInstance.result.then(function () {
-                var electionToUpdate = new Object();
-                electionToUpdate.status = 'Canceled';
-                electionToUpdate.referenceId = vm.dar.dataRequestId;
-                electionToUpdate.electionId = vm.dar.electionId;
-                cmElectionService.updateElection(electionToUpdate).$promise.then(function () {
-                    init();
-                });
-            });
-        }
-
         function init() {
             cmRPService.getDataAccessManage(vm);
         }

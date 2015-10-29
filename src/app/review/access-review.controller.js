@@ -6,13 +6,13 @@
 
     function DarReview($scope, $modal, $state, $rootScope, USER_ROLES, vote, rpVote, dar, election, consent, cmVoteService, apiUrl, cmAuthenticateService , cmLoginUserService, cmTranslateService, researchPurpose)
     {
-          if( typeof vote == 'undefined' ||
-                typeof consent == 'undefined'||
-                typeof election == 'undefined'||
-                typeof dar == 'undefined'){
-                    cmLoginUserService.redirect($rootScope.currentUser);
-                 return;
-           }
+        if( typeof vote == 'undefined' ||
+            typeof consent == 'undefined'||
+            typeof election == 'undefined'||
+            typeof dar == 'undefined'){
+            cmLoginUserService.redirect($rootScope.currentUser);
+            return;
+        }
 
         if(researchPurpose == null){
             $scope.rp = "this includes senesitive research objectives that requires manual review";
@@ -21,6 +21,8 @@
                 $scope.rp = data;
             })
         }
+        $scope.enableDARButton = true;
+        $scope.enableRPButton = true;
         $scope.selection = {};
         $scope.downloadUrl = apiUrl + 'consent/' + consent.consentId + '/dul';
         $scope.consent = consent;
@@ -74,6 +76,7 @@
 
 
         $scope.logRPVote = function() {
+            $scope.enableRPButton = false;
             if((rpVote.vote != $scope.selection.rpVoteStatus)||($scope.selection.rpRationale != vote.rpRationale)){
                 rpVote.vote = $scope.selection.rpVoteStatus;
                 rpVote.rationale = $scope.selection.rpRationale;
@@ -89,6 +92,7 @@
                 result.then(
                     //success
                     function(){
+                        $scope.enableRPButton = true;
                         var modalInstance = $modal.open({
                             animation: false,
                             templateUrl: 'app/modals/confirmation-modal.html',
@@ -97,27 +101,34 @@
                             scope: $scope
                         });
                         modalInstance.result.then(function () {
-                        if($scope.logAccessVote || vote.vote != null){
-                            cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles)
-                            if(cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles)){
-                                $state.go('chair_console');
-                            }else {
-                                $state.go('user_console');
+                            if($scope.logAccessVote || vote.vote != null){
+                                cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles)
+                                if(cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles)){
+                                    $state.go('chair_console');
+                                }else {
+                                    $state.go('user_console');
+                                }
+                            }else{
+                                $scope.reminderRPAlert();
+                                $scope.enableRPButton = true;
                             }
-                        }else{
-                            $scope.reminderRPAlert();
-                        }
-                      });
+                        });
+
                     },
                     //error
-                    function(){alert("Error updating vote.")});
+                    function(){
+                        alert("Error updating vote.")
+                        $scope.enableRPButton = true;
+                    });
             } else  {
                 alert("Error: Your vote hasn't been changed.");
+                $scope.enableRPButton = true;
             }
         };
 
 
         $scope.logVote = function() {
+            $scope.enableDARButton = false;
             if((vote.vote != $scope.selection.voteStatus)||($scope.selection.rationale != vote.rationale)){
                 vote.vote = $scope.selection.voteStatus;
                 vote.rationale = $scope.selection.rationale;
@@ -132,7 +143,8 @@
                 $scope.logAccessVote = true;
                 $scope.electionType = 'access';
                 result.then(
-                     function(){
+                    function(){
+                        $scope.enableDARButton = true;
                         var modalInstance = $modal.open({
                             animation: false,
                             templateUrl: 'app/modals/confirmation-modal.html',
@@ -141,21 +153,25 @@
                             scope: $scope
                         });
                         modalInstance.result.then(function () {
-                          if($scope.logRpVote || rpVote.vote != null){
-                              cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles)
-                              if(cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles)){
-                                  $state.go('chair_console');
-                              }else {
-                                  $state.go('user_console');
-                              }
-                          }else {
-                              $scope.reminderDARAlert();
-                          }
+                            if($scope.logRpVote || rpVote.vote != null){
+                                cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles)
+                                if(cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles)){
+                                    $state.go('chair_console');
+                                }else {
+                                    $state.go('user_console');
+                                }
+                            }else {
+                                $scope.reminderDARAlert();
+                                $scope.enableDARButton = true;
+                            }
 
                         });
                     },
                     //error
-                    function(){alert("Error updating vote.")});
+                    function(){
+                        alert("Error updating vote.");
+                        $scope.enableDARButton = true;
+                    });
             } else  {
                 alert("Error: Your vote hasn't been changed.");
             }

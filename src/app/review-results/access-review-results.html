@@ -86,7 +86,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
-                                    <button ng-click="logVote()" ng-disabled="!voteForm.$valid"
+                                    <button ng-click="logVote()" ng-disabled="!voteForm.$valid && enableVoteButton"
                                             class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button access-background">
                                         Vote
                                     </button>
@@ -108,7 +108,7 @@
                                 </div>
                                 <div ng-show="vm.vote.vote == null" class="no-padding f-right">
                                     <input type="button" class="sendReminder btn btn-primary vote-reminder access-color"
-                                           value="Send a reminder" ng-click="sendReminder(vm.vote.voteId)"/>
+                                           value="Send a reminder" ng-disabled="buttonDisabled" ng-click="sendReminder(vm.vote.voteId)"/>
                                 </div>
 
                             </div>
@@ -257,7 +257,7 @@
                                 </div>
                                 <div ng-show="vm.vote.vote == null" class="no-padding f-right">
                                     <input type="button" class="sendReminder btn btn-primary vote-reminder access-color"
-                                           value="Send a reminder" ng-click="sendReminder(vm.vote.voteId)"/>
+                                           value="Send a reminder" ng-disabled="buttonDisabled" ng-click="sendReminder(vm.vote.voteId)"/>
                                 </div>
                             </div>
                         </div>
