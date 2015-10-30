@@ -44,16 +44,17 @@
                 <div class="form-group admin-form-group ">
                     <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label dul-color">Structured Limitations</label>
                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 admin-input">
-                        <input type="text" ng-model="consent.useRestriction"
+                        <textarea ng-model="useRestriction"
                                name="inputSDUL"
                                class="form-control col-lg-12 vote-input"
                                placeholder="Structured string of the Data Use Limitations (JSON format)" required>
+                        </textarea>
 
                     </div>
                 </div>
                 <div class="admin-modal-footer">
-                    <div class="form-group alert-form-group">
-                        <div class="admin-alerts">
+                    <div class="alert-form-group">
+                        <div class="admin-alerts no-margin">
                             <alert ng-repeat="alert in alerts" type="{{alert.type}}" class="alert-title cancel-color">
                                 <h4>{{alert.title}}</h4>{{alert.msg}}
                             </alert>
