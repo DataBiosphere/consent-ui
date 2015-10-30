@@ -30,7 +30,7 @@
                     <div dir-paginate="pendingCase in UserConsole.electionsList.dul | itemsPerPage:5" pagination-id="dulCases">
                         <hr class="pvotes-separator">
                         <div class="row pvotes-main-list">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4 pvotes-list-id">{{pendingCase.referenceId}}</div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4 pvotes-list-id">{{pendingCase.frontEndId}}</div>
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pvotes-list bold">
                                 <span ng-if="pendingCase.isReminderSent == true">URGENT!</span>
                                 <span ng-if="pendingCase.status == 'pending' && pendingCase.isReminderSent != true">Pending</span>
@@ -83,7 +83,7 @@
                     <div dir-paginate="pendingCase in UserConsole.electionsList.access | itemsPerPage:5" pagination-id="accessCases">
                         <hr class="pvotes-separator">
                         <div class="row pvotes-main-list">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4 pvotes-list-id">{{pendingCase.referenceId}}</div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4 pvotes-list-id">{{pendingCase.frontEndId}}</div>
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pvotes-list {{pendingCase.status}}">
                                 <span ng-if="pendingCase.status == 'urgent'">URGENT!</span>
                                 <span ng-if="pendingCase.status == 'pending'">Pending</span>

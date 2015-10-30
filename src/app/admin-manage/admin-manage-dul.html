@@ -21,37 +21,37 @@
     <div class="jumbotron box-vote-singleresults">
         <div class="row manage-wrapper">
             <div class="pvotes-box-head">
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle dul-color">Consent id</div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-box-subtitle dul-color">Consent name</div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-box-subtitle dul-color">Consent id</div>
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle dul-color">Date</div>
-                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pvotes-box-subtitle f-center dul-color">Edit Record</div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle f-center dul-color">Edit Record</div>
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle f-center dul-color">Election status</div>
-                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pvotes-box-subtitle f-center dul-color">Election actions</div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle f-center dul-color">Election actions</div>
             </div>
 
             <div class="admin-box-body">
                 <hr class="pvotes-main-separator">
                 <div dir-paginate="election in AdminManage.electionsList.dul | filter: searchDUL | itemsPerPage:10">
                     <div class="row pvotes-main-list">
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{election.consentId}}</div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">{{election.consentName}}</div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{election.createDate | date:'yyyy-MM-dd HH:mm'}}</div>
-                        <a href="#" class="admin-manage-buttons col-lg-1 col-md-1 col-sm-1 col-xs-1 no-padding">
-                            <div ng-if="election.electionStatus != 'Open'" class="enabled hover-color" ng-click="AdminManage.editDul(election.consentId)">
-                                <span>Edit</span>
-                            </div>
-                            <div ng-if="election.electionStatus == 'Open'" class="disabled hover-color">
-                                <span>Edit</span>
-                            </div>
-                        </a>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{election.createDate | date:'yyyy-MM-dd'}}</div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <a href="#" class="admin-manage-buttons">
+                                <div ng-if="election.electionStatus != 'Open'" class="enabled hover-color" ng-click="AdminManage.editDul(election.consentId)">
+                                    <span>Edit</span>
+                                </div>
+                                <div ng-if="election.electionStatus == 'Open'" class="disabled hover-color">
+                                    <span>Edit</span>
+                                </div>
+                            </a>
+                        </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list bold">
                             <span ng-if="election.electionStatus == 'un-reviewed'">Un-reviewed</span>
                             <span ng-if="election.electionStatus == 'Open'">Open</span>
                             <span ng-if="election.electionStatus == 'Canceled'">Canceled</span>
                             <span ng-if="election.electionStatus == 'Closed'">Reviewed</span>
                         </div>
-                        <div>
-                            <a class="col-lg-1 col-md-1 col-sm-1 col-xs-1 admin-manage-buttons no-padding">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <a class="admin-manage-buttons">
                                 <div ng-if="election.electionStatus != 'Open'" class="create hover-color" ng-click="AdminManage.openCreate(election.consentId)">
                                     <span>Create</span>
                                 </div>

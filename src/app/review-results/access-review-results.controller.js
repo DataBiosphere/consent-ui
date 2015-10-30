@@ -40,7 +40,7 @@
         if(researchPurpose == null){
             $scope.rp = "this includes senesitive research objectives that requires manual review";
         }else{
-            cmTranslateService.translate("sampleset",researchPurpose.restriction).then(function(data) {
+            cmTranslateService.translate("purpose",researchPurpose.restriction).then(function(data) {
                 $scope.rp = data;
             })
         }
