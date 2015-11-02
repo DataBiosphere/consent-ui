@@ -54,18 +54,23 @@
                 cmVoteService.updateFinalAccessDarVote($scope.referenceId, $scope.vote).$promise.then(
                     function () {
                         $scope.alreadyVote = true;
-                        if ($scope.agreementAlreadyVote) {
-                            $state.go('chair_console');
-                        } else {
+                        if($scope.agreementAlreadyVote){
+                            closeElection();
+                        } else{
                             $scope.reminderDARAlert();
                         }
-
                     },
                     function () {
                         alert("Error while updating final access vote.");
                     }
                 )
             });
+        }
+
+        function closeElection(){
+            $scope.electionAccess.status = 'Closed';
+            cmElectionService.updateElection($scope.electionAccess).$promise;
+            $state.go('chair_console');
         }
 
         function logVoteAgreement() {
@@ -82,7 +87,7 @@
                     function () {
                         $scope.agreementAlreadyVote = true;
                         if ($scope.alreadyVote) {
-                            $state.go('chair_console');
+                                closeElection();
                         } else {
                             $scope.reminderAgreeAlert();
                         }
