@@ -1,19 +1,25 @@
 <div ng-include src="'app/header/header.html'"></div>
 <div class="container">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
         <h2 class="cm-title common-color">
             <div id="dacUser">Welcome {{currentUser.displayName}}!</div>
             <small>These are your pending cases for review</small>
         </h2>
         <hr class="section-separator">
     </div>
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-        <h2 class="pvotes-box-title dul-color">
-            <img src="assets/images/icon_dul.png" alt="Translation icon" class="pvotes-icons">Data Use Limitations Review
-            <br>
-            <div class="pvotes-box-title-description">Where the data use limitations accurately converted to a structured format?
+    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <div class="row no-margin">
+            <h2 class="col-lg-8 col-md-8 col-sm-8 col-xs-12 pvotes-box-title dul-color">
+                <img src="assets/images/icon_dul.png" alt="Data Use Limitations Review icon" class="pvotes-icons">Data Use Limitations Review</br>
+                <div class="pvotes-box-title-description">Where the data use limitations accurately converted to a structured format?</div>
+            </h2>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 search-reviewed no-padding">
+                <div class="search-text">
+                    <i class="glyphicon glyphicon-search dul-color"></i>
+                    <input type="search" class="form-control users-search" placeholder="Enter search term..." ng-model="searchDULCases"/>
+                </div>
             </div>
-        </h2>
+        </div>
         <div class="jumbotron box-vote-singleresults">
             <div class="row">
                 <div class="pvotes-box-head">
@@ -28,7 +34,7 @@
                     <hr class="pvotes-main-separator">
                 </div>
                 <div class="pvotes-box-body">
-                    <div dir-paginate="pendingCase in ChairConsole.electionsList.dul | itemsPerPage:5" pagination-id="dulCases">
+                    <div dir-paginate="pendingCase in ChairConsole.electionsList.dul | filter: searchDULCases | itemsPerPage:5" pagination-id="dulCases">
                         <hr class="pvotes-separator">
                         <div class="row pvotes-main-list">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4 pvotes-list-id">{{pendingCase.frontEndId}}</div>
@@ -61,13 +67,19 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-        <h2 class="pvotes-box-title access-color">
-            <img src="assets/images/icon_access.png" alt="Access icon" class="pvotes-icons">Data Access Request Review
-            <br>
-            <div class="pvotes-box-title-description">Should data access be granted to this applicant?
+    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <div class="row no-margin">
+            <h2 class="col-lg-8 col-md-8 col-sm-8 col-xs-12 pvotes-box-title access-color">
+                <img src="assets/images/icon_access.png" alt="Data Access Review icon" class="pvotes-icons">Data Access Request Review</br>
+                <div class="pvotes-box-title-description">Should data access be granted to this applicant?</div>
+            </h2>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 search-reviewed no-padding">
+                <div class="search-text">
+                    <i class="glyphicon glyphicon-search access-color"></i>
+                    <input type="search" class="form-control users-search" placeholder="Enter search term..." ng-model="searchAccessCases"/>
+                </div>
             </div>
-        </h2>
+        </div>
         <div class="jumbotron box-vote-singleresults">
             <div class="row">
                 <div class="pvotes-box-head">
@@ -85,7 +97,7 @@
                     <hr class="pvotes-main-separator">
                 </div>
                 <div class="pvotes-box-body">
-                    <div dir-paginate="pendingCase in ChairConsole.electionsList.access | itemsPerPage:5" pagination-id="accessCases">
+                    <div dir-paginate="pendingCase in ChairConsole.electionsList.access | filter: searchAccessCases | itemsPerPage:5" pagination-id="accessCases">
                         <hr class="pvotes-separator">
                         <div class="row pvotes-main-list">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4 pvotes-list-id">{{pendingCase.frontEndId}}</div>
@@ -113,7 +125,7 @@
                             <div ng-if="pendingCase.electionStatus === 'Final'">
                                 <a ui-sref="final_access_review_results({referenceId: '{{pendingCase.referenceId}}', electionId: '{{pendingCase.electionId}}', rpElectionId: '{{pendingCase.rpElectionId}}'})" class="col-lg-2 col-md-2 col-sm-2 col-xs-3 no-padding">
                                     <div class="collectButton {{pendingCase.alreadyVoted ? 'enabled' : 'disabled'}}">
-                                        <span>Final Vote</span>
+                                        <span>FINAL VOTE</span>
                                     </div>
                                 </a>
                             </div>
