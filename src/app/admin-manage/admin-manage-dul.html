@@ -36,10 +36,10 @@
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{election.createDate | date:'yyyy-MM-dd'}}</div>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                             <a href="#" class="admin-manage-buttons">
-                                <div ng-if="election.electionStatus != 'Open'" class="enabled hover-color" ng-click="AdminManage.editDul(election.consentId)">
+                                <div ng-if="election.electionStatus != 'Open' && election.editable"  class="enabled hover-color" ng-click="AdminManage.editDul(election.consentId)">
                                     <span>Edit</span>
                                 </div>
-                                <div ng-if="election.electionStatus == 'Open'" class="disabled hover-color">
+                                <div ng-if="election.electionStatus == 'Open' || !election.editable" class="disabled hover-color">
                                     <span>Edit</span>
                                 </div>
                             </a>
@@ -52,10 +52,13 @@
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                             <a class="admin-manage-buttons">
-                                <div ng-if="election.electionStatus != 'Open'" class="create hover-color" ng-click="AdminManage.openCreate(election.consentId)">
+                                <div ng-if="election.electionStatus != 'Open' && election.editable " class=" create hover-color" ng-click="AdminManage.openCreate(election.consentId)">
                                     <span>Create</span>
                                 </div>
-                                <div ng-if="election.electionStatus == 'Open'" class="cancel hover-color" ng-click="AdminManage.openCancel(election)">
+                                <div ng-if="election.electionStatus != 'Open' && !election.editable" class="disabled  hover-color">
+                                    <span>Create</span>
+                                </div>
+                                <div ng-if="election.electionStatus == 'Open' " class="cancel hover-color" ng-click="AdminManage.openCancel(election)">
                                     <span>Cancel</span>
                                 </div>
                             </a>
