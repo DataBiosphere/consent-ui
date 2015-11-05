@@ -36,16 +36,16 @@
                         </a>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list bold">
                             <span ng-if="dar.electionStatus == 'un-reviewed'">Un-reviewed</span>
-                            <span ng-if="dar.electionStatus == 'Open'">Open</span>
+                            <span ng-if="dar.electionStatus == 'Open' || dar.electionStatus == 'Final'">Open</span>
                             <span ng-if="dar.electionStatus == 'Canceled'">Canceled</span>
                             <span ng-if="dar.electionStatus == 'Closed'">Reviewed</span>
                         </div>
                         <div>
                             <a class="admin-manage-buttons col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                                <div ng-if="dar.electionStatus != 'Open'" class="create hover-color" ng-click="AdminManageAccess.openCreate(dar.dataRequestId)">
+                                <div ng-if="dar.electionStatus != 'Open' &&  dar.electionStatus != 'Final' " class="create hover-color" ng-click="AdminManageAccess.openCreate(dar.dataRequestId)">
                                     <span>Create</span>
                                 </div>
-                                <div ng-if="dar.electionStatus == 'Open'" class="cancel hover-color" ng-click="AdminManageAccess.openCancel(dar)">
+                                <div ng-if="dar.electionStatus == 'Open'||  dar.electionStatus == 'Final'" class="cancel hover-color" ng-click="AdminManageAccess.openCancel(dar)">
                                     <span>Cancel</span>
                                 </div>
                             </a>
