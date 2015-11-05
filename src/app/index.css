@@ -1771,6 +1771,11 @@ input[type="checkbox"][disabled] + label {
     cursor: not-allowed !important;
 }
 
+.admin-input textarea {
+    resize: vertical;
+    max-height: 150px;
+}
+
 /***************************************************Alerts*/
 
 .votes-alerts {

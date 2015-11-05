@@ -13,7 +13,7 @@
         $scope.disableButton = false;
 
         if(typeof consent.useRestriction == 'object'){
-             consent.useRestriction = JSON.stringify(consent.useRestriction);
+             $scope.useRestriction = JSON.stringify(consent.useRestriction);
         }
 
         if (consent !== undefined) {
@@ -30,6 +30,14 @@
 
         vm.ok = function (consent) {
             $scope.disableButton = true;
+            try{
+                JSON.parse($scope.useRestriction)
+            }catch(err){
+                $scope.duplicateEntryAlert(0, "Unable to process JSON");
+                $scope.disableButton = false;
+                return;
+            }
+            consent.useRestriction = $scope.useRestriction;
             cmConsentService.postConsent(consent).$promise.then(
                 function (value) {
                     cmConsentService.postDul($scope.file, value.consentId).$promise.then(
@@ -43,13 +51,25 @@
                 },
 
                 function (reason) {
-                    $scope.duplicateEntryAlert(0, reason.data.cause.localizedMessage);
+                    if(reason.data.message === undefined){
+                        $scope.duplicateEntryAlert(0, reason.data.cause.localizedMessage);
+                    }else{
+                        $scope.duplicateEntryAlert(0, reason.data.message);
+                    }
                     $scope.disableButton = false;
                 });
         };
 
         vm.edit = function (consent) {
             $scope.disableButton = true;
+            try{
+                JSON.parse($scope.useRestriction);
+            }catch(err){
+                $scope.duplicateEntryAlert(0, "Unable to process JSON");
+                $scope.disableButton = false;
+                return;
+            }
+            consent.useRestriction = $scope.useRestriction;
             cmConsentService.updateConsent(consent).$promise.then(
                 function (value) {
                     if ($scope.file.type !== undefined) {
@@ -66,11 +86,15 @@
                     }
                 },
                 function (reason) {
-                    $scope.duplicateEntryAlert(0, reason.data.cause.localizedMessage);
+                    if(reason.data.message === undefined){
+                        $scope.duplicateEntryAlert(0, reason.data.cause.localizedMessage);
+                    }else{
+                        $scope.duplicateEntryAlert(0, reason.data.message);
+                    }
                     $scope.disableButton = false;
                 }
             )
-        }
+        };
 
         vm.cancel = function () {
             $modalInstance.dismiss('cancel');
@@ -88,8 +112,11 @@
                 message = "There is a Data Use Limitation already registered with this Consent Id. ";
             } else if (message.indexOf("name") > -1) {
                 message = "There is a Data Use Limitation already registered with this name. ";
-            } else {
-                tle = "Error , unable to create a new Data Use Limitation! ";
+            } else if (message.indexOf("Unable to process JSON") > -1){
+                message = "Structured Limitations has invalid format. Please write it as a JSON.";
+            }
+            else {
+                tle = "Error, unable to create a new Data Use Limitation! ";
                 message = "Internal Server Error ";
             }
 
