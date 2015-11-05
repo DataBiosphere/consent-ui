@@ -487,6 +487,7 @@ small {
 .box-vote-results,
 .box-vote-singleresults,
 .box-vote-lightresults,
+.box-vote-stats,
 .pvotes-box {
     padding: 15px 25px !important;
     margin: 10px 0 20px 0;
@@ -509,12 +510,20 @@ small {
 }
 
 .box-vote-singleresults{
+     background: #eeeeee;
+     margin: 10px 0 20px 0 !important;
+     height: auto !important;
+ }
+
+.box-vote-stats{
     background: #eeeeee;
     margin: 10px 15px 20px 15px !important;
-    height: auto!important;
+    height: auto !important;
 }
 
-.box-vote-singleresults, .pvotes-box {
+.box-vote-singleresults,
+.pvotes-box,
+.box-vote-stats{
     height: 100%;
     min-height: 100%;
 }
@@ -849,6 +858,7 @@ input[type=checkbox]:checked + label:before{
 .pvotes-box-title {
     font-size: 22px;
     padding: 10px 10px 0 10px;
+    margin-top: 10px !important;
     font-weight: 500;
     display: inline-block;
 }
@@ -965,7 +975,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 }
 
 .pvotes-pagination ul {
-    margin: 10px 0 5px 0;
+    margin: 10px 0 -5px 0;
 }
 
 .dataset-pagination ul {
@@ -1298,12 +1308,13 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 .rp-title-question span a,
 .rp-choice-questions span a {
     color: #2FA4E7;
+    cursor: pointer !important;
 }
 
 /*///////////////////////////////////////////////////////SUMMARY STATS*/
 
 .stats-title{
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .stats-title h2{
@@ -1644,11 +1655,11 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 }
 
 .admin-modal-content{
-    float: left;
-    text-align: left;
-    padding: 15px 30px 15px 30px !important;
-    border-top: 1px solid #e5e5e5;
-}
+     float: left;
+     text-align: left;
+     padding: 15px 30px 15px 30px !important;
+     border-top: 1px solid #e5e5e5;
+ }
 
 .admin-modal-footer {
     padding: 0 0 20px 0 !important;
@@ -1679,6 +1690,10 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     color: #ffffff !important;
 }
 
+input:-webkit-autofill{
+    background-color: #eeeeee !important;
+}
+
 /***************************************************Confirmation modals*/
 
 .modal-confirmation-alerts {
@@ -1703,6 +1718,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     cursor: pointer;
     opacity: 0;
     filter: alpha(opacity=0);
+    height: 100%;
 }
 
 .fileName {
@@ -2602,6 +2618,17 @@ tags-input .autocomplete .suggestion-item em {
     background-color: #fff;
 }
 
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+
 tags-input .tags .tag-item{
     background: rgba(96, 59, 155, 0.2) !important;
 }
@@ -2610,6 +2637,3 @@ tags-input .tags .tag-item{
     background-color: #2FA4E7 !important;
 }
 
-.dropdown-menu li a:hover {
-    background-color: transparent !important;
-}

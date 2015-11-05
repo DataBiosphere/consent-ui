@@ -37,6 +37,14 @@
             document.body.scrollTop = document.documentElement.scrollTop = 0;
         });
 
+        $scope.openCatalog = function() {
+            $scope.url = '/#/dataset_catalog';
+        }
+
+        $scope.openGWAS = function() {
+            $scope.url = '#';
+        }
+
         function attestAndSave() {
 
             verifyCheckboxes();
