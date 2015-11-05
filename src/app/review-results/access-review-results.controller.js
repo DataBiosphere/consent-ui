@@ -82,7 +82,7 @@
                 scope: $scope
             });
             modalInstance.result.then(function () {
-                $scope.election.status = 'Closed';
+                $scope.election.status = 'Final';
                 cmElectionService.updateElection($scope.election).$promise.then(
                     function() {
                         $scope.closeAccessElection = true;
@@ -106,7 +106,7 @@
                 scope: $scope
             });
             modalInstance.result.then(function () {
-                $scope.rpElection.status = 'Closed';
+                $scope.rpElection.status = 'Final';
                 cmElectionService.updateElection($scope.rpElection).$promise.then(
                     function() {
                         $scope.closeRPElection = true;
