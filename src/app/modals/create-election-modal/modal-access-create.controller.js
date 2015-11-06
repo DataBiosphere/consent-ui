@@ -5,7 +5,7 @@
         .controller('ModalAccessCreate', ModalAccessCreate);
 
     /* ngInject */
-    function ModalAccessCreate($modalInstance, $scope,  cmElectionService) {
+    function ModalAccessCreate($modalInstance, $scope,  cmElectionService, $state) {
 
         var vm = this;
         $scope.disableButton = false;
@@ -15,12 +15,17 @@
                 function (value) {
                     $modalInstance.close();
                 }, function (value) {
-                    $scope.createElectionAlert(0);
+                    if(value.status == 500){
+                        $scope.createEmailAlert(0);
+                    }else{
+                        $scope.createElectionAlert(0);
+                    }
                 });
         };
 
         vm.cancel = function () {
-            $modalInstance.dismiss('cancel');
+            $state.go('admin_manage_access');
+            $modalInstance.close();
         };
 
         vm.singleModel = 0;
@@ -37,6 +42,14 @@
             $scope.alerts.push({
                 title: 'Election cannot be created!',
                 msg: 'There has to be a Chairperson and at least 4 Members cataloged in the system to create an election.'
+            });
+        };
+
+        $scope.createEmailAlert = function (index) {
+            $scope.alerts.splice(index, 1);
+            $scope.alerts.push({
+                title: 'Email Service Error!',
+                msg: 'The election was created but the participants couldnt be notified by Email.'
             });
         };
 
