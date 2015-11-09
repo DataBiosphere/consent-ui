@@ -13,14 +13,18 @@
             $scope.disableButton = true;
             cmElectionService.createElection(value).$promise.then(
                 function (value) {
-                   $modalInstance.close();
+                    $modalInstance.close();
                 }, function (value) {
-                    $scope.createElectionAlert(0);
-                });
+                    if(value.status == 500){
+                        $scope.createEmailAlert(0);
+                    }else{
+                        $scope.createElectionAlert(0);
+                    }});
         };
 
         vm.cancel = function () {
-            $modalInstance.dismiss('cancel');
+            $state.go('admin_manage');
+            $modalInstance.close();
         };
 
         vm.singleModel = 0;
@@ -37,6 +41,14 @@
             $scope.alerts.push({
                 title: 'Election cannot be created!',
                 msg: 'There has to be a Chairperson and at least 4 Members cataloged in the system to create an election.'
+            });
+        };
+
+        $scope.createEmailAlert = function (index) {
+            $scope.alerts.splice(index, 1);
+            $scope.alerts.push({
+                title: 'Email Service Error!',
+                msg: 'The election was created but the participants couldnt be notified by Email.'
             });
         };
 

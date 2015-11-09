@@ -42,6 +42,10 @@
             }
         }
 
+        function redirectToSpecificPage(){
+
+        }
+
         function refreshUser() {
             $rootScope.setCurrentUser(JSON.parse(sessionStorage.getItem('currentUser')));
             $rootScope.loadScript('https://apis.google.com/js/platform.js?onload=onLoadCallback', 'text/javascript', 'utf-8');

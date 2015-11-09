@@ -4,7 +4,7 @@
     angular.module('cmReviewResults')
         .controller('DulReviewResults', DulReviewResults);
 
-    function DulReviewResults(apiUrl, $scope,$rootScope, $modal, $state, cmElectionService,cmTranslateService, cmLoginUserService, electionReview){
+    function DulReviewResults(apiUrl, $scope, $rootScope, cmEmailService, $modal, $state, cmElectionService, cmTranslateService, cmLoginUserService, electionReview){
 
         if( typeof electionReview == 'undefined'){
                     cmLoginUserService.redirect($rootScope.currentUser)
@@ -77,8 +77,8 @@
           });
         $scope.positiveVote = positiveVote;
         $scope.logVote = logVote;
-        $scope.sendReminder = sendReminder;
         $scope.electionType = null;
+        $scope.buttonDisabled = false;
         // Final vote variables
         $scope.isFormDisabled = $scope.chartData.dul[3][1] > 0 || $scope.status != 'Open';
         $scope.finalRationale = electionReview.election.finalRationale;
@@ -86,8 +86,6 @@
         $scope.finalVote = electionReview.election.finalVote;
         $scope.voteList = chunk(electionReview.reviewVote, 2);
         $scope.chartData = getGraphData(electionReview.reviewVote);
-
-
 
         $scope.$watch('chartData.dul', function(){
             if($scope.chartData.dul != 'undefined') {
@@ -124,19 +122,37 @@
             });
         }
 
+        $scope.sendReminder = function(voteId) {
+            $scope.buttonDisabled = true;
+            cmEmailService.sendReminderEmail(voteId).$promise.then(
+                function (value) {
+                    openEmailModal("successDUL", "The reminder was successfully sent.", "Email Notification Sent")
+                    $scope.buttonDisabled = false;
+                }, function (value) {
+                    openEmailModal( "failure", "The reminder couldn't be sent. Please contact Support.", "Email Notification Error")
+                    $scope.buttonDisabled = false;
+                });
+        };
 
-        function sendReminder(voteId) {
-            alert("Reminder sent to: " + getEmailFromVoteList(voteId, electionReview.reviewVote));
-        }
-
-        function getEmailFromVoteList(voteId, reviewVote){
-            for (var i=0; i<reviewVote.length; i++) {
-                if (reviewVote[i].vote.voteId === voteId){
-                    return reviewVote[i].email;
+        var openEmailModal = function(messageType, message, title){
+            $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/email-notification-modal/reminder-modal.html',
+                controller: 'ModalReminder',
+                controllerAs: 'ModalReminder',
+                resolve: {
+                    msg: function () {
+                        return message;
+                    },
+                    messageType: function () {
+                        return messageType;
+                    },
+                    title: function () {
+                        return title;
+                    }
                 }
-            }
+            });
         }
-
 
     };
 

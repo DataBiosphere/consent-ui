@@ -4,9 +4,9 @@
     angular.module('cmReviewResults')
         .controller('AccessReviewResults', ReviewResults);
 
-    function ReviewResults(cmTranslateService, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, electionReview, rpElectionReview, dar, apiUrl, researchPurpose){
+    function ReviewResults(cmTranslateService, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, electionReview, rpElectionReview, dar, apiUrl, researchPurpose, cmEmailService) {
 
-        if( typeof electionReview == 'undefined'){
+        if (typeof electionReview == 'undefined') {
             cmLoginUserService.redirect($rootScope.currentUser);
             return;
         }
@@ -15,7 +15,7 @@
         $scope.rpElection = rpElectionReview.election;
         $scope.voteList = chunk(electionReview.reviewVote, 2);
         $scope.rpVoteList = chunk(rpElectionReview.reviewVote, 2);
-
+        $scope.buttonDisabled = false;
         $scope.chartData = getAccessGraphData(electionReview.reviewVote);
         $scope.rpChartData = getRPGraphData(rpElectionReview.reviewVote);
 
@@ -24,25 +24,57 @@
         $scope.dar = dar.rus;
         $scope.status = electionReview.election.status;
         $scope.isFormDisabled = $scope.chartData.accessChart[3][1] > 0 || $scope.status != 'Open';
-        $scope.isRPFormDisabled =  $scope.rpChartData.RPChart[3][1] > 0 || rpElectionReview.election.status != 'Open';
+        $scope.isRPFormDisabled = $scope.rpChartData.RPChart[3][1] > 0 || rpElectionReview.election.status != 'Open';
         /*ALERTS*/
         $scope.alertsRP = [];
         $scope.alertsDAR = [];
 
-        if($scope.rpElection.finalVote != null){
+        if ($scope.rpElection.finalVote != null) {
             $scope.rpAlreadyVote = true;
         }
 
-        if($scope.election.finalVote != null){
+        if ($scope.election.finalVote != null) {
             $scope.accessAlreadyVote = true;
         }
 
-        if(researchPurpose == null){
-            $scope.rp = "this includes senesitive research objectives that requires manual review";
+        if (researchPurpose == null) {
+            $scope.rp = "this includes sensitive research objectives that requires manual review";
         }else{
             cmTranslateService.translate("purpose",researchPurpose.restriction).then(function(data) {
                 $scope.rp = data;
             })
+        }
+
+        $scope.sendReminder = function(voteId) {
+            $scope.buttonDisabled = true;
+            cmEmailService.sendReminderEmail(voteId).$promise.then(
+                function (value) {
+                    openEmailModal("successDAR", "The reminder was successfully sent.", "Email Notification Sent")
+                    $scope.buttonDisabled = false;
+                }, function (value) {
+                    openEmailModal( "failure", "The reminder couldn't be sent. Please contact Support.", "Email Notification Error")
+                    $scope.buttonDisabled = false;
+                });
+        };
+
+        var openEmailModal = function(messageType, message, title){
+            $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/email-notification-modal/reminder-modal.html',
+                controller: 'ModalReminder',
+                controllerAs: 'ModalReminder',
+                resolve: {
+                    msg: function () {
+                        return message;
+                    },
+                    messageType: function () {
+                        return messageType;
+                    },
+                    title: function () {
+                        return title;
+                    }
+                }
+            });
         }
 
         $scope.reminderDARAlert = function (index) {
@@ -65,11 +97,11 @@
             $scope.alerts.splice(index, 1);
         };
 
-        $scope.positiveRpVote = function (){
+        $scope.positiveRpVote = function () {
             $scope.rpElection.finalRationale = null;
         };
 
-        $scope.positiveAccessVote = function (){
+        $scope.positiveAccessVote = function () {
             $scope.election.finalRationale = null;
         };
 
@@ -84,15 +116,17 @@
             modalInstance.result.then(function () {
                 $scope.election.status = 'Final';
                 cmElectionService.updateElection($scope.election).$promise.then(
-                    function() {
+                    function () {
                         $scope.closeAccessElection = true;
-                        if($scope.closeRPElection || $scope.rpAlreadyVote){
+                        if ($scope.closeRPElection || $scope.rpAlreadyVote) {
                             $state.go('chair_console');
-                        }else{
+                        } else {
                             $scope.reminderDARAlert();
                         }
                     },
-                    function(){ alert("Error while updating final vote.");}
+                    function () {
+                        alert("Error while updating final vote.");
+                    }
                 )
             });
         };
@@ -108,31 +142,33 @@
             modalInstance.result.then(function () {
                 $scope.rpElection.status = 'Final';
                 cmElectionService.updateElection($scope.rpElection).$promise.then(
-                    function() {
+                    function () {
                         $scope.closeRPElection = true;
-                        if($scope.closeAccessElection || $scope.accessAlreadyVote){
+                        if ($scope.closeAccessElection || $scope.accessAlreadyVote) {
                             $state.go('chair_console');
-                        }else{
+                        } else {
                             $scope.reminderRPAlert();
                         }
                     },
-                    function(){ alert("Error while updating final vote.");}
+                    function () {
+                        alert("Error while updating final vote.");
+                    }
                 )
             });
         };
 
         function chunk(arr, size) {
             var newArr = [];
-            for (var i=0; i<arr.length; i+=size) {
-                newArr.push(arr.slice(i, i+size));
+            for (var i = 0; i < arr.length; i += size) {
+                newArr.push(arr.slice(i, i + size));
             }
             return newArr;
         }
 
-        function getAccessGraphData(reviewVote){
+        function getAccessGraphData(reviewVote) {
             var yes = 0, no = 0, empty = 0;
-            for (var i=0; i<reviewVote.length; i++) {
-                switch(reviewVote[i].vote.vote) {
+            for (var i = 0; i < reviewVote.length; i++) {
+                switch (reviewVote[i].vote.vote) {
                     case true:
                         yes++;
                         break;
@@ -155,10 +191,10 @@
             return chartData;
         }
 
-        function getRPGraphData(reviewVote){
+        function getRPGraphData(reviewVote) {
             var yes = 0, no = 0, empty = 0;
-            for (var i=0; i<reviewVote.length; i++) {
-                switch(reviewVote[i].vote.vote) {
+            for (var i = 0; i < reviewVote.length; i++) {
+                switch (reviewVote[i].vote.vote) {
                     case true:
                         yes++;
                         break;
