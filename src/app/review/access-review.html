@@ -73,7 +73,7 @@
                                     </alert>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 col-xs-offset-8 f-right no-margin">
-                                    <button ng-disabled="selection.voteStatus === null" ng-click="logVote()"
+                                    <button ng-disabled="selection.voteStatus === null || enableDARButton === false" ng-click="logVote()"
                                             class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button access-background">
                                         Vote
                                     </button>
@@ -154,7 +154,7 @@
                                     </alert>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 col-xs-offset-8 f-right no-margin">
-                                    <button ng-disabled="selection.rpVoteStatus === null" ng-click="logRPVote()"
+                                    <button ng-disabled="selection.rpVoteStatus === null || enableRPButton === false" ng-click="logRPVote()"
                                             class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button access-background">
                                         Vote
                                     </button>

@@ -7,19 +7,19 @@
     function DulReview($scope, $modal, $state, $rootScope, USER_ROLES, vote, consent, election, cmVoteService,cmTranslateService,cmLoginUserService, apiUrl, cmAuthenticateService)
     {
         if( typeof vote == 'undefined' ||
-        typeof consent == 'undefined'||
-        typeof election == 'undefined'){
+            typeof consent == 'undefined'||
+            typeof election == 'undefined'){
             cmLoginUserService.redirect($rootScope.currentUser)
             return;
         }
 
+        $scope.enableVoteButton = true;
         $scope.downloadUrl = apiUrl + 'consent/' + consent.consentId + '/dul';
         $scope.consentDulUrl = consent.dataUseLetter;
         $scope.consentDulName = consent.dulName;
         $scope.consentSDul = "Loading...";
-
         cmTranslateService.translate("sampleset",consent.useRestriction).then(function(data) {
-                $scope.consentSDul = data;
+            $scope.consentSDul = data;
         });
         $scope.voteStatus = vote.vote;
         $scope.isFormDisabled = (election.status == 'Closed');
@@ -32,6 +32,7 @@
         }
 
         $scope.logVote = function() {
+            $scope.enableVoteButton = false;
             if((vote.vote != $scope.voteStatus)||($scope.rationale != vote.rationale)){
                 vote.vote = $scope.voteStatus;
                 vote.rationale = $scope.rationale;
@@ -47,6 +48,7 @@
                 result.then(
                     //success
                     function(){
+                        $scope.enableVoteButton = true;
                         var modalInstance = $modal.open({
                             animation: false,
                             templateUrl: 'app/modals/confirmation-modal.html',
@@ -64,7 +66,10 @@
                         });
                     },
                     //error
-                    function(){alert("Error updating vote.")});
+                    function(value){
+                        alert("Error updating vote.");
+                        $scope.enableVoteButton = true;
+                    });
             } else  {
                 alert("Error: Your vote hasn't been changed.");
             }
