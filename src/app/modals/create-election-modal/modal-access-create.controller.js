@@ -18,7 +18,7 @@
                     if (value.status === 500) {
                         $scope.createEmailAlert(0);
                     } else {
-                        $scope.createElectionAlert(0);
+                        $scope.createElectionAlert(0, value.data);
                     }
                 });
         };
@@ -37,11 +37,11 @@
 
         $scope.alerts = [];
 
-        $scope.createElectionAlert = function (index) {
+        $scope.createElectionAlert = function (index, data) {
             $scope.alerts.splice(index, 1);
             $scope.alerts.push({
                 title: 'Election cannot be created!',
-                msg: 'There has to be a Chairperson and at least 4 Members cataloged in the system to create an election.'
+                msg: data
             });
         };
 
