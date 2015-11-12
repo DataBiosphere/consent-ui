@@ -1,17 +1,17 @@
-(function() {
+(function () {
 
     'use strict';
 
     angular.module('ConsentManagement')
         .controller('ApplicationController', ApplicationController)
         .factory('OAuth2Interceptor', OAuth2Interceptor)
-        .config(function($httpProvider) {
+        .config(function ($httpProvider) {
             $httpProvider.interceptors.push('OAuth2Interceptor');
         });
 
     function OAuth2Interceptor($rootScope, ontologyApiUrl) {
         return {
-            'request': function(config) {
+            'request': function (config) {
                 if ($rootScope && config.url.indexOf(ontologyApiUrl) === -1) {
                     config.headers.Authorization = 'Bearer ' + $rootScope.accessToken;
                 }
@@ -21,11 +21,11 @@
     }
 
     /* ngInject */
-    function ApplicationController($rootScope, USER_ROLES,cmLoginUserService) {
+    function ApplicationController($rootScope, USER_ROLES) {
 
-            $rootScope.currentUser = null;
-            $rootScope.userRoles = USER_ROLES;
-            $rootScope.setCurrentUser = function(user) {
+        $rootScope.currentUser = null;
+        $rootScope.userRoles = USER_ROLES;
+        $rootScope.setCurrentUser = function (user) {
             $rootScope.currentUser = user;
             sessionStorage.setItem('currentUser', JSON.stringify(user));
             var i = user.roles.length;
@@ -35,8 +35,8 @@
         };
 
 
-        $rootScope.loadScript = function(url, type, charset) {
-            if (type === undefined) type = 'text/javascript';
+        $rootScope.loadScript = function (url, type, charset) {
+            if (type === undefined) {type = 'text/javascript';}
             if (url) {
                 var script = document.querySelector("script[src*='" + url + "']");
                 if (!script) {
@@ -47,8 +47,8 @@
                             script = document.createElement('script');
                             script.setAttribute('src', url);
                             script.setAttribute('type', type);
-                            if (charset) script.setAttribute('charset', charset);
-                            head.appendChild(script);
+                            if (charset) {script.setAttribute('charset', charset);
+                            head.appendChild(script);}
                         }
                     }
                 }
@@ -58,22 +58,22 @@
     }
 
 
-    angular.module('ConsentManagement').run(function($location, $rootScope, $state, cmAuthenticateService,cmLoginUserService) {
-        $rootScope.$on('$stateChangeStart', function(event, next, toState, toParams, fromState, fromParams) {
+    angular.module('ConsentManagement').run(function ($location, $rootScope, $state, cmAuthenticateService, cmLoginUserService) {
+        $rootScope.$on('$stateChangeStart', function (event, next) {
             var authorizedRoles = next.data.authorizedRoles;
 
-              if ($rootScope.currentUser === null) {
-                                    if (sessionStorage.getItem('currentUser') != null && $state.current.name === "") {
-                                                      cmLoginUserService.refreshUser();
-                                        }else if(next.name !== "login"){
-                                                       event.preventDefault();
-                                                       $location.path("/login");
-                                           }
-                                        } else if ($state.current.name !== "login") {
-                                                         if (!cmAuthenticateService.isAuthorized(authorizedRoles, $rootScope.currentUser.roles)) {
-                                                             event.preventDefault();
-                                                         }
-                                        }
-                  });
-                })
+            if ($rootScope.currentUser === null) {
+                if (sessionStorage.getItem('currentUser') !== null && $state.current.name === "") {
+                    cmLoginUserService.refreshUser();
+                } else if (next.name !== "login") {
+                    event.preventDefault();
+                    $location.path("/login");
+                }
+            } else if ($state.current.name !== "login") {
+                if (!cmAuthenticateService.isAuthorized(authorizedRoles, $rootScope.currentUser.roles)) {
+                    event.preventDefault();
+                }
+            }
+        });
+    });
 })();

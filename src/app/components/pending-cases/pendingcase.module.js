@@ -2,31 +2,31 @@
     'use strict';
 
     angular.module('cmPendingCase', ['ngResource'])
-        .factory('DataRequestPendingCases', function($resource, apiUrl){
-            return $resource(apiUrl+"dataRequest/cases/pending/:userId", {},
+        .factory('DataRequestPendingCases', function ($resource, apiUrl) {
+            return $resource(apiUrl + "dataRequest/cases/pending/:userId", {},
                 {
-                    List: {method:'GET',isArray:true}
+                    List: {method: 'GET', isArray: true}
                 });
 
         })
 
-        .factory('ConsentPendingCases', function($resource, apiUrl){
-            return $resource(apiUrl+"consent/cases/pending/:userId", {},
+        .factory('ConsentPendingCases', function ($resource, apiUrl) {
+            return $resource(apiUrl + "consent/cases/pending/:userId", {},
                 {
-                    List: {method:'GET',isArray:true}
+                    List: {method: 'GET', isArray: true}
                 });
         })
 
-        .factory('ConsentSummaryCases', function($resource, apiUrl){
-            return $resource(apiUrl+"consent/cases/summary");
+        .factory('ConsentSummaryCases', function ($resource, apiUrl) {
+            return $resource(apiUrl + "consent/cases/summary");
         })
 
-        .factory('DataRequestSummaryCases', function($resource, apiUrl){
-            return $resource(apiUrl+"dataRequest/cases/summary/:type");
+        .factory('DataRequestSummaryCases', function ($resource, apiUrl) {
+            return $resource(apiUrl + "dataRequest/cases/summary/:type");
         })
 
-        .factory('ConsentSummaryFile', function($resource, apiUrl){
-            return $resource(apiUrl+"consent/cases/summary/file");
-        })
+        .factory('ConsentSummaryFile', function ($resource, apiUrl) {
+            return $resource(apiUrl + "consent/cases/summary/file");
+        });
 
 })();

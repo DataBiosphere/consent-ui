@@ -11,25 +11,26 @@
         init();
 
         function init() {
-        $scope.user = new Object();
-        $scope.user.roles = [];
-        $scope.checkModel = new Object();
+            $scope.user = {};
+            $scope.user.roles = [];
+            $scope.checkModel = {};
 
-           $scope.$on("changeChairpersonRoleAlert", function (event, arg) {
-                                                     $scope.$apply(function () {
-                                                     if(arg.alert){
-                                                       $scope.changeChairpersonRoleAlert();
-                                                     }else{
-                                                       $scope.closeAlert();
-                                                     }
-                                                    });
-                                                   });
-            }
+            $scope.$on("changeChairpersonRoleAlert", function (event, arg) {
+                $scope.$apply(function () {
+                    if (arg.alert) {
+                        $scope.changeChairpersonRoleAlert();
+                    } else {
+                        $scope.closeAlert();
+                    }
+                });
+            });
+        }
+
         vm.ok = function (user) {
             cmUserService.postUser(user).$promise.then(
-                function (value) {
+                function () {
                     $modalInstance.close();
-                }, function (value) {
+                }, function () {
                     $scope.duplicateNameAlert(0);
                 });
 

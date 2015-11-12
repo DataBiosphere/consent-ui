@@ -7,7 +7,7 @@
         .factory('PostDsFileResource', function($resource, apiUrl){
         return $resource(apiUrl+"dataset",{}, {
             post: {method: 'POST', isArray:true, params: {overwrite: 'overwrite'}, headers: { 'Content-Type': undefined },
-                transformRequest: function (data, headers) {
+                transformRequest: function (data) {
                     var formData = new FormData();
                     formData.append("data", new Blob([data], { type: 'text/plain' }));
                     return formData;
@@ -41,7 +41,7 @@
                                            headers: {'Accept': "application/json",
                                             'Content-Type': "application/json" } }
                            });
-                })
+                });
 
 })();
 

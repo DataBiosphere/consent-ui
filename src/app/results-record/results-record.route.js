@@ -23,7 +23,7 @@
                 },
                 resolve: {
                     electionReview: function($stateParams, cmElectionService){
-                        if($stateParams.electionId != null){
+                        if($stateParams.electionId !== null){
                             return cmElectionService.findReviewedElections($stateParams.electionId).$promise;
                         }
                     }

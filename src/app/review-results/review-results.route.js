@@ -6,7 +6,7 @@
         .config(routeConfig);
 
     /* ngInject */
-    function routeConfig($stateProvider,USER_ROLES) {
+    function routeConfig($stateProvider, USER_ROLES) {
 
         $stateProvider
             // route to show our basic form (/form)
@@ -24,8 +24,8 @@
                     authorizedRoles: [USER_ROLES.chairperson]
                 },
                 resolve: {
-                    electionReview: function($stateParams, cmElectionService){
-                        if($stateParams.consentId != null){
+                    electionReview: function ($stateParams, cmElectionService) {
+                        if ($stateParams.consentId !== null) {
                             return cmElectionService.findElectionReview($stateParams.consentId, 'TranslateDUL').$promise;
                         }
                     }
@@ -47,23 +47,23 @@
                     authorizedRoles: [USER_ROLES.chairperson]
                 },
                 resolve: {
-                    electionReview: function($stateParams, cmElectionService){
-                        if($stateParams.electionId != null){
-                            return cmElectionService.findDataAccessElectionReview($stateParams.electionId,false).$promise;
+                    electionReview: function ($stateParams, cmElectionService) {
+                        if ($stateParams.electionId !== null) {
+                            return cmElectionService.findDataAccessElectionReview($stateParams.electionId, false).$promise;
                         }
                     },
-                    rpElectionReview: function($stateParams, cmElectionService){
-                        if($stateParams.electionId != null){
-                            return cmElectionService.findRPElectionReview($stateParams.electionId,false).$promise;
+                    rpElectionReview: function ($stateParams, cmElectionService) {
+                        if ($stateParams.electionId !== null) {
+                            return cmElectionService.findRPElectionReview($stateParams.electionId, false).$promise;
                         }
                     },
-                    researchPurpose: function($stateParams, cmRPService){
-                        if($stateParams.referenceId != null){
+                    researchPurpose: function ($stateParams, cmRPService) {
+                        if ($stateParams.referenceId !== null) {
                             return cmRPService.getRestriction($stateParams.referenceId);
                         }
                     },
-                    dar: function($stateParams, cmRPService){
-                        if($stateParams.referenceId != null){
+                    dar: function ($stateParams, cmRPService) {
+                        if ($stateParams.referenceId !== null) {
                             return cmRPService.getDarFields($stateParams.referenceId, "rus");
                         }
 
@@ -75,7 +75,7 @@
                 name: 'final_access_review_results',
                 url: '/final_access_review_results',
                 templateUrl: 'app/review-results/final-access-review-results.html',
-                controller: function($scope, $stateParams){
+                controller: function ($scope, $stateParams) {
                     $scope.electionId = $stateParams.electionId;
                     $scope.referenceId = $stateParams.referenceId;
                     $scope.rpElectionId = $stateParams.rpElectionId;

@@ -6,7 +6,7 @@
         .config(routeConfig);
 
     /* ngInject */
-    function routeConfig($stateProvider,USER_ROLES) {
+    function routeConfig($stateProvider, USER_ROLES) {
         $stateProvider
             .state('rp_application', {
                 url: '/rp_application',
@@ -39,7 +39,7 @@
             })
 
             .state('rp_application_confirm', {
-                name:'rp_application_confirm',
+                name: 'rp_application_confirm',
                 url: '/rp_application_confirm',
                 templateUrl: 'app/rp-application/rp-application-confirm.html',
                 controller: 'RPApplication',
@@ -47,7 +47,7 @@
                 data: {
                     authorizedRoles: [USER_ROLES.researcher]
                 }
-            })
+            });
     }
 
 })();

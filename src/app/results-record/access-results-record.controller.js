@@ -8,8 +8,8 @@
     function AccessResultsRecord($scope, $state, cmElectionService, apiUrl, cmRPService, cmVoteService, cmMatchService) {
 
 
-        if ($scope.electionId == null) {
-            $state.go('reviewed_cases')
+        if ($scope.electionId === null) {
+            $state.go('reviewed_cases');
             return;
         }
 
@@ -176,7 +176,7 @@
                 cmElectionService.findLastElectionReviewByReferenceId(data.consent.consentId).$promise.then(function (data) {
                     showDULData(data);
                     vaultVote(data.consent.consentId);
-                })
+                });
             });
         }
 
@@ -219,7 +219,7 @@
         function getGraphData(reviewVote) {
             var yes = 0, no = 0, empty = 0;
             for (var i = 0; i < reviewVote.length; i++) {
-                if (reviewVote[i].vote.type == 'DAC') {
+                if (reviewVote[i].vote.type === 'DAC') {
                     switch (reviewVote[i].vote.vote) {
                         case true:
                             yes++;
@@ -246,7 +246,7 @@
 
         function vaultVote(consentId) {
             cmMatchService.findMatch(consentId, $scope.electionAccess.referenceId).then(function (data) {
-                if (data.match != null) {
+                if (data.match !== null) {
                     $scope.hideMatch = false;
                     $scope.match = data.match;
                     $scope.createDate = data.createDate;

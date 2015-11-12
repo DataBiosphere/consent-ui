@@ -1,6 +1,6 @@
 (function () {
     'use strict';
 
-    angular.module('cmSession', ['ngResource'])
+    angular.module('cmSession', ['ngResource']);
 
 })();

@@ -22,7 +22,7 @@
 
             function focusElement() {
                 $timeout(function () {
-                    if (attrs.cmFocus == "true") element[0].focus();
+                    if (attrs.cmFocus === "true") {element[0].focus();}
                 }, 0);
             }
 

@@ -9,10 +9,10 @@
 
         return {
             scope: true,
-            link: function (scope, element, attributes) {
+            link: function (scope, element) {
                 element.bind("change", function () {
                     var file = element.context.files[0];
-                    scope.$emit("fileSelected", { file : file });
+                    scope.$emit("fileSelected", {file: file});
 
                 });
             }

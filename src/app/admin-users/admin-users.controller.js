@@ -18,7 +18,7 @@
         function init() {
             cmUserService.findUsers().then(
                 function (data) {
-                    vm.usersList['dul'] = data;
+                    vm.usersList.dul = data;
                 });
         }
 
@@ -50,15 +50,14 @@
                         return cmUserService.findUser(email);
                     },
                     enableRolEdit: function (cmElectionService) {
-                                        return cmElectionService.openElections().$promise;
+                        return cmElectionService.openElections().$promise;
                     }
                 }
             });
 
-            modalInstance.result.then(function (selectedItem) {
+            modalInstance.result.then(function () {
                 init();
             }, function () {
-                //what to do if the modal was canceled
             });
         }
 

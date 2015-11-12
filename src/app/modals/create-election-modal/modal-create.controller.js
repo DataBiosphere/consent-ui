@@ -12,14 +12,15 @@
         vm.ok = function (value) {
             $scope.disableButton = true;
             cmElectionService.createElection(value).$promise.then(
-                function (value) {
+                function () {
                     $modalInstance.close();
                 }, function (value) {
-                    if(value.status == 500){
+                    if (value.status === 500) {
                         $scope.createEmailAlert(0);
-                    }else{
+                    } else {
                         $scope.createElectionAlert(0);
-                    }});
+                    }
+                });
         };
 
         vm.cancel = function () {
@@ -48,7 +49,7 @@
             $scope.alerts.splice(index, 1);
             $scope.alerts.push({
                 title: 'Email Service Error!',
-                msg: 'The election was created but the participants couldnt be notified by Email.'
+                msg: "The election was created but the participants couldn't be notified by email."
             });
         };
 
@@ -59,4 +60,3 @@
     }
 
 })();
-
