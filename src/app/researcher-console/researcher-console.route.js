@@ -17,7 +17,7 @@
                 data: {
                     authorizedRoles: [USER_ROLES.researcher]
                 }
-            })
+            });
     }
 
 })();

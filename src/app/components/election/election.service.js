@@ -5,33 +5,33 @@
         .service('cmElectionService', cmElectionService);
 
     /* ngInject */
-    function cmElectionService(RPElectionReviewResource, DarElectionResource,ElectionReviewResource , ElectionResource, ElectionUpdateResource, ElectionReviewedConsents, ElectionReviewedDRs, ElectionReviewConsent,openElectionsResource, ElectionReview,LastElectionReview, DataAccessElectionReviewResource) {
+    function cmElectionService(RPElectionReviewResource, DarElectionResource, ElectionReviewResource, ElectionResource, ElectionUpdateResource, ElectionReviewedConsents, ElectionReviewedDRs, ElectionReviewConsent, openElectionsResource, ElectionReview, LastElectionReview, DataAccessElectionReviewResource) {
         /**
          * Find data for the election related to the consentId sent as a parameter
          * @param consentId
          */
-        function findElectionByConsentId(id){
+        function findElectionByConsentId(id) {
             return ElectionResource.get({consentId: id});
         }
 
-        function findElectionReviewByReferenceId(id, type){
-            return ElectionReviewResource.get({referenceId: id, type:type});
+        function findElectionReviewByReferenceId(id, type) {
+            return ElectionReviewResource.get({referenceId: id, type: type});
 
         }
 
-        function findDataAccessElectionReview(id,isFinalAccess){
-            return DataAccessElectionReviewResource.get({electionId: id ,isFinalAccess: isFinalAccess });
+        function findDataAccessElectionReview(id, isFinalAccess) {
+            return DataAccessElectionReviewResource.get({electionId: id, isFinalAccess: isFinalAccess});
         }
 
-        function findRPElectionReview(id,isFinalAccess){
-            return RPElectionReviewResource.get({electionId: id ,isFinalAccess: isFinalAccess });
+        function findRPElectionReview(id, isFinalAccess) {
+            return RPElectionReviewResource.get({electionId: id, isFinalAccess: isFinalAccess});
         }
 
         /**
          * Find all data needed to display an election Review for an specific election id
          * @param electionId
          */
-        function findElectionReviewByElectionId(id){
+        function findElectionReviewByElectionId(id) {
             return ElectionReview.get({electionId: id});
         }
 
@@ -40,8 +40,8 @@
          * @param consentId
          * @param electionId
          */
-        function updateElection(election){
-            var postObject = new Object();
+        function updateElection(election) {
+            var postObject = {};
             postObject.finalVote = election.finalVote;
             postObject.status = election.status;
             postObject.finalRationale = election.finalRationale;
@@ -53,11 +53,12 @@
          * @param consentId
          * @param electionId
          */
-        function createElection(consentId){
-            var postElection = new Object();
+        function createElection(consentId) {
+            var postElection = {};
             postElection.status = 'Open';
             return ElectionResource.post({consentId: consentId}, postElection);
         }
+
         /**
          * Find data for the election related to the requestId sent as a parameter
          * @param consentId
@@ -71,27 +72,27 @@
          * @param consentId
          */
         function createDARElection(requestId) {
-            var postElection = new Object();
+            var postElection = {};
             postElection.status = 'Open';
             postElection.finalAccessVote = false;
             return DarElectionResource.post({requestId: requestId}, postElection);
         }
 
-        function openElections(){
+        function openElections() {
             return openElectionsResource.get();
         }
 
         /**
          * Find closed elections for consents
          */
-        function getReviewedConsents(){
+        function getReviewedConsents() {
             return ElectionReviewedConsents.List().$promise;
         }
 
         /**
          * Find closed elections for Data Requests
          */
-        function getReviewedDRs(){
+        function getReviewedDRs() {
             return ElectionReviewedDRs.List().$promise;
         }
 
@@ -99,54 +100,54 @@
          * Find all data needed to display an election Review Access for an specific election id
          * @param electionId
          */
-        function findLastElectionReviewByReferenceId(id){
+        function findLastElectionReviewByReferenceId(id) {
             return LastElectionReview.get({electionId: id});
         }
 
-        return{
-            findDarElection: function(id) {
+        return {
+            findDarElection: function (id) {
                 return findElectionByDarId(id);
             },
-            findElection: function(id) {
+            findElection: function (id) {
                 return findElectionByConsentId(id);
             },
-            findElectionReview: function(referenceId, type) {
+            findElectionReview: function (referenceId, type) {
                 return findElectionReviewByReferenceId(referenceId, type);
             },
 
-            findDataAccessElectionReview: function(referenceId , isFinalAccess) {
-                return findDataAccessElectionReview(referenceId , isFinalAccess);
+            findDataAccessElectionReview: function (referenceId, isFinalAccess) {
+                return findDataAccessElectionReview(referenceId, isFinalAccess);
             },
-            findRPElectionReview: function(referenceId , isFinalAccess) {
-                return findRPElectionReview(referenceId , isFinalAccess);
+            findRPElectionReview: function (referenceId, isFinalAccess) {
+                return findRPElectionReview(referenceId, isFinalAccess);
             },
-            updateElection: function(election){
+            updateElection: function (election) {
                 return updateElection(election);
             },
 
-            createElection: function(consentId){
+            createElection: function (consentId) {
                 return createElection(consentId);
             },
-            findReviewedConsents: function() {
+            findReviewedConsents: function () {
                 return getReviewedConsents();
             },
 
-            findReviewedDRs: function() {
+            findReviewedDRs: function () {
                 return getReviewedDRs();
             },
-            openElections: function(){
+            openElections: function () {
                 return openElections();
             },
-            findLastElectionReviewByReferenceId: function(id){
+            findLastElectionReviewByReferenceId: function (id) {
                 return findLastElectionReviewByReferenceId(id);
             },
-            findReviewedElections: function(electionId){
+            findReviewedElections: function (electionId) {
                 return findElectionReviewByElectionId(electionId);
             },
-            createDARElection: function(requestId){
+            createDARElection: function (requestId) {
                 return createDARElection(requestId);
             }
-        }
+        };
     }
 
 })();

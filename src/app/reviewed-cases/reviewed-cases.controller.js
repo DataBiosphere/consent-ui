@@ -13,19 +13,19 @@
         init();
 
         function init() {
-            vm.electionsList['dul'] = transformElectionResultData(reviewedConsents);
-            vm.electionsList['access'] = transformElectionResultData(reviewedDRs);
+            vm.electionsList.dul = transformElectionResultData(reviewedConsents);
+            vm.electionsList.access = transformElectionResultData(reviewedDRs);
 
         }
     }
 
     // We need to transform the result data to a string to be able to filter results
-    function transformElectionResultData(collection){
+    function transformElectionResultData(collection) {
         var dup_array = collection.slice();
         for (var i = 0; i < dup_array.length; i++) {
-            if(dup_array[i].finalVote === true){
+            if (dup_array[i].finalVote === true) {
                 dup_array[i].finalVoteString = 'Yes';
-            }else{
+            } else {
                 dup_array[i].finalVoteString = 'No';
             }
         }

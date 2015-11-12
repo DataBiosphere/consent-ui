@@ -13,7 +13,7 @@
         $scope.showValidationMessages = false;
         $scope.atLeastOneCheckboxChecked = false;
 
-        $scope.formData = Object();
+        $scope.formData = {};
 
         $scope.$watch("form.step1.$valid", function (value1) {
             if ($state.current.url === "/step1") {
@@ -39,11 +39,11 @@
 
         $scope.openCatalog = function() {
             $scope.url = '/#/dataset_catalog';
-        }
+        };
 
         $scope.openGWAS = function() {
             $scope.url = '#';
-        }
+        };
 
         function attestAndSave() {
 
@@ -75,11 +75,11 @@
 
         function verifyCheckboxes() {
 
-            if ($scope.formData.control != true &&
-                $scope.formData.population != true &&
-                $scope.formData.diseases != true &&
-                $scope.formData.methods != true &&
-                $scope.formData.other != true
+            if ($scope.formData.control !== true &&
+                $scope.formData.population !== true &&
+                $scope.formData.diseases !== true &&
+                $scope.formData.methods !== true &&
+                $scope.formData.other !== true
             ) {
                 $scope.atLeastOneCheckboxChecked = false;
             } else {

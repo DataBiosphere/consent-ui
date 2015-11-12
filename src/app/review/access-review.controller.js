@@ -6,20 +6,20 @@
 
     function DarReview($scope, $modal, $state, $rootScope, USER_ROLES, vote, rpVote, dar, election, consent, cmVoteService, apiUrl, cmAuthenticateService , cmLoginUserService, cmTranslateService, researchPurpose)
     {
-        if( typeof vote == 'undefined' ||
-            typeof consent == 'undefined'||
-            typeof election == 'undefined'||
-            typeof dar == 'undefined'){
+        if( typeof vote === 'undefined' ||
+            typeof consent === 'undefined'||
+            typeof election === 'undefined'||
+            typeof dar === 'undefined'){
             cmLoginUserService.redirect($rootScope.currentUser);
             return;
         }
 
-        if(researchPurpose == null){
+        if(researchPurpose === null){
             $scope.rp = "this includes senesitive research objectives that requires manual review";
         }else{
             cmTranslateService.translate("purpose",researchPurpose.restriction).then(function(data) {
                 $scope.rp = data;
-            })
+            });
         }
         $scope.enableDARButton = true;
         $scope.enableRPButton = true;
@@ -29,7 +29,7 @@
         $scope.dar = dar;
         $scope.selection.voteStatus = vote.vote;
         $scope.selection.rpVoteStatus = rpVote.vote;
-        $scope.isFormDisabled = (election.status == 'Closed');
+        $scope.isFormDisabled = (election.status === 'Closed');
         $scope.selection.rationale = vote.rationale;
         $scope.selection.rpRationale = rpVote.rationale;
         $scope.isNew = null;
@@ -77,16 +77,16 @@
 
         $scope.logRPVote = function() {
             $scope.enableRPButton = false;
-            if((rpVote.vote != $scope.selection.rpVoteStatus)||($scope.selection.rpRationale != vote.rpRationale)){
+            if((rpVote.vote !== $scope.selection.rpVoteStatus)||($scope.selection.rpRationale !== vote.rpRationale)){
                 rpVote.vote = $scope.selection.rpVoteStatus;
                 rpVote.rationale = $scope.selection.rpRationale;
                 var result;
-                if(rpVote.createDate == null){
+                if(rpVote.createDate === null){
                     $scope.isNew = true;
-                    result = cmVoteService.postDarVote(election.referenceId, rpVote).$promise
+                    result = cmVoteService.postDarVote(election.referenceId, rpVote).$promise;
                 } else {
                     $scope.isNew = false;
-                    result = cmVoteService.updateDarVote(election.referenceId, rpVote).$promise
+                    result = cmVoteService.updateDarVote(election.referenceId, rpVote).$promise;
                 }
                 $scope.logRpVote = true;
                 result.then(
@@ -101,8 +101,8 @@
                             scope: $scope
                         });
                         modalInstance.result.then(function () {
-                            if($scope.logAccessVote || vote.vote != null){
-                                cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles)
+                            if($scope.logAccessVote || vote.vote !== null){
+                                cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles);
                                 if(cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles)){
                                     $state.go('chair_console');
                                 }else {
@@ -117,7 +117,7 @@
                     },
                     //error
                     function(){
-                        alert("Error updating vote.")
+                        alert("Error updating vote.");
                         $scope.enableRPButton = true;
                     });
             } else  {
@@ -129,16 +129,16 @@
 
         $scope.logVote = function() {
             $scope.enableDARButton = false;
-            if((vote.vote != $scope.selection.voteStatus)||($scope.selection.rationale != vote.rationale)){
+            if((vote.vote !== $scope.selection.voteStatus)||($scope.selection.rationale !== vote.rationale)){
                 vote.vote = $scope.selection.voteStatus;
                 vote.rationale = $scope.selection.rationale;
                 var result;
-                if(vote.createDate == null){
+                if(vote.createDate === null){
                     $scope.isNew = true;
-                    result = cmVoteService.postDarVote(election.referenceId, vote).$promise
+                    result = cmVoteService.postDarVote(election.referenceId, vote).$promise;
                 } else {
                     $scope.isNew = false;
-                    result = cmVoteService.updateDarVote(election.referenceId, vote).$promise
+                    result = cmVoteService.updateDarVote(election.referenceId, vote).$promise;
                 }
                 $scope.logAccessVote = true;
                 $scope.electionType = 'access';
@@ -153,8 +153,8 @@
                             scope: $scope
                         });
                         modalInstance.result.then(function () {
-                            if($scope.logRpVote || rpVote.vote != null){
-                                cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles)
+                            if($scope.logRpVote || rpVote.vote !== null){
+                                cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles);
                                 if(cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles)){
                                     $state.go('chair_console');
                                 }else {

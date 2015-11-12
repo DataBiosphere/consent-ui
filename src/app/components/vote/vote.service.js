@@ -11,7 +11,7 @@
          * Find all votes for the election related to the consentId sent as a parameter
          * @param consentId
          */
-        function findAllVotesByConsentId(id){
+        function findAllVotesByConsentId(id) {
             return GetAllVotesResource.query({consentId: id}).$promise;
         }
 
@@ -20,7 +20,7 @@
          * @param consentId(referenceId)
          * @param voteId
          */
-        function findVote(referenceId, voteId){
+        function findVote(referenceId, voteId) {
             return VoteResource.get({consentId: referenceId, voteId: voteId}).$promise;
         }
 
@@ -29,7 +29,7 @@
          * @param requestId(Data Access Request ID)
          * @param voteId
          */
-        function findDarVote(referenceId, voteId){
+        function findDarVote(referenceId, voteId) {
             return DarVoteResource.get({requestId: referenceId, voteId: voteId}).$promise;
         }
 
@@ -37,7 +37,7 @@
          * Find the final Access Vote for the election related to the electionId  sent as a parameter
          * @param electionId
          */
-        function findDarFinalAccessVote(electionId){
+        function findDarFinalAccessVote(electionId) {
             return DarFinalAccessVoteResource.get({requestId: electionId}).$promise;
         }
 
@@ -45,7 +45,7 @@
          * Update the vote with the id sent as a parameter
          * @param vote, with the voteId included
          */
-        function putVote(consentId, vote){
+        function putVote(consentId, vote) {
             var postObject = {};
             postObject.vote = vote.vote;
             postObject.dacUserId = vote.dacUserId;
@@ -57,7 +57,7 @@
          * Update the vote with the id sent as a parameter
          * @param vote, with the voteId included
          */
-        function putDarVote(requestId, vote){
+        function putDarVote(requestId, vote) {
             var postObject = {};
             postObject.vote = vote.vote;
             postObject.dacUserId = vote.dacUserId;
@@ -70,24 +70,25 @@
          * Update the final access vote with the id sent as a parameter
          * @param vote, with the voteId included
          */
-        function putFinalAccessDarVote(requestId, vote){
+        function putFinalAccessDarVote(requestId, vote) {
             var postObject = {};
             postObject.vote = vote.vote;
             postObject.dacUserId = vote.dacUserId;
             postObject.rationale = vote.rationale;
-            if(vote.type == 'FINAL'){
-                {postObject.type = 'FINAL';}
+            if (vote.type === 'FINAL') {
+                {
+                    postObject.type = 'FINAL';
+                }
             }
             return FinalAccessDarVoteResource.post({requestId: requestId, voteId: vote.voteId}, postObject);
         }
-
 
 
         /**
          * Post the vote with the id sent as a parameter
          * @param vote, with the voteId included
          */
-        function postVote(consentId, vote){
+        function postVote(consentId, vote) {
             var postObject = {};
             postObject.vote = vote.vote;
             postObject.dacUserId = vote.dacUserId;
@@ -99,7 +100,7 @@
          * Post the vote with the id sent as a parameter
          * @param vote, with the voteId included
          */
-        function postDarVote(requestId, vote){
+        function postDarVote(requestId, vote) {
             var postObject = {};
             postObject.vote = vote.vote;
             postObject.dacUserId = vote.dacUserId;
@@ -107,32 +108,32 @@
             return DarVoteResource.post({requestId: requestId, voteId: vote.voteId}, postObject);
         }
 
-        return{
-            getAllVotes: function(id){
+        return {
+            getAllVotes: function (id) {
                 return findAllVotesByConsentId(id);
             },
-            getVote: function(referenceId, voteId){
+            getVote: function (referenceId, voteId) {
                 return findVote(referenceId, voteId);
             },
-            postVote: function(consentId, vote){
+            postVote: function (consentId, vote) {
                 return postVote(consentId, vote);
             },
-            updateVote: function(consentId, vote){
+            updateVote: function (consentId, vote) {
                 return putVote(consentId, vote);
             },
-            getDarVote: function(referenceId, voteId){
+            getDarVote: function (referenceId, voteId) {
                 return findDarVote(referenceId, voteId);
             },
-            getDarFinalAccessVote: function(electionId){
+            getDarFinalAccessVote: function (electionId) {
                 return findDarFinalAccessVote(electionId);
             },
-            postDarVote: function(consentId, vote){
+            postDarVote: function (consentId, vote) {
                 return postDarVote(consentId, vote);
             },
-            updateDarVote: function(consentId, vote){
+            updateDarVote: function (consentId, vote) {
                 return putDarVote(consentId, vote);
             },
-            updateFinalAccessDarVote: function(consentId, vote){
+            updateFinalAccessDarVote: function (consentId, vote) {
                 return putFinalAccessDarVote(consentId, vote);
             }
 

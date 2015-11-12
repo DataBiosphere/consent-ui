@@ -6,7 +6,7 @@
 
     function FinalAccessReviewResults($scope, $rootScope, $modal, $state, cmElectionService, cmRPService, cmVoteService, cmLoginUserService, apiUrl, cmMatchService) {
 
-        if ($scope.electionId == null || $scope.referenceId == null) {
+        if ($scope.electionId === null || $scope.referenceId === null) {
             cmLoginUserService.redirect($rootScope.currentUser);
             return;
         }
@@ -63,7 +63,7 @@
                     function () {
                         alert("Error while updating final access vote.");
                     }
-                )
+                );
             });
         }
 
@@ -95,7 +95,7 @@
                     function () {
                         alert("Error while updating final access vote.");
                     }
-                )
+                );
             });
         }
 
@@ -239,7 +239,7 @@
             $scope.vote = cmVoteService.getDarFinalAccessVote($scope.electionId)
                 .then(function (data) {
                     $scope.vote = data;
-                    if(data.vote != null){
+                    if (data.vote !== null) {
                         $scope.alreadyVote = true;
                     }
                 });
@@ -260,7 +260,7 @@
                 cmElectionService.findLastElectionReviewByReferenceId(data.consent.consentId).$promise.then(function (data) {
                     showDULData(data);
                     vaultVote(data.consent.consentId);
-                })
+                });
             });
 
         }
@@ -277,7 +277,7 @@
             $scope.voteAccessList = chunk(electionReview.reviewVote, 2);
             $scope.chartDataAccess = getGraphData(electionReview.reviewVote);
             $scope.voteAgreement = electionReview.voteAgreement;
-            if(electionReview.voteAgreement.vote != null){
+            if (electionReview.voteAgreement.vote !== null) {
                 $scope.agreementAlreadyVote = true;
             }
         }
@@ -307,7 +307,7 @@
         function getGraphData(reviewVote) {
             var yes = 0, no = 0, empty = 0;
             for (var i = 0; i < reviewVote.length; i++) {
-                if (reviewVote[i].vote.type == 'DAC') {
+                if (reviewVote[i].vote.type === 'DAC') {
                     switch (reviewVote[i].vote.vote) {
                         case true:
                             yes++;
@@ -343,7 +343,7 @@
 
         function vaultVote(consentId) {
             cmMatchService.findMatch(consentId, $scope.electionAccess.referenceId).then(function (data) {
-                if (data.match != null) {
+                if (data.match !== null) {
                     $scope.hideMatch = false;
                     $scope.match = data.match;
                     $scope.createDate = data.createDate;
