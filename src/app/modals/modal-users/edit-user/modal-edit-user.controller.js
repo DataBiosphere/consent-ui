@@ -12,7 +12,7 @@
 
         function init() {
             $scope.USER_ROLES = USER_ROLES;
-            $scope.checkModel = new Object();
+            $scope.checkModel = {};
             $scope.user = user;
             $scope.enableRolEdit = enableRolEdit.open;
             var i = user.roles.length;
@@ -35,7 +35,7 @@
                     }
                 }
                 return false;
-            }
+            };
 
 
             $scope.$on("changeChairpersonRoleAlert", function (event, arg) {
@@ -52,7 +52,7 @@
 
         vm.edit = function (user) {
             cmUserService.updateUser(user).$promise.then(
-                function (value) {
+                function () {
                     $modalInstance.close();
                 }, function (reason) {
                     if (reason.status === 400) {

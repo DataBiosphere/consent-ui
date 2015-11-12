@@ -6,7 +6,7 @@
         .config(routeConfig);
 
     /* ngInject */
-    function routeConfig($stateProvider,USER_ROLES) {
+    function routeConfig($stateProvider, USER_ROLES) {
         $stateProvider
             // route to show our basic form (/form)
             .state('dul_review', {
@@ -24,18 +24,18 @@
                     authorizedRoles: [USER_ROLES.member, USER_ROLES.chairperson]
                 },
                 resolve: {
-                    vote: function($stateParams, cmVoteService){
-                        if($stateParams.consentId != null){
+                    vote: function ($stateParams, cmVoteService) {
+                        if ($stateParams.consentId !== null) {
                             return cmVoteService.getVote($stateParams.consentId, $stateParams.voteId);
                         }
                     },
-                    consent: function($stateParams, cmConsentService){
-                        if($stateParams.consentId != null) {
+                    consent: function ($stateParams, cmConsentService) {
+                        if ($stateParams.consentId !== null) {
                             return cmConsentService.findConsent($stateParams.consentId);
                         }
                     },
-                    election: function($stateParams, cmElectionService){
-                        if($stateParams.consentId != null) {
+                    election: function ($stateParams, cmElectionService) {
+                        if ($stateParams.consentId !== null) {
                             return cmElectionService.findElection($stateParams.consentId);
                         }
                     }
@@ -59,34 +59,34 @@
                     authorizedRoles: [USER_ROLES.member, USER_ROLES.chairperson]
                 },
                 resolve: {
-                    dar: function($stateParams, cmRPService){
-                        if($stateParams.darId != null){
+                    dar: function ($stateParams, cmRPService) {
+                        if ($stateParams.darId !== null) {
                             return cmRPService.getDarFields($stateParams.darId, "rus");
                         }
                     },
-                    researchPurpose: function($stateParams, cmRPService){
-                        if($stateParams.darId != null){
+                    researchPurpose: function ($stateParams, cmRPService) {
+                        if ($stateParams.darId !== null) {
                             return cmRPService.getRestriction($stateParams.darId);
                         }
                     },
-                    consent: function($stateParams, cmRPService){
-                        if($stateParams.darId != null){
+                    consent: function ($stateParams, cmRPService) {
+                        if ($stateParams.darId !== null) {
                             return cmRPService.getDarConsent($stateParams.darId);
                         }
                     },
                     election: function ($stateParams, cmElectionService) {
-                        if($stateParams.darId != null){
+                        if ($stateParams.darId !== null) {
                             return cmElectionService.findDarElection($stateParams.darId);
                         }
 
                     },
                     vote: function ($stateParams, cmVoteService) {
-                        if($stateParams.darId != null) {
+                        if ($stateParams.darId !== null) {
                             return cmVoteService.getDarVote($stateParams.darId, $stateParams.voteId);
                         }
                     },
                     rpVote: function ($stateParams, cmVoteService) {
-                        if($stateParams.darId != null && $stateParams.rpVoteId != null) {
+                        if ($stateParams.darId !== null && $stateParams.rpVoteId !== null) {
                             return cmVoteService.getDarVote($stateParams.darId, $stateParams.rpVoteId);
                         }
                     }

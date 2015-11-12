@@ -6,7 +6,7 @@
 
     function ReviewResults(cmTranslateService, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, electionReview, rpElectionReview, dar, apiUrl, researchPurpose, cmEmailService) {
 
-        if (typeof electionReview == 'undefined') {
+        if (typeof electionReview === 'undefined') {
             cmLoginUserService.redirect($rootScope.currentUser);
             return;
         }
@@ -23,41 +23,41 @@
         $scope.dulName = electionReview.consent.dulName;
         $scope.dar = dar.rus;
         $scope.status = electionReview.election.status;
-        $scope.isFormDisabled = $scope.chartData.accessChart[3][1] > 0 || $scope.status != 'Open';
-        $scope.isRPFormDisabled = $scope.rpChartData.RPChart[3][1] > 0 || rpElectionReview.election.status != 'Open';
+        $scope.isFormDisabled = $scope.chartData.accessChart[3][1] > 0 || $scope.status !== 'Open';
+        $scope.isRPFormDisabled = $scope.rpChartData.RPChart[3][1] > 0 || rpElectionReview.election.status !== 'Open';
         /*ALERTS*/
         $scope.alertsRP = [];
         $scope.alertsDAR = [];
 
-        if ($scope.rpElection.finalVote != null) {
+        if ($scope.rpElection.finalVote !== null) {
             $scope.rpAlreadyVote = true;
         }
 
-        if ($scope.election.finalVote != null) {
+        if ($scope.election.finalVote !== null) {
             $scope.accessAlreadyVote = true;
         }
 
-        if (researchPurpose == null) {
+        if (researchPurpose === null) {
             $scope.rp = "this includes sensitive research objectives that requires manual review";
-        }else{
-            cmTranslateService.translate("purpose",researchPurpose.restriction).then(function(data) {
+        } else {
+            cmTranslateService.translate("purpose", researchPurpose.restriction).then(function (data) {
                 $scope.rp = data;
-            })
+            });
         }
 
-        $scope.sendReminder = function(voteId) {
+        $scope.sendReminder = function (voteId) {
             $scope.buttonDisabled = true;
             cmEmailService.sendReminderEmail(voteId).$promise.then(
-                function (value) {
-                    openEmailModal("successDAR", "The reminder was successfully sent.", "Email Notification Sent")
+                function () {
+                    openEmailModal("successDAR", "The reminder was successfully sent.", "Email Notification Sent");
                     $scope.buttonDisabled = false;
-                }, function (value) {
-                    openEmailModal( "failure", "The reminder couldn't be sent. Please contact Support.", "Email Notification Error")
+                }, function () {
+                    openEmailModal("failure", "The reminder couldn't be sent. Please contact Support.", "Email Notification Error");
                     $scope.buttonDisabled = false;
                 });
         };
 
-        var openEmailModal = function(messageType, message, title){
+        var openEmailModal = function (messageType, message, title) {
             $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/email-notification-modal/reminder-modal.html',
@@ -75,7 +75,7 @@
                     }
                 }
             });
-        }
+        };
 
         $scope.reminderDARAlert = function (index) {
             $scope.alertsDAR.splice(index, 1);
@@ -127,7 +127,7 @@
                     function () {
                         alert("Error while updating final vote.");
                     }
-                )
+                );
             });
         };
 
@@ -153,7 +153,7 @@
                     function () {
                         alert("Error while updating final vote.");
                     }
-                )
+                );
             });
         };
 
@@ -298,6 +298,6 @@
                     }
                 }
             }
-        }
+        };
     }
 })();

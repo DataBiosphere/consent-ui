@@ -5,19 +5,19 @@
         .controller('ModalAccessCreate', ModalAccessCreate);
 
     /* ngInject */
-    function ModalAccessCreate($modalInstance, $scope,  cmElectionService, $state) {
+    function ModalAccessCreate($modalInstance, $scope, cmElectionService, $state) {
 
         var vm = this;
         $scope.disableButton = false;
         vm.ok = function (value) {
             $scope.disableButton = true;
             cmElectionService.createDARElection(value).$promise.then(
-                function (value) {
+                function () {
                     $modalInstance.close();
                 }, function (value) {
-                    if(value.status == 500){
+                    if (value.status === 500) {
                         $scope.createEmailAlert(0);
-                    }else{
+                    } else {
                         $scope.createElectionAlert(0);
                     }
                 });
@@ -60,4 +60,3 @@
     }
 
 })();
-

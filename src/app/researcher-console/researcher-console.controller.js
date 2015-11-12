@@ -32,10 +32,8 @@
                 controllerAs: 'Modal'
             });
 
-            modalInstance.result.then(function (selectedItem) {//selectedItem - params to apply when the fc was successful
-                //what to do if it was accepted
+            modalInstance.result.then(function () {
             }, function () {
-                //what to do if the modal was canceled
             });
         }
 

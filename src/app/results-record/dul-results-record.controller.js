@@ -9,8 +9,8 @@
 
 
 
- if( typeof electionReview == 'undefined'){
-            $state.go('reviewed_cases')
+ if( typeof electionReview === 'undefined'){
+            $state.go('reviewed_cases');
             return;
         }
         $scope.chartData = {
@@ -63,7 +63,7 @@
                     }
                 }
             }
-        }
+        };
 
 
         $scope.election = electionReview.election;

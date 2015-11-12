@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('cmTranslate', ['ngResource'])
+    angular.module('cmTranslate', ['ngResource']);
 
 
 })();

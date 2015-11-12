@@ -5,45 +5,45 @@
         .service('cmUserService', cmUserService);
 
     /* ngInject */
-    function cmUserService(UserResource, GetUserResource ,UpdateUserResource) {
+    function cmUserService(UserResource, GetUserResource, UpdateUserResource) {
 
 
-        function getUserByEmail(email){
+        function getUserByEmail(email) {
             return GetUserResource.get({email: email}).$promise;
         }
 
-        function getUsers(){
+        function getUsers() {
             return UserResource.List().$promise;
         }
 
-        function postUser(user){
+        function postUser(user) {
             return UserResource.post(user);
 
         }
 
-        function updateUser(user){
-             return UpdateUserResource.update({userId: user.dacUserId}, user);
+        function updateUser(user) {
+            return UpdateUserResource.update({userId: user.dacUserId}, user);
         }
 
 
-        return{
-            findUser: function(email) {
+        return {
+            findUser: function (email) {
                 return getUserByEmail(email);
             },
 
-            findUsers: function() {
+            findUsers: function () {
                 return getUsers();
             },
 
-            postUser: function(user){
+            postUser: function (user) {
                 return postUser(user);
             },
 
-            updateUser: function(user){
-                 return  updateUser(user);
+            updateUser: function (user) {
+                return updateUser(user);
             }
 
-        }
+        };
     }
 
 })();
