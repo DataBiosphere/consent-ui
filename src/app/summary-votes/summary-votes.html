@@ -102,7 +102,7 @@
                     <hr class="box-separator-white separator-margin">
                     <div cm-chart cm-chart-data="SummaryVotes.chartData.VaultReviewed"
                          cm-chart-options="SummaryVotes.chartOptions.VaultReviewed" class="result_chart"></div>
-                    <h4 class="cm-results-amount">Amount of cases: <span class="access-color">5</span></h4>
+                    <h4 class="cm-results-amount">Amount of cases: <span class="access-color">{{SummaryVotes.chartData.VaultReviewed[1][1] + SummaryVotes.chartData.VaultReviewed[2][1]}}</span></h4>
                 </div>
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 jumbotron box-vote-singleresults">
@@ -111,7 +111,7 @@
                     <hr class="box-separator-white separator-margin">
                     <div cm-chart cm-chart-data="SummaryVotes.chartData.Agreement"
                          cm-chart-options="SummaryVotes.chartOptions.Agreement" class="result_chart"></div>
-                    <h4 class="cm-results-amount">Amount of cases: <span class="access-color">5</span></h4>
+                    <h4 class="cm-results-amount">Amount of cases: <span class="access-color">{{SummaryVotes.chartData.Agreement[1][1] + SummaryVotes.chartData.Agreement[2][1]}}</span></h4>
                 </div>
             </div>
 

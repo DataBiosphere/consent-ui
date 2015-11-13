@@ -42,13 +42,13 @@
             ],
             'VaultReviewed': [
                 ['Results', 'Votes'],
-                ['Yes', 4],
-                ['No', 3]
+                ['Yes', 0],
+                ['No', 0]
             ],
             'Agreement': [
                 ['Results', 'Votes'],
-                ['Agreement', 5],
-                ['Disagreement', 8]
+                ['Agreement', 0],
+                ['Disagreement', 0]
             ]
 
 
