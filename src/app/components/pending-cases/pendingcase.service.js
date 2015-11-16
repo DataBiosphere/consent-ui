@@ -5,7 +5,7 @@
         .service('cmPendingCaseService', cmPendingCaseService);
 
     /* ngInject */
-    function cmPendingCaseService(DataRequestPendingCases, ConsentPendingCases, ConsentSummaryCases, DataRequestSummaryCases) {
+    function cmPendingCaseService(DataRequestPendingCases, ConsentPendingCases, MatchSummaryCases ,ConsentSummaryCases, DataRequestSummaryCases) {
 
         /**
          * Finding data request pending cases for the specified user id
@@ -78,8 +78,17 @@
                         data.RPReviewed[1][1] = rp.reviewedPositiveCases;
                         // negative cases
                         data.RPReviewed[2][1] = rp.reviewedNegativeCases;
-                        vm.chartData = data;
-
+                        MatchSummaryCases.List().$promise.then(function(match) {
+                            // positive cases
+                            data.VaultReviewed[1][1] = match[0].reviewedPositiveCases;
+                            // negative cases
+                            data.VaultReviewed[2][1] = match[0].reviewedNegativeCases;
+                            // positive cases
+                            data.Agreement[1][1] = match[1].reviewedPositiveCases;
+                            // negative cases
+                            data.Agreement[2][1] = match[1].reviewedNegativeCases;
+                            vm.chartData = data;
+                         });
                     });
 
                 });

@@ -8,6 +8,7 @@
     function SummaryVotes(apiUrl, cmPendingCaseService) {
         var vm = this;
         vm.downloadUrl = apiUrl + "consent/cases/summary/file";
+        vm.downloadUrlDAR = apiUrl + "consent/cases/summary/darfile";
         var data = {
             'accessTotal': [
                 ['Results', 'Votes'],
@@ -41,13 +42,13 @@
             ],
             'VaultReviewed': [
                 ['Results', 'Votes'],
-                ['Yes', 4],
-                ['No', 3]
+                ['Yes', 0],
+                ['No', 0]
             ],
             'Agreement': [
                 ['Results', 'Votes'],
-                ['Agreement', 5],
-                ['Disagreement', 8]
+                ['Agreement', 0],
+                ['Disagreement', 0]
             ]
 
 

@@ -21,8 +21,15 @@
             return $resource(apiUrl + "consent/cases/summary");
         })
 
-        .factory('DataRequestSummaryCases', function ($resource, apiUrl) {
-            return $resource(apiUrl + "dataRequest/cases/summary/:type");
+        .factory('MatchSummaryCases', function($resource, apiUrl){
+                    return $resource(apiUrl+"dataRequest/cases/matchsummary", {},
+                    {
+                                        List: {method:'GET',isArray:true}
+                    });
+                })
+
+        .factory('DataRequestSummaryCases', function($resource, apiUrl){
+            return $resource(apiUrl+"dataRequest/cases/summary/:type");
         })
 
         .factory('ConsentSummaryFile', function ($resource, apiUrl) {
