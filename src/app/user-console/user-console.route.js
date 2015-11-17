@@ -6,7 +6,7 @@
         .config(routeConfig);
 
     /* ngInject */
-    function routeConfig($stateProvider,USER_ROLES) {
+    function routeConfig($stateProvider, USER_ROLES) {
         $stateProvider
             .state('user_console', {
                 name: 'user_console',
@@ -14,10 +14,10 @@
                 templateUrl: 'app/user-console/user-console.html',
                 controller: 'UserConsole',
                 controllerAs: 'UserConsole',
-                      data: {
-                                authorizedRoles: [USER_ROLES.member]
-                            }
-            })
+                data: {
+                    authorizedRoles: [USER_ROLES.member]
+                }
+            });
     }
 
 })();

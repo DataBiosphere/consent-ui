@@ -10,7 +10,9 @@
         var vm = this;
         vm.electionsList = {'dul': []};
 
-        vm.openCreate = openCreate;     vm.openCancel = openCancel;  vm.openDelete = openDelete;
+        vm.openCreate = openCreate;
+        vm.openCancel = openCancel;
+        vm.openDelete = openDelete;
 
         vm.addDul = addDul;
         vm.editDul = editDul;
@@ -52,7 +54,7 @@
             });
 
             modalInstance.result.then(function () {
-                var electionToUpdate = new Object();
+                var electionToUpdate = {};
                 electionToUpdate.status = 'Canceled';
                 electionToUpdate.referenceId = vm.selectedElection.consentId;
                 electionToUpdate.electionId = vm.selectedElection.electionId;
@@ -62,21 +64,21 @@
             });
         }
 
-        function openDelete(consentId)  {
+        function openDelete(consentId) {
 
-                             var modalInstance = $modal.open({
-                                 animation: false,
-                                 templateUrl: 'app/modals/delete-consent-modal.html',
-                                 controller: 'Modal',
-                                 controllerAs: 'Modal'
-                             });
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/delete-consent-modal.html',
+                controller: 'Modal',
+                controllerAs: 'Modal'
+            });
 
-                             modalInstance.result.then(function () {
-                                 cmConsentService.deleteConsent(consentId).then(function () {
-                                 init();
-                                 });
-                             });
-                         }
+            modalInstance.result.then(function () {
+                cmConsentService.deleteConsent(consentId).then(function () {
+                    init();
+                });
+            });
+        }
 
         function addDul() {
 
@@ -86,15 +88,13 @@
                 controller: 'DULModal',
                 controllerAs: 'DULModal',
                 resolve: {
-                    consent: new Object()
+                    consent: {}
                 }
             });
 
-            modalInstance.result.then(function () {//selectedItem - params to apply when the fc was successful
-                //what to do if it was accepted
+            modalInstance.result.then(function () {
                 init();
             }, function () {
-                //what to do if the modal was canceled
             });
         }
 
@@ -112,11 +112,9 @@
                 }
             });
 
-            modalInstance.result.then(function (selectedItem) {//selectedItem - params to apply when the fc was successful
-                //what to do if it was accepted
+            modalInstance.result.then(function () {
                 init();
             }, function () {
-                //what to do if the modal was canceled
             });
         }
 

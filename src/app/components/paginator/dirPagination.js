@@ -278,7 +278,7 @@
                     return (paginationService.getItemsPerPage(paginationId));
                 }
             }, function(current, previous) {
-                if (current != previous && typeof previous !== 'undefined') {
+                if (current !== previous && typeof previous !== 'undefined') {
                     goToPage(scope.pagination.current);
                 }
             });
@@ -288,7 +288,7 @@
                     return paginationService.getCurrentPage(paginationId);
                 }
             }, function(currentPage, previousPage) {
-                if (currentPage != previousPage) {
+                if (currentPage !== previousPage) {
                     goToPage(currentPage);
                 }
             });
@@ -502,7 +502,7 @@
         this.setItemsPerPage = function(instanceId, val) {
             instances[instanceId].itemsPerPage = val;
         };
-        this.getItemsPerPage = function(instanceId,scope) {
+        this.getItemsPerPage = function(instanceId) {
             return instances[instanceId].itemsPerPage;
         };
 

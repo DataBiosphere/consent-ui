@@ -12,15 +12,20 @@
         vm.ok = function (value) {
             $scope.disableButton = true;
             cmElectionService.createElection(value).$promise.then(
-                function (value) {
-                   $modalInstance.close();
+                function () {
+                    $modalInstance.close();
                 }, function (value) {
-                    $scope.createElectionAlert(0);
+                    if (value.status === 500) {
+                        $scope.createEmailAlert(0);
+                    } else {
+                        $scope.createElectionAlert(0);
+                    }
                 });
         };
 
         vm.cancel = function () {
-            $modalInstance.dismiss('cancel');
+            $state.go('admin_manage');
+            $modalInstance.close();
         };
 
         vm.singleModel = 0;
@@ -40,6 +45,14 @@
             });
         };
 
+        $scope.createEmailAlert = function (index) {
+            $scope.alerts.splice(index, 1);
+            $scope.alerts.push({
+                title: 'Email Service Error!',
+                msg: "The election was created but the participants couldn't be notified by email."
+            });
+        };
+
         $scope.closeAlert = function (index) {
             $scope.alerts.splice(index, 1);
         };
@@ -47,4 +60,3 @@
     }
 
 })();
-

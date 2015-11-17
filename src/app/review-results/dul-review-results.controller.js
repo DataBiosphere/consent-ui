@@ -4,11 +4,11 @@
     angular.module('cmReviewResults')
         .controller('DulReviewResults', DulReviewResults);
 
-    function DulReviewResults(apiUrl, $scope,$rootScope, $modal, $state, cmElectionService,cmTranslateService, cmLoginUserService, electionReview){
+    function DulReviewResults(apiUrl, $scope, $rootScope, cmEmailService, $modal, $state, cmElectionService, cmTranslateService, cmLoginUserService, electionReview) {
 
-        if( typeof electionReview == 'undefined'){
-                    cmLoginUserService.redirect($rootScope.currentUser)
-                    return;
+        if (typeof electionReview === 'undefined') {
+            cmLoginUserService.redirect($rootScope.currentUser);
+            return;
         }
 
         $scope.chartData = {
@@ -64,7 +64,7 @@
         };
         $scope.election = electionReview.election;
 
-        if(electionReview.election.finalRationale === 'null'){
+        if (electionReview.election.finalRationale === 'null') {
             $scope.election.finalRationale = '';
         }
 
@@ -72,26 +72,24 @@
         $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
         $scope.dulName = electionReview.consent.dulName;
         $scope.structuredDataUseLetter = "Loading...";
-        cmTranslateService.translate("sampleset",electionReview.consent.useRestriction).then(function(data) {
-        $scope.structuredDataUseLetter = data;
-          });
+        cmTranslateService.translate("sampleset", electionReview.consent.useRestriction).then(function (data) {
+            $scope.structuredDataUseLetter = data;
+        });
         $scope.positiveVote = positiveVote;
         $scope.logVote = logVote;
-        $scope.sendReminder = sendReminder;
         $scope.electionType = null;
+        $scope.buttonDisabled = false;
         // Final vote variables
-        $scope.isFormDisabled = $scope.chartData.dul[3][1] > 0 || $scope.status != 'Open';
+        $scope.isFormDisabled = $scope.chartData.dul[3][1] > 0 || $scope.status !== 'Open';
         $scope.finalRationale = electionReview.election.finalRationale;
         $scope.status = electionReview.election.status;
         $scope.finalVote = electionReview.election.finalVote;
         $scope.voteList = chunk(electionReview.reviewVote, 2);
         $scope.chartData = getGraphData(electionReview.reviewVote);
 
-
-
-        $scope.$watch('chartData.dul', function(){
-            if($scope.chartData.dul != 'undefined') {
-                $scope.isFormDisabled = $scope.chartData.dul[3][1] > 0 || $scope.status != 'Open'
+        $scope.$watch('chartData.dul', function () {
+            if ($scope.chartData.dul !== 'undefined') {
+                $scope.isFormDisabled = $scope.chartData.dul[3][1] > 0 || $scope.status !== 'Open';
             } else {
                 $scope.isFormDisabled = false;
             }
@@ -115,43 +113,62 @@
                 $scope.election.status = 'Closed';
                 cmElectionService.updateElection($scope.election).$promise.then(
                     //success
-                    function() {
+                    function () {
                         $state.go('chair_console');
                     },
                     //error
-                    function(){ alert("Error while updating final vote.");}
+                    function () {
+                        alert("Error while updating final vote.");
+                    }
                 );
             });
         }
 
+        $scope.sendReminder = function (voteId) {
+            $scope.buttonDisabled = true;
+            cmEmailService.sendReminderEmail(voteId).$promise.then(
+                function () {
+                    openEmailModal("successDUL", "The reminder was successfully sent.", "Email Notification Sent");
+                    $scope.buttonDisabled = false;
+                }, function () {
+                    openEmailModal("failure", "The reminder couldn't be sent. Please contact Support.", "Email Notification Error");
+                    $scope.buttonDisabled = false;
+                });
+        };
 
-        function sendReminder(voteId) {
-            alert("Reminder sent to: " + getEmailFromVoteList(voteId, electionReview.reviewVote));
-        }
-
-        function getEmailFromVoteList(voteId, reviewVote){
-            for (var i=0; i<reviewVote.length; i++) {
-                if (reviewVote[i].vote.voteId === voteId){
-                    return reviewVote[i].email;
+        var openEmailModal = function (messageType, message, title) {
+            $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/email-notification-modal/reminder-modal.html',
+                controller: 'ModalReminder',
+                controllerAs: 'ModalReminder',
+                resolve: {
+                    msg: function () {
+                        return message;
+                    },
+                    messageType: function () {
+                        return messageType;
+                    },
+                    title: function () {
+                        return title;
+                    }
                 }
-            }
-        }
-
-
-    };
+            });
+        };
+    }
 
     function chunk(arr, size) {
         var newArr = [];
-        for (var i=0; i<arr.length; i+=size) {
-            newArr.push(arr.slice(i, i+size));
+        for (var i = 0; i < arr.length; i += size) {
+            newArr.push(arr.slice(i, i + size));
         }
         return newArr;
     }
 
-    function getGraphData(reviewVote){
+    function getGraphData(reviewVote) {
         var yes = 0, no = 0, empty = 0;
-        for (var i=0; i<reviewVote.length; i++) {
-            switch(reviewVote[i].vote.vote) {
+        for (var i = 0; i < reviewVote.length; i++) {
+            switch (reviewVote[i].vote.vote) {
                 case true:
                     yes++;
                     break;

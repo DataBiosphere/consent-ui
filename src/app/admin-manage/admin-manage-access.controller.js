@@ -15,31 +15,6 @@
         init();
 
 
-        function openCancel(dar) {
-
-            var modalInstance = $modal.open({
-                animation: false,
-                templateUrl: 'app/modals/cancel-modal.html',
-                controller: 'Modal',
-                controllerAs: 'Modal',
-                resolve: {
-                    dar: function () {
-                        vm.dar = dar;
-                    }
-                }
-            });
-
-            modalInstance.result.then(function () {
-                var electionToUpdate = new Object();
-                electionToUpdate.status = 'Canceled';
-                electionToUpdate.referenceId = vm.dar.dataRequestId;
-                electionToUpdate.electionId = vm.dar.electionId;
-                cmElectionService.updateElection(electionToUpdate).$promise.then(function () {
-                    init();
-                });
-            });
-        }
-
         function init() {
             cmRPService.getDataAccessManage(vm);
         }
@@ -62,7 +37,6 @@
         }
 
 
-
         function openCancel(dar) {
 
             var modalInstance = $modal.open({
@@ -78,7 +52,7 @@
             });
 
             modalInstance.result.then(function () {
-                var electionToUpdate = new Object();
+                var electionToUpdate = {};
                 electionToUpdate.status = 'Canceled';
                 electionToUpdate.referenceId = vm.dar.dataRequestId;
                 electionToUpdate.electionId = vm.dar.electionId;
@@ -99,13 +73,10 @@
                 scope: $scope
             });
 
-            modalInstance.result.then(function (selectedItem) {//selectedItem - params to apply when the fc was successful
-                //what to do if it was accepted
+            modalInstance.result.then(function () {
             }, function () {
-                //what to do if the modal was canceled
             });
         }
-
 
 
     }

@@ -13,7 +13,7 @@
         $scope.disableButton = false;
 
         if(typeof consent.useRestriction == 'object'){
-             $scope.useRestriction = JSON.stringify(consent.useRestriction);
+            $scope.useRestriction = JSON.stringify(consent.useRestriction);
         }
 
         if (consent !== undefined) {
@@ -111,13 +111,13 @@
             if (message.indexOf("PRIMARY") > -1) {
                 message = "There is a Data Use Limitation already registered with this Consent Id. ";
             } else if (message.indexOf("name") > -1) {
-                message = "There is a Data Use Limitation already registered with this name. ";
+                message = "There is a Data Use Limitation already registered with this name.";
             } else if (message.indexOf("Unable to process JSON") > -1){
                 message = "Structured Limitations has invalid format. Please write it as a JSON.";
             }
             else {
                 tle = "Error, unable to create a new Data Use Limitation! ";
-                message = "Internal Server Error ";
+                message = "Internal Server Error";
             }
 
             $scope.alerts.push({

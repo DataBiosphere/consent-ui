@@ -34,7 +34,7 @@
                         return true;
             }
             return false;
-        }
+        };
 
         function containsOtherThanResearcher(roles, rootRoles){
             var i;

@@ -8,28 +8,28 @@
 
     function cmDataAccessRequest(dataAccessRequestResource, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields, dataAccessRequestManageResource, darRestriction) {
 
-        function findDarConsent(id){
+        function findDarConsent(id) {
             return darConsent.get({id: id}).$promise;
         }
 
 
-        function findDarFields(id, fields){
+        function findDarFields(id, fields) {
             return darFields.get({id: id, fields: fields}).$promise;
         }
 
-        function postDataAccessRequest(dataAccessRequest){
+        function postDataAccessRequest(dataAccessRequest) {
             return dataAccessRequestResource.post(dataAccessRequest);
         }
 
         function getAutoCompleteDS(partialReq) {
-            return typeAheadDatasetsResource.get({partial:partialReq}).$promise;
+            return typeAheadDatasetsResource.get({partial: partialReq}).$promise;
         }
 
         function getAutoCompleteOT(partialReq) {
-            return typeAheadOntologiesResource.get({partial:partialReq}).$promise;
+            return typeAheadOntologiesResource.get({partial: partialReq}).$promise;
         }
 
-        function getDataAccessManage(vm){
+        function getDataAccessManage(vm) {
             dataAccessRequestManageResource.List().$promise.then(
                 function (data) {
                     vm.dars = data;
@@ -42,32 +42,32 @@
 
         return {
 
-            getDarConsent: function(id){
-                return  findDarConsent(id);
+            getDarConsent: function (id) {
+                return findDarConsent(id);
             },
 
-            getDarFields: function(id, fields){
-                return  findDarFields(id, fields);
+            getDarFields: function (id, fields) {
+                return findDarFields(id, fields);
             },
-            postDataAccessRequest: function(dataAccessRequest) {
+            postDataAccessRequest: function (dataAccessRequest) {
                 return postDataAccessRequest(dataAccessRequest);
             },
 
-            getAutoCompleteDS: function(partialReq) {
+            getAutoCompleteDS: function (partialReq) {
                 return getAutoCompleteDS(partialReq);
             },
 
-            getAutoCompleteOT: function(partialReq) {
+            getAutoCompleteOT: function (partialReq) {
                 return getAutoCompleteOT(partialReq);
             },
 
-            getDataAccessManage: function(vm){
+            getDataAccessManage: function (vm) {
                 return getDataAccessManage(vm);
             },
-            getRestriction: function(id){
+            getRestriction: function (id) {
                 return getRestriction(id);
             }
-        }
+        };
 
     }
 

@@ -7,15 +7,15 @@
     /* ngInject */
     function cmMatchService(MatchResource) {
 
-        function findMatch(consentId, purposeId){
-            return MatchResource.get({consentId: consentId, purposeId: purposeId}).$promise;;
+        function findMatch(consentId, purposeId) {
+            return MatchResource.get({consentId: consentId, purposeId: purposeId}).$promise;
         }
 
-        return{
-            findMatch: function(consentId, purposeId) {
+        return {
+            findMatch: function (consentId, purposeId) {
                 return findMatch(consentId, purposeId);
             }
-        }
+        };
     }
 
 })();

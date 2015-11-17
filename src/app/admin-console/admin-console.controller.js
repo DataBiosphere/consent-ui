@@ -5,7 +5,7 @@
         .controller('AdminConsole', AdminConsole);
 
     /* ngInject */
-    function AdminConsole($http, $modal, $state, apiUrl) {
+    function AdminConsole($modal, $state, apiUrl) {
 
         var vm = this;
         vm.addDul = addDul;
@@ -21,15 +21,13 @@
                 controller: 'DULModal',
                 controllerAs: 'DULModal',
                 resolve: {
-                    consent: new Object()
+                    consent: {}
                 }
             });
 
-            modalInstance.result.then(function () {//selectedItem - params to apply when the fc was successful
-                //what to do if it was accepted
+            modalInstance.result.then(function () {
                 $state.go('admin_manage');
             }, function () {
-                //what to do if the modal was canceled
             });
         }
 
@@ -42,11 +40,9 @@
                 controllerAs: 'ModalUsersAdd'
             });
 
-            modalInstance.result.then(function (selectedItem) {//selectedItem - params to apply when the fc was successful
-                //what to do if it was accepted
+            modalInstance.result.then(function () {
                 $state.go('admin_users');
             }, function () {
-                //what to do if the modal was canceled
             });
         }
 
@@ -59,11 +55,9 @@
                 controllerAs: 'DataSetModal'
             });
 
-            modalInstance.result.then(function (selectedItem) {//selectedItem - params to apply when the fc was successful
-                //what to do if it was accepted
+            modalInstance.result.then(function () {
                 $state.go('dataset_catalog');
             }, function () {
-                //what to do if the modal was canceled
             });
         }
 
