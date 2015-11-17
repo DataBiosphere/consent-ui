@@ -5,7 +5,7 @@
         .service('cmPendingCaseService', cmPendingCaseService);
 
     /* ngInject */
-    function cmPendingCaseService(DataRequestPendingCases, ConsentPendingCases, MatchSummaryCases ,ConsentSummaryCases, DataRequestSummaryCases) {
+    function cmPendingCaseService(DARUnReviewed, ConsentUnReviewed, DataRequestPendingCases, ConsentPendingCases, MatchSummaryCases ,ConsentSummaryCases, DataRequestSummaryCases) {
 
         /**
          * Finding data request pending cases for the specified user id
@@ -45,6 +45,26 @@
                         }
                     );
                 });
+        }
+
+        /**
+         * Finding consent unreviewed cases
+         * @param vm
+         */
+        function findConsentUnReviewed(vm) {
+            ConsentUnReviewed.get().$promise.then(function (data) {
+                vm.dULUnreviewedCases = data.dulUnReviewedCases;
+            });
+        }
+
+        /**
+         * Finding dar unreviewed cases
+         * @param vm
+         */
+        function findDARUnReviewed(vm) {
+            DARUnReviewed.get().$promise.then(function (data) {
+                vm.dARUnreviewedCases = data.darUnReviewedCases;
+            });
         }
 
         /**
@@ -106,6 +126,12 @@
             },
             findSummary: function (data, vm) {
                 return findSummary(data, vm);
+            },
+            findConsentUnReviewed: function (vm){
+                return findConsentUnReviewed(vm);
+            },
+            findDARUnReviewed: function (vm){
+                return findDARUnReviewed(vm);
             }
         };
     }

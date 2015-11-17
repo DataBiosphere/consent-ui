@@ -12,8 +12,12 @@
         vm.attestAndSave = attestAndSave;
         $scope.showValidationMessages = false;
         $scope.atLeastOneCheckboxChecked = false;
-
         $scope.formData = {};
+        if($rootScope.formData !== undefined && $rootScope.formData.userId !== undefined){
+            $scope.formData = $rootScope.formData;
+            $rootScope.formData= {};
+        }
+
 
         $scope.$watch("form.step1.$valid", function (value1) {
             if ($state.current.url === "/step1") {
@@ -45,37 +49,53 @@
             $scope.url = '#';
         };
 
+        function openResearchConsole() {
+            $scope.showValidationMessages = false;
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/data-access-request-modal/data-access-request-modal.html',
+                controller: 'DARModal',
+                controllerAs: 'DARModal',
+                scope: $scope
+            });
+
+            modalInstance.result.then(function (value) {
+                if (value) {
+                    $state.go('researcher_console');
+                }
+                if (!value) {
+                    $scope.problemSavingRequest = true;
+                }
+            });
+        }
+
         function attestAndSave() {
 
             verifyCheckboxes();
-
-            if ($scope.step1isValidated && $scope.step2isValidated && $scope.step3isValidated && $scope.atLeastOneCheckboxChecked) {
-                $scope.showValidationMessages = false;
-                var modalInstance = $modal.open({
-                    animation: false,
-                    templateUrl: 'app/modals/data-access-request-modal/data-access-request-modal.html',
-                    controller: 'DARModal',
-                    controllerAs: 'DARModal',
-                    scope: $scope
-                });
-
-                modalInstance.result.then(function (value) {
-                    if (value) {
-                        $state.go('rp_application_confirm');
-                    }
-                    if (!value) {
-                        $scope.problemSavingRequest = true;
-                    }
-                });
-            } else {
-                $scope.showValidationMessages = true;
+            $scope.formData.userId = $rootScope.currentUser.dacUserId;
+            if($scope.formData.dar_code  !== undefined) {
+                $scope.darAction = "edit";
+                if ($scope.step1isValidated !== false && $scope.step2isValidated !== false && $scope.step3isValidated !== false && $scope.atLeastOneCheckboxChecked !== false) {
+                    openResearchConsole();
+                } else {
+                    $scope.showValidationMessages = true;
+                }
+            }else{
+                $scope.darAction = "send";
+                if ($scope.step1isValidated && $scope.step2isValidated && $scope.step3isValidated && $scope.atLeastOneCheckboxChecked) {
+                    $scope.showValidationMessages = false;
+                    openResearchConsole();
+                } else {
+                    $scope.showValidationMessages = true;
+                }
             }
+
         }
 
 
         function verifyCheckboxes() {
 
-            if ($scope.formData.control !== true &&
+            if ($scope.formData.controls !== true &&
                 $scope.formData.population !== true &&
                 $scope.formData.diseases !== true &&
                 $scope.formData.methods !== true &&

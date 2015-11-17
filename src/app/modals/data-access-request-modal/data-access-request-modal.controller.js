@@ -13,12 +13,22 @@
         vm.ok = function () {
             vm.disableButton = true;
             $scope.showValidationMessages = false;
-            cmRPService.postDataAccessRequest($scope.formData).$promise.then(
-                function () {
-                    $modalInstance.close(true);
-                }, function () {
-                    $modalInstance.close(false);
-                });
+            if($scope.formData.dar_code  !== undefined){
+                cmRPService.updateDar($scope.formData, $scope.formData.dar_code).$promise.then(
+                    function () {
+                        $modalInstance.close(true);
+                    }, function () {
+                        $modalInstance.close(false);
+                    });
+            }else{
+                cmRPService.postDataAccessRequest($scope.formData).$promise.then(
+                    function () {
+                        $modalInstance.close(true);
+                    }, function () {
+                        $modalInstance.close(false);
+                    });
+            }
+
         };
 
         vm.cancel = function () {
