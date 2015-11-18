@@ -6,6 +6,24 @@
 
     function ReviewResults(cmTranslateService, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, electionReview, rpElectionReview, dar, apiUrl, researchPurpose, cmEmailService) {
 
+        var vm = this;
+        vm.openApplication = openApplication;
+
+        function openApplication(dataRequestId) {
+            $scope.dataRequestId = dataRequestId;
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/application-summary-modal/application-summary-modal.html',
+                controller: 'ApplicationModal',
+                controllerAs: 'ApplicationModal',
+                scope: $scope
+            });
+
+            modalInstance.result.then(function () {
+                init();
+            });
+        }
+
         if (typeof electionReview === 'undefined') {
             cmLoginUserService.redirect($rootScope.currentUser);
             return;

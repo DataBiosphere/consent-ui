@@ -605,6 +605,16 @@ small {
     text-align: center;
 }
 
+.agreement-data{
+    font-size: 16px;
+    line-height: 22px;
+    margin: 5px 0 0 0;
+}
+
+.agreement-data span{
+    padding-right: 10px;
+}
+
 .form-group-bottom {
     margin-bottom: 0 !important;
 }
@@ -1027,6 +1037,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     -webkit-border-radius: 5px;
     box-shadow: 1px 1px #cccccc;
     display: inline-block !important;
+    font-weight: 500 !important;
     text-align: center;
     font-style: italic;
 }
@@ -1036,13 +1047,11 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     padding: 2px 4px 0 3px;
     position: absolute;
     top: 0;
-    font-weight: 500 !important;
     margin-left: 4px !important;
 }
 
 .pcases-medium-tag {
     font-size: 13px;
-    font-weight: normal !important;
     padding: 3px 5px 1px 4px;
     position: absolute;
     top: 15px;
@@ -1580,27 +1589,35 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 
 /***************************************************Modals*/
 
-.modal.fade .modal-dialog, .modal.in .modal-dialog {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-}
+
+
+
+
+
 
 .modal-dialog {
-    width: 100%;
+    width: 450px !important;
 }
 
-.modal-content {
-    position: absolute;
-    top: 40%;
-    -ms-transform: translate(0, -50%);
-    -moz-transform: translate(0, -50%);
-    -webkit-transform: translate(0, -50%);
-    transform: translate(0, -50%);
-    width: 100%;
-    border: 0;
+
+
+.modal.fade .modal-dialog {
+    transform: translate(-50%, -80%);
+}
+
+.modal.in .modal-dialog{
+
+
+
+
+
+
+
+    margin: 8% auto !important;
+}
+
+.modal.in .modal-dialog .modal-content{
+    border: 0!important;
 }
 
 .modal-close-btn {
@@ -1611,12 +1628,16 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 
 .modal-alerts {
     width: 600px !important;
+    position: absolute;
+    left: -75px;
 }
 
 .modal-add-dul,
 .modal-add-dataset,
 .modal-large{
     width: 750px !important;
+    position: absolute;
+    left: -150px!important;
 }
 
 .modal-add-dul .admin-modal-header,
@@ -1723,6 +1744,13 @@ input:-webkit-autofill {
     background-color: #eeeeee !important;
 }
 
+.modal.fade .modal-app-summary,
+.modal.in .modal-app-summary{
+    position: absolute;
+    right: 0;
+    left: 0;
+}
+
 .app-summary-modal-content{
     float: left;
     text-align: left;
@@ -1767,6 +1795,7 @@ input:-webkit-autofill {
 
 .modal-confirmation-alerts {
     width: 450px !important;
+    position: absolute;
 }
 
 .modal-confirmation-alerts button {
@@ -1995,7 +2024,8 @@ input[type="checkbox"][disabled] + label {
 }
 
 .alert-danger {
-    background-color: rgba(209, 59, 7, 0.1);
+    /*background-color: rgba(209, 59, 7, 0.1);*/
+    background-color: rgb(215, 200, 196);
     border: none;
 }
 
@@ -2379,12 +2409,12 @@ td:first-child .checkbox label{
     color: #777777;
 }
 
-.table-items {
-    font-weight: normal !important;
-    font-size: 14px !important;
-    padding: 5px 10px 10px 10px;
-    color: #777777;
-}
+
+
+
+
+
+
 
 .table-items .enabled, .table-items .disabled {
     font-weight: 500 !important;

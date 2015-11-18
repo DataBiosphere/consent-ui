@@ -15,6 +15,7 @@
         $scope.logVote = logVote;
         $scope.logVoteAgreement = logVoteAgreement;
         $scope.electionType = null;
+        $scope.openApplication = openApplication;
 
         /*ALERTS*/
         $scope.alertsDAR = [];
@@ -96,6 +97,20 @@
                         alert("Error while updating final access vote.");
                     }
                 );
+            });
+        }
+
+        function openApplication() {
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/application-summary-modal/application-summary-modal.html',
+                controller: 'ApplicationModal',
+                controllerAs: 'ApplicationModal',
+                scope: $scope
+            });
+
+            modalInstance.result.then(function () {
+                init();
             });
         }
 

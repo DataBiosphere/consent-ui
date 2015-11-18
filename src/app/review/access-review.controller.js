@@ -6,6 +6,25 @@
 
     function DarReview($scope, $modal, $state, $rootScope, USER_ROLES, vote, rpVote, dar, election, consent, cmVoteService, apiUrl, cmAuthenticateService , cmLoginUserService, cmTranslateService, researchPurpose)
     {
+        var vm = this;
+        vm.openApplication = openApplication;
+
+        function openApplication(dataRequestId) {
+            $scope.dataRequestId = dataRequestId;
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/application-summary-modal/application-summary-modal.html',
+                controller: 'ApplicationModal',
+                controllerAs: 'ApplicationModal',
+                scope: $scope
+
+            });
+
+            modalInstance.result.then(function () {
+                init();
+            });
+        }
+
         if( typeof vote === 'undefined' ||
             typeof consent === 'undefined'||
             typeof election === 'undefined'||
