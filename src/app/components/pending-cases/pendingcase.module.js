@@ -21,19 +21,31 @@
             return $resource(apiUrl + "consent/cases/summary");
         })
 
-        .factory('MatchSummaryCases', function($resource, apiUrl){
-                    return $resource(apiUrl+"dataRequest/cases/matchsummary", {},
-                    {
-                                        List: {method:'GET',isArray:true}
-                    });
-                })
+        .factory('ConsentUnReviewed', function ($resource, apiUrl) {
+            return $resource(apiUrl + "consent/unreviewed");
+        })
 
-        .factory('DataRequestSummaryCases', function($resource, apiUrl){
-            return $resource(apiUrl+"dataRequest/cases/summary/:type");
+        .factory('MatchSummaryCases', function ($resource, apiUrl) {
+            return $resource(apiUrl + "dataRequest/cases/matchsummary", {},
+                {
+                    List: {method: 'GET', isArray: true}
+                });
+        })
+
+        .factory('DataRequestSummaryCases', function ($resource, apiUrl) {
+            return $resource(apiUrl + "dataRequest/cases/summary/:type");
         })
 
         .factory('ConsentSummaryFile', function ($resource, apiUrl) {
             return $resource(apiUrl + "consent/cases/summary/file");
+        })
+
+        .factory('DARUnReviewed', function ($resource, apiUrl){
+            return $resource(apiUrl + "dar/cases/unreviewed");
+        })
+
+        .factory('ConsentUnReviewed', function ($resource, apiUrl){
+            return $resource(apiUrl + "consent/unreviewed");
         });
 
 })();

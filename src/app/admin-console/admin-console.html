@@ -8,7 +8,9 @@
         <div class="row fsi-row-lg-level fsi-row-md-level">
             <a href="#/admin_manage_dul" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 console-boxes admin-icons">
                 <div class="all-icons manage-dul"></div>
-                <span class="admin-icon-subtitles dul-color">Manage Data Use Limitations</span>
+                <div class="admin-icon-subtitles dul-color">Manage Data Use Limitations
+                    <div ng-show="AdminConsole.dULUnreviewedCases > 0" class="pcases-medium-tag">{{AdminConsole.dULUnreviewedCases}}</div>
+                </div>
                 <div class="cm-title-description">Select and manage Data Use Limitations Record for review</div>
             </a>
             <a href="#" ng-click="AdminConsole.addDul()" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 console-boxes admin-icons">
@@ -32,7 +34,9 @@
         <div class="row fsi-row-lg-level fsi-row-md-level">
             <a href="#/admin_manage_access" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 console-boxes admin-icons">
                 <div class="all-icons manage-access"></div>
-                <span class="admin-icon-subtitles access-color">Manage Data Access Request</span>
+                <div class="admin-icon-subtitles access-color">Manage Data Access Request
+                    <div ng-show="AdminConsole.dARUnreviewedCases > 0" class="pcases-medium-tag">{{AdminConsole.dARUnreviewedCases}}</div>
+                </div>
                 <div class="cm-title-description">Select and manage Data Access Request for review</div>
             </a>
             <a href="#" ng-click="AdminConsole.addDataSets()" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 console-boxes admin-icons">

@@ -10,9 +10,9 @@
         })
 
         .factory('dataAccessRequestManageResource', function ($resource, apiUrl) {
-            return $resource(apiUrl + "dar/manage", {},
+            return $resource(apiUrl + "dar/manage?userId=:userId", {},
                 {
-                    List: {method: 'GET', isArray: true}
+                    List: {method: 'GET', isArray: true,  params: {userId: '@userId'}}
                 });
         })
 
@@ -23,7 +23,6 @@
         })
 
         .factory('typeAheadOntologiesResource', function ($resource, ontologyApiUrl) {
-            //return $resource(apiUrl+"dar/ontology/:partial", { },
             return $resource(ontologyApiUrl + "autocomplete?q=:partial", {},
                 {get: {method: 'GET', isArray: true, params: {partial: '@partial'}}}
             );
@@ -43,5 +42,10 @@
             return $resource(apiUrl + "dar/restriction/:id", {},
                 {get: {method: 'GET'}, params: {id: '@id'}}
             );
-        });
+        })
+        .factory('updateDataAccessRequestResource', function ($resource, apiUrl) {
+            return $resource(apiUrl + "dar/:accessId", {}, {
+                update: {method: 'PUT', params: {accessId: '@accessId'}}
+          });
+       });
 })();

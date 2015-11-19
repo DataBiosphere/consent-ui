@@ -1003,28 +1003,30 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 
 .pcases-small-tag,
 .pcases-medium-tag{
-    position: absolute;
-    top: 0;
     background: #D13B07;
     color: #ffffff;
     border-radius: 5px;
     -webkit-border-radius: 5px;
     box-shadow: 1px 1px #cccccc;
     display: inline-block !important;
-    font-weight: 500 !important;
     text-align: center;
     font-style: italic;
-    margin-left: 4px !important;
 }
 
 .pcases-small-tag {
     font-size: 12px;
     padding: 2px 4px 0 3px;
+    position: absolute;
+    top: 0;
+    font-weight: 500 !important;
+    margin-left: 4px !important;
 }
 
 .pcases-medium-tag {
-    font-size: 14px;
-    padding: 4px 6px 2px 4px;
+    font-size: 13px;
+    font-weight: normal !important;
+    padding: 3px 5px 1px 4px;
+    vertical-align: 75%;
 }
 
 .active-case {
@@ -1366,6 +1368,12 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 
 .admin-icons:hover .admin-icon-subtitles {
     color: #ffffff !important;
+}
+
+.admin-icons:hover .admin-icon-subtitles .pcases-medium-tag {
+    background: #ffffff;
+    color: #2FA4E7;
+    font-weight: 700!important;
 }
 
 .admin-icons {

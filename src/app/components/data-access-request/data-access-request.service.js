@@ -6,8 +6,7 @@
 
     /* ngInject */
 
-    function cmDataAccessRequest(dataAccessRequestResource, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields, dataAccessRequestManageResource, darRestriction) {
-
+    function cmDataAccessRequest(dataAccessRequestResource, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields, dataAccessRequestManageResource, darRestriction, updateDataAccessRequestResource) {
         function findDarConsent(id) {
             return darConsent.get({id: id}).$promise;
         }
@@ -25,12 +24,15 @@
             return typeAheadDatasetsResource.get({partial: partialReq}).$promise;
         }
 
+        function updateDar(dar, id) {
+            return updateDataAccessRequestResource.update({accessId: id}, dar);
+        }
         function getAutoCompleteOT(partialReq) {
             return typeAheadOntologiesResource.get({partial: partialReq}).$promise;
         }
 
         function getDataAccessManage(vm) {
-            dataAccessRequestManageResource.List().$promise.then(
+            dataAccessRequestManageResource.List(({userId: vm.userId})).$promise.then(
                 function (data) {
                     vm.dars = data;
                 });
@@ -66,6 +68,9 @@
             },
             getRestriction: function (id) {
                 return getRestriction(id);
+            },
+            updateDar: function(dar, id){
+                return updateDar(dar, id);
             }
         };
 

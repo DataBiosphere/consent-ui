@@ -5,13 +5,22 @@
         .controller('AdminConsole', AdminConsole);
 
     /* ngInject */
-    function AdminConsole($modal, $state, apiUrl) {
+    function AdminConsole($modal, $state, apiUrl, cmPendingCaseService) {
 
         var vm = this;
         vm.addDul = addDul;
         vm.addUser = addUser;
         vm.addDataSets = addDataSets;
         vm.downloadUrl = apiUrl + "dataset/sample";
+        vm.dULUnreviewedCases = 0;
+        vm.dARUnreviewedCases = 0;
+
+        init();
+
+        function init() {
+            cmPendingCaseService.findDARUnReviewed(vm);
+            cmPendingCaseService.findConsentUnReviewed(vm);
+        }
 
         function addDul() {
 

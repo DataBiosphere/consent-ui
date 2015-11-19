@@ -30,27 +30,38 @@
                     <hr class="pvotes-main-separator">
                 </div>
                 <div class="pvotes-box-body">
-                    <div dir-paginate="dar in dars.researcher | filter: searchAccess | itemsPerPage:10" pagination-id="researcherConsole">
+                    <div dir-paginate="dar in ResearcherConsole.dars | filter: searchAccess | itemsPerPage:10" pagination-id="researcherConsole">
                         <hr class="pvotes-separator">
                         <div class="row pvotes-main-list">
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{dar.darId}}</div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">{{dar.title}}</div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{dar.date}}</div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{dar.frontEndId}}</div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">{{dar.projectTitle}}</div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{dar.createDate | date:'yyyy-MM-dd'}}</div>
                             <a href="#" class="admin-manage-buttons col-lg-1 col-md-1 col-sm-1 col-xs-1 no-padding">
-                                <div class="{{dar.info}} hover-color" ng-click="ResearcherConsole.openRUS()">
+                                <div class="enabled hover-color" ng-click="ResearcherConsole.openRUS(dar.rus)">
                                     <span>RUS</span>
                                 </div>
                             </a>
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list bold">
-                                <span ng-if="dar.status == 'submitted'">Submitted</span>
-                                <span ng-if="dar.status == 'review'">In review</span>
-                                <span ng-if="dar.status == 'canceled'">Canceled</span>
-                                <span ng-if="dar.status == 'denied'">DENIED</span>
-                                <span ng-if="dar.status == 'approved'">APPROVED</span>
+                                <span ng-if="dar.electionStatus === 'un-reviewed'">Submitted</span>
+                                <span ng-if="dar.electionStatus === 'Open'">In review</span>
+                                <span ng-if="dar.electionStatus === 'Canceled'">Canceled</span>
+                                <span ng-if="dar.electionStatus === 'Closed' && dar.electionVote === false">DENIED</span>
+                                <span ng-if=" dar.electionStatus === 'Closed' && dar.electionVote === true">APPROVED</span>
                             </div>
-                            <a href="/#/rp_application/step1" class="admin-manage-buttons col-lg-1 col-md-1 col-sm-1 col-xs-1 no-padding">
-                                <div class="{{dar.edit}} hover-color">Edit</div>
+                            <a class="admin-manage-buttons col-lg-1 col-md-1 col-sm-1 col-xs-1 no-padding">
+                                <div ng-if="dar.electionStatus !== 'un-reviewed'" class="disabled hover-color">
+                                    <span>Edit</span>
+                                </div>
                             </a>
+
+                            <a class="admin-manage-buttons col-lg-1 col-md-1 col-sm-1 col-xs-1 no-padding">
+                                <div ng-if="dar.electionStatus === 'un-reviewed'" class="enabled hover-color" ng-click="ResearcherConsole.edit(dar.dataRequestId)">
+                                    <span>Edit</span>
+                                </div>
+                            </a>
+
+
+
                         </div>
                     </div>
                     <hr class="pvotes-separator">

@@ -36,17 +36,6 @@
             .state('rp_application.step4', {
                 url: '/step4',
                 templateUrl: 'app/rp-application/rp-application-f4.html'
-            })
-
-            .state('rp_application_confirm', {
-                name: 'rp_application_confirm',
-                url: '/rp_application_confirm',
-                templateUrl: 'app/rp-application/rp-application-confirm.html',
-                controller: 'RPApplication',
-                controllerAs: 'RPApplication',
-                data: {
-                    authorizedRoles: [USER_ROLES.researcher]
-                }
             });
     }
 
