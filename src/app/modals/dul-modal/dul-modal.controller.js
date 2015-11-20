@@ -19,7 +19,7 @@
         if (consent !== undefined) {
             $scope.consent = consent;
             $scope.file = new Object();
-            $scope.file.name = consent.dulName
+            $scope.file.name = consent.dulName;
         }
 
         $scope.$on("fileSelected", function (event, arg) {
@@ -31,7 +31,7 @@
         vm.ok = function (consent) {
             $scope.disableButton = true;
             try{
-                JSON.parse($scope.useRestriction)
+                JSON.parse($scope.useRestriction);
             }catch(err){
                 $scope.duplicateEntryAlert(0, "Unable to process JSON");
                 $scope.disableButton = false;
@@ -80,7 +80,7 @@
                                 fileUploadErrorAlert(0);
                                 $scope.disableButton = false;
                             }
-                        )
+                        );
                     } else {
                         $modalInstance.close();
                     }
@@ -93,7 +93,7 @@
                     }
                     $scope.disableButton = false;
                 }
-            )
+            );
         };
 
         vm.cancel = function () {

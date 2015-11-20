@@ -9,8 +9,7 @@
 
         function translate(purpose, UseRestriction) {
                       var promise =  $http({
-                           url: ontologyApiUrl+
-                           +purpose,
+                           url: ontologyApiUrl + "translate?for=" + purpose,
                            method: "POST",
                            data: UseRestriction
                        })

@@ -74,7 +74,7 @@
         $scope.dul = electionReview.consent.dataUseLetter;
         $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
         $scope.dulName = electionReview.consent.dulName;
-        $scope.structuredDataUseLetter = electionReview.election.translatedUseRestriction
+        $scope.structuredDataUseLetter = electionReview.election.translatedUseRestriction;
 
         $scope.finalRationale = electionReview.election.finalRationale;
         $scope.status = electionReview.election.status;

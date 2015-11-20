@@ -61,6 +61,10 @@ a:hover {
     text-decoration: none !important;
 }
 
+b{
+    font-weight: 500!important;
+}
+
 small {
     font-weight: 400;
     font-style: italic;
@@ -476,6 +480,14 @@ small {
     margin: 5px 5px 0 5px !important;
 }
 
+.cm-boxhead h4 .application-link{
+    text-align: right;
+    float: right;
+    margin-top: 0 !important;
+    padding-top: 3px !important;
+    cursor: pointer;
+}
+
 .cm-boxbody {
     /*font-weight: 500;*/
     margin-left: 5px;
@@ -545,7 +557,7 @@ small {
     margin: 20px 0 10px 0 !important;
 }
 
-.vote-label, .vote-update, .control-label {
+.vote-label, .vote-update, .control-label{
     color: #777777;
     padding: 10px 0 0 0;
 }
@@ -573,6 +585,12 @@ small {
     text-align: right;
     font-weight: 500;
     margin-bottom: 0;
+}
+
+.response-label {
+    padding: 7px 0 0 15px;
+    text-align: left;
+    color: #777777;
 }
 
 .vote-update, .vote-ultimate-update {
@@ -1026,7 +1044,9 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     font-size: 13px;
     font-weight: normal !important;
     padding: 3px 5px 1px 4px;
-    vertical-align: 75%;
+    position: absolute;
+    top: 15px;
+    right: 15px;
 }
 
 .active-case {
@@ -1594,7 +1614,8 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 }
 
 .modal-add-dul,
-.modal-add-dataset {
+.modal-add-dataset,
+.modal-large{
     width: 750px !important;
 }
 
@@ -1698,9 +1719,49 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     color: #ffffff !important;
 }
 
-input:-webkit-autofill{
+input:-webkit-autofill {
     background-color: #eeeeee !important;
 }
+
+.app-summary-modal-content{
+    float: left;
+    text-align: left;
+    padding: 0 30px 10px 30px !important;
+}
+
+.app-summary-modal-first-content{
+    padding: 10px 30px !important;
+}
+
+.app-summary-modal-content hr{
+    margin: 10px 0 0 0!important;
+    border-top-color: #e5e5e5 !important;
+}
+
+.app-summary-modal-content ul{
+    margin: 0 15px 0 15px !important;
+}
+
+.app-summary-modal-content .alert-danger{
+    padding: 15px 20px;
+    margin-top: 10px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.app-summary-modal-content .control-label{
+    padding: 7px 0 0 0!important;
+    line-height: 23px;
+}
+
+.app-summary-modal-content .response-label{
+    line-height: 23px;
+}
+
+.app-summary-modal-footer button{
+    margin-top: 5px !important;
+}
+
 
 /***************************************************Confirmation modals*/
 
@@ -2117,23 +2178,6 @@ input[type="checkbox"][disabled] + label {
     -moz-border-radius: 5px;
 }
 
-.landing-box h4 {
-    /*FOR DESCRIPTION, WHICH IS NOT BEING USE FOR THE MOMENT*/
-    font-size: 16px;
-    line-height: 22px;
-    font-weight: normal;
-    color: #777777;
-    text-align: center;
-    margin-top: 0 !important;
-    margin-bottom: 30px;
-}
-
-.landing-box hr {
-    /*LINE TO SEPARATE DESCRIPTION FROM LOGIN BUTTON, WHICH IS NOT BEING USE FOR THE MOMENT*/
-    border-top-color: #cccccc;
-    margin: 15px 30px;
-}
-
 .landing-box-brand {
     margin: 0 auto;
     margin-bottom: 20px;
@@ -2219,7 +2263,7 @@ input[type="checkbox"][disabled] + label {
 
 .table-scroll-admin{
     overflow-x: scroll;
-    margin: 0 25px 5px 90px !important;
+    margin: 0 25px 5px 120px !important;
     overflow-y: visible;
 }
 
@@ -2259,13 +2303,14 @@ td:first-child {
 
 .table-scroll-admin td:first-child {
     position: absolute;
-    margin-left: -70px !important;
+    margin-left: -100px !important;
 }
 
-.table-scroll-admin td:first-child + .remove-datasets-col {
+.table-scroll-admin td:first-child + .remove-datasets-col{
     position: absolute;
-    margin-left: -35px;
-    padding: 8px 25px 8px 10px !important;
+    margin-left: -65px;
+    padding: 8px 8px 8px 10px !important;
+
 }
 
 .table-scroll-admin td:first-child + .remove-datasets-col a:hover .disabled{
@@ -2282,20 +2327,48 @@ td:first-child .checkbox label{
     padding-top: 1px !important;
 }
 
-.remove-datasets-col a span{
+.disable-datasets-col{
+    display: inline!important;
+    margin: 0 3px 0 5px!important;
+    padding: 8px 10px 8px 10px !important;
+}
+
+.remove-datasets-col{
+    display: inline!important;
+}
+
+.remove-datasets-col a span,
+.disable-datasets-col a span{
     text-shadow: 1px 1px 0 #ffffff !important;
     padding-left: 0!important;
     margin-left: 0!important;
 }
 
-.remove-datasets-col a span.glyphicon-trash {
+.remove-datasets-col a span.glyphicon-trash,
+.disable-datasets-col a span.glyphicon-ban-circle,
+.disable-datasets-col a span.glyphicon-ok-sign{
     vertical-align: bottom;
     font-size: 1.15em;
     top: 0!important;
+    padding-top: 0!important;
 }
 
-.remove-datasets-col a:hover span{
+.disable-datasets-col a span.glyphicon-ok-circle{
+    vertical-align: bottom;
+    font-size: 1.2em;
+    top: 0!important;
+    margin-top: 0!important;
+}
+
+.remove-datasets-col a .glyphicon-trash.disabled {
+    padding-top: 6px !important;
+    height: auto !important;
+}
+
+.remove-datasets-col a:hover span,
+.disable-datasets-col a:hover span{
     color: #2FA4E7 !important;
+    cursor: pointer;
 }
 
 .table-items {
@@ -2398,6 +2471,12 @@ td:first-child .checkbox label{
 
 .dataset-admin-alerts {
     margin: 10px 15px;
+}
+
+.dataset-disabled,
+.dataset-disabled p,
+.dataset-disabled a{
+    color: #cccccc !important;
 }
 
 .dataset-form-group {
@@ -2664,4 +2743,19 @@ tags-input .tags .tag-item{
     border: solid 3px transparent !important;
     border-top-color: #cccccc !important;
     border-left-color: #cccccc !important;
+}
+
+/***************************************************Tooltip*/
+
+.tooltip.tooltip-class .tooltip-inner{
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 13px !important;
+    color: #333333;
+    background: #ffffff;
+    box-shadow: 2px 2px 2px rgba(0,0,0,.175);
+    padding: 3px 5px!important;
+}
+
+.tooltip.tooltip-class .tooltip-arrow {
+    display: none;
 }
