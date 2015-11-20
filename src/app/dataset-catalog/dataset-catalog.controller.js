@@ -6,7 +6,7 @@
         .controller('DatasetCatalog', DatasetCatalog);
 
     /* ngInject */
-    function DatasetCatalog($scope, $modal, $rootScope, cmDatasetService, cmTranslateService, cmAuthenticateService, USER_ROLES) {
+    function DatasetCatalog($scope ,$modal,$rootScope,cmDatasetService,cmAuthenticateService, USER_ROLES) {
 
         var vm = this;
         vm.dataSetList = {'catalog': [], 'dictionary': []};
@@ -28,13 +28,7 @@
 
             cmDatasetService.findDataSets($rootScope.currentUser.dacUserId).then(
                 function (data) {
-                    vm.dataSetList.catalog = data;
-                    vm.dataSetList.catalog.forEach(function (arrayItem) {
-                        cmTranslateService.translate("sampleset", arrayItem.useRestriction).then(function (data) {
-                            arrayItem.useRestriction = data;
-                        });
-                        arrayItem.useRestriction = "Loading...";
-                    });
+                    vm.dataSetList['catalog'] = data;
                 });
         }
 
