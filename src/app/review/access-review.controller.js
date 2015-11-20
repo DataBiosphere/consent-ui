@@ -4,20 +4,24 @@
     angular.module('cmReview')
         .controller('DarReview', DarReview);
 
-    function DarReview($scope, $modal, $state, $rootScope, USER_ROLES, vote, rpVote, dar, election, consent, cmVoteService, apiUrl, cmAuthenticateService , cmLoginUserService, cmTranslateService, researchPurpose)
-    {
+    function DarReview($scope, $modal, $state, $rootScope, USER_ROLES, vote, rpVote, dar, election, consent, cmVoteService, apiUrl, cmAuthenticateService, cmLoginUserService, cmTranslateService, researchPurpose, cmRPService, dar_id) {
+
         var vm = this;
         vm.openApplication = openApplication;
 
-        function openApplication(dataRequestId) {
-            $scope.dataRequestId = dataRequestId;
+        function openApplication() {
+            $scope.dataRequestId = dar_id;
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/application-summary-modal/application-summary-modal.html',
                 controller: 'ApplicationModal',
                 controllerAs: 'ApplicationModal',
-                scope: $scope
-
+                scope: $scope,
+                resolve: {
+                    darDetails: function () {
+                        return cmRPService.getDarModalSummary(dar_id);
+                    }
+                }
             });
 
             modalInstance.result.then(function () {
@@ -25,18 +29,18 @@
             });
         }
 
-        if( typeof vote === 'undefined' ||
-            typeof consent === 'undefined'||
-            typeof election === 'undefined'||
-            typeof dar === 'undefined'){
+        if (typeof vote === 'undefined' ||
+            typeof consent === 'undefined' ||
+            typeof election === 'undefined' ||
+            typeof dar === 'undefined') {
             cmLoginUserService.redirect($rootScope.currentUser);
             return;
         }
 
-        if(researchPurpose === null){
+        if (researchPurpose === null) {
             $scope.rp = "this includes senesitive research objectives that requires manual review";
-        }else{
-            cmTranslateService.translate("purpose",researchPurpose.restriction).then(function(data) {
+        } else {
+            cmTranslateService.translate("purpose", researchPurpose.restriction).then(function (data) {
                 $scope.rp = data;
             });
         }
@@ -81,26 +85,25 @@
         };
 
 
-
-        $scope.positiveVote = function(){
+        $scope.positiveVote = function () {
             $scope.selection.voteStatus = true;
             $scope.selection.rationale = null;
         };
 
 
-        $scope.positiveRPVote = function(){
+        $scope.positiveRPVote = function () {
             $scope.selection.rpVoteStatus = true;
             $scope.selection.rpRationale = null;
         };
 
 
-        $scope.logRPVote = function() {
+        $scope.logRPVote = function () {
             $scope.enableRPButton = false;
-            if((rpVote.vote !== $scope.selection.rpVoteStatus)||($scope.selection.rpRationale !== vote.rpRationale)){
+            if ((rpVote.vote !== $scope.selection.rpVoteStatus) || ($scope.selection.rpRationale !== vote.rpRationale)) {
                 rpVote.vote = $scope.selection.rpVoteStatus;
                 rpVote.rationale = $scope.selection.rpRationale;
                 var result;
-                if(rpVote.createDate === null){
+                if (rpVote.createDate === null) {
                     $scope.isNew = true;
                     result = cmVoteService.postDarVote(election.referenceId, rpVote).$promise;
                 } else {
@@ -110,7 +113,7 @@
                 $scope.logRpVote = true;
                 result.then(
                     //success
-                    function(){
+                    function () {
                         $scope.enableRPButton = true;
                         var modalInstance = $modal.open({
                             animation: false,
@@ -120,14 +123,14 @@
                             scope: $scope
                         });
                         modalInstance.result.then(function () {
-                            if($scope.logAccessVote || vote.vote !== null){
-                                cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles);
-                                if(cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles)){
+                            if ($scope.logAccessVote || vote.vote !== null) {
+                                cmAuthenticateService.isAuthorized(USER_ROLES.chairperson, $rootScope.currentUser.roles);
+                                if (cmAuthenticateService.isAuthorized(USER_ROLES.chairperson, $rootScope.currentUser.roles)) {
                                     $state.go('chair_console');
-                                }else {
+                                } else {
                                     $state.go('user_console');
                                 }
-                            }else{
+                            } else {
                                 $scope.reminderRPAlert();
                                 $scope.enableRPButton = true;
                             }
@@ -135,24 +138,24 @@
 
                     },
                     //error
-                    function(){
+                    function () {
                         alert("Error updating vote.");
                         $scope.enableRPButton = true;
                     });
-            } else  {
+            } else {
                 alert("Error: Your vote hasn't been changed.");
                 $scope.enableRPButton = true;
             }
         };
 
 
-        $scope.logVote = function() {
+        $scope.logVote = function () {
             $scope.enableDARButton = false;
-            if((vote.vote !== $scope.selection.voteStatus)||($scope.selection.rationale !== vote.rationale)){
+            if ((vote.vote !== $scope.selection.voteStatus) || ($scope.selection.rationale !== vote.rationale)) {
                 vote.vote = $scope.selection.voteStatus;
                 vote.rationale = $scope.selection.rationale;
                 var result;
-                if(vote.createDate === null){
+                if (vote.createDate === null) {
                     $scope.isNew = true;
                     result = cmVoteService.postDarVote(election.referenceId, vote).$promise;
                 } else {
@@ -162,7 +165,7 @@
                 $scope.logAccessVote = true;
                 $scope.electionType = 'access';
                 result.then(
-                    function(){
+                    function () {
                         $scope.enableDARButton = true;
                         var modalInstance = $modal.open({
                             animation: false,
@@ -172,14 +175,14 @@
                             scope: $scope
                         });
                         modalInstance.result.then(function () {
-                            if($scope.logRpVote || rpVote.vote !== null){
-                                cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles);
-                                if(cmAuthenticateService.isAuthorized(USER_ROLES.chairperson,$rootScope.currentUser.roles)){
+                            if ($scope.logRpVote || rpVote.vote !== null) {
+                                cmAuthenticateService.isAuthorized(USER_ROLES.chairperson, $rootScope.currentUser.roles);
+                                if (cmAuthenticateService.isAuthorized(USER_ROLES.chairperson, $rootScope.currentUser.roles)) {
                                     $state.go('chair_console');
-                                }else {
+                                } else {
                                     $state.go('user_console');
                                 }
-                            }else {
+                            } else {
                                 $scope.reminderDARAlert();
                                 $scope.enableDARButton = true;
                             }
@@ -187,11 +190,11 @@
                         });
                     },
                     //error
-                    function(){
+                    function () {
                         alert("Error updating vote.");
                         $scope.enableDARButton = true;
                     });
-            } else  {
+            } else {
                 alert("Error: Your vote hasn't been changed.");
             }
         };

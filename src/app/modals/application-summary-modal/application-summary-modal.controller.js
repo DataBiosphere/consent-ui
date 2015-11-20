@@ -5,13 +5,9 @@
         .controller('ApplicationModal', ApplicationModal);
 
     /* ngInject */
-    function ApplicationModal($modalInstance, $scope, $http) {
+    function ApplicationModal($modalInstance, $scope, darDetails) {
 
-        $scope.appSummaries = [];
-        $http.get("json/app-summary.json").success(function(response){
-            $scope.appSummaries = response;
-        });
-
+        $scope.summary = darDetails;
         var vm = this;
 
         vm.ok = function () {

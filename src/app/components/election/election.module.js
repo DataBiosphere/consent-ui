@@ -9,9 +9,9 @@
         })
         .factory('ElectionUpdateResource', function($resource, apiUrl){
             return $resource(apiUrl+"election/:electionId", {}, {
-                update:{method: 'PUT', params: {electionId: '@electionId'}}});
+                update:{method: 'PUT', params: {electionId: '@electionId'}},
+                get:{method: 'GET', params: {electionId: '@electionId'}}});
         })
-
         .factory('LastElectionReview', function($resource, apiUrl){
             return $resource(apiUrl+"electionReview/last/:electionId", {}, {
                 get:{method: 'GET', params: {electionId: '@electionId'}}});

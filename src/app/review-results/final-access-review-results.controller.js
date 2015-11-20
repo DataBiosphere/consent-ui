@@ -106,7 +106,12 @@
                 templateUrl: 'app/modals/application-summary-modal/application-summary-modal.html',
                 controller: 'ApplicationModal',
                 controllerAs: 'ApplicationModal',
-                scope: $scope
+                scope: $scope,
+                resolve: {
+                    darDetails: function () {
+                        return cmRPService.getDarModalSummary($scope.referenceId);
+                    }
+                }
             });
 
             modalInstance.result.then(function () {

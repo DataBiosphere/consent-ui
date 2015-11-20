@@ -4,19 +4,24 @@
     angular.module('cmReviewResults')
         .controller('AccessReviewResults', ReviewResults);
 
-    function ReviewResults(cmTranslateService, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, electionReview, rpElectionReview, dar, apiUrl, researchPurpose, cmEmailService) {
+    function ReviewResults(cmTranslateService, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, electionReview, rpElectionReview, dar, apiUrl, researchPurpose, cmEmailService, cmRPService, dar_id) {
 
         var vm = this;
         vm.openApplication = openApplication;
 
-        function openApplication(dataRequestId) {
-            $scope.dataRequestId = dataRequestId;
+        function openApplication() {
+            $scope.dataRequestId = dar_id;
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/application-summary-modal/application-summary-modal.html',
                 controller: 'ApplicationModal',
                 controllerAs: 'ApplicationModal',
-                scope: $scope
+                scope: $scope,
+                resolve: {
+                    darDetails: function () {
+                        return cmRPService.getDarModalSummary(dar_id);
+                    }
+                }
             });
 
             modalInstance.result.then(function () {

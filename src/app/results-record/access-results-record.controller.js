@@ -5,7 +5,7 @@
     angular.module('cmResultsRecord')
         .controller('AccessResultsRecord', AccessResultsRecord);
 
-    function AccessResultsRecord($scope, $state, cmElectionService, apiUrl, cmRPService, cmVoteService, cmMatchService) {
+    function AccessResultsRecord($scope, $state, $modal, cmElectionService, apiUrl, cmRPService, cmVoteService, cmMatchService) {
 
 
         if ($scope.electionId === null) {
@@ -257,7 +257,23 @@
             });
         }
 
+        $scope.openApplication = function openApplication() {
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/application-summary-modal/application-summary-modal.html',
+                controller: 'ApplicationModal',
+                controllerAs: 'ApplicationModal',
+                scope: $scope,
+                resolve: {
+                    darDetails: function () {
+                        return cmRPService.getDarModalSummary($scope.dar_election.referenceId);
+                    }
+                }
+            });
+            modalInstance.result.then(function () {
+                init();
+            });
+        };
+
     }
-
-
 })();

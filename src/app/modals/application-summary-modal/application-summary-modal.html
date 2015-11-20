@@ -1,4 +1,4 @@
-<div class="modal-dialog modal-add-dul">
+<div class="modal-add-dul modal-app-summary">
     <div class="modal-content">
         <div class="modal-header admin-modal-header">
             <button type="button" class="modal-close-btn close" ng-click="ApplicationModal.cancel()"><span aria-hidden="true">&times;</span></button>
@@ -6,19 +6,19 @@
                 <small class="bold">Data Access Request Application Summary</small>
             </h2>
         </div>
-        <div ng-repeat="appSummary in appSummaries">
+        <div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 admin-modal-content app-summary-modal-content app-summary-modal-first-content">
                 <div class="row">
                     <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label access-color">Principal Investigator</label>
-                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">{{appSummary.investigator}}</div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">{{summary.principalInvestigator}}</div>
                 </div>
                 <div class="row">
                     <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label access-color">Institution Name</label>
-                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">{{appSummary.institution}}</div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">{{summary.institutionName}}</div>
                 </div>
                 <div class="row">
                     <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label access-color">Project Title</label>
-                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">{{appSummary.title}}</div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">{{summary.projectTitle}}</div>
                 </div>
                 <hr>
             </div>
@@ -27,56 +27,45 @@
                     <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label access-color">Type of research</label>
                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">
                         <ul>
-                            <li ng-if="appSummary.researchType[0].status === true"><b>{{appSummary.researchType[0].title}}</b>{{appSummary.researchType[0].description}}</li>
-                            <li ng-if="appSummary.researchType[1].status === true"><b>{{appSummary.researchType[1].title}}</b>{{appSummary.researchType[1].description}}</li>
-                            <li ng-if="appSummary.researchType[2].status === true"><b>{{appSummary.researchType[2].title}}</b>{{appSummary.researchType[2].description}}</li>
-                            <li ng-if="appSummary.researchType[3].status === true"><b>{{appSummary.researchType[3].title}}</b>{{appSummary.researchType[3].description}}</li>
+                            <li ng-repeat="rt in summary.researchType"><b>{{rt.title}}</b>{{rt.description}}</li>
                         </ul>
                     </div>
                 </div>
                 <hr>
             </div>
-            <div ng-if="appSummary.diseasesApplies === true"  class="col-lg-12 col-md-12 col-sm-12 col-xs-12 app-summary-modal-content">
+            <div ng-if="summary.thereDiseases == true"  class="col-lg-12 col-md-12 col-sm-12 col-xs-12 app-summary-modal-content">
                 <div class="row">
                     <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label access-color">Disease area(s)</label>
                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">
                         <ul>
-                            <li ng-if="appSummary.diseases[0].status === true">{{appSummary.diseases[0].title}}</li>
-                            <li ng-if="appSummary.diseases[1].status === true">{{appSummary.diseases[1].title}}</li>
+                            <li ng-repeat="disease in summary.diseases">{{disease}}</li>
                         </ul>
                     </div>
                 </div>
                 <hr>
             </div>
-            <div ng-if="appSummary.purposeStatementApplies === true" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 app-summary-modal-content">
+            <div ng-if="summary.therePurposeStatements === true" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 app-summary-modal-content">
                 <div class="row">
                     <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label access-color">Purpose Statement</label>
                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">
                         <ul>
-                            <li ng-if="appSummary.purposeStatement[0].status === true">{{appSummary.purposeStatement[0].description}}</li>
-                            <li ng-if="appSummary.purposeStatement[1].status === true">{{appSummary.purposeStatement[1].description}}</li>
-                            <li ng-if="appSummary.purposeStatement[2].status === true">{{appSummary.purposeStatement[2].description}}</li>
-                            <li ng-if="appSummary.purposeStatement[3].status === true">{{appSummary.purposeStatement[3].description}}</li>
-                            <li ng-if="appSummary.purposeStatement[4].status === true" class="cancel-color">{{appSummary.purposeStatement[4].description}}</li>
-                            <li ng-if="appSummary.purposeStatement[5].status === true" class="cancel-color">{{appSummary.purposeStatement[5].description}}</li>
-                            <li ng-if="appSummary.purposeStatement[6].status === true" class="cancel-color">{{appSummary.purposeStatement[6].description}}</li>
-                            <li ng-if="appSummary.purposeStatement[7].status === true" class="cancel-color">{{appSummary.purposeStatement[7].description}}</li>
-                            <li ng-if="appSummary.purposeStatement[8].status === true" class="cancel-color">{{appSummary.purposeStatement[8].description}}</li>
-                            <li ng-if="appSummary.purposeStatement[9].status === true" class="cancel-color">{{appSummary.purposeStatement[9].description}}</li>
-                            <li ng-if="appSummary.purposeStatement[10].status === true" class="cancel-color">{{appSummary.purposeStatement[10].description}}</li>
-                            <li ng-if="appSummary.purposeStatement[11].status === true" class="cancel-color">{{appSummary.purposeStatement[11].description}}</li>
+                            <li ng-repeat="rt in summary.purposeStatements" ng-class="{'cancel-color': rt.manualReview}"><b>{{rt.title}}</b>{{rt.description}}</li>
                         </ul>
                     </div>
                 </div>
-                <div ng-if="appSummary.sensitivePopulationApplies === true" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert-danger cancel-color">
+                <div ng-if="summary.sensitivePopulation == true" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert-danger cancel-color">
                     This research involves studying a sensitive population and requires manual review.
                 </div>
                 <hr>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 app-summary-modal-content">
+                <div ng-if="summary.requiresManualReview == true && summary.sensitivePopulation == false" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert-danger cancel-color">
+                    This research requires manual review.
+                </div>
             </div>
         </div>
         <div class="modal-footer admin-modal-footer app-summary-modal-footer">
             <button class="col-lg-3 col-md-3 col-sm-4 col-xs-6 btn access-background" ng-click="ApplicationModal.cancel()">Close</button>
         </div>
     </div>
-
 </div>

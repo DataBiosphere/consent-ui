@@ -34,9 +34,9 @@
                 name: 'access_results_record',
                 url: '/access_results_record',
                 templateUrl: 'app/results-record/access-results-record.html',
-                controller: function($scope, $stateParams){
-                    $scope.electionId =$stateParams.electionId;
-
+                controller: function($scope, $stateParams, cmElectionService){
+                    $scope.electionId = $stateParams.electionId;
+                    $scope.dar_election = cmElectionService.findElectionById($stateParams.electionId);
                 },
                 controllerAs: 'AccessResultsRecord',
                 params: {
