@@ -68,7 +68,7 @@
                             <div class="form-group">
                                 <label class="col-lg-2 col-md-2 col-sm-2 col-xs-4 control-label vote-label access-color">Rationale</label>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
-                                    <input type="text" ng-model="election.finalRationale" ng-required="!election.finalVote"
+                                    <input type="text" ng-model="election.finalRationale"
                                            ng-disabled="election.finalVote"
                                            cm-focus="{{!AccessReviewResults.voteForm.vote || AccessReviewResults.voteForm.vote == 'true' ? 'false' : 'true'}}"
                                            name="inputRationale"
@@ -86,7 +86,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
-                                    <button ng-click="logVote()" ng-disabled="!voteForm.$valid && enableVoteButton"
+                                    <button ng-click="logVote()" ng-disabled="!voteForm.$valid"
                                             class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button access-background">
                                         Vote
                                     </button>
@@ -217,7 +217,6 @@
 
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
                                     <input type="text" ng-model="rpElection.finalRationale"
-                                           ng-required="!rpElection.finalVote"
                                            ng-disabled="rpElection.finalVote"
                                            cm-focus="{{!AccessReviewResults.rpVoteForm.vote || AccessReviewResults.rpVoteForm.vote == 'true' ? 'false' : 'true'}}"
                                            name="inputRationale"
