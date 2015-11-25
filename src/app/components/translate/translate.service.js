@@ -8,21 +8,21 @@
     function cmTranslateService($http, ontologyApiUrl) {
 
         function translate(purpose, UseRestriction) {
+                      var promise =  $http({
+                           url: ontologyApiUrl+
+                           +purpose,
+                           method: "POST",
+                           data: UseRestriction
+                       })
+                       .then(function(response) {
+                               return response.data;
+                       });
+                       return promise;
+               }
 
-            var promise = $http({
-                url: ontologyApiUrl + "translate?for=" + purpose,
-                method: "POST",
-                data: UseRestriction
-            })
-                .then(function (response) {
-                    return response.data;
-                });
-            return promise;
-        }
-
-        return {
-            translate: function (purpose, UseRestriction) {
-                return translate(purpose, UseRestriction);
+              return{
+                translate: function(purpose,UseRestriction) {
+                return translate(purpose,UseRestriction);
             }
         };
     }
