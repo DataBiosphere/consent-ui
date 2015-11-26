@@ -2,13 +2,19 @@
     <div class="modal-content">
         <div class="modal-header admin-modal-header">
             <button type="button" class="modal-close-btn close" ng-click="Modal.cancel()"><span aria-hidden="true">&times;</span></button>
-            <h2 class="pvotes-box-title cancel-color">Delete Dataset?
+            <h2 ng-show="actionType == 'delete'" class="cancel-color pvotes-box-title">Delete Dataset Confirmation
                 <small>Are you sure you want to delete this Dataset?</small>
+            </h2>
+            <h2 ng-show="actionType == 'disable'" class="dataset-color pvotes-box-title">Disable Dataset Confirmation
+                <small>If you disable a Dataset, Researchers won't be able to request access on it from now on. New Access elections related to this dataset won't be available but opened ones will continue.</small>
+            </h2>
+            <h2 ng-show="actionType == 'enable'" class="dataset-color pvotes-box-title">Enable Dataset Confirmation
+                <small>If you enable a Dataset, Researchers will be able to request access on it from now on.</small>
             </h2>
         </div>
         <div class="modal-footer admin-modal-footer">
             <button type="button" class="btn dismiss-background" ng-click="Modal.cancel()">No</button>
-            <button type="button" class="btn cancel-background" ng-click="Modal.ok()">Yes</button>
+            <button type="button" ng-class="{'cancel-background': actionType == 'delete', 'dataset-background': actionType == 'disable' || actionType == 'enable'}"class="btn" ng-click="Modal.ok()">Yes</button>
         </div>
     </div>
 </div>

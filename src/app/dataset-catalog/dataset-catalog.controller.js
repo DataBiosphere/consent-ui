@@ -9,6 +9,11 @@
     function DatasetCatalog($scope ,$modal,$rootScope,cmDatasetService,cmAuthenticateService, USER_ROLES) {
 
         var vm = this;
+        vm.openDelete = openDelete;
+        vm.openDisable = openDisable;
+        vm.openEnable = openEnable;
+        $scope.actionType = null;
+
         vm.dataSetList = {'catalog': [], 'dictionary': []};
         $scope.pagination = {
             current: 1
@@ -20,7 +25,7 @@
             $scope.objectIdList = [];
 
             $scope.isAdmin = cmAuthenticateService.isAuthorized(USER_ROLES.admin, $rootScope.currentUser.roles);
-
+            $scope.isResearcher =  cmAuthenticateService.isAuthorized(USER_ROLES.researcher, $rootScope.currentUser.roles);
             cmDatasetService.findDictionary().then(
                 function (data) {
                     vm.dataSetList.dictionary = data;
@@ -53,14 +58,16 @@
             cmDatasetService.deleteDataset(datasetId);
         };
 
-        vm.openDelete = openDelete;
+
         function openDelete(datasetId) {
 
+            $scope.actionType = 'delete';
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/delete-dataset-modal.html',
                 controller: 'Modal',
-                controllerAs: 'Modal'
+                controllerAs: 'Modal',
+                scope: $scope
             });
 
             modalInstance.result.then(function () {
@@ -69,6 +76,45 @@
                 });
             });
         }
+
+
+        function openDisable(datasetId) {
+
+            $scope.actionType = 'disable';
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/delete-dataset-modal.html',
+                controller: 'Modal',
+                controllerAs: 'Modal',
+                scope: $scope
+            });
+
+            modalInstance.result.then(function () {
+                cmDatasetService.disableDataset(datasetId, false).then(function () {
+                    init();
+                });
+            });
+        }
+
+
+        function openEnable(datasetId) {
+
+            $scope.actionType = 'enable';
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/delete-dataset-modal.html',
+                controller: 'Modal',
+                controllerAs: 'Modal',
+                scope: $scope
+            });
+
+            modalInstance.result.then(function () {
+                cmDatasetService.disableDataset(datasetId, true).then(function () {
+                    init();
+                });
+            });
+        }
+
 
 
     }

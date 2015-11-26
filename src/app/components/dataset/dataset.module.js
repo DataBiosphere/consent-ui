@@ -3,7 +3,6 @@
 
     angular.module('cmDataset', [])
 
-
         .factory('PostDsFileResource', function($resource, apiUrl){
         return $resource(apiUrl+"dataset",{}, {
             post: {method: 'POST', isArray:true, params: {overwrite: 'overwrite'}, headers: { 'Content-Type': undefined },
@@ -22,14 +21,19 @@
                    });
         })
 
-
         .factory('DeleteDataSetResource', function($resource, apiUrl){
                           return $resource(apiUrl+"dataset/:datasetObjectId", {}, {
                               Delete: {method:'DELETE',params: {datasetObjectId: '@datasetObjectId'}}
                           });
-               })
+        })
 
-         .factory('DictionaryResource', function($resource, apiUrl){
+        .factory('DisableDataSetResource', function($resource, apiUrl){
+            return $resource(apiUrl+"dataset/disable/:datasetObjectId/:active", {}, {
+                Delete: {method:'DELETE',params: {datasetObjectId: '@datasetObjectId', active: '@active'}}
+            });
+        })
+
+        .factory('DictionaryResource', function($resource, apiUrl){
                    return $resource(apiUrl+"dataset/dictionary", {}, {
                                    List: {method:'GET',isArray:true}
                    });
