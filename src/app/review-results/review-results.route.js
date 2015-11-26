@@ -67,6 +67,9 @@
                             return cmRPService.getDarFields($stateParams.referenceId, "rus");
                         }
 
+                    },
+                    dar_id: function ($stateParams) {
+                            return $stateParams.referenceId;
                     }
                 }
             })

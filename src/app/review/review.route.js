@@ -89,6 +89,9 @@
                         if ($stateParams.darId !== null && $stateParams.rpVoteId !== null) {
                             return cmVoteService.getDarVote($stateParams.darId, $stateParams.rpVoteId);
                         }
+                    },
+                    dar_id: function($stateParams){
+                        return $stateParams.darId;
                     }
                 }
             });

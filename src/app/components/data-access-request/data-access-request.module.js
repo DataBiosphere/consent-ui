@@ -46,6 +46,11 @@
         .factory('updateDataAccessRequestResource', function ($resource, apiUrl) {
             return $resource(apiUrl + "dar/:accessId", {}, {
                 update: {method: 'PUT', params: {accessId: '@accessId'}}
-          });
-       });
+            });
+        })
+        .factory('darModalSummary', function ($resource, apiUrl) {
+            return $resource(apiUrl + "dar/modalSummary/:id", {},
+                {get: {method: 'GET'}, params: {id: '@id'}}
+            );
+        });
 })();

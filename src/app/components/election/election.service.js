@@ -49,6 +49,14 @@
         }
 
         /**
+         * Find the election with the id sent as a parameter
+         * @param electionId
+         */
+        function getElectionById(electionId) {
+            return ElectionUpdateResource.get({electionId: electionId});
+        }
+
+        /**
          * Create election for the specified consent id
          * @param consentId
          * @param electionId
@@ -105,6 +113,9 @@
         }
 
         return {
+            findElectionById: function(electionId){
+              return getElectionById(electionId);
+            },
             findDarElection: function (id) {
                 return findElectionByDarId(id);
             },
