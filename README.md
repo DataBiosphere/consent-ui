@@ -21,4 +21,6 @@ To run consent-ui app :
  4. to start the application on a test server :
          gulp serve
 
+ 5. to generate a static version on dist folder:
+         gulp
 
