@@ -16,6 +16,7 @@
         $scope.logVoteAgreement = logVoteAgreement;
         $scope.electionType = null;
         $scope.openApplication = openApplication;
+        $scope.alertOn = null;
 
         /*ALERTS*/
         $scope.alertsDAR = [];
@@ -30,6 +31,7 @@
         };
 
         $scope.reminderAgreeAlert = function (index) {
+            $scope.alertOn = true;
             $scope.alertsAgree.splice(index, 1);
             $scope.alertsAgree.push({
                 title: 'Please log a vote on Final Access Decision'

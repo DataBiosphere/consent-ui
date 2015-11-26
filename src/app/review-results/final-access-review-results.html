@@ -62,7 +62,7 @@
                 </div>
                 <div class="form-group form-group-bottom">
                     <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
-                        <div class="votes-alerts no-margin no-padding">
+                        <div class="votes-alerts final-alert no-margin no-padding">
                             <alert ng-repeat="alert in alertsDAR" type="danger"
                                    class="alert-title cancel-color">
                                 <h4>{{alert.title}}</h4>
@@ -84,6 +84,7 @@
                 <small>Were the Final votes of the DAC and the Vault consistent?</small>
             </h3>
             <hr class="box-separator-white">
+
             <form class="form-horizontal" id="voteAgreement">
                 <div class="form-group first-form-group">
                     <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Vote</label>
@@ -113,7 +114,16 @@
                 </div>
                 <div class="form-group form-group-bottom">
                     <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
-                        <div class="votes-alerts no-margin no-padding">
+                        <div ng-show="alertOn == null;" class="agreement-data default-color">DAC Decision:
+                            <span class="access-color" ng-if="electionAccess.finalVote == '1'"><b>YES</b></span>
+                            <span class="access-color" ng-if="electionAccess.finalVote == '0'"><b>NO</b></span>
+                            <span class="access-color" ng-if="electionAccess.finalVote == 'null'"><b>---</b></span>
+                            Vault Decision:
+                            <span class="access-color" ng-if="match == '1'"><b>YES</b></span>
+                            <span class="access-color" ng-if="match == '0'"><b>NO</b></span>
+                            <span class="access-color" ng-if="match == null"><b>---</b></span>
+                        </div>
+                        <div ng-show="alertOn == true;" class="votes-alerts final-alert no-margin no-padding">
                             <alert ng-repeat="alert in alertsAgree" type="danger"
                                    class="alert-title cancel-color">
                                 <h4>{{alert.title}}</h4>
@@ -169,8 +179,7 @@
                         </div>
                     </div>
                 </div>
-
-               <div ng-disabled="hideMatch" class="col-lg-4 col-md-4 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2 jumbotron box-vote-lightresults no-padding">
+                <div ng-disabled="hideMatch" class="col-lg-4 col-md-4 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2 jumbotron box-vote-lightresults no-padding">
                     <div class="cm-title-record access-color">Vault Decision</div>
                     <hr class="box-separator">
                     <div class="results-box">
@@ -182,8 +191,8 @@
                                 <span ng-if="match == null"></span>
                             </div>
                         </div>
-                       <div class="row">
-                       <label class="col-lg-4 col-md-4 col-sm-2 col-xs-4 control-label vote-label access-color">Date: </label>
+                        <div class="row">
+                            <label class="col-lg-4 col-md-4 col-sm-2 col-xs-4 control-label vote-label access-color">Date: </label>
                             <div class="voteDate col-lg-8 col-md-8 col-sm-3 col-xs-3 vote-label">{{createDate}}</div>
                         </div>
                     </div>

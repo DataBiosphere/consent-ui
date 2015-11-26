@@ -152,6 +152,10 @@ small {
     color: #2FA4E7 !important;
 }
 
+.dismiss-color{
+    color: #cccccc!important;
+}
+
 .dismiss-background {
     background: rgba(204, 204, 204, 0.5) !important;
 }
@@ -1925,6 +1929,10 @@ input[type="checkbox"][disabled] + label {
     margin-bottom: 0!important;
 }
 
+.final-alert .alert-title{
+    background-color: rgb(215, 200, 196);
+}
+
 .admin-alerts .alert-title {
     padding: 25px 30px 25px 30px;
 }
@@ -2024,8 +2032,7 @@ input[type="checkbox"][disabled] + label {
 }
 
 .alert-danger {
-    /*background-color: rgba(209, 59, 7, 0.1);*/
-    background-color: rgb(215, 200, 196);
+    background-color: rgba(209, 59, 7, 0.1);
     border: none;
 }
 
@@ -2282,7 +2289,7 @@ input[type="checkbox"][disabled] + label {
     min-height: 100%;
     box-shadow: 3px 3px 0 #cccccc;
     border-radius: 6px;
-    position: relative;
+    position: relative !important;
 }
 
 .table-scroll {
@@ -2333,13 +2340,13 @@ td:first-child {
 
 .table-scroll-admin td:first-child {
     position: absolute;
-    margin-left: -100px !important;
+    left: 60px!important;
 }
 
 .table-scroll-admin td:first-child + .remove-datasets-col{
     position: absolute;
-    margin-left: -65px;
     padding: 8px 8px 8px 10px !important;
+    left: 55px!important;
 
 }
 
