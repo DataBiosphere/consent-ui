@@ -5,10 +5,15 @@
         .controller('SummaryVotes', SummaryVotes);
 
     /* ngInject */
-    function SummaryVotes(apiUrl, cmPendingCaseService) {
+    function SummaryVotes(apiUrl, cmPendingCaseService, cmStatFilesService) {
         var vm = this;
-        vm.downloadUrl = apiUrl + "consent/cases/summary/file";
-        vm.downloadUrlDAR = apiUrl + "consent/cases/summary/darfile";
+        vm.getFile = getFile;
+
+         function getFile(fileType){
+                   var file = cmStatFilesService.getFile(fileType);
+                }
+
+
         var data = {
             'accessTotal': [
                 ['Results', 'Votes'],
