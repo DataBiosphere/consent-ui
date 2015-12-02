@@ -64,11 +64,6 @@
                             return cmRPService.getDarFields($stateParams.darId, "rus");
                         }
                     },
-                    researchPurpose: function ($stateParams, cmRPService) {
-                        if ($stateParams.darId !== null) {
-                            return cmRPService.getRestriction($stateParams.darId);
-                        }
-                    },
                     consent: function ($stateParams, cmRPService) {
                         if ($stateParams.darId !== null) {
                             return cmRPService.getDarConsent($stateParams.darId);
