@@ -38,11 +38,6 @@
                 {get: {method: 'GET'}, params: {id: '@id', fields: '@fields'}}
             );
         })
-        .factory('darRestriction', function ($resource, apiUrl) {
-            return $resource(apiUrl + "dar/restriction/:id", {},
-                {get: {method: 'GET'}, params: {id: '@id'}}
-            );
-        })
         .factory('updateDataAccessRequestResource', function ($resource, apiUrl) {
             return $resource(apiUrl + "dar/:accessId", {}, {
                 update: {method: 'PUT', params: {accessId: '@accessId'}}

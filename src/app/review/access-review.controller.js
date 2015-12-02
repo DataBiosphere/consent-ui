@@ -4,7 +4,7 @@
     angular.module('cmReview')
         .controller('DarReview', DarReview);
 
-    function DarReview($scope, $modal, $state, $rootScope, USER_ROLES, vote, rpVote, dar, election, consent, cmVoteService, apiUrl, cmAuthenticateService, cmLoginUserService, cmTranslateService, researchPurpose, cmRPService, dar_id) {
+    function DarReview($scope, $modal, $state, $rootScope, USER_ROLES, vote, rpVote, dar, election, consent, cmVoteService, apiUrl, cmAuthenticateService, cmLoginUserService, cmRPService, dar_id) {
 
         var vm = this;
         vm.openApplication = openApplication;
@@ -36,13 +36,10 @@
             cmLoginUserService.redirect($rootScope.currentUser);
             return;
         }
-
-        if (researchPurpose === null) {
+        if (election.translatedUseRestriction === null) {
             $scope.rp = "This includes sensitive research objectives that requires manual review.";
         } else {
-            cmTranslateService.translate("purpose", researchPurpose.restriction).then(function (data) {
-                $scope.rp = data;
-            });
+                $scope.rp = election.translatedUseRestriction;
         }
         $scope.enableDARButton = true;
         $scope.enableRPButton = true;

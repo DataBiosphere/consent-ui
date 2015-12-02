@@ -57,16 +57,10 @@
                             return cmElectionService.findRPElectionReview($stateParams.electionId, false).$promise;
                         }
                     },
-                    researchPurpose: function ($stateParams, cmRPService) {
-                        if ($stateParams.referenceId !== null) {
-                            return cmRPService.getRestriction($stateParams.referenceId);
-                        }
-                    },
                     dar: function ($stateParams, cmRPService) {
                         if ($stateParams.referenceId !== null) {
                             return cmRPService.getDarFields($stateParams.referenceId, "rus");
                         }
-
                     },
                     dar_id: function ($stateParams) {
                             return $stateParams.referenceId;

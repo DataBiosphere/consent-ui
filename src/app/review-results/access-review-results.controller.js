@@ -4,7 +4,7 @@
     angular.module('cmReviewResults')
         .controller('AccessReviewResults', ReviewResults);
 
-    function ReviewResults(cmTranslateService, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, electionReview, rpElectionReview, dar, apiUrl, researchPurpose, cmEmailService, cmRPService, dar_id) {
+    function ReviewResults($scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, electionReview, rpElectionReview, dar, apiUrl, cmEmailService, cmRPService, dar_id) {
 
         var vm = this;
         vm.openApplication = openApplication;
@@ -60,12 +60,10 @@
             $scope.accessAlreadyVote = true;
         }
 
-        if (researchPurpose === null) {
+        if (electionReview.election.translatedUseRestriction === null) {
             $scope.rp = "This includes sensitive research objectives that requires manual review.";
         } else {
-            cmTranslateService.translate("purpose", researchPurpose.restriction).then(function (data) {
-                $scope.rp = data;
-            });
+            $scope.rp = electionReview.election.translatedUseRestriction;
         }
 
         $scope.sendReminder = function (voteId) {
