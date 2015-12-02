@@ -2,6 +2,6 @@
     'use strict';
 
     angular
-        .module('cmHelpModal', ['ui.bootstrap']);
+        .module('cmHelpModal', ['ui.bootstrap', 'cmHelpMeReport']);
 
 })();
