@@ -44,14 +44,14 @@
 
         }
 
-        function refreshUser() {
+        function refreshUser(clientId) {
             $rootScope.setCurrentUser(JSON.parse(sessionStorage.getItem('currentUser')));
             $rootScope.loadScript('https://apis.google.com/js/platform.js?onload=onLoadCallback', 'text/javascript', 'utf-8');
             window.onLoadCallback = function () {
                 gapi.load('auth2', function () {
                     if (gapi.auth2.getAuthInstance() === null) {
                         gapi.auth2.init({
-                            client_id: '806222273987-o5v929322h518gsoli74vem9rq7iqg09.apps.googleusercontent.com'
+                            client_id: clientId
                         });
                     }
                 });

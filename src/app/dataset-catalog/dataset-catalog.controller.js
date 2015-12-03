@@ -6,7 +6,7 @@
         .controller('DatasetCatalog', DatasetCatalog);
 
     /* ngInject */
-    function DatasetCatalog($scope ,$modal,$rootScope,cmDatasetService,cmAuthenticateService, USER_ROLES) {
+    function DatasetCatalog($scope, $modal, $rootScope, cmDatasetService, cmAuthenticateService, USER_ROLES) {
 
         var vm = this;
         vm.openDelete = openDelete;
