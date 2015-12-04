@@ -6,14 +6,19 @@
 
 
     /* ngInject */
-    function HelpModal($modalInstance, $state) {
+    function HelpModal($modalInstance, $state, cmHelpMeReportService, $rootScope, $scope) {
 
         var vm = this;
+        $scope.disableButton = false;
 
-        vm.ok = function () {
-            $modalInstance.close();
-            $state.go('help_me');
-
+        vm.ok = function (record) {
+            $scope.disableButton = true;
+            record.userId = $rootScope.currentUser.dacUserId;
+            cmHelpMeReportService.createHelpMeReport(record).$promise.then(
+                function success() {
+                    $modalInstance.close();
+                    $state.go('help_me');
+                });
         };
 
         vm.cancel = function () {

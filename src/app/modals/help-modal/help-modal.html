@@ -9,23 +9,23 @@
             </h2>
         </div>
         <div class="modal-footer">
-            <form class="form-horizontal" name="consentForm" novalidate class="css-form" enctype="multipart/form-data">
+            <form class="form-horizontal" name="reportForm" novalidate class="css-form">
                 <fieldset>
                     <div class="form-group admin-form-group first-form-group">
                         <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label common-color">Subject</label>
                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 admin-input">
-                            <input type="text" name="helpSubject" class="form-control col-lg-12 vote-input" required>
+                            <input type="text"  ng-model="report.subject" name="helpSubject" class="form-control col-lg-12 vote-input" required>
                         </div>
                     </div>
                     <div class="form-group admin-form-group ">
                         <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label common-color">Description</label>
                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 admin-input">
-                            <textarea name="textarea" rows="5" name="helpDescription"
+                            <textarea name="textarea" ng-model="report.description" rows="5" name="helpDescription"
                                   class="form-control col-lg-12 vote-input" required></textarea>
                         </div>
                     </div>
                     <div class="admin-modal-footer">
-                        <button class="col-lg-3 col-md-3 col-sm-4 col-xs-6 btn common-background" ng-click="HelpModal.ok()">Submit</button>
+                        <button ng-disabled="reportForm.$invalid || disableButton"  class="col-lg-3 col-md-3 col-sm-4 col-xs-6 btn common-background" ng-click="HelpModal.ok(report)">Submit</button>
                         <button class="col-lg-3 col-md-3 col-sm-4 col-xs-6 btn dismiss-background" ng-click="HelpModal.cancel()">Cancel</button>
                     </div>
                 </fieldset>
