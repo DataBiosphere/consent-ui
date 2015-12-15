@@ -1,0 +1,5 @@
+{
+    "apiUrl": "apiUrl",
+    "ontologyApiUrl": "ontologyServiceUrl",
+    "clientId": "googleId"
+}

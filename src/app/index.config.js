@@ -6,9 +6,7 @@
         .config(logConfig)
         .config(routeConfig)
         .config(httpConfig)
-        .config(compileProvider)
-        .constant("apiUrl", "https://consent.dsde-dev.broadinstitute.org/")
-        .constant("ontologyApiUrl", "https://consent-ontology.dsde-dev.broadinstitute.org/");
+        .config(compileProvider);
 
     /* ngInject */
     function logConfig($logProvider) {
