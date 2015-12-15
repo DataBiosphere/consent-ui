@@ -69,8 +69,8 @@
             });
         }
 
-        function attestAndSave() {
 
+        function attestAndSave() {
             verifyCheckboxes();
             $scope.formData.userId = $rootScope.currentUser.dacUserId;
             if($scope.formData.dar_code  !== undefined) {

@@ -34,8 +34,7 @@
                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous Step</a>
             </li>
             <li class="next f-right multi-step-next">
-
-                <button class="access-background bold" ng-click="RPApplication.attestAndSave()">
+                <button ng-if="formData.dar_code == null" class="access-background bold" ng-click="RPApplication.attestAndSave()">
                     Attest and Save
                 </button>
             </li>

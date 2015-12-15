@@ -15,11 +15,11 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
             <div class="radio-inline">
                 <input ng-model="formData.forProfit" ng-value=true type="radio" class="regular-radio" id="exclusiveYes"
-                       name="exclusive" required>
+                       name="exclusive" required ng-disabled="formData.dar_code != null">
                 <label for="exclusiveYes"></label>
                 <label for="exclusiveYes" class="radio-button-text">Yes</label>
                 <input ng-model="formData.forProfit" ng-value=false type="radio" class="regular-radio" id="exclusiveNo"
-                       name="exclusive" required>
+                       name="exclusive" required ng-disabled="formData.dar_code != null">
                 <label for="exclusiveNo"></label>
                 <label for="exclusiveNo" class="radio-button-text">No</label>
             </div>
@@ -31,23 +31,23 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
             <div class="radio-inline">
                 <input ng-model="formData.onegender" ng-value=true type="radio" class="regular-radio" id="oneGenderYes"
-                       name="onegender" required>
+                       name="onegender" required ng-disabled="formData.dar_code != null">
                 <label for="oneGenderYes"></label>
                 <label for="oneGenderYes" class="radio-button-text">Yes</label>
                 <input ng-model="formData.onegender" ng-value=false type="radio" class="regular-radio" id="oneGenderNo"
-                       name="onegender" required>
+                       name="onegender" required ng-disabled="formData.dar_code != null">
                 <label for="oneGenderNo"></label>
                 <label for="oneGenderNo" class="radio-button-text">No</label>
             </div>
-            <div ng-show="formData.onegender == true" class="multi-step-fields">
+            <div ng-show="formData.onegender == true" class="multi-step-fields" ng-disabled="formData.dar_code != null">
                 <span>Please specify</span>
                 <div class="radio-inline">
                     <input ng-model="formData.gender" value="F" type="radio" class="regular-radio" id="genderFemale"
-                    ng-required="formData.onegender" >
+                    ng-required="formData.onegender" ng-disabled="formData.dar_code != null">
                     <label for="genderFemale"></label>
                     <label for="genderFemale" class="radio-button-text">Female</label>
                     <input ng-model="formData.gender" value="M" type="radio" class="regular-radio" id="genderMale"
-                     ng-required="formData.onegender">
+                     ng-required="formData.onegender" ng-disabled="formData.dar_code != null">
                     <label for="genderMale"></label>
                     <label for="genderMale" class="radio-button-text">Male</label>
                 </div>
@@ -60,11 +60,11 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
             <div class="radio-inline">
                 <input ng-model="formData.pediatric" ng-value=true type="radio" class="regular-radio" id="pediatricYes"
-                       name="pediatric" required>
+                       name="pediatric" required ng-disabled="formData.dar_code != null">
                 <label for="pediatricYes"></label>
                 <label for="pediatricYes" class="radio-button-text">Yes</label>
                 <input ng-model="formData.pediatric" ng-value=false type="radio" class="regular-radio" id="pediatricNo"
-                       name="pediatric" required>
+                       name="pediatric" required ng-disabled="formData.dar_code != null">
                 <label for="pediatricNo"></label>
                 <label for="pediatricNo" class="radio-button-text">No</label>
             </div>
@@ -76,7 +76,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
             <div class="radio-inline">
                 <input ng-model="formData.illegalbehave" ng-value=true type="radio" class="regular-radio" id="illegalBehaveYes"
-                       name="illegalBehave" required>
+                       name="illegalBehave" required ng-disabled="formData.dar_code != null">
                 <label for="illegalBehaveYes"></label>
                 <label for="illegalBehaveYes" class="radio-button-text">Yes</label>
                 <input ng-model="formData.illegalbehave" ng-value=false type="radio" class="regular-radio" id="illegalBehaveNo"
@@ -91,11 +91,11 @@
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
             <div class="radio-inline">
-                <input ng-model="formData.addiction" ng-value=true type="radio" class="regular-radio" id="addictionYes"
+                <input ng-model="formData.addiction" ng-disabled="formData.dar_code != null" ng-value=true type="radio" class="regular-radio" id="addictionYes"
                        name="addiction" required>
                 <label for="addictionYes"></label>
                 <label for="addictionYes" class="radio-button-text">Yes</label>
-                <input ng-model="formData.addiction" ng-value=false type="radio" class="regular-radio" id="addictionNo"
+                <input ng-model="formData.addiction" ng-disabled="formData.dar_code != null" ng-value=false type="radio" class="regular-radio" id="addictionNo"
                        name="addiction" required>
                 <label for="addictionNo"></label>
                 <label for="addictionNo" class="radio-button-text">No</label>
@@ -108,7 +108,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
             <div class="radio-inline">
                 <input ng-model="formData.sexualdiseases" ng-value=true type="radio" class="regular-radio" id="sexualDiseasesYes"
-                       name="sexualdiseases" required>
+                       name="sexualdiseases" required ng-disabled="formData.dar_code != null">
                 <label for="sexualDiseasesYes"></label>
                 <label for="sexualDiseasesYes" class="radio-button-text">Yes</label>
                 <input ng-model="formData.sexualdiseases" ng-value=false type="radio" class="regular-radio" id="sexualDiseasesNo"
@@ -123,11 +123,11 @@
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
             <div class="radio-inline">
-                <input ng-model="formData.stigmatizediseases" ng-value=true type="radio" class="regular-radio" id="stigmatizeDiseasesYes"
+                <input ng-model="formData.stigmatizediseases" ng-disabled="formData.dar_code != null" ng-value=true type="radio" class="regular-radio" id="stigmatizeDiseasesYes"
                        name="stigmatizediseases" required>
                 <label for="stigmatizeDiseasesYes"></label>
                 <label for="stigmatizeDiseasesYes" class="radio-button-text">Yes</label>
-                <input ng-model="formData.stigmatizediseases" ng-value=false type="radio" class="regular-radio" id="stigmatizeDiseasesNo"
+                <input ng-model="formData.stigmatizediseases" ng-disabled="formData.dar_code != null" ng-value=false type="radio" class="regular-radio" id="stigmatizeDiseasesNo"
                        name="stigmatizediseases" required>
                 <label for="stigmatizeDiseasesNo"></label>
                 <label for="stigmatizeDiseasesNo" class="radio-button-text">No</label>
@@ -140,11 +140,11 @@
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
             <div class="radio-inline">
-                <input ng-model="formData.vulnerablepop" ng-value=true type="radio" class="regular-radio" id="vulnerablePopYes"
+                <input ng-model="formData.vulnerablepop" ng-disabled="formData.dar_code != null" ng-value=true type="radio" class="regular-radio" id="vulnerablePopYes"
                        name="vulnerablepop" required>
                 <label for="vulnerablePopYes"></label>
                 <label for="vulnerablePopYes" class="radio-button-text">Yes</label>
-                <input ng-model="formData.vulnerablepop" ng-value=false type="radio" class="regular-radio" id="vulnerablePopNo"
+                <input ng-model="formData.vulnerablepop" ng-disabled="formData.dar_code != null" ng-value=false type="radio" class="regular-radio" id="vulnerablePopNo"
                        name="vulnerablepop" required>
                 <label for="vulnerablePopNo"></label>
                 <label for="vulnerablePopNo" class="radio-button-text">No</label>
@@ -156,11 +156,11 @@
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
             <div class="radio-inline">
-                <input ng-model="formData.popmigration" ng-value=true type="radio" class="regular-radio" id="popMigrationYes"
+                <input ng-model="formData.popmigration" ng-disabled="formData.dar_code != null" ng-value=true type="radio" class="regular-radio" id="popMigrationYes"
                        name="popmigration" required>
                 <label for="popMigrationYes"></label>
                 <label for="popMigrationYes" class="radio-button-text">Yes</label>
-                <input ng-model="formData.popmigration" ng-value=false type="radio" class="regular-radio" id="popMigrationNo"
+                <input ng-model="formData.popmigration" ng-disabled="formData.dar_code != null" ng-value=false type="radio" class="regular-radio" id="popMigrationNo"
                        name="popmigration" required>
                 <label for="popMigrationNo"></label>
                 <label for="popMigrationNo" class="radio-button-text">No</label>
@@ -173,11 +173,11 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
             <div class="radio-inline">
                 <input ng-model="formData.psychtraits" ng-value=true type="radio" class="regular-radio" id="psychTraitsYes"
-                       name="psychtraits" required>
+                       name="psychtraits" required ng-disabled="formData.dar_code != null">
                 <label for="psychTraitsYes"></label>
                 <label for="psychTraitsYes" class="radio-button-text">Yes</label>
                 <input ng-model="formData.psychtraits" ng-value=false type="radio" class="regular-radio" id="psychTraitsNo"
-                       name="psychtraits" required>
+                       name="psychtraits" required ng-disabled="formData.dar_code != null">
                 <label for="psychTraitsNo"></label>
                 <label for="psychTraitsNo" class="radio-button-text">No</label>
             </div>
@@ -189,11 +189,11 @@
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group rp-last-group">
             <div class="radio-inline">
-                <input ng-model="formData.nothealth" ng-value=true type="radio" class="regular-radio" id="notHealthYes"
+                <input ng-model="formData.nothealth" ng-disabled="formData.dar_code != null" ng-value=true type="radio" class="regular-radio" id="notHealthYes"
                        name="nothealth" required>
                 <label for="notHealthYes"></label>
                 <label for="notHealthYes" class="radio-button-text">Yes</label>
-                <input ng-model="formData.nothealth" ng-value=false type="radio" class="regular-radio" id="notHealthNo"
+                <input ng-model="formData.nothealth" ng-disabled="formData.dar_code != null" ng-value=false type="radio" class="regular-radio" id="notHealthNo"
                        name="nothealth" required>
                 <label for="notHealthNo"></label>
                 <label for="notHealthNo" class="radio-button-text">No</label>

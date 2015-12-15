@@ -2669,9 +2669,9 @@ tags-input[disabled] .tags {
 }
 
 tags-input[disabled] .tags .tag-item {
-    opacity: 0.65;
+    opacity: 1;
     background: #eeeeee;
-    color: #cccccc;
+    color: #777777;
 }
 
 tags-input[disabled] .tags .tag-item .remove-button {

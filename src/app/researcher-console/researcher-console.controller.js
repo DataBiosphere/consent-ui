@@ -22,7 +22,15 @@
         function edit(id) {
             cmRPService.getDarFields(id, null).then(function (data) {
                 $rootScope.formData = data;
+                cmRPService.getAutoCompleteDS(data.datasetId).then(function (o){
+                $rootScope.formData.datasetId = []
+                var obj = {}
+                obj.id = o[0].id;
+                obj.concatenation = o[0].concatenation;
+                $rootScope.formData.datasetId.push(obj)
                 $state.go('rp_application.step1');
+                })
+
             });
         }
 

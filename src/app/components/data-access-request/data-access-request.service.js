@@ -57,7 +57,12 @@
             },
 
             getAutoCompleteDS: function (partialReq) {
-                return getAutoCompleteDS(partialReq);
+                if (partialReq){
+                 return getAutoCompleteDS(partialReq);
+              }else{
+                 var a = []
+                 return a;
+              }
             },
 
             getAutoCompleteOT: function (partialReq) {
