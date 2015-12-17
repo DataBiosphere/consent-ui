@@ -10,6 +10,7 @@
         var vm = this;
         vm.$state = $state;
         vm.attestAndSave = attestAndSave;
+        vm.partialSave = partialSave;
         $scope.showValidationMessages = false;
         $scope.atLeastOneCheckboxChecked = false;
         $scope.formData = {};
@@ -89,7 +90,15 @@
                     $scope.showValidationMessages = true;
                 }
             }
+        }
 
+        function partialSave(){
+            $scope.formData.userId = $rootScope.currentUser.dacUserId;
+            if($scope.formData.partial_dar_code === undefined){
+                cmRPService.postPartialDarRequest($scope.formData);
+            }else{
+                cmRPService.updatePartialDarRequest($scope.formData);
+            }
         }
 
 

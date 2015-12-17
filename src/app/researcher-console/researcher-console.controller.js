@@ -12,26 +12,41 @@
         vm.userId = $rootScope.currentUser.dacUserId;
         vm.openRUS = openRUS;
         vm.edit = edit;
+        vm.resume = resume;
+        vm.cancel = cancelAndDelete;
 
         init();
 
         function init() {
             cmRPService.getDataAccessManage(vm);
+            cmRPService.getPartialDarRequestList(vm);
         }
 
         function edit(id) {
             cmRPService.getDarFields(id, null).then(function (data) {
                 $rootScope.formData = data;
-                cmRPService.getAutoCompleteDS(data.datasetId).then(function (o){
                 $rootScope.formData.datasetId = []
-                var obj = {}
-                obj.id = o[0].id;
-                obj.concatenation = o[0].concatenation;
-                $rootScope.formData.datasetId.push(obj)
+                $rootScope.formData.datasetDetail.forEach(function(detail){
+                    var obj = {}
+                    obj.id = detail.datasetId;
+                    obj.concatenation =detail.datasetId + "  " + detail.name;
+                    $rootScope.formData.datasetId.push(obj)
+                });
                 $state.go('rp_application.step1');
-                })
 
             });
+        }
+
+        function resume(id) {
+            cmRPService.getPartialDarRequest(id).then(function (data) {
+                $rootScope.formData = data;
+                $state.go('rp_application.step1');
+            });
+        }
+
+        /* Cancels and deletes the DAR, and deletes the associated election if there's any. */
+        function cancelAndDelete(id) {
+            cmRPService.deletePartialDarRequest(id);
         }
 
         function openRUS(rus) {

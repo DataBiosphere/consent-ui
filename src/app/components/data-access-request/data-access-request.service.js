@@ -6,12 +6,11 @@
 
     /* ngInject */
 
-    function cmDataAccessRequest(dataAccessRequestResource, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields, dataAccessRequestManageResource, updateDataAccessRequestResource, darModalSummary) {
+    function cmDataAccessRequest(dataAccessRequestResource, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields, dataAccessRequestManageResource, updateDataAccessRequestResource, darModalSummary, partialDataAccessRequestManageResource, partialDataAccessRequestResource, postPartialDarResource) {
 
         function findDarConsent(id) {
             return darConsent.get({id: id}).$promise;
         }
-
 
         function findDarFields(id, fields) {
             return darFields.get({id: id, fields: fields}).$promise;
@@ -43,7 +42,50 @@
             return darModalSummary.get({id: id}).$promise;
         }
 
+        function partialDarRequestGet(darId) {
+            return partialDataAccessRequestResource.get(({darId: darId})).$promise;
+        }
+
+        function partialDarRequestUpdate(formData) {
+            return postPartialDarResource.update(formData);
+        }
+
+        function partialDarRequestPost(formData) {
+            return postPartialDarResource.post(formData);
+        }
+
+        function partialDarRequestDelete(darId) {
+            return partialDataAccessRequestResource.delete({darId: darId}).$promise;
+        }
+
+        function getPartialDarRequestList(vm) {
+            partialDataAccessRequestManageResource.List(({userId: vm.userId})).$promise.then(
+                function (data) {
+                    vm.partialDars = data;
+                });
+        }
+
         return {
+
+            getPartialDarRequest: function(id){
+                return partialDarRequestGet(id);
+            },
+
+            updatePartialDarRequest: function(id){
+                return partialDarRequestUpdate(id);
+            },
+
+            postPartialDarRequest: function(dataAccessRequest){
+                return partialDarRequestPost(dataAccessRequest);
+            },
+
+            deletePartialDarRequest: function(id){
+                return partialDarRequestDelete(id);
+            },
+
+            getPartialDarRequestList: function(userId){
+                return getPartialDarRequestList(userId);
+            },
 
             getDarConsent: function (id) {
                 return findDarConsent(id);
