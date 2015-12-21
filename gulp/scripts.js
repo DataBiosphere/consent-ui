@@ -10,7 +10,7 @@ var browserSync = require('browser-sync');
 var $ = require('gulp-load-plugins')();
 
 gulp.task('configuration', function () {
-    gulp.src('config.json')
+    gulp.src('/app/consent-ui.conf')
         .pipe(gulpNgConfig('ConsentConfiguration'))
         .pipe(gulp.dest(path.join(conf.paths.src, '/app/configuration')));
 });
