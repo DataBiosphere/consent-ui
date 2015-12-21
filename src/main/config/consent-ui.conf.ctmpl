@@ -1,6 +1,6 @@
 {{with $environment := env "ENVIRONMENT"}}{{$keyname := printf "secret/dsde/consent/%s/consent-ui/consent-ui.conf" $environment}}{{with vault $keyname}}
 {
-    "apiUrl": {{.Data.api_utl}},
+    "apiUrl": {{.Data.api_url}},
     "ontologyApiUrl": {{.Data.ontology_url}},
     "clientId": {{.Data.client_id}}
 }
