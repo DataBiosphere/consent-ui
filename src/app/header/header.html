@@ -34,7 +34,7 @@
                     <a href="#/researcher_console">Researcher Console</a>
                 </li>
                 <li ng-repeat="rol in $root.currentUser.roles" ng-show="'{{rol.name}}' === '{{$root.userRoles.researcher}}'">
-                    <a href="#/rp_application/step1">Request Application</a>
+                    <a href="" ng-click="Header.goToRP()" > Request Application</a>
                 </li>
                 <li class="dropdown drop-li" dropdown on-toggle="toggled(open)" ng-show="showStatistics($root.currentUser.roles, $root.userRoles)">
                     <a role="button" class="dropdown-toggle" href="#" dropdown-toggle>

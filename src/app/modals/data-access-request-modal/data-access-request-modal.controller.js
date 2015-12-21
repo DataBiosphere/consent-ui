@@ -13,7 +13,7 @@
         vm.ok = function () {
             vm.disableButton = true;
             $scope.showValidationMessages = false;
-             var a = []
+             var a = [];
              $scope.formData.datasetId.forEach(function(obj){
              a.push(obj.id);
              });

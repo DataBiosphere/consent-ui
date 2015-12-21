@@ -93,12 +93,25 @@
         }
 
         function partialSave(){
-            $scope.formData.userId = $rootScope.currentUser.dacUserId;
-            if($scope.formData.partial_dar_code === undefined){
-                cmRPService.postPartialDarRequest($scope.formData);
-            }else{
-                cmRPService.updatePartialDarRequest($scope.formData);
-            }
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/partial-dar-modals/save-confirmation-partial-dar.html',
+                controller: 'PDarModalSaveConfirmation',
+                controllerAs: 'PDarModalSaveConfirmation'
+            });
+
+            modalInstance.result.then(function () {
+                $scope.formData.userId = $rootScope.currentUser.dacUserId;
+                if($scope.formData.partial_dar_code === undefined){
+                    cmRPService.postPartialDarRequest($scope.formData).$promise.then(
+                        function () {
+                            $state.go('researcher_console');
+                        });
+                }else{
+                    cmRPService.updatePartialDarRequest($scope.formData);
+                }
+            }, function () {
+            });
         }
 
 

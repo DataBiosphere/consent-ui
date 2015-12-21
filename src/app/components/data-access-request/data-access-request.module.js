@@ -66,5 +66,5 @@
                 post: {method: 'POST', headers: {'Content-Type': "application/json"}},
                 update: {method: 'PUT', headers: {'Content-Type': "application/json"}}
             });
-        })
+        });
 })();

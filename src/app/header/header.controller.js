@@ -5,16 +5,19 @@
         .controller('Header', Header);
 
     /* ngInject */
-    function Header($scope, $modal) {
+    function Header($scope, $state, $modal) {
 
         var vm = this;
         vm.helpMeModal = helpMeModal;
-
+        vm.goToRP = goToRP;
 
         $scope.status = {
             isopen: false
         };
 
+       function goToRP() {
+               $state.go('rp_application.step1', {}, { reload: true });
+           };
 
         function helpMeModal() {
             var modalInstance = $modal.open({

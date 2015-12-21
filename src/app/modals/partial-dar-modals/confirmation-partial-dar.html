@@ -1,0 +1,19 @@
+<div class="modal-alerts">
+    <div class="modal-content">
+        <div class="modal-header admin-modal-header">
+            <button type="button" class="modal-close-btn close" ng-click="PDarModalConfirmation.cancel()"><span aria-hidden="true">&times;</span></button>
+            <h2 class="pvotes-box-title access-color">Delete saved Request?
+                <small>Are you sure you want to delete the Data Access Request?</small>
+            </h2>
+            <div class="admin-alerts admin-create-alerts">
+                <alert ng-repeat="alert in alerts" type="danger" class="alert-title cancel-color">
+                    <h4>{{alert.title}}</h4>{{alert.msg}}
+                </alert>
+            </div>
+        </div>
+        <div class="modal-footer admin-modal-footer">
+            <button type="button" class="btn dismiss-background" ng-click='PDarModalConfirmation.cancel()'>No</button>
+            <button type="button" class="btn access-background" ng-click='PDarModalConfirmation.ok()'>Yes</button>
+        </div>
+    </div>
+</div>

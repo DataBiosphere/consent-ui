@@ -102,7 +102,7 @@
                 if (partialReq){
                  return getAutoCompleteDS(partialReq);
               }else{
-                 var a = []
+                 var a = [];
                  return a;
               }
             },
