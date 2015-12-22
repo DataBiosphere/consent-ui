@@ -41,7 +41,7 @@
             $scope.alerts.splice(index, 1);
             $scope.alerts.push({
                 title: 'Election cannot be created!',
-                msg: data
+                msg: data.message
             });
         };
 
