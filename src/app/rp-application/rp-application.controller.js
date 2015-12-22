@@ -14,11 +14,28 @@
         $scope.showValidationMessages = false;
         $scope.atLeastOneCheckboxChecked = false;
         $scope.formData = {};
-        if($rootScope.formData !== undefined && $rootScope.formData.userId !== undefined){
+        if ($rootScope.formData !== undefined && $rootScope.formData.userId !== undefined) {
             $scope.formData = $rootScope.formData;
-            $rootScope.formData= {};
+            $rootScope.formData = {};
         }
 
+        $scope.step1isValidated = function () {
+            if ($scope.form.step1.$valid) {
+                return true;
+            }
+        };
+
+        $scope.step2isValidated = function () {
+            if ($scope.form.step2.$valid) {
+                return true;
+            }
+        };
+
+        $scope.step3isValidated = function () {
+            if($scope.form.step3.$valid) {
+                return true;
+            }
+        };
 
         $scope.$watch("form.step1.$valid", function (value1) {
             if ($state.current.url === "/step1") {
@@ -97,19 +114,12 @@
                 animation: false,
                 templateUrl: 'app/modals/partial-dar-modals/save-confirmation-partial-dar.html',
                 controller: 'PDarModalSaveConfirmation',
-                controllerAs: 'PDarModalSaveConfirmation'
+                controllerAs: 'PDarModalSaveConfirmation',
+                scope: $scope
             });
 
             modalInstance.result.then(function () {
-                $scope.formData.userId = $rootScope.currentUser.dacUserId;
-                if($scope.formData.partial_dar_code === undefined){
-                    cmRPService.postPartialDarRequest($scope.formData).$promise.then(
-                        function () {
-                            $state.go('researcher_console');
-                        });
-                }else{
-                    cmRPService.updatePartialDarRequest($scope.formData);
-                }
+                $state.go('researcher_console');
             }, function () {
             });
         }

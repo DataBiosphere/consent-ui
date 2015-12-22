@@ -15,9 +15,9 @@
             isopen: false
         };
 
-       function goToRP() {
-               $state.go('rp_application.step1', {}, { reload: true });
-           };
+        function goToRP() {
+            $state.go('rp_application.step1', {}, { reload: true });
+        }
 
         function helpMeModal() {
             var modalInstance = $modal.open({

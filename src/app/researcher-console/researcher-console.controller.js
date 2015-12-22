@@ -23,19 +23,19 @@
         }
 
         function review(id) {
-                    cmRPService.getDarFields(id, null).then(function (data) {
-                        $rootScope.formData = data;
-                        $rootScope.formData.datasetId = [];
-                        $rootScope.formData.datasetDetail.forEach(function(detail){
-                            var obj = {};
-                            obj.id = detail.datasetId;
-                            obj.concatenation = detail.datasetId + "  " + detail.name;
-                            $rootScope.formData.datasetId.push(obj);
-                        });
-                        $state.go('rp_application.step1');
+            cmRPService.getDarFields(id, null).then(function (data) {
+                $rootScope.formData = data;
+                $rootScope.formData.datasetId = [];
+                $rootScope.formData.datasetDetail.forEach(function(detail){
+                    var obj = {};
+                    obj.id = detail.datasetId;
+                    obj.concatenation = detail.datasetId + "  " + detail.name;
+                    $rootScope.formData.datasetId.push(obj);
+                });
+                $state.go('rp_application.step1');
 
-                    });
-                }
+            });
+        }
 
         function resume(id) {
             cmRPService.getPartialDarRequest(id).then(function (data) {

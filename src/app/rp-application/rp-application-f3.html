@@ -202,9 +202,17 @@
         </div>
         <ul class="pager wizard">
             <div class="row multi-step-pager">
-                <li class="previous f-left multi-step-prev"><a href="#/rp_application/step2"  class="access-background"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous Step</a></li>
-                <li ng-if="formData.dar_code == null"  class="next f-right multi-step-next"><a ng-click="RPApplication.partialSave()"  class="access-background">Save<span aria-hidden="true"></span></a></li>
-                <li class="next f-right multi-step-next"><a href="#/rp_application/step4"  class="access-background">Next Step<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a></li>
+                <li class="previous f-left multi-step-prev">
+                    <a href="#/rp_application/step2" class="access-background"><span
+                        class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous Step</a>
+                </li>
+                <li class="next f-right multi-step-next">
+                    <a href="#/rp_application/step4" class="access-background">Next
+                        Step<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+                </li>
+                <li ng-if="formData.dar_code == null" class="next f-right multi-step-save">
+                    <a ng-click="RPApplication.partialSave()"><span>Save</span></a>
+                </li>
             </div>
         </ul>
     </div>

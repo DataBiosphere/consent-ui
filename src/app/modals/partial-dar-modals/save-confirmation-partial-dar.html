@@ -2,8 +2,8 @@
     <div class="modal-content">
         <div class="modal-header admin-modal-header">
             <button type="button" class="modal-close-btn close" ng-click="PDarModalSaveConfirmation.cancel()"><span aria-hidden="true">&times;</span></button>
-            <h2 class="pvotes-box-title access-color">Save this partial request?
-                <small>If you saved this request previously, the saved request will be overwritten.</small>
+            <h2 class="pvotes-box-title access-color">Save changes?
+                <small>Are you sure you want to save this Data Access Request? Previous changes will be overwritten.</small>
             </h2>
             <div class="admin-alerts admin-create-alerts">
                 <alert ng-repeat="alert in alerts" type="danger" class="alert-title cancel-color">
@@ -13,7 +13,7 @@
         </div>
         <div class="modal-footer admin-modal-footer">
             <button type="button" class="btn dismiss-background" ng-click='PDarModalSaveConfirmation.cancel()'>No</button>
-            <button type="button" class="btn access-background" ng-click='PDarModalSaveConfirmation.ok()'>Yes</button>
+            <button type="button" class="btn access-background" ng-disabled="disableButton" ng-click='PDarModalSaveConfirmation.ok()'>Yes</button>
         </div>
     </div>
 </div>
