@@ -23,6 +23,7 @@ gulp.task('appScripts', function () {
     .pipe($.size())
 });
 
-gulp.task('scripts', ['configuration', 'appScripts']);
+//gulp.task('scripts', ['configuration', 'appScripts']);
+gulp.task('scripts', ['appScripts']);
 
 
