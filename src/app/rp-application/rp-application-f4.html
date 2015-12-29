@@ -30,14 +30,17 @@
     </span>
     <ul class="pager wizard" style="margin-top: 0!important;">
         <div class="row multi-step-pager">
-            <li class="previous f-left multi-step-prev"><a href="#/rp_application/step3" class="access-background">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous Step</a>
+            <li class="previous f-left multi-step-prev">
+                <a href="#/rp_application/step3" class="access-background"><span
+                    class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous Step</a>
             </li>
             <li class="next f-right multi-step-next">
-
-                <button class="access-background bold" ng-click="RPApplication.attestAndSave()">
-                    Attest and Save
+                <button ng-if="formData.dar_code == null" class="access-background bold" ng-click="RPApplication.attestAndSave()">
+                    Attest and Send
                 </button>
+            </li>
+            <li ng-if="formData.dar_code == null" class="next f-right multi-step-save">
+                <a ng-click="RPApplication.partialSave()"><span>Save</span></a>
             </li>
         </div>
     </ul>

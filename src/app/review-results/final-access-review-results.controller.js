@@ -163,7 +163,6 @@
                     textStyle: {
                         color: '#777777',
                         bold: true,
-                        fontName: 'Roboto',
                         fontSize: 14
                     },
                     alignment: 'start'
@@ -203,7 +202,6 @@
                     textStyle: {
                         color: '#777777',
                         bold: true,
-                        fontName: 'Roboto',
                         fontSize: 14
                     },
                     alignment: 'start'
@@ -243,7 +241,6 @@
                     textStyle: {
                         color: '#777777',
                         bold: true,
-                        fontName: 'Roboto',
                         fontSize: 14
                     },
                     alignment: 'start'

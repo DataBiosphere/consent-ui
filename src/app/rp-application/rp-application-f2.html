@@ -9,16 +9,29 @@
                     </span>
                 </label>
             </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-                <input ng-model="formData.datasetId" type="text" name="inputDatasetID"
-                       id="inputDatasetID"  ng-class="step2.inputDatasetID.$invalid && showValidationMessages  ?   'form-control required-field-error' : 'form-control'  "
-                       typeahead="datasetId for datasetId in search_datasets($viewValue) | limitTo:8"
-                       typeahead-min-length="3"
-                       typeahead-wait-ms="20"
-                       typeahead-editable=false
-                       required="required"
-                       placeholder="Dataset ID">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group ">
+                <tags-input ng-model="formData.datasetId" ng-disabled="formData.dar_code != null"  ng-required="step2.inputDatasetID.$invalid && showValidationMessages" display-property="concatenation"
+                            name ="inputDatasetID"
+                            key-property="id"
+                            placeholder="Dataset ID"
+                            min-length="3"
+                            min-tags="0"
+                            replace-spaces-with-dashes="false"
+                            add-from-autocomplete-only="true">
+                    <auto-complete source="search_datasets($query)"
+                                   display-property="concatenation"
+                                   min-length="3"
+                                   highlight-matched-text="true"
+                                   max-results-to-show="8"
+                                   load-on-down-arrow="true"
+                                   load-on-empty="true"
+                                   load-on-focus="true"
+                                   select-first-match="true">
+                    </auto-complete>
+                </tags-input>
             </div>
+
+
         </div>
         <div class="form-group">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
@@ -31,7 +44,7 @@
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
             <textarea ng-model="formData.rus" name="inputRUS" id="inputRUS" ng-class="step2.inputRUS.$invalid && showValidationMessages  ?   ' required-field-error form-control' :'form-control'" maxlength="2200" rows="6"
-                      required="required" placeholder="Please limit your RUS to 2200 characters."></textarea>
+                      required="required" placeholder="Please limit your RUS to 2200 characters." ng-disabled="formData.dar_code != null"></textarea>
             </div>
         </div>
         <div class="form-group">
@@ -41,7 +54,7 @@
                 </label>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-                <textarea ng-model="formData.non_tech_rus" name="inputNonTechRUS" id="inputNonTechRUS" ng-class="step2.inputNonTechRUS.$invalid && showValidationMessages  ? ' required-field-error form-control' :'form-control'" maxlength="1100" rows="3" required="required" placeholder="Please limit your non-technical summary to 1100 characters."></textarea>
+                <textarea ng-model="formData.non_tech_rus" name="inputNonTechRUS" id="inputNonTechRUS" ng-class="step2.inputNonTechRUS.$invalid && showValidationMessages  ? ' required-field-error form-control' :'form-control'" maxlength="1100" rows="3" required="required" placeholder="Please limit your non-technical summary to 1100 characters." ng-disabled="formData.dar_code != null"></textarea>
             </div>
         </div>
         <div class="form-group">
@@ -55,7 +68,7 @@
             </span>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
                 <div class="checkbox">
-                    <input ng-model="formData.diseases" id="checkDiseases" type="checkbox" class="checkbox-inline rp-checkbox" name="checkDiseases">
+                    <input ng-model="formData.diseases" id="checkDiseases" type="checkbox" class="checkbox-inline rp-checkbox" name="checkDiseases" ng-disabled="formData.dar_code != null">
                     <label class="regular-checkbox rp-choice-questions" for="checkDiseases"><span>2.4.1 Disease-related studies: </span>
                         The primary purpose of the research is to learn more about a particular disease or disorder (e.g., type 2 diabetes), a trait (e.g., blood pressure), or a set of related conditions (e.g., autoimmune diseases, psychiatric disorders).
                     </label>
@@ -63,7 +76,7 @@
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
                 <div class="checkbox">
-                    <input ng-model="formData.methods" id="checkMethods" type="checkbox"
+                    <input ng-model="formData.methods" id="checkMethods" type="checkbox" ng-disabled="formData.dar_code != null"
                            class="checkbox-inline rp-checkbox"
                            name="checkMethods">
                     <label class="regular-checkbox rp-choice-questions" for="checkMethods">
@@ -74,7 +87,7 @@
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
                 <div class="checkbox">
-                    <input ng-model="formData.controls" id="checkControls" type="checkbox"
+                    <input ng-model="formData.controls" id="checkControls" type="checkbox" ng-disabled="formData.dar_code != null"
                            class="checkbox-inline rp-checkbox"
                            name="checkControls">
                     <label class="regular-checkbox rp-choice-questions" for="checkControls">
@@ -85,7 +98,7 @@
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
                 <div class="checkbox">
-                    <input ng-model="formData.population" id="checkPopulation" type="checkbox"
+                    <input ng-model="formData.population" id="checkPopulation" type="checkbox" ng-disabled="formData.dar_code != null"
                            class="checkbox-inline rp-checkbox" name="checkPopulation">
                     <label class="regular-checkbox rp-choice-questions" for="checkPopulation">
                         <span>2.4.4 Population structure or normal variation studies: </span>
@@ -95,13 +108,13 @@
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
                 <div class="checkbox">
-                    <input ng-model="formData.other" id="checkOther" type="checkbox" class="checkbox-inline rp-checkbox" name="checkOther">
+                    <input ng-model="formData.other" id="checkOther" type="checkbox" class="checkbox-inline rp-checkbox" name="checkOther" ng-disabled="formData.dar_code != null">
                     <label class="regular-checkbox rp-choice-questions" for="checkOther"><span>2.4.5 Other:</span></label>
                 </div>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-                <input ng-model="formData.othertext" type="text" name="inputOther" id="inputOther" class="form-control"
-                       placeholder="Please specify if selected" ng-disabled=" formData.other != true" ng-required="formData.other" >
+                <input ng-model="formData.othertext" type="text" name="inputOther" id="inputOther" ng-required="formData.other" ng-class="step2.inputOther.$invalid && formData.other && showValidationMessages  ?   ' required-field-error form-control' :'form-control'" ng-disabled="formData.dar_code != null || formData.other != true"
+                       placeholder="Please specify if selected">
             </div>
         </div>
         <div class="form-group">
@@ -111,7 +124,7 @@
                 </label>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group ">
-                <tags-input ng-model="formData.ontologies" display-property="label" key-property="id"
+                <tags-input ng-model="formData.ontologies" display-property="label" key-property="id" ng-disabled="formData.dar_code != null"
                             placeholder="Please enter one or more ontologies"
                             min-length="3"
                             min-tags="0"
@@ -131,10 +144,17 @@
         </div>
         <ul class="pager wizard">
             <div class="row multi-step-pager">
-                <li class="previous f-left multi-step-prev"><a href="#/rp_application/step1" class="access-background"><span
-                    class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous Step</a></li>
-                <li class="next f-right multi-step-next"><a href="#/rp_application/step3" class="access-background">Next
-                    Step<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a></li>
+                <li class="previous f-left multi-step-prev">
+                    <a href="#/rp_application/step1" class="access-background"><span
+                        class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous Step</a>
+                </li>
+                <li class="next f-right multi-step-next">
+                    <a href="#/rp_application/step3" class="access-background">Next
+                        Step<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+                </li>
+                <li ng-if="formData.dar_code == null" class="next f-right multi-step-save">
+                    <a ng-click="RPApplication.partialSave()"><span>Save</span></a>
+                </li>
             </div>
         </ul>
     </div>

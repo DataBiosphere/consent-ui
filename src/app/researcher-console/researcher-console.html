@@ -24,9 +24,8 @@
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle access-color">Data Request id</div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-box-subtitle access-color">Project title</div>
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle access-color">Date</div>
-                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pvotes-box-subtitle f-center access-color">+ Info</div>
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle f-center access-color">Status</div>
-                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pvotes-box-subtitle f-center access-color">Edit</div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle f-center access-color">Review</div>
                     <hr class="pvotes-main-separator">
                 </div>
                 <div class="pvotes-box-body">
@@ -36,11 +35,6 @@
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{dar.frontEndId}}</div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">{{dar.projectTitle}}</div>
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{dar.createDate | date:'yyyy-MM-dd'}}</div>
-                            <a href="" class="admin-manage-buttons col-lg-1 col-md-1 col-sm-1 col-xs-1 no-padding">
-                                <div class="enabled hover-color" ng-click="ResearcherConsole.openRUS(dar.rus)">
-                                    <span>RUS</span>
-                                </div>
-                            </a>
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list bold">
                                 <span ng-if="dar.electionStatus === 'un-reviewed'">Submitted</span>
                                 <span ng-if="dar.electionStatus === 'Open'">In review</span>
@@ -48,20 +42,11 @@
                                 <span ng-if="dar.electionStatus === 'Closed' && dar.electionVote === false">DENIED</span>
                                 <span ng-if=" dar.electionStatus === 'Closed' && dar.electionVote === true">APPROVED</span>
                             </div>
-                            <a class="admin-manage-buttons col-lg-1 col-md-1 col-sm-1 col-xs-1 no-padding">
-                                <div ng-if="dar.electionStatus !== 'un-reviewed'" class="disabled hover-color">
-                                    <span>Edit</span>
+                            <a class="admin-manage-buttons col-lg-2 col-md-2 col-sm-2 col-xs-2 no-padding">
+                                <div class="enabled hover-color"  ng-click="ResearcherConsole.review(dar.dataRequestId)">
+                                    <span>Review</span>
                                 </div>
                             </a>
-
-                            <a class="admin-manage-buttons col-lg-1 col-md-1 col-sm-1 col-xs-1 no-padding">
-                                <div ng-if="dar.electionStatus === 'un-reviewed'" class="enabled hover-color" ng-click="ResearcherConsole.edit(dar.dataRequestId)">
-                                    <span>Edit</span>
-                                </div>
-                            </a>
-
-
-
                         </div>
                     </div>
                     <hr class="pvotes-separator">
@@ -72,6 +57,48 @@
                      boundary-links="true"
                      class="pvotes-pagination"
                      pagination-id="researcherConsole">
+                </div>
+            </div>
+        </div>
+        <div class="row no-margin" ng-hide="ResearcherConsole.partialDars == 0">
+            <h2 class="cm-title default-color no-margin"><small><b>Saved Data Access Requests</b></small></h2>
+
+            <div class="jumbotron box-vote-singleresults">
+                <div class="row">
+                    <div class="pvotes-box-head">
+                        <div class="col-lg-2 col-lg-offset-1 col-md-2 col-md-offset-1 col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 pvotes-box-subtitle default-color">Temporary id</div>
+                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 pvotes-box-subtitle default-color">Project title</div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle default-color">Date</div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle f-center default-color">Resume</div>
+                        <hr class="pvotes-main-separator">
+                    </div>
+                    <div class="pvotes-box-body">
+                        <div dir-paginate="pdar in ResearcherConsole.partialDars | filter: searchAccess | itemsPerPage:10" pagination-id="researcherPartialConsole">
+                            <hr class="pvotes-separator">
+                            <div class="row pvotes-main-list no-margin">
+                                <a class="col-lg-1 col-md-1 col-sm-1 col-xs-1 delete-dar default-color no-padding" ng-click="ResearcherConsole.cancel(pdar.dataRequestId)">
+                                    <span class="cm-icon-button glyphicon glyphicon-trash caret-margin" aria-hidden="true"></span>
+                                </a>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{pdar.partial_dar_code}}</div>
+                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 pvotes-list-id">{{pdar.projectTitle}}</div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{pdar.createDate | date:'yyyy-MM-dd'}}</div>
+                                <a class="admin-manage-buttons col-lg-2 col-md-2 col-sm-2 col-xs-2 no-padding">
+                                    <div class="enabled hover-color" ng-click="ResearcherConsole.resume(pdar.dataRequestId)">
+                                        <span>Resume</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <hr class="pvotes-separator">
+                    </div>
+
+                    <div dir-pagination-controls
+                         max-size="10"
+                         direction-links="true"
+                         boundary-links="true"
+                         class="pvotes-pagination"
+                         pagination-id="researcherPartialConsole">
+                    </div>
                 </div>
             </div>
         </div>
