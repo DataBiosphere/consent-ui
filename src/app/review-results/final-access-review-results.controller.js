@@ -267,6 +267,7 @@
                 showAccessData(data);
                 cmElectionService.findRPElectionReview($scope.electionId, false).
                     $promise.then(function (data) {
+                       if(data.election !== undefined){
                         $scope.electionRP = data.election;
                         if (data.election.finalRationale === null) {
                             $scope.electionRP.finalRationale = '';
@@ -274,6 +275,10 @@
                         $scope.statusRP = data.election.status;
                         $scope.rpVoteAccessList = chunk(data.reviewVote, 2);
                         $scope.chartRP = getGraphData(data.reviewVote);
+                        $scope.showRPaccordion = true;
+                      }else{
+                          $scope.showRPaccordion = false;
+                      }
                     });
 
                 cmElectionService.findLastElectionReviewByReferenceId(data.consent.consentId).$promise.then(function (data) {

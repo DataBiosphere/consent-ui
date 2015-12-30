@@ -13,8 +13,8 @@
         vm.openRUS = openRUS;
         vm.review = review;
         vm.resume = resume;
-        vm.cancel = cancelAndDelete;
-
+        vm.cancelPartialDar = cancelAndDeletePartialDar;
+        vm.cancelDar = cancelDar;;
         init();
 
         function init() {
@@ -31,7 +31,7 @@
                     obj.id = detail.datasetId;
                     obj.concatenation = detail.datasetId + "  " + detail.name;
                     $rootScope.formData.datasetId.push(obj);
-                });
+                })
                 $state.go('rp_application.step1');
 
             });
@@ -44,8 +44,31 @@
             });
         }
 
-        /* Cancels and deletes the DAR, and deletes the associated election if there's any. */
-        function cancelAndDelete(id) {
+        /* Cancels and deletes a sent DAR Request, and deletes the associated election if there's any. */
+        function cancelDar(id) {
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/cancel-dar-modals/confirmation-cancel-dar.html',
+                controller: 'PDarCancelModalConfirmation',
+                controllerAs: 'PDarCancelModalConfirmation',
+                resolve: {
+                    id: function () {
+                        return id;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function () {
+                init();
+            }, function(){
+                init();
+            });
+        }
+
+
+        /* Cancels and deletes the PARTIAL DAR */
+        function cancelAndDeletePartialDar(id) {
+
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/partial-dar-modals/confirmation-partial-dar.html',
