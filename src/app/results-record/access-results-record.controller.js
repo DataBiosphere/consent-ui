@@ -249,7 +249,7 @@
 
         function vaultVote(consentId) {
             cmMatchService.findMatch(consentId, $scope.electionAccess.referenceId).then(function (data) {
-                if (data.match !== null) {
+                if (data.match !== null && data.match !== undefined) {
                     $scope.hideMatch = false;
                     $scope.match = data.match;
                     $scope.createDate = data.createDate;

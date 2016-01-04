@@ -57,7 +57,7 @@
                 cmVoteService.updateFinalAccessDarVote($scope.referenceId, $scope.vote).$promise.then(
                     function () {
                         $scope.alreadyVote = true;
-                        if($scope.agreementAlreadyVote){
+                        if($scope.agreementAlreadyVote || $scope.hideMatch){
                             closeElection();
                         } else{
                             $scope.reminderDARAlert();
@@ -301,7 +301,7 @@
             $scope.voteAccessList = chunk(electionReview.reviewVote, 2);
             $scope.chartDataAccess = getGraphData(electionReview.reviewVote);
             $scope.voteAgreement = electionReview.voteAgreement;
-            if (electionReview.voteAgreement.vote !== null) {
+            if (electionReview.voteAgreement != null && electionReview.voteAgreement.vote !== null) {
                 $scope.agreementAlreadyVote = true;
             }
         }
@@ -367,7 +367,7 @@
 
         function vaultVote(consentId) {
             cmMatchService.findMatch(consentId, $scope.electionAccess.referenceId).then(function (data) {
-                if (data.match !== null) {
+                if (data.match !== null && data.match !== undefined) {
                     $scope.hideMatch = false;
                     $scope.match = data.match;
                     $scope.createDate = data.createDate;

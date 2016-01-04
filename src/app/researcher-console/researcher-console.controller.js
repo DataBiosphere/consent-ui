@@ -14,7 +14,7 @@
         vm.review = review;
         vm.resume = resume;
         vm.cancelPartialDar = cancelAndDeletePartialDar;
-        vm.cancelDar = cancelDar;;
+        vm.cancelDar = cancelDar;
         init();
 
         function init() {
@@ -31,7 +31,7 @@
                     obj.id = detail.datasetId;
                     obj.concatenation = detail.datasetId + "  " + detail.name;
                     $rootScope.formData.datasetId.push(obj);
-                })
+                });
                 $state.go('rp_application.step1');
 
             });
