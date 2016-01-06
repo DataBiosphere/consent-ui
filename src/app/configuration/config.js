@@ -1,4 +1,4 @@
 angular.module('ConsentConfiguration', [])
-.constant('apiUrl', "https://consent.dsde-consent-dev.broadinstitute.org/")
-.constant('ontologyApiUrl', "https://consent-ontology.dsde-consent-dev.broadinstitute.org/")
-.constant('clientId', "117729808652025111105");
+.constant('apiUrl', "https://consent.dsde-consent-prod.broadinstitute.org/")
+.constant('ontologyApiUrl', "https://consent-ontology.dsde-consent-prod.broadinstitute.org/")
+.constant('clientId', "1019469328169-uk6592ph25b0nijc0nm7s2dss4qm2nbu.apps.googleusercontent.com");

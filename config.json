@@ -1,5 +1,5 @@
 {
-    "apiUrl": "https://consent.dsde-consent-dev.broadinstitute.org/",
-    "ontologyApiUrl": "https://consent-ontology.dsde-consent-dev.broadinstitute.org/",
-    "clientId": "117729808652025111105"
+    "apiUrl": "https://consent.dsde-consent-prod.broadinstitute.org/",
+    "ontologyApiUrl": "https://consent-ontology.dsde-consent-prod.broadinstitute.org/",
+    "clientId": "1019469328169-uk6592ph25b0nijc0nm7s2dss4qm2nbu.apps.googleusercontent.com"
 }
