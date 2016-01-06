@@ -1,210 +1,219 @@
 <ng-form name="step3">
     <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-    <div class="cm-subtitle access-color"><h3>3. Research Purpose Statement</h3></div>
-    <div class="form-group">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-            <label class="control-label rp-title-question">3.1 In order to ensure appropriate review, please answer the
-                questions below:</label>
-        </div>
+        <div class="cm-subtitle access-color"><h3>3. Research Purpose Statement</h3></div>
+        <div class="form-group">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
+                <label class="control-label rp-title-question">3.1 In order to ensure appropriate review, please answer the
+                    questions below:</label>
+            </div>
         <span class="cancel-color required-field-error-span" ng-show="!step3isValidated && showValidationMessages">
             <span>* All fields are required</span>
         </span>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-            <label class="control-label rp-choice-questions">3.1.1 Will this data be used exclusively or partially for a commercial purpose?</label>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-            <div class="radio-inline">
-                <input ng-model="formData.forProfit" ng-value=true type="radio" class="regular-radio" id="exclusiveYes"
-                       name="exclusive" required>
-                <label for="exclusiveYes"></label>
-                <label for="exclusiveYes" class="radio-button-text">Yes</label>
-                <input ng-model="formData.forProfit" ng-value=false type="radio" class="regular-radio" id="exclusiveNo"
-                       name="exclusive" required>
-                <label for="exclusiveNo"></label>
-                <label for="exclusiveNo" class="radio-button-text">No</label>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
+                <label class="control-label rp-choice-questions">3.1.1 Will this data be used exclusively or partially for a commercial purpose?</label>
             </div>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-            <label class="control-label rp-choice-questions">3.1.2 Please indicate if this study is limited to one
-                gender?</label>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-            <div class="radio-inline">
-                <input ng-model="formData.onegender" ng-value=true type="radio" class="regular-radio" id="oneGenderYes"
-                       name="onegender" required>
-                <label for="oneGenderYes"></label>
-                <label for="oneGenderYes" class="radio-button-text">Yes</label>
-                <input ng-model="formData.onegender" ng-value=false type="radio" class="regular-radio" id="oneGenderNo"
-                       name="onegender" required>
-                <label for="oneGenderNo"></label>
-                <label for="oneGenderNo" class="radio-button-text">No</label>
-            </div>
-            <div ng-show="formData.onegender == true" class="multi-step-fields">
-                <span>Please specify</span>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
                 <div class="radio-inline">
-                    <input ng-model="formData.gender" value="F" type="radio" class="regular-radio" id="genderFemale"
-                    ng-required="formData.onegender" >
-                    <label for="genderFemale"></label>
-                    <label for="genderFemale" class="radio-button-text">Female</label>
-                    <input ng-model="formData.gender" value="M" type="radio" class="regular-radio" id="genderMale"
-                     ng-required="formData.onegender">
-                    <label for="genderMale"></label>
-                    <label for="genderMale" class="radio-button-text">Male</label>
+                    <input ng-model="formData.forProfit" ng-value=true type="radio" class="regular-radio" id="exclusiveYes"
+                           name="exclusive" required ng-disabled="formData.dar_code != null">
+                    <label for="exclusiveYes"></label>
+                    <label for="exclusiveYes" class="radio-button-text">Yes</label>
+                    <input ng-model="formData.forProfit" ng-value=false type="radio" class="regular-radio" id="exclusiveNo"
+                           name="exclusive" required ng-disabled="formData.dar_code != null">
+                    <label for="exclusiveNo"></label>
+                    <label for="exclusiveNo" class="radio-button-text">No</label>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
+                <label class="control-label rp-choice-questions">3.1.2 Please indicate if this study is limited to one
+                    gender?</label>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
+                <div class="radio-inline">
+                    <input ng-model="formData.onegender" ng-value=true type="radio" class="regular-radio" id="oneGenderYes"
+                           name="onegender" required ng-disabled="formData.dar_code != null">
+                    <label for="oneGenderYes"></label>
+                    <label for="oneGenderYes" class="radio-button-text">Yes</label>
+                    <input ng-model="formData.onegender" ng-value=false type="radio" class="regular-radio" id="oneGenderNo"
+                           name="onegender" required ng-disabled="formData.dar_code != null">
+                    <label for="oneGenderNo"></label>
+                    <label for="oneGenderNo" class="radio-button-text">No</label>
+                </div>
+                <div ng-show="formData.onegender == true" class="multi-step-fields" ng-disabled="formData.dar_code != null">
+                    <span>Please specify</span>
+                    <div class="radio-inline">
+                        <input ng-model="formData.gender" value="F" type="radio" class="regular-radio" id="genderFemale"
+                               ng-required="formData.onegender" ng-disabled="formData.dar_code != null">
+                        <label for="genderFemale"></label>
+                        <label for="genderFemale" class="radio-button-text">Female</label>
+                        <input ng-model="formData.gender" value="M" type="radio" class="regular-radio" id="genderMale"
+                               ng-required="formData.onegender" ng-disabled="formData.dar_code != null">
+                        <label for="genderMale"></label>
+                        <label for="genderMale" class="radio-button-text">Male</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
+                <label class="control-label rp-choice-questions">3.1.3 Please indicate if this study is restricted to a
+                    pediatric population (under the age of 18)?</label>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
+                <div class="radio-inline">
+                    <input ng-model="formData.pediatric" ng-value=true type="radio" class="regular-radio" id="pediatricYes"
+                           name="pediatric" required ng-disabled="formData.dar_code != null">
+                    <label for="pediatricYes"></label>
+                    <label for="pediatricYes" class="radio-button-text">Yes</label>
+                    <input ng-model="formData.pediatric" ng-value=false type="radio" class="regular-radio" id="pediatricNo"
+                           name="pediatric" required ng-disabled="formData.dar_code != null">
+                    <label for="pediatricNo"></label>
+                    <label for="pediatricNo" class="radio-button-text">No</label>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
+                <label class="control-label rp-choice-questions">3.1.4 Does the research aim involve the study of illegal
+                    behaviors (violence, domestic abuse, prostitution, sexual victimization)?</label>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
+                <div class="radio-inline">
+                    <input ng-model="formData.illegalbehave" ng-value=true type="radio" class="regular-radio" id="illegalBehaveYes"
+                           name="illegalBehave" required ng-disabled="formData.dar_code != null">
+                    <label for="illegalBehaveYes"></label>
+                    <label for="illegalBehaveYes" class="radio-button-text">Yes</label>
+                    <input ng-model="formData.illegalbehave" ng-value=false type="radio" class="regular-radio" id="illegalBehaveNo"
+                           name="illegalBehave" required>
+                    <label for="illegalBehaveNo"></label>
+                    <label for="illegalBehaveNo" class="radio-button-text">No</label>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
+                <label class="control-label rp-choice-questions">3.1.5 Does the research aim involve the study of alcohol or
+                    drug abuse, or abuse of other addictive products?</label>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
+                <div class="radio-inline">
+                    <input ng-model="formData.addiction" ng-disabled="formData.dar_code != null" ng-value=true type="radio" class="regular-radio" id="addictionYes"
+                           name="addiction" required>
+                    <label for="addictionYes"></label>
+                    <label for="addictionYes" class="radio-button-text">Yes</label>
+                    <input ng-model="formData.addiction" ng-disabled="formData.dar_code != null" ng-value=false type="radio" class="regular-radio" id="addictionNo"
+                           name="addiction" required>
+                    <label for="addictionNo"></label>
+                    <label for="addictionNo" class="radio-button-text">No</label>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
+                <label class="control-label rp-choice-questions">3.1.6 Does the research aim involve the study of sexual
+                    preferences or sexually transmitted diseases?</label>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
+                <div class="radio-inline">
+                    <input ng-model="formData.sexualdiseases" ng-value=true type="radio" class="regular-radio" id="sexualDiseasesYes"
+                           name="sexualdiseases" required ng-disabled="formData.dar_code != null">
+                    <label for="sexualDiseasesYes"></label>
+                    <label for="sexualDiseasesYes" class="radio-button-text">Yes</label>
+                    <input ng-model="formData.sexualdiseases" ng-value=false type="radio" class="regular-radio" id="sexualDiseasesNo"
+                           name="sexualdiseases" required>
+                    <label for="sexualDiseasesNo"></label>
+                    <label for="sexualDiseasesNo" class="radio-button-text">No</label>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
+                <label class="control-label rp-choice-questions">3.1.7 Does the research aim involve the study of any
+                    stigmatizing illnesses?</label>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
+                <div class="radio-inline">
+                    <input ng-model="formData.stigmatizediseases" ng-disabled="formData.dar_code != null" ng-value=true type="radio" class="regular-radio" id="stigmatizeDiseasesYes"
+                           name="stigmatizediseases" required>
+                    <label for="stigmatizeDiseasesYes"></label>
+                    <label for="stigmatizeDiseasesYes" class="radio-button-text">Yes</label>
+                    <input ng-model="formData.stigmatizediseases" ng-disabled="formData.dar_code != null" ng-value=false type="radio" class="regular-radio" id="stigmatizeDiseasesNo"
+                           name="stigmatizediseases" required>
+                    <label for="stigmatizeDiseasesNo"></label>
+                    <label for="stigmatizeDiseasesNo" class="radio-button-text">No</label>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
+                <label class="control-label rp-choice-questions">3.1.8 Does the study target a vulnerable population as defined
+                    in 456 CFR (children, prisoners, pregnant women, mentally disabled persons, or [SIGNIFICANTLY] economically
+                    or educationally disadvantaged persons)?</label>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
+                <div class="radio-inline">
+                    <input ng-model="formData.vulnerablepop" ng-disabled="formData.dar_code != null" ng-value=true type="radio" class="regular-radio" id="vulnerablePopYes"
+                           name="vulnerablepop" required>
+                    <label for="vulnerablePopYes"></label>
+                    <label for="vulnerablePopYes" class="radio-button-text">Yes</label>
+                    <input ng-model="formData.vulnerablepop" ng-disabled="formData.dar_code != null" ng-value=false type="radio" class="regular-radio" id="vulnerablePopNo"
+                           name="vulnerablepop" required>
+                    <label for="vulnerablePopNo"></label>
+                    <label for="vulnerablePopNo" class="radio-button-text">No</label>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
+                <label class="control-label rp-choice-questions">3.1.9 Does the research aim involve the study of Population
+                    Origins/Migration patterns?</label>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
+                <div class="radio-inline">
+                    <input ng-model="formData.popmigration" ng-disabled="formData.dar_code != null" ng-value=true type="radio" class="regular-radio" id="popMigrationYes"
+                           name="popmigration" required>
+                    <label for="popMigrationYes"></label>
+                    <label for="popMigrationYes" class="radio-button-text">Yes</label>
+                    <input ng-model="formData.popmigration" ng-disabled="formData.dar_code != null" ng-value=false type="radio" class="regular-radio" id="popMigrationNo"
+                           name="popmigration" required>
+                    <label for="popMigrationNo"></label>
+                    <label for="popMigrationNo" class="radio-button-text">No</label>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
+                <label class="control-label rp-choice-questions">3.1.10 Does the research aim involve the study of psychological
+                    traits, including intelligence, attention, emotion?</label>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
+                <div class="radio-inline">
+                    <input ng-model="formData.psychtraits" ng-value=true type="radio" class="regular-radio" id="psychTraitsYes"
+                           name="psychtraits" required ng-disabled="formData.dar_code != null">
+                    <label for="psychTraitsYes"></label>
+                    <label for="psychTraitsYes" class="radio-button-text">Yes</label>
+                    <input ng-model="formData.psychtraits" ng-value=false type="radio" class="regular-radio" id="psychTraitsNo"
+                           name="psychtraits" required ng-disabled="formData.dar_code != null">
+                    <label for="psychTraitsNo"></label>
+                    <label for="psychTraitsNo" class="radio-button-text">No</label>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
+                <label class="control-label rp-choice-questions">3.1.11 Does the research correlate ethnicity, race, or gender
+                    with genotypic or other phenotypic variables, for purposes beyond biomedical or health-related research, or
+                    in ways that are not easily related to Health? </label>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group rp-last-group">
+                <div class="radio-inline">
+                    <input ng-model="formData.nothealth" ng-disabled="formData.dar_code != null" ng-value=true type="radio" class="regular-radio" id="notHealthYes"
+                           name="nothealth" required>
+                    <label for="notHealthYes"></label>
+                    <label for="notHealthYes" class="radio-button-text">Yes</label>
+                    <input ng-model="formData.nothealth" ng-disabled="formData.dar_code != null" ng-value=false type="radio" class="regular-radio" id="notHealthNo"
+                           name="nothealth" required>
+                    <label for="notHealthNo"></label>
+                    <label for="notHealthNo" class="radio-button-text">No</label>
                 </div>
             </div>
         </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-            <label class="control-label rp-choice-questions">3.1.3 Please indicate if this study is restricted to a
-                pediatric population (under the age of 18)?</label>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-            <div class="radio-inline">
-                <input ng-model="formData.pediatric" ng-value=true type="radio" class="regular-radio" id="pediatricYes"
-                       name="pediatric" required>
-                <label for="pediatricYes"></label>
-                <label for="pediatricYes" class="radio-button-text">Yes</label>
-                <input ng-model="formData.pediatric" ng-value=false type="radio" class="regular-radio" id="pediatricNo"
-                       name="pediatric" required>
-                <label for="pediatricNo"></label>
-                <label for="pediatricNo" class="radio-button-text">No</label>
+        <ul class="pager wizard">
+            <div class="row multi-step-pager">
+                <li class="previous f-left multi-step-prev">
+                    <a href="#/rp_application/step2" class="access-background"><span
+                        class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous Step</a>
+                </li>
+                <li class="next f-right multi-step-next">
+                    <a href="#/rp_application/step4" class="access-background">Next
+                        Step<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+                </li>
+                <li ng-if="formData.dar_code == null" class="next f-right multi-step-save">
+                    <a ng-click="RPApplication.partialSave()"><span>Save</span></a>
+                </li>
             </div>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-            <label class="control-label rp-choice-questions">3.1.4 Does the research aim involve the study of illegal
-                behaviors (violence, domestic abuse, prostitution, sexual victimization)?</label>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-            <div class="radio-inline">
-                <input ng-model="formData.illegalbehave" ng-value=true type="radio" class="regular-radio" id="illegalBehaveYes"
-                       name="illegalBehave" required>
-                <label for="illegalBehaveYes"></label>
-                <label for="illegalBehaveYes" class="radio-button-text">Yes</label>
-                <input ng-model="formData.illegalbehave" ng-value=false type="radio" class="regular-radio" id="illegalBehaveNo"
-                       name="illegalBehave" required>
-                <label for="illegalBehaveNo"></label>
-                <label for="illegalBehaveNo" class="radio-button-text">No</label>
-            </div>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-            <label class="control-label rp-choice-questions">3.1.5 Does the research aim involve the study of alcohol or
-                drug abuse, or abuse of other addictive products?</label>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-            <div class="radio-inline">
-                <input ng-model="formData.addiction" ng-value=true type="radio" class="regular-radio" id="addictionYes"
-                       name="addiction" required>
-                <label for="addictionYes"></label>
-                <label for="addictionYes" class="radio-button-text">Yes</label>
-                <input ng-model="formData.addiction" ng-value=false type="radio" class="regular-radio" id="addictionNo"
-                       name="addiction" required>
-                <label for="addictionNo"></label>
-                <label for="addictionNo" class="radio-button-text">No</label>
-            </div>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-            <label class="control-label rp-choice-questions">3.1.6 Does the research aim involve the study of sexual
-                preferences or sexually transmitted diseases?</label>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-            <div class="radio-inline">
-                <input ng-model="formData.sexualdiseases" ng-value=true type="radio" class="regular-radio" id="sexualDiseasesYes"
-                       name="sexualdiseases" required>
-                <label for="sexualDiseasesYes"></label>
-                <label for="sexualDiseasesYes" class="radio-button-text">Yes</label>
-                <input ng-model="formData.sexualdiseases" ng-value=false type="radio" class="regular-radio" id="sexualDiseasesNo"
-                       name="sexualdiseases" required>
-                <label for="sexualDiseasesNo"></label>
-                <label for="sexualDiseasesNo" class="radio-button-text">No</label>
-            </div>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-            <label class="control-label rp-choice-questions">3.1.7 Does the research aim involve the study of any
-                stigmatizing illnesses?</label>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-            <div class="radio-inline">
-                <input ng-model="formData.stigmatizediseases" ng-value=true type="radio" class="regular-radio" id="stigmatizeDiseasesYes"
-                       name="stigmatizediseases" required>
-                <label for="stigmatizeDiseasesYes"></label>
-                <label for="stigmatizeDiseasesYes" class="radio-button-text">Yes</label>
-                <input ng-model="formData.stigmatizediseases" ng-value=false type="radio" class="regular-radio" id="stigmatizeDiseasesNo"
-                       name="stigmatizediseases" required>
-                <label for="stigmatizeDiseasesNo"></label>
-                <label for="stigmatizeDiseasesNo" class="radio-button-text">No</label>
-            </div>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-            <label class="control-label rp-choice-questions">3.1.8 Does the study target a vulnerable population as defined
-                in 456 CFR (children, prisoners, pregnant women, mentally disabled persons, or [SIGNIFICANTLY] economically
-                or educationally disadvantaged persons)?</label>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-            <div class="radio-inline">
-                <input ng-model="formData.vulnerablepop" ng-value=true type="radio" class="regular-radio" id="vulnerablePopYes"
-                       name="vulnerablepop" required>
-                <label for="vulnerablePopYes"></label>
-                <label for="vulnerablePopYes" class="radio-button-text">Yes</label>
-                <input ng-model="formData.vulnerablepop" ng-value=false type="radio" class="regular-radio" id="vulnerablePopNo"
-                       name="vulnerablepop" required>
-                <label for="vulnerablePopNo"></label>
-                <label for="vulnerablePopNo" class="radio-button-text">No</label>
-            </div>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-            <label class="control-label rp-choice-questions">3.1.9 Does the research aim involve the study of Population
-                Origins/Migration patterns?</label>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-            <div class="radio-inline">
-                <input ng-model="formData.popmigration" ng-value=true type="radio" class="regular-radio" id="popMigrationYes"
-                       name="popmigration" required>
-                <label for="popMigrationYes"></label>
-                <label for="popMigrationYes" class="radio-button-text">Yes</label>
-                <input ng-model="formData.popmigration" ng-value=false type="radio" class="regular-radio" id="popMigrationNo"
-                       name="popmigration" required>
-                <label for="popMigrationNo"></label>
-                <label for="popMigrationNo" class="radio-button-text">No</label>
-            </div>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-            <label class="control-label rp-choice-questions">3.1.10 Does the research aim involve the study of psychological
-                traits, including intelligence, attention, emotion?</label>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-            <div class="radio-inline">
-                <input ng-model="formData.psychtraits" ng-value=true type="radio" class="regular-radio" id="psychTraitsYes"
-                       name="psychtraits" required>
-                <label for="psychTraitsYes"></label>
-                <label for="psychTraitsYes" class="radio-button-text">Yes</label>
-                <input ng-model="formData.psychtraits" ng-value=false type="radio" class="regular-radio" id="psychTraitsNo"
-                       name="psychtraits" required>
-                <label for="psychTraitsNo"></label>
-                <label for="psychTraitsNo" class="radio-button-text">No</label>
-            </div>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-            <label class="control-label rp-choice-questions">3.1.11 Does the research correlate ethnicity, race, or gender
-                with genotypic or other phenotypic variables, for purposes beyond biomedical or health-related research, or
-                in ways that are not easily related to Health? </label>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group rp-last-group">
-            <div class="radio-inline">
-                <input ng-model="formData.nothealth" ng-value=true type="radio" class="regular-radio" id="notHealthYes"
-                       name="nothealth" required>
-                <label for="notHealthYes"></label>
-                <label for="notHealthYes" class="radio-button-text">Yes</label>
-                <input ng-model="formData.nothealth" ng-value=false type="radio" class="regular-radio" id="notHealthNo"
-                       name="nothealth" required>
-                <label for="notHealthNo"></label>
-                <label for="notHealthNo" class="radio-button-text">No</label>
-            </div>
-        </div>
+        </ul>
     </div>
-    <ul class="pager wizard">
-        <div class="row multi-step-pager">
-            <li class="previous f-left multi-step-prev"><a href="#/rp_application/step2"  class="access-background"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Previous Step</a></li>
-            <li class="next f-right multi-step-next"><a href="#/rp_application/step4"  class="access-background">Next Step<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a></li>
-        </div>
-    </ul>
-</div>
 </ng-form>

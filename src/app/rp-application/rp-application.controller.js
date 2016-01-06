@@ -10,14 +10,32 @@
         var vm = this;
         vm.$state = $state;
         vm.attestAndSave = attestAndSave;
+        vm.partialSave = partialSave;
         $scope.showValidationMessages = false;
         $scope.atLeastOneCheckboxChecked = false;
         $scope.formData = {};
-        if($rootScope.formData !== undefined && $rootScope.formData.userId !== undefined){
+        if ($rootScope.formData !== undefined && $rootScope.formData.userId !== undefined) {
             $scope.formData = $rootScope.formData;
-            $rootScope.formData= {};
+            $rootScope.formData = {};
         }
 
+        $scope.step1isValidated = function () {
+            if ($scope.form.step1.$valid) {
+                return true;
+            }
+        };
+
+        $scope.step2isValidated = function () {
+            if ($scope.form.step2.$valid) {
+                return true;
+            }
+        };
+
+        $scope.step3isValidated = function () {
+            if($scope.form.step3.$valid) {
+                return true;
+            }
+        };
 
         $scope.$watch("form.step1.$valid", function (value1) {
             if ($state.current.url === "/step1") {
@@ -69,8 +87,8 @@
             });
         }
 
-        function attestAndSave() {
 
+        function attestAndSave() {
             verifyCheckboxes();
             $scope.formData.userId = $rootScope.currentUser.dacUserId;
             if($scope.formData.dar_code  !== undefined) {
@@ -89,7 +107,21 @@
                     $scope.showValidationMessages = true;
                 }
             }
+        }
 
+        function partialSave(){
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/partial-dar-modals/save-confirmation-partial-dar.html',
+                controller: 'PDarModalSaveConfirmation',
+                controllerAs: 'PDarModalSaveConfirmation',
+                scope: $scope
+            });
+
+            modalInstance.result.then(function () {
+                $state.go('researcher_console');
+            }, function () {
+            });
         }
 
 

@@ -108,6 +108,10 @@ small {
     color: #777777 !important;
 }
 
+.default-background {
+    background: #777777 !important;
+}
+
 .common-color {
     color: #00609f !important;
 }
@@ -1262,9 +1266,14 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 }
 
 .multi-step-prev,
-.multi-step-next {
+.multi-step-next,
+.multi-step-save{
     color: #777777;
     font-size: 15px;
+}
+
+.multi-step-save{
+    margin-right: 20px!important;
 }
 
 .multi-step-prev {
@@ -1276,16 +1285,29 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     padding: 2px 5px 0 0;
 }
 
-.multi-step-next {
+.multi-step-next,
+.multi-step-save{
     float: right;
     text-align: right;
 }
-.multi-step-next button:hover{
+.multi-step-next button:hover,
+.multi-step-save button:hover{
     background: #2FA4E7 !important;
 }
 
-.multi-step-next span {
+.multi-step-next span{
     padding: 2px 0 0 5px;
+}
+
+.multi-step-save a{
+    background: #eeeeee !important;
+    color: #603B9B !important;
+    padding-top: 11px!important;
+}
+
+.multi-step-save span{
+    padding: 0 15px 0 15px !important;
+    font-weight: 500;
 }
 
 .rp-group {
@@ -1591,32 +1613,32 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     cursor: pointer;
 }
 
+.delete-dar{
+    cursor: pointer;
+    float: left;
+}
+
+.delete-dar .cm-icon-button{
+    font-size: 16px;
+    margin: 9px 0 0 0!important;
+    transition: color 0.3s ease !important;
+}
+
+.delete-dar .cm-icon-button:hover{
+    color: #D13B07;
+}
+
 /***************************************************Modals*/
-
-
-
-
-
-
 
 .modal-dialog {
     width: 450px !important;
 }
-
-
 
 .modal.fade .modal-dialog {
     transform: translate(-50%, -80%);
 }
 
 .modal.in .modal-dialog{
-
-
-
-
-
-
-
     margin: 8% auto !important;
 }
 
@@ -2669,9 +2691,9 @@ tags-input[disabled] .tags {
 }
 
 tags-input[disabled] .tags .tag-item {
-    opacity: 0.65;
+    opacity: 1;
     background: #eeeeee;
-    color: #cccccc;
+    color: #777777;
 }
 
 tags-input[disabled] .tags .tag-item .remove-button {

@@ -86,7 +86,6 @@
                     position: 'right',
                     textStyle: {
                         color: '#777777',
-                        fontName: 'Roboto',
                         fontSize: 14
                     },
                     alignment: 'start'
@@ -124,7 +123,6 @@
                     position: 'right',
                     textStyle: {
                         color: '#777777',
-                        fontName: 'Roboto',
                         fontSize: 14
                     },
                     alignment: 'start'
@@ -162,7 +160,6 @@
                     position: 'right',
                     textStyle: {
                         color: '#777777',
-                        fontName: 'Roboto',
                         fontSize: 14
                     },
                     alignment: 'start'
@@ -200,7 +197,6 @@
                     position: 'right',
                     textStyle: {
                         color: '#777777',
-                        fontName: 'Roboto',
                         fontSize: 14
                     },
                     alignment: 'start'
@@ -238,7 +234,6 @@
                     position: 'right',
                     textStyle: {
                         color: '#777777',
-                        fontName: 'Roboto',
                         fontSize: 14
                     },
                     alignment: 'start'
@@ -276,7 +271,6 @@
                     position: 'right',
                     textStyle: {
                         color: '#777777',
-                        fontName: 'Roboto',
                         fontSize: 14
                     },
                     alignment: 'start'
@@ -314,7 +308,6 @@
                     position: 'right',
                     textStyle: {
                         color: '#777777',
-                        fontName: 'Roboto',
                         fontSize: 14
                     },
                     alignment: 'start'
@@ -352,7 +345,6 @@
                     position: 'right',
                     textStyle: {
                         color: '#777777',
-                        fontName: 'Roboto',
                         fontSize: 14
                     },
                     alignment: 'start'

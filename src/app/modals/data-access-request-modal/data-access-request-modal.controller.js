@@ -13,6 +13,11 @@
         vm.ok = function () {
             vm.disableButton = true;
             $scope.showValidationMessages = false;
+            var a = [];
+            $scope.formData.datasetId.forEach(function(obj){
+                a.push(obj.id);
+            });
+            $scope.formData.datasetId = a;
             if($scope.formData.dar_code  !== undefined){
                 cmRPService.updateDar($scope.formData, $scope.formData.dar_code).$promise.then(
                     function () {

@@ -47,5 +47,24 @@
             return $resource(apiUrl + "dar/modalSummary/:id", {},
                 {get: {method: 'GET'}, params: {id: '@id'}}
             );
+        })
+
+        // Partial DAR Requests
+        .factory('partialDataAccessRequestManageResource', function ($resource, apiUrl) {
+            return $resource(apiUrl + "dar/partials/manage?userId=:userId", {},
+                {
+                    List: {method: 'GET', isArray: true,  params: {userId: '@userId'}}
+                });
+        })
+
+        .factory('partialDataAccessRequestResource', function ($resource, apiUrl) {
+            return $resource(apiUrl + "dar/partial/:darId");
+        })
+
+        .factory('postPartialDarResource', function ($resource, apiUrl) {
+            return $resource(apiUrl + "dar/partial", {}, {
+                post: {method: 'POST', headers: {'Content-Type': "application/json"}},
+                update: {method: 'PUT', headers: {'Content-Type': "application/json"}}
+            });
         });
 })();
