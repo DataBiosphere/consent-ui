@@ -21,7 +21,7 @@
 
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
-            var accessToken = googleUser.po.access_token;
+            var accessToken = googleUser.hg.access_token;
             cmLoginUserService.loginUser(profile.getEmail(), accessToken);
         }
 
