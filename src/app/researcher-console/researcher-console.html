@@ -25,13 +25,14 @@
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-box-subtitle access-color">Project title</div>
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle access-color">Date</div>
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle f-center access-color">Status</div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle f-center access-color">Review</div>
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pvotes-box-subtitle f-center access-color">Cancel</div>
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pvotes-box-subtitle f-center access-color">Review</div>
                     <hr class="pvotes-main-separator">
                 </div>
                 <div class="pvotes-box-body">
                     <div dir-paginate="dar in ResearcherConsole.dars | filter: searchAccess | itemsPerPage:10" pagination-id="researcherConsole">
                         <hr class="pvotes-separator">
-                        <div class="row pvotes-main-list">
+                        <div class="row pvotes-main-list no-margin">
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{dar.frontEndId}}</div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">{{dar.projectTitle}}</div>
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{dar.createDate | date:'yyyy-MM-dd'}}</div>
@@ -42,11 +43,23 @@
                                 <span ng-if="dar.electionStatus === 'Closed' && dar.electionVote === false">DENIED</span>
                                 <span ng-if=" dar.electionStatus === 'Closed' && dar.electionVote === true">APPROVED</span>
                             </div>
-                            <a class="admin-manage-buttons col-lg-2 col-md-2 col-sm-2 col-xs-2 no-padding">
-                                <div class="enabled hover-color"  ng-click="ResearcherConsole.review(dar.dataRequestId)">
-                                    <span>Review</span>
-                                </div>
-                            </a>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 no-padding">
+                                <a class="admin-manage-buttons">
+                                    <div ng-if="!dar.isCanceled"  class="enabled cancel-color" ng-click="ResearcherConsole.cancelDar(dar.dataRequestId)">
+                                        <span>Cancel</span>
+                                    </div>
+                                    <div ng-if="dar.isCanceled" class="disabled cancel-color">
+                                        <span>Canceled</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 no-padding">
+                                <a class="admin-manage-buttons">
+                                    <div class="enabled hover-color" ng-click="ResearcherConsole.review(dar.dataRequestId)">
+                                        <span>Review</span>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <hr class="pvotes-separator">
@@ -76,7 +89,7 @@
                         <div dir-paginate="pdar in ResearcherConsole.partialDars | filter: searchAccess | itemsPerPage:10" pagination-id="researcherPartialConsole">
                             <hr class="pvotes-separator">
                             <div class="row pvotes-main-list no-margin">
-                                <a class="col-lg-1 col-md-1 col-sm-1 col-xs-1 delete-dar default-color no-padding" ng-click="ResearcherConsole.cancel(pdar.dataRequestId)">
+                                <a class="col-lg-1 col-md-1 col-sm-1 col-xs-1 delete-dar default-color no-padding" ng-click="ResearcherConsole.cancelPartialDar(pdar.dataRequestId)">
                                     <span class="cm-icon-button glyphicon glyphicon-trash caret-margin" aria-hidden="true"></span>
                                 </a>
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{pdar.partial_dar_code}}</div>

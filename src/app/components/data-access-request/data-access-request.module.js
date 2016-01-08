@@ -8,6 +8,12 @@
                 {post: {method: 'POST'}, headers: {'Content-Type': "application/json"}}
             );
         })
+        .factory('dataAccessRequestCancel', function ($resource, apiUrl) {
+            return $resource(apiUrl + "dar/cancel/:referenceId", {},
+                {
+                    put: {method: 'PUT', params: {referenceId: '@referenceId'}}
+                });
+        })
 
         .factory('dataAccessRequestManageResource', function ($resource, apiUrl) {
             return $resource(apiUrl + "dar/manage?userId=:userId", {},

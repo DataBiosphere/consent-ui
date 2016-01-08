@@ -2148,6 +2148,10 @@ input[type="checkbox"][disabled] + label {
     }
 }
 
+.center-margin{
+    margin: 10px auto 20px auto!important;
+}
+
 /*///////////////////////////////////////////////////////REVIEWED CASES*/
 
 .reviewed-cases-list .enabled {

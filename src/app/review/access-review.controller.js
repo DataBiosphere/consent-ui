@@ -48,10 +48,20 @@
         $scope.consent = consent;
         $scope.dar = dar;
         $scope.selection.voteStatus = vote.vote;
-        $scope.selection.rpVoteStatus = rpVote.vote;
         $scope.isFormDisabled = (election.status === 'Closed');
         $scope.selection.rationale = vote.rationale;
-        $scope.selection.rpRationale = rpVote.rationale;
+
+        if(rpVote !== undefined){
+             $scope.selection.rpRationale = rpVote.rationale;
+             $scope.selection.rpVoteStatus = rpVote.vote;
+             $scope.showRPaccordion = true;
+             $scope.openAccordion = false;
+
+        }else{
+              $scope.showRPaccordion = false;
+               $scope.openAccordion = true;
+        }
+
         $scope.isNew = null;
         $scope.electionType = 'access';
 
@@ -172,7 +182,7 @@
                             scope: $scope
                         });
                         modalInstance.result.then(function () {
-                            if ($scope.logRpVote || rpVote.vote !== null) {
+                            if (!$scope.showRPaccordion ||$scope.logRpVote || rpVote.vote !== null) {
                                 cmAuthenticateService.isAuthorized(USER_ROLES.chairperson, $rootScope.currentUser.roles);
                                 if (cmAuthenticateService.isAuthorized(USER_ROLES.chairperson, $rootScope.currentUser.roles)) {
                                     $state.go('chair_console');

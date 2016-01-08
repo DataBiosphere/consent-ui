@@ -21,8 +21,7 @@
     }
 
     /* ngInject */
-  function ApplicationController($rootScope, USER_ROLES , clientId) {
-
+   function ApplicationController($rootScope, USER_ROLES , clientId) {
         $rootScope.clientId = clientId;
         $rootScope.currentUser = null;
         $rootScope.userRoles = USER_ROLES;

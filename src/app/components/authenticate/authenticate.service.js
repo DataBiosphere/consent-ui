@@ -5,12 +5,12 @@
         .service('cmAuthenticateService', cmAuthenticateService);
 
     /* ngInject */
-    function cmAuthenticateService() {
+    function cmAuthenticateService(USER_ROLES) {
 
         function isAuthorized(authorizedRoles, userRoles) {
             var i = userRoles.length;
             while (i--) {
-                if (authorizedRoles.indexOf(userRoles[i].name) !== -1) {
+                if (authorizedRoles[i] === USER_ROLES.all || (authorizedRoles.indexOf(userRoles[i].name) !== -1))  {
                     return true;
                 }
             }

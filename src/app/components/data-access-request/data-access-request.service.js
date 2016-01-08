@@ -6,7 +6,7 @@
 
     /* ngInject */
 
-    function cmDataAccessRequest(dataAccessRequestResource, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields, dataAccessRequestManageResource, updateDataAccessRequestResource, darModalSummary, partialDataAccessRequestManageResource, partialDataAccessRequestResource, postPartialDarResource) {
+    function cmDataAccessRequest(dataAccessRequestResource, dataAccessRequestCancel, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields, dataAccessRequestManageResource, updateDataAccessRequestResource, darModalSummary, partialDataAccessRequestManageResource, partialDataAccessRequestResource, postPartialDarResource) {
 
         function findDarConsent(id) {
             return darConsent.get({id: id}).$promise;
@@ -18,6 +18,10 @@
 
         function postDataAccessRequest(dataAccessRequest) {
             return dataAccessRequestResource.post(dataAccessRequest);
+        }
+
+        function cancelDar(referenceId) {
+            return dataAccessRequestCancel.put({referenceId: referenceId}).$promise;
         }
 
         function getAutoCompleteDS(partialReq) {
@@ -94,8 +98,13 @@
             getDarFields: function (id, fields) {
                 return findDarFields(id, fields);
             },
+
             postDataAccessRequest: function (dataAccessRequest) {
                 return postDataAccessRequest(dataAccessRequest);
+            },
+
+            cancelDar: function (referenceId) {
+                return cancelDar(referenceId);
             },
 
             getAutoCompleteDS: function (partialReq) {
