@@ -7,7 +7,7 @@ info:
     name: BSD
     url: 'http://opensource.org/licenses/BSD-3-Clause'
   termsOfService: 'https://github.com/broadinstitute/consent'
-host: consent-ui.dsde-dev.broadinstitute.org
+host: consent.dsde-consent-dev.broadinstitute.org
 schemes:
   - https
 basePath: /api
@@ -483,7 +483,7 @@ paths:
   '/consent/{consentId}/vote/{id}':
     post:
       summary: firstVoteUpdate
-      description: Returns the created vote.
+      description: Returns the updated vote.
       parameters:
         - name: consentId
           in: path
@@ -505,13 +505,15 @@ paths:
         - Vote
       responses:
         '200':
-          description: Returns the created vote.
+          description: Returns the updated vote.
           schema:
             $ref: '#/definitions/Vote'
         '400':
           description: 'Bad request, malformed entity, etc'
         '404':
           description: The association type wasn't send, or the application couldn't find any consents that matched the search criteria.
+        '500':
+          description: Internal server error
     put:
       summary: updateConsentVote
       description: Returns the updated vote.
@@ -541,6 +543,8 @@ paths:
             $ref: '#/definitions/Vote'
         '400':
           description: Bad request, malformed entity, etc.
+        '500':
+          description: Internal server error
     get:
       summary: describe
       description: Returns the required vote.
@@ -587,6 +591,8 @@ paths:
             type: string
         '404':
           description: The vote couldn't be found
+        '500':
+          description: Internal server error
   '/consent/{consentId}/vote':
     delete:
       summary: deleteVotes
@@ -607,6 +613,8 @@ paths:
             type: string
         '404':
           description: The votes for the consent ID couldn't be found
+        '500':
+          description: Internal server error
     get:
       summary: describeAllVotes
       description: Returns all the votes related to this consent.
@@ -646,6 +654,8 @@ paths:
             $ref: '#/definitions/DACUser'
         '400':
           description: Malformed user entity.
+        '500':
+          description: Internal server error.
     get:
       summary: describeAllUsers
       description: Returns all the users
@@ -677,6 +687,10 @@ paths:
           description: Returns the user.
           schema:
             $ref: '#/definitions/DACUser'
+        '400':
+          description: User not found.
+        '500':
+          description: Internal server error.
     delete:
       summary: delete
       description: Deletes the user identified by the email.
@@ -694,6 +708,10 @@ paths:
           description: Response = User was deleted
           schema:
             type: string
+        '404':
+          description: User not found.
+        '500':
+          description: Internal server error.
     put:
       summary: update
       description: Updates the user identified by the ID.
@@ -718,6 +736,10 @@ paths:
             $ref: '#/definitions/DACUser'
         '400':
           description: Malformed entity.
+        '404':
+          description: User not found.
+        '500':
+          description: Internal server error.
   /dar:
     post:
       summary: createdDataAccessRequest
@@ -999,6 +1021,8 @@ paths:
             type: string
         '404':
           description: The DAR or the election couldn't be found.
+        '500':
+          description: Internal server error.
   '/consent/{id}/dul':
     get:
       summary: getDUL
@@ -1127,6 +1151,8 @@ paths:
           description: The Votes were deleted.
         '404':
           description: The Election doesn't exist.
+        '500':
+          description: Internal server error.
   '/dataRequest/{requestId}/vote/{id}':
     get:
       summary: describe
@@ -1178,12 +1204,14 @@ paths:
         - Vote
         - DataRequest
       responses:
-        '201':
-          description: Returns the updated Vote.
+        '200':
+          description: Successful update.
         '400':
           description: Required parameter is null
         '404':
           description: The \"to update\" vote doesn't exist.
+        '500':
+          description: Internal server error.
     put:
       summary: updateDataRequestVote
       description: update an edited Vote specified by VoteId of a DataRequest Election.
@@ -1215,6 +1243,8 @@ paths:
           description: Required parameter is null
         '404':
           description: The \"to update\" vote doesn't exist.
+        '500':
+          description: Internal server error.
     delete:
       summary: deleteVote
       description: Deletes the vote specified by the requestId and the VoteId.
@@ -1238,6 +1268,8 @@ paths:
           description: The Vote was deleted.
         '404':
           description: Could not find vote with this Vote ID.
+        '500':
+          description: Internal server error.
   '/dataRequest/{requestId}/vote/{id}/final':
     post:
       summary: updateFinalAccessConsentVote
@@ -1272,6 +1304,8 @@ paths:
           description: Required parameter is null
         '404':
           description: Election for specified id does not exist
+        '500':
+          description: Internal server error.
   '/dataRequest/{requestId}/vote/final':
     get:
       summary: describeFinalAccessVote
@@ -1485,7 +1519,13 @@ paths:
           schema:
             $ref: '#/definitions/Election'
         '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
           description: Could not find Election with the specified Id
+          schema:
+            $ref: '#/definitions/ErrorResponse'
     put:
       summary: updateElection
       description: "Updates the election specified by Id."
@@ -1510,7 +1550,13 @@ paths:
           schema:
             $ref: '#/definitions/Election'
         '400':
-          description: Illegal Argument Exception
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Could not find Election with the specified Id
+          schema:
+            $ref: '#/definitions/ErrorResponse'
   /electionReview:
     get:
       summary: getCollectElectionReview
@@ -1618,6 +1664,12 @@ paths:
               $ref: '#/definitions/HelpReport'
           '400':
             description: Bad Request
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+          '500':
+            description: Internal Server Error
+            schema:
+              $ref: '#/definitions/ErrorResponse'
   '/report/{id}':
       get:
         summary: describe
@@ -1636,8 +1688,10 @@ paths:
               description: HelpReport
               schema:
                 $ref: '#/definitions/HelpReport'
-           '400':
+           '404':
               description: HelpReport not found.
+              schema:
+                $ref: '#/definitions/ErrorResponse'
       delete:
         summary: delete
         description: Deletes the HelpReport identified by Id.
@@ -1653,6 +1707,10 @@ paths:
         responses:
           '200':
             description: Report was deleted
+          '404':
+              description: HelpReport not found.
+              schema:
+                $ref: '#/definitions/ErrorResponse'
   '/report/user/{userId}':
         get:
           summary: describeAllReportsByUser
@@ -1673,6 +1731,26 @@ paths:
                   type: array
                   items:
                     $ref: '#/definitions/HelpReport'
+	'/emailNotifier/reminderMessage/{voteId}':
+      post:
+        summary: sendReminderEmailMessage
+        description: Sends a reminder email message to the owner of the vote.
+        parameters:
+          - name: voteId
+            in: path
+            description: voteId
+            required: true
+            type: integer
+            format: int32
+        tags:
+          - Email
+        responses:
+          '200':
+            description: The Email was sent
+          '500':
+            description: Internal Server Error
+            schema:
+              $ref: '#/definitions/ErrorResponse'
 definitions:
   ConsentAssociation:
     type: object
@@ -1747,9 +1825,9 @@ definitions:
       rationale:
         type: string
         description: If the final vote is NO, the voter can specify why in this field.
-      isFinalAccessVote:
-        type: boolean
-        description: Specifies if the Vote is a finalAccessVote, only For Data Access Request elections.
+      type:
+        type: string
+        description: Describes the type of Vote.
       isReminderSent:
         type: boolean
         description: Describes if the user recieved a reminder by the chairperson to log the vote on the case.
@@ -2024,11 +2102,15 @@ definitions:
         type: string
         description: Name of the role
   ErrorResponse:
+    type: object
     required:
       - "message"
     properties:
       message:
         type: string
+      code:
+        type: integer
+        format: int32
   HelpReport:
       type: object
       properties:
