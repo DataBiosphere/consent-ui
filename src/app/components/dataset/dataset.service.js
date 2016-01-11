@@ -5,7 +5,7 @@
         .service('cmDatasetService', cmDatasetService);
 
     /* ngInject */
-    function cmDatasetService(PostDsFileResource, DataSetResource, DictionaryResource, DownloadDatasetResource, DeleteDataSetResource, DisableDataSetResource) {
+    function cmDatasetService(PostDsFileResource, DataSetResource, DictionaryResource, DownloadDatasetResource, DeleteDataSetResource, DisableDataSetResource, ReviewDataSetResource) {
 
         /**
          * Post the file that contains the datasets.
@@ -36,6 +36,10 @@
             return DisableDataSetResource.Delete({datasetObjectId: datasetObjectId, active: active}).$promise;
         }
 
+        function  reviewDataSet(dataSetId, needsApproval){
+            return ReviewDataSetResource.Update({dataSetId: dataSetId, needsApproval: needsApproval}).$promise;
+        }
+
         return {
             postDatasetFile: function (file, overwrite) {
                 return postDataFile(file, overwrite);
@@ -54,7 +58,11 @@
             },
             disableDataset: function (datasetId, active) {
                 return disableDataset(datasetId, active);
+            },
+            reviewDataSet: function (dataSetId, review) {
+                return reviewDataSet(dataSetId, review);
             }
+
         };
     }
 })();

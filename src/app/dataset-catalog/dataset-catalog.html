@@ -75,6 +75,18 @@
                                           aria-hidden="true"></span>
                             </a>
                         </div>
+
+                        <div class="">
+                            <a ng-if="dataSet.needsApproval && isAdmin && !isResearcher" ng-click="DatasetCatalog.openDisableNeedsApproval(property.propertyValue)" tooltip="" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right">
+                                <span class="cm-icon-button glyphicon glyphicon-ok-circle caret-margin dataset-color"
+                                      aria-hidden="true"></span>
+                            </a>
+                            <a ng-if="!dataSet.needsApproval && isAdmin && !isResearcher" ng-click="DatasetCatalog.openEnableNeedsApproval(property.propertyValue)" tooltip=""
+                               tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right">
+                                    <span class="cm-icon-button glyphicon glyphicon-ban-circle caret-margin cancel-color"
+                                          aria-hidden="true"></span>
+                            </a>
+                        </div>
                     </td>
 
                     <td ng-repeat="property in dataSet.properties" class="table-items cell-size" ng-class="{'dataset-disabled': !dataSet.active}">

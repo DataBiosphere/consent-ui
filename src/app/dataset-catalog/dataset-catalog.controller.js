@@ -12,6 +12,9 @@
         vm.openDelete = openDelete;
         vm.openDisable = openDisable;
         vm.openEnable = openEnable;
+        vm.openEnableNeedsApproval = openEnableNeedsApproval;
+        vm.openDisableNeedsApproval = openDisableNeedsApproval;
+
         $scope.actionType = null;
 
         vm.dataSetList = {'catalog': [], 'dictionary': []};
@@ -110,6 +113,40 @@
 
             modalInstance.result.then(function () {
                 cmDatasetService.disableDataset(datasetId, true).then(function () {
+                    init();
+                });
+            });
+        }
+
+        function openEnableNeedsApproval(datasetId){
+            $scope.actionType = 'needsApproval';
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/delete-dataset-modal.html',
+                controller: 'Modal',
+                controllerAs: 'Modal',
+                scope: $scope
+            });
+
+            modalInstance.result.then(function () {
+                cmDatasetService.reviewDataSet(datasetId, true).then(function () {
+                    init();
+                });
+            });
+        }
+
+        function openDisableNeedsApproval(datasetId){
+            $scope.actionType = 'notNeedsApproval';
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/delete-dataset-modal.html',
+                controller: 'Modal',
+                controllerAs: 'Modal',
+                scope: $scope
+            });
+
+            modalInstance.result.then(function () {
+                cmDatasetService.reviewDataSet(datasetId, false).then(function () {
                     init();
                 });
             });

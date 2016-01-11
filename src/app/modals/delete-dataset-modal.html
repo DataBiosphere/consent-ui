@@ -11,6 +11,12 @@
             <h2 ng-show="actionType == 'enable'" class="dataset-color pvotes-box-title">Enable Dataset Confirmation
                 <small>If you enable a Dataset, Researchers will be able to request access on it from now on.</small>
             </h2>
+            <h2 ng-show="actionType == 'needsApproval'" class="dataset-color pvotes-box-title">Enable Dataset Confirmation
+                <small>If you....</small>
+            </h2>
+            <h2 ng-show="actionType == 'notNeedsApproval'" class="dataset-color pvotes-box-title">Enable Dataset Confirmation
+                <small>If you ....</small>
+            </h2>
         </div>
         <div class="modal-footer admin-modal-footer">
             <button type="button" class="btn dismiss-background" ng-click="Modal.cancel()">No</button>

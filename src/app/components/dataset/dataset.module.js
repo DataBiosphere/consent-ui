@@ -45,8 +45,13 @@
                                            headers: {'Accept': "application/json",
                                             'Content-Type': "application/json" } }
                            });
-                });
+         })
 
+        .factory('ReviewDataSetResource', function($resource, apiUrl){
+            return $resource(apiUrl+"dataset?dataSetId=:dataSetId&needsApproval=:needsApproval", {}, {
+                Update: {method:'PUT',params: {dataSetId: '@dataSetId', needsApproval: '@needsApproval'}}
+            });
+        });
 })();
 
 
