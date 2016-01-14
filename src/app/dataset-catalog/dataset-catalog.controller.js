@@ -56,7 +56,6 @@
             );
         };
 
-
         vm.delete = function (datasetId) {
             cmDatasetService.deleteDataset(datasetId);
         };
@@ -80,7 +79,6 @@
             });
         }
 
-
         function openDisable(datasetId) {
 
             $scope.actionType = 'disable';
@@ -98,7 +96,6 @@
                 });
             });
         }
-
 
         function openEnable(datasetId) {
 
@@ -119,12 +116,13 @@
         }
 
         function openEnableNeedsApproval(datasetId){
+
             $scope.actionType = 'needsApproval';
             var modalInstance = $modal.open({
                 animation: false,
-                templateUrl: 'app/modals/delete-dataset-modal.html',
-                controller: 'Modal',
-                controllerAs: 'Modal',
+                templateUrl: 'app/modals/dataset-approval-modal/dataset-approval-modal.html',
+                controller: 'DataSetApprovalModal',
+                controllerAs: 'DataSetApprovalModal',
                 scope: $scope
             });
 
@@ -136,12 +134,13 @@
         }
 
         function openDisableNeedsApproval(datasetId){
+
             $scope.actionType = 'notNeedsApproval';
             var modalInstance = $modal.open({
                 animation: false,
-                templateUrl: 'app/modals/delete-dataset-modal.html',
-                controller: 'Modal',
-                controllerAs: 'Modal',
+                templateUrl: 'app/modals/dataset-approval-modal/dataset-approval-modal.html',
+                controller: 'DataSetApprovalModal',
+                controllerAs: 'DataSetApprovalModal',
                 scope: $scope
             });
 
@@ -151,8 +150,6 @@
                 });
             });
         }
-
-
 
     }
 })();

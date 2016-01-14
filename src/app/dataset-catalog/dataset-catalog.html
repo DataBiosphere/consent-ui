@@ -75,16 +75,13 @@
                                           aria-hidden="true"></span>
                             </a>
                         </div>
-
-                        <div class="">
-                            <a ng-if="dataSet.needsApproval && isAdmin && !isResearcher" ng-click="DatasetCatalog.openDisableNeedsApproval(property.propertyValue)" tooltip="" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right">
-                                <span class="cm-icon-button glyphicon glyphicon-ok-circle caret-margin dataset-color"
-                                      aria-hidden="true"></span>
+                        <div class="approval-datasets-col">
+                            <a ng-if="dataSet.needsApproval && isAdmin && !isResearcher" ng-click="DatasetCatalog.openDisableNeedsApproval(property.propertyValue)" tooltip="Connect with Data Owner" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right">
+                                <span class="cm-icon-button glyphicon glyphicon-link caret-margin dataset-color" aria-hidden="true"></span>
                             </a>
-                            <a ng-if="!dataSet.needsApproval && isAdmin && !isResearcher" ng-click="DatasetCatalog.openEnableNeedsApproval(property.propertyValue)" tooltip=""
+                            <a ng-if="!dataSet.needsApproval && isAdmin && !isResearcher" ng-click="DatasetCatalog.openEnableNeedsApproval(property.propertyValue)" tooltip="Connect with Data Owner"
                                tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right">
-                                    <span class="cm-icon-button glyphicon glyphicon-ban-circle caret-margin cancel-color"
-                                          aria-hidden="true"></span>
+                                <span class="cm-icon-button glyphicon glyphicon-link caret-margin default-color" aria-hidden="true"></span>
                             </a>
                         </div>
                     </td>
