@@ -1,0 +1,59 @@
+<div ng-include src="'app/header/header.html'"></div>
+<div class="container">
+    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <h2 class="cm-title common-color">
+            <div id="dacUser">Welcome {{currentUser.displayName}}!</div>
+            <small>These are your pending cases for review</small>
+        </h2>
+        <hr class="section-separator">
+    </div>
+    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <div class="row no-margin">
+            <h2 class="col-lg-8 col-md-8 col-sm-8 col-xs-12 pvotes-box-title dataset-color">
+                <img src="assets/images/icon_dataset_review.png" alt="Dataset Review icon" class="pvotes-icons">Dataset
+                Access Request Review</br>
+                <div class="pvotes-box-title-description pvotes-box-title-other-description">Should data access be
+                    granted to this applicant?
+                </div>
+            </h2>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 search-reviewed no-padding">
+                <div class="search-text">
+                    <i class="glyphicon glyphicon-search dataset-color"></i>
+                    <input type="search" class="form-control users-search" placeholder="Enter search term..."/>
+                </div>
+            </div>
+        </div>
+        <div class="jumbotron box-vote-singleresults">
+            <div class="row">
+                <div class="pvotes-box-head">
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 pvotes-box-subtitle dataset-color">Dataset ID</div>
+                    <div class="col-lg-6 col-md-6 col-sm-5 col-xs-5 pvotes-box-subtitle dataset-color">Dataset Name
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle dataset-color">Data Request ID
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 center-text pvotes-box-subtitle dataset-color">Review/Vote
+                    </div>
+                    <hr class="pvotes-main-separator">
+                </div>
+                <div class="pvotes-box-body">
+                    <div ng-repeat="pendingCase in DataOwnerConsole.dataOwnerUnreviewedCases">
+                    <hr class="pvotes-separator">
+                    <div class="row pvotes-main-list">
+                        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 pvotes-list-id">{{pendingCase.dataSetId}}</div>
+                        <div class="col-lg-6 col-md-6 col-sm-5 col-xs-5 pvotes-list-id">{{pendingCase.dataSetName}}</div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{pendingCase.darCode}}</div>
+                        <a ui-sref="data_owner_review({voteId: '{{pendingCase.voteId}}', referenceId: '{{pendingCase.referenceId}}', dataSetId: '{{pendingCase.dataSetId}}'})" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <div ng-class="{'enabled hover-color': !pendingCase.alreadyVoted, 'editable default-color' : pendingCase.alreadyVoted}">
+                                <span ng-if="!pendingCase.alreadyVoted && (pendingCase.hasConcerns == null || !pendingCase.hasConcerns)">Vote</span>
+                                <span ng-if="pendingCase.alreadyVoted || pendingCase.hasConcerns">Edit</span>
+                            </div>
+
+                        </a>
+                    </div>
+                </div>
+                <hr class="pvotes-separator">
+            </div>
+        </div>
+    </div>
+</div>
+</div>

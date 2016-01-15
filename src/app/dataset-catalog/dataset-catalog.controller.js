@@ -6,14 +6,13 @@
         .controller('DatasetCatalog', DatasetCatalog);
 
     /* ngInject */
-    function DatasetCatalog($scope, $modal, $rootScope, cmDatasetService, cmAuthenticateService, USER_ROLES) {
+    function DatasetCatalog($scope, $modal, $rootScope, cmDatasetService, cmAuthenticateService, cmDatasetAssociationService,  USER_ROLES) {
 
         var vm = this;
         vm.openDelete = openDelete;
         vm.openDisable = openDisable;
         vm.openEnable = openEnable;
-        vm.openEnableNeedsApproval = openEnableNeedsApproval;
-        vm.openDisableNeedsApproval = openDisableNeedsApproval;
+        vm.associate = associate;
 
         $scope.actionType = null;
 
@@ -115,7 +114,7 @@
             });
         }
 
-        function openEnableNeedsApproval(datasetId){
+        function associate(datasetId, needsApproval){
 
             $scope.actionType = 'needsApproval';
             var modalInstance = $modal.open({
@@ -123,33 +122,19 @@
                 templateUrl: 'app/modals/dataset-approval-modal/dataset-approval-modal.html',
                 controller: 'DataSetApprovalModal',
                 controllerAs: 'DataSetApprovalModal',
-                scope: $scope
+                scope: $scope,
+                resolve: {
+                          usersAssociation: function (cmDatasetAssociationService) {
+                                   return cmDatasetAssociationService.getAssociatedAndToAssociateUsers(datasetId);
+                             },
+                          datasetName: function(){ return datasetId },
+                          needsApproval: function(){ return needsApproval }
+                        }
             });
 
             modalInstance.result.then(function () {
-                cmDatasetService.reviewDataSet(datasetId, true).then(function () {
-                    init();
-                });
+                init();
             });
         }
-
-        function openDisableNeedsApproval(datasetId){
-
-            $scope.actionType = 'notNeedsApproval';
-            var modalInstance = $modal.open({
-                animation: false,
-                templateUrl: 'app/modals/dataset-approval-modal/dataset-approval-modal.html',
-                controller: 'DataSetApprovalModal',
-                controllerAs: 'DataSetApprovalModal',
-                scope: $scope
-            });
-
-            modalInstance.result.then(function () {
-                cmDatasetService.reviewDataSet(datasetId, false).then(function () {
-                    init();
-                });
-            });
-        }
-
     }
 })();

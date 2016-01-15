@@ -35,7 +35,7 @@
             } else if (cmAuthenticateService.isAuthorized(USER_ROLES.alumni, data.roles)) {
                 $state.go('summary_votes');
             } else if (cmAuthenticateService.isAuthorized(USER_ROLES.dataOwner, data.roles)) {
-                $state.go('user_console');
+                $state.go('data_owner_console');
             }else {
                 alert("not valid Role");
                 logoutUser();

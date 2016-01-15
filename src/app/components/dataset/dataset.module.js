@@ -15,6 +15,10 @@
          });
         })
 
+        .factory('GetDatasetResource', function ($resource, apiUrl) {
+                            return $resource(apiUrl + "dataset/:datasetId");
+                })
+
         .factory('DataSetResource', function($resource, apiUrl){
                    return $resource(apiUrl+"dataset", {}, {
                        List: {method:'GET',params: {dacUserId: 'dacUserId'},isArray:true}

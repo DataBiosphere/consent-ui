@@ -76,12 +76,8 @@
                             </a>
                         </div>
                         <div class="approval-datasets-col">
-                            <a ng-if="dataSet.needsApproval && isAdmin && !isResearcher" ng-click="DatasetCatalog.openDisableNeedsApproval(property.propertyValue)" tooltip="Connect with Data Owner" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right">
-                                <span class="cm-icon-button glyphicon glyphicon-link caret-margin dataset-color" aria-hidden="true"></span>
-                            </a>
-                            <a ng-if="!dataSet.needsApproval && isAdmin && !isResearcher" ng-click="DatasetCatalog.openEnableNeedsApproval(property.propertyValue)" tooltip="Connect with Data Owner"
-                               tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right">
-                                <span class="cm-icon-button glyphicon glyphicon-link caret-margin default-color" aria-hidden="true"></span>
+                            <a ng-if="isAdmin && !isResearcher" ng-click="DatasetCatalog.associate(property.propertyValue, dataSet.needsApproval)" tooltip="Connect with Data Owner" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right">
+                                <span ng-class="dataSet.isAssociatedToDataOwners ? 'cm-icon-button glyphicon glyphicon-link caret-margin dataset-color' : 'cm-icon-button glyphicon glyphicon-link caret-margin default-color'" aria-hidden="true"></span>
                             </a>
                         </div>
                     </td>

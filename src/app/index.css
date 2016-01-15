@@ -873,12 +873,11 @@ input[type=checkbox]:checked + label:before{
 /*///////////////////////////////////////////////////////DAC CONSOLES*/
 
 .pvotes-main-list {
-    margin: 0 0 0 5px;
+    margin: 0px!important;
 }
 
 .list-highlighted{
     background-color: rgba(96, 59, 155, 0.05);
-    margin-left: -5px!important;
 }
 
 .list-highlighted .glyphicon-exclamation-sign{
@@ -1018,6 +1017,10 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     font-weight: 500 !important;
     font-size: 15px;
     margin: -3px 0 0 45px;
+}
+
+.pvotes-box-title-other-description{
+    margin: -3px 0 0 50px;
 }
 
 .pvotes-pagination {

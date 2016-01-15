@@ -58,6 +58,7 @@
                     function () {
                         $scope.alreadyVote = true;
                         if($scope.agreementAlreadyVote || $scope.hideMatch){
+                            $state.go('chair_console');
                             closeElection();
                         } else{
                             $scope.reminderDARAlert();
@@ -73,7 +74,7 @@
         function closeElection(){
             $scope.electionAccess.status = 'Closed';
             cmElectionService.updateElection($scope.electionAccess).$promise;
-            $state.go('chair_console');
+
         }
 
         function logVoteAgreement() {
@@ -90,7 +91,8 @@
                     function () {
                         $scope.agreementAlreadyVote = true;
                         if ($scope.alreadyVote) {
-                                closeElection();
+                            $state.go('chair_console');
+                            closeElection();
                         } else {
                             $scope.reminderAgreeAlert();
                         }

@@ -9,50 +9,57 @@
 
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 admin-modal-content app-summary-modal-content app-summary-modal-first-content">
             <div class="row">
-                <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label dataset-color">Dataset</label>
-                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">ACE-000000 | Name of the Dataset</div>
+                <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label dataset-color">Dataset ID</label>
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">{{DatasetId}}</div>
+            </div>
+            <div class="row">
+                <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label dataset-color">Dataset Name</label>
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">{{DatasetName}}</div>
             </div>
             <div class="row">
                 <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label dataset-color">Description</label>
-                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">lalala lalalal lalala lala lalala lalalala lalalala lalal lalala llalala.</div>
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">{{Description}}</div>
             </div>
             <div class="row">
                 <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label dataset-color">Data Type</label>
-                <div class="col-lg-3 col-md-3 col-sm-9 col-xs-8 response-label">lalala</div>
-
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">{{DataType}}</div>
+            </div>
+            <div class="row">
                 <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label dataset-color">Phenotype/Indication</label>
-                <div class="col-lg-3 col-md-3 col-sm-9 col-xs-8 response-label">lalala</div>
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">{{Indication}}</div>
             </div>
             <div class="row">
                 <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label dataset-color">Species</label>
-                <div class="col-lg-3 col-md-3 col-sm-9 col-xs-8 response-label">lalala</div>
-
-                <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label dataset-color"># of Participants</label>
-                <div class="col-lg-3 col-md-3 col-sm-9 col-xs-8 response-label">lalala</div>
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">{{Species}}</div>
             </div>
-            <hr>
-        </div>
+            <div class="row">
+                <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label dataset-color"># of Participants</label>
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">{{nrParticipants}}</div>
+            </div>
 
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 app-summary-modal-content">
+            <hr>
+
             <div class="row">
                 <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label dataset-color">Data Depositor</label>
-                <div class="col-lg-3 col-md-3 col-sm-9 col-xs-8 response-label">lalala lala</div>
-
-                <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label dataset-color">Principal Investigator</label>
-                <div class="col-lg-3 col-md-3 col-sm-9 col-xs-8 response-label">lalala lalal</div>
+                <div class="col-lg-3 col-md-3 col-sm-9 col-xs-8 response-label">{{DataDepositor}}</div>
             </div>
+            <div class="row">
+                <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label dataset-color">Principal Investigator</label>
+                <div class="col-lg-3 col-md-3 col-sm-9 col-xs-8 response-label">{{PI}}</div>
+            </div>
+
             <hr>
+
             <div class="row">
                 <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label dataset-color">Consent ID</label>
-                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">SC-000000</div>
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">{{consentName}}</div>
             </div>
             <div class="row">
                 <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label dataset-color">Structured Limitations</label>
-                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">lalala lalalal lalala lala lalala lalalala lalalala lalal lalala llalala.</div>
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">{{translatedUseRestriction}}</div>
             </div>
             <hr>
         </div>
-
         <div class="modal-footer admin-modal-footer app-summary-modal-footer">
             <button class="col-lg-3 col-md-3 col-sm-4 col-xs-6 btn dataset-background" ng-click="DatasetSummaryModal.cancel()">Close</button>
         </div>

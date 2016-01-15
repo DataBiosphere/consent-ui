@@ -2,6 +2,6 @@
     'use strict';
 
     angular
-        .module('cmDataSetApprovalModal', ['ui.bootstrap']);
+        .module('cmDataSetApprovalModal', ['ui.bootstrap','cmDatasetAssociation']);
 
 })();

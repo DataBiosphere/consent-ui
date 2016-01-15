@@ -12,7 +12,7 @@
                     <a class="enabled hover-color application-link" ng-click="DataOwnerReview.openApplication()">Application summary</a>
                 </h4>
             </div>
-            <div id="rp" class="panel-body cm-boxbody">{{dar.rus}}</div>
+            <div id="rp" class="panel-body cm-boxbody">{{darFields.rus}}</div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
             <div class="panel-heading cm-boxhead dataset-color">
@@ -21,7 +21,7 @@
                 </h4>
             </div>
             <div id="dul" class="panel-body cm-boxbody">
-                <a href="{{downloadUrl}}" target="_blank">{{consent.dulName}}</a>
+                <a href="{{consent.dataUseLetter}}" target="_blank">{{consent.dulName}}</a>
             </div>
         </div>
     </div>
@@ -39,20 +39,20 @@
                         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
                             <div class="radio-inline">
 
-                                <input type="radio" ng-model="selection.voteStatus" ng-click="positiveVote()"
+                                <input type="radio" ng-model="voteStatus" ng-click="positiveVote()"
                                        class="regular-radio" id="inputVotePositive"
-                                       ng-value="1" name="inputVote">
+                                       ng-value="true" name="inputVote">
                                 <label for="inputVotePositive"></label>
                                 <label for="inputVotePositive" class="radio-button-text">Approve</label>
 
-                                <input type="radio" ng-model="selection.voteStatus"
-                                       ng-value="2" class="regular-radio" id="inputVoteNegative"
+                                <input type="radio" ng-model="voteStatus" ng-click="negativeVote()"
+                                       ng-value="false" class="regular-radio" id="inputVoteNegative"
                                        name="inputVote">
                                 <label for="inputVoteNegative"></label>
                                 <label for="inputVoteNegative" class="radio-button-text">Disapprove</label>
 
-                                <input type="radio" ng-model="selection.voteStatus"
-                                       ng-value="3" class="regular-radio" id="inputConcern"
+                                <input type="radio" ng-model="hasConcerns" ng-click="concerns()"
+                                       ng-value="true" class="regular-radio" id="inputConcern"
                                        name="inputVote">
                                 <label for="inputConcern"></label>
                                 <label for="inputConcern" class="radio-button-text">Raise a concern</label>
@@ -60,12 +60,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label
-                            class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label dataset-color">Rationale</label>
-
+                        <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label dataset-color">Rationale</label>
                         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
-                            <input type="text" ng-model="selection.rationale"
-                                   ng-disabled="selection.voteStatus == true"
+                            <input type="text" ng-model="rationale"
+                                   ng-disabled="voteStatus == true"
                                    name="inputRationale"
                                    class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
                                    placeholder="Describe your rationale here (be as specific as possible).">
@@ -77,8 +75,9 @@
                                 <h4>{{alert.title}}<i>{{alert.msg}}</i></h4>
                             </alert>
                         </div>
+
                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 col-xs-offset-8 f-right no-margin">
-                            <button ng-disabled="selection.voteStatus === null || enableDARButton === false" ng-click="logVote()"
+                            <button ng-disabled="voteStatus == null && hasConcerns == null" ng-click="logVote()"
                                     class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button dataset-background">
                                 Vote
                             </button>

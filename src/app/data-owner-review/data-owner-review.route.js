@@ -8,14 +8,13 @@
     /* ngInject */
     function routeConfig($stateProvider, USER_ROLES) {
         $stateProvider
-
             .state('data_owner_review', {
                 name: 'data_owner_review',
                 url: '/data_owner_review',
                 params: {
-                    darId: null,
                     voteId: null,
-                    rpVoteId: null
+                    referenceId: null,
+                    dataSetId: null
                 },
                 templateUrl: 'app/data-owner-review/data-owner-review.html',
                 controller: 'DataOwnerReview',
@@ -24,36 +23,28 @@
                     authorizedRoles: [USER_ROLES.dataOwner]
                 },
                 resolve: {
-                    dar: function ($stateParams, cmRPService) {
-                        if ($stateParams.darId !== null) {
-                            return cmRPService.getDarFields($stateParams.darId, "rus");
-                        }
-                    },
-                    consent: function ($stateParams, cmRPService) {
-                        if ($stateParams.darId !== null) {
-                            return cmRPService.getDarConsent($stateParams.darId);
-                        }
-                    },
-                    election: function ($stateParams, cmElectionService) {
-                        if ($stateParams.darId !== null) {
-                            return cmElectionService.findDarElection($stateParams.darId);
-                        }
-
-                    },
                     vote: function ($stateParams, cmVoteService) {
-                        if ($stateParams.darId !== null) {
-                            return cmVoteService.getDarVote($stateParams.darId, $stateParams.voteId);
+                        if ($stateParams.voteId !== null && $stateParams.referenceId != null) {
+                            return cmVoteService.getDarVote($stateParams.referenceId, $stateParams.voteId);
                         }
                     },
-                    rpVote: function ($stateParams, cmVoteService) {
-                        if ($stateParams.darId !== null && $stateParams.rpVoteId !== null) {
-                            return cmVoteService.getDarVote($stateParams.darId, $stateParams.rpVoteId);
-                        }
+                    referenceId: function($stateParams){
+                        return $stateParams.referenceId;
                     },
-                    dar_id: function($stateParams){
-                        return $stateParams.darId;
+                    dataSet: function($stateParams, cmDatasetService){
+                        return cmDatasetService.getDataSetsByDatasetId($stateParams.dataSetId);
+                    },
+                    consent: function ($stateParams, cmConsentService,dataSet ) {
+                        return cmConsentService.findConsent(dataSet.consentId);
+                    },
+                    darFields: function ($stateParams, cmRPService) {
+                        if ($stateParams.referenceId !== null) {
+                            return cmRPService.getDarFields($stateParams.referenceId, "rus");
+                        }
                     }
+
                 }
+
             });
 
     }
