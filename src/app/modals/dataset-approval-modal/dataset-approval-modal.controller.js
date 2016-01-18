@@ -13,7 +13,7 @@
         $scope.alert.show = false ;
 
 
-        needsApproval ? $scope.updatedNeedsApproval = true : $scope.updatedNeedsApproval = false
+        needsApproval ? $scope.updatedNeedsApproval = true : $scope.updatedNeedsApproval = false;
         (usersAssociation.associated_users === undefined || usersAssociation.associated_users.length == 0) ? $scope.isUpdate = false : $scope.isUpdate = true;
         $scope.selectedclients = usersAssociation.associated_users.map(function (user){
                  return { id: user.dacUserId , name: user.displayName+" : "+user.email};});

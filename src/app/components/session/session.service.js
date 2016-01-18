@@ -24,26 +24,26 @@
 
 
         function redirect(data) {
-            if (cmAuthenticateService.isAuthorized(USER_ROLES.chairperson, data.roles)) {
-                $state.go('chair_console');
-            } else if (cmAuthenticateService.isAuthorized(USER_ROLES.member, data.roles)) {
-                $state.go('user_console');
-            } else if (cmAuthenticateService.isAuthorized(USER_ROLES.admin, data.roles)) {
-                $state.go('admin_console');
-            } else if (cmAuthenticateService.isAuthorized(USER_ROLES.researcher, data.roles)) {
-                $state.go('researcher_console');
-            } else if (cmAuthenticateService.isAuthorized(USER_ROLES.alumni, data.roles)) {
-                $state.go('summary_votes');
-            } else if (cmAuthenticateService.isAuthorized(USER_ROLES.dataOwner, data.roles)) {
-                $state.go('data_owner_console');
-            }else {
-                alert("not valid Role");
-                logoutUser();
+            if(($rootScope.returnToState != null && $rootScope.returnToState !== 'login') && cmAuthenticateService.hasValidRole($rootScope.returnToStateAuthorizedRoles, data.roles)){
+                $state.go($rootScope.returnToState, $rootScope.returnToStateParams);
+            } else {
+                if (cmAuthenticateService.isAuthorized(USER_ROLES.chairperson, data.roles)) {
+                    $state.go('chair_console');
+                } else if (cmAuthenticateService.isAuthorized(USER_ROLES.member, data.roles)) {
+                    $state.go('user_console');
+                } else if (cmAuthenticateService.isAuthorized(USER_ROLES.admin, data.roles)) {
+                    $state.go('admin_console');
+                } else if (cmAuthenticateService.isAuthorized(USER_ROLES.researcher, data.roles)) {
+                    $state.go('researcher_console');
+                } else if (cmAuthenticateService.isAuthorized(USER_ROLES.alumni, data.roles)) {
+                    $state.go('summary_votes');
+                } else if (cmAuthenticateService.isAuthorized(USER_ROLES.dataOwner, data.roles)) {
+                    $state.go('data_owner_console');
+                } else {
+                    alert("not valid Role");
+                    logoutUser();
+                }
             }
-        }
-
-        function redirectToSpecificPage(){
-
         }
 
         function refreshUser(clientId) {
