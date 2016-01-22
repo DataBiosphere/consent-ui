@@ -75,6 +75,11 @@
                                           aria-hidden="true"></span>
                             </a>
                         </div>
+                        <div class="approval-datasets-col">
+                            <a ng-if="isAdmin && !isResearcher" ng-click="DatasetCatalog.associate(property.propertyValue, dataSet.needsApproval)" tooltip="Connect with Data Owner" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right">
+                                <span ng-class="dataSet.isAssociatedToDataOwners ? 'cm-icon-button glyphicon glyphicon-link caret-margin dataset-color' : 'cm-icon-button glyphicon glyphicon-link caret-margin default-color'" aria-hidden="true"></span>
+                            </a>
+                        </div>
                     </td>
 
                     <td ng-repeat="property in dataSet.properties" class="table-items cell-size" ng-class="{'dataset-disabled': !dataSet.active}">

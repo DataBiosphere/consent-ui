@@ -5,7 +5,7 @@
         .service('cmDatasetService', cmDatasetService);
 
     /* ngInject */
-    function cmDatasetService(PostDsFileResource, DataSetResource, DictionaryResource, DownloadDatasetResource, DeleteDataSetResource, DisableDataSetResource) {
+    function cmDatasetService(PostDsFileResource, DataSetResource, DictionaryResource, DownloadDatasetResource, DeleteDataSetResource, DisableDataSetResource, ReviewDataSetResource, GetDatasetResource) {
 
         /**
          * Post the file that contains the datasets.
@@ -13,11 +13,14 @@
          */
         function postDataFile(file, overwrite) {
             return PostDsFileResource.post({overwrite: overwrite}, file);
-
         }
 
         function getDataSets(dacUserId) {
             return DataSetResource.List({dacUserId: dacUserId}).$promise;
+        }
+
+        function getDataSetsByDatasetId(datasetId) {
+                    return GetDatasetResource.get({datasetId: datasetId}).$promise;
         }
 
         function getDictionary() {
@@ -36,6 +39,10 @@
             return DisableDataSetResource.Delete({datasetObjectId: datasetObjectId, active: active}).$promise;
         }
 
+        function  reviewDataSet(dataSetId, needsApproval){
+            return ReviewDataSetResource.Update({dataSetId: dataSetId, needsApproval: needsApproval}).$promise;
+        }
+
         return {
             postDatasetFile: function (file, overwrite) {
                 return postDataFile(file, overwrite);
@@ -46,6 +53,9 @@
             findDataSets: function (dacUserId) {
                 return getDataSets(dacUserId);
             },
+            getDataSetsByDatasetId: function (dataSetId) {
+                            return getDataSetsByDatasetId(dataSetId);
+            },
             downloadDataSets: function (objectIdList) {
                 return download(objectIdList);
             },
@@ -54,7 +64,11 @@
             },
             disableDataset: function (datasetId, active) {
                 return disableDataset(datasetId, active);
+            },
+            reviewDataSet: function (dataSetId, review) {
+                return reviewDataSet(dataSetId, review);
             }
+
         };
     }
 })();

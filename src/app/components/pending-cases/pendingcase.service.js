@@ -5,7 +5,7 @@
         .service('cmPendingCaseService', cmPendingCaseService);
 
     /* ngInject */
-    function cmPendingCaseService(DARUnReviewed, ConsentUnReviewed, DataRequestPendingCases, ConsentPendingCases, MatchSummaryCases ,ConsentSummaryCases, DataRequestSummaryCases) {
+    function cmPendingCaseService(DARUnReviewed, ConsentUnReviewed, DataRequestPendingCases, ConsentPendingCases, MatchSummaryCases ,ConsentSummaryCases, DataRequestSummaryCases, DataOwnerUnReviewed) {
 
         /**
          * Finding data request pending cases for the specified user id
@@ -64,6 +64,12 @@
         function findDARUnReviewed(vm) {
             DARUnReviewed.get().$promise.then(function (data) {
                 vm.dARUnreviewedCases = data.darUnReviewedCases;
+            });
+        }
+
+        function findDataOwnerUnReviewed(dataOwnerId, vm) {
+            DataOwnerUnReviewed.List({dataOwnerId: dataOwnerId}).$promise.then(function (data) {
+                vm.dataOwnerUnreviewedCases = data;
             });
         }
 
@@ -136,6 +142,9 @@
             },
             findDARUnReviewed: function (vm){
                 return findDARUnReviewed(vm);
+            },
+            findDataOwnerUnReviewed: function (dataOwnerId, vm){
+                return findDataOwnerUnReviewed(dataOwnerId, vm);
             }
         };
     }

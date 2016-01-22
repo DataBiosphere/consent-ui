@@ -15,6 +15,10 @@
          });
         })
 
+        .factory('GetDatasetResource', function ($resource, apiUrl) {
+                            return $resource(apiUrl + "dataset/:datasetId");
+                })
+
         .factory('DataSetResource', function($resource, apiUrl){
                    return $resource(apiUrl+"dataset", {}, {
                        List: {method:'GET',params: {dacUserId: 'dacUserId'},isArray:true}
@@ -45,8 +49,13 @@
                                            headers: {'Accept': "application/json",
                                             'Content-Type': "application/json" } }
                            });
-                });
+         })
 
+        .factory('ReviewDataSetResource', function($resource, apiUrl){
+            return $resource(apiUrl+"dataset?dataSetId=:dataSetId&needsApproval=:needsApproval", {}, {
+                Update: {method:'PUT',params: {dataSetId: '@dataSetId', needsApproval: '@needsApproval'}}
+            });
+        });
 })();
 
 

@@ -12,6 +12,7 @@
              member: 'MEMBER',
              researcher: 'RESEARCHER',
              alumni: 'ALUMNI',
-             all: 'ALL',
+             dataOwner: 'DATAOWNER',
+             all: 'ALL'
            });
     })();

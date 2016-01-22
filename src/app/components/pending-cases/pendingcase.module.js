@@ -46,6 +46,13 @@
 
         .factory('ConsentUnReviewed', function ($resource, apiUrl){
             return $resource(apiUrl + "consent/unreviewed");
-        });
+        })
+
+        .factory('DataOwnerUnReviewed', function ($resource, apiUrl){
+            return $resource(apiUrl + "dataRequest/cases/pending/dataOwner/:dataOwnerId", {},
+                {
+                    List: {method: 'GET', isArray: true}
+                });
+        })
 
 })();

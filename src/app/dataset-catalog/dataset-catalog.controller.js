@@ -6,12 +6,14 @@
         .controller('DatasetCatalog', DatasetCatalog);
 
     /* ngInject */
-    function DatasetCatalog($scope, $modal, $rootScope, cmDatasetService, cmAuthenticateService, USER_ROLES) {
+    function DatasetCatalog($scope, $modal, $rootScope, cmDatasetService, cmAuthenticateService, cmDatasetAssociationService,  USER_ROLES) {
 
         var vm = this;
         vm.openDelete = openDelete;
         vm.openDisable = openDisable;
         vm.openEnable = openEnable;
+        vm.associate = associate;
+
         $scope.actionType = null;
 
         vm.dataSetList = {'catalog': [], 'dictionary': []};
@@ -53,7 +55,6 @@
             );
         };
 
-
         vm.delete = function (datasetId) {
             cmDatasetService.deleteDataset(datasetId);
         };
@@ -77,7 +78,6 @@
             });
         }
 
-
         function openDisable(datasetId) {
 
             $scope.actionType = 'disable';
@@ -95,7 +95,6 @@
                 });
             });
         }
-
 
         function openEnable(datasetId) {
 
@@ -115,7 +114,27 @@
             });
         }
 
+        function associate(datasetId, needsApproval){
 
+            $scope.actionType = 'needsApproval';
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/dataset-approval-modal/dataset-approval-modal.html',
+                controller: 'DataSetApprovalModal',
+                controllerAs: 'DataSetApprovalModal',
+                scope: $scope,
+                resolve: {
+                          usersAssociation: function (cmDatasetAssociationService) {
+                                   return cmDatasetAssociationService.getAssociatedAndToAssociateUsers(datasetId);
+                             },
+                          datasetName: function(){ return datasetId },
+                          needsApproval: function(){ return needsApproval }
+                        }
+            });
 
+            modalInstance.result.then(function () {
+                init();
+            });
+        }
     }
 })();
