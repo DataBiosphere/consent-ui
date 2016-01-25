@@ -1,7 +1,7 @@
 <div class="modal-alerts">
     <div class="modal-content">
         <div class="modal-header admin-modal-header">
-            <button type="button" class="modal-close-btn close" ng-click="FinalVoteModal.cancel()"><span aria-hidden="true">&times;</span></button>
+            <button ng-disabled="disableButton" type="button" class="modal-close-btn close" ng-click="FinalVoteModal.cancel()"><span aria-hidden="true">&times;</span></button>
             <h2 ng-show="electionType == 'access'" class="pvotes-box-title access-color">Post Final Access Decision?
                 <small ng-show="electionType == 'access'">Are you sure you want to post this Final Access Decision?</small>
             </h2>
