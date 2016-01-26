@@ -53,6 +53,6 @@
                 {
                     List: {method: 'GET', isArray: true}
                 });
-        })
+        });
 
 })();

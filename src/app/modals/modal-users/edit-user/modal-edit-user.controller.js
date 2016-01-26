@@ -15,6 +15,10 @@
             $scope.checkModel = {};
             $scope.user = user;
             $scope.enableRolEdit = enableRolEdit.open;
+
+            // this var is used in addRoleRadioDirective
+            $scope.from = 'edit' ;
+
             var i = user.roles.length;
             while (i--) {
                 user.roles[i].name = user.roles[i].name.toUpperCase();
@@ -48,7 +52,13 @@
                 });
             });
 
-        }
+            var l = $scope.user.roles.length;
+                        while (l--) {
+                               if ($scope.user.roles[l].name === USER_ROLES.admin ) {
+                                       $scope.emailPreference = !$scope.user.roles[l].emailPreference;
+                                   }
+                                }
+          }
 
         vm.edit = function (user) {
             cmUserService.updateUser(user).$promise.then(
