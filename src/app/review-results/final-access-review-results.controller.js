@@ -46,62 +46,85 @@
 
         function logVote() {
             $scope.electionType = 'access';
-            var modalInstance = $modal.open({
-                animation: false,
-                templateUrl: 'app/modals/final-access-vote-modal.html',
-                controller: 'Modal',
-                controllerAs: 'Modal',
-                scope: $scope
-            });
-            modalInstance.result.then(function () {
-                cmVoteService.updateFinalAccessDarVote($scope.referenceId, $scope.vote).$promise.then(
-                    function () {
-                        $scope.alreadyVote = true;
-                        if($scope.agreementAlreadyVote || $scope.hideMatch){
-                            $state.go('chair_console');
-                            closeElection();
-                        } else{
-                            $scope.reminderDARAlert();
-                        }
-                    },
-                    function () {
-                        alert("Error while updating final access vote.");
+            if($scope.agreementAlreadyVote || $scope.hideMatch){
+                var modalFinalInstance = $modal.open({
+                    animation: false,
+                    templateUrl: 'app/modals/final-access-vote-modal/final-access-vote-modal.html',
+                    controller: 'FinalVoteModal',
+                    controllerAs: 'FinalVoteModal',
+                    scope: $scope,
+                    resolve: {
+                        vote: $scope.vote
                     }
-                );
-            });
+                });
+                modalFinalInstance.result.then(function () {});
+            }else{
+                var modalInstance = $modal.open({
+                    animation: false,
+                    templateUrl: 'app/modals/final-access-vote-modal.html',
+                    controller: 'Modal',
+                    controllerAs: 'Modal',
+                    scope: $scope
+                });
+                modalInstance.result.then(function () {
+                    cmVoteService.updateFinalAccessDarVote($scope.referenceId, $scope.vote).$promise.then(
+                        function () {
+                            $scope.alreadyVote = true;
+                            if($scope.agreementAlreadyVote || $scope.hideMatch){
+                                    $state.go('chair_console');
+                            } else{
+                                $scope.reminderDARAlert();
+                            }
+                        },
+                        function () {
+                            alert("Error while updating final access vote.");
+                        }
+                    );
+                });
+            }
         }
 
-        function closeElection(){
-            $scope.electionAccess.status = 'Closed';
-            cmElectionService.updateElection($scope.electionAccess).$promise;
 
-        }
 
         function logVoteAgreement() {
             $scope.electionType = 'agreement';
-            var modalInstance = $modal.open({
-                animation: false,
-                templateUrl: 'app/modals/final-access-vote-modal.html',
-                controller: 'Modal',
-                controllerAs: 'Modal',
-                scope: $scope
-            });
-            modalInstance.result.then(function () {
-                cmVoteService.updateFinalAccessDarVote($scope.referenceId, $scope.voteAgreement).$promise.then(
-                    function () {
-                        $scope.agreementAlreadyVote = true;
-                        if ($scope.alreadyVote) {
-                            $state.go('chair_console');
-                            closeElection();
-                        } else {
-                            $scope.reminderAgreeAlert();
-                        }
-                    },
-                    function () {
-                        alert("Error while updating final access vote.");
+            if ($scope.alreadyVote){
+                $scope.electionAccess.status = 'Closed';
+                var modalFinalInstance = $modal.open({
+                    animation: false,
+                    templateUrl: 'app/modals/final-access-vote-modal/final-access-vote-modal.html',
+                    controller: 'FinalVoteModal',
+                    controllerAs: 'FinalVoteModal',
+                    scope: $scope,
+                    resolve: {
+                        vote: $scope.voteAgreement
                     }
-                );
-            });
+                });
+                modalFinalInstance.result.then(function () {});
+            }else{
+                var modalInstance = $modal.open({
+                    animation: false,
+                    templateUrl: 'app/modals/final-access-vote-modal.html',
+                    controller: 'Modal',
+                    controllerAs: 'Modal',
+                    scope: $scope
+                });
+                modalInstance.result.then(function () {
+                    cmVoteService.updateFinalAccessDarVote($scope.referenceId, $scope.voteAgreement).$promise.then(
+                        function () {
+                            $scope.agreementAlreadyVote = true;
+                            if ($scope.alreadyVote) {
+                                $state.go('chair_console');
+                            } else {
+                                $scope.reminderAgreeAlert();
+                            }
+                        },
+                        function () {
+                            alert("Error while updating final access vote.");
+                        }
+                    );
+                });
+            }
         }
 
         function openApplication() {
