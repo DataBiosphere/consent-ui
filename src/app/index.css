@@ -873,7 +873,7 @@ input[type=checkbox]:checked + label:before{
 /*///////////////////////////////////////////////////////DAC CONSOLES*/
 
 .pvotes-main-list {
-    margin: 0px!important;
+    margin: 0!important;
 }
 
 .list-highlighted{
@@ -883,6 +883,14 @@ input[type=checkbox]:checked + label:before{
 .list-highlighted .glyphicon-exclamation-sign{
     margin: 0 10px 0 5px;
     font-size: 1.2em;
+    line-height: 22px;
+}
+
+.list-highlighted .glyphicon-download-alt{
+    font-size: 1.2em;
+    margin: 0 0 0 5px;
+    cursor: pointer;
+    line-height: 22px;
 }
 
 .list-highlighted .list-highlighted-item{

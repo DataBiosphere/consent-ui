@@ -64,7 +64,7 @@
             if ($rootScope.currentUser === null) {
                 if (sessionStorage.getItem('currentUser') !== null && $state.current.name === "") {
                     cmLoginUserService.refreshUser();
-                    $state.go($rootScope.returnToState, $rootScope.returnToStateParams);
+                    $state.go(next.name, toParams);
                 } else if (next.name !== "login") {
                     event.preventDefault();
                     $rootScope.returnToState = next.name;
