@@ -9,6 +9,6 @@
                 get: {method: 'GET'},
                 put: {method: 'PUT', isArray: true},
             });
-        })
+        });
 })();
 

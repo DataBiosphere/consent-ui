@@ -13,14 +13,13 @@
         $scope.alert.show = false ;
 
 
-        needsApproval ? $scope.updatedNeedsApproval = true : $scope.updatedNeedsApproval = false;
-        (usersAssociation.associated_users === undefined || usersAssociation.associated_users.length == 0)
-        ? $scope.isUpdate = false : $scope.isUpdate = true;
+        needsApproval ? $scope.updatedNeedsApproval = true : $scope.updatedNeedsApproval = false
+        (usersAssociation.associated_users === undefined || usersAssociation.associated_users.length == 0) ? $scope.isUpdate = false : $scope.isUpdate = true;
         $scope.selectedclients = usersAssociation.associated_users.map(function (user){
-                 return { id: user.dacUserId , name: user.displayName+" : "+user.email}});
+                 return { id: user.dacUserId , name: user.displayName+" : "+user.email};});
 
         $scope.availableclients = usersAssociation.not_associated_users.map(function (user){
-                 return { id: user.dacUserId , name: user.displayName+" : "+user.email}});
+                 return { id: user.dacUserId , name: user.displayName+" : "+user.email};});
 
 
         $scope.availableToCompare = $scope.selectedclients.slice();
@@ -71,7 +70,7 @@
                                                     showAlert();
                                    });
                        }
-              };
+              }
 
         $scope.checkInput = function(){
                     if($scope.needsApprovalToCompare ===  $scope.updatedNeedsApproval){
@@ -80,16 +79,16 @@
                           $scope.needsApprovalModified = true;
                     }
 
-                    if($scope.needsApprovalModified && ( $scope.updatedNeedsApproval && $scope.selectedclients.length > 0
-                    || ( !$scope.updatedNeedsApproval))){
-                        return false
+                    if($scope.needsApprovalModified && ( $scope.updatedNeedsApproval && $scope.selectedclients.length > 0||
+                    (!$scope.updatedNeedsApproval))){
+                         return false;
                     }
-                    if(  (($scope.isModified && $scope.updatedNeedsApproval && $scope.selectedclients.length > 0 )
-                             ||(!$scope.updatedNeedsApproval && $scope.isModified))  ){
-                               return false;
-                          }
+                    if(  (($scope.isModified && $scope.updatedNeedsApproval && $scope.selectedclients.length > 0 ) ||
+                    (!$scope.updatedNeedsApproval && $scope.isModified))  ){
+                         return false;
+                    }
                           return true;
-                 }
+                 };
 
         vm.cancel = function () {
             $modalInstance.dismiss('cancel');
@@ -97,7 +96,7 @@
 
         $scope.moveItem = function(item, from, to) {
             var idx=from.indexOf(item);
-            if (idx != -1) {
+            if (idx !== -1) {
                 from.splice(idx, 1);
                 to.push(item);
             }
