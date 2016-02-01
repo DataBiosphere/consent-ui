@@ -53,15 +53,20 @@
                                 <span ng-if="dar.electionStatus == 'un-reviewed'">Un-reviewed</span>
                                 <span ng-if="dar.electionStatus == 'Open' || dar.electionStatus == 'Final'">Open</span>
                                 <span ng-if="dar.electionStatus == 'Canceled'">Canceled</span>
-                                <span ng-if="dar.electionStatus == 'Closed'">Reviewed</span>
+                                <span ng-if="dar.electionStatus == 'Closed' || dar.electionStatus == 'PendingApproval'">Reviewed</span>
                             </div>
                             <div>
                                 <a class="admin-manage-buttons col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                                    <div ng-if="dar.electionStatus != 'Open' &&  dar.electionStatus != 'Final' "
+                                    <div ng-if="dar.electionStatus != 'Open' &&  dar.electionStatus != 'Final' && dar.electionStatus != 'PendingApproval'"
                                          class="create hover-color"
                                          ng-click="AdminManageAccess.openCreate(dar.dataRequestId)">
                                         <span>Create</span>
                                     </div>
+                                    <div ng-if="dar.electionStatus == 'PendingApproval'"
+                                         class="disabled">
+                                        <span>Create</span>
+                                    </div>
+
                                     <div ng-if="dar.electionStatus == 'Open'||  dar.electionStatus == 'Final'"
                                          class="cancel hover-color" ng-click="AdminManageAccess.openCancel(dar)">
                                         <span>Cancel</span>

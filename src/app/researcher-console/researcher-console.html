@@ -38,7 +38,7 @@
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{dar.createDate | date:'yyyy-MM-dd'}}</div>
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list bold">
                                 <span ng-if="dar.electionStatus === 'un-reviewed'">Submitted</span>
-                                <span ng-if="dar.electionStatus === 'Open' || dar.electionStatus === 'Final'">In review</span>
+                                <span ng-if="dar.electionStatus === 'Open' || dar.electionStatus === 'Final' || dar.electionStatus === 'PendingApproval'">In review</span>
                                 <span ng-if="dar.electionStatus === 'Canceled'">Canceled</span>
                                 <span ng-if="dar.electionStatus === 'Closed' && dar.electionVote === false">DENIED</span>
                                 <span ng-if=" dar.electionStatus === 'Closed' && dar.electionVote === true">APPROVED</span>
