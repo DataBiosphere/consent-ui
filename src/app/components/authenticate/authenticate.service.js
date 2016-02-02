@@ -17,9 +17,26 @@
             return false;
         }
 
+        function hasValidRole(authorizedRoles, userRoles){
+            var uRolesCount = userRoles.length;
+            var authRolesCount = authorizedRoles.length;
+            while(authRolesCount--){
+                var i = uRolesCount;
+                while(i--){
+                    if (userRoles[i] === USER_ROLES.all || (userRoles[i].name === authorizedRoles[authRolesCount]))  {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         return {
             isAuthorized: function (authorizedRoles, userRoles) {
                 return isAuthorized(authorizedRoles, userRoles);
+            },
+            hasValidRole: function(authorizedRoles, userRoles){
+                return hasValidRole(authorizedRoles, userRoles);
             }
         };
     }

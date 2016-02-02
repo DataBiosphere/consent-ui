@@ -11,7 +11,7 @@
             // route to show our basic form (/form)
             .state('dul_results_record', {
                 name: 'dul_results_record',
-                url: '/dul_results_record',
+                url: '/dul_results_record/:electionId',
                 params: {
                     electionId: null
                 },
@@ -32,7 +32,7 @@
 
             .state('access_results_record', {
                 name: 'access_results_record',
-                url: '/access_results_record',
+                url: '/access_results_record/:electionId',
                 templateUrl: 'app/results-record/access-results-record.html',
                 controller: function($scope, $stateParams, cmElectionService){
                     $scope.electionId = $stateParams.electionId;
