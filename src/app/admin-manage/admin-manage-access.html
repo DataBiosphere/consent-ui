@@ -34,9 +34,14 @@
                     <div ng-if="!dar.isCanceled" class="row pvotes-main-list">
                         <div class="row pvotes-main-list" ng-class="{'list-highlighted': dar.needsApproval}">
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">
-                                <div ng-if="dar.needsApproval" class="glyphicon glyphicon-exclamation-sign access-color"
-                                     tooltip="Needs approval" tooltip-class="tooltip-class" tooltip-trigger
-                                     tooltip-placement="right"></div>
+                                <div ng-if="dar.dataSetElectionResult == 'Denied'" class="cancel-color glyphicon glyphicon-download-alt" ng-click="dar.electionStatus != 'Closed' || AdminManageAccess.downloadDataSetVotesDetail(dar.dataRequestId)" ng-show="dar.needsApproval" tooltip="Download Summary" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right"></div>
+                                <div ng-if="dar.dataSetElectionResult == 'Approved'" class="dataset-color glyphicon glyphicon-download-alt" ng-click="dar.electionStatus != 'Closed' || AdminManageAccess.downloadDataSetVotesDetail(dar.dataRequestId)" ng-show="dar.needsApproval" tooltip="Download Summary" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right"></div>
+                                <div
+                                ng-class="{'access-color': dar.needsApproval, 'cancel-color': dar.dataSetElectionResult == 'Denied','dataset-color': dar.dataSetElectionResult == 'Approved'}"
+                                class="glyphicon glyphicon-exclamation-sign"
+                                tooltip="{{dar.dataSetElectionResult}}"
+                                tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right"
+                                ng-show="dar.needsApproval"></div>
                                 <span class="list-highlighted-item">{{dar.frontEndId}}</span>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id">{{dar.projectTitle}}</div>
