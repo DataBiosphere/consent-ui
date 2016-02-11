@@ -53,6 +53,9 @@
         .factory('openElectionsResource', function($resource, apiUrl){
             return $resource(apiUrl+"electionReview/openElection");
         })
+        .factory('DataSetElection', function($resource, apiUrl){
+            return $resource(apiUrl+"election/checkdataset");
+        })
         .factory('DarElectionResource', function($resource, apiUrl){
             return $resource(apiUrl+"dataRequest/:requestId/election", {}, {
                 get:{method: 'GET', params: {requestId: '@requestId'}},

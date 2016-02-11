@@ -64,7 +64,7 @@
         };
 
         $scope.openGWAS = function() {
-            $scope.url = '#';
+            $scope.url = 'http://epi.grants.cancer.gov/dac/examples.html';
         };
 
         function openResearchConsole() {

@@ -5,7 +5,7 @@
         .service('cmElectionService', cmElectionService);
 
     /* ngInject */
-    function cmElectionService(apiUrl, $http, RPElectionReviewResource, DarElectionResource, ElectionReviewResource, ElectionResource, ElectionUpdateResource, ElectionReviewedConsents, ElectionReviewedDRs, ElectionReviewConsent, openElectionsResource, ElectionReview, LastElectionReview, DataAccessElectionReviewResource) {
+    function cmElectionService(apiUrl, $http, RPElectionReviewResource, DarElectionResource, ElectionReviewResource, ElectionResource, ElectionUpdateResource, ElectionReviewedConsents, ElectionReviewedDRs, openElectionsResource, ElectionReview, LastElectionReview, DataAccessElectionReviewResource, DataSetElection) {
 
         /**
          * Find data for the election related to the consentId sent as a parameter
@@ -137,6 +137,11 @@
             return LastElectionReview.get({electionId: id});
         }
 
+
+        function isDataSetElectionOpen() {
+            return DataSetElection.get();
+        }
+
         return {
             findElectionById: function(electionId){
                 return getElectionById(electionId);
@@ -185,6 +190,9 @@
             },
             createDARElection: function (requestId) {
                 return createDARElection(requestId);
+            },
+            isDataSetElectionOpen: function(){
+                return isDataSetElectionOpen();
             }
         };
     }
