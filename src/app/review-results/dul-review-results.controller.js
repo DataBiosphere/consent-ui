@@ -4,7 +4,7 @@
     angular.module('cmReviewResults')
         .controller('DulReviewResults', DulReviewResults);
 
-    function DulReviewResults(apiUrl, $scope, $rootScope, cmEmailService, $modal, $state, cmElectionService, cmLoginUserService, electionReview) {
+    function DulReviewResults($sce, apiUrl, $scope, $rootScope, cmEmailService, $modal, $state, cmElectionService, cmLoginUserService, electionReview) {
 
         if (typeof electionReview === 'undefined') {
             cmLoginUserService.redirect($rootScope.currentUser);
@@ -70,7 +70,7 @@
         $scope.dul = electionReview.consent.dataUseLetter;
         $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
         $scope.dulName = electionReview.consent.dulName;
-        $scope.structuredDataUseLetter = electionReview.election.translatedUseRestriction;
+        $scope.structuredDataUseLetter = $sce.trustAsHtml(electionReview.election.translatedUseRestriction);
         $scope.positiveVote = positiveVote;
         $scope.logVote = logVote;
         $scope.electionType = null;

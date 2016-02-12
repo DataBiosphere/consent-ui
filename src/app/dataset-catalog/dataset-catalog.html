@@ -91,7 +91,7 @@
                            ng-if="property.propertyName =='dbGAP' && property.propertyValue.length === 0   "
                            class="disabled">Link</a>
                     <td class="table-items cell-size" ng-class="{'dataset-disabled': !dataSet.active}">{{dataSet.consentId}}</td>
-                    <td class="table-items cell-size" ng-class="{'dataset-disabled': !dataSet.active}">{{dataSet.translatedUseRestriction}}</td>
+                    <td class="table-items cell-size translated-restriction" ng-class="{'dataset-disabled': !dataSet.active}" ng-bind-html="dataSet.translatedUseRestriction"></td>
 
                     </td>
                 </tr>

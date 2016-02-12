@@ -5,7 +5,7 @@
         .controller('DatasetSummaryModal', DatasetSummaryModal);
 
     /* ngInject */
-    function DatasetSummaryModal($modalInstance, $scope, dataSet, consent) {
+    function DatasetSummaryModal($sce, $modalInstance, $scope, dataSet, consent) {
 
         var vm = this;
 
@@ -41,7 +41,7 @@
                                      return p.propertyName === "Principal Investigator(PI)"})[0].propertyValue;
 
         $scope.consentName = consent.name;
-        $scope.translatedUseRestriction = consent.translatedUseRestriction;
+        $scope.translatedUseRestriction = $sce.trustAsHtml(consent.translatedUseRestriction);
 
 
 
