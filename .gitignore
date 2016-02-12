@@ -3,6 +3,7 @@ bower_components/
 .sass-cache/
 .tmp/
 dist/
+target/
 
 ### JetBrains te mplate
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio
