@@ -6,7 +6,7 @@
         .controller('DatasetCatalog', DatasetCatalog);
 
     /* ngInject */
-    function DatasetCatalog($scope, $modal, $rootScope, cmDatasetService, cmAuthenticateService, cmDatasetAssociationService,  USER_ROLES) {
+    function DatasetCatalog($scope, $state, $modal, $rootScope, cmDatasetService, cmAuthenticateService, cmRPService,  USER_ROLES) {
 
         var vm = this;
         vm.openDelete = openDelete;
@@ -53,6 +53,27 @@
                 }, function () {
                 }
             );
+        };
+
+        vm.exportToRequest = function (objectIdList) {
+            cmRPService.partialDarFromCatalogPost($rootScope.currentUser.dacUserId, objectIdList).$promise.then(
+                function (data) {
+                        $rootScope.formData = data;
+                        $state.go('rp_application.step1');
+                }, function (value) {
+                    console.log(value);
+                    $modal.open({
+                        animation: false,
+                        templateUrl: 'app/modals/dataset-catalog-export-modal/dataset-catalog-export-error-modal.html',
+                        controller: 'DatasetCatalogExportModal',
+                        controllerAs: 'DatasetCatalogExportModal',
+                        resolve: {
+                            msg: function () {
+                                return value.data.message;
+                            }
+                        }
+                    });
+                });
         };
 
         vm.delete = function (datasetId) {
@@ -124,12 +145,12 @@
                 controllerAs: 'DataSetApprovalModal',
                 scope: $scope,
                 resolve: {
-                          usersAssociation: function (cmDatasetAssociationService) {
-                                   return cmDatasetAssociationService.getAssociatedAndToAssociateUsers(datasetId);
-                             },
-                          datasetName: function(){ return datasetId },
-                          needsApproval: function(){ return needsApproval }
-                        }
+                    usersAssociation: function (cmDatasetAssociationService) {
+                        return cmDatasetAssociationService.getAssociatedAndToAssociateUsers(datasetId);
+                    },
+                    datasetName: function(){ return datasetId },
+                    needsApproval: function(){ return needsApproval }
+                }
             });
 
             modalInstance.result.then(function () {

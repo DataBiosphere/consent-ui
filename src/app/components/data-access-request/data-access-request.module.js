@@ -64,6 +64,13 @@
                 });
         })
 
+        .factory('partialDARFromCatalogResource', function ($resource, apiUrl) {
+            return $resource(apiUrl + "dar/partial/datasetCatalog?userId=:userId", {},
+                {
+                    post: {method: 'POST', params: {userId: '@userId'}}
+                });
+        })
+
         .factory('partialDataAccessRequestResource', function ($resource, apiUrl) {
             return $resource(apiUrl + "dar/partial/:darId");
         })
