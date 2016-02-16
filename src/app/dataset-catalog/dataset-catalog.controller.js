@@ -6,7 +6,7 @@
         .controller('DatasetCatalog', DatasetCatalog);
 
     /* ngInject */
-    function DatasetCatalog($scope, $state, $modal, $rootScope, cmDatasetService, cmAuthenticateService, cmRPService,  USER_ROLES) {
+    function DatasetCatalog($sce, $scope, $state, $modal, $rootScope, cmDatasetService, cmAuthenticateService, cmRPService,  USER_ROLES) {
 
         var vm = this;
         vm.openDelete = openDelete;
@@ -36,6 +36,11 @@
             cmDatasetService.findDataSets($rootScope.currentUser.dacUserId).then(
                 function (data) {
                     vm.dataSetList['catalog'] = data;
+                    angular.forEach(vm.dataSetList['catalog'], function(obj) {
+                        if (angular.isDefined(obj["translatedUseRestriction"])) {
+                            obj["translatedUseRestriction"] = $sce.trustAsHtml(obj["translatedUseRestriction"]);
+                        }
+                    });
                 });
         }
 
