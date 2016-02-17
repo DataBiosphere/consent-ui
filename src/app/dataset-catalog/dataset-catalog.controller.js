@@ -6,13 +6,14 @@
         .controller('DatasetCatalog', DatasetCatalog);
 
     /* ngInject */
-    function DatasetCatalog($sce, $scope, $state, $modal, $rootScope, cmDatasetService, cmAuthenticateService, cmRPService,  USER_ROLES) {
+    function DatasetCatalog($scope, $state, $modal, $rootScope, cmDatasetService, cmAuthenticateService, cmRPService,  USER_ROLES) {
 
         var vm = this;
         vm.openDelete = openDelete;
         vm.openDisable = openDisable;
         vm.openEnable = openEnable;
         vm.associate = associate;
+        vm.showSdul = showSdul;
 
         $scope.actionType = null;
 
@@ -38,10 +39,25 @@
                     vm.dataSetList['catalog'] = data;
                     angular.forEach(vm.dataSetList['catalog'], function(obj) {
                         if (angular.isDefined(obj["translatedUseRestriction"])) {
-                            obj["translatedUseRestriction"] = $sce.trustAsHtml(obj["translatedUseRestriction"]);
+                            obj["translatedUseRestriction"] = obj["translatedUseRestriction"];
                         }
                     });
                 });
+        }
+        
+        function showSdul(datasetsDul) {
+            $scope.dataset = datasetsDul;
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/translatedDul-modal/translatedDul-modal.html',
+                controller: 'TranslatedDulModal',
+                controllerAs: 'TranslatedDulModal',
+                scope: $scope
+            });
+
+            modalInstance.result.then(function () {
+            }, function () {
+            });
         }
 
         vm.download = function (objectIdList) {
