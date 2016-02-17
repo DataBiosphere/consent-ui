@@ -4,7 +4,7 @@
     angular.module('cmReviewResults')
         .controller('AccessReviewResults', ReviewResults);
 
-    function ReviewResults($scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, electionReview, rpElectionReview, dar, apiUrl, cmEmailService, cmRPService, dar_id) {
+    function ReviewResults($sce, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, electionReview, rpElectionReview, dar, apiUrl, cmEmailService, cmRPService, dar_id) {
 
         var vm = this;
         vm.openApplication = openApplication;
@@ -72,7 +72,7 @@
         if (electionReview.election.translatedUseRestriction === null) {
             $scope.rp = "This includes sensitive research objectives that requires manual review.";
         } else {
-            $scope.rp = electionReview.election.translatedUseRestriction;
+            $scope.rp = $sce.trustAsHtml(electionReview.election.translatedUseRestriction);
         }
 
         $scope.sendReminder = function (voteId) {

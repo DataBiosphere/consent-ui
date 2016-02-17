@@ -240,6 +240,10 @@ small {
     width: 100%;
 }
 
+.translated-restriction ul {
+    margin-left: 2em;
+}
+
 .user-dropdown li a {
     color: #00609f !important;
     font-weight: normal !important;
