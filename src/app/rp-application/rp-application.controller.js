@@ -5,7 +5,7 @@
         .controller('RPApplication', RPApplication);
 
     /* ngInject */
-    function RPApplication($state, $scope, $modal, cmRPService, $rootScope) {
+    function RPApplication($state, $scope, $modal, cmRPService, $rootScope, gwasUrl) {
 
         var vm = this;
         vm.$state = $state;
@@ -64,7 +64,7 @@
         };
 
         $scope.openGWAS = function() {
-            $scope.url = 'http://epi.grants.cancer.gov/dac/examples.html';
+            $scope.url = gwasUrl;
         };
 
         function openResearchConsole() {

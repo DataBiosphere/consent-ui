@@ -11,44 +11,44 @@
         <div class="modal-body">
             <form class="form-horizontal" name="electionTimeoutForm" novalidate>
                 <fieldset>
-                    <div class="row">
+                    <div class="form-group admin-form-group first-form-group">
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 control-label common-color">
                             <label>Current timeout: </label>
                         </div>
-                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 admin-input">
+                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 admin-input response-label">
                             <label>{{timeout.amountOfDays}} days</label>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="form-group admin-form-group">
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 control-label common-color">
                             <label>Last updated by:</label>
                         </div>
-                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 admin-input">
+                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 admin-input response-label">
                             <label>{{timeout.displayName}}</label>
                         </div>
                     </div>
-                    <div class="row" ng-if="timeout.updateDate != null">
+                    <div class="form-group admin-form-group" ng-if="timeout.updateDate != null">
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 control-label common-color">
                             <label>Last updated date:</label>
                         </div>
-                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 admin-input">
+                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 admin-input response-label">
                             <label>{{timeout.updateDate | date:'yyyy-MM-dd'}}</label>
                         </div>
                     </div>
-                    <div class="row" ng-if="timeout.updateDate == null && timeout.createDate != null ">
+                    <div class="form-group admin-form-group" ng-if="timeout.updateDate == null && timeout.createDate != null ">
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 control-label common-color">
                             <label>Last updated date:</label>
                         </div>
-                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 admin-input">
+                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 admin-input response-label">
                             <label>{{timeout.createDate | date:'yyyy-MM-dd'}}</label>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="form-group admin-form-group">
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 control-label common-color">
                             <label>Set new timeout:</label>
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 admin-input">
-                            <input type="number" min="1" ng-model="timeout.newTimeout" name="days" required ng-change="setTimeout()">
+                            <input type="number" min="1" ng-model="timeout.newTimeout" name="days" required ng-change="setTimeout()" style="width: 55px; padding: 5px 2px 2px 5px; color: #777777;">
                         </div>
                     </div>
                     <div class="admin-modal-footer">
