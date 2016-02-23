@@ -2,7 +2,11 @@
 set -euox pipefail
 IFS=$'\n\t'
 
-# Run script as root
+# Make sure only root can run our script
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
 
 npm install -g npm && \
      npm cache clean -f && \
