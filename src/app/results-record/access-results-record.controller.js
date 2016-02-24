@@ -5,7 +5,7 @@
     angular.module('cmResultsRecord')
         .controller('AccessResultsRecord', AccessResultsRecord);
 
-    function AccessResultsRecord($scope, $state, $modal, cmElectionService, apiUrl, cmRPService, cmVoteService, cmMatchService) {
+    function AccessResultsRecord($scope, $state, $modal, cmElectionService, downloadFileService, apiUrl, cmRPService, cmVoteService, cmMatchService) {
 
 
         if ($scope.electionId === null) {
@@ -153,6 +153,7 @@
 
 
         function init() {
+
             cmVoteService.getDarFinalAccessVote($scope.electionId)
                 .then(function (data) {
                     $scope.finalDACVote = data;
@@ -195,7 +196,21 @@
             $scope.voteAccessList = chunk(electionReview.reviewVote, 2);
             $scope.chartDataAccess = getGraphData(electionReview.reviewVote);
             $scope.voteAgreement = electionReview.voteAgreement;
+
+
+            // this data is used to construct structured_ files
+            $scope.sDAR = electionReview.election.useRestriction
+            $scope.sDUL = electionReview.consent.useRestriction
+            $scope.DulFileTitle = "structured_DUL"
+            $scope.DarFileTitle = "structured_DAR"
+
         }
+
+        $scope.download = function download(fileName, text) {
+                          var break_line =  '\r\n \r\n'
+                          text = break_line+ JSON.stringify(text)
+                          downloadFileService.downloadFile(fileName ,text);
+                      };
 
         function showDULData(electionReview) {
             $scope.election = electionReview.election;
