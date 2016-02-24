@@ -5,7 +5,7 @@
         .controller('DataSetModal', DataSetModal);
 
     /* ngInject */
-    function DataSetModal($modalInstance, $scope, apiUrl, cmDatasetService) {
+    function DataSetModal($modalInstance, $scope, apiUrl, cmDatasetService, $rootScope) {
 
         $scope.disableButton = false;
         $scope.overwrite = false;
@@ -22,7 +22,7 @@
 
         vm.ok = function () {
             $scope.disableButton = true;
-            var response = cmDatasetService.postDatasetFile($scope.file, $scope.overwrite).$promise;
+            var response = cmDatasetService.postDatasetFile($scope.file, $scope.overwrite, $rootScope.currentUser.dacUserId).$promise;
             response.then(function () {
                 $scope.disableButton = false;
                 $modalInstance.close();

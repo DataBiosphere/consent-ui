@@ -11,8 +11,8 @@
          * Post the file that contains the datasets.
          * @param file, using as a base the sample file provided by the application.
          */
-        function postDataFile(file, overwrite) {
-            return PostDsFileResource.post({overwrite: overwrite}, file);
+        function postDataFile(file, overwrite, userId) {
+            return PostDsFileResource.post({userId: userId, overwrite: overwrite}, file);
         }
 
         function getDataSets(dacUserId) {
@@ -44,8 +44,8 @@
         }
 
         return {
-            postDatasetFile: function (file, overwrite) {
-                return postDataFile(file, overwrite);
+            postDatasetFile: function (file, overwrite, userId) {
+                return postDataFile(file, overwrite, userId);
             },
             findDictionary: function () {
                 return getDictionary();

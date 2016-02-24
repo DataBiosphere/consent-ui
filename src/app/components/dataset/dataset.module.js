@@ -4,7 +4,7 @@
     angular.module('cmDataset', [])
 
         .factory('PostDsFileResource', function($resource, apiUrl){
-        return $resource(apiUrl+"dataset",{}, {
+        return $resource(apiUrl+"dataset/:userId",{}, {
             post: {method: 'POST', isArray:true, params: {overwrite: 'overwrite'}, headers: { 'Content-Type': undefined },
                 transformRequest: function (data) {
                     var formData = new FormData();
@@ -17,7 +17,7 @@
 
         .factory('GetDatasetResource', function ($resource, apiUrl) {
                             return $resource(apiUrl + "dataset/:datasetId");
-                })
+        })
 
         .factory('DataSetResource', function($resource, apiUrl){
                    return $resource(apiUrl+"dataset", {}, {
