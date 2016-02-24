@@ -72,11 +72,7 @@
                 name: 'final_access_review_results',
                 url: '/final_access_review_results/:electionId/:referenceId/:rpElectionId',
                 templateUrl: 'app/review-results/final-access-review-results.html',
-                controller: function ($scope, $stateParams) {
-                    $scope.electionId = $stateParams.electionId;
-                    $scope.referenceId = $stateParams.referenceId;
-                    $scope.rpElectionId = $stateParams.rpElectionId;
-                },
+                controller: 'FinalAccessReviewResults',
                 controllerAs: 'FinalAccessReviewResults',
                 params: {
                     electionId: null,
@@ -85,7 +81,19 @@
                 },
                 data: {
                     authorizedRoles: [USER_ROLES.chairperson]
+                },
+                resolve: {
+                    electionId: function ($stateParams){
+                        return $stateParams.electionId;
+                    },
+                    referenceId: function ($stateParams){
+                        return $stateParams.referenceId;
+                    },
+                    hasUseRestriction: function($stateParams, cmRPService){
+                        return cmRPService.hasUseRestriction($stateParams.referenceId)
+                    }
                 }
+
             });
 
     }
