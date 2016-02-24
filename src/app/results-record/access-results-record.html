@@ -13,7 +13,11 @@
                 </h4>
             </div>
             <div id="prf" class="panel-body cm-boxbody">{{dar.rus}}</div>
+            <a ng-show="!hideMatch"  ng-click="download(DarFileTitle, sDAR)">
+                <span style="cursor: pointer;">Download DAR structured format</span>
+            </a>
         </div>
+
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
             <div class="panel-heading cm-boxhead access-color">
                 <h4>Data Use Limitations</h4>
@@ -21,6 +25,9 @@
             <div id="dul" class="panel-body cm-boxbody">
                 <a href="{{downloadUrl}}" target="_blank">{{dulName}}</a>
             </div>
+            <a  ng-click="download(DulFileTitle, sDUL)">
+                <span style="cursor: pointer;">Download DUL structured format</span>
+            </a>
         </div>
     </div>
     <hr class="section-separator">
