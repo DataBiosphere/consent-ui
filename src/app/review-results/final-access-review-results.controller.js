@@ -4,9 +4,9 @@
     angular.module('cmReviewResults')
         .controller('FinalAccessReviewResults', FinalAccessReviewResults);
 
-    function FinalAccessReviewResults($scope, $rootScope, $modal, $state, cmElectionService, cmRPService, cmVoteService, cmLoginUserService, apiUrl, cmMatchService) {
+    function FinalAccessReviewResults($scope, $rootScope, $modal, $state, cmElectionService, cmRPService, cmVoteService, cmLoginUserService, apiUrl, cmMatchService, electionId, referenceId, hasUseRestriction) {
 
-        if ($scope.electionId === null || $scope.referenceId === null) {
+        if (electionId === null || referenceId === null) {
             cmLoginUserService.redirect($rootScope.currentUser);
             return;
         }
@@ -17,11 +17,12 @@
         $scope.electionType = null;
         $scope.openApplication = openApplication;
         $scope.alertOn = null;
-
+        $scope.hasUseRestriction = hasUseRestriction;
         /*ALERTS*/
         $scope.alertsDAR = [];
         $scope.alertsAgree = [];
-
+        $scope.referenceId = referenceId;
+        $scope.electionId = electionId;
 
         $scope.reminderDARAlert = function (index) {
             $scope.alertsDAR.splice(index, 1);
@@ -67,7 +68,7 @@
                     scope: $scope
                 });
                 modalInstance.result.then(function () {
-                    cmVoteService.updateFinalAccessDarVote($scope.referenceId, $scope.vote).$promise.then(
+                    cmVoteService.updateFinalAccessDarVote(referenceId, $scope.vote).$promise.then(
                         function () {
                             $scope.alreadyVote = true;
                             if($scope.agreementAlreadyVote || $scope.hideMatch){
@@ -110,7 +111,7 @@
                     scope: $scope
                 });
                 modalInstance.result.then(function () {
-                    cmVoteService.updateFinalAccessDarVote($scope.referenceId, $scope.voteAgreement).$promise.then(
+                    cmVoteService.updateFinalAccessDarVote(referenceId, $scope.voteAgreement).$promise.then(
                         function () {
                             $scope.agreementAlreadyVote = true;
                             if ($scope.alreadyVote) {
@@ -136,7 +137,7 @@
                 scope: $scope,
                 resolve: {
                     darDetails: function () {
-                        return cmRPService.getDarModalSummary($scope.referenceId);
+                        return cmRPService.getDarModalSummary(referenceId);
                     }
                 }
             });
@@ -280,7 +281,7 @@
         };
 
         function init() {
-            $scope.vote = cmVoteService.getDarFinalAccessVote($scope.electionId)
+            $scope.vote = cmVoteService.getDarFinalAccessVote(electionId)
                 .then(function (data) {
                     $scope.vote = data;
                     if (data.vote !== null) {
@@ -288,9 +289,9 @@
                     }
                 });
 
-            cmElectionService.findDataAccessElectionReview($scope.electionId, false).$promise.then(function (data) {
+            cmElectionService.findDataAccessElectionReview(electionId, false).$promise.then(function (data) {
                 showAccessData(data);
-                cmElectionService.findRPElectionReview($scope.electionId, false).
+                cmElectionService.findRPElectionReview(electionId, false).
                     $promise.then(function (data) {
                        if(data.election !== undefined){
                         $scope.electionRP = data.election;

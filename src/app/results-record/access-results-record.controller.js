@@ -5,8 +5,13 @@
     angular.module('cmResultsRecord')
         .controller('AccessResultsRecord', AccessResultsRecord);
 
-    function AccessResultsRecord($scope, $state, $modal, cmElectionService, downloadFileService, apiUrl, cmRPService, cmVoteService, cmMatchService) {
+    function AccessResultsRecord($scope, $state, $modal, cmElectionService, downloadFileService, apiUrl, cmRPService, cmVoteService, cmMatchService, darElection, electionId, hasUseRestriction) {
 
+        /*ACCORDION*/
+        $scope.oneAtATime = false;
+        $scope.electionId = electionId;
+        $scope.darElection = darElection;
+        $scope.hasUseRestriction = hasUseRestriction;
 
         if ($scope.electionId === null) {
             $state.go('reviewed_cases');
@@ -16,8 +21,6 @@
         init();
 
 
-        /*ACCORDION*/
-        $scope.oneAtATime = false;
 
         /*GOOGLE CHART*/
         $scope.chartData = {
@@ -284,7 +287,7 @@
                 scope: $scope,
                 resolve: {
                     darDetails: function () {
-                        return cmRPService.getDarModalSummary($scope.dar_election.referenceId);
+                        return cmRPService.getDarModalSummary($scope.darElection.referenceId);
                     }
                 }
             });

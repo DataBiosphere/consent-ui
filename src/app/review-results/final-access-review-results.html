@@ -1,5 +1,5 @@
 <div ng-include src="'app/header/header.html'"></div>
-<div class="container" ng-controller="FinalAccessReviewResults">
+<div class="container">
     <h2 class="cm-title access-color">
         <img src="../assets/images/icon_access.png" alt="access icon" class="cm-icons">Final voting for Data Access
         Review</br>
@@ -27,7 +27,7 @@
 
     <div class="row fsi-row-lg-level fsi-row-md-level">
         <div class="jumbotron box-vote-results"
-             ng-class="{'col-lg-6 col-md-6 col-sm-12 col-xs-12': !hideMatch, 'col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 center-margin' : hideMatch}">
+             ng-class="{'col-lg-6 col-md-6 col-sm-12 col-xs-12': hasUseRestriction, 'col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 center-margin' : !hasUseRestriction}">
             <h3 class="cm-results-subtitle access-color">
                 Final Access decision</br>
                 <small>Is the researcher going to be allowed to access this research study?</small>
@@ -86,7 +86,7 @@
                 </div>
             </form>
         </div>
-        <div ng-show="!hideMatch" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 jumbotron box-vote-results">
+        <div ng-show="hasUseRestriction" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 jumbotron box-vote-results">
             <h3 class="cm-results-subtitle access-color">
                 Decision agreement</br>
                 <small>Were the Final votes of the DAC and the Vault consistent?</small>
@@ -204,7 +204,7 @@
                         </div>
                     </div>
                 </div>
-                <div ng-show="!hideMatch"
+                <div ng-show="hasUseRestriction"
                      class="col-lg-4 col-md-4 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2 jumbotron box-vote-lightresults no-padding">
                     <div class="cm-title-record access-color">Vault Decision</div>
                     <hr class="box-separator">

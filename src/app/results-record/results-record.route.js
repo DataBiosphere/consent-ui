@@ -34,16 +34,25 @@
                 name: 'access_results_record',
                 url: '/access_results_record/:electionId',
                 templateUrl: 'app/results-record/access-results-record.html',
-                controller: function($scope, $stateParams, cmElectionService){
-                    $scope.electionId = $stateParams.electionId;
-                    $scope.dar_election = cmElectionService.findElectionById($stateParams.electionId);
-                },
+                controller: 'AccessResultsRecord',
                 controllerAs: 'AccessResultsRecord',
                 params: {
-                    electionId: null
+                    electionId: null,
+                    referenceId: null
                 },
                 data: {
                     authorizedRoles: [USER_ROLES.member, USER_ROLES.chairperson, USER_ROLES.alumni, USER_ROLES.admin]
+                },
+                resolve: {
+                    electionId: function($stateParams){
+                        return $stateParams.electionId;
+                    },
+                    darElection: function($stateParams, cmElectionService){
+                        return cmElectionService.findElectionById($stateParams.electionId);
+                    },
+                    hasUseRestriction: function($stateParams, cmRPService){
+                        return cmRPService.hasUseRestriction($stateParams.referenceId)
+                    }
                 }
             });
 

@@ -75,6 +75,10 @@
             return $resource(apiUrl + "dar/partial/:darId");
         })
 
+        .factory('restrictionDataAccessRequestResource', function ($resource, apiUrl) {
+            return $resource(apiUrl + "dar/hasUseRestriction/:referenceId");
+        })
+
         .factory('postPartialDarResource', function ($resource, apiUrl) {
             return $resource(apiUrl + "dar/partial", {}, {
                 post: {method: 'POST', headers: {'Content-Type': "application/json"}},
