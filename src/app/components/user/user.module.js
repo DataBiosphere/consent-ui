@@ -24,7 +24,12 @@
                     params: {userId: '@userId'}
                 }
             });
-        });
+        })
 
+        .factory('validateUserDelegationResource', function ($resource, apiUrl) {
+                    return $resource(apiUrl + "dacuser/validateDelegation", {},{
+                    post: {method: 'POST',  params: {role: 'role'}}
+                    });
+        });
 })();
 

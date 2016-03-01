@@ -5,7 +5,7 @@
         .service('cmUserService', cmUserService);
 
     /* ngInject */
-    function cmUserService(UserResource, GetUserResource, UpdateUserResource) {
+    function cmUserService(UserResource, GetUserResource, UpdateUserResource, validateUserDelegationResource) {
 
 
         function getUserByEmail(email) {
@@ -22,7 +22,11 @@
         }
 
         function updateUser(user) {
-            return UpdateUserResource.update({userId: user.dacUserId}, user);
+            return UpdateUserResource.update({userId: user.updatedUser.dacUserId}, user);
+        }
+
+        function validateDelegation(role,dacUser) {
+                    return validateUserDelegationResource.post({role: role}, dacUser);
         }
 
         return {
@@ -40,8 +44,10 @@
 
             updateUser: function (user) {
                 return updateUser(user);
+            },
+            validateDelegation: function(role,user) {
+                return validateDelegation(role,user);
             }
-
         };
     }
 

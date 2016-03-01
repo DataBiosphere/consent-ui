@@ -6,9 +6,9 @@
     angular.module('cmModalUsersAdd')
         .directive('setMailPreference', setMailPreference);
     angular.module('cmModalUsersEdit')
-            .directive('addRoleEdit', addRoleRadioDirective);
+        .directive('addRoleEdit', addRoleRadioDirective);
     angular.module('cmModalUsersEdit')
-            .directive('setMailPreference', setMailPreference);
+        .directive('setMailPreference', setMailPreference);
 
 
     /* ngInject */
@@ -52,25 +52,25 @@
     }
 
     /* ngInject */
-        function setMailPreference() {
+    function setMailPreference() {
 
-            return {
-                restrict: "EA",
-                scope: false,
-                link: function (scope, element) {
-                    element.bind("change", function () {
-                            var i = scope.user.roles.length;
-                                                    while (i--) {
-                                                        if (scope.user.roles[i] && scope.user.roles[i].name === "ADMIN") {
-                                                            scope.$apply(function () {
-                                                                scope.user.roles[i].emailPreference = !element.context.checked
-                                                            });
-                                                        }
-                                                    }
-                    });
-                }
-            };
-        }
+        return {
+            restrict: "EA",
+            scope: false,
+            link: function (scope, element) {
+                element.bind("change", function () {
+                    var i = scope.user.roles.length;
+                    while (i--) {
+                        if (scope.user.roles[i] && scope.user.roles[i].name === "ADMIN") {
+                            scope.$apply(function () {
+                                scope.user.roles[i].emailPreference = !element.context.checked
+                            });
+                        }
+                    }
+                });
+            }
+        };
+    }
 
 
 })();

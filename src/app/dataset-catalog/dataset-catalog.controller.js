@@ -82,7 +82,6 @@
                         $rootScope.formData = data;
                         $state.go('rp_application.step1');
                 }, function (value) {
-                    console.log(value);
                     $modal.open({
                         animation: false,
                         templateUrl: 'app/modals/dataset-catalog-export-modal/dataset-catalog-export-error-modal.html',
