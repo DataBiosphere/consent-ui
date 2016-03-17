@@ -75,6 +75,11 @@
                                           aria-hidden="true"></span>
                             </a>
                         </div>
+                        <div class="approval-datasets-col">
+                            <a ng-if="isAdmin && !isResearcher" ng-click="DatasetCatalog.associate(property.propertyValue, dataSet.needsApproval)" tooltip="Connect with Data Owner" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right">
+                                <span ng-class="dataSet.isAssociatedToDataOwners ? 'cm-icon-button glyphicon glyphicon-link caret-margin dataset-color' : 'cm-icon-button glyphicon glyphicon-link caret-margin default-color'" aria-hidden="true"></span>
+                            </a>
+                        </div>
                     </td>
 
                     <td ng-repeat="property in dataSet.properties" class="table-items cell-size" ng-class="{'dataset-disabled': !dataSet.active}">
@@ -86,7 +91,7 @@
                            ng-if="property.propertyName =='dbGAP' && property.propertyValue.length === 0   "
                            class="disabled">Link</a>
                     <td class="table-items cell-size" ng-class="{'dataset-disabled': !dataSet.active}">{{dataSet.consentId}}</td>
-                    <td class="table-items cell-size" ng-class="{'dataset-disabled': !dataSet.active}">{{dataSet.translatedUseRestriction}}</td>
+                    <td class="table-items cell-size translated-restriction hover-color" ng-class="{'dataset-disabled': !dataSet.active}" ng-click="DatasetCatalog.showSdul(dataSet.translatedUseRestriction)"><span style="cursor: pointer;">Translated Use Restriction</span></td>
 
                     </td>
                 </tr>
@@ -98,6 +103,14 @@
              direction-links="true"
              boundary-links="true">
         </div>
+    </div>
+    <div class="f-right">
+        <button ng-show="isResearcher" ng-disabled="objectIdList.length === 0" ng-click="DatasetCatalog.exportToRequest(objectIdList)"
+                class="download-button dataset-download-button dataset-background" tooltip="Export selected Datasets to a new Data Access Request Application Form" tooltip-class="tooltip-class" tooltip-trigger
+                tooltip-placement="top">
+            <span>Apply for Access</span>
+            <span class="cm-icon-button" aria-hidden="true"></span>
+        </button>
     </div>
 </div>
 

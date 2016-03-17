@@ -2,6 +2,6 @@
     'use strict';
 
     angular
-        .module('cmResultsRecord', ['ui.router', 'cmChart', 'cmUserRoles']);
+        .module('cmResultsRecord', ['ui.router', 'cmChart', 'cmUserRoles', 'cmDownloadFile']);
 
 })();

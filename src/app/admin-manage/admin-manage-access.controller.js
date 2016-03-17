@@ -11,6 +11,7 @@
         vm.openCreate = openCreate;
         vm.openCancel = openCancel;
         vm.openRUS = openRUS;
+        vm.downloadDataSetVotesDetail = downloadDataSetVotesDetail;
 
         init();
 
@@ -78,6 +79,9 @@
             });
         }
 
+        function downloadDataSetVotesDetail(dataRequestId){
+            cmElectionService.downloadDatasetVotesForDARElection(dataRequestId);
+        }
 
     }
 })();

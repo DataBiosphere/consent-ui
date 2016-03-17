@@ -5,7 +5,7 @@
         .controller('AdminConsole', AdminConsole);
 
     /* ngInject */
-    function AdminConsole($modal, $state, apiUrl, cmPendingCaseService) {
+    function AdminConsole($modal, $state, apiUrl, cmPendingCaseService, cmElectionService, $scope, cmElectionTimeoutService) {
 
         var vm = this;
         vm.addDul = addDul;
@@ -14,6 +14,7 @@
         vm.downloadUrl = apiUrl + "dataset/sample";
         vm.dULUnreviewedCases = 0;
         vm.dARUnreviewedCases = 0;
+        vm.setTimeout = setTimeout;
 
         init();
 
@@ -68,6 +69,37 @@
                 $state.go('dataset_catalog');
             }, function () {
             });
+        }
+
+        function setTimeout() {
+            cmElectionService.isDataSetElectionOpen().$promise.then(function (data) {
+                if(data.open === true){
+                    $scope.alert = {};
+                    $scope.alert.title = "The new election timeout value can not be updated because there are opened elections.";
+                }else{
+                    $scope.alert = null;
+                }
+                cmElectionTimeoutService.findApprovalExpirationTime().$promise.then(function(data){
+                    $scope.timeout = data;
+                    var modalInstance = $modal.open({
+                        animation: false,
+                        templateUrl: 'app/modals/election-timeout-modal/election-timeout-modal.html',
+                        controller: 'ElectionTimeoutModal',
+                        controllerAs: 'ElectionTimeoutModal',
+                        scope: $scope
+                    });
+
+                    modalInstance.result.then(function () {
+                        $state.go('admin_console');
+                    }, function () {
+                    });
+                });
+
+
+            });
+
+
+
         }
 
     }

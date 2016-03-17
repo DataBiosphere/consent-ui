@@ -21,8 +21,7 @@
     }
 
     /* ngInject */
-  function ApplicationController($rootScope, USER_ROLES , clientId) {
-
+   function ApplicationController($rootScope, USER_ROLES , clientId) {
         $rootScope.clientId = clientId;
         $rootScope.currentUser = null;
         $rootScope.userRoles = USER_ROLES;
@@ -60,15 +59,18 @@
 
 
     angular.module('ConsentManagement').run(function ($location, $rootScope, $state, cmAuthenticateService, cmLoginUserService) {
-        $rootScope.$on('$stateChangeStart', function (event, next) {
+        $rootScope.$on('$stateChangeStart', function (event, next, toParams) {
             var authorizedRoles = next.data.authorizedRoles;
-
             if ($rootScope.currentUser === null) {
                 if (sessionStorage.getItem('currentUser') !== null && $state.current.name === "") {
                     cmLoginUserService.refreshUser();
+                    $state.go(next.name, toParams);
                 } else if (next.name !== "login") {
                     event.preventDefault();
-                    $location.path("/login");
+                    $rootScope.returnToState = next.name;
+                    $rootScope.returnToStateAuthorizedRoles = authorizedRoles;
+                    $rootScope.returnToStateParams = toParams;
+                    $state.go("login");
                 }
             } else if ($state.current.name !== "login") {
                 if (!cmAuthenticateService.isAuthorized(authorizedRoles, $rootScope.currentUser.roles)) {

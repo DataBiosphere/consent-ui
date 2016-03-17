@@ -2,16 +2,16 @@
     'use strict';
 
 
-    describe('cmUserConsole module', function () {
+    describe('cmDataOwnerConsole module', function () {
 
-        beforeEach(module('cmUserConsole'));
+        beforeEach(module('cmDataOwnerConsole'));
 
-        describe('UserConsole controller', function () {
+        describe('DataOwnerConsole controller', function () {
 
             it('should ....', inject(function ($controller) {
                 //spec body
-                var dac_consoleCtrl = $controller('UserConsole');
-                expect(dac_consoleCtrl).toBeDefined();
+                var data_owner_consoleCtrl = $controller('DataOwnerConsole');
+                expect(data_owner_consoleCtrl).toBeDefined();
             }));
 
         });

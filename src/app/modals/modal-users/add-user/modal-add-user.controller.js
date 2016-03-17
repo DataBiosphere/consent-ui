@@ -5,15 +5,20 @@
         .controller('ModalUsersAdd', ModalUsers);
 
     /* ngInject */
-    function ModalUsers($modalInstance, cmUserService, $scope) {
+    function ModalUsers($modalInstance, cmUserService, $scope, USER_ROLES) {
 
         var vm = this;
         init();
 
         function init() {
+            $scope.USER_ROLES = USER_ROLES;
             $scope.user = {};
             $scope.user.roles = [];
             $scope.checkModel = {};
+
+            // this var is used in addRoleRadioDirective
+            $scope.from = 'create' ;
+
 
             $scope.$on("changeChairpersonRoleAlert", function (event, arg) {
                 $scope.$apply(function () {

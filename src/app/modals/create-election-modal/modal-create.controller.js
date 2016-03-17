@@ -9,8 +9,11 @@
 
         var vm = this;
         $scope.disableButton = false;
+        $scope.disableNoButton = false;
+
         vm.ok = function (value) {
             $scope.disableButton = true;
+            $scope.disableNoButton = true;
             cmElectionService.createElection(value).$promise.then(
                 function () {
                     $modalInstance.close();
@@ -20,6 +23,7 @@
                     } else {
                         $scope.createElectionAlert(0);
                     }
+                    $scope.disableNoButton = false;
                 });
         };
 

@@ -4,7 +4,7 @@
         <img src="assets/images/icon_access.png" alt="access icon" class="cm-icons"><span>Data Access Congruence Review</span><br>
     </h2>
     <accordion>
-        <accordion-group class="accordion">
+        <accordion-group class="accordion" is-open="openAccordion">
             <accordion-heading>
                 <h3 class="access-color">
                     <div class="accordion-title">1. Should data access be granted to this applicant?</div>
@@ -88,8 +88,8 @@
         </accordion-group>
     </accordion>
 
-    <accordion close-others="oneAtATime">
-        <accordion-group class="accordion">
+    <accordion close-others="oneAtATime" ng-if="showRPaccordion">
+        <accordion-group class="accordion" >
             <accordion-heading>
                 <h3 class="access-color">
                     <div class="accordion-title">2. Was the research purpose accurately converted to a structured format?</div>
@@ -109,7 +109,7 @@
                     <div class="panel-heading cm-boxhead access-color">
                         <h4>Structured Research Purpose</h4>
                     </div>
-                    <div id="srp" class="panel-body cm-boxbody">{{rp}}</div>
+                    <div id="srp" class="panel-body cm-boxbody translated-restriction" ng-bind-html="rp"></div>
                 </div>
             </div>
 
