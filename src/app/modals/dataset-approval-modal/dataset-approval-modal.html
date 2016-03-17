@@ -1,0 +1,60 @@
+<div class="modal-add-dataset">
+    <div class="modal-content">
+        <div class="modal-header admin-modal-header">
+            <button type="button" class=" modal-close-btn close" ng-click="DataSetApprovalModal.cancel()"><span
+                aria-hidden="true">&times;</span></button>
+            <h2 class="cm-title-admin dataset-color">
+                <img src="../assets/images/icon_dataset_link.png" alt="Add Datasets icon" class="cm-icons">
+                <span>Connect Dataset with Data Owner</span>
+                <div class="cm-title-description">Associate Dataset with Data Owners and check for approval</div>
+            </h2>
+        </div>
+        <div class="modal-body">
+            <form class="form-horizontal" name="datasetApprovalForm" novalidate class="css-form" enctype="multipart/form-data">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding" style="margin: 20px 0 0 0;">
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 no-padding">
+                        <div class="select-table-title dataset-color">Data Owners</div>
+                        <select class="col-lg-12 col-md-12 col-sm-12 col-xs-12 select-table-list" size="5" multiple ng-model="available" ng-options="client as client.name for client in availableclients"></select>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12" style="margin: 30px 0;">
+                        <input type="button" class="select-table-btn select-table-btn-add default-color" value="Add" ng-click="moveItem(available[0], availableclients,selectedclients)" />
+                        <input type="button" class="select-table-btn select-table-btn-remove default-color" value="Remove" ng-click="moveItem(selected[0], selectedclients,availableclients)" />
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 no-padding">
+                        <div class="select-table-title dataset-color">Selected Data Owners</div>
+                        <select class="col-lg-12 col-md-12 col-sm-12 col-xs-12 select-table-list" size="5" multiple ng-model="selected" ng-options="client as client.name for client in selectedclients"></select>
+                    </div>
+                </div>
+                <div class="form-group admin-form-group no-margin">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                        <div class="checkbox dataset-label no-padding">
+                            <input ng-model="updatedNeedsApproval" id="approval" type="checkbox" class="checkbox-inline"
+                                   name="updatedNeedsApproval">
+                            <label class="regular-checkbox dataset-label" for="approval">Needs Data Owner's
+                                approval</label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="form-group alert-form-group">
+          <div class="admin-alerts">
+            <alert  ng-show="alert.show" type="{{alert.type}}" class="alert-title cancel-color">
+                <h4>{{alert.title}}</h4>{{alert.msg}}
+                <div class="warning">{{alert.warning}}</div>
+            </alert>
+          </div>
+        </div>
+        <div class="modal-footer">
+            <div class="admin-modal-footer" style="margin-top: 20px!important;">
+                <button ng-disabled="checkInput()"
+                        class="col-lg-3 col-md-3 col-sm-4 col-xs-6 btn dataset-background"
+                        ng-click="DataSetApprovalModal.submit()">Submit
+                </button>
+                <button class="col-lg-3 col-md-3 col-sm-4 col-xs-6 btn dismiss-background"
+                        ng-click="DataSetApprovalModal.cancel()">Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

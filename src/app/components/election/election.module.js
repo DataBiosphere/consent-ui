@@ -53,9 +53,16 @@
         .factory('openElectionsResource', function($resource, apiUrl){
             return $resource(apiUrl+"electionReview/openElection");
         })
+        .factory('DataSetElection', function($resource, apiUrl){
+            return $resource(apiUrl+"election/checkdataset");
+        })
         .factory('DarElectionResource', function($resource, apiUrl){
             return $resource(apiUrl+"dataRequest/:requestId/election", {}, {
                 get:{method: 'GET', params: {requestId: '@requestId'}},
                 post: {method: 'POST', params: {requestId: '@requestId'}}});
+        })
+        .factory('DarElectionDatasetVotes', function($resource, apiUrl){
+            return $resource(apiUrl+"dataRequest/:requestId/election/dataSetVotes", {}, {
+                get:{method: 'GET', params: {requestId: '@requestId'}}});
         });
 })();

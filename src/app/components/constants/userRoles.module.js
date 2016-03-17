@@ -11,6 +11,8 @@
              chairperson: 'CHAIRPERSON',
              member: 'MEMBER',
              researcher: 'RESEARCHER',
-             alumni: 'ALUMNI'
+             alumni: 'ALUMNI',
+             dataOwner: 'DATAOWNER',
+             all: 'ALL'
            });
     })();

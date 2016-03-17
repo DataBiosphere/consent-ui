@@ -5,7 +5,7 @@
         .service('cmPendingCaseService', cmPendingCaseService);
 
     /* ngInject */
-    function cmPendingCaseService(DARUnReviewed, ConsentUnReviewed, DataRequestPendingCases, ConsentPendingCases, MatchSummaryCases ,ConsentSummaryCases, DataRequestSummaryCases) {
+    function cmPendingCaseService(DARUnReviewed, ConsentUnReviewed, DataRequestPendingCases, ConsentPendingCases, MatchSummaryCases ,ConsentSummaryCases, DataRequestSummaryCases, DataOwnerUnReviewed) {
 
         /**
          * Finding data request pending cases for the specified user id
@@ -67,6 +67,12 @@
             });
         }
 
+        function findDataOwnerUnReviewed(dataOwnerId, vm) {
+            DataOwnerUnReviewed.List({dataOwnerId: dataOwnerId}).$promise.then(function (data) {
+                vm.dataOwnerUnreviewedCases = data;
+            });
+        }
+
         /**
          * Finding consent summary
          */
@@ -99,14 +105,18 @@
                         // negative cases
                         data.RPReviewed[2][1] = rp.reviewedNegativeCases;
                         MatchSummaryCases.List().$promise.then(function(match) {
-                            // positive cases
-                            data.VaultReviewed[1][1] = match[0].reviewedPositiveCases;
-                            // negative cases
-                            data.VaultReviewed[2][1] = match[0].reviewedNegativeCases;
-                            // positive cases
-                            data.Agreement[1][1] = match[1].reviewedPositiveCases;
-                            // negative cases
-                            data.Agreement[2][1] = match[1].reviewedNegativeCases;
+                            if(match[0] != undefined) {
+                                // positive cases
+                                data.VaultReviewed[1][1] = match[0].reviewedPositiveCases;
+                                // negative cases
+                                data.VaultReviewed[2][1] = match[0].reviewedNegativeCases;
+                            }
+                            if(match[1] != undefined) {
+                                // positive cases
+                                data.Agreement[1][1] = match[1].reviewedPositiveCases;
+                                // negative cases
+                                data.Agreement[2][1] = match[1].reviewedNegativeCases;
+                            }
                             vm.chartData = data;
                          });
                     });
@@ -132,6 +142,9 @@
             },
             findDARUnReviewed: function (vm){
                 return findDARUnReviewed(vm);
+            },
+            findDataOwnerUnReviewed: function (dataOwnerId, vm){
+                return findDataOwnerUnReviewed(dataOwnerId, vm);
             }
         };
     }

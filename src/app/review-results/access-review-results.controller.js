@@ -4,7 +4,7 @@
     angular.module('cmReviewResults')
         .controller('AccessReviewResults', ReviewResults);
 
-    function ReviewResults($scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, electionReview, rpElectionReview, dar, apiUrl, cmEmailService, cmRPService, dar_id) {
+    function ReviewResults($sce, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, electionReview, rpElectionReview, dar, apiUrl, cmEmailService, cmRPService, dar_id) {
 
         var vm = this;
         vm.openApplication = openApplication;
@@ -35,26 +35,35 @@
         }
         $scope.electionType = 'access';
         $scope.election = electionReview.election;
-        $scope.rpElection = rpElectionReview.election;
         $scope.voteList = chunk(electionReview.reviewVote, 2);
+        if(rpElectionReview.election !== undefined){
+        $scope.rpElection = rpElectionReview.election;
         $scope.rpVoteList = chunk(rpElectionReview.reviewVote, 2);
+        $scope.rpChartData = getRPGraphData(rpElectionReview.reviewVote);
+        $scope.isRPFormDisabled = $scope.rpChartData.RPChart[3][1] > 0 || rpElectionReview.election.status !== 'Open';
+        $scope.showRPaccordion = true;
+        $scope.openAccordion = false;
+            if ($scope.rpElection.finalVote !== null) {
+                     $scope.rpAlreadyVote = true;
+                 }
+        }else{
+                  $scope.showRPaccordion = false;
+                  $scope.openAccordion = true;
+
+        }
         $scope.buttonDisabled = false;
         $scope.chartData = getAccessGraphData(electionReview.reviewVote);
-        $scope.rpChartData = getRPGraphData(rpElectionReview.reviewVote);
 
         $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
         $scope.dulName = electionReview.consent.dulName;
         $scope.dar = dar.rus;
         $scope.status = electionReview.election.status;
         $scope.isFormDisabled = $scope.chartData.accessChart[3][1] > 0 || $scope.status !== 'Open';
-        $scope.isRPFormDisabled = $scope.rpChartData.RPChart[3][1] > 0 || rpElectionReview.election.status !== 'Open';
         /*ALERTS*/
         $scope.alertsRP = [];
         $scope.alertsDAR = [];
 
-        if ($scope.rpElection.finalVote !== null) {
-            $scope.rpAlreadyVote = true;
-        }
+
 
         if ($scope.election.finalVote !== null) {
             $scope.accessAlreadyVote = true;
@@ -63,7 +72,7 @@
         if (electionReview.election.translatedUseRestriction === null) {
             $scope.rp = "This includes sensitive research objectives that requires manual review.";
         } else {
-            $scope.rp = electionReview.election.translatedUseRestriction;
+            $scope.rp = $sce.trustAsHtml(electionReview.election.translatedUseRestriction);
         }
 
         $scope.sendReminder = function (voteId) {
@@ -139,7 +148,7 @@
                 cmElectionService.updateElection($scope.election).$promise.then(
                     function () {
                         $scope.closeAccessElection = true;
-                        if ($scope.closeRPElection || $scope.rpAlreadyVote) {
+                        if (!$scope.showRPaccordion || $scope.closeRPElection || $scope.rpAlreadyVote) {
                             $state.go('chair_console');
                         } else {
                             $scope.reminderDARAlert();

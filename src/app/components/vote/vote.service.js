@@ -62,7 +62,7 @@
             postObject.vote = vote.vote;
             postObject.dacUserId = vote.dacUserId;
             postObject.rationale = vote.rationale;
-
+            postObject.hasConcerns = vote.hasConcerns;
             return DarVoteResource.update({requestId: requestId, voteId: vote.voteId}, postObject);
         }
 
@@ -105,8 +105,10 @@
             postObject.vote = vote.vote;
             postObject.dacUserId = vote.dacUserId;
             postObject.rationale = vote.rationale;
+            postObject.hasConcerns = vote.hasConcerns;
             return DarVoteResource.post({requestId: requestId, voteId: vote.voteId}, postObject);
         }
+
 
         return {
             getAllVotes: function (id) {
@@ -136,7 +138,6 @@
             updateFinalAccessDarVote: function (consentId, vote) {
                 return putFinalAccessDarVote(consentId, vote);
             }
-
         };
     }
 

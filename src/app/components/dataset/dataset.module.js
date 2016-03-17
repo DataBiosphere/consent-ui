@@ -4,7 +4,7 @@
     angular.module('cmDataset', [])
 
         .factory('PostDsFileResource', function($resource, apiUrl){
-        return $resource(apiUrl+"dataset",{}, {
+        return $resource(apiUrl+"dataset/:userId",{}, {
             post: {method: 'POST', isArray:true, params: {overwrite: 'overwrite'}, headers: { 'Content-Type': undefined },
                 transformRequest: function (data) {
                     var formData = new FormData();
@@ -13,6 +13,10 @@
                 }
             }
          });
+        })
+
+        .factory('GetDatasetResource', function ($resource, apiUrl) {
+                            return $resource(apiUrl + "dataset/:datasetId");
         })
 
         .factory('DataSetResource', function($resource, apiUrl){
@@ -45,8 +49,13 @@
                                            headers: {'Accept': "application/json",
                                             'Content-Type': "application/json" } }
                            });
-                });
+         })
 
+        .factory('ReviewDataSetResource', function($resource, apiUrl){
+            return $resource(apiUrl+"dataset?dataSetId=:dataSetId&needsApproval=:needsApproval", {}, {
+                Update: {method:'PUT',params: {dataSetId: '@dataSetId', needsApproval: '@needsApproval'}}
+            });
+        });
 })();
 
 

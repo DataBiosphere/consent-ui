@@ -11,7 +11,7 @@
             // route to show our basic form (/form)
             .state('dul_review', {
                 name: 'dul_review',
-                url: '/dul_review',
+                url: '/dul_review/:voteId/:consentId',
                 params: {
                     consentId: null,
                     voteId: null
@@ -46,7 +46,7 @@
             // route to show our basic form (/form)
             .state('access_review', {
                 name: 'access_review',
-                url: '/access_review',
+                url: '/access_review/:darId/:voteId/:rpVoteId',
                 params: {
                     darId: null,
                     voteId: null,

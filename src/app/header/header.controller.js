@@ -33,19 +33,19 @@
         }
 
         $scope.showStatistics = function(roles, rootRoles){
-            if(containsOtherThanResearcher(roles, rootRoles)){
+            if(containsOtherThanResearcherAndDataOwner(roles, rootRoles)){
                 return true;
             }
             return false;
         };
 
-        function containsOtherThanResearcher(roles, rootRoles){
+        function containsOtherThanResearcherAndDataOwner(roles, rootRoles){
             var i;
             if(roles == null){
                 return false;
             }
             for (i = 0; i < roles.length; i++) {
-                if(roles[i].name !== rootRoles.researcher){
+                if(roles[i].name !== rootRoles.researcher && roles[i].name !== rootRoles.dataOwner){
                     return true;
                 }
             }

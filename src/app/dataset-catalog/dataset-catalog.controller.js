@@ -6,12 +6,15 @@
         .controller('DatasetCatalog', DatasetCatalog);
 
     /* ngInject */
-    function DatasetCatalog($scope, $modal, $rootScope, cmDatasetService, cmAuthenticateService, USER_ROLES) {
+    function DatasetCatalog($scope, $state, $modal, $rootScope, cmDatasetService, cmAuthenticateService, cmRPService,  USER_ROLES) {
 
         var vm = this;
         vm.openDelete = openDelete;
         vm.openDisable = openDisable;
         vm.openEnable = openEnable;
+        vm.associate = associate;
+        vm.showSdul = showSdul;
+
         $scope.actionType = null;
 
         vm.dataSetList = {'catalog': [], 'dictionary': []};
@@ -34,7 +37,27 @@
             cmDatasetService.findDataSets($rootScope.currentUser.dacUserId).then(
                 function (data) {
                     vm.dataSetList['catalog'] = data;
+                    angular.forEach(vm.dataSetList['catalog'], function(obj) {
+                        if (angular.isDefined(obj["translatedUseRestriction"])) {
+                            obj["translatedUseRestriction"] = obj["translatedUseRestriction"];
+                        }
+                    });
                 });
+        }
+        
+        function showSdul(datasetsDul) {
+            $scope.dataset = datasetsDul;
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/translatedDul-modal/translatedDul-modal.html',
+                controller: 'TranslatedDulModal',
+                controllerAs: 'TranslatedDulModal',
+                scope: $scope
+            });
+
+            modalInstance.result.then(function () {
+            }, function () {
+            });
         }
 
         vm.download = function (objectIdList) {
@@ -53,6 +76,26 @@
             );
         };
 
+        vm.exportToRequest = function (objectIdList) {
+            cmRPService.partialDarFromCatalogPost($rootScope.currentUser.dacUserId, objectIdList).$promise.then(
+                function (data) {
+                        $rootScope.formData = data;
+                        $state.go('rp_application.step1');
+                }, function (value) {
+                    console.log(value);
+                    $modal.open({
+                        animation: false,
+                        templateUrl: 'app/modals/dataset-catalog-export-modal/dataset-catalog-export-error-modal.html',
+                        controller: 'DatasetCatalogExportModal',
+                        controllerAs: 'DatasetCatalogExportModal',
+                        resolve: {
+                            msg: function () {
+                                return value.data.message;
+                            }
+                        }
+                    });
+                });
+        };
 
         vm.delete = function (datasetId) {
             cmDatasetService.deleteDataset(datasetId);
@@ -77,7 +120,6 @@
             });
         }
 
-
         function openDisable(datasetId) {
 
             $scope.actionType = 'disable';
@@ -95,7 +137,6 @@
                 });
             });
         }
-
 
         function openEnable(datasetId) {
 
@@ -115,7 +156,27 @@
             });
         }
 
+        function associate(datasetId, needsApproval){
 
+            $scope.actionType = 'needsApproval';
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/dataset-approval-modal/dataset-approval-modal.html',
+                controller: 'DataSetApprovalModal',
+                controllerAs: 'DataSetApprovalModal',
+                scope: $scope,
+                resolve: {
+                    usersAssociation: function (cmDatasetAssociationService) {
+                        return cmDatasetAssociationService.getAssociatedAndToAssociateUsers(datasetId);
+                    },
+                    datasetName: function(){ return datasetId },
+                    needsApproval: function(){ return needsApproval }
+                }
+            });
 
+            modalInstance.result.then(function () {
+                init();
+            });
+        }
     }
 })();

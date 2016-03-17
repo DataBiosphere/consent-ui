@@ -12,7 +12,7 @@
             // route to show our basic form (/form)
             .state('dul_review_results', {
                 name: 'dul_review_results',
-                url: '/dul_review_results',
+                url: '/dul_review_results/:consentId',
                 params: {
                     consentId: null
                 },
@@ -35,7 +35,7 @@
 
             .state('access_review_results', {
                 name: 'access_review_results',
-                url: '/access_review_results',
+                url: '/access_review_results/:electionId/:referenceId',
                 templateUrl: 'app/review-results/access-review-results.html',
                 controller: 'AccessReviewResults',
                 controllerAs: 'AccessReviewResults',
@@ -70,13 +70,9 @@
 
             .state('final_access_review_results', {
                 name: 'final_access_review_results',
-                url: '/final_access_review_results',
+                url: '/final_access_review_results/:electionId/:referenceId/:rpElectionId',
                 templateUrl: 'app/review-results/final-access-review-results.html',
-                controller: function ($scope, $stateParams) {
-                    $scope.electionId = $stateParams.electionId;
-                    $scope.referenceId = $stateParams.referenceId;
-                    $scope.rpElectionId = $stateParams.rpElectionId;
-                },
+                controller: 'FinalAccessReviewResults',
                 controllerAs: 'FinalAccessReviewResults',
                 params: {
                     electionId: null,
@@ -85,7 +81,19 @@
                 },
                 data: {
                     authorizedRoles: [USER_ROLES.chairperson]
+                },
+                resolve: {
+                    electionId: function ($stateParams){
+                        return $stateParams.electionId;
+                    },
+                    referenceId: function ($stateParams){
+                        return $stateParams.referenceId;
+                    },
+                    hasUseRestriction: function($stateParams, cmRPService){
+                        return cmRPService.hasUseRestriction($stateParams.referenceId)
+                    }
                 }
+
             });
 
     }

@@ -1,7 +1,7 @@
 <div class="modal-alerts">
     <div class="modal-content">
         <div class="modal-header admin-modal-header">
-            <button type="button" class="modal-close-btn close" ng-click="ModalAccessCreate.cancel()"><span aria-hidden="true">&times;</span></button>
+            <button type="button" class="modal-close-btn close" ng-disabled="disableNoButton" ng-click="ModalAccessCreate.cancel()"><span aria-hidden="true">&times;</span></button>
             <h2 class="pvotes-box-title access-color">Create election?
                 <small>Are you sure you want the DAC to vote on this case?</small>
             </h2>
@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="modal-footer admin-modal-footer">
-            <button type="button" class="btn dismiss-background" ng-click='ModalAccessCreate.cancel()'>No</button>
+            <button type="button"  ng-disabled="disableNoButton" class="btn dismiss-background" ng-click='ModalAccessCreate.cancel()'>No</button>
             <button type="button" ng-disabled="disableButton" class="btn access-background" ng-click='ModalAccessCreate.ok(dataRequestId)'>Yes</button>
         </div>
     </div>

@@ -6,7 +6,7 @@
 
     /* ngInject */
 
-    function cmDataAccessRequest(dataAccessRequestResource, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields, dataAccessRequestManageResource, updateDataAccessRequestResource, darModalSummary, partialDataAccessRequestManageResource, partialDataAccessRequestResource, postPartialDarResource) {
+    function cmDataAccessRequest(dataAccessRequestResource, partialDARFromCatalogResource, dataAccessRequestCancel, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields, dataAccessRequestManageResource, updateDataAccessRequestResource, darModalSummary, partialDataAccessRequestManageResource, partialDataAccessRequestResource, postPartialDarResource, restrictionDataAccessRequestResource) {
 
         function findDarConsent(id) {
             return darConsent.get({id: id}).$promise;
@@ -18,6 +18,10 @@
 
         function postDataAccessRequest(dataAccessRequest) {
             return dataAccessRequestResource.post(dataAccessRequest);
+        }
+
+        function cancelDar(referenceId) {
+            return dataAccessRequestCancel.put({referenceId: referenceId}).$promise;
         }
 
         function getAutoCompleteDS(partialReq) {
@@ -54,6 +58,10 @@
             return postPartialDarResource.post(formData);
         }
 
+        function partialDarFromCatalogPost(userId, datasetIds) {
+            return partialDARFromCatalogResource.post({userId: userId},datasetIds);
+        }
+
         function partialDarRequestDelete(darId) {
             return partialDataAccessRequestResource.delete({darId: darId}).$promise;
         }
@@ -63,6 +71,11 @@
                 function (data) {
                     vm.partialDars = data;
                 });
+        }
+        function hasUseRestriction(referenceId) {
+            return restrictionDataAccessRequestResource.get(({referenceId: referenceId})).$promise.then(function (data) {
+                return data.hasUseRestriction;
+            });
         }
 
         return {
@@ -77,6 +90,10 @@
 
             postPartialDarRequest: function(dataAccessRequest){
                 return partialDarRequestPost(dataAccessRequest);
+            },
+
+            partialDarFromCatalogPost: function(userId, datasetIds) {
+                return partialDarFromCatalogPost(userId, datasetIds);
             },
 
             deletePartialDarRequest: function(id){
@@ -94,8 +111,13 @@
             getDarFields: function (id, fields) {
                 return findDarFields(id, fields);
             },
+
             postDataAccessRequest: function (dataAccessRequest) {
                 return postDataAccessRequest(dataAccessRequest);
+            },
+
+            cancelDar: function (referenceId) {
+                return cancelDar(referenceId);
             },
 
             getAutoCompleteDS: function (partialReq) {
@@ -119,6 +141,9 @@
             },
             getDarModalSummary: function (id){
                 return getDarModalSummary(id);
+            },
+            hasUseRestriction: function(referenceId){
+                return hasUseRestriction(referenceId);
             }
         };
 

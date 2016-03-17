@@ -15,7 +15,7 @@
                 controller: 'HelpMe',
                 controllerAs: 'HelpMe',
                 data: {
-                    authorizedRoles: [USER_ROLES.member, USER_ROLES.chairperson, USER_ROLES.alumni, USER_ROLES.admin, USER_ROLES.researcher]
+                    authorizedRoles: [USER_ROLES.all]
                 }
             });
 

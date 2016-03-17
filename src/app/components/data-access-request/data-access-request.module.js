@@ -8,6 +8,12 @@
                 {post: {method: 'POST'}, headers: {'Content-Type': "application/json"}}
             );
         })
+        .factory('dataAccessRequestCancel', function ($resource, apiUrl) {
+            return $resource(apiUrl + "dar/cancel/:referenceId", {},
+                {
+                    put: {method: 'PUT', params: {referenceId: '@referenceId'}}
+                });
+        })
 
         .factory('dataAccessRequestManageResource', function ($resource, apiUrl) {
             return $resource(apiUrl + "dar/manage?userId=:userId", {},
@@ -38,6 +44,7 @@
                 {get: {method: 'GET'}, params: {id: '@id', fields: '@fields'}}
             );
         })
+
         .factory('updateDataAccessRequestResource', function ($resource, apiUrl) {
             return $resource(apiUrl + "dar/:accessId", {}, {
                 update: {method: 'PUT', params: {accessId: '@accessId'}}
@@ -57,8 +64,19 @@
                 });
         })
 
+        .factory('partialDARFromCatalogResource', function ($resource, apiUrl) {
+            return $resource(apiUrl + "dar/partial/datasetCatalog?userId=:userId", {},
+                {
+                    post: {method: 'POST', params: {userId: '@userId'}}
+                });
+        })
+
         .factory('partialDataAccessRequestResource', function ($resource, apiUrl) {
             return $resource(apiUrl + "dar/partial/:darId");
+        })
+
+        .factory('restrictionDataAccessRequestResource', function ($resource, apiUrl) {
+            return $resource(apiUrl + "dar/hasUseRestriction/:referenceId");
         })
 
         .factory('postPartialDarResource', function ($resource, apiUrl) {

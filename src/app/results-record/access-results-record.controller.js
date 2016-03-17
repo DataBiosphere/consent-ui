@@ -5,8 +5,13 @@
     angular.module('cmResultsRecord')
         .controller('AccessResultsRecord', AccessResultsRecord);
 
-    function AccessResultsRecord($scope, $state, $modal, cmElectionService, apiUrl, cmRPService, cmVoteService, cmMatchService) {
+    function AccessResultsRecord($scope, $state, $modal, cmElectionService, downloadFileService, apiUrl, cmRPService, cmVoteService, cmMatchService, darElection, electionId, hasUseRestriction) {
 
+        /*ACCORDION*/
+        $scope.oneAtATime = false;
+        $scope.electionId = electionId;
+        $scope.darElection = darElection;
+        $scope.hasUseRestriction = hasUseRestriction;
 
         if ($scope.electionId === null) {
             $state.go('reviewed_cases');
@@ -16,8 +21,6 @@
         init();
 
 
-        /*ACCORDION*/
-        $scope.oneAtATime = false;
 
         /*GOOGLE CHART*/
         $scope.chartData = {
@@ -153,6 +156,7 @@
 
 
         function init() {
+
             cmVoteService.getDarFinalAccessVote($scope.electionId)
                 .then(function (data) {
                     $scope.finalDACVote = data;
@@ -161,6 +165,8 @@
                 showAccessData(data);
                 cmElectionService.findRPElectionReview($scope.electionId, false).
                     $promise.then(function (data) {
+
+                    if(data.election !== undefined){
                         $scope.electionRP = data.election;
                         if (data.election.finalRationale === null) {
                             $scope.electionRP.finalRationale = '';
@@ -168,6 +174,10 @@
                         $scope.statusRP = data.election.status;
                         $scope.rpVoteAccessList = chunk(data.reviewVote, 2);
                         $scope.chartRP = getGraphData(data.reviewVote);
+                        $scope.showRPaccordion = true;
+                      }else{
+                         $scope.showRPaccordion = false;
+                      }
                     });
 
                 cmElectionService.findLastElectionReviewByReferenceId(data.consent.consentId).$promise.then(function (data) {
@@ -189,7 +199,21 @@
             $scope.voteAccessList = chunk(electionReview.reviewVote, 2);
             $scope.chartDataAccess = getGraphData(electionReview.reviewVote);
             $scope.voteAgreement = electionReview.voteAgreement;
+
+
+            // this data is used to construct structured_ files
+            $scope.sDAR = electionReview.election.useRestriction
+            $scope.sDUL = electionReview.consent.useRestriction
+            $scope.DulFileTitle = "structured_DUL"
+            $scope.DarFileTitle = "structured_DAR"
+
         }
+
+        $scope.download = function download(fileName, text) {
+                          var break_line =  '\r\n \r\n'
+                          text = break_line+ JSON.stringify(text)
+                          downloadFileService.downloadFile(fileName ,text);
+                      };
 
         function showDULData(electionReview) {
             $scope.election = electionReview.election;
@@ -243,7 +267,7 @@
 
         function vaultVote(consentId) {
             cmMatchService.findMatch(consentId, $scope.electionAccess.referenceId).then(function (data) {
-                if (data.match !== null) {
+                if (data.match !== null && data.match !== undefined) {
                     $scope.hideMatch = false;
                     $scope.match = data.match;
                     $scope.createDate = data.createDate;
@@ -263,7 +287,7 @@
                 scope: $scope,
                 resolve: {
                     darDetails: function () {
-                        return cmRPService.getDarModalSummary($scope.dar_election.referenceId);
+                        return cmRPService.getDarModalSummary($scope.darElection.referenceId);
                     }
                 }
             });

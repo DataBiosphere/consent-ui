@@ -240,6 +240,14 @@ small {
     width: 100%;
 }
 
+.translated-restriction ul {
+    margin-left: 2em;
+}
+
+.translated-restriction {
+    white-space: pre-line;
+}
+
 .user-dropdown li a {
     color: #00609f !important;
     font-weight: normal !important;
@@ -873,7 +881,28 @@ input[type=checkbox]:checked + label:before{
 /*///////////////////////////////////////////////////////DAC CONSOLES*/
 
 .pvotes-main-list {
+    margin: 0!important;
+}
+
+.list-highlighted{
+    background-color: rgba(96, 59, 155, 0.05);
+}
+
+.list-highlighted .glyphicon-exclamation-sign{
+    margin: 0 10px 0 5px;
+    font-size: 1.2em;
+    line-height: 22px;
+}
+
+.list-highlighted .glyphicon-download-alt{
+    font-size: 1.2em;
     margin: 0 0 0 5px;
+    cursor: pointer;
+    line-height: 22px;
+}
+
+.list-highlighted .list-highlighted-item{
+    vertical-align: top;
 }
 
 .pvotes-box-head, .pvotes-box-body, .admin-box-body {
@@ -1004,6 +1033,10 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     font-weight: 500 !important;
     font-size: 15px;
     margin: -3px 0 0 45px;
+}
+
+.pvotes-box-title-other-description{
+    margin: -3px 0 0 50px;
 }
 
 .pvotes-pagination {
@@ -1450,7 +1483,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     display: inline-block;
     width: 35px;
     height: 40px;
-    background: url('../assets/images/admin_icons.png') no-repeat 0 0;
+    background: url('../assets/images/admin_icons_.png') no-repeat 0 0;
     overflow: hidden;
     text-indent: -15000px;
     margin: 7px 3px 0 0;
@@ -1545,6 +1578,15 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 .add-help_white {
     background-position: -325px -40px;
     margin: -8px 0 0 -5px;
+}
+
+.manage-timeout {
+    background-position: -360px 0;
+    width: 35px !important;
+}
+
+.admin-icons:hover .manage-timeout {
+    background-position: -360px -40px !important;
 }
 
 .admin-manage-buttons .enabled, .admin-manage-buttons .disabled, .admin-manage-buttons .create, .admin-manage-buttons .cancel {
@@ -2112,6 +2154,10 @@ input[type="checkbox"][disabled] + label {
     padding: 15px 20px;
 }
 
+.console-boxes-margin{
+    margin-right: 30px;
+}
+
 @media (min-width: 0px) and (max-width: 767px) {
     .fsi-row-xs-level {
         display: -webkit-box;
@@ -2146,6 +2192,10 @@ input[type="checkbox"][disabled] + label {
         display: -ms-flexbox;
         display: flex;
     }
+}
+
+.center-margin{
+    margin: 10px auto 20px auto!important;
 }
 
 /*///////////////////////////////////////////////////////REVIEWED CASES*/
@@ -2322,7 +2372,7 @@ input[type="checkbox"][disabled] + label {
 
 .table-scroll-admin{
     overflow-x: scroll;
-    margin: 0 25px 5px 120px !important;
+    margin: 0 25px 5px 144px !important;
     overflow-y: visible;
 }
 
@@ -2369,7 +2419,6 @@ td:first-child {
     position: absolute;
     padding: 8px 8px 8px 10px !important;
     left: 55px!important;
-
 }
 
 .table-scroll-admin td:first-child + .remove-datasets-col a:hover .disabled{
@@ -2386,18 +2435,28 @@ td:first-child .checkbox label{
     padding-top: 1px !important;
 }
 
-.disable-datasets-col{
-    display: inline!important;
-    margin: 0 3px 0 5px!important;
-    padding: 8px 10px 8px 10px !important;
+.disable-datasets-col,
+.approval-datasets-col{
+    display: inline !important;
 }
 
 .remove-datasets-col{
-    display: inline!important;
+    display: inline !important;
+}
+
+.disable-datasets-col{
+    padding: 8px 10px 8px 10px !important;
+    margin: 0 3px !important;
+}
+
+.approval-datasets-col{
+    padding: 8px 0!important;
+    margin: 0 3px 0 0!important;
 }
 
 .remove-datasets-col a span,
-.disable-datasets-col a span{
+.disable-datasets-col a span
+.approval-datasets-col a span{
     text-shadow: 1px 1px 0 #ffffff !important;
     padding-left: 0!important;
     margin-left: 0!important;
@@ -2405,7 +2464,9 @@ td:first-child .checkbox label{
 
 .remove-datasets-col a span.glyphicon-trash,
 .disable-datasets-col a span.glyphicon-ban-circle,
-.disable-datasets-col a span.glyphicon-ok-sign{
+.disable-datasets-col a span.glyphicon-ok-sign,
+.approval-datasets-col a span.glyphicon-link,
+.approval-datasets-col a span.glyphicon-exclamation-sign{
     vertical-align: bottom;
     font-size: 1.15em;
     top: 0!important;
@@ -2425,7 +2486,8 @@ td:first-child .checkbox label{
 }
 
 .remove-datasets-col a:hover span,
-.disable-datasets-col a:hover span{
+.disable-datasets-col a:hover span,
+.approval-datasets-col a:hover span{
     color: #2FA4E7 !important;
     cursor: pointer;
 }
@@ -2437,13 +2499,6 @@ td:first-child .checkbox label{
     margin: 0!important;
     color: #777777;
 }
-
-
-
-
-
-
-
 
 .table-items .enabled, .table-items .disabled {
     font-weight: 500 !important;
@@ -2818,3 +2873,49 @@ tags-input .tags .tag-item{
 .tooltip.tooltip-class .tooltip-arrow {
     display: none;
 }
+
+
+.select-table-btn{
+    width: 100%;
+    height: auto;
+    text-align: center;
+    border: 0!important;
+    background: rgba(204, 204, 204, 0.5) !important;
+    transition: background 0.3s ease, color 0.3s ease;
+    font-weight: 500;
+    border-radius: 3px;
+    -moz-border-radius: 5px;
+    box-shadow: 2px 2px rgb(204, 204, 204) !important;
+    cursor: pointer;
+    padding: 7px 20px 5px 20px !important;
+    font-size: 14px;
+}
+
+.select-table-title{
+    font-weight: 500;
+    font-style: italic;
+    font-size: 16px;
+    padding-bottom: 5px;
+}
+.select-table-btn:hover{
+    border: 0!important;
+    background: #2FA4E7 !important;
+    color: #ffffff !important;
+}
+
+.select-table-btn-add{
+    margin-bottom: 10px;
+}
+
+.select-table-list{
+    padding: 0!important;
+    font-size: 14px!important;
+    border: 1px solid #cccccc !important;
+    border-radius: 2px;
+    height: 150px;
+}
+
+.select-table-list option{
+    padding: 0 10px !important;
+}
+

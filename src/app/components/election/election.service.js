@@ -5,7 +5,8 @@
         .service('cmElectionService', cmElectionService);
 
     /* ngInject */
-    function cmElectionService(RPElectionReviewResource, DarElectionResource, ElectionReviewResource, ElectionResource, ElectionUpdateResource, ElectionReviewedConsents, ElectionReviewedDRs, ElectionReviewConsent, openElectionsResource, ElectionReview, LastElectionReview, DataAccessElectionReviewResource) {
+    function cmElectionService(apiUrl, $http, RPElectionReviewResource, DarElectionResource, ElectionReviewResource, ElectionResource, ElectionUpdateResource, ElectionReviewedConsents, ElectionReviewedDRs, openElectionsResource, ElectionReview, LastElectionReview, DataAccessElectionReviewResource, DataSetElection) {
+
         /**
          * Find data for the election related to the consentId sent as a parameter
          * @param consentId
@@ -86,6 +87,30 @@
             return DarElectionResource.post({requestId: requestId}, postElection);
         }
 
+        /**
+         * Find the related datasets owner votes for an election.
+         * @param consentId
+         */
+        function downloadDatasetVotesForDARElection(requestId) {
+            $http({
+                url: apiUrl+"dataRequest/"+requestId+"/election/dataSetVotes",
+                method: "GET"
+            }).
+                success(function(data) {
+                    var blob = new Blob([data], {type: 'text/plain'});
+                    if(blob.size !== 0){
+                        var downloadElement = angular.element('<a/>');
+                        downloadElement.css({display: 'none'});
+                        angular.element(document.body).append(downloadElement);
+                        downloadElement.attr({
+                            href: (window.URL || window.webkitURL).createObjectURL(blob),
+                            target: '_blank',
+                            download: 'datasetVotesSummary.txt'
+                        })[0].click();
+                    }
+                });
+        }
+
         function openElections() {
             return openElectionsResource.get();
         }
@@ -112,12 +137,20 @@
             return LastElectionReview.get({electionId: id});
         }
 
+
+        function isDataSetElectionOpen() {
+            return DataSetElection.get();
+        }
+
         return {
             findElectionById: function(electionId){
-              return getElectionById(electionId);
+                return getElectionById(electionId);
             },
             findDarElection: function (id) {
                 return findElectionByDarId(id);
+            },
+            downloadDatasetVotesForDARElection: function(requestId) {
+                return downloadDatasetVotesForDARElection(requestId);
             },
             findElection: function (id) {
                 return findElectionByConsentId(id);
@@ -157,6 +190,9 @@
             },
             createDARElection: function (requestId) {
                 return createDARElection(requestId);
+            },
+            isDataSetElectionOpen: function(){
+                return isDataSetElectionOpen();
             }
         };
     }
