@@ -100,6 +100,10 @@ small {
     font-weight: 500 !important;
 }
 
+.italic{
+    font-style: italic !important;
+}
+
 .center-text {
     text-align: center;
 }
