@@ -1,0 +1,94 @@
+<div ng-include src="'app/header/header.html'"></div>
+<div class="container">
+    <h2 class="cm-title common-color">
+        <img src="assets/images/icon_invalid_restrictions.png" alt="Invalid Restrictions icon" class="cm-icons">Invalid Request Restrictions<br>
+        <div class="cm-title-description">List of Invalid Restrictions for Data Use Limitations and Data Access Requests</div>
+    </h2>
+    <hr class="section-separator">
+    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <div class="row">
+            <h2 class="col-lg-8 col-md-8 col-sm-8 col-xs-12 pvotes-box-title dul-color">
+                <img src="assets/images/icon_dul_invalid.png" alt="DUL Invalid icon" class="pvotes-icons">Data Use Limitations Invalid Cases
+                <div class="pvotes-box-title-description">List of Invalid Restrictions for Data Use Limitations</div>
+            </h2>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 search-reviewed">
+                <div class="search-text">
+                    <i class="glyphicon glyphicon-search dul-color"></i>
+                    <input type="search" class="form-control" placeholder="Enter search term..." ng-model="searchDULcases"/>
+                </div>
+            </div>
+        </div>
+        <div class="jumbotron box-vote-singleresults">
+            <div class="row">
+                <div class="pvotes-box-head">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-box-subtitle dul-color">Consent id</div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pvotes-box-subtitle dul-color">Invalid Restrictions</div>
+                    <hr class="pvotes-main-separator">
+                </div>
+                <div class="pvotes-box-body">
+                    <div pagination-id="dulInvalidCases">
+                        <hr class="pvotes-separator">
+                        <div class="row pvotes-main-list">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">Id</div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pvotes-list-id">
+                                <a href="" ng-click="download()" target="_blank" class="bold hover-color">Download Restrictions</a>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="pvotes-separator">
+                </div>
+                <div dir-pagination-controls
+                     max-size="5"
+                     direction-links="true"
+                     boundary-links="true"
+                     class="pvotes-pagination"
+                     pagination-id="dulInvalidCases">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <div class="row">
+            <h2 class="col-lg-8 col-md-8 col-sm-8 col-xs-12 pvotes-box-title access-color">
+                <img src="assets/images/icon_access_invalid.png" alt="Access Invalid icon" class="pvotes-icons">Data Access Requests Invalid Cases
+                <div class="pvotes-box-title-description">List of Invalid Restrictions for Data Access Requests</div>
+            </h2>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 search-reviewed">
+                <div class="search-text">
+                    <i class="glyphicon glyphicon-search access-color"></i>
+                    <input type="search" class="form-control" placeholder="Enter search term..." ng-model="searchAccessCases"/>
+                </div>
+            </div>
+        </div>
+        <div class="jumbotron box-vote-singleresults">
+            <div class="row">
+                <div class="pvotes-box-head">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-box-subtitle access-color">Data Access Request id</div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pvotes-box-subtitle access-color">Invalid Restrictions</div>
+                </div>
+                <hr class="pvotes-main-separator">
+            </div>
+            <div class="pvotes-box-body" id="searchTextResults">
+                <div pagination-id="accessInvalidCases">
+                    <hr class="pvotes-separator">
+                    <div class="row pvotes-main-list">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">Id</div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pvotes-list-id">
+                            <a href="" target="_blank" class="bold hover-color">Download Restrictions</a>
+                        </div>
+                    </div>
+                </div>
+                <hr class="pvotes-separator">
+            </div>
+            <div dir-pagination-controls
+                 max-size="5"
+                 direction-links="true"
+                 boundary-links="true"
+                 class="pvotes-pagination"
+                 pagination-id="accessInvalidCases">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
