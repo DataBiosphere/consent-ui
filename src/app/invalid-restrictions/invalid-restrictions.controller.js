@@ -4,14 +4,22 @@
     angular.module('cmInvalidRestrictions')
         .controller('InvalidRestrictions', InvalidRestrictions);
 
-    function InvalidRestrictions($scope, downloadFileService) {
+    function InvalidRestrictions($scope, downloadFileService, cmConsentService, cmRPService) {
 
-        $scope.DulFileTitle = "structured_DUL";
-        $scope.DarFileTitle = "structured_DAR";
+        var vm = this;
+        vm.consentList = {};
+        vm.darList = {};
+        init();
+
+        function init() {
+            cmConsentService.findInvalidConsentRestriction(vm);
+            cmRPService.findInvalidDataAccessUseRestriction(vm);
+
+        }
         $scope.download = function download(fileName, text) {
             var break_line =  '\r\n \r\n';
-            text = break_line+ JSON.stringify(text);
-            downloadFileService.downloadFile(fileName ,text);
+            text = break_line+ text;
+            downloadFileService.downloadFile(fileName+'-restriction.txt' ,text);
         };
 
     }

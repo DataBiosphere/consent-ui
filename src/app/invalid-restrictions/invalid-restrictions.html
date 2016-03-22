@@ -26,12 +26,12 @@
                     <hr class="pvotes-main-separator">
                 </div>
                 <div class="pvotes-box-body">
-                    <div pagination-id="dulInvalidCases">
+                    <div dir-paginate="consent in InvalidRestrictions.consentList | itemsPerPage:5" pagination-id="dulInvalidCases">
                         <hr class="pvotes-separator">
                         <div class="row pvotes-main-list">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">Id</div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">{{consent.name}}</div>
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pvotes-list-id">
-                                <a href="" ng-click="download()" target="_blank" class="bold hover-color">Download Restrictions</a>
+                                <a href="" ng-click="download(consent.name,consent.useRestriction)" class="bold hover-color">Download Restrictions</a>
                             </div>
                         </div>
                     </div>
@@ -70,12 +70,12 @@
                 <hr class="pvotes-main-separator">
             </div>
             <div class="pvotes-box-body" id="searchTextResults">
-                <div pagination-id="accessInvalidCases">
+                <div dir-paginate="dar in InvalidRestrictions.darList | itemsPerPage:5" pagination-id="accessInvalidCases">
                     <hr class="pvotes-separator">
                     <div class="row pvotes-main-list">
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">Id</div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">{{dar.name}}</div>
                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pvotes-list-id">
-                            <a href="" target="_blank" class="bold hover-color">Download Restrictions</a>
+                            <a href="" ng-click="download(dar.name,dar.useRestriction)" class="bold hover-color">Download Restrictions</a>
                         </div>
                     </div>
                 </div>

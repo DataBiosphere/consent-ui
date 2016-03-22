@@ -117,7 +117,7 @@
             }
             else {
                 tle = "Error, unable to create a new Data Use Limitation! ";
-                message = "Internal Server Error";
+                message = message;
             }
 
             $scope.alerts.push({
