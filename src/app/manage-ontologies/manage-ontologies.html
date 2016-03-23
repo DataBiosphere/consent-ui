@@ -9,17 +9,16 @@
             <div class="search-text">
                 <i class="glyphicon glyphicon-search common-color"></i>
                 <input type="search" class="form-control users-search" placeholder="Enter search term..."
-                       ng-model="searchAccess"/>
+                       ng-model="searchOntologies"/>
             </div>
         </div>
         <div>
-            <a class="col-lg-3 col-md-3 col-sm-6 col-xs-6 admin-add-button common-background" ng-click="">
-                <div class="all-icons add-dul_white"></div>
+            <a href="" ng-click="addOntology()" class="col-lg-3 col-md-3 col-sm-6 col-xs-6 admin-add-button common-background">
+                <div class="all-icons add-ontologies-white"></div>
                 <span>Add Ontologies</span>
             </a>
         </div>
     </div>
-
     <div class="jumbotron box-vote-singleresults">
         <div class="row manage-wrapper">
             <div class="pvotes-box-head fsi-row-lg-level fsi-row-md-level">
@@ -31,13 +30,14 @@
 
             <div class="admin-box-body">
                 <hr class="pvotes-main-separator">
-                <div pagination-id="ontologies">
+                <div dir-paginate="indexFile in indexedFiles | itemsPerPage:8" pagination-id="indexedFiles">
                     <div class="row pvotes-main-list">
-                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-4 pvotes-list-id">data_use.owl</div>
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id">Organization</div>
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id">DURPO</div>
+                        <a class="col-lg-5 col-md-5 col-sm-5 col-xs-4 pvotes-list-id"
+                           ng-href="{{indexFile.fileUrl}}">{{indexFile.fileName}}</a>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id">{{indexFile.ontologyType}}</div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id">{{indexFile.prefix}}</div>
                         <div class="remove-dul-col">
-                            <a ng-click="">
+                            <a ng-click="openDelete(indexFile.fileUrl)">
                                 <span class="cm-icon-button glyphicon glyphicon-trash caret-margin" aria-hidden="true"></span>
                             </a>
                             <hr class="pvotes-separator-longer">
@@ -50,7 +50,7 @@
                      direction-links="true"
                      boundary-links="true"
                      class="pvotes-pagination"
-                     pagination-id="ontologies">
+                     pagination-id="indexedFiles">
                 </div>
             </div>
         </div>

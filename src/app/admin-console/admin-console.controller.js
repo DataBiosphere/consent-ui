@@ -15,6 +15,7 @@
         vm.dULUnreviewedCases = 0;
         vm.dARUnreviewedCases = 0;
         vm.setTimeout = setTimeout;
+        vm.addOntology = addOntology;
 
         init();
 
@@ -98,8 +99,26 @@
 
             });
 
+        }
 
+        function addOntology() {
 
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/add-ontologies/add-ontologies.html',
+                controller: 'AddOntologyModal',
+                controllerAs: 'AddOntologyModal',
+                resolve: {
+                              ontologyTypes:  function (cmOntologyService) {
+                                     return cmOntologyService.getOntologyTypes();
+                                  }
+                          }
+            });
+
+            modalInstance.result.then(function () {
+                $state.go('manage_ontologies');
+            }, function () {
+            });
         }
 
     }
