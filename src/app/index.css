@@ -100,10 +100,6 @@ small {
     font-weight: 500 !important;
 }
 
-.italic{
-    font-style: italic !important;
-}
-
 .center-text {
     text-align: center;
 }
@@ -1602,6 +1598,25 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     background-position: -395px -40px !important;
 }
 
+.manage-ontologies {
+    background-position: -438px 0;
+    width: 46px !important;
+}
+
+.admin-icons:hover .manage-ontologies {
+    background-position: -438px -40px !important;
+}
+
+.add-ontologies {
+    background-position: -484px 0;
+    width: 46px !important;
+}
+
+.admin-icons:hover .add-ontologies {
+    background-position: -484px -40px !important;
+}
+
+>>>>>>> UI Refinements and New Manage Ontologies module
 .admin-manage-buttons .enabled, .admin-manage-buttons .disabled, .admin-manage-buttons .create, .admin-manage-buttons .cancel {
     text-align: center;
     margin: 4px auto 0 auto !important;
@@ -2931,4 +2946,3 @@ tags-input .tags .tag-item{
 .select-table-list option{
     padding: 0 10px !important;
 }
-
