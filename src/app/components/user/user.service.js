@@ -25,7 +25,6 @@
             return UpdateUserResource.update({userId: user.dacUserId}, user);
         }
 
-
         return {
             findUser: function (email) {
                 return getUserByEmail(email);

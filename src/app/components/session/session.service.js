@@ -5,13 +5,14 @@
         .service('cmLoginUserService', cmLoginUserService);
 
     /* ngInject */
-    function cmLoginUserService($rootScope, $location, GetUserResource, USER_ROLES, $state, cmAuthenticateService) {
+    function cmLoginUserService(clientId, $rootScope, $location, USER_ROLES, $state, cmAuthenticateService, GetUserResource) {
 
 
         function loginUser(email, accessToken) {
             $rootScope.accessToken = accessToken;
             GetUserResource.get({email: email},
                 function (data) {
+                    data.accessToken = accessToken;
                     $rootScope.setCurrentUser(data);
                     redirect(data);
                 }, function (error) {
@@ -46,7 +47,7 @@
             }
         }
 
-        function refreshUser(clientId) {
+        function refreshUser() {
             $rootScope.setCurrentUser(JSON.parse(sessionStorage.getItem('currentUser')));
             $rootScope.loadScript('https://apis.google.com/js/platform.js?onload=onLoadCallback', 'text/javascript', 'utf-8');
             window.onLoadCallback = function () {
@@ -58,11 +59,7 @@
                     }
                 });
             };
-            function signOut() {
-                logoutUser();
-            }
-
-            window.signOut = signOut;
+            $rootScope.accessToken = $rootScope.currentUser.accessToken;
         }
 
 

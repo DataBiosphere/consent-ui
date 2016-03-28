@@ -4,24 +4,45 @@
 
     angular.module('ConsentManagement')
         .controller('ApplicationController', ApplicationController)
-        .factory('OAuth2Interceptor', OAuth2Interceptor)
-        .config(function ($httpProvider) {
-            $httpProvider.interceptors.push('OAuth2Interceptor');
-        });
+        .config(function ($httpProvider, $provide) {
+            $provide.factory('UnauthorizedInterceptor', function UnauthorizedInterceptor($rootScope, $q) {
+                return {
+                    'response': function (response) {
+                        return response;
+                    },
+                    'responseError': function (rejection) {
+                        if (rejection.status === -1) {
+                            $rootScope.logout();
+                        }
+                        return $q.reject(rejection);
+                    }
+                };
+            });
 
-    function OAuth2Interceptor($rootScope, ontologyApiUrl) {
-        return {
-            'request': function (config) {
-                if ($rootScope && config.url.indexOf(ontologyApiUrl) === -1) {
-                    config.headers.Authorization = 'Bearer ' + $rootScope.accessToken;
-                }
-                return config;
-            }
-        };
-    }
+            $provide.factory('OAuth2Interceptor', function OAuth2Interceptor($rootScope, ontologyApiUrl) {
+                return {
+                    'request': function (config) {
+                        if ($rootScope && config.url.indexOf(ontologyApiUrl) === -1) {
+                            config.headers.Authorization = 'Bearer ' + $rootScope.accessToken;
+                        }
+                        return config;
+                    }
+                };
+            });
+
+            $httpProvider.interceptors.push('OAuth2Interceptor');
+            $httpProvider.interceptors.push('UnauthorizedInterceptor');
+        }
+
+    );
+
+
+
+
+
 
     /* ngInject */
-   function ApplicationController($rootScope, USER_ROLES , clientId) {
+   function ApplicationController($rootScope, USER_ROLES , clientId, cmLoginUserService) {
         $rootScope.clientId = clientId;
         $rootScope.currentUser = null;
         $rootScope.userRoles = USER_ROLES;
@@ -55,6 +76,9 @@
                 return script;
             }
         };
+       $rootScope.logout = function(){
+           cmLoginUserService.logoutUser();
+       }
     }
 
 
