@@ -58,7 +58,7 @@
                                 <span ng-if="dar.electionStatus == 'un-reviewed'">Un-reviewed</span>
                                 <span ng-if="dar.electionStatus == 'Open' || dar.electionStatus == 'Final'">Open</span>
                                 <span ng-if="dar.electionStatus == 'Canceled'">Canceled</span>
-                                <span ng-if="dar.electionStatus == 'Closed' || dar.electionStatus == 'PendingApproval'">Reviewed</span>
+                                <span ng-if="dar.electionStatus == 'Closed' || dar.electionStatus == 'PendingApproval'"><a ui-sref="access_results_record({electionId: '{{dar.electionId}}', referenceId: '{{dar.dataRequestId}}'})">Reviewed</a></span>
                             </div>
                             <div>
                                 <a class="admin-manage-buttons col-lg-2 col-md-2 col-sm-2 col-xs-2">
