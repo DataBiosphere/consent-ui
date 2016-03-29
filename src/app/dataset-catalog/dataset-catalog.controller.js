@@ -44,7 +44,7 @@
                     });
                 });
         }
-        
+
         function showSdul(datasetsDul) {
             $scope.dataset = datasetsDul;
             var modalInstance = $modal.open({
@@ -98,12 +98,11 @@
         };
 
         vm.delete = function (datasetId) {
-            cmDatasetService.deleteDataset(datasetId);
+            cmDatasetService.deleteDataset(datasetId, $rootScope.currentUser.dacUserId);
         };
 
 
         function openDelete(datasetId) {
-
             $scope.actionType = 'delete';
             var modalInstance = $modal.open({
                 animation: false,
@@ -114,7 +113,8 @@
             });
 
             modalInstance.result.then(function () {
-                cmDatasetService.deleteDataset(datasetId).then(function () {
+                var currentUserId = $rootScope.currentUser.dacUserId;
+                cmDatasetService.deleteDataset(datasetId, currentUserId).then(function () {
                     init();
                 });
             });
