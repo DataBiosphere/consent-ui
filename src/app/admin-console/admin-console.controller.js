@@ -19,7 +19,7 @@
 
         init();
 
-        function init() {
+                function init() {
             cmPendingCaseService.findDARUnReviewed(vm);
             cmPendingCaseService.findConsentUnReviewed(vm);
         }
@@ -76,7 +76,7 @@
             cmElectionService.isDataSetElectionOpen().$promise.then(function (data) {
                 if(data.open === true){
                     $scope.alert = {};
-                    $scope.alert.title = "The new election timeout value can not be updated because there are opened elections.";
+                    $scope.alert.title = "Data Owner election Timeout value can't be updated because there are open elections.";
                 }else{
                     $scope.alert = null;
                 }

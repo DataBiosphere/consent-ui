@@ -1,18 +1,21 @@
 <div ng-include src="'app/header/header.html'"></div>
 <div class="container">
-    <h2 class="cm-title cm-title-access access-color">
-        <img src="assets/images/icon_access.png" alt="access icon" class="cm-icons"><span>Collect votes for Data Access Congruence Review</span><br>
-    </h2>
+    <div class="row fsi-row-lg-level fsi-row-md-level title-wrapper">
+        <img src="assets/images/icon_access.png" alt="Data Access Request icon" class="cm-icons main-icon-title">
+        <h2 class="main-title margin-sm access-color">
+            Collect votes for Data Access Congruence Review
+        </h2>
+    </div>
     <accordion>
         <accordion-group class="accordion"  is-open="openAccordion">
             <accordion-heading>
-                <h3 class="access-color">
+                <h3 class="access-color pos-relative">
                     <div class="accordion-title">1. Should data access be granted to this applicant?</div>
                     <i class="pull-right glyphicon"
                        ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
                 </h3>
             </accordion-heading>
-            <div class="row fsi-row-lg-level fsi-row-md-level">
+            <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
                     <div class="panel-heading cm-boxhead access-color">
                         <h4>Research Purpose
@@ -30,9 +33,9 @@
                     </div>
                 </div>
             </div>
-            <h3 class="cm-subtitle no-padding">Data Access Committee Votes</h3>
+            <h3 class="cm-subtitle">Data Access Committee Votes</h3>
 
-            <div class="row fsi-row-lg-level fsi-row-md-level">
+            <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 jumbotron box-vote-results">
                     <h3 class="cm-results-subtitle access-color">Vote Results</h3>
                     <hr class="box-separator-white">
@@ -78,20 +81,25 @@
                                            placeholder="Describe your rationale here (be as specific as possible).">
                                 </div>
                             </div>
-                            <div class="form-group form-group-bottom">
-                                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
-                                    <div class="votes-alerts no-margin no-padding">
-                                        <alert ng-repeat="alert in alertsDAR" type="danger"
-                                               class="alert-title cancel-color">
-                                            <h4>{{alert.title}}<i>{{alert.msg}}</i></h4>
-                                        </alert>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+
+                            <div class="row">
+                                <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-6 col-sm-offset-6 col-xs-6 col-xs-offset-6 f-right no-margin">
                                     <button ng-click="logVote()" ng-disabled="!voteForm.$valid"
                                             class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button access-background">
                                         Vote
                                     </button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="votes-alerts votes-alerts-more-margin">
+                                    <alert ng-repeat="alert in alertsDAR" type="danger"
+                                           class="alert-title cancel-color f-left col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <h4>
+                                            <b>{{alert.title}}</b><br>
+                                            <i>{{alert.msg}}</i>
+                                        </h4>
+                                    </alert>
                                 </div>
                             </div>
                         </form>
@@ -99,8 +107,8 @@
                 </div>
             </div>
 
-            <div class="row" ng-repeat="row in voteList">
-                <div id="voteResultsList" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill" ng-repeat="vm in row">
+            <div class="row fsi-row-lg-level fsi-row-md-level no-margin" ng-repeat="row in voteList">
+                <div id="voteResultsList" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill no-padding" ng-repeat="vm in row">
                     <div class="jumbotron box-vote-singleresults">
                         <div class="row">
                             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 cm-user-name">{{vm.displayName}}</div>
@@ -153,21 +161,20 @@
     <accordion close-others="oneAtATime" ng-if="showRPaccordion" >
         <accordion-group class="accordion" >
             <accordion-heading>
-                <h3 class="access-color">
-                    <div class="accordion-title">2. Was the research purpose accurately converted to a structured
-                        format?
-                    </div>
+                <h3 class="access-color pos-relative">
+                    <div class="accordion-title">2. Was the research purpose accurately converted to a structured format?</div>
                     <i class="pull-right glyphicon"
                        ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
                 </h3>
             </accordion-heading>
 
-            <div class="row fsi-row-lg-level fsi-row-md-level">
+            <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
                     <div class="panel-heading cm-boxhead access-color">
                         <h4>Research Purpose
                             <a class="enabled hover-color application-link" ng-click="AccessReviewResults.openApplication()">Application summary</a>
-                        </h4>                    </div>
+                        </h4>
+                    </div>
                     <div id="rpurpose" class="panel-body cm-boxbody">{{dar}}</div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
@@ -177,9 +184,9 @@
                     <div id="srp" class="panel-body cm-boxbody translated-restriction" ng-bind-html="rp"></div>
                 </div>
             </div>
-            <h3 class="cm-subtitle no-padding">Data Access Committee Votes</h3>
+            <h3 class="cm-subtitle">Data Access Committee Votes</h3>
 
-            <div class="row fsi-row-lg-level fsi-row-md-level">
+            <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 jumbotron box-vote-results">
                     <h3 class="cm-results-subtitle access-color">Vote Results</h3>
                     <hr class="box-separator-white">
@@ -227,20 +234,25 @@
                                            placeholder="Describe your rationale here (be as specific as possible).">
                                 </div>
                             </div>
-                            <div class="form-group form-group-bottom">
-                                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
-                                    <div class="votes-alerts no-margin no-padding">
-                                        <alert ng-repeat="alert in alertsRP" type="danger"
-                                               class="alert-title cancel-color">
-                                            <h4>{{alert.title}}<i>{{alert.msg}}</i></h4>
-                                        </alert>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+
+                            <div class="row">
+                                <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-6 col-sm-offset-6 col-xs-6 col-xs-offset-6 f-right no-margin">
                                     <button ng-click="logRPVote()" ng-disabled="!rpVoteForm.$valid"
                                             class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button access-background">
                                         Vote
                                     </button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="votes-alerts votes-alerts-more-margin">
+                                    <alert ng-repeat="alert in alertsRP" type="danger"
+                                           class="alert-title cancel-color f-left col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <h4>
+                                            <b>{{alert.title}}</b><br>
+                                            <i>{{alert.msg}}</i>
+                                        </h4>
+                                    </alert>
                                 </div>
                             </div>
                         </form>
@@ -248,8 +260,8 @@
                 </div>
             </div>
 
-            <div class="row" ng-repeat="row in rpVoteList">
-                <div id="voteResultsListRP" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill" ng-repeat="vm in row">
+            <div class="row fsi-row-lg-level fsi-row-md-level no-margin" ng-repeat="row in rpVoteList">
+                <div id="voteResultsListRP" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill no-padding" ng-repeat="vm in row">
                     <div class="jumbotron box-vote-singleresults">
                         <div class="row">
                             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 cm-user-name">{{vm.displayName}}</div>
@@ -295,4 +307,10 @@
             </div>
         </accordion-group>
     </accordion>
+
+    <div class="form-group form-group-bottom">
+       <a href="#/chair_console" class="btn vote-button vote-button-dismiss vote-button-bigger">
+            Back to Console
+        </a>
+    </div>
 </div>

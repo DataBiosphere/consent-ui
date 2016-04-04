@@ -169,6 +169,13 @@ small {
 .top-navigator-bar {
     background: #00609f;
     color: #fff;
+    border-radius: 0!important;
+    min-height: 50px !important;
+    margin-bottom: 20px !important;
+}
+
+@media screen and (max-width: 800px) {
+    .top-navigator { margin: 0 30px !important;}
 }
 
 .top-navigator {
@@ -181,8 +188,12 @@ small {
 
 .top-navigator-bar li {
     display: inline-block !important;
-    margin: 0 10px 0 10px;
-    padding: 20px 5px 5px 5px;
+    margin: 0 20px 0 0;
+    padding: 22px 0 15px 0;
+}
+
+@media screen and (max-width: 800px) {
+    .top-navigator-bar li { display: block !important; }
 }
 
 .top-navigator li a {
@@ -201,43 +212,88 @@ small {
     color: #2FA4E7;
 }
 
+/*HAMBURGER ICON*/
+
+.navbar-collapse.in {
+    overflow-y: visible !important;
+}
+
+.navbar-toggle {
+    background-color: rgba(0, 0, 0, 0.2);
+    margin-top: 15px !important;
+}
+
+@media (max-width: 800px){
+    .navbar-toggle{ margin-right: 0;}
+}
+
+.navbar-toggle .icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: #ffffff;
+    border-radius: 1px;
+}
+/**/
+
 .links-li{
     padding: 0 0 10px 0 !important;
 }
 
 .brand {
-    margin: 14px 0 0 0;
-    padding: 0 0 0 20px !important;
-    vertical-align: middle;
+    margin: 15px 40px 0 0;
+    padding: 0 !important;
 }
 
 .user-li {
-    padding: 10px 5px 5px 5px !important;
+    padding: 12px 5px 10px 5px !important;
     float: right !important;
     text-align: right;
     margin: 0 0 0 20px !important;
+}
+
+.navbar-right .user-dropdown {
+    text-align: right;
+    float: right;
+}
+
+.navbar-left .user-dropdown {
+    text-align: left;
+    float: left;
+}
+
+.user-dropdown{
+    margin: 0!important;
+    padding: 3px 0 0 0!important;
+    width: auto;
+}
+
+.user-dropdown li{
+    margin: 0!important;
+    padding: 0!important;
+}
+
+.user-dropdown li a{
+    margin: 0!important;
+    padding: 10px 15px 6px 15px!important;
+    color: #00609f !important;
+    font-weight: normal !important;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.user-dropdown li:hover a{
+    background: #fff!important;
+    color: #2FA4E7 !important;
+    cursor: pointer;
 }
 
 .drop-li {
     padding: 20px 5px 5px 5px !important;
 }
 
-.navbar-right .user-dropdown {
-    left: 0 !important;
-    right: auto;
-    text-align: left;
-}
-
 .drop-li .user-dropdown {
     margin-top: 12px;
-}
-
-.user-dropdown li {
-    padding: 5px 0 0 0 !important;
-    margin: 2px 0 2px 0 !important;
-    float: right !important;
-    text-align: right !important;
-    width: 100%;
 }
 
 .translated-restriction ul {
@@ -248,21 +304,9 @@ small {
     white-space: pre-line;
 }
 
-.user-dropdown li a {
-    color: #00609f !important;
-    font-weight: normal !important;
-    font-size: 15px;
-    cursor: pointer;
-}
-
-.user-dropdown li:hover a {
-    color: #2FA4E7 !important;
-    cursor: pointer;
-}
-
 .user-dropdown hr {
     float: right;
-    margin: 0 2px 0 2px !important;
+    margin: 0 !important;
     width: 100%;
 }
 
@@ -274,6 +318,11 @@ small {
 
 .search-reviewed {
     margin-top: 35px !important;
+}
+
+@media (max-width: 800px){
+    .search-reviewed { margin: 5px 0 !important;}
+    .search-reviewed>div { padding-left: 0;}
 }
 
 .search-text {
@@ -311,6 +360,39 @@ small {
 }
 
 /***************************************************Titles & Subtitles*/
+
+.title-wrapper{
+    margin: 20px 0 10px 0;
+    position: relative;
+}
+
+.main-icon-title{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.main-title{
+    margin: 7px 0 10px 0 !important;
+    line-break: auto;
+}
+
+.main-title.margin-sm{
+    margin-left: 60px !important;
+}
+
+.main-title.margin-lg{
+    margin-left: 70px !important;
+}
+
+.main-title-description{
+    color: #777777;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 19px;
+    line-height: 25px;
+    padding: 5px 0 0 3px;
+}
 
 .cm-title, .cm-title-admin, .cm-subtitle, .cm-subtitle-ultimate, .cm-user-name, .cm-results-subtitle, .cm-box-title {
     color: #777777;
@@ -360,7 +442,7 @@ small {
 }
 
 .cm-subtitle {
-    padding: 15px 0 0 0;
+    padding: 0 0 0 20px;
 }
 
 .cm-subtitle h3 {
@@ -486,6 +568,10 @@ small {
     margin: 10px 15px 20px 15px !important;
 }
 
+@media (max-width: 800px){
+    .cm-boxes { margin: 10px 0 20px 0 !important; }
+}
+
 .cm-boxhead {
     border: 0 !important;
     background: rgba(204, 204, 204, 0.5) !important;
@@ -505,7 +591,6 @@ small {
 }
 
 .cm-boxbody {
-    /*font-weight: 500;*/
     margin-left: 5px;
     font-size: 15px;
     color: #777777;
@@ -539,8 +624,12 @@ small {
 
 .box-vote-singleresults{
     background: #eeeeee;
-    margin: 10px 0 20px 0 !important;
+    margin: 10px 15px 20px 15px !important;
     height: auto !important;
+}
+
+.box-vote-no-margin{
+    margin: 10px 0 20px 0 !important;
 }
 
 .box-vote-stats{
@@ -559,6 +648,10 @@ small {
 .box-vote-lightresults{
     background: #eeeeee;
     margin: 10px 15px 20px 15px !important;
+}
+
+@media (max-width: 800px){
+    .box-vote-lightresults, .box-vote-results, .box-vote-singleresults, .box-vote-stats { margin: 10px 0 20px 0 !important;}
 }
 
 .first-form-group {
@@ -622,7 +715,7 @@ small {
 }
 
 .agreement-data{
-    font-size: 16px;
+    font-size: 15px;
     line-height: 22px;
     margin: 5px 0 0 0;
 }
@@ -795,6 +888,22 @@ input[type=checkbox]:checked + label:before{
 .vote-button {
     background: #00609f;
     float: right !important;
+    box-shadow: 2px 2px rgb(204, 204, 204) !important;
+}
+
+@media (max-width: 800px){
+    .vote-button-more-margin{ margin-top: 15px;}
+}
+
+
+.vote-button-dismiss{
+    color: #777777;
+    background: rgba(204, 204, 204, 0.5) !important;
+}
+
+.vote-button-bigger{
+    margin-top: 15px;
+    padding: 10px 20px 8px 20px;
 }
 
 .vote-reminder {
@@ -943,7 +1052,7 @@ input[type=checkbox]:checked + label:before{
 .pvotes-box-subtitle {
     font-style: italic;
     font-size: 16px;
-    padding: 5px 10px 10px 10px;
+    padding: 5px 10px 10px 5px;
     font-weight: 500;
 }
 
@@ -1085,22 +1194,27 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     font-weight: 500 !important;
     text-align: center;
     font-style: italic;
-}
-
-.pcases-small-tag {
-    font-size: 12px;
-    padding: 2px 4px 0 3px;
     position: absolute;
     top: 0;
     margin-left: 4px !important;
 }
 
+.pcases-small-tag {
+    font-size: 12px;
+    padding: 2px 4px 0 3px;
+}
+
+@media (max-width: 800px){
+    .pcases-small-tag{ right: 0; margin: 0;}
+}
+
 .pcases-medium-tag {
     font-size: 13px;
-    padding: 3px 5px 1px 4px;
-    position: absolute;
-    top: 15px;
-    right: 15px;
+    padding: 3px 5px 2px 4px;
+}
+
+@media (max-width: 800px){
+    .pcases-medium-tag{ right: 35px; margin: 0;}
 }
 
 .active-case {
@@ -1139,6 +1253,11 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     background: #eeeeee !important;
     padding: 10px 20px 10px 20px !important;
     transition: background 0.3s ease !important;
+    margin: 10px;
+}
+
+@media (max-width: 800px){
+    .multi-step-title{ margin: 10px 5px;}
 }
 
 .multi-step-title a {
@@ -1222,7 +1341,6 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     border: none;
     height: 40px;
     padding: 9px 15px 7px 15px !important;
-    width: auto;
     transition: background 0.3s ease;
     cursor: pointer !important;
 }
@@ -1245,18 +1363,14 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     font-size: 15px;
 }
 
-.download-button {
-    margin: 15px 15px 10px 0;
-}
-
 .download-box-button{
     margin: 10px 15px 5px 0 !important;
-
 }
 
-.admin-add-button {
-    margin: 35px 0 0 0;
-    padding: 8px 15px 0 15px !important;
+.admin-add-button,
+.download-button{
+    padding: 8px auto 0 auto;
+    text-align: center;
 }
 
 .upload-button {
@@ -1533,7 +1647,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 
 .add-user_white {
     background-position: -140px -40px;
-    margin: -8px 0 0 0;
+    margin: -8px 0 0 -10px;
 }
 
 .edit-dul {
@@ -1743,6 +1857,10 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     width: 750px !important;
     position: absolute;
     left: -150px!important;
+}
+
+@media (max-width: 800px){
+    .modal-add-dul, .modal-add-dataset, .modal-large { width: 600px !important; left: -75px !important;}
 }
 
 .modal-add-dul .admin-modal-header,
@@ -2001,6 +2119,15 @@ input[type="checkbox"][disabled] + label {
     margin: 0 !important;
 }
 
+/*.votes-alerts-more-margin {*/
+    /*margin: 15px 10px 5px 10px !important;*/
+/*}*/
+
+.votes-alerts-more-margin {
+    margin-right: 10px !important;
+    margin-left: 10px !important;
+}
+
 .admin-create-alerts {
     margin: 5px 10px 0 10px !important;
 }
@@ -2030,6 +2157,10 @@ input[type="checkbox"][disabled] + label {
     margin-bottom: 0!important;
 }
 
+.votes-alerts-more-margin .alert-title{
+    margin-top: 15px;
+}
+
 .final-alert .alert-title{
     background-color: rgb(215, 200, 196);
 }
@@ -2040,7 +2171,7 @@ input[type="checkbox"][disabled] + label {
 
 .votes-alerts .alert-title h4 {
     display: block;
-    font-weight: 500;
+    font-weight: normal;
     font-size: 16px !important;
     line-height: 25px;
     margin: 0!important;
@@ -2189,6 +2320,12 @@ input[type="checkbox"][disabled] + label {
     box-shadow: 3px 3px 3px #cccccc;
     border-radius: 6px;
     padding: 15px 20px;
+}
+
+@media (max-width: 800px){
+    .console-boxes {
+        margin: 10px 0;
+    }
 }
 
 .console-boxes-margin{
@@ -2399,6 +2536,7 @@ input[type="checkbox"][disabled] + label {
     box-shadow: 3px 3px 0 #cccccc;
     border-radius: 6px;
     position: relative !important;
+    margin-top: 10px;
 }
 
 .table-scroll {
@@ -2609,10 +2747,6 @@ td:first-child .checkbox label{
     font-size: 13px;
 }
 
-.dataset-download-button{
-    margin: 35px 0 0 20px!important;
-}
-
 .dataset-upload-button {
     color: #00928A;
     font-weight: 500;
@@ -2646,7 +2780,6 @@ accordion .panel-group{
 
 .accordion h3{
     margin: 10px 0 5px 0!important;
-    padding: 0 5px;
 }
 
 .accordion-title{

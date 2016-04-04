@@ -1,33 +1,38 @@
 <div ng-include src="'app/header/header.html'"></div>
 <div class="container">
-    <h2 class="cm-title cm-title-access access-color">
-        <img src="assets/images/icon_access.png" alt="access icon" class="cm-icons"><span>Data Access Congruence Review</span><br>
-    </h2>
+    <div class="row fsi-row-lg-level fsi-row-md-level title-wrapper">
+        <img src="assets/images/icon_access.png" alt="Data Access Request icon" class="cm-icons main-icon-title">
+        <h2 class="main-title margin-sm access-color">
+            Data Access Congruence Review
+        </h2>
+    </div>
     <accordion>
         <accordion-group class="accordion" is-open="openAccordion">
             <accordion-heading>
-                <h3 class="access-color">
+                <h3 class="access-color pos-relative">
                     <div class="accordion-title">1. Should data access be granted to this applicant?</div>
-                    <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
+                    <i class="pull-right glyphicon"
+                       ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
                 </h3>
             </accordion-heading>
-            <div class="row fsi-row-lg-level fsi-row-md-level">
-               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
+            <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
                     <div class="panel-heading cm-boxhead access-color">
                         <h4>Research Purpose
-                            <a class="enabled hover-color application-link" ng-click="DarReview.openApplication()">Application summary</a>
+                            <a class="enabled hover-color application-link" ng-click="DarReview.openApplication()">Application
+                                summary</a>
                         </h4>
                     </div>
                     <div id="rp" class="panel-body cm-boxbody">{{dar.rus}}</div>
-               </div>
-               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
                     <div class="panel-heading cm-boxhead access-color">
                         <h4>Data Use Limitations</h4>
                     </div>
                     <div id="dul" class="panel-body cm-boxbody">
                         <a href="{{downloadUrl}}" target="_blank">{{consent.dulName}}</a>
                     </div>
-               </div>
+                </div>
             </div>
             <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
                 <div class="jumbotron box-vote">
@@ -68,17 +73,26 @@
                                            placeholder="Describe your rationale here (be as specific as possible).">
                                 </div>
                             </div>
+
                             <div class="row">
-                                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 votes-alerts">
-                                    <alert ng-repeat="alert in alertsDAR" type="danger" class="alert-title cancel-color f-left">
-                                        <h4>{{alert.title}}<i>{{alert.msg}}</i></h4>
-                                    </alert>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 col-xs-offset-8 f-right no-margin">
-                                    <button ng-disabled="selection.voteStatus === null || enableDARButton === false" ng-click="logVote()"
+                                <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-6 col-sm-offset-6 col-xs-6 col-xs-offset-6 f-right no-margin">
+                                    <button ng-disabled="selection.voteStatus === null || enableDARButton === false"
+                                            ng-click="logVote()"
                                             class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button access-background">
                                         Vote
                                     </button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="votes-alerts votes-alerts-more-margin">
+                                    <alert ng-repeat="alert in alertsDAR" type="danger"
+                                           class="alert-title cancel-color f-left col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <h4>
+                                            <b>{{alert.title}}</b><br>
+                                            <i>{{alert.msg}}</i>
+                                        </h4>
+                                    </alert>
                                 </div>
                             </div>
                         </fieldset>
@@ -89,18 +103,20 @@
     </accordion>
 
     <accordion close-others="oneAtATime" ng-if="showRPaccordion">
-        <accordion-group class="accordion" >
+        <accordion-group class="accordion">
             <accordion-heading>
-                <h3 class="access-color">
+                <h3 class="access-color pos-relative">
                     <div class="accordion-title">2. Was the research purpose accurately converted to a structured format?</div>
-                    <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
+                    <i class="pull-right glyphicon"
+                       ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
                 </h3>
             </accordion-heading>
-            <div class="row fsi-row-lg-level fsi-row-md-level">
+            <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
                     <div class="panel-heading cm-boxhead access-color">
                         <h4>Research Purpose
-                            <a class="enabled hover-color application-link" ng-click="DarReview.openApplication()">Application summary</a>
+                            <a class="enabled hover-color application-link" ng-click="DarReview.openApplication()">Application
+                                summary</a>
                         </h4>
                     </div>
                     <div id="rpurpose" class="panel-body cm-boxbody">{{dar.rus}}</div>
@@ -125,7 +141,8 @@
 
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
                                     <div class="radio-inline">
-                                        <input type="radio" ng-model="selection.rpVoteStatus" ng-click="positiveRPVote()"
+                                        <input type="radio" ng-model="selection.rpVoteStatus"
+                                               ng-click="positiveRPVote()"
                                                ng-value="true" class="regular-radio" id="inputRPPositive"
                                                name="inputVote">
                                         <label for="inputRPPositive"></label>
@@ -152,16 +169,23 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 votes-alerts">
-                                    <alert ng-repeat="alert in alertsRP" type="danger" class="f-left alert-title cancel-color">
-                                        <h4>{{alert.title}}<i>{{alert.msg}}</i></h4>
-                                    </alert>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 col-xs-offset-8 f-right no-margin">
-                                    <button ng-disabled="selection.rpVoteStatus === null || enableRPButton === false" ng-click="logRPVote()"
+                                <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-6 col-sm-offset-6 col-xs-6 col-xs-offset-6 f-right no-margin">
+                                    <button ng-disabled="selection.rpVoteStatus === null || enableRPButton === false"
+                                            ng-click="logRPVote()"
                                             class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button access-background">
                                         Vote
                                     </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="votes-alerts votes-alerts-more-margin">
+                                    <alert ng-repeat="alert in alertsRP" type="danger"
+                                           class="alert-title cancel-color f-left col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <h4>
+                                            <b>{{alert.title}}</b><br>
+                                            <i>{{alert.msg}}</i>
+                                        </h4>
+                                    </alert>
                                 </div>
                             </div>
                         </fieldset>
@@ -170,4 +194,19 @@
             </div>
         </accordion-group>
     </accordion>
+
+    <div class="form-group form-group-bottom">
+        <a href="#/user_console" ng-repeat="rol in $root.currentUser.roles"
+           ng-show="'{{rol.name}}' === '{{$root.userRoles.member}}'"
+           class="btn vote-button vote-button-dismiss vote-button-bigger">
+            Back to Console
+        </a>
+
+        <a href="#/chair_console" ng-repeat="rol in $root.currentUser.roles"
+           ng-show="'{{rol.name}}' === '{{$root.userRoles.chairperson}}'"
+           class="btn vote-button vote-button-dismiss vote-button-bigger">
+            Back to Console
+        </a>
+    </div>
+
 </div>

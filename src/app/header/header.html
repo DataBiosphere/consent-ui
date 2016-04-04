@@ -1,22 +1,33 @@
-<nav class="navbar top-navigator-bar" ng-controller="Header as Header">
+<nav class="navbar top-navigator-bar" role="navigation" ng-controller="Header as Header">
     <div class="row top-navigator">
-        <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 no-padding">
-            <div class="brand"><img src="../assets/images/broad_logo_allwhite.png" alt="Broad Institute Logo"></div>
+    <div class="navbar-header">
+                <button type="button" class="navbar-toggle" ng-click="navbarCollapsed = !navbarCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <div class="navbar-brand brand">
+                <img src="../assets/images/broad_logo_allwhite.png" alt="Broad Institute Logo">
+            </div>
         </div>
-        <div class="navbar navbar-right col-lg-3 col-md-3 col-sm-6 col-xs-6 no-margin"
-             ng-controller="Header">
-            <li class="dropdown navbar-right user-li" dropdown is-open="status.isopen">
-                <a role="button" class="dropdown-toggle" data-toggle="dropdown" href="#" dropdown-toggle
-                   ng-disabled="disabled">
-                    <div id="dacUser">{{$root.currentUser.displayName}} <span class="caret caret-margin"></span></div>
-                    <small id="dacUserMail"> {{$root.currentUser.email}}</small>
-                </a>
-                <ul class="dropdown-menu user-dropdown" role="menu">
-                    <li><a href onclick="signOut();">Sign out</a></li>
-                </ul>
-            </li>
-        </div>
-        <div class="navbar col-lg-7 col-md-7 col-sm-12 col-xs-12 links-li">
+
+        <div class="collapse navbar-collapse no-padding" collapse="navbarCollapsed">
+
+            <ul class="navbar-right no-margin">
+                <li class="dropdown user-li" dropdown is-open="status.isopen">
+                    <a role="button" class="dropdown-toggle" data-toggle="dropdown" href="#" dropdown-toggle
+                       ng-disabled="disabled">
+                        <div id="dacUser">{{$root.currentUser.displayName}} <span class="caret caret-margin"></span></div>
+                        <small id="dacUserMail"> {{$root.currentUser.email}}</small>
+                    </a>
+                    <ul class="dropdown-menu user-dropdown" role="menu">
+                        <li><a href onclick="signOut();">Sign out</a></li>
+                    </ul>
+                </li>
+            </ul>
+
             <ul class="navbar-left no-margin">
                 <li ng-repeat="rol in $root.currentUser.roles"
                     ng-show="'{{rol.name}}' === '{{$root.userRoles.chairperson}}'">
@@ -37,10 +48,12 @@
                     ng-show="'{{rol.name}}' === '{{$root.userRoles.dataOwner}}'">
                     <a href="#/data_owner_console">Data Owner Console</a>
                 </li>
-                <li ng-repeat="rol in $root.currentUser.roles" ng-show="'{{rol.name}}' === '{{$root.userRoles.researcher}}'">
-                    <a href="" ng-click="Header.goToRP()" > Request Application</a>
+                <li ng-repeat="rol in $root.currentUser.roles"
+                    ng-show="'{{rol.name}}' === '{{$root.userRoles.researcher}}'">
+                    <a href="" ng-click="Header.goToRP()"> Request Application</a>
                 </li>
-                <li class="dropdown drop-li" dropdown on-toggle="toggled(open)" ng-show="showStatistics($root.currentUser.roles, $root.userRoles)">
+                <li class="dropdown" dropdown on-toggle="toggled(open)"
+                    ng-show="showStatistics($root.currentUser.roles, $root.userRoles)">
                     <a role="button" class="dropdown-toggle" href="#" dropdown-toggle>
                         <div>Statistics <span class="caret caret-margin"></span></div>
                     </a>
@@ -53,10 +66,9 @@
                     </ul>
                 </li>
                 <li><a href="#/dataset_catalog">Dataset Catalog</a></li>
-                <!--<li><a href="#">About</a></li>-->
-                <li class="dropdown drop-li" dropdown on-toggle="toggled(open)">
+                <li class="dropdown" dropdown on-toggle="toggled(open)">
                     <a role="button" class="dropdown-toggle" href="#" dropdown-toggle>
-                        <div>Request Help<span class="caret caret-margin"></span></div>
+                        <div>Request Help <span class="caret caret-margin"></span></div>
                     </a>
                     <ul class="dropdown-menu user-dropdown" role="menu">
                         <li><a href="" class="f-left" ng-click="Header.helpMeModal()">Create a Report</a></li>

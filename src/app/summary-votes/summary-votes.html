@@ -1,17 +1,20 @@
 <div ng-include src="'app/header/header.html'"></div>
 <div class="container">
-    <h2 class="cm-title common-color">
-        <img src="assets/images/icon_statistics.png" alt="Statistics icon" class="cm-icons">Votes statistics<br>
-        <div class="cm-title-other-description">Summary statistics on the Data Access Committee and votes system</div>
-    </h2>
+    <div class="row fsi-row-lg-level fsi-row-md-level title-wrapper">
+        <img src="assets/images/icon_statistics.png" alt="Statistics icon" class="cm-icons main-icon-title">
+        <h2 class="main-title margin-sm common-color">
+            Votes statistics<br>
+            <div class="main-title-description">Summary statistics on the Data Access Committee and votes system</div>
+        </h2>
+    </div>
     <hr class="section-separator">
-    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
         <div class="row stats-title">
-            <h2 class="col-lg-9 col-md-9 col-sm-8 col-xs-12 pvotes-box-title dul-color">
+            <h2 class="col-lg-10 col-md-9 col-sm-8 col-xs-12 pvotes-box-title dul-color">
                 <img src="assets/images/icon_dul.png" alt="Translation icon" class="pvotes-icons">Data Use Limitations Statistics<br>
                 <div class="pvotes-box-title-description">Summary of votes on whether the consent limitations were accurately converted into a structured format</div>
             </h2>
-            <a ng-click= SummaryVotes.getFile("TranslateDUL")  class="col-lg-3 col-md-3 col-sm-4 col-xs-12 download-button dul-background"><span>Download stats</span><span class="cm-icon-button glyphicon glyphicon-download caret-margin" aria-hidden="true"></span></a>
+            <a ng-click= SummaryVotes.getFile("TranslateDUL")  class="col-lg-2 col-md-3 col-sm-4 col-xs-12 search-reviewed download-button dul-background"><span>Download stats</span><span class="glyphicon glyphicon-download caret-margin" aria-hidden="true"></span></a>
         </div>
         <div class="row fsi-row-lg-level fsi-row-md-level">
             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 jumbotron box-vote-stats">
@@ -34,13 +37,12 @@
             </div>
         </div>
         <div class="row stats-title">
-            <h2 class="col-lg-9 col-md-9 col-sm-8 col-xs-12 pvotes-box-title access-color">
+            <h2 class="col-lg-10 col-md-9 col-sm-8 col-xs-12 pvotes-box-title access-color">
                 <img src="assets/images/icon_access.png" alt="Access icon" class="pvotes-icons">Data Access Statistics<br>
                 <div class="pvotes-box-title-description">Summary of votes on whether the researcher should be allowed to access a research study</div>
             </h2>
-            <a ng-click= SummaryVotes.getFile("DataAccess") name="Download" class="col-lg-3 col-md-3 col-sm-4 col-xs-6 download-button download-box-button access-background"><span>Download stats</span><span class="cm-icon-button glyphicon glyphicon-download caret-margin" aria-hidden="true"></span></a>
+            <a ng-click= SummaryVotes.getFile("DataAccess") name="Download" class="col-lg-2 col-md-3 col-sm-4 col-xs-12 download-button search-reviewed access-background"><span>Download stats</span><span class="glyphicon glyphicon-download caret-margin" aria-hidden="true"></span></a>
         </div>
-        <hr class="box-separator">
 
         <h3 class="stats-box-title no-margin">
             <div class="cm-inside-box-title access-color">1. Should data access be granted to this applicant?</div>
@@ -105,7 +107,7 @@
                     <h4 class="cm-results-amount">Amount of cases: <span class="access-color">{{SummaryVotes.chartData.VaultReviewed[1][1] + SummaryVotes.chartData.VaultReviewed[2][1]}}</span></h4>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 jumbotron box-vote-singleresults">
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 jumbotron box-vote-stats">
                 <h4 class="cm-results-subtitle">Agreement between automated matching and Data Access Committee</h4>
                 <div class="row">
                     <hr class="box-separator-white separator-margin">

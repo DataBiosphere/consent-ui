@@ -1,11 +1,14 @@
 <div ng-include src="'app/header/header.html'"></div>
 <div class="container">
-    <h2 class="cm-title dul-color">
-        <img src="assets/images/icon_dul.png" alt="translation icon" class="cm-icons">Data Use Limitations Congruence Review<br>
-        <div class="cm-title-description">Where the data use limitations accurately converted to a structured format?</div>
-    </h2>
+    <div class="row fsi-row-lg-level fsi-row-md-level title-wrapper">
+        <img src="assets/images/icon_dul.png" alt="Data Use Limitations icon" class="cm-icons main-icon-title">
+        <h2 class="main-title margin-sm dul-color">
+            Data Use Limitations Congruence Review<br>
+            <div class="main-title-description">Where the data use limitations accurately converted to a structured format?</div>
+        </h2>
+    </div>
     <hr class="section-separator">
-    <div class="row fsi-row-lg-level fsi-row-md-level">
+    <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
             <div class="panel-heading cm-boxhead dul-color">
                 <h4>Data Use Limitations</h4>
@@ -59,7 +62,20 @@
                         </div>
                     </div>
                     <div class="form-group form-group-bottom">
-                        <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-3 col-md-offset-9 col-xs-12">
+                        <div class="col-lg-3 col-lg-offset-6 col-md-3 col-md-offset-6 col-sm-6 col-xs-6">
+                            <a href="#/user_console" ng-repeat="rol in $root.currentUser.roles"
+                               ng-show="'{{rol.name}}' === '{{$root.userRoles.member}}'"
+                               class="btn col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button vote-button-dismiss">
+                                Cancel
+                            </a>
+
+                            <a href="#/chair_console" ng-repeat="rol in $root.currentUser.roles"
+                               ng-show="'{{rol.name}}' === '{{$root.userRoles.chairperson}}'"
+                               class="btn col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button vote-button-dismiss">
+                                Cancel
+                            </a>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
                             <button ng-disabled="voteStatus === null || enableVoteButton === false" ng-click="logVote()"
                                     class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button dul-background">
                                 Vote
