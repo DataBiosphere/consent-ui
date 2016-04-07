@@ -24,6 +24,11 @@
             <div id="ssdur" class="panel-body cm-boxbody translated-restriction" ng-bind-html="structuredDataUseLetter"></div>
         </div>
     </div>
+    <div class="form-group form-group-bottom">
+        <a href="#/chair_console" class="btn vote-button vote-button-dismiss vote-button-bigger" style="margin-right: 15px;">
+            Back to Console
+        </a>
+    </div>
     <h3 class="cm-subtitle">Data Access Committee Votes</h3>
 
     <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
@@ -72,10 +77,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-lg-3 col-lg-offset-6 col-md-3 col-md-offset-6 col-sm-6 col-xs-6">
-                            <a href="#/chair_console" class="btn col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button vote-button-dismiss">Cancel</a>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                        <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-6 col-sm-offset-6 col-xs-6 col-xs-offset-6">
                             <button ng-click="logVote()" ng-disabled="election.finalVote == null"
                                     class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button dul-background">
                                 Vote

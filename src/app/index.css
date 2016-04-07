@@ -902,8 +902,12 @@ input[type=checkbox]:checked + label:before{
 }
 
 .vote-button-bigger{
-    margin-top: 15px;
+    margin-top: 10px;
     padding: 10px 20px 8px 20px;
+}
+
+@media (max-width: 800px){
+    .vote-button-bigger { margin-right: 0;}
 }
 
 .vote-reminder {
@@ -970,9 +974,6 @@ input[type=checkbox]:checked + label:before{
 .vault-result-chart{
     width: 100%;
     height: 138px;
-    /*float: left !important;*/
-    /*text-align: left;*/
-    /*margin-left: 50px;*/
 }
 
 .pvotes-icons {
@@ -1179,6 +1180,42 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     font-weight: 500 !important;
 }
 
+
+
+
+.pcases-small-tag,
+.pcases-medium-tag{
+    background: #D13B07;
+    color: #ffffff;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    box-shadow: 1px 1px #cccccc;
+    display: inline-block !important;
+    font-weight: 500 !important;
+    text-align: center;
+    font-style: italic;
+}
+
+.pcases-small-tag {
+    font-size: 12px;
+    padding: 2px 4px 0 3px;
+    position: absolute;
+    top: 0;
+    margin-left: 4px !important;
+}
+
+.pcases-medium-tag {
+    font-size: 13px;
+    padding: 3px 5px 1px 4px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+
+
+
+
 .pcases-small-tag,
 .pcases-medium-tag{
     background: #D13B07;
@@ -1200,17 +1237,18 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     padding: 2px 4px 0 3px;
 }
 
+
 @media (max-width: 800px){
     .pcases-small-tag{ right: 0; margin: 0;}
 }
 
+
 .pcases-medium-tag {
     font-size: 13px;
-    padding: 3px 5px 2px 4px;
-}
-
-@media (max-width: 800px){
-    .pcases-medium-tag{ right: 35px; margin: 0;}
+    padding: 3px 5px 1px 4px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
 }
 
 .active-case {
@@ -2114,10 +2152,6 @@ input[type="checkbox"][disabled] + label {
 .votes-alerts {
     margin: 0 !important;
 }
-
-/*.votes-alerts-more-margin {*/
-/*margin: 15px 10px 5px 10px !important;*/
-/*}*/
 
 .votes-alerts-more-margin {
     margin-right: 10px !important;
