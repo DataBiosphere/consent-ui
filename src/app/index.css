@@ -954,10 +954,6 @@ input[type=checkbox]:checked + label:before{
     padding-right: 5px;
 }
 
-.select-option{
-
-}
-
 /***************************************************Charts*/
 
 .result_chart {
@@ -1596,6 +1592,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     background: #2FA4E7 !important;
 }
 
+
 .all-icons {
     display: inline-block;
     width: 35px;
@@ -1739,7 +1736,6 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     margin: -8px 0 0 -5px;
 }
 
->>>>>>> Add Ontologies Modal
 .admin-manage-buttons .enabled, .admin-manage-buttons .disabled, .admin-manage-buttons .create, .admin-manage-buttons .cancel {
     text-align: center;
     margin: 4px auto 0 auto !important;
@@ -2120,7 +2116,7 @@ input[type="checkbox"][disabled] + label {
 }
 
 /*.votes-alerts-more-margin {*/
-    /*margin: 15px 10px 5px 10px !important;*/
+/*margin: 15px 10px 5px 10px !important;*/
 /*}*/
 
 .votes-alerts-more-margin {
