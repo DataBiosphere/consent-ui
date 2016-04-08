@@ -1,11 +1,14 @@
 <div ng-include src="'app/header/header.html'"></div>
 <div class="container">
-    <h2 class="cm-title dul-color">
-        <img src="assets/images/icon_dul.png" alt="Data Use Limitations icon" class="cm-icons">Collect votes for Data Use Limitations Congruence Review<br>
-        <div class="cm-title-description">Where the data use limitations accurately converted to a structured format?</div>
-    </h2>
+    <div class="row fsi-row-lg-level fsi-row-md-level title-wrapper">
+        <img src="assets/images/icon_dul.png" alt="Data Use Limitations icon" class="cm-icons main-icon-title">
+        <h2 class="main-title margin-sm dul-color">
+            Collect votes for Data Use Limitations Congruence Review<br>
+            <div class="main-title-description">Where the data use limitations accurately converted to a structured format?</div>
+        </h2>
+    </div>
     <hr class="section-separator">
-    <div class="row fsi-row-lg-level fsi-row-md-level">
+    <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
             <div class="panel-heading cm-boxhead dul-color">
                 <h4>Data Use Limitations</h4>
@@ -21,9 +24,15 @@
             <div id="ssdur" class="panel-body cm-boxbody translated-restriction" ng-bind-html="structuredDataUseLetter"></div>
         </div>
     </div>
-    <h3 class="cm-subtitle no-padding">Data Access Committee Votes</h3>
-    <div class="row fsi-row-lg-level fsi-row-md-level">
-        <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 jumbotron box-vote-results">
+    <div class="form-group form-group-bottom">
+        <a href="#/chair_console" class="btn vote-button vote-button-dismiss vote-button-bigger" style="margin-right: 15px;">
+            Back to Console
+        </a>
+    </div>
+    <h3 class="cm-subtitle">Data Access Committee Votes</h3>
+
+    <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 jumbotron box-vote-results no-padding">
             <h3 class="cm-results-subtitle dul-color">Vote Results</h3>
             <hr class="box-separator-white">
             <div class="row">
@@ -32,7 +41,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12 jumbotron box-vote-results" ng-class="{'box-vote-disabled' : isFormDisabled}">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-results no-padding" ng-class="{'box-vote-disabled' : isFormDisabled}">
             <h3 class="cm-results-subtitle dul-color">Final decision</h3>
             <hr class="box-separator-white">
             <fieldset ng-disabled="isFormDisabled">
@@ -66,8 +75,9 @@
                                    placeholder={{election.finalRationale}}>
                         </div>
                     </div>
-                    <div class="form-group form-group-bottom">
-                        <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-4 col-sm-offset-8 col-xs-12">
+
+                    <div class="row">
+                        <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-6 col-sm-offset-6 col-xs-6 col-xs-offset-6">
                             <button ng-click="logVote()" ng-disabled="election.finalVote == null"
                                     class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button dul-background">
                                 Vote
@@ -78,8 +88,8 @@
             </fieldset>
         </div>
     </div>
-    <div class="row" ng-repeat="row in voteList">
-        <div id="voteResultsList" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill" ng-repeat="vm in row">
+    <div class="row row fsi-row-lg-level fsi-row-md-level no-margin" ng-repeat="row in voteList">
+        <div id="voteResultsList" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill no-padding" ng-repeat="vm in row">
             <div class="jumbotron box-vote-singleresults">
                 <div class="row">
                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 cm-user-name">{{vm.displayName}}</div>

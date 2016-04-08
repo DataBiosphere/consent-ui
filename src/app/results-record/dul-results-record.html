@@ -1,13 +1,14 @@
 <div ng-include src="'app/header/header.html'"></div>
 <div class="container">
-    <h2 class="cm-title dul-color">
-        <img src="assets/images/icon_dul.png" alt="translation icon" class="cm-icons">Data Use Limitations - Results
-        Record<br>
-        <div class="cm-title-description">Where the data use limitations accurately converted to a structured format?
-        </div>
-    </h2>
+    <div class="row fsi-row-lg-level fsi-row-md-level title-wrapper">
+        <img src="assets/images/icon_dul.png" alt="Data Use Limitations icon" class="cm-icons main-icon-title">
+        <h2 class="main-title margin-sm dul-color">
+            Data Use Limitations - Results Record<br>
+            <div class="main-title-description">Where the data use limitations accurately converted to a structured format?</div>
+        </h2>
+    </div>
     <hr class="section-separator">
-    <div class="row fsi-row-lg-level fsi-row-md-level">
+    <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
             <div class="panel-heading cm-boxhead dul-color">
                 <h4>Data Use Limitations</h4>
@@ -23,9 +24,8 @@
             <div id="ssdur" class="panel-body cm-boxbody translated-restriction" ng-bind-html="structuredDataUseLetter"></div>
         </div>
     </div>
-    <hr class="section-separator">
     <h3 class="cm-subtitle">Data Access Committee Votes</h3>
-    <div class="row fsi-row-lg-level fsi-row-md-level">
+    <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 jumbotron box-vote-results">
             <h3 class="cm-results-subtitle dul-color">Vote Results Stats</h3>
             <hr class="box-separator-white">
@@ -64,8 +64,8 @@
                        ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
                 </h3>
             </accordion-heading>
-            <div class="row" ng-repeat="row in voteList">
-                <div id="voteResultsList" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill" ng-repeat="vm in row">
+            <div class="row fsi-row-lg-level fsi-row-md-level no-margin" ng-repeat="row in voteList">
+                <div id="voteResultsList" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill no-padding" ng-repeat="vm in row">
                     <div class="jumbotron box-vote-singleresults">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">{{vm.displayName}}

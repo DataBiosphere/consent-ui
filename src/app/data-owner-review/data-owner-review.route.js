@@ -10,7 +10,7 @@
         $stateProvider
             .state('data_owner_review', {
                 name: 'data_owner_review',
-                url: '/data_owner_review',
+                url: '/data_owner_review/:voteId/:referenceId/:dataSetId',
                 params: {
                     voteId: null,
                     referenceId: null,

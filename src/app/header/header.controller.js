@@ -15,6 +15,9 @@
             isopen: false
         };
 
+        $scope.navbarCollapsed = true;
+
+
         function goToRP() {
             $state.go('rp_application.step1', {}, { reload: true });
         }
