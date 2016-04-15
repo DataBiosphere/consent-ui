@@ -47,7 +47,7 @@
                             <label for="inputVotePositive"></label>
 
                             <div class="radio-button-text">Yes</div>
-                            <input type="radio" ng-model="vote.vote"
+                            <input type="radio" ng-model="vote.vote" ng-click="setEnableFinalButton()"
                                    ng-value="false" class="regular-radio" id="inputVoteNegative"
                                    name="inputVote">
                             <label for="inputVoteNegative"></label>
@@ -61,7 +61,7 @@
                         class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale</label>
 
                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
-                        <input type="text" ng-model="vote.rationale"
+                        <input type="text" ng-model="vote.rationale" ng-change="setEnableFinalButton()"
                                ng-disabled="vote.vote != false "
                                cm-focus="{{!FinalAccessReviewResults.voteForm.vote || FinalAccessReviewResults.voteForm.vote == 'true' ? 'false' : 'true'}}"
                                name="inputRationale"
@@ -80,7 +80,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
-                        <button ng-disabled="vote.vote === null" ng-click="logVote()"
+                        <button ng-disabled="vote.vote === null || !enableFinalButton" ng-click="logVote()"
                                 class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button vote-button-more-margin access-background">
                             Vote
                         </button>
@@ -102,13 +102,13 @@
 
                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
                         <div class="radio-inline">
-                            <input type="radio" ng-model="voteAgreement.vote"
+                            <input type="radio" ng-model="voteAgreement.vote" ng-click="setEnableAgreementButton()"
                                    ng-value="true" class="regular-radio" id="inputAgreement"
                                    name="inputAgreement">
                             <label for="inputAgreement"></label>
 
                             <div class="radio-button-text">Yes</div>
-                            <input type="radio" ng-model="voteAgreement.vote"
+                            <input type="radio" ng-model="voteAgreement.vote" ng-click="setEnableAgreementButton()"
                                    ng-value="false" class="regular-radio" id="inputDisagreement"
                                    name="inputDisagreement">
                             <label for="inputDisagreement"></label>
@@ -122,7 +122,7 @@
                         class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Comments</label>
 
                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
-                        <input type="text" ng-model="voteAgreement.rationale"
+                        <input type="text" ng-model="voteAgreement.rationale" ng-change="setEnableAgreementButton()"
                                name="inputRationale"
                                class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
                                placeholder="Describe your rationale here (be as specific as possible).">
@@ -148,7 +148,7 @@
                     </div>
 
                     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
-                        <button ng-click="logVoteAgreement()" ng-disabled="voteAgreement.vote == null"
+                        <button ng-click="logVoteAgreement()" ng-disabled="voteAgreement.vote == null || !enableAgreementButton"
                                 class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button access-background">
                             Vote
                         </button>
@@ -176,7 +176,7 @@
             <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-lightresults no-padding">
                     <div class="row">
-                        <div class="col-lg-7 col-md-7 col-sm-6 col-xs-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <div class="cm-title-record access-color">DAC Decision</div>
                             <hr class="box-separator">
                             <div class="row results-box">
@@ -206,7 +206,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <div cm-chart cm-chart-data="chartDataAccess.Total"
                                  cm-chart-options="chartOptions.accessTotal" class="result_chart"></div>
                         </div>
@@ -286,7 +286,7 @@
             <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-lightresults no-padding">
                     <div class="row">
-                        <div class="col-lg-7 col-md-7 col-sm-6 col-xs-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <div class="cm-title-record access-color">DAC Decision</div>
                             <hr class="box-separator">
                             <div class="row results-box">
@@ -314,7 +314,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <div cm-chart cm-chart-data="chartRP.Total"
                                  cm-chart-options="chartOptions.RPTotal" class="result_chart"></div>
                         </div>
@@ -373,7 +373,7 @@
             <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-lightresults no-padding">
                     <div class="row">
-                        <div class="col-lg-7 col-md-7 col-sm-6 col-xs-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <div class="cm-title-record dul-color">DAC Decision</div>
                             <hr class="box-separator">
                             <div class="row results-box">
@@ -401,7 +401,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <div cm-chart cm-chart-data="chartDataDUL.Total"
                                  cm-chart-options="chartOptions.dulTotal" class="result_chart"></div>
                         </div>
