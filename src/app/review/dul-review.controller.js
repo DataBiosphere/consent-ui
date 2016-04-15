@@ -11,8 +11,6 @@
             cmLoginUserService.redirect($rootScope.currentUser);
             return;
         }
-
-        $scope.enableVoteButton = true;
         $scope.downloadUrl = apiUrl + 'consent/' + consent.consentId + '/dul';
         $scope.consentDulUrl = consent.dataUseLetter;
         $scope.consentDulName = consent.dulName;
@@ -22,14 +20,31 @@
         $scope.rationale = vote.rationale;
         $scope.isNew = null;
         $scope.electionType = null;
+        initEnableVoteButton();
+
+        function initEnableVoteButton(){
+            if(vote.vote != null){
+                $scope.enableVoteButton = false;
+            }else{
+                $scope.enableVoteButton = true;
+            }
+        }
+
+        $scope.setEnableVoteButton = function(){
+            if($scope.voteStatus === vote.vote && $scope.rationale === vote.rationale){
+                $scope.enableVoteButton = false;
+            }else{
+                $scope.enableVoteButton = true;
+            }
+        };
 
         $scope.positiveVote = function () {
             $scope.rationale = null;
+            $scope.setEnableVoteButton();
+
         };
 
         $scope.logVote = function () {
-            $scope.enableVoteButton = false;
-            if ((vote.vote !== $scope.voteStatus) || ($scope.rationale !== vote.rationale)) {
                 vote.vote = $scope.voteStatus;
                 vote.rationale = $scope.rationale;
                 var result;
@@ -44,7 +59,6 @@
                 result.then(
                     //success
                     function () {
-                        $scope.enableVoteButton = true;
                         var modalInstance = $modal.open({
                             animation: false,
                             templateUrl: 'app/modals/confirmation-modal.html',
@@ -66,9 +80,7 @@
                         alert("Error updating vote.");
                         $scope.enableVoteButton = true;
                     });
-            } else {
-                alert("Error: Your vote hasn't been changed.");
-            }
+
         };
     }
 })();

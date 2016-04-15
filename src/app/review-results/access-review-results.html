@@ -62,7 +62,7 @@
                                         <label for="inputDARVotePositive"></label>
                                         <label for="inputDARVotePositive" class="radio-button-text">Yes</label>
 
-                                        <input ng-disabled="isFormDisabled" type="radio" ng-model="election.finalVote"
+                                        <input ng-disabled="isFormDisabled" type="radio" ng-model="election.finalVote" ng-click="setEnableDARButton()"
                                                ng-value="false" class="regular-radio" id="inputDARVoteNegative"
                                                name="finalVote" ng-required="true">
                                         <label for="inputDARVoteNegative"></label>
@@ -73,7 +73,7 @@
                             <div class="form-group">
                                 <label class="col-lg-2 col-md-2 col-sm-2 col-xs-4 control-label vote-label access-color">Rationale</label>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
-                                    <input type="text" ng-model="election.finalRationale"
+                                    <input type="text" ng-model="election.finalRationale"  ng-change="setEnableDARButton()"
                                            ng-disabled="election.finalVote"
                                            cm-focus="{{!AccessReviewResults.voteForm.vote || AccessReviewResults.voteForm.vote == 'true' ? 'false' : 'true'}}"
                                            name="inputRationale"
@@ -84,7 +84,7 @@
 
                             <div class="row">
                                 <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-6 col-sm-offset-6 col-xs-6 col-xs-offset-6 f-right no-margin">
-                                    <button ng-click="logVote()" ng-disabled="!voteForm.$valid"
+                                    <button ng-click="logVote()" ng-disabled="!voteForm.$valid || !enableDARButton"
                                             class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button access-background">
                                         Vote
                                     </button>
@@ -213,7 +213,7 @@
                                         <label for="inputRPVotePositive"></label>
                                         <label for="inputRPVotePositive" class="radio-button-text">Yes</label>
 
-                                        <input type="radio" ng-model="rpElection.finalVote" ng-value="false"
+                                        <input type="radio" ng-model="rpElection.finalVote" ng-value="false" ng-click="setEnableRPButton()"
                                                class="regular-radio" id="inputRPVoteNegative" name="finalRPVote"
                                                ng-required="true">
                                         <label for="inputRPVoteNegative"></label>
@@ -226,7 +226,7 @@
                                     class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale</label>
 
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
-                                    <input type="text" ng-model="rpElection.finalRationale"
+                                    <input type="text" ng-model="rpElection.finalRationale" ng-change="setEnableRPButton()"
                                            ng-disabled="rpElection.finalVote"
                                            cm-focus="{{!AccessReviewResults.rpVoteForm.vote || AccessReviewResults.rpVoteForm.vote == 'true' ? 'false' : 'true'}}"
                                            name="inputRationale"
@@ -237,7 +237,7 @@
 
                             <div class="row">
                                 <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-6 col-sm-offset-6 col-xs-6 col-xs-offset-6 f-right no-margin">
-                                    <button ng-click="logRPVote()" ng-disabled="!rpVoteForm.$valid"
+                                    <button ng-click="logRPVote()" ng-disabled="!rpVoteForm.$valid || !enableRPButton"
                                             class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button access-background">
                                         Vote
                                     </button>

@@ -53,7 +53,7 @@
                                         <label for="inputVotePositive"></label>
                                         <label for="inputVotePositive" class="radio-button-text">Yes</label>
 
-                                        <input type="radio" ng-model="selection.voteStatus"
+                                        <input type="radio" ng-model="selection.voteStatus" ng-click="setEnableDARButton()"
                                                ng-value="false" class="regular-radio" id="inputVoteNegative"
                                                name="inputVote">
                                         <label for="inputVoteNegative"></label>
@@ -67,7 +67,7 @@
 
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
                                     <input type="text" ng-model="selection.rationale"
-                                           ng-disabled="selection.voteStatus == true"
+                                           ng-disabled="selection.voteStatus == true" ng-change="setEnableDARButton()"
                                            name="inputRationale"
                                            class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
                                            placeholder="Describe your rationale here (be as specific as possible).">
@@ -148,7 +148,7 @@
                                         <label for="inputRPPositive"></label>
                                         <label for="inputRPPositive" class="radio-button-text">Yes</label>
 
-                                        <input type="radio" ng-model="selection.rpVoteStatus"
+                                        <input type="radio" ng-model="selection.rpVoteStatus" ng-click="setEnableRPButton()"
                                                ng-value="false" class="regular-radio" id="inputRPNegative"
                                                name="inputVote">
                                         <label for="inputRPNegative"></label>
@@ -161,7 +161,7 @@
                                     class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale</label>
 
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
-                                    <input type="text" ng-model="selection.rpRationale"
+                                    <input type="text" ng-model="selection.rpRationale" ng-change="setEnableRPButton()"
                                            ng-disabled="selection.rpVoteStatus == true"
                                            name="inputRationale"
                                            class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
