@@ -5,7 +5,7 @@
     angular.module('cmResultsRecord')
         .controller('AccessResultsRecord', AccessResultsRecord);
 
-    function AccessResultsRecord($scope, $state, $modal, cmElectionService, downloadFileService, apiUrl, cmRPService, cmVoteService, cmMatchService, darElection, electionId, hasUseRestriction) {
+    function AccessResultsRecord($scope, $state, $modal, cmElectionService, downloadFileService, apiUrl, cmRPService, cmVoteService, cmMatchService, darElection, electionId, hasUseRestriction, cmDulFilesService) {
 
         /*ACCORDION*/
         $scope.oneAtATime = false;
@@ -181,6 +181,7 @@
                     });
 
                 cmElectionService.findLastElectionReviewByReferenceId(data.consent.consentId).$promise.then(function (data) {
+                    $scope.electionReview = data;
                     showDULData(data);
                     vaultVote(data.consent.consentId);
                 });
@@ -208,6 +209,10 @@
             $scope.DarFileTitle = "structured_DAR";
 
         }
+
+        $scope.downloadDUL = function(){
+            cmDulFilesService.getFile($scope.electionReview.consent.consentId, $scope.electionReview.consent.dulName);
+        };
 
         $scope.download = function download(fileName, text) {
                           var break_line =  '\r\n \r\n';

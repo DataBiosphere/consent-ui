@@ -4,7 +4,7 @@
     angular.module('cmReviewResults')
         .controller('AccessReviewResults', ReviewResults);
 
-    function ReviewResults($sce, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, electionReview, rpElectionReview, dar, apiUrl, cmEmailService, cmRPService, dar_id) {
+    function ReviewResults($sce, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, electionReview, rpElectionReview, dar, apiUrl, cmEmailService, cmRPService, dar_id, cmDulFilesService) {
 
         var vm = this;
         vm.openApplication = openApplication;
@@ -133,6 +133,11 @@
                 }
             });
         };
+
+        $scope.downloadDUL = function(){
+            cmDulFilesService.getFile(electionReview.consent.consentId, electionReview.consent.dulName);
+        };
+
 
         $scope.reminderDARAlert = function (index) {
             $scope.alertsDAR.splice(index, 1);
