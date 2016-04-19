@@ -286,6 +286,8 @@
                     $scope.vote = data;
                     if (data.vote !== null) {
                         $scope.alreadyVote = true;
+                        $scope.originalVote = data.vote;
+                        $scope.originalRationale = data.rationale;
                     }
                 });
 
@@ -316,6 +318,8 @@
         }
 
         function showAccessData(electionReview) {
+            $scope.originalAgreementVote = electionReview.voteAgreement.vote;
+            $scope.originalAgreementRationale = electionReview.voteAgreement.rationale;
             cmRPService.getDarFields(electionReview.election.referenceId, "rus").then(function (data) {
                 $scope.dar = data;
             });
@@ -384,10 +388,12 @@
 
         $scope.positiveVote = function () {
             $scope.vote.rationale = null;
+            $scope.setEnableFinalButton();
         };
 
         $scope.positiveAgreementVote = function () {
             $scope.voteAgreement.rationale = null;
+            $scope.enableAgreementButton();
         };
 
 
@@ -403,6 +409,22 @@
 
             });
         }
+
+        $scope.setEnableAgreementButton = function(){
+            if($scope.voteAgreement != undefined && $scope.voteAgreement.vote === $scope.originalAgreementVote && $scope.voteAgreement.rationale === $scope.originalAgreementRationale){
+                $scope.enableAgreementButton = false;
+            }else{
+                $scope.enableAgreementButton = true;
+            }
+        };
+
+        $scope.setEnableFinalButton = function(){
+            if($scope.vote.vote === $scope.originalVote  && $scope.vote.rationale === $scope.originalRationale ){
+                $scope.enableFinalButton = false;
+            }else{
+                $scope.enableFinalButton = true;
+            }
+        };
     }
 
 })();
