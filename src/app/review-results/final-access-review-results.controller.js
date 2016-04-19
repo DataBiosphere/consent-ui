@@ -4,7 +4,7 @@
     angular.module('cmReviewResults')
         .controller('FinalAccessReviewResults', FinalAccessReviewResults);
 
-    function FinalAccessReviewResults($scope, $rootScope, $modal, $state, cmElectionService, cmRPService, cmVoteService, cmLoginUserService, apiUrl, cmMatchService, electionId, referenceId, hasUseRestriction) {
+    function FinalAccessReviewResults($scope, $rootScope, $modal, $state, cmElectionService, cmRPService, cmVoteService, cmLoginUserService, apiUrl, cmMatchService, electionId, referenceId, hasUseRestriction, cmDulFilesService) {
 
         if (electionId === null || referenceId === null) {
             cmLoginUserService.redirect($rootScope.currentUser);
@@ -44,6 +44,10 @@
         };
 
         init();
+
+        $scope.downloadDUL = function(){
+            cmDulFilesService.getFile($scope.electionReview.consent.consentId, $scope.electionReview.consent.dulName);
+        };
 
         function logVote() {
             $scope.electionType = 'access';
@@ -310,6 +314,7 @@
                     });
 
                 cmElectionService.findLastElectionReviewByReferenceId(data.consent.consentId).$promise.then(function (data) {
+                    $scope.electionReview = data;
                     showDULData(data);
                     vaultVote(data.consent.consentId);
                 });

@@ -28,7 +28,7 @@
                 <h4>Data Use Limitations</h4>
             </div>
             <div id="dul" class="panel-body cm-boxbody">
-                <a href="{{downloadUrl}}" target="_blank">{{dulName}}</a>
+                <a style="cursor:pointer;" ng-click="downloadDUL()">{{dulName}}</a>
                 <hr style="margin: 10px 0">
                 <a ng-click="download(DulFileTitle, sDUL)" class="italic hover-color" style="cursor: pointer">
                     Download DUL structured format

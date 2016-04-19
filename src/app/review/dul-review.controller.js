@@ -4,7 +4,7 @@
     angular.module('cmReview')
         .controller('DulReview', DulReview);
 
-    function DulReview($sce, $scope, $modal, $state, $rootScope, USER_ROLES, vote, consent, election, cmVoteService,cmLoginUserService, apiUrl, cmAuthenticateService){
+    function DulReview($sce, $scope, $modal, $state, $rootScope, USER_ROLES, vote, consent, election, cmVoteService,cmLoginUserService, apiUrl, cmAuthenticateService, cmDulFilesService){
         if (typeof vote === 'undefined' ||
             typeof consent === 'undefined' ||
             typeof election === 'undefined') {
@@ -12,7 +12,6 @@
             return;
         }
         $scope.downloadUrl = apiUrl + 'consent/' + consent.consentId + '/dul';
-        $scope.consentDulUrl = consent.dataUseLetter;
         $scope.consentDulName = consent.dulName;
         $scope.consentSDul = $sce.trustAsHtml(consent.translatedUseRestriction);
         $scope.voteStatus = vote.vote;
@@ -42,6 +41,10 @@
             $scope.rationale = null;
             $scope.setEnableVoteButton();
 
+        };
+
+        $scope.downloadDUL = function(){
+            cmDulFilesService.getFile(consent.consentId, consent.dulName);
         };
 
         $scope.logVote = function () {
