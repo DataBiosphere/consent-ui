@@ -323,8 +323,11 @@
         }
 
         function showAccessData(electionReview) {
-            $scope.originalAgreementVote = electionReview.voteAgreement.vote;
-            $scope.originalAgreementRationale = electionReview.voteAgreement.rationale;
+            if(electionReview.voteAgreement != null){
+                $scope.originalAgreementVote = electionReview.voteAgreement.vote;
+                $scope.originalAgreementRationale = electionReview.voteAgreement.rationale;
+            }
+
             cmRPService.getDarFields(electionReview.election.referenceId, "rus").then(function (data) {
                 $scope.dar = data;
             });
