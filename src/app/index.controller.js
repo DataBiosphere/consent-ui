@@ -11,7 +11,7 @@
                         return response;
                     },
                     'responseError': function (rejection) {
-                        if (rejection.status === -1) {
+                        if (rejection.status === 401) {
                             $rootScope.logout();
                         }
                         return $q.reject(rejection);
