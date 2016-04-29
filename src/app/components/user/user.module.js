@@ -3,7 +3,7 @@
 
     angular.module('cmUser', [])
         .factory('GetUserResource', function ($resource, apiUrl) {
-            return $resource(apiUrl + "dacuser/:email")
+            return $resource(apiUrl + "dacuser/:email");
         })
         .factory('UserResource', function ($resource, apiUrl) {
             return $resource(apiUrl + "dacuser", {}, {

@@ -22,7 +22,7 @@
         initEnableVoteButton();
 
         function initEnableVoteButton(){
-            if(vote.vote != null){
+            if(vote.vote !== undefined && vote.vote !== null){
                 $scope.enableVoteButton = false;
             }else{
                 $scope.enableVoteButton = true;

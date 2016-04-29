@@ -11,7 +11,7 @@
                 return OntologyResource.post(fileData).$promise;
             }
 
-        function retrieveIndexedFiles(fileData) {
+        function retrieveIndexedFiles() {
                 return OntologyResource.List().$promise;
         }
 
@@ -37,6 +37,6 @@
                   getOntologyTypes: function () {
                      return getOntologyTypes();
                   }
-               }
+               };
      }
 })();

@@ -16,6 +16,6 @@
                             download: fileName
                })[0].click();
              }
-         }
+         };
     });
 })();

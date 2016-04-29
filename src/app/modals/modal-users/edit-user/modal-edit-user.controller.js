@@ -7,7 +7,6 @@
     /* ngInject */
     function ModalUsers($modalInstance, cmUserService, $scope, user, USER_ROLES) {
 
-        var vm = this;
         init();
 
         function init() {
@@ -17,7 +16,7 @@
             $scope.delegateDacUser =  {};
             $scope.delegateDataOwner =  {};
             $scope.delegateMemberRequired = false;
-            $scope.newAlternativeUserNeeded = new Object();
+            $scope.newAlternativeUserNeeded = {};
             // this var is used in addRoleRadioDirective
 
             $scope.from = 'edit';
@@ -60,63 +59,63 @@
 
             $scope.memberChanged = function (checkState,role) {
                 if($scope.wasMember){
-                if (!checkState) {
-                    $scope.searchDACUsers(role).then(
-                        function (result) {
-                            if(checkNoEmptyDelegateCandidates(result.needsDelegation,result.delegateCandidates,role)){
-                                  role == USER_ROLES.member ? $scope.delegateMemberRequired = result.needsDelegation : false;
-                                  $scope.delegateDacUser.delegateCandidates = result.delegateCandidates;
-                                  $scope.delegateDacUser.needsDelegation = result.needsDelegation;
-                            return;
-                            };
-                        });
+                    if (!checkState) {
+                        $scope.searchDACUsers(role).then(
+                            function (result) {
+                                if(checkNoEmptyDelegateCandidates(result.needsDelegation,result.delegateCandidates,role)){
+                                    $scope.delegateMemberRequired = role === USER_ROLES.member ?  result.needsDelegation : false;
+                                    $scope.delegateDacUser.delegateCandidates = result.delegateCandidates;
+                                    $scope.delegateDacUser.needsDelegation = result.needsDelegation;
+                                    return;
+                                }
+                            });
                     } else {
-                    closeNoAvailableCandidatesAlert(role);
-                    $scope.delegateDacUser.delegateCandidates = [];
-                    $scope.delegateDacUser.needsDelegation = false;
-                    $scope.delegateMemberRequired = false
+                        closeNoAvailableCandidatesAlert(role);
+                        $scope.delegateDacUser.delegateCandidates = [];
+                        $scope.delegateDacUser.needsDelegation = false;
+                        $scope.delegateMemberRequired = false;
                     }
                 }
             };
 
 
             $scope.chairpersonChanged = function (checkState,role) {
-                            if(wasChairperson){
-                               if (!checkState) {
-                                   $scope.searchDACUsers(role).then(
-                                      function (result) {
-                                        if(checkNoEmptyDelegateCandidates(result.needsDelegation,result.delegateCandidates,role)){
-                                              $scope.delegateDacUser.delegateCandidates = result.delegateCandidates;
-                                              $scope.delegateDacUser.needsDelegation = result.needsDelegation;
-                                              return;
-                                        };
-                                    });
-                                } else {
-                                         closeNoAvailableCandidatesAlert(role);
-                                         $scope.delegateDacUser.delegateCandidates = [];
-                                         $scope.delegateDacUser.needsDelegation = false;
-                                         $scope.delegateMemberRequired = false;
-                                       }
-                            }
-             };
+                if(wasChairperson){
+                    if (!checkState) {
+                        $scope.searchDACUsers(role).then(
+                            function (result) {
+                                if(checkNoEmptyDelegateCandidates(result.needsDelegation,result.delegateCandidates,role)){
+                                    $scope.delegateDacUser.delegateCandidates = result.delegateCandidates;
+                                    $scope.delegateDacUser.needsDelegation = result.needsDelegation;
+                                    return;
+                                }
+                            });
+                    } else {
+                        closeNoAvailableCandidatesAlert(role);
+                        $scope.delegateDacUser.delegateCandidates = [];
+                        $scope.delegateDacUser.needsDelegation = false;
+                        $scope.delegateMemberRequired = false;
+                    }
+                }
+            };
 
 
 
             $scope.dataOwnerChanged = function (checkState) {
                 if(wasDataOwner){
-                if (!checkState) {
-                    $scope.searchDACUsers(USER_ROLES.dataOwner).then(
-                        function (result) {
-                            if(checkNoEmptyDelegateCandidates(result.needsDelegation,result.delegateCandidates,USER_ROLES.dataOwner)){
+                    if (!checkState) {
+                        $scope.searchDACUsers(USER_ROLES.dataOwner).then(
+                            function (result) {
+                                if(checkNoEmptyDelegateCandidates(result.needsDelegation,result.delegateCandidates,USER_ROLES.dataOwner)){
                                     $scope.delegateDataOwner.delegateCandidates = result.delegateCandidates;
                                     $scope.delegateDataOwner.needsDelegation = result.needsDelegation;
-                            return;
-                            };
-                          });
+                                    return;
+                                }
+                            });
                     } else {
-                    closeNoAvailableCandidatesAlert(USER_ROLES.dataOwner);
-                    $scope.delegateDataOwner.delegateCandidates = [];
-                    $scope.delegateDataOwner.needsDelegation = false;
+                        closeNoAvailableCandidatesAlert(USER_ROLES.dataOwner);
+                        $scope.delegateDataOwner.delegateCandidates = [];
+                        $scope.delegateDataOwner.needsDelegation = false;
                     }
                 }
             };
@@ -135,7 +134,7 @@
         };
 
         $scope.edit = function (user) {
-            var map = new Object();
+            var map = {};
             map.updatedUser = user;
             if($scope.delegateDacUser.needsDelegation){
                 map.userToDelegate = JSON.parse($scope.alternativeDACMemberUser);
@@ -155,27 +154,29 @@
 
 
         var checkNoEmptyDelegateCandidates = function(needsDelegation,delegateCandidates,role){
-                  var valid =  needsDelegation === true && delegateCandidates.length === 0 ? false : true;
-                  (!valid) ? $scope.errorNoAvailableCandidates(role) : false;
-                  return valid;
+            var valid =  needsDelegation === true && delegateCandidates.length === 0 ? false : true;
+            if(!valid){
+                $scope.errorNoAvailableCandidates(role);
+            }
+            return valid;
         };
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
         };
 
-        $scope.$watch('newAlternativeUserNeeded', function(newVal, oldVal){
-              $scope.newUserNeeded = validateNoNewUserIsNeeded();
+        $scope.$watch('newAlternativeUserNeeded', function(){
+            $scope.newUserNeeded = validateNoNewUserIsNeeded();
         }, true);
 
         var validateNoNewUserIsNeeded = function(){
-           for (var key in $scope.newAlternativeUserNeeded){
-             if($scope.newAlternativeUserNeeded[key] === true){
-                return true;
-             }
-           }
-           return false;
-        }
+            for (var key in $scope.newAlternativeUserNeeded){
+                if($scope.newAlternativeUserNeeded[key] === true){
+                    return true;
+                }
+            }
+            return false;
+        };
 
         /*****ALERTS*****/
 
@@ -191,15 +192,15 @@
             });
         };
 
-         $scope.errorNoAvailableCandidates = function (role) {
-                    $scope.newAlternativeUserNeeded[role] = true;
-                    $scope.alerts.push({
-                        type: 'danger',
-                        title: "Edition can't be made!",
-                        msg: "There are no available users to delegate "+ role.toLowerCase() +" responsibilities, please add a new User.",
-                        alertType: role
-                    });
-                };
+        $scope.errorNoAvailableCandidates = function (role) {
+            $scope.newAlternativeUserNeeded[role] = true;
+            $scope.alerts.push({
+                type: 'danger',
+                title: "Edition can't be made!",
+                msg: "There are no available users to delegate "+ role.toLowerCase() +" responsibilities, please add a new User.",
+                alertType: role
+            });
+        };
 
 
         $scope.errorOnEdition = function (index) {
@@ -225,17 +226,17 @@
         };
 
         var closeNoAvailableCandidatesAlert = function (role) {
-                    var l = $scope.alerts.length;
-                    var i = 0;
-                    while(i < l){
-                        if($scope.alerts[i].alertType === role){
-                           $scope.alerts.splice(i,1);
-                           $scope.newAlternativeUserNeeded[role] = false;
-                           return;
-                        }
-                        i++;
-                    }
-                };
+            var l = $scope.alerts.length;
+            var i = 0;
+            while(i < l){
+                if($scope.alerts[i].alertType === role){
+                    $scope.alerts.splice(i,1);
+                    $scope.newAlternativeUserNeeded[role] = false;
+                    return;
+                }
+                i++;
+            }
+        };
 
         /*****DROPDOWN*****/
 
@@ -246,8 +247,3 @@
     }
 
 })();
-
-
-
-
-

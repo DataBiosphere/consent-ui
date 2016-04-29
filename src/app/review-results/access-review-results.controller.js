@@ -82,7 +82,7 @@
 
         function openApplication() {
             $scope.dataRequestId = dar_id;
-            var modalInstance = $modal.open({
+            $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/application-summary-modal/application-summary-modal.html',
                 controller: 'ApplicationModal',
@@ -93,10 +93,6 @@
                         return cmRPService.getDarModalSummary(dar_id);
                     }
                 }
-            });
-
-            modalInstance.result.then(function () {
-                init();
             });
         }
 

@@ -36,12 +36,7 @@
 
             cmDatasetService.findDataSets($rootScope.currentUser.dacUserId).then(
                 function (data) {
-                    vm.dataSetList['catalog'] = data;
-                    angular.forEach(vm.dataSetList['catalog'], function(obj) {
-                        if (angular.isDefined(obj["translatedUseRestriction"])) {
-                            obj["translatedUseRestriction"] = obj["translatedUseRestriction"];
-                        }
-                    });
+                    vm.dataSetList.catalog = data;
                 });
         }
 
@@ -168,8 +163,8 @@
                     usersAssociation: function (cmDatasetAssociationService) {
                         return cmDatasetAssociationService.getAssociatedAndToAssociateUsers(datasetId);
                     },
-                    datasetName: function(){ return datasetId },
-                    needsApproval: function(){ return needsApproval }
+                    datasetName: function(){ return datasetId; },
+                    needsApproval: function(){ return needsApproval; }
                 }
             });
 
