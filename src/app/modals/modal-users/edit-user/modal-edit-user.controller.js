@@ -5,7 +5,7 @@
         .controller('ModalUsersEdit', ModalUsers);
 
     /* ngInject */
-    function ModalUsers($modalInstance, cmUserService, $scope, user, enableRolEdit, USER_ROLES) {
+    function ModalUsers($modalInstance, cmUserService, $scope, user, USER_ROLES) {
 
         var vm = this;
         init();
@@ -14,10 +14,13 @@
             $scope.USER_ROLES = USER_ROLES;
             $scope.checkModel = {};
             $scope.user = user;
-            $scope.enableRolEdit = enableRolEdit.open;
-
+            $scope.delegateDacUser =  {};
+            $scope.delegateDataOwner =  {};
+            $scope.delegateMemberRequired = false;
+            $scope.newAlternativeUserNeeded = new Object();
             // this var is used in addRoleRadioDirective
-            $scope.from = 'edit' ;
+
+            $scope.from = 'edit';
 
             var i = user.roles.length;
             while (i--) {
@@ -41,48 +44,142 @@
                 return false;
             };
 
+            var wasChairperson =  user.was(USER_ROLES.chairperson);
+            $scope.wasMember = user.was(USER_ROLES.member);
+            var wasDataOwner = user.was(USER_ROLES.dataOwner);
 
             $scope.$on("changeChairpersonRoleAlert", function (event, arg) {
                 $scope.$apply(function () {
                     if (arg.alert) {
                         $scope.changeChairpersonRoleAlert();
                     } else {
-                        $scope.closeAlert();
+                        $scope.closeAlert(1);
                     }
                 });
             });
 
-            var l = $scope.user.roles.length;
-                        while (l--) {
-                               if ($scope.user.roles[l].name === USER_ROLES.admin ) {
-                                       $scope.emailPreference = !$scope.user.roles[l].emailPreference;
-                                   }
-                                }
-          }
+            $scope.memberChanged = function (checkState,role) {
+                if($scope.wasMember){
+                if (!checkState) {
+                    $scope.searchDACUsers(role).then(
+                        function (result) {
+                            if(checkNoEmptyDelegateCandidates(result.needsDelegation,result.delegateCandidates,role)){
+                                  role == USER_ROLES.member ? $scope.delegateMemberRequired = result.needsDelegation : false;
+                                  $scope.delegateDacUser.delegateCandidates = result.delegateCandidates;
+                                  $scope.delegateDacUser.needsDelegation = result.needsDelegation;
+                            return;
+                            };
+                        });
+                    } else {
+                    closeNoAvailableCandidatesAlert(role);
+                    $scope.delegateDacUser.delegateCandidates = [];
+                    $scope.delegateDacUser.needsDelegation = false;
+                    $scope.delegateMemberRequired = false
+                    }
+                }
+            };
 
-        vm.edit = function (user) {
-            cmUserService.updateUser(user).$promise.then(
+
+            $scope.chairpersonChanged = function (checkState,role) {
+                            if(wasChairperson){
+                               if (!checkState) {
+                                   $scope.searchDACUsers(role).then(
+                                      function (result) {
+                                        if(checkNoEmptyDelegateCandidates(result.needsDelegation,result.delegateCandidates,role)){
+                                              $scope.delegateDacUser.delegateCandidates = result.delegateCandidates;
+                                              $scope.delegateDacUser.needsDelegation = result.needsDelegation;
+                                              return;
+                                        };
+                                    });
+                                } else {
+                                         closeNoAvailableCandidatesAlert(role);
+                                         $scope.delegateDacUser.delegateCandidates = [];
+                                         $scope.delegateDacUser.needsDelegation = false;
+                                         $scope.delegateMemberRequired = false;
+                                       }
+                            }
+             };
+
+
+
+            $scope.dataOwnerChanged = function (checkState) {
+                if(wasDataOwner){
+                if (!checkState) {
+                    $scope.searchDACUsers(USER_ROLES.dataOwner).then(
+                        function (result) {
+                            if(checkNoEmptyDelegateCandidates(result.needsDelegation,result.delegateCandidates,USER_ROLES.dataOwner)){
+                                    $scope.delegateDataOwner.delegateCandidates = result.delegateCandidates;
+                                    $scope.delegateDataOwner.needsDelegation = result.needsDelegation;
+                            return;
+                            };
+                          });
+                    } else {
+                    closeNoAvailableCandidatesAlert(USER_ROLES.dataOwner);
+                    $scope.delegateDataOwner.delegateCandidates = [];
+                    $scope.delegateDataOwner.needsDelegation = false;
+                    }
+                }
+            };
+
+
+            var l = $scope.user.roles.length;
+            while (l--) {
+                if ($scope.user.roles[l].name === USER_ROLES.admin ) {
+                    $scope.emailPreference = !$scope.user.roles[l].emailPreference;
+                }
+            }
+        }
+
+        $scope.searchDACUsers = function (role) {
+            return cmUserService.validateDelegation(role,$scope.user).$promise;
+        };
+
+        $scope.edit = function (user) {
+            var map = new Object();
+            map.updatedUser = user;
+            if($scope.delegateDacUser.needsDelegation){
+                map.userToDelegate = JSON.parse($scope.alternativeDACMemberUser);
+            }
+            if($scope.delegateDataOwner.needsDelegation){
+                map.alternativeDataOwnerUser = JSON.parse($scope.alternativeDataOwnerUser);
+            }
+            cmUserService.updateUser(map).$promise.then(
                 function () {
                     $modalInstance.close();
                 }, function (reason) {
                     if (reason.status === 400) {
-                        if (reason.data.message === "There must be at least one Admin in the system.") {
-                            $scope.noAdminAlert();
-                        } else {
-                            $scope.duplicateEmailAlert();
-                        }
+                        $scope.errorOnEdition(reason.data.message);
                     }
                 });
         };
 
-        vm.cancel = function () {
+
+        var checkNoEmptyDelegateCandidates = function(needsDelegation,delegateCandidates,role){
+                  var valid =  needsDelegation === true && delegateCandidates.length === 0 ? false : true;
+                  (!valid) ? $scope.errorNoAvailableCandidates(role) : false;
+                  return valid;
+        };
+
+        $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
         };
+
+        $scope.$watch('newAlternativeUserNeeded', function(newVal, oldVal){
+              $scope.newUserNeeded = validateNoNewUserIsNeeded();
+        }, true);
+
+        var validateNoNewUserIsNeeded = function(){
+           for (var key in $scope.newAlternativeUserNeeded){
+             if($scope.newAlternativeUserNeeded[key] === true){
+                return true;
+             }
+           }
+           return false;
+        }
 
         /*****ALERTS*****/
 
         $scope.alerts = [];
-
 
         $scope.changeChairpersonRoleAlert = function (index) {
             $scope.alerts.splice(index, 1);
@@ -94,36 +191,57 @@
             });
         };
 
-        $scope.duplicateEmailAlert = function (index) {
-            $scope.alerts.splice(index, 1);
-            $scope.alerts.push({
-                type: 'danger',
-                title: 'Conflicts to resolve!',
-                msg: 'There is a user already registered with this google account.',
-                alertType: 2
-            });
-        };
+         $scope.errorNoAvailableCandidates = function (role) {
+                    $scope.newAlternativeUserNeeded[role] = true;
+                    $scope.alerts.push({
+                        type: 'danger',
+                        title: "Edition can't be made!",
+                        msg: "There are no available users to delegate "+ role.toLowerCase() +" responsibilities, please add a new User.",
+                        alertType: role
+                    });
+                };
 
-        $scope.noAdminAlert = function (index) {
+
+        $scope.errorOnEdition = function (index) {
             $scope.alerts.splice(index, 1);
             $scope.alerts.push({
                 type: 'danger',
                 title: "Edition can't be made!",
-                msg: 'There must be at least one Admin in the system.',
-                alertType: 1
+                msg: index,
+                alertType: 2
             });
         };
 
-        $scope.closeAlert = function (index) {
-            $scope.alerts.splice(index, 1);
+        $scope.closeAlert = function (alertType) {
+            var l = $scope.alerts.length;
+            var i = 0;
+            while(i < l){
+                if($scope.alerts[i].alertType === alertType){
+                    $scope.alerts.splice(i,1);
+                    return;
+                }
+                i++;
+            }
         };
+
+        var closeNoAvailableCandidatesAlert = function (role) {
+                    var l = $scope.alerts.length;
+                    var i = 0;
+                    while(i < l){
+                        if($scope.alerts[i].alertType === role){
+                           $scope.alerts.splice(i,1);
+                           $scope.newAlternativeUserNeeded[role] = false;
+                           return;
+                        }
+                        i++;
+                    }
+                };
 
         /*****DROPDOWN*****/
 
         $scope.status = {
             isopen: false
         };
-
 
     }
 

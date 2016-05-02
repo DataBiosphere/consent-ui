@@ -50,9 +50,7 @@
                     List: {method:'GET', isArray:true}
                 });
         })
-        .factory('openElectionsResource', function($resource, apiUrl){
-            return $resource(apiUrl+"electionReview/openElection");
-        })
+
         .factory('DataSetElection', function($resource, apiUrl){
             return $resource(apiUrl+"election/checkdataset");
         })
