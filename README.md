@@ -1,6 +1,8 @@
 Consent-UI v1
 =============
 
+[![Build Status](https://travis-ci.com/broadinstitute/consent-ui.svg?token=3ve6QNemvC5zpJzsoKzf&branch=develop)](https://travis-ci.com/broadinstitute/consent-ui)
+
 consent-ui is an angularJS application that requires consent-ws up and running 
 with some preloaded data: dacUser table at least or nobody will be able to log in.
 
