@@ -1,17 +1,44 @@
 (function () {
     'use strict';
 
+    describe('cmUserConsole', function () {
 
-    describe('cmDataOwnerConsole module', function () {
 
-        beforeEach(module('cmDataOwnerConsole'));
+        describe('Controller: UserConsole', function () {
 
-        describe('DataOwnerConsole controller', function () {
+            var UserConsoleController, cmPendingServiceMock;
+
+            beforeEach(function () {
+                cmPendingServiceMock = {
+                    findDataRequestPendingCasesByUser: function () {
+                    },
+                    findConsentPendingCasesByUser: function () {
+                    },
+                    findSummary: function () {
+                    },
+                    findConsentUnReviewed: function (){
+                    },
+                    findDARUnReviewed: function (){
+                    },
+                    findDataOwnerUnReviewed: function (){
+                    }
+                };
+            });
+
+            beforeEach( function(){
+                module('cmUserConsole');
+            });
+
 
             it('should ....', inject(function ($controller) {
                 //spec body
-                var data_owner_consoleCtrl = $controller('DataOwnerConsole');
-                expect(data_owner_consoleCtrl).toBeDefined();
+                var currentUser = {'dacUserId': 123};
+                var scope = {'currentUser': currentUser};
+                UserConsoleController = $controller('UserConsole', {
+                    cmPendingCaseService: cmPendingServiceMock, $rootScope: scope
+                });
+
+                expect(UserConsoleController).toBeDefined();
             }));
 
         });
