@@ -24,7 +24,7 @@
                 },
                 resolve: {
                     vote: function ($stateParams, cmVoteService) {
-                        if ($stateParams.voteId !== null && $stateParams.referenceId != null) {
+                        if ($stateParams.voteId !== null && Boolean($stateParams.referenceId)) {
                             return cmVoteService.getDarVote($stateParams.referenceId, $stateParams.voteId);
                         }
                     },

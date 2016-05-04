@@ -34,8 +34,8 @@
         };
 
 
-        function openApplication() {
-            var modalInstance = $modal.open({
+        function openApplication(){
+             $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/application-summary-modal/application-summary-modal.html',
                 controller: 'ApplicationModal',
@@ -47,14 +47,11 @@
                     }
                 }
             });
-                modalInstance.result.then(function () {
-                init();
-            });
         }
 
         function openDatasetApplication() {
             $scope.dataSet = dataSet;
-            var modalInstance = $modal.open({
+            $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/application-summary-modal/dataset-app-summary-modal.html',
                 controller: 'DatasetSummaryModal',

@@ -12,7 +12,7 @@
         initEnableDARButton();
 
         function initEnableRPButton(){
-           if(rpVote !== undefined && rpVote.vote != null){
+           if(rpVote !== undefined && (rpVote.vote !== undefined && rpVote.vote !== null)){
                 $scope.enableRPButton  = false;
             }else{
                 $scope.enableRPButton  = true;
@@ -20,7 +20,7 @@
         }
 
         function initEnableDARButton(){
-            if(vote.vote != null){
+            if(vote.vote !== undefined && vote.vote !== null){
                 $scope.enableDARButton = false;
             }else{
                 $scope.enableDARButton = true;
@@ -28,7 +28,7 @@
         }
 
         $scope.setEnableRPButton = function(){
-            if(rpVote != undefined && ($scope.selection.rpVoteStatus === rpVote.vote && $scope.selection.rpRationale === rpVote.rationale)){
+            if(Boolean(rpVote) && ($scope.selection.rpVoteStatus === rpVote.vote && $scope.selection.rpRationale === rpVote.rationale)){
                 $scope.enableRPButton = false;
             }else{
                 $scope.enableRPButton = true;
@@ -45,7 +45,7 @@
 
         function openApplication() {
             $scope.dataRequestId = dar_id;
-            var modalInstance = $modal.open({
+            $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/application-summary-modal/application-summary-modal.html',
                 controller: 'ApplicationModal',
@@ -56,10 +56,6 @@
                         return cmRPService.getDarModalSummary(dar_id);
                     }
                 }
-            });
-
-            modalInstance.result.then(function () {
-                init();
             });
         }
 
@@ -226,7 +222,7 @@
                     function () {
                         alert("Error updating vote.");
                     });
-            }
+            };
         }
 
 })();

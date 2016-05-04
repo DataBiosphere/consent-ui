@@ -44,7 +44,7 @@
 
         function containsOtherThanResearcherAndDataOwner(roles, rootRoles){
             var i;
-            if(roles == null){
+            if(!Boolean(roles)){
                 return false;
             }
             for (i = 0; i < roles.length; i++) {

@@ -14,7 +14,6 @@
         vm.downloadUrl = apiUrl + "dataset/sample";
         vm.dULUnreviewedCases = 0;
         vm.dARUnreviewedCases = 0;
-        vm.setTimeout = setTimeout;
         vm.addOntology = addOntology;
 
         init();
@@ -72,7 +71,7 @@
             });
         }
 
-        function setTimeout() {
+        vm.setTimeout = function setTimeout() {
             cmElectionService.isDataSetElectionOpen().$promise.then(function (data) {
                 if(data.open === true){
                     $scope.alert = {};
@@ -98,8 +97,7 @@
 
 
             });
-
-        }
+        };
 
         function addOntology() {
 

@@ -7,7 +7,6 @@
     /* ngInject */
     function ManageOntologies($modal, $state, $scope, cmOntologyService) {
 
-        var vm = this;
         $scope.addOntology = addOntology;
         $scope.openDelete = openDelete ;
 
@@ -37,7 +36,7 @@
                                                    init();
                                                 });
                         });
-                    };
+                    }
 
 
         function addOntology() {

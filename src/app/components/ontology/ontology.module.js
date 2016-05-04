@@ -10,8 +10,8 @@
                 transformRequest: function (fileData) {
                   var fd = new FormData();
                   var uuid = guid();
-                  var metadata = new Object();
-                  metadata[uuid] = fileData.fileMetadata
+                  var metadata = {};
+                  metadata[uuid] = fileData.fileMetadata;
                   fd.append(uuid,fileData.file);
                   fd.append("metadata",JSON.stringify(metadata));
                   return fd;
@@ -25,8 +25,8 @@
      .factory('OntologyTypesResource',function($resource,apiUrl){
           return $resource(apiUrl+"ontology/types",{}, {
              get: {method: 'GET', isArray: true}
-          })
-     })
+          });
+     });
 
 
 function guid() {

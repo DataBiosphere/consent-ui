@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var consentModule = angular
+    angular
         .module('ConsentManagement')
         .config(logConfig)
         .config(routeConfig)

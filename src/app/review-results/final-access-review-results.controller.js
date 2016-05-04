@@ -323,7 +323,7 @@
         }
 
         function showAccessData(electionReview) {
-            if(electionReview.voteAgreement != null){
+            if(Boolean(electionReview.voteAgreement)){
                 $scope.originalAgreementVote = electionReview.voteAgreement.vote;
                 $scope.originalAgreementRationale = electionReview.voteAgreement.rationale;
             }
@@ -339,7 +339,7 @@
             $scope.voteAccessList = chunk(electionReview.reviewVote, 2);
             $scope.chartDataAccess = getGraphData(electionReview.reviewVote);
             $scope.voteAgreement = electionReview.voteAgreement;
-            if (electionReview.voteAgreement != null && electionReview.voteAgreement.vote !== null) {
+            if (Boolean(electionReview.voteAgreement) && electionReview.voteAgreement.vote !== null) {
                 $scope.agreementAlreadyVote = true;
             }
         }
@@ -419,7 +419,7 @@
         }
 
         $scope.setEnableAgreementButton = function(){
-            if($scope.voteAgreement != undefined && $scope.voteAgreement.vote === $scope.originalAgreementVote && $scope.voteAgreement.rationale === $scope.originalAgreementRationale){
+            if(Boolean($scope.voteAgreement) && $scope.voteAgreement.vote === $scope.originalAgreementVote && $scope.voteAgreement.rationale === $scope.originalAgreementRationale){
                 $scope.enableAgreementButton = false;
             }else{
                 $scope.enableAgreementButton = true;

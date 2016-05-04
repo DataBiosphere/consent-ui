@@ -51,7 +51,7 @@
                         return cmElectionService.findElectionById($stateParams.electionId);
                     },
                     hasUseRestriction: function($stateParams, cmRPService){
-                        return cmRPService.hasUseRestriction($stateParams.referenceId)
+                        return cmRPService.hasUseRestriction($stateParams.referenceId);
                     }
                 }
             });

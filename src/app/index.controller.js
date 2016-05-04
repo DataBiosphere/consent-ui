@@ -78,7 +78,7 @@
         };
        $rootScope.logout = function(){
            cmLoginUserService.logoutUser();
-       }
+       };
     }
 
 
