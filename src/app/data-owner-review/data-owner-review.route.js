@@ -10,7 +10,7 @@
         $stateProvider
             .state('data_owner_review', {
                 name: 'data_owner_review',
-                url: '/data_owner_review',
+                url: '/data_owner_review/:voteId/:referenceId/:dataSetId',
                 params: {
                     voteId: null,
                     referenceId: null,
@@ -24,7 +24,7 @@
                 },
                 resolve: {
                     vote: function ($stateParams, cmVoteService) {
-                        if ($stateParams.voteId !== null && $stateParams.referenceId != null) {
+                        if ($stateParams.voteId !== null && Boolean($stateParams.referenceId)) {
                             return cmVoteService.getDarVote($stateParams.referenceId, $stateParams.voteId);
                         }
                     },

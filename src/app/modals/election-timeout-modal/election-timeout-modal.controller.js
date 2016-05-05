@@ -9,9 +9,7 @@
         var vm = this;
         $scope.disableButton = false;
         $scope.timeout.newTimeout = $scope.timeout.amountOfDays;
-        $scope.setTimeout = setTimeout;
-        setTimeout();
-        function setTimeout() {
+        $scope.setTimeout = function() {
             if($scope.timeout.displayName.indexOf("Default") === 0) {
                 $scope.disableButton = false;
             } else if($scope.timeout.newTimeout === $scope.timeout.amountOfDays){
@@ -19,9 +17,8 @@
             } else {
                 $scope.disableButton = false;
             }
-
-        }
-
+        };
+        $scope.setTimeout();
 
         vm.ok = function () {
             var approvalExpirationTime = {};

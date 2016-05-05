@@ -23,12 +23,12 @@
             admin: false,
             researcher: false
         };
-        
-       
+
+
         if (angular.isDefined($scope.dataset)) {
                             $scope.dataset = $sce.trustAsHtml($scope.dataset);
-        };
-        
+        }
+
     }
 
 })();

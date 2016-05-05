@@ -31,8 +31,8 @@
             return DownloadDatasetResource.download(objectIdList).$promise;
         }
 
-        function deleteDataset(datasetObjectId) {
-            return DeleteDataSetResource.Delete({datasetObjectId: datasetObjectId}).$promise;
+        function deleteDataset(datasetObjectId, dacUserId) {
+            return DeleteDataSetResource.Delete({datasetObjectId: datasetObjectId, dacUserId: dacUserId}).$promise;
         }
 
         function disableDataset(datasetObjectId, active) {
@@ -59,8 +59,8 @@
             downloadDataSets: function (objectIdList) {
                 return download(objectIdList);
             },
-            deleteDataset: function (datasetId) {
-                return deleteDataset(datasetId);
+            deleteDataset: function (datasetId, dacUserId) {
+                return deleteDataset(datasetId, dacUserId);
             },
             disableDataset: function (datasetId, active) {
                 return disableDataset(datasetId, active);

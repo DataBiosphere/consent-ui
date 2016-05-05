@@ -15,6 +15,7 @@
         vm.resume = resume;
         vm.cancelPartialDar = cancelAndDeletePartialDar;
         vm.cancelDar = cancelDar;
+        vm.partialDars = [];
         init();
 
         function init() {

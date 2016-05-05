@@ -6,7 +6,7 @@
 
     /* ngInject */
 
-    function cmDataAccessRequest(dataAccessRequestResource, partialDARFromCatalogResource, dataAccessRequestCancel, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields, dataAccessRequestManageResource, updateDataAccessRequestResource, darModalSummary, partialDataAccessRequestManageResource, partialDataAccessRequestResource, postPartialDarResource, restrictionDataAccessRequestResource) {
+    function cmDataAccessRequest(dataAccessInvalidUseRestriction, dataAccessRequestResource, partialDARFromCatalogResource, dataAccessRequestCancel, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields, dataAccessRequestManageResource, updateDataAccessRequestResource, darModalSummary, partialDataAccessRequestManageResource, partialDataAccessRequestResource, postPartialDarResource, restrictionDataAccessRequestResource) {
 
         function findDarConsent(id) {
             return darConsent.get({id: id}).$promise;
@@ -78,6 +78,13 @@
             });
         }
 
+        function findInvalidDataAccessUseRestriction(vm) {
+            dataAccessInvalidUseRestriction.List().$promise.then(
+                function (data) {
+                    vm.darList = data;
+                });
+        }
+
         return {
 
             getPartialDarRequest: function(id){
@@ -144,6 +151,9 @@
             },
             hasUseRestriction: function(referenceId){
                 return hasUseRestriction(referenceId);
+            },
+            findInvalidDataAccessUseRestriction: function(vm){
+                return findInvalidDataAccessUseRestriction(vm);
             }
         };
 

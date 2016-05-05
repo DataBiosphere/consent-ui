@@ -32,7 +32,7 @@
 
             .state('access_results_record', {
                 name: 'access_results_record',
-                url: '/access_results_record/:electionId',
+                url: '/access_results_record/:referenceId/:electionId',
                 templateUrl: 'app/results-record/access-results-record.html',
                 controller: 'AccessResultsRecord',
                 controllerAs: 'AccessResultsRecord',
@@ -51,7 +51,7 @@
                         return cmElectionService.findElectionById($stateParams.electionId);
                     },
                     hasUseRestriction: function($stateParams, cmRPService){
-                        return cmRPService.hasUseRestriction($stateParams.referenceId)
+                        return cmRPService.hasUseRestriction($stateParams.referenceId);
                     }
                 }
             });

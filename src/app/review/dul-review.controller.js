@@ -4,17 +4,14 @@
     angular.module('cmReview')
         .controller('DulReview', DulReview);
 
-    function DulReview($sce, $scope, $modal, $state, $rootScope, USER_ROLES, vote, consent, election, cmVoteService,cmLoginUserService, apiUrl, cmAuthenticateService){
+    function DulReview($sce, $scope, $modal, $state, $rootScope, USER_ROLES, vote, consent, election, cmVoteService,cmLoginUserService, apiUrl, cmAuthenticateService, cmDulFilesService){
         if (typeof vote === 'undefined' ||
             typeof consent === 'undefined' ||
             typeof election === 'undefined') {
             cmLoginUserService.redirect($rootScope.currentUser);
             return;
         }
-
-        $scope.enableVoteButton = true;
         $scope.downloadUrl = apiUrl + 'consent/' + consent.consentId + '/dul';
-        $scope.consentDulUrl = consent.dataUseLetter;
         $scope.consentDulName = consent.dulName;
         $scope.consentSDul = $sce.trustAsHtml(consent.translatedUseRestriction);
         $scope.voteStatus = vote.vote;
@@ -22,14 +19,35 @@
         $scope.rationale = vote.rationale;
         $scope.isNew = null;
         $scope.electionType = null;
+        initEnableVoteButton();
+
+        function initEnableVoteButton(){
+            if(vote.vote !== undefined && vote.vote !== null){
+                $scope.enableVoteButton = false;
+            }else{
+                $scope.enableVoteButton = true;
+            }
+        }
+
+        $scope.setEnableVoteButton = function(){
+            if($scope.voteStatus === vote.vote && $scope.rationale === vote.rationale){
+                $scope.enableVoteButton = false;
+            }else{
+                $scope.enableVoteButton = true;
+            }
+        };
 
         $scope.positiveVote = function () {
             $scope.rationale = null;
+            $scope.setEnableVoteButton();
+
+        };
+
+        $scope.downloadDUL = function(){
+            cmDulFilesService.getFile(consent.consentId, consent.dulName);
         };
 
         $scope.logVote = function () {
-            $scope.enableVoteButton = false;
-            if ((vote.vote !== $scope.voteStatus) || ($scope.rationale !== vote.rationale)) {
                 vote.vote = $scope.voteStatus;
                 vote.rationale = $scope.rationale;
                 var result;
@@ -44,7 +62,6 @@
                 result.then(
                     //success
                     function () {
-                        $scope.enableVoteButton = true;
                         var modalInstance = $modal.open({
                             animation: false,
                             templateUrl: 'app/modals/confirmation-modal.html',
@@ -66,9 +83,7 @@
                         alert("Error updating vote.");
                         $scope.enableVoteButton = true;
                     });
-            } else {
-                alert("Error: Your vote hasn't been changed.");
-            }
+
         };
     }
 })();

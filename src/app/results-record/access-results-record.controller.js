@@ -5,7 +5,7 @@
     angular.module('cmResultsRecord')
         .controller('AccessResultsRecord', AccessResultsRecord);
 
-    function AccessResultsRecord($scope, $state, $modal, cmElectionService, downloadFileService, apiUrl, cmRPService, cmVoteService, cmMatchService, darElection, electionId, hasUseRestriction) {
+    function AccessResultsRecord($scope, $state, $modal, cmElectionService, downloadFileService, apiUrl, cmRPService, cmVoteService, cmMatchService, darElection, electionId, hasUseRestriction, cmDulFilesService) {
 
         /*ACCORDION*/
         $scope.oneAtATime = false;
@@ -181,6 +181,7 @@
                     });
 
                 cmElectionService.findLastElectionReviewByReferenceId(data.consent.consentId).$promise.then(function (data) {
+                    $scope.electionReview = data;
                     showDULData(data);
                     vaultVote(data.consent.consentId);
                 });
@@ -202,16 +203,20 @@
 
 
             // this data is used to construct structured_ files
-            $scope.sDAR = electionReview.election.useRestriction
-            $scope.sDUL = electionReview.consent.useRestriction
-            $scope.DulFileTitle = "structured_DUL"
-            $scope.DarFileTitle = "structured_DAR"
+            $scope.sDAR = electionReview.election.useRestriction;
+            $scope.sDUL = electionReview.consent.useRestriction;
+            $scope.DulFileTitle = "structured_DUL";
+            $scope.DarFileTitle = "structured_DAR";
 
         }
 
+        $scope.downloadDUL = function(){
+            cmDulFilesService.getFile($scope.electionReview.consent.consentId, $scope.electionReview.consent.dulName);
+        };
+
         $scope.download = function download(fileName, text) {
-                          var break_line =  '\r\n \r\n'
-                          text = break_line+ JSON.stringify(text)
+                          var break_line =  '\r\n \r\n';
+                          text = break_line+ JSON.stringify(text);
                           downloadFileService.downloadFile(fileName ,text);
                       };
 

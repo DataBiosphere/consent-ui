@@ -1,25 +1,25 @@
 <div ng-include src="'app/header/header.html'"></div>
 <div class="container">
     <div class="row no-margin">
-        <h2 class="col-lg-6 col-md-6 col-sm-12 col-xs-12 cm-title dataset-color no-padding">
-            <img src="../assets/images/icon_dataset_.png" alt="Dataset Catalog icon" class="cm-icons">Dataset
-            Catalog<br>
-
-            <div class="cm-title-other-description">Datasets with an associated DUL to apply for secondary use.</div>
-        </h2>
-        <div class="f-right">
+        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 no-padding title-wrapper">
+            <img src="../assets/images/icon_dataset_.png" alt="Dataset Catalog icon" class="cm-icons main-icon-title">
+            <h2 class="main-title margin-lg dataset-color">Dataset Catalog<br>
+                <div class="main-title-description">Datasets with an associated DUL to apply for secondary use.</div>
+            </h2>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 search-reviewed no-padding">
+            <div class="col-lg-6 col-md-6 col-sm-7 col-xs-7">
+                <div class="search-text">
+                    <i class="glyphicon glyphicon-search dataset-color"></i>
+                    <input type="search" class="form-control users-search" placeholder="Enter search term..."
+                           ng-model="searchDataset"/>
+                </div>
+            </div>
             <button download="" ng-disabled="objectIdList.length === 0" ng-click="DatasetCatalog.download(objectIdList)"
-                    class="download-button dataset-download-button dataset-background">
+                    class="col-lg-6 col-md-6 col-sm-5 col-xs-5 download-button dataset-background">
                 <span>Download selection</span>
                 <span class="cm-icon-button glyphicon glyphicon-download caret-margin" aria-hidden="true"></span>
             </button>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 search-reviewed no-padding f-right">
-            <div class="search-text">
-                <i class="glyphicon glyphicon-search dataset-color"></i>
-                <input type="search" class="form-control users-search" placeholder="Enter search term..."
-                       ng-model="searchDataset"/>
-            </div>
         </div>
     </div>
     <div class="table-wrap">

@@ -29,16 +29,16 @@
                                    placeholder="e.g. username@broadinstitute.org" required>
                         </div>
                     </div>
-                    <div  ng-show="!enableRolEdit" class="form-group admin-form-group ">
+                    <div class="form-group admin-form-group ">
                         <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label common-color">Roles</label>
                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <div class="checkbox">
-                                    <input type="checkbox" id="MEMBER" class="checkbox-inline user-checkbox" ng-model="checkModel.MEMBER" add-role-edit ng-disabled="checkModel.CHAIRPERSON || checkModel.ALUMNI || checkModel.RESEARCHER" checked="checked" >
+                                    <input type="checkbox" id="MEMBER" class="checkbox-inline user-checkbox" ng-model="checkModel.MEMBER" add-role-edit ng-change="memberChanged(checkModel.MEMBER,USER_ROLES.member)" ng-disabled="checkModel.CHAIRPERSON || checkModel.ALUMNI || checkModel.RESEARCHER" checked="checked" >
                                     <label class="regular-checkbox rp-choice-questions" for="MEMBER">Member</label>
                                 </div>
                                 <div class="checkbox">
-                                    <input type="checkbox" id="CHAIRPERSON" class="checkbox-inline user-checkbox" ng-model="checkModel.CHAIRPERSON" add-role-edit ng-disabled="checkModel.MEMBER || checkModel.ALUMNI || checkModel.RESEARCHER">
+                                    <input type="checkbox" id="CHAIRPERSON" class="checkbox-inline user-checkbox" ng-model="checkModel.CHAIRPERSON" add-role-edit ng-change="chairpersonChanged(checkModel.CHAIRPERSON,USER_ROLES.chairperson)" ng-disabled="checkModel.MEMBER || checkModel.ALUMNI || checkModel.RESEARCHER || (wasMember && delegateMemberRequired)">
                                     <label class="regular-checkbox rp-choice-questions" for="CHAIRPERSON">Chairperson</label>
                                 </div>
                                 <div class="checkbox">
@@ -58,13 +58,12 @@
                                 </div>
 
                                 <div class="checkbox">
-                                    <input id="DATAOWNER" type="checkbox" class="checkbox-inline user-checkbox" ng-model="checkModel.DATAOWNER" add-role>
+                                    <input id="DATAOWNER" type="checkbox" class="checkbox-inline user-checkbox" ng-model="checkModel.DATAOWNER" add-role ng-change="dataOwnerChanged(checkModel.DATAOWNER)">
                                     <label class="regular-checkbox rp-choice-questions" for="DATAOWNER">Data Owner</label>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <p ng-show="enableRolEdit" class="cancel-color bold">*Every election must be closed in order to edit User roles.</p>
                     <div class="form-group alert-form-group">
                         <div class="col-lg-9 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-9 col-sm-offset-3 col-xs-8 col-xs-offset-4" style="padding-left: 26px;">
                             <div ng-show="checkModel.ADMIN" class="checkbox">
@@ -79,11 +78,36 @@
                             </alert>
                         </div>
                     </div>
+
+                    <div  ng-if="delegateDacUser.needsDelegation" class="form-group admin-form-group">
+                        <div class="row f-left">
+                            <div class="default-color" style="padding:0 40px 15px 40px;">Member responsabilities must be delegated to a different user, please select one from below:</div>
+                        </div>
+                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label common-color">Alternative User</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 admin-input">
+                            <select class="form-control col-lg-12"  id="dacMemberSelect" ng-model="$parent.alternativeDACMemberUser" ng-required="delegateDacUser.needsDelegation">
+                                <option ng-repeat="user in delegateDacUser.delegateCandidates" value="{{user}}">{{user.displayName}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div  ng-if="delegateDataOwner.needsDelegation"  class="form-group admin-form-group">
+                        <div class="row f-left">
+                            <div class="default-color" style="padding:0 40px 15px 40px;">Member responsabilities must be delegated to a different user, please select one from below:</div>
+                        </div>
+                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label common-color">Alternative DataOwner User</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 admin-input">
+                            <select class="form-control col-lg-12" id="dataOwnerSelect" ng-model="$parent.alternativeDataOwnerUser" required="delegateDataOwner.needsDelegation">
+                                <option ng-repeat="dataOwner in delegateDataOwner.delegateCandidates" value="{{dataOwner}}">{{dataOwner.displayName}}</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="admin-modal-footer">
                         <a href="#/admin_users">
-                            <button  ng-disabled="userForm.$invalid || user.roles.length === 0 " class="col-lg-3 col-md-3 col-sm-4 col-xs-6 btn common-background" ng-click="ModalUsersEdit.edit(user)">Save</button>
+                            <button  ng-disabled="newUserNeeded  || userForm.$invalid || user.roles.length === 0" class="col-lg-3 col-md-3 col-sm-4 col-xs-6 btn common-background" ng-click="edit(user)">Save</button>
                         </a>
-                        <button class="col-lg-3 col-md-3 col-sm-4 col-xs-6 btn dismiss-background" ng-click="ModalUsersEdit.cancel()">Cancel</button>
+                        <button class="col-lg-3 col-md-3 col-sm-4 col-xs-6 btn dismiss-background" ng-click="cancel()">Cancel</button>
                     </div>
                 </fieldset>
             </form>

@@ -14,11 +14,11 @@
         vm.downloadUrl = apiUrl + "dataset/sample";
         vm.dULUnreviewedCases = 0;
         vm.dARUnreviewedCases = 0;
-        vm.setTimeout = setTimeout;
+        vm.addOntology = addOntology;
 
         init();
 
-        function init() {
+                function init() {
             cmPendingCaseService.findDARUnReviewed(vm);
             cmPendingCaseService.findConsentUnReviewed(vm);
         }
@@ -71,11 +71,11 @@
             });
         }
 
-        function setTimeout() {
+        vm.setTimeout = function setTimeout() {
             cmElectionService.isDataSetElectionOpen().$promise.then(function (data) {
                 if(data.open === true){
                     $scope.alert = {};
-                    $scope.alert.title = "The new election timeout value can not be updated because there are opened elections.";
+                    $scope.alert.title = "Data Owner election Timeout value can't be updated because there are open elections.";
                 }else{
                     $scope.alert = null;
                 }
@@ -97,9 +97,26 @@
 
 
             });
+        };
 
+        function addOntology() {
 
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/add-ontologies/add-ontologies.html',
+                controller: 'AddOntologyModal',
+                controllerAs: 'AddOntologyModal',
+                resolve: {
+                              ontologyTypes:  function (cmOntologyService) {
+                                     return cmOntologyService.getOntologyTypes();
+                                  }
+                          }
+            });
 
+            modalInstance.result.then(function () {
+                $state.go('manage_ontologies');
+            }, function () {
+            });
         }
 
     }

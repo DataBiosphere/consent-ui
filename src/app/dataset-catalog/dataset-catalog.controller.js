@@ -36,15 +36,10 @@
 
             cmDatasetService.findDataSets($rootScope.currentUser.dacUserId).then(
                 function (data) {
-                    vm.dataSetList['catalog'] = data;
-                    angular.forEach(vm.dataSetList['catalog'], function(obj) {
-                        if (angular.isDefined(obj["translatedUseRestriction"])) {
-                            obj["translatedUseRestriction"] = obj["translatedUseRestriction"];
-                        }
-                    });
+                    vm.dataSetList.catalog = data;
                 });
         }
-        
+
         function showSdul(datasetsDul) {
             $scope.dataset = datasetsDul;
             var modalInstance = $modal.open({
@@ -82,7 +77,6 @@
                         $rootScope.formData = data;
                         $state.go('rp_application.step1');
                 }, function (value) {
-                    console.log(value);
                     $modal.open({
                         animation: false,
                         templateUrl: 'app/modals/dataset-catalog-export-modal/dataset-catalog-export-error-modal.html',
@@ -98,12 +92,11 @@
         };
 
         vm.delete = function (datasetId) {
-            cmDatasetService.deleteDataset(datasetId);
+            cmDatasetService.deleteDataset(datasetId, $rootScope.currentUser.dacUserId);
         };
 
 
         function openDelete(datasetId) {
-
             $scope.actionType = 'delete';
             var modalInstance = $modal.open({
                 animation: false,
@@ -114,7 +107,8 @@
             });
 
             modalInstance.result.then(function () {
-                cmDatasetService.deleteDataset(datasetId).then(function () {
+                var currentUserId = $rootScope.currentUser.dacUserId;
+                cmDatasetService.deleteDataset(datasetId, currentUserId).then(function () {
                     init();
                 });
             });
@@ -169,8 +163,8 @@
                     usersAssociation: function (cmDatasetAssociationService) {
                         return cmDatasetAssociationService.getAssociatedAndToAssociateUsers(datasetId);
                     },
-                    datasetName: function(){ return datasetId },
-                    needsApproval: function(){ return needsApproval }
+                    datasetName: function(){ return datasetId; },
+                    needsApproval: function(){ return needsApproval; }
                 }
             });
 

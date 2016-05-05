@@ -32,5 +32,6 @@
 
         window.signOut = signOut;
         window.onSignIn = onSignIn;
+
     }
 })();
