@@ -22,6 +22,13 @@
                 });
         })
 
+        .factory('dataAccessInvalidUseRestriction', function ($resource, apiUrl) {
+            return $resource(apiUrl + "dar/invalid", {},
+                {
+                    List: {method: 'GET', isArray: true}
+                });
+        })
+
         .factory('typeAheadDatasetsResource', function ($resource, apiUrl) {
             return $resource(apiUrl + "dataset/autocomplete/:partial", {},
                 {get: {method: 'GET', isArray: true, params: {partial: '@partial'}}}

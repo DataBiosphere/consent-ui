@@ -5,7 +5,7 @@
         .service('cmConsentService', cmConsentService);
 
     /* ngInject */
-    function cmConsentService(ConsentResource, DeleteConsentResource, ConsentDulResource, ConsentManageResource, CreateConsentResource, CreateDulResource, UpdateConsentResource) {
+    function cmConsentService(ConsentInvalidRestriction, ConsentResource, DeleteConsentResource, ConsentDulResource, ConsentManageResource, CreateConsentResource, CreateDulResource, UpdateConsentResource) {
 
         /**
          * Find data for the consent related to the consentId sent as a parameter
@@ -27,6 +27,13 @@
             ConsentManageResource.List().$promise.then(
                 function (data) {
                     vm.electionsList.dul = data;
+                });
+        }
+
+        function findInvalidConsentRestriction(vm){
+            ConsentInvalidRestriction.List().$promise.then(
+                function (data) {
+                    vm.consentList = data;
                 });
         }
 
@@ -78,6 +85,9 @@
             },
             deleteConsent: function (consentId) {
                 return deleteConsent(consentId);
+            },
+            findInvalidConsentRestriction: function(vm){
+                return findInvalidConsentRestriction(vm);
             }
 
         };

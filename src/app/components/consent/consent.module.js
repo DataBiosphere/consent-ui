@@ -5,6 +5,12 @@
         .factory('ConsentResource', function ($resource, apiUrl) {
             return $resource(apiUrl + "consent/:consentId");
         })
+        .factory('ConsentInvalidRestriction', function($resource, apiUrl) {
+            return $resource(apiUrl + "consent/invalid", {},
+                {
+                    List: {method: 'GET', isArray: true}
+                });
+        })
         .factory('ConsentDulResource', function ($resource, apiUrl) {
             return $resource(apiUrl + "consent/:consentId/dul");
         })
