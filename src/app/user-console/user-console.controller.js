@@ -6,7 +6,7 @@
         .controller('UserConsole', UserConsole);
 
     /* ngInject */
-    function UserConsole(cmPendingCaseService,$rootScope) {
+    function UserConsole(cmPendingCaseService, $rootScope) {
 
         var vm = this;
         vm.electionsList = {'dul': [], 'access': [], 'rp':[]};

@@ -90,7 +90,7 @@ gulp.task('swagger', ['clean'], function () {
    return gulp.src(['swagger/**/*'], {
          base: 'swagger'
    }).pipe(gulp.dest(conf.paths.dist + "/swagger"));
-});;
+});
 
 gulp.task('clean', function (done) {
   $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')], done);
