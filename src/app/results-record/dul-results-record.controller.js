@@ -5,7 +5,7 @@
         .controller('DulResultsRecord', DulResultsRecord);
 
 
-    function DulResultsRecord($sce, $scope, $state, electionReview, apiUrl, cmDulFilesService) {
+    function DulResultsRecord($sce, $scope, $state, electionReview, apiUrl, cmFilesService) {
 
 
 
@@ -84,7 +84,7 @@
         $scope.chartData = getGraphData(electionReview.reviewVote);
 
         $scope.downloadDUL = function(){
-            cmDulFilesService.getFile(electionReview.consent.consentId, electionReview.consent.dulName);
+            cmFilesService.getDULFile(electionReview.consent.consentId, electionReview.consent.dulName);
         };
 
         function chunk(arr, size) {

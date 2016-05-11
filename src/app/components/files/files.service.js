@@ -1,0 +1,52 @@
+(function () {
+    'use strict';
+
+    angular.module('cmFiles')
+        .service('cmFilesService', cmFilesService);
+
+    /* ngInject */
+    function cmFilesService($http, apiUrl) {
+
+        function getDULFile(consentId, fileName) {
+            var consentUrl = apiUrl + 'consent/' + consentId + '/dul';
+            getFile(consentUrl, fileName);
+        }
+
+        function getOntologyFile(fileName, fileUrl){
+            var encodeURI = encodeURIComponent(fileUrl);
+            var ontologyUrl = apiUrl + 'ontology/file?fileUrl='+ encodeURI + '&fileName=' + fileName;
+            getFile(ontologyUrl, fileName);
+        }
+
+        function getFile(url, fileName) {
+            $http({
+                url: url,
+                method: "GET",
+                responseType: 'arraybuffer'
+            }).
+                then(function (response) {
+                    var contentType = response.headers()["content-type"];
+                    var blob = new Blob([response.data], {type: contentType});
+                    if (blob.size !== 0) {
+                        var downloadElement = angular.element('<a/>');
+                        downloadElement.css({display: 'none'});
+                        angular.element(document.body).append(downloadElement);
+                        downloadElement.attr({
+                            href: (window.URL || window.webkitURL).createObjectURL(blob),
+                            target: '_blank',
+                            download: fileName
+                        })[0].click();
+                    }
+                });
+        }
+
+        return {
+            getDULFile: function (consentId, fileName) {
+                return getDULFile(consentId, fileName);
+            },
+            getOntologyFile: function(fileName, fileUrl){
+                return getOntologyFile(fileName, fileUrl);
+            }
+        };
+    }
+})();
