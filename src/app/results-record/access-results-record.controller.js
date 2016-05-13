@@ -5,7 +5,7 @@
     angular.module('cmResultsRecord')
         .controller('AccessResultsRecord', AccessResultsRecord);
 
-    function AccessResultsRecord($scope, $state, $modal, cmElectionService, downloadFileService, apiUrl, cmRPService, cmVoteService, cmMatchService, darElection, electionId, hasUseRestriction, cmDulFilesService) {
+    function AccessResultsRecord($scope, $state, $modal, cmElectionService, downloadFileService, apiUrl, cmRPService, cmVoteService, cmMatchService, darElection, electionId, hasUseRestriction, cmFilesService) {
 
         /*ACCORDION*/
         $scope.oneAtATime = false;
@@ -211,7 +211,7 @@
         }
 
         $scope.downloadDUL = function(){
-            cmDulFilesService.getFile($scope.electionReview.consent.consentId, $scope.electionReview.consent.dulName);
+            cmFilesService.getDULFile($scope.electionReview.consent.consentId, $scope.electionReview.consent.dulName);
         };
 
         $scope.download = function download(fileName, text) {

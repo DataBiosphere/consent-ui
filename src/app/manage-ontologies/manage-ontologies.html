@@ -35,7 +35,7 @@
                 <div dir-paginate="indexFile in indexedFiles | itemsPerPage:8" pagination-id="indexedFiles">
                     <div class="row pvotes-main-list">
                         <a class="col-lg-5 col-md-5 col-sm-5 col-xs-4 pvotes-list-id"
-                           ng-href="{{indexFile.fileUrl}}">{{indexFile.fileName}}</a>
+                           style="cursor:pointer;" ng-click="downloadOntology(indexFile.fileName,indexFile.fileUrl)">{{indexFile.fileName}}</a>
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id">{{indexFile.ontologyType}}</div>
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id">{{indexFile.prefix}}</div>
                         <div class="remove-dul-col">

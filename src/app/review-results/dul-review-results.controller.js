@@ -4,7 +4,7 @@
     angular.module('cmReviewResults')
         .controller('DulReviewResults', DulReviewResults);
 
-    function DulReviewResults($sce, apiUrl, $scope, $rootScope, cmEmailService, $modal, $state, cmElectionService, cmLoginUserService, electionReview, cmDulFilesService) {
+    function DulReviewResults($sce, apiUrl, $scope, $rootScope, cmEmailService, $modal, $state, cmElectionService, cmLoginUserService, electionReview, cmFilesService) {
 
         if (typeof electionReview === 'undefined') {
             cmLoginUserService.redirect($rootScope.currentUser);
@@ -84,7 +84,7 @@
         $scope.chartData = getGraphData(electionReview.reviewVote);
 
         $scope.downloadDUL = function(){
-            cmDulFilesService.getFile(electionReview.consent.consentId, electionReview.consent.dulName);
+            cmFilesService.getDULFile(electionReview.consent.consentId, electionReview.consent.dulName);
         };
 
         $scope.$watch('chartData.dul', function () {

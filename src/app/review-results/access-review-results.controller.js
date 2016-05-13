@@ -4,7 +4,7 @@
     angular.module('cmReviewResults')
         .controller('AccessReviewResults', ReviewResults);
 
-    function ReviewResults($sce, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, electionReview, rpElectionReview, dar, apiUrl, cmEmailService, cmRPService, dar_id, cmDulFilesService) {
+    function ReviewResults($sce, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, electionReview, rpElectionReview, dar, apiUrl, cmEmailService, cmRPService, dar_id, cmFilesService) {
 
         var vm = this;
         vm.openApplication = openApplication;
@@ -131,7 +131,7 @@
         };
 
         $scope.downloadDUL = function(){
-            cmDulFilesService.getFile(electionReview.consent.consentId, electionReview.consent.dulName);
+            cmFilesService.getDULFile(electionReview.consent.consentId, electionReview.consent.dulName);
         };
 
 

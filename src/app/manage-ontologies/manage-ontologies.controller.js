@@ -5,7 +5,7 @@
         .controller('ManageOntologies', ManageOntologies);
 
     /* ngInject */
-    function ManageOntologies($modal, $state, $scope, cmOntologyService) {
+    function ManageOntologies($modal, $state, $scope, cmOntologyService, cmFilesService) {
 
         $scope.addOntology = addOntology;
         $scope.openDelete = openDelete ;
@@ -17,7 +17,7 @@
                function (indexedFiles) {
                   $scope.indexedFiles = indexedFiles;
                });
-              }
+         }
 
 
         function openDelete(fileUrl) {
@@ -58,5 +58,9 @@
             }, function () {
             });
         }
+
+        $scope.downloadOntology = function(fileName, fileUrl){
+            cmFilesService.getOntologyFile(fileName, fileUrl);
+        };
     }
 })();
