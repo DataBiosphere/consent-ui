@@ -59,6 +59,9 @@
                     }
                 });
             };
+            window.signOut = function(){
+                logoutUser();
+            };
             $rootScope.accessToken = $rootScope.currentUser.accessToken;
         }
 
