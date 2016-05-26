@@ -1,38 +1,44 @@
 <div ng-include src="'app/header/header.html'"></div>
 <div class="container">
-    <h2 class="cm-title access-color">
-        <img src="assets/images/icon_access.png" alt="access icon" class="cm-icons">Data Access Results Record<br>
-
-        <div class="cm-title-description">Was the researcher allowed to access this research study?</div>
-    </h2>
-    <div class="row fsi-row-lg-level fsi-row-md-level">
+    <div class="row fsi-row-lg-level fsi-row-md-level title-wrapper">
+        <img src="assets/images/icon_access.png" alt="Data Access Request icon" class="cm-icons main-icon-title">
+        <h2 class="main-title margin-sm access-color">
+            Data Access - Results Record<br>
+            <div class="main-title-description">Was the researcher allowed to access this research study?</div>
+        </h2>
+    </div>
+    <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
             <div class="panel-heading cm-boxhead access-color">
                 <h4>Research Purpose
                     <a class="enabled hover-color application-link" ng-click="openApplication()">Application summary</a>
                 </h4>
             </div>
-            <div id="prf" class="panel-body cm-boxbody">{{dar.rus}}</div>
-            <a ng-show="hasUseRestriction"  ng-click="download(DarFileTitle, sDAR)">
-                <span style="cursor: pointer;">Download DAR structured format</span>
-            </a>
+            <div id="prf" class="panel-body cm-boxbody">
+                {{dar.rus}}
+                <hr style="margin: 10px 0">
+                <a ng-show="hasUseRestriction" ng-click="download(DarFileTitle, sDAR)" class="italic hover-color" style="cursor: pointer;" >
+                    Download DAR structured format
+                </a>
+            </div>
         </div>
 
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
-            <div class="panel-heading cm-boxhead access-color">
+            <div class="panel-heading cm-boxhead dul-color">
                 <h4>Data Use Limitations</h4>
             </div>
             <div id="dul" class="panel-body cm-boxbody">
-                <a href="{{downloadUrl}}" target="_blank">{{dulName}}</a>
+                <a style="cursor:pointer;" ng-click="downloadDUL()">{{dulName}}</a>
+                <hr style="margin: 10px 0">
+                <a ng-click="download(DulFileTitle, sDUL)" class="italic hover-color" style="cursor: pointer">
+                    Download DUL structured format
+                </a>
             </div>
-            <a  ng-click="download(DulFileTitle, sDUL)">
-                <span style="cursor: pointer;">Download DUL structured format</span>
-            </a>
         </div>
     </div>
     <hr class="section-separator">
 
-    <div class="row fsi-row-lg-level fsi-row-md-level">
+    <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
         <div class="jumbotron box-vote-results"
              ng-class="{'col-lg-6 col-md-6 col-sm-12 col-xs-12': hasUseRestriction, 'col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 center-margin' : !hasUseRestriction}">
             <h3 class="cm-results-subtitle access-color">
@@ -88,9 +94,9 @@
                         <span ng-if="voteAgreement.vote == null"></span>
                     </div>
                     <label
-                        class="col-lg-2 col-md-2 col-sm-4 col-xs-4 control-label vote-label access-color">Date: </label>
+                        class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label vote-label access-color">Date: </label>
 
-                    <div class="voteDate col-lg-4 col-md-4 col-sm-8 col-xs-8 vote-label">
+                    <div class="voteDate col-lg-4 col-md-4 col-sm-4 col-xs-4 vote-label">
                         <span ng-if="voteAgreement.createDate == null">---</span>
                         <span ng-if="voteAgreement.createDate != null && voteAgreement.updateDate == null">{{voteAgreement.createDate | date:'yyyy-MM-dd'}}</span>
                         <span ng-if="voteAgreement.createDate != null && voteAgreement.updateDate != null">{{voteAgreement.updateDate | date:'yyyy-MM-dd' }}</span>
@@ -98,7 +104,7 @@
                 </div>
                 <div class="row">
                     <label
-                        class="col-lg-3 col-md-3 col-sm-4 col-xs-4 control-label vote-label access-color">Comments: </label>
+                        class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label vote-label access-color">Comments: </label>
 
                     <div class="inputRationale col-lg-9 col-md-9 col-sm-8 col-xs-8 vote-label">
                         <span ng-if="voteAgreement.vote == '1'">{{voteAgreement.rationale}}</span>
@@ -120,10 +126,10 @@
                        ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
                 </h3>
             </accordion-heading>
-            <div class="row fsi-row-lg-level fsi-row-md-level">
-                <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10 jumbotron box-vote-lightresults no-padding">
+            <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-lightresults no-padding">
                     <div class="row">
-                        <div class="col-lg-7 col-md-7 col-sm-6 col-xs-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <div class="cm-title-record access-color">DAC Decision</div>
                             <hr class="box-separator">
                             <div class="results-box">
@@ -157,7 +163,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6 f-left">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 f-left">
                             <div cm-chart cm-chart-data="chartDataAccess.Total"
                                  cm-chart-options="chartOptions.accessTotal" class="result_chart"></div>
                         </div>
@@ -165,7 +171,7 @@
                 </div>
 
                 <div ng-show="hasUseRestriction"
-                     class="col-lg-4 col-md-4 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2 jumbotron box-vote-lightresults no-padding">
+                     class="col-lg-4 col-md-4 col-sm-12 col-xs-8 jumbotron box-vote-lightresults no-padding">
                     <div class="cm-title-record access-color">Vault Decision</div>
                     <hr class="box-separator">
                     <div class="results-box">
@@ -187,8 +193,8 @@
                     </div>
                 </div>
             </div>
-            <div class="row" ng-repeat="row in voteAccessList">
-                <div id="voteResultsList" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill" ng-repeat="vm in row">
+            <div class="row fsi-row-lg-level fsi-row-md-level no-margin" ng-repeat="row in voteAccessList">
+                <div id="voteResultsList" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill no-padding" ng-repeat="vm in row">
                     <div class="jumbotron box-vote-singleresults" ng-if="vm.vote.type == 'DAC'">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">{{vm.displayName}}
@@ -211,7 +217,7 @@
                                 <span ng-if="vm.vote.createDate != null && vm.vote.updateDate != null">{{vm.vote.updateDate}}</span>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
                             <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label access-color">Rationale: </label>
 
                             <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">
@@ -237,10 +243,10 @@
                        ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
                 </h3>
             </accordion-heading>
-            <div class="row">
-                <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10 jumbotron box-vote-lightresults no-padding">
+            <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-lightresults no-padding">
                     <div class="row">
-                        <div class="col-lg-7 col-md-7 col-sm-6 col-xs-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <div class="cm-title-record access-color">DAC Decision</div>
                             <hr class="box-separator">
                             <div class="results-box">
@@ -254,7 +260,7 @@
                                         <span ng-if="electionRP.finalVote == 'null'"></span>
                                     </div>
                                     <label
-                                        class="col-lg-2 col-md-2 col-sm-4 col-xs-4 control-label vote-label access-color-color">Date: </label>
+                                        class="col-lg-2 col-md-2 col-sm-4 col-xs-4 control-label vote-label access-color">Date: </label>
 
                                     <div class="voteDate col-lg-4 col-md-4 col-sm-8 col-xs-8 vote-label">
                                         {{electionRP.finalVoteDate}}
@@ -272,15 +278,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 f-left">
                             <div cm-chart cm-chart-data="chartRP.Total"
                                  cm-chart-options="chartOptions.RPTotal" class="result_chart"></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row" ng-repeat="row in rpVoteAccessList">
-                <div id="voteResultsListRP" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill" ng-repeat="vm in row">
+            <div class="row fsi-row-lg-level fsi-row-md-level no-margin" ng-repeat="row in rpVoteAccessList">
+                <div id="voteResultsListRP" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill no-padding" ng-repeat="vm in row">
                     <div class="jumbotron box-vote-singleresults">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">{{vm.displayName}}
@@ -320,7 +326,6 @@
         <accordion-group class="accordion">
             <accordion-heading>
                 <h3 class="dul-color">Data Use Limitations Voting Results<br>
-
                     <div class="cm-inside-box-title">Were Data Use Limitations correctly converted into a
                         machine-readable format?
                     </div>
@@ -328,10 +333,10 @@
                        ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
                 </h3>
             </accordion-heading>
-            <div class="row">
-                <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10 jumbotron box-vote-lightresults no-padding">
+            <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-lightresults no-padding">
                     <div class="row">
-                        <div class="col-lg-7 col-md-7 col-sm-6 col-xs-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <div class="cm-title-record dul-color">DAC Decision</div>
                             <hr class="box-separator">
                             <div class="results-box">
@@ -364,15 +369,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <div cm-chart cm-chart-data="chartDataDUL.Total"
                                  cm-chart-options="chartOptions.dulTotal" class="result_chart"></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row" ng-repeat="row in voteList">
-                <div id="voteResultsListDul" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill" ng-repeat="vm in row">
+            <div class="row fsi-row-lg-level fsi-row-md-level no-margin" ng-repeat="row in voteList">
+                <div id="voteResultsListDul" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill no-padding" ng-repeat="vm in row">
                     <div class="jumbotron box-vote-singleresults">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cm-user-name bold">{{vm.displayName}}

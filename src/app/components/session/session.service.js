@@ -5,13 +5,14 @@
         .service('cmLoginUserService', cmLoginUserService);
 
     /* ngInject */
-    function cmLoginUserService($rootScope, $location, GetUserResource, USER_ROLES, $state, cmAuthenticateService) {
+    function cmLoginUserService(clientId, $rootScope, $location, USER_ROLES, $state, cmAuthenticateService, GetUserResource) {
 
 
         function loginUser(email, accessToken) {
             $rootScope.accessToken = accessToken;
             GetUserResource.get({email: email},
                 function (data) {
+                    data.accessToken = accessToken;
                     $rootScope.setCurrentUser(data);
                     redirect(data);
                 }, function (error) {
@@ -24,7 +25,7 @@
 
 
         function redirect(data) {
-            if(($rootScope.returnToState != null && $rootScope.returnToState !== 'login') && cmAuthenticateService.hasValidRole($rootScope.returnToStateAuthorizedRoles, data.roles)){
+            if(( Boolean($rootScope.returnToState) && $rootScope.returnToState !== 'login') && cmAuthenticateService.hasValidRole($rootScope.returnToStateAuthorizedRoles, data.roles)){
                 $state.go($rootScope.returnToState, $rootScope.returnToStateParams);
             } else {
                 if (cmAuthenticateService.isAuthorized(USER_ROLES.chairperson, data.roles)) {
@@ -46,7 +47,7 @@
             }
         }
 
-        function refreshUser(clientId) {
+        function refreshUser() {
             $rootScope.setCurrentUser(JSON.parse(sessionStorage.getItem('currentUser')));
             $rootScope.loadScript('https://apis.google.com/js/platform.js?onload=onLoadCallback', 'text/javascript', 'utf-8');
             window.onLoadCallback = function () {
@@ -58,11 +59,10 @@
                     }
                 });
             };
-            function signOut() {
+            window.signOut = function(){
                 logoutUser();
-            }
-
-            window.signOut = signOut;
+            };
+            $rootScope.accessToken = $rootScope.currentUser.accessToken;
         }
 
 

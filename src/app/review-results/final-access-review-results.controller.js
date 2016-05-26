@@ -4,7 +4,7 @@
     angular.module('cmReviewResults')
         .controller('FinalAccessReviewResults', FinalAccessReviewResults);
 
-    function FinalAccessReviewResults($scope, $rootScope, $modal, $state, cmElectionService, cmRPService, cmVoteService, cmLoginUserService, apiUrl, cmMatchService, electionId, referenceId, hasUseRestriction) {
+    function FinalAccessReviewResults($scope, $rootScope, $modal, $state, cmElectionService, cmRPService, cmVoteService, cmLoginUserService, apiUrl, cmMatchService, electionId, referenceId, hasUseRestriction, cmFilesService) {
 
         if (electionId === null || referenceId === null) {
             cmLoginUserService.redirect($rootScope.currentUser);
@@ -44,6 +44,10 @@
         };
 
         init();
+
+        $scope.downloadDUL = function(){
+            cmFilesService.getDULFile($scope.electionReview.consent.consentId, $scope.electionReview.consent.dulName);
+        };
 
         function logVote() {
             $scope.electionType = 'access';
@@ -286,6 +290,8 @@
                     $scope.vote = data;
                     if (data.vote !== null) {
                         $scope.alreadyVote = true;
+                        $scope.originalVote = data.vote;
+                        $scope.originalRationale = data.rationale;
                     }
                 });
 
@@ -308,6 +314,7 @@
                     });
 
                 cmElectionService.findLastElectionReviewByReferenceId(data.consent.consentId).$promise.then(function (data) {
+                    $scope.electionReview = data;
                     showDULData(data);
                     vaultVote(data.consent.consentId);
                 });
@@ -316,6 +323,11 @@
         }
 
         function showAccessData(electionReview) {
+            if(Boolean(electionReview.voteAgreement)){
+                $scope.originalAgreementVote = electionReview.voteAgreement.vote;
+                $scope.originalAgreementRationale = electionReview.voteAgreement.rationale;
+            }
+
             cmRPService.getDarFields(electionReview.election.referenceId, "rus").then(function (data) {
                 $scope.dar = data;
             });
@@ -327,7 +339,7 @@
             $scope.voteAccessList = chunk(electionReview.reviewVote, 2);
             $scope.chartDataAccess = getGraphData(electionReview.reviewVote);
             $scope.voteAgreement = electionReview.voteAgreement;
-            if (electionReview.voteAgreement != null && electionReview.voteAgreement.vote !== null) {
+            if (Boolean(electionReview.voteAgreement) && electionReview.voteAgreement.vote !== null) {
                 $scope.agreementAlreadyVote = true;
             }
         }
@@ -384,10 +396,12 @@
 
         $scope.positiveVote = function () {
             $scope.vote.rationale = null;
+            $scope.setEnableFinalButton();
         };
 
         $scope.positiveAgreementVote = function () {
             $scope.voteAgreement.rationale = null;
+            $scope.enableAgreementButton();
         };
 
 
@@ -403,6 +417,22 @@
 
             });
         }
+
+        $scope.setEnableAgreementButton = function(){
+            if(Boolean($scope.voteAgreement) && $scope.voteAgreement.vote === $scope.originalAgreementVote && $scope.voteAgreement.rationale === $scope.originalAgreementRationale){
+                $scope.enableAgreementButton = false;
+            }else{
+                $scope.enableAgreementButton = true;
+            }
+        };
+
+        $scope.setEnableFinalButton = function(){
+            if($scope.vote.vote === $scope.originalVote  && $scope.vote.rationale === $scope.originalRationale ){
+                $scope.enableFinalButton = false;
+            }else{
+                $scope.enableFinalButton = true;
+            }
+        };
     }
 
 })();

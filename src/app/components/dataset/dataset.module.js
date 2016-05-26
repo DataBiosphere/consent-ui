@@ -26,8 +26,8 @@
         })
 
         .factory('DeleteDataSetResource', function($resource, apiUrl){
-                          return $resource(apiUrl+"dataset/:datasetObjectId", {}, {
-                              Delete: {method:'DELETE',params: {datasetObjectId: '@datasetObjectId'}}
+                          return $resource(apiUrl+"dataset/:datasetObjectId/:dacUserId", {}, {
+                              Delete: {method:'DELETE',params: {datasetObjectId: '@datasetObjectId', dacUserId: '@dacUserId'}}
                           });
         })
 

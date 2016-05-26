@@ -41,10 +41,10 @@
             cmConsentService.postConsent(consent).$promise.then(
                 function (value) {
                     cmConsentService.postDul($scope.file, value.consentId).$promise.then(
-                        function (value) {
+                        function () {
                             $modalInstance.close();
                         },
-                        function (reason) {
+                        function () {
                             fileUploadErrorAlert(0);
                             $scope.disableButton = false;
                         });
@@ -71,7 +71,7 @@
             }
             consent.useRestriction = $scope.useRestriction;
             cmConsentService.updateConsent(consent).$promise.then(
-                function (value) {
+                function () {
                     if ($scope.file.type !== undefined) {
                         cmConsentService.postDul($scope.file, consent.consentId).$promise.then(
                             function () {
@@ -117,7 +117,7 @@
             }
             else {
                 tle = "Error, unable to create a new Data Use Limitation! ";
-                message = "Internal Server Error";
+                message = message;
             }
 
             $scope.alerts.push({
@@ -128,7 +128,7 @@
             });
         };
 
-        $scope.fileUploadErrorAlert = function (index) {
+        function fileUploadErrorAlert(index) {
             $scope.alerts.splice(index, 1);
             $scope.alerts.push({
                 type: 'danger',
@@ -136,7 +136,7 @@
                 msg: 'Problem with the file UpLoad.',
                 alertType: 1
             });
-        };
+        }
 
         $scope.closeAlert = function (index) {
             $scope.alerts.splice(index, 1);

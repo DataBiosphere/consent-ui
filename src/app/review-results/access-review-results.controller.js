@@ -4,14 +4,85 @@
     angular.module('cmReviewResults')
         .controller('AccessReviewResults', ReviewResults);
 
-    function ReviewResults($sce, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, electionReview, rpElectionReview, dar, apiUrl, cmEmailService, cmRPService, dar_id) {
+    function ReviewResults($sce, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, electionReview, rpElectionReview, dar, apiUrl, cmEmailService, cmRPService, dar_id, cmFilesService) {
 
         var vm = this;
         vm.openApplication = openApplication;
+        $scope.electionType = 'access';
+        $scope.election = electionReview.election;
+        $scope.voteList = chunk(electionReview.reviewVote, 2);
+        $scope.darOriginalFinalVote = electionReview.election.finalVote;
+        $scope.darOriginalFinalRationale = electionReview.election.finalRationale;
+
+        if (typeof electionReview === 'undefined') {
+            cmLoginUserService.redirect($rootScope.currentUser);
+            return;
+        }
+        if(rpElectionReview.election !== undefined){
+            $scope.rpElection = rpElectionReview.election;
+            $scope.rpVoteList = chunk(rpElectionReview.reviewVote, 2);
+            $scope.rpChartData = getRPGraphData(rpElectionReview.reviewVote);
+            $scope.isRPFormDisabled = $scope.rpChartData.RPChart[3][1] > 0;
+            $scope.showRPaccordion = true;
+
+
+            $scope.openAccordion = false;
+            if ($scope.rpElection.finalVote !== null) {
+                $scope.rpAlreadyVote = true;
+            }
+            $scope.rpOriginalFinalVote = rpElectionReview.election.finalVote;
+            $scope.rpOriginalFinalRationale = rpElectionReview.election.finalRationale;
+            if(rpElectionReview.election.finalRationale !== null && (rpElectionReview.election.finalRationale.length === 0 || !rpElectionReview.election.finalRationale.trim())){
+                $scope.rpOriginalFinalRationale = null;
+            }
+        }else{
+            $scope.showRPaccordion = false;
+            $scope.openAccordion = true;
+
+        }
+        $scope.buttonDisabled = false;
+        $scope.chartData = getAccessGraphData(electionReview.reviewVote);
+
+        $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
+        $scope.dulName = electionReview.consent.dulName;
+        $scope.dar = dar.rus;
+        $scope.status = electionReview.election.status;
+        $scope.isFormDisabled = $scope.chartData.accessChart[3][1] > 0;
+        /*ALERTS*/
+        $scope.alertsRP = [];
+        $scope.alertsDAR = [];
+
+        if ($scope.election.finalVote !== null) {
+            $scope.accessAlreadyVote = true;
+        }
+
+        if (electionReview.election.translatedUseRestriction === null) {
+            $scope.rp = "This includes sensitive research objectives that requires manual review.";
+        } else {
+            $scope.rp = $sce.trustAsHtml(electionReview.election.translatedUseRestriction);
+        }
+
+
+        $scope.setEnableDARButton = function(){
+            if(electionReview.election.finalVote === $scope.darOriginalFinalVote && electionReview.election.finalRationale === $scope.darOriginalFinalRationale){
+                $scope.enableDARButton = false;
+            }else{
+                $scope.enableDARButton = true;
+            }
+        };
+
+        $scope.setEnableRPButton = function(){
+           if($scope.rpOriginalFinalVote !== undefined && (rpElectionReview.election.finalVote === $scope.rpOriginalFinalVote && rpElectionReview.election.finalRationale === $scope.rpOriginalFinalRationale)){
+                $scope.enableRPButton = false;
+            }else{
+                $scope.enableRPButton = true;
+            }
+        };
+
 
         function openApplication() {
             $scope.dataRequestId = dar_id;
-            var modalInstance = $modal.open({
+            $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/application-summary-modal/application-summary-modal.html',
                 controller: 'ApplicationModal',
@@ -23,57 +94,9 @@
                     }
                 }
             });
-
-            modalInstance.result.then(function () {
-                init();
-            });
         }
 
-        if (typeof electionReview === 'undefined') {
-            cmLoginUserService.redirect($rootScope.currentUser);
-            return;
-        }
-        $scope.electionType = 'access';
-        $scope.election = electionReview.election;
-        $scope.voteList = chunk(electionReview.reviewVote, 2);
-        if(rpElectionReview.election !== undefined){
-        $scope.rpElection = rpElectionReview.election;
-        $scope.rpVoteList = chunk(rpElectionReview.reviewVote, 2);
-        $scope.rpChartData = getRPGraphData(rpElectionReview.reviewVote);
-        $scope.isRPFormDisabled = $scope.rpChartData.RPChart[3][1] > 0 || rpElectionReview.election.status !== 'Open';
-        $scope.showRPaccordion = true;
-        $scope.openAccordion = false;
-            if ($scope.rpElection.finalVote !== null) {
-                     $scope.rpAlreadyVote = true;
-                 }
-        }else{
-                  $scope.showRPaccordion = false;
-                  $scope.openAccordion = true;
 
-        }
-        $scope.buttonDisabled = false;
-        $scope.chartData = getAccessGraphData(electionReview.reviewVote);
-
-        $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
-        $scope.dulName = electionReview.consent.dulName;
-        $scope.dar = dar.rus;
-        $scope.status = electionReview.election.status;
-        $scope.isFormDisabled = $scope.chartData.accessChart[3][1] > 0 || $scope.status !== 'Open';
-        /*ALERTS*/
-        $scope.alertsRP = [];
-        $scope.alertsDAR = [];
-
-
-
-        if ($scope.election.finalVote !== null) {
-            $scope.accessAlreadyVote = true;
-        }
-
-        if (electionReview.election.translatedUseRestriction === null) {
-            $scope.rp = "This includes sensitive research objectives that requires manual review.";
-        } else {
-            $scope.rp = $sce.trustAsHtml(electionReview.election.translatedUseRestriction);
-        }
 
         $scope.sendReminder = function (voteId) {
             $scope.buttonDisabled = true;
@@ -107,6 +130,11 @@
             });
         };
 
+        $scope.downloadDUL = function(){
+            cmFilesService.getDULFile(electionReview.consent.consentId, electionReview.consent.dulName);
+        };
+
+
         $scope.reminderDARAlert = function (index) {
             $scope.alertsDAR.splice(index, 1);
             $scope.alertsDAR.push({
@@ -129,10 +157,12 @@
 
         $scope.positiveRpVote = function () {
             $scope.rpElection.finalRationale = null;
+            $scope.setEnableRPButton();
         };
 
         $scope.positiveAccessVote = function () {
             $scope.election.finalRationale = null;
+            $scope.setEnableDARButton();
         };
 
         $scope.logVote = function logVote() {

@@ -1,17 +1,20 @@
 <div ng-include src="'app/header/header.html'"></div>
 <div class="container">
-    <h2 class="cm-title dul-color">
-        <img src="assets/images/icon_dul.png" alt="translation icon" class="cm-icons">Data Use Limitations Congruence Review<br>
-        <div class="cm-title-description">Where the data use limitations accurately converted to a structured format?</div>
-    </h2>
+    <div class="row fsi-row-lg-level fsi-row-md-level title-wrapper">
+        <img src="assets/images/icon_dul.png" alt="Data Use Limitations icon" class="cm-icons main-icon-title">
+        <h2 class="main-title margin-sm dul-color">
+            Data Use Limitations Congruence Review<br>
+            <div class="main-title-description">Where the data use limitations accurately converted to a structured format?</div>
+        </h2>
+    </div>
     <hr class="section-separator">
-    <div class="row fsi-row-lg-level fsi-row-md-level">
+    <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
             <div class="panel-heading cm-boxhead dul-color">
                 <h4>Data Use Limitations</h4>
             </div>
             <div id="dul" class="panel-body cm-boxbody">
-                <a href="{{downloadUrl}}" target="_blank">{{consentDulName}}</a>
+                <a style="cursor:pointer;" ng-click="downloadDUL()">{{consentDulName}}</a>
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
@@ -38,7 +41,7 @@
                                 <label for="inputVotePositive"></label>
                                 <label for="inputVotePositive" class="radio-button-text">Yes</label>
 
-                                <input type="radio" ng-model="voteStatus"
+                                <input type="radio" ng-model="voteStatus" ng-click="setEnableVoteButton()"
                                        ng-value="false" class="regular-radio" id="inputVoteNegative"
                                        name="inputVote">
                                 <label for="inputVoteNegative"></label>
@@ -51,7 +54,7 @@
                             class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label dul-color">Rationale</label>
 
                         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
-                            <input type="text" ng-model="rationale"
+                            <input type="text" ng-model="rationale" ng-change="setEnableVoteButton()"
                                    ng-disabled="voteStatus == true"
                                    name="inputRationale"
                                    class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
@@ -59,8 +62,8 @@
                         </div>
                     </div>
                     <div class="form-group form-group-bottom">
-                        <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-3 col-md-offset-9 col-xs-12">
-                            <button ng-disabled="voteStatus === null || enableVoteButton === false" ng-click="logVote()"
+                        <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-6 col-sm-offset-6 col-xs-6 col-xs-offset-6">
+                            <button ng-disabled="voteStatus === null || !enableVoteButton" ng-click="logVote()"
                                     class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button dul-background">
                                 Vote
                             </button>
@@ -69,5 +72,18 @@
                 </fieldset>
             </form>
         </div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 f-right">
+        <a href="#/user_console" ng-repeat="rol in $root.currentUser.roles"
+           ng-show="'{{rol.name}}' === '{{$root.userRoles.member}}'"
+           class="btn vote-button vote-button-dismiss vote-button-bigger">
+            Back to Console
+        </a>
+
+        <a href="#/chair_console" ng-repeat="rol in $root.currentUser.roles"
+           ng-show="'{{rol.name}}' === '{{$root.userRoles.chairperson}}'"
+           class="btn vote-button vote-button-dismiss vote-button-bigger">
+            Back to Console
+        </a>
     </div>
 </div>
