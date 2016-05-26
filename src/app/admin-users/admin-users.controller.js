@@ -48,11 +48,8 @@
                 resolve: {
                     user: function (cmUserService) {
                         return cmUserService.findUser(email);
-                    },
-                    enableRolEdit: function (cmElectionService) {
-                        return cmElectionService.openElections().$promise;
                     }
-                }
+              }
             });
 
             modalInstance.result.then(function () {

@@ -15,6 +15,9 @@
             isopen: false
         };
 
+        $scope.navbarCollapsed = true;
+
+
         function goToRP() {
             $state.go('rp_application.step1', {}, { reload: true });
         }
@@ -41,7 +44,7 @@
 
         function containsOtherThanResearcherAndDataOwner(roles, rootRoles){
             var i;
-            if(roles == null){
+            if(!Boolean(roles)){
                 return false;
             }
             for (i = 0; i < roles.length; i++) {

@@ -5,14 +5,16 @@
         .controller('DulResultsRecord', DulResultsRecord);
 
 
-    function DulResultsRecord($sce, $scope, $state, electionReview, apiUrl) {
+    function DulResultsRecord($sce, $scope, $state, electionReview, apiUrl, cmFilesService) {
 
 
 
- if( typeof electionReview === 'undefined'){
+
+        if( typeof electionReview === 'undefined'){
             $state.go('reviewed_cases');
             return;
         }
+
         $scope.chartData = {
             'dulTotal': [
                 ['Results', 'Votes'],
@@ -80,6 +82,11 @@
         $scope.finalVote = electionReview.election.finalVote;
         $scope.voteList = chunk(electionReview.reviewVote, 2);
         $scope.chartData = getGraphData(electionReview.reviewVote);
+
+        $scope.downloadDUL = function(){
+            cmFilesService.getDULFile(electionReview.consent.consentId, electionReview.consent.dulName);
+        };
+
         function chunk(arr, size) {
             var newArr = [];
             for (var i = 0; i < arr.length; i += size) {
@@ -113,6 +120,5 @@
             };
             return chartData;
         }
-
     }
 })();

@@ -105,13 +105,13 @@
                         // negative cases
                         data.RPReviewed[2][1] = rp.reviewedNegativeCases;
                         MatchSummaryCases.List().$promise.then(function(match) {
-                            if(match[0] != undefined) {
+                            if(match[0]){
                                 // positive cases
                                 data.VaultReviewed[1][1] = match[0].reviewedPositiveCases;
                                 // negative cases
                                 data.VaultReviewed[2][1] = match[0].reviewedNegativeCases;
                             }
-                            if(match[1] != undefined) {
+                            if(match[1]){
                                 // positive cases
                                 data.Agreement[1][1] = match[1].reviewedPositiveCases;
                                 // negative cases

@@ -7,10 +7,10 @@ info:
     name: BSD
     url: 'http://opensource.org/licenses/BSD-3-Clause'
   termsOfService: 'https://github.com/broadinstitute/consent'
-host: consent-ui.dsde-dev.broadinstitute.org
+host: consent.dsde-consent-prod.broadinstitute.org
 schemes:
   - https
-basePath: /api
+basePath:
 paths:
   '/consent/associations/{associationType}/{id}':
     get:

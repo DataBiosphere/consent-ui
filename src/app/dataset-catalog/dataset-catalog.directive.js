@@ -1,3 +1,5 @@
+/*jshint loopfunc: true */
+
 (function () {
     'use strict';
 
@@ -22,15 +24,17 @@
                         var i = scope.objectIdList.length;
                         while (i--) {
                             if (scope.objectIdList[i] === element.context.id) {
-                                scope.$apply(function () {
-                                    scope.objectIdList.splice(i, 1);
-                                });
+                                scope.$apply(spliceFromList(scope.objectIdList,i));
                             }
                         }
                     }
                 });
             }
         };
+    }
+
+    function spliceFromList(list,i) {
+                 list.splice(i, 1);
     }
 
     function selectAllDatasetsDirective() {
@@ -45,15 +49,16 @@
                     if (element.context.checked) {
                         scope.objectIdList = [];
                         scope.$apply(function () {
+                            var checkboxModel;
                             for (i; i <= dataList.length; i++) {
                                 if (index === 10) {
                                     index = 0;
                                     currentPage++;
-                                    var checkboxModel = 'field_' + currentPage + index;
+                                     checkboxModel = 'field_' + currentPage + index;
                                     index++;
                                     scope.checkMod[checkboxModel] = true;
                                 } else {
-                                    var checkboxModel = 'field_' + currentPage + index;
+                                     checkboxModel = 'field_' + currentPage + index;
                                     index++;
                                     scope.checkMod[checkboxModel] = true;
                                 }
@@ -65,19 +70,24 @@
                                         scope.objectIdList.push(obj.propertyValue);
                                     }
                                 });
+
+
+
+
                             }
                         });
                     } else {
                         scope.$apply(function () {
+                            var checkboxModel;
                             for (i; i <= dataList.length; i++) {
                                 if (index === 10) {
                                     index = 0;
                                     currentPage++;
-                                    var checkboxModel = 'field_' + currentPage + index;
+                                    checkboxModel = 'field_' + currentPage + index;
                                     index++;
                                     scope.checkMod[checkboxModel] = false;
                                 } else {
-                                    var checkboxModel = 'field_' + currentPage + index;
+                                    checkboxModel = 'field_' + currentPage + index;
                                     index++;
                                     scope.checkMod[checkboxModel] = false;
                                     scope.objectIdList = [];

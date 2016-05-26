@@ -74,11 +74,13 @@
       });
 
       function addApiKeyAuthorization(){
+	var user = encodeURIComponent($('#input_user')[0].value);
         var key = encodeURIComponent($('#input_apiKey')[0].value);
-        if(key && key.trim() != "") {
-            var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("api_key", key, "query");
-            window.swaggerUi.api.clientAuthorizations.add("api_key", apiKeyAuth);
-            log("added key " + key);
+        if(key && key.trim() != "" && user && user.trim() != "") {
+	    auth = 'Basic '+window.btoa(user+':'+key); 
+            var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("Authorization", auth, "header");
+            window.swaggerUi.api.clientAuthorizations.add("Authorization", apiKeyAuth);
+            log("added key " + auth);
         }
       }
 
@@ -107,7 +109,8 @@
     <a id="logo" href="http://swagger.io">swagger</a>
     <form id='api_selector'>
       <div class='input'><input placeholder="http://example.com/api" id="input_baseUrl" name="baseUrl" type="text"/></div>
-      <div class='input'><input placeholder="api_key" id="input_apiKey" name="apiKey" type="text"/></div>
+      <div class='input'><input placeholder="user" id="input_user" name="user" type="text" size="10"/></div>
+      <div class='input'><input style="width:100px;" placeholder="password" id="input_apiKey" name="apiKey" type="password"/></div>
       <div class='input'><a id="explore" href="#" data-sw-translate>Explore</a></div>
     </form>
   </div>

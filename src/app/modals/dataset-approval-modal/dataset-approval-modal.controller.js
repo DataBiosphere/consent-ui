@@ -8,13 +8,13 @@
     function DataSetApprovalModal($modalInstance, $scope, usersAssociation, datasetName, needsApproval, cmDatasetAssociationService, cmDatasetService) {
 
         var vm = this;
-        $scope.updatedNeedsApproval;
+        $scope.updatedNeedsApproval = false;
         $scope.alert = {};
         $scope.alert.show = false ;
 
+        $scope.updatedNeedsApproval = needsApproval ?  true : false;
+        $scope.isUpdate = (usersAssociation.associated_users === undefined || usersAssociation.associated_users.length === 0) ?  false : true;
 
-        needsApproval ? $scope.updatedNeedsApproval = true : $scope.updatedNeedsApproval = false;
-        (usersAssociation.associated_users === undefined || usersAssociation.associated_users.length == 0) ? $scope.isUpdate = false : $scope.isUpdate = true;
         $scope.selectedclients = usersAssociation.associated_users.map(function (user){
                  return { id: user.dacUserId , name: user.displayName+" : "+user.email};});
 
@@ -35,7 +35,7 @@
             if(needsApproval !== $scope.updatedNeedsApproval){
             cmDatasetService.reviewDataSet(datasetName, $scope.updatedNeedsApproval).then(function () {
               createOrUpdateAssociations();
-              }, function(reason){
+              }, function(){
                    showAlert();
               });
           }else{
@@ -59,14 +59,14 @@
                                cmDatasetAssociationService.updateDatasetAssociations(datasetName, userIdList).then(
                                    function () {
                                           $modalInstance.close();
-                                   }, function (reason) {
+                                   }, function () {
                                            showAlert();
                                    });
                      } else{
                                cmDatasetAssociationService.createDatasetAssociations(datasetName, userIdList).then(
                                    function () {
                                            $modalInstance.close();
-                                             }, function (reason) {
+                                             }, function () {
                                                     showAlert();
                                    });
                        }

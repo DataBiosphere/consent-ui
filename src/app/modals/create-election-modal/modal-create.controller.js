@@ -45,7 +45,7 @@
             $scope.alerts.splice(index, 1);
             $scope.alerts.push({
                 title: 'Election cannot be created!',
-                msg: 'There has to be a Chairperson and at least 4 Members cataloged in the system to create an election.'
+                msg: 'There has to be a Chairperson and at least 3 Members cataloged in the system to create an election.'
             });
         };
 

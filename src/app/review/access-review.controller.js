@@ -4,14 +4,48 @@
     angular.module('cmReview')
         .controller('DarReview', DarReview);
 
-    function DarReview($sce, $scope, $modal, $state, $rootScope, USER_ROLES, vote, rpVote, dar, election, consent, cmVoteService, apiUrl, cmAuthenticateService, cmLoginUserService, cmRPService, dar_id) {
+    function DarReview($sce, $scope, $modal, $state, $rootScope, USER_ROLES, vote, rpVote, dar, election, consent, cmVoteService, apiUrl, cmAuthenticateService, cmLoginUserService, cmRPService, dar_id, cmFilesService) {
 
         var vm = this;
         vm.openApplication = openApplication;
+        initEnableRPButton();
+        initEnableDARButton();
+
+        function initEnableRPButton(){
+           if(rpVote !== undefined && (rpVote.vote !== undefined && rpVote.vote !== null)){
+                $scope.enableRPButton  = false;
+            }else{
+                $scope.enableRPButton  = true;
+            }
+        }
+
+        function initEnableDARButton(){
+            if(vote.vote !== undefined && vote.vote !== null){
+                $scope.enableDARButton = false;
+            }else{
+                $scope.enableDARButton = true;
+            }
+        }
+
+        $scope.setEnableRPButton = function(){
+            if(Boolean(rpVote) && ($scope.selection.rpVoteStatus === rpVote.vote && $scope.selection.rpRationale === rpVote.rationale)){
+                $scope.enableRPButton = false;
+            }else{
+                $scope.enableRPButton = true;
+            }
+        };
+
+        $scope.setEnableDARButton = function(){
+            if($scope.selection.voteStatus === vote.vote && $scope.selection.rationale  === vote.rationale){
+                $scope.enableDARButton = false;
+            }else{
+                $scope.enableDARButton = true;
+            }
+        };
 
         function openApplication() {
             $scope.dataRequestId = dar_id;
-            var modalInstance = $modal.open({
+            $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/application-summary-modal/application-summary-modal.html',
                 controller: 'ApplicationModal',
@@ -22,10 +56,6 @@
                         return cmRPService.getDarModalSummary(dar_id);
                     }
                 }
-            });
-
-            modalInstance.result.then(function () {
-                init();
             });
         }
 
@@ -41,8 +71,7 @@
         } else {
                 $scope.rp = $sce.trustAsHtml(election.translatedUseRestriction);
         }
-        $scope.enableDARButton = true;
-        $scope.enableRPButton = true;
+
         $scope.selection = {};
         $scope.downloadUrl = apiUrl + 'consent/' + consent.consentId + '/dul';
         $scope.consent = consent;
@@ -95,18 +124,22 @@
         $scope.positiveVote = function () {
             $scope.selection.voteStatus = true;
             $scope.selection.rationale = null;
+            $scope.setEnableDARButton();
         };
 
 
         $scope.positiveRPVote = function () {
             $scope.selection.rpVoteStatus = true;
             $scope.selection.rpRationale = null;
+            $scope.setEnableRPButton();
+
         };
 
+        $scope.downloadDUL = function(){
+            cmFilesService.getDULFile(consent.consentId, consent.dulName);
+        };
 
         $scope.logRPVote = function () {
-            $scope.enableRPButton = false;
-            if ((rpVote.vote !== $scope.selection.rpVoteStatus) || ($scope.selection.rpRationale !== vote.rpRationale)) {
                 rpVote.vote = $scope.selection.rpVoteStatus;
                 rpVote.rationale = $scope.selection.rpRationale;
                 var result;
@@ -121,7 +154,6 @@
                 result.then(
                     //success
                     function () {
-                        $scope.enableRPButton = true;
                         var modalInstance = $modal.open({
                             animation: false,
                             templateUrl: 'app/modals/confirmation-modal.html',
@@ -139,7 +171,6 @@
                                 }
                             } else {
                                 $scope.reminderRPAlert();
-                                $scope.enableRPButton = true;
                             }
                         });
 
@@ -147,18 +178,11 @@
                     //error
                     function () {
                         alert("Error updating vote.");
-                        $scope.enableRPButton = true;
                     });
-            } else {
-                alert("Error: Your vote hasn't been changed.");
-                $scope.enableRPButton = true;
-            }
         };
 
 
         $scope.logVote = function () {
-            $scope.enableDARButton = false;
-            if ((vote.vote !== $scope.selection.voteStatus) || ($scope.selection.rationale !== vote.rationale)) {
                 vote.vote = $scope.selection.voteStatus;
                 vote.rationale = $scope.selection.rationale;
                 var result;
@@ -173,7 +197,6 @@
                 $scope.electionType = 'access';
                 result.then(
                     function () {
-                        $scope.enableDARButton = true;
                         var modalInstance = $modal.open({
                             animation: false,
                             templateUrl: 'app/modals/confirmation-modal.html',
@@ -191,7 +214,6 @@
                                 }
                             } else {
                                 $scope.reminderDARAlert();
-                                $scope.enableDARButton = true;
                             }
 
                         });
@@ -199,12 +221,8 @@
                     //error
                     function () {
                         alert("Error updating vote.");
-                        $scope.enableDARButton = true;
                     });
-            } else {
-                alert("Error: Your vote hasn't been changed.");
-            }
-        };
+            };
+        }
 
-    }
 })();
