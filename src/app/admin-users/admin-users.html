@@ -1,25 +1,27 @@
 <div ng-include src="'app/header/header.html'"></div>
 <div class="container">
     <div class="row no-margin">
-        <h2 class="col-lg-7 col-md-7 col-sm-12 col-xs-12 cm-title common-color no-padding">
-            <img src="../assets/images/icon_manage_users.png" alt="Manage DUL icon" class="cm-icons">Manage Users
-            <div class="cm-title-admin-description">Select and manage users and their roles</div>
-        </h2>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 search-reviewed">
-            <div class="search-text">
-                <i class="glyphicon glyphicon-search common-color"></i>
-                <input type="search" class="form-control users-search" placeholder="Enter search term..." ng-model="searchUsers"/>
-            </div>
+        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 no-padding title-wrapper">
+            <img src="../assets/images/icon_manage_users.png" alt="Manage Users icon" class="cm-icons main-icon-title">
+            <h2 class="main-title margin-sm common-color">Manage Users<br>
+                <div class="main-title-description">Select and manage users and their roles</div>
+            </h2>
         </div>
-        <div>
-            <a class="col-lg-2 col-md-2 col-sm-6 col-xs-6 admin-add-button common-background"
-               ng-click="AdminUsers.addUser()">
+        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 search-reviewed no-padding">
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                <div class="search-text">
+                    <i class="glyphicon glyphicon-search common-color"></i>
+                    <input type="search" class="form-control users-search" placeholder="Enter search term..."
+                           ng-model="searchUsers"/>
+                </div>
+            </div>
+            <a class="col-lg-5 col-md-5 col-sm-5 col-xs-5 admin-add-button common-background" ng-click="AdminUsers.addUser()">
                 <div class="all-icons add-user_white"></div>
                 <span>Add User</span>
             </a>
         </div>
     </div>
-    <div class="jumbotron box-vote-singleresults">
+    <div class="jumbotron box-vote-singleresults box-vote-no-margin">
         <div class="row">
             <div class="pvotes-box-head">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-box-subtitle common-color">User Name</div>

@@ -19,5 +19,10 @@
     "afterEach": false,
     "module": false,
     "inject": false
-  }
+  },
+  "browser" : true,    // Standard browser globals e.g. `window`, `document`.
+  "devel" : true,
+  "predef" : ["gapi", "google"]
+
+
 }

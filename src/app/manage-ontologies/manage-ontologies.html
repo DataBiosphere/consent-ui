@@ -1,0 +1,60 @@
+<div ng-include src="'app/header/header.html'"></div>
+<div class="container">
+    <div class="row no-margin">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 no-padding title-wrapper">
+            <img src="../assets/images/icon-manage-ontology.png" alt="Manage Ontology icon" class="cm-icons main-icon-title">
+            <h2 class="main-title margin-sm common-color">Manage Ontologies<br>
+                <div class="main-title-description">Select and manage Ontologies for index</div>
+            </h2>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 search-reviewed no-padding">
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                <div class="search-text">
+                    <i class="glyphicon glyphicon-search common-color"></i>
+                    <input type="search" class="form-control users-search" placeholder="Enter search term..."
+                           ng-model="searchOntologies"/>
+                </div>
+            </div>
+            <a href="" class="col-lg-5 col-md-5 col-sm-5 col-xs-5 admin-add-button common-background no-margin" ng-click="addOntology()">
+                <div class="all-icons add-ontologies-white"></div>
+                <span>Add Ontologies</span>
+            </a>
+        </div>
+    </div>
+    <div class="jumbotron box-vote-singleresults box-vote-no-margin">
+        <div class="row manage-wrapper">
+            <div class="pvotes-box-head fsi-row-lg-level fsi-row-md-level">
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-4 pvotes-box-subtitle common-color">File name</div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-box-subtitle common-color">Type</div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-box-subtitle common-color">Prefix</div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pvotes-box-subtitle f-center common-color"></div>
+            </div>
+
+            <div class="admin-box-body">
+                <hr class="pvotes-main-separator">
+                <div dir-paginate="indexFile in indexedFiles | itemsPerPage:8" pagination-id="indexedFiles">
+                    <div class="row pvotes-main-list">
+                        <a class="col-lg-5 col-md-5 col-sm-5 col-xs-4 pvotes-list-id"
+                           style="cursor:pointer;" ng-click="downloadOntology(indexFile.fileName,indexFile.fileUrl)">{{indexFile.fileName}}</a>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id">{{indexFile.ontologyType}}</div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id">{{indexFile.prefix}}</div>
+                        <div class="remove-dul-col">
+                            <a ng-click="openDelete(indexFile.fileUrl)">
+                                <span class="cm-icon-button glyphicon glyphicon-trash caret-margin" aria-hidden="true"></span>
+                            </a>
+                            <hr class="pvotes-separator-longer">
+                        </div>
+                    </div>
+                    <hr class="pvotes-separator">
+                </div>
+                <div dir-pagination-controls
+                     max-size="10"
+                     direction-links="true"
+                     boundary-links="true"
+                     class="pvotes-pagination"
+                     pagination-id="indexedFiles">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

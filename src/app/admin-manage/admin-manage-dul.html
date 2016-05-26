@@ -1,24 +1,27 @@
 <div ng-include src="'app/header/header.html'"></div>
 <div class="container">
     <div class="row no-margin">
-        <h2 class="col-lg-6 col-md-6 col-sm-12 col-xs-12 cm-title dul-color no-padding">
-            <img src="../assets/images/icon_manage_dul.png" alt="Manage DUL icon" class="cm-icons">Manage Data Use Limitations
-            <div class="cm-title-admin-description">Select and manage Data Use Limitations for DAC review</div>
-        </h2>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 search-reviewed">
-            <div class="search-text">
-                <i class="glyphicon glyphicon-search dul-color"></i>
-                <input type="search" class="form-control users-search" placeholder="Enter search term..." ng-model="searchDUL"/>
-            </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 no-padding title-wrapper">
+            <img src="../assets/images/icon_manage_dul.png" alt="Manage DUL icon" class="cm-icons main-icon-title">
+            <h2 class="main-title margin-sm dul-color">Manage Data Use Limitations<br>
+                <div class="main-title-description">Select and manage Data Use Limitations for DAC review</div>
+            </h2>
         </div>
-        <div>
-            <a class="col-lg-3 col-md-3 col-sm-6 col-xs-6 admin-add-button dul-background" ng-click="AdminManage.addDul()">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 search-reviewed no-padding">
+            <div class="col-lg-6 col-md-6 col-sm-7 col-xs-7">
+                <div class="search-text">
+                    <i class="glyphicon glyphicon-search dul-color"></i>
+                    <input type="search" class="form-control users-search" placeholder="Enter search term..."
+                           ng-model="searchDUL"/>
+                </div>
+            </div>
+            <a class="col-lg-6 col-md-6 col-sm-5 col-xs-5 admin-add-button dul-background no-margin" ng-click="AdminManage.addDul()">
                 <div class="all-icons add-dul_white"></div>
                 <span>Add Data Use Limitations</span>
             </a>
         </div>
     </div>
-    <div class="jumbotron box-vote-singleresults">
+    <div class="jumbotron box-vote-singleresults box-vote-no-margin">
         <div class="row manage-wrapper">
             <div class="pvotes-box-head">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-box-subtitle dul-color">Consent id</div>
@@ -48,7 +51,7 @@
                             <span ng-if="election.electionStatus == 'un-reviewed'">Un-reviewed</span>
                             <span ng-if="election.electionStatus == 'Open'">Open</span>
                             <span ng-if="election.electionStatus == 'Canceled'">Canceled</span>
-                            <span ng-if="election.electionStatus == 'Closed'">Reviewed</span>
+                            <span ng-if="election.electionStatus == 'Closed'"><a ui-sref="dul_results_record({electionId: '{{election.electionId}}'})">Reviewed</a></span>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                             <a class="admin-manage-buttons">

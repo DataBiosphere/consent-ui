@@ -10,7 +10,7 @@
         vm.getFile = getFile;
 
          function getFile(fileType){
-                   var file = cmStatFilesService.getFile(fileType);
+                   cmStatFilesService.getFile(fileType);
                 }
 
 

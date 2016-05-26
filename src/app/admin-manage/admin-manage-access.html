@@ -1,12 +1,13 @@
 <div ng-include src="'app/header/header.html'"></div>
 <div class="container">
     <div class="row no-margin">
-        <h2 class="col-lg-8 col-md-8 col-sm-12 col-xs-12 cm-title access-color no-padding">
-            <img src="../assets/images/icon_manage_access.png" alt="Manage DAR icon" class="cm-icons">Manage Data Access
-            Request
-            <div class="cm-title-admin-description">Select and manage Data Access Request for DAC review</div>
-        </h2>
-        <div class="col-lg-4 col-md-4 col-sm-8 col-xs-8 search-reviewed no-padding">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 no-padding title-wrapper">
+            <img src="../assets/images/icon_manage_access.png" alt="Manage DAR icon" class="cm-icons main-icon-title">
+            <h2 class="main-title margin-sm access-color">Manage Data Access Request<br>
+                <div class="main-title-description">Select and manage Data Access Request for DAC review</div>
+            </h2>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12  search-reviewed no-padding">
             <div class="search-text">
                 <i class="glyphicon glyphicon-search access-color"></i>
                 <input type="search" class="form-control users-search" placeholder="Enter search term..."
@@ -14,7 +15,7 @@
             </div>
         </div>
     </div>
-    <div class="jumbotron box-vote-singleresults">
+    <div class="jumbotron box-vote-singleresults box-vote-no-margin">
         <div class="row">
             <div class="pvotes-box-head">
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle access-color">Data Request id</div>
@@ -58,7 +59,7 @@
                                 <span ng-if="dar.electionStatus == 'un-reviewed'">Un-reviewed</span>
                                 <span ng-if="dar.electionStatus == 'Open' || dar.electionStatus == 'Final'">Open</span>
                                 <span ng-if="dar.electionStatus == 'Canceled'">Canceled</span>
-                                <span ng-if="dar.electionStatus == 'Closed' || dar.electionStatus == 'PendingApproval'">Reviewed</span>
+                                <span ng-if="dar.electionStatus == 'Closed' || dar.electionStatus == 'PendingApproval'"><a ui-sref="access_results_record({electionId: '{{dar.electionId}}', referenceId: '{{dar.dataRequestId}}'})">Reviewed</a></span>
                             </div>
                             <div>
                                 <a class="admin-manage-buttons col-lg-2 col-md-2 col-sm-2 col-xs-2">

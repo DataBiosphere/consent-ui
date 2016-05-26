@@ -5,7 +5,7 @@
         <hr class="section-separator">
     </div>
     <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-        <div class="row fsi-row-lg-level fsi-row-md-level">
+        <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
             <a href="#/admin_manage_dul" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 console-boxes admin-icons">
                 <div class="all-icons manage-dul"></div>
                 <div class="admin-icon-subtitles dul-color">Manage Data Use Limitations
@@ -19,7 +19,7 @@
                 <div class="cm-title-description">Catalog a Data Use Limitation Record in the system</div>
             </a>
         </div>
-        <div class="row fsi-row-lg-level fsi-row-md-level">
+        <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
             <a href="#/admin_users" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 console-boxes admin-icons">
                 <div class="all-icons manage-user"></div>
                 <span class="admin-icon-subtitles common-color">Manage Users</span>
@@ -31,7 +31,7 @@
                 <div class="cm-title-description">Catalog a new User in the system</div>
             </a>
         </div>
-        <div class="row fsi-row-lg-level fsi-row-md-level">
+        <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
             <a href="#/admin_manage_access" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 console-boxes admin-icons">
                 <div class="all-icons manage-access"></div>
                 <div class="admin-icon-subtitles access-color">Manage Data Access Request
@@ -45,14 +45,29 @@
                 <div class="cm-title-description">Store Datasets associated with Data Use Limitations</div>
             </a>
         </div>
-        <div class="row fsi-row-lg-level fsi-row-md-level">
-            <a href="" ng-click="AdminConsole.setTimeout()" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 console-boxes console-boxes-margin admin-icons">
+        <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
+            <a href="" ng-click="AdminConsole.setTimeout()" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 console-boxes admin-icons">
                 <div class="all-icons manage-timeout"></div>
                 <div class="admin-icon-subtitles common-color">Set Data Owner election Timeout</div>
                 <div class="cm-title-description">Manage Data Owner election expiration time</div>
             </a>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"></div>
-
+            <a href="#/invalid_restrictions" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 console-boxes admin-icons">
+            <div class="all-icons invalid-restrictions"></div>
+                <span class="admin-icon-subtitles common-color">Invalid Request Restrictions</span>
+                <div class="cm-title-description">Show Invalid Restrictions for Data Use Limitations and Data Access Requests</div>
+            </a>
+        </div>
+        <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
+            <a href="#/manage_ontologies" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 console-boxes admin-icons">
+                <div class="all-icons manage-ontologies"></div>
+                <div class="admin-icon-subtitles common-color">Manage Ontologies</div>
+                <div class="cm-title-description" style="margin-left: 50px !important;">Select and manage Ontologies for index</div>
+            </a>
+            <a href="" ng-click="AdminConsole.addOntology()" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 console-boxes admin-icons">
+                <div class="all-icons add-ontologies"></div>
+                <span class="admin-icon-subtitles common-color">Add Ontologies</span>
+                <div class="cm-title-description" style="margin-left: 50px !important;">Store Ontologies for index</div>
+            </a>
         </div>
     </div>
 </div>
