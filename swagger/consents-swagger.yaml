@@ -10,7 +10,15 @@ info:
 host: consent.dsde-consent-dev.broadinstitute.org
 schemes:
   - https
-basePath:
+basePath: /api
+securityDefinitions:
+  consent_auth:
+    type: oauth2
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    flow: implicit
+    scopes:
+      profile: profile
+      email: email
 paths:
   '/consent/associations/{associationType}/{id}':
     get:
@@ -926,8 +934,8 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Election'
-          '404':
-            description: Election was not found.
+        '404':
+          description: Election was not found.
   '/dataRequest/{requestId}/election':
     get:
       summary: describe
@@ -1071,7 +1079,7 @@ paths:
           schema:
             $ref: '#/definitions/Consent'
         '404':
-          details: Could not find consent with the specified Id
+          description: Could not find consent with the specified Id
     delete:
       summary: deleteDUL
       description: Deletes the Data Use Letter of the Consent specified by Id and updates the Consent's dataUseLetter property.
