@@ -908,7 +908,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/PendingCase'
-  /dataRequest/cases/summary:
+  /dataRequest/cases/summary/DataAccess:
     get:
       summary: getConsentSummaryCases
       description: Retrieves the Summary of DAR cases
@@ -920,6 +920,18 @@ paths:
           description: A summary of cases
           schema:
             $ref: '#/definitions/Summary'
+  /dataRequest/cases/summary/RP:
+    get:
+      summary: getConsentSummaryCases
+      description: Retrieves the Summary of Research Purposes cases
+      tags:
+        - Summary
+        - Research Purpose
+      responses:
+        '200':
+          description: A summary of cases
+          schema:
+            $ref: '#/definitions/Summary'          
   /dataRequest/cases/closed:
     get:
       summary: describeClosedElections
