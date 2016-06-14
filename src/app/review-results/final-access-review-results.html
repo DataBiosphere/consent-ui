@@ -235,7 +235,7 @@
                 </div>
             </div>
 
-            <div class="row fsi-row-lg-level fsi-row-md-level no-margin" ng-repeat="row in voteAccessList">
+            <div class="row fsi-row-lg-level fsi-row-md-level vote-row" ng-repeat="row in voteAccessList">
                 <div id="voteResultsList" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill no-padding" ng-repeat="vm in row">
                     <div class="jumbotron box-vote-singleresults" ng-if="vm.vote.type == 'DAC'">
                         <div class="row">
@@ -321,7 +321,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row fsi-row-lg-level fsi-row-md-level no-margin" ng-repeat="row in rpVoteAccessList">
+            <div class="row fsi-row-lg-level fsi-row-md-level vote-row" ng-repeat="row in rpVoteAccessList">
                 <div id="voteResultsListRP" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill no-padding" ng-repeat="vm in row">
                     <div class="jumbotron box-vote-singleresults">
                         <div class="row">
@@ -408,7 +408,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row fsi-row-lg-level fsi-row-md-level no-margin" ng-repeat="row in voteList">
+            <div class="row fsi-row-lg-level fsi-row-md-level vote-row" ng-repeat="row in voteList">
                 <div id="voteResultsListDul" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill no-padding" ng-repeat="vm in row">
                     <div class="jumbotron box-vote-singleresults">
                         <div class="row">
