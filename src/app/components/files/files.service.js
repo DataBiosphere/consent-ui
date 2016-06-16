@@ -19,22 +19,13 @@
         }
 
         function getFile(url, fileName) {
-
             $http({
                 url: url,
                 method: "GET",
                 responseType: 'arraybuffer'
             }).
                 then(function (response) {
-
-                    var isFirefox = typeof InstallTrigger !== 'undefined';
-                    var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
                     var isIE = /*@cc_on!@*/false || !!document.documentMode;
-                    var isEdge = !isIE && !!window.StyleMedia;
-                    var isChrome = !!window.chrome && !!window.chrome.webstore;
-                    var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-                    var isBlink = (isChrome || isOpera) && !!window.CSS;
-
                     var contentType = response.headers()["content-type"];
                     var blob = new Blob([response.data], { type: contentType });
                     if (blob.size !== 0) {
