@@ -35,9 +35,9 @@
         $httpProvider.defaults.headers.get = {};
     }
 
-    $httpProvider.defaults.headers.common['Cache-Control'] = 'no-cache';
-    $httpProvider.defaults.headers.common.get.Pragma = 'no-cache';
-    $httpProvider.defaults.headers.common.get.Expires = -1;
+    $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
+    $httpProvider.defaults.headers.get.Pragma = 'no-cache';
+    $httpProvider.defaults.headers.get.Expires = -1;
 
     }
 
