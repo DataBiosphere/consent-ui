@@ -27,6 +27,7 @@
                         }else{
                             delete config.headers.Pragma;
                             delete config.headers['Cache-Control'];
+                            delete config.headers.Expires;
                         }
                         return config;
                     }
