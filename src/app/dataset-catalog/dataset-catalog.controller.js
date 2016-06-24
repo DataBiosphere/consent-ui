@@ -55,21 +55,29 @@
             });
         }
 
-        vm.download = function (objectIdList) {
+       vm.download = function (objectIdList) {
             cmDatasetService.downloadDataSets(objectIdList).then(function (value) {
+                    var isIE = /*@cc_on!@*/false || !!document.documentMode;
                     var blob = new Blob([value.datasets], {type: 'text/plain'});
                     var downloadElement = angular.element('<a/>');
                     downloadElement.css({display: 'none'});
                     angular.element(document.body).append(downloadElement);
-                    downloadElement.attr({
+                    if (isIE) {
+                        downloadElement.attr({
+                            href: window.navigator.msSaveOrOpenBlob(blob, 'datasets.tsv'),
+                        });
+                    } else { 
+                     downloadElement.attr({
                         href: (window.URL || window.webkitURL).createObjectURL(blob),
                         target: '_blank',
                         download: 'datasets.tsv'
                     })[0].click();
-                }, function () {
+                  }
                 }
             );
         };
+        
+        
 
         vm.exportToRequest = function (objectIdList) {
             cmRPService.partialDarFromCatalogPost($rootScope.currentUser.dacUserId, objectIdList).$promise.then(

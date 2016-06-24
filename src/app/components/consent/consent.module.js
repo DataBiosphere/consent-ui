@@ -26,9 +26,9 @@
             });
         })
         .factory('CreateDulResource', function ($resource, apiUrl) {
-            return $resource(apiUrl + "consent/:consentId/dul", {}, {
+            return $resource(apiUrl + "consent/:consentId/dul?fileName=:fileName", {}, {
                 post: {
-                    method: 'POST', params: {consentId: '@consentId'}, headers: {'Content-Type': undefined},
+                    method: 'POST', params: {consentId: '@consentId', fileName: '@fileName'}, headers: {'Content-Type': undefined},
                     transformRequest: function (data) {
                         var formData = new FormData();
                         formData.append("data", data);

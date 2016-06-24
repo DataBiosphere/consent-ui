@@ -24,6 +24,9 @@
                     'request': function (config) {
                         if ($rootScope && config.url.indexOf(ontologyApiUrl) === -1) {
                             config.headers.Authorization = 'Bearer ' + $rootScope.accessToken;
+                        }else{
+                            delete config.headers.Pragma;
+                            delete config.headers['Cache-Control'];
                         }
                         return config;
                     }

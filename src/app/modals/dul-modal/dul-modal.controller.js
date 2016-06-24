@@ -40,7 +40,7 @@
             consent.useRestriction = $scope.useRestriction;
             cmConsentService.postConsent(consent).$promise.then(
                 function (value) {
-                    cmConsentService.postDul($scope.file, value.consentId).$promise.then(
+                    cmConsentService.postDul($scope.file, value.consentId, $scope.file.name).$promise.then(
                         function () {
                             $modalInstance.close();
                         },
@@ -73,7 +73,7 @@
             cmConsentService.updateConsent(consent).$promise.then(
                 function () {
                     if ($scope.file.type !== undefined) {
-                        cmConsentService.postDul($scope.file, consent.consentId).$promise.then(
+                        cmConsentService.postDul($scope.file, consent.consentId, $scope.file.name).$promise.then(
                             function () {
                                 $modalInstance.close();
                             }, function () {
