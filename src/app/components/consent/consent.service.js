@@ -53,10 +53,10 @@
         }
 
 
-        function postDul(dul, consentId) {
+        function postDul(dul, consentId, fileName) {
             var postObject = {};
             postObject.file = dul;
-            return CreateDulResource.post({consentId: consentId}, dul);
+            return CreateDulResource.post({consentId: consentId, fileName: fileName}, dul);
         }
 
         function deleteConsent(consentId) {
@@ -76,8 +76,8 @@
             postConsent: function (consent) {
                 return postConsent(consent);
             },
-            postDul: function (dul, consentId) {
-                return postDul(dul, consentId);
+            postDul: function (dul, consentId, fileName) {
+                return postDul(dul, consentId, fileName);
             },
 
             updateConsent: function (consent) {

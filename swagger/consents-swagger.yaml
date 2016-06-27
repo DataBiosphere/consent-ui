@@ -931,7 +931,7 @@ paths:
         '200':
           description: A summary of cases
           schema:
-            $ref: '#/definitions/Summary'          
+            $ref: '#/definitions/Summary'
   /dataRequest/cases/closed:
     get:
       summary: describeClosedElections
@@ -1058,6 +1058,11 @@ paths:
           description: Id of the consent at which belongs the Data Use Letter.
           required: true
           type: string
+        - name: fileName
+          in: query
+          description: File name.
+          required: false
+          type: string
       tags:
         - Consent
       responses:
@@ -1082,6 +1087,11 @@ paths:
           in: path
           description: Id of the consent at which belongs the Data Use Letter.
           required: true
+          type: string
+        - name: fileName
+          in: query
+          description: File name.
+          required: false
           type: string
       tags:
         - Consent

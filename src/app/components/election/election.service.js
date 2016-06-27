@@ -97,16 +97,23 @@
                 method: "GET"
             }).
                 success(function(data) {
+                    var isIE = /*@cc_on!@*/false || !!document.documentMode;
                     var blob = new Blob([data], {type: 'text/plain'});
                     if(blob.size !== 0){
                         var downloadElement = angular.element('<a/>');
                         downloadElement.css({display: 'none'});
                         angular.element(document.body).append(downloadElement);
-                        downloadElement.attr({
-                            href: (window.URL || window.webkitURL).createObjectURL(blob),
-                            target: '_blank',
-                            download: 'datasetVotesSummary.txt'
-                        })[0].click();
+                         if (isIE) {
+                            downloadElement.attr({
+                                href: window.navigator.msSaveOrOpenBlob(blob, 'datasetVotesSummary.txt')
+                            });
+                        } else {
+                            downloadElement.attr({
+                                href: (window.URL || window.webkitURL).createObjectURL(blob),
+                                target: '_blank',
+                                download: 'datasetVotesSummary.txt'
+                            })[0].click();
+                        }
                     }
                 });
         }
