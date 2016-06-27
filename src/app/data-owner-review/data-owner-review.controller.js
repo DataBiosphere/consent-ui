@@ -5,7 +5,7 @@
         .controller('DataOwnerReview', DataOwnerReview);
 
 
-    function DataOwnerReview($scope, $modal, vote, referenceId, dataSet, consent, darFields, cmRPService, cmVoteService, $state) {
+    function DataOwnerReview($scope, $modal, vote, referenceId, dataSet, consent, darFields, cmRPService, cmVoteService, $state, cmFilesService) {
 
         var vm = this;
         vm.openApplication = openApplication;
@@ -17,6 +17,9 @@
         $scope.consent = consent;
         $scope.darFields = darFields;
 
+        $scope.downloadDUL = function(){
+            cmFilesService.getDULFile($scope.consent.consentId, $scope.consent.dulName);
+        };
 
         $scope.positiveVote = function () {
             $scope.rationale = null;
