@@ -24,7 +24,7 @@
                     'request': function (config) {
                         if ($rootScope && config.url.indexOf(ontologyApiUrl) === -1) {
                             config.headers.Authorization = 'Bearer ' + $rootScope.accessToken;
-                        }else{
+                        } else {
                             delete config.headers.Pragma;
                             delete config.headers['Cache-Control'];
                             delete config.headers.Expires;
@@ -38,15 +38,11 @@
             $httpProvider.interceptors.push('UnauthorizedInterceptor');
         }
 
-    );
-
-
-
-
+        );
 
 
     /* ngInject */
-   function ApplicationController($rootScope, USER_ROLES , clientId, cmLoginUserService) {
+    function ApplicationController($rootScope, USER_ROLES, clientId, cmLoginUserService) {
         $rootScope.clientId = clientId;
         $rootScope.currentUser = null;
         $rootScope.userRoles = USER_ROLES;
@@ -61,7 +57,7 @@
 
 
         $rootScope.loadScript = function (url, type, charset) {
-            if (type === undefined) {type = 'text/javascript';}
+            if (type === undefined) { type = 'text/javascript'; }
             if (url) {
                 var script = document.querySelector("script[src*='" + url + "']");
                 if (!script) {
@@ -72,25 +68,35 @@
                             script = document.createElement('script');
                             script.setAttribute('src', url);
                             script.setAttribute('type', type);
-                            if (charset) {script.setAttribute('charset', charset);
-                            head.appendChild(script);}
+                            if (charset) {
+                                script.setAttribute('charset', charset);
+                                head.appendChild(script);
+                            }
                         }
                     }
                 }
                 return script;
             }
         };
-       $rootScope.logout = function(){
-           cmLoginUserService.logoutUser();
-       };
+        $rootScope.logout = function () {
+            cmLoginUserService.logoutUser();
+        };
     }
 
 
     angular.module('ConsentManagement').run(function ($location, $rootScope, $state, cmAuthenticateService, cmLoginUserService) {
         $rootScope.$on('$stateChangeStart', function (event, next, toParams) {
             var authorizedRoles = next.data.authorizedRoles;
+
             if ($rootScope.currentUser === null) {
-                if (sessionStorage.getItem('currentUser') !== null && $state.current.name === "") {
+                if (
+                    next.name === "home" ||
+                    next.name === "home_help" ||
+                    next.name === "home_about"
+                ) {
+                    cmLoginUserService.refreshUser();
+                    $state.go("home", toParams);
+                } else if (sessionStorage.getItem('currentUser') !== null && $state.current.name === "") {
                     cmLoginUserService.refreshUser();
                     $state.go(next.name, toParams);
                 } else if (next.name !== "login") {

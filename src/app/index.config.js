@@ -15,7 +15,7 @@
 
     /* ngInject */
     function routeConfig($urlRouterProvider) {
-        $urlRouterProvider.when('', '/login');
+        $urlRouterProvider.when('', '/home');
         $urlRouterProvider.otherwise("components/HtmlResource/404.html");
     }
 

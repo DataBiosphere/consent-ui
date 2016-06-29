@@ -42,12 +42,15 @@ html, body {
 
 .wrap {
     min-height: 100%;
+    min-width: 100%;
 }
 
 .main {
-    overflow: auto;
-    padding-bottom: 80px; /* must be same height as the footer */
+    overflow-x: hidden;
+    min-width: 100%;
+    padding-bottom: 100px; /* must be same height as the footer */
 }
+
 p{
     margin-bottom: 3px;
 }
@@ -97,7 +100,11 @@ small {
 }
 
 .bold {
-    font-weight: 500 !important;
+    font-weight: 600 !important;
+}
+
+.italic {
+    font-style: italic !important;
 }
 
 .center-text {
@@ -163,19 +170,119 @@ small {
 .dismiss-background {
     background: rgba(204, 204, 204, 0.5) !important;
 }
+/***************************************************Home (public site)*/
+
+.home{
+    padding: 0 50px;
+}
+
+@media screen and (max-width: 800px) {
+    .home { padding: 0 25px;}
+}
+
+.home-title h1 {
+    font-size: 30px;
+    font-weight: 600;
+    color: #333333;
+}
+
+.home-title-description{
+    font-size: 18px;
+    color: #999999;
+}
+
+.home-line{
+    margin: 10px 0 15px 0;
+}
+
+.home-sections{
+    margin: 0;
+}
+
+@media screen and (max-width: 990px) {
+    .home-sections { margin: 8px 0;}
+}
+
+.home-sections-table{
+    display: table;
+}
+
+.home-sections-table .home-sections-icons,
+.home-sections-table .home-sections-title{
+    display: table-cell;
+}
+
+.home-sections-icon{
+    padding: 0 15px 0 0;
+    max-width: 90px;
+}
+
+.home-sections-title{
+    padding: 10px 10px 0 0;
+    vertical-align: top;
+}
+
+.home-sections-title h3{
+    color: #2899BC;
+    font-size: 20px;
+    margin: 0 0 5px 0;
+}
+
+.home-sections-description{
+    color: #999999;
+    font-size: 15px;
+    width: 100%;
+}
+
+.home-content{
+    margin-top: 15px;
+    margin-bottom: 30px;
+    font-size: 15px;
+    color: #333333;
+}
+
+.home-content br{
+    line-height: 30px;
+}
+
+.home-content-graphic{
+    padding: 40px 50px !important;
+}
+
+.home-content-references{
+    padding: 4px 0 0 0;
+}
+
+.home-content-references svg{
+    margin-right: 10px;
+}
+
+/**/
 
 /***************************************************Nav*/
 
-.top-navigator-bar {
-    background: #00609f;
+.top-navigator-bar,
+.navbar-duos{
     color: #fff;
     border-radius: 0!important;
     min-height: 50px !important;
     margin-bottom: 20px !important;
+    background: #333333;
+}
+/*
+.top-navigator-bar {
+    background: #00609f;
+}*/
+
+.navbar-duos{
+    background: #333333;
+    padding: 0 80px;
+    margin: 0 0 20px 0;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 990px) {
     .top-navigator { margin: 0 30px !important;}
+    .navbar-duos { padding: 0 25px;}
 }
 
 .top-navigator {
@@ -186,17 +293,23 @@ small {
     margin-bottom: 0 !important;
 }
 
-.top-navigator-bar li {
+.top-navigator-bar li,
+.navbar-duos li {
     display: inline-block !important;
     margin: 0 20px 0 0;
     padding: 22px 0 15px 0;
 }
 
-@media screen and (max-width: 800px) {
-    .top-navigator-bar li { display: block !important; }
+@media screen and (max-width: 765px) {
+    .top-navigator-bar li,
+    .navbar-duos li {
+        display: block !important;
+        padding: 15px 0;
+    }
 }
 
-.top-navigator li a {
+.top-navigator li a,
+.navbar-duos li a {
     font-size: 15px;
     color: #ffffff;
     transition: color 0.3s ease;
@@ -204,11 +317,22 @@ small {
     font-weight: 500;
 }
 
-.top-navigator li > a:hover, .top-navigator li a:active, .top-navigator li a:link, .top-navigator li > a:visited {
+.top-navigator li > a:hover,
+.top-navigator li a:active,
+.top-navigator li a:link,
+.top-navigator li > a:visited {
     text-decoration: none !important;
 }
 
-.top-navigator li > a:hover {
+.navbar-duos li > a:hover,
+.navbar-duos li a:active,
+.navbar-duos li a:link,
+.navbar-duos li > a:visited {
+    text-decoration: none !important;
+}
+
+.top-navigator li > a:hover,
+.navbar-duos li > a:hover {
     color: #2FA4E7;
 }
 
@@ -220,11 +344,7 @@ small {
 
 .navbar-toggle {
     background-color: rgba(0, 0, 0, 0.2);
-    margin-top: 15px !important;
-}
-
-@media (max-width: 800px){
-    .navbar-toggle{ margin-right: 0;}
+    margin: 15px 0 10px 0 !important;
 }
 
 .navbar-toggle .icon-bar {
@@ -240,8 +360,76 @@ small {
     padding: 0 0 10px 0 !important;
 }
 
+.navbar-duos-brand img{
+    margin: 17px 40px 0 0;
+    padding: 0;
+}
+
+.navbar-duos-link{
+    color: #f2f2f2 !important;
+    transition: all 0.3s ease !important;
+}
+
+.navbar-duos-link:hover{
+    color: #2FA4E7 !important;
+}
+
+.navbar-duos-link p{
+    display: inline;
+    vertical-align: top;
+    font-weight: normal;
+}
+
+.navbar-duos-icon{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin: 0 8px 0 0;
+    transition: all 0.3s ease !important;
+    vertical-align: baseline;
+}
+
+.navbar-duos-icon-about{
+    background: url('../assets/images/navbar_icon_about.svg') no-repeat 0 0;
+}
+
+.navbar-duos-link:hover .navbar-duos-icon-about{
+    background: url('../assets/images/navbar_icon_about_hover.svg') no-repeat 0 0;
+}
+
+.navbar-duos-icon-help{
+    background: url('../assets/images/navbar_icon_help.svg') no-repeat 0 0;
+}
+
+.navbar-duos-link:hover .navbar-duos-icon-help{
+    background: url('../assets/images/navbar_icon_help_hover.svg') no-repeat 0 0;
+}
+
+.navbar-duos-icon-sign{
+    background: url('../assets/images/navbar_icon_sign.svg') no-repeat 0 0;
+}
+
+.navbar-duos-link:hover .navbar-duos-icon-sign{
+    background: url('../assets/images/navbar_icon_sign_hover.svg') no-repeat 0 0;
+}
+
+.navbar-duos-button{
+    color: #ffffff;
+    background-color: #2899BC;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 2px;
+    padding: 8px 35px;
+    transition: background 0.3s ease !important;
+}
+
+.navbar-duos-button:hover{
+    color: #ffffff !important;
+    background-color: #5BB0CA;
+}
+
 .brand {
-    margin: 15px 40px 0 0;
+    margin: 12px 40px 0 0;
     padding: 0 !important;
 }
 
@@ -2451,18 +2639,26 @@ input[type="checkbox"][disabled] + label {
 
 .footer {
     position: relative;
-    margin-top: -85px; /* negative value of footer height */
+    margin-top: -100px; /* negative value of footer height */
     clear: both;
-    background-color: #f4f4f4;
+    background-color: #333333;
 }
 
 .main-footer {
-    border-top: 2px solid #e6e6e6;
     color: #989898 !important;
     margin: 2em 0 0;
-    padding: 14px 60px 21px 60px;
+    height: 75px;
     display: block;
     width: 100%;
+    padding: 0 50px;
+}
+
+@media screen and (max-width: 800px) {
+    .main-footer { padding: 0 25px;}
+}
+
+.footer-links li{
+    padding: 28px 0 0 0;
 }
 
 .footer-links, .footer-links a {
@@ -2488,12 +2684,19 @@ input[type="checkbox"][disabled] + label {
     font-size: 1em;
 }
 
+.footer-logo{
+    float: right;
+    height: 32px;
+    width: 127px;
+    margin-top: 22px;
+}
+
 /*///////////////////////////////////////////////////////LOGIN*/
 
 .landing-box {
     padding: 40px 30px 30px 30px;
     background: #eeeeee;
-    margin-top: 100px;
+    margin-top: 80px;
     box-shadow: 3px 3px 0 #cccccc;
     border-radius: 5px;
     -moz-border-radius: 5px;
