@@ -87,16 +87,11 @@
     angular.module('ConsentManagement').run(function ($location, $rootScope, $state, cmAuthenticateService, cmLoginUserService) {
         $rootScope.$on('$stateChangeStart', function (event, next, toParams) {
             var authorizedRoles = next.data.authorizedRoles;
-
             if ($rootScope.currentUser === null) {
-                if (
-                    next.name === "home" ||
-                    next.name === "home_help" ||
-                    next.name === "home_about"
-                ) {
-                    cmLoginUserService.refreshUser();
-                    $state.go("home", toParams);
-                } else if (sessionStorage.getItem('currentUser') !== null && $state.current.name === "") {
+                if(next.name === "home" || next.name === "home_help" || next.name === "home_about") {
+                       return;
+                }
+                else if(sessionStorage.getItem('currentUser') !== null && $state.current.name === "") {
                     cmLoginUserService.refreshUser();
                     $state.go(next.name, toParams);
                 } else if (next.name !== "login") {
