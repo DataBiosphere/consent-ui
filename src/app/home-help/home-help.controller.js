@@ -5,7 +5,7 @@
         .controller('HomeHelp', HomeHelp);
 
     /* ngInject */
-    function HomeHelp($scope, $rootScope) {
+    function HomeHelp() {
 
         init();
 

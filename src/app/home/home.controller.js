@@ -5,7 +5,7 @@
         .controller('Home', Home);
 
     /* ngInject */
-    function Home($scope, $rootScope) {
+    function Home() {
 
         init();
 
