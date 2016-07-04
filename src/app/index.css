@@ -1575,6 +1575,22 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     cursor: pointer !important;
 }
 
+ .apply-dataset{
+    margin-top: 25px;
+}
+
+ .apply-dataset.disabled,
+ .apply-dataset.disabled:hover{
+    background: #eeeeee !important;
+    color: #cccccc !important;
+    border: none !important;
+    padding: 10px 15px 7px 15px !important;
+}
+
+ .apply-dataset.disabled:hover{
+    cursor: default !important;
+ }
+
 .multi-step-pager li button{
     padding: 8px 15px 7px 15px !important;
 }
@@ -3279,6 +3295,7 @@ tags-input .tags .tag-item{
     background: #ffffff;
     box-shadow: 2px 2px 2px rgba(0,0,0,.175);
     padding: 3px 5px!important;
+    z-index: 200000;
 }
 
 .tooltip.tooltip-class .tooltip-arrow {
