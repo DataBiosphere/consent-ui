@@ -6,6 +6,7 @@
         .config(logConfig)
         .config(routeConfig)
         .config(httpConfig)
+        .config(tooltipConfig)
         .config(compileProvider);
 
     /* ngInject */
@@ -26,19 +27,21 @@
 
     /* ngInject */
     function httpConfig($httpProvider) {
-        $httpProvider.defaults.useXDomain = true;
-        $httpProvider.defaults.withCredentials = false;
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
-
-        //initialize get if not there
-    if (!$httpProvider.defaults.headers.get) {
+      $httpProvider.defaults.useXDomain = true;
+      $httpProvider.defaults.withCredentials = false;
+      delete $httpProvider.defaults.headers.common['X-Requested-With'];
+      //initialize get if not there
+      if (!$httpProvider.defaults.headers.get) {
         $httpProvider.defaults.headers.get = {};
+      }
+      $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
+      $httpProvider.defaults.headers.get.Pragma = 'no-cache';
+      $httpProvider.defaults.headers.get.Expires = -1;
     }
 
-    $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
-    $httpProvider.defaults.headers.get.Pragma = 'no-cache';
-    $httpProvider.defaults.headers.get.Expires = -1;
-
+    function tooltipConfig($tooltipProvider){
+      $tooltipProvider.options({appendToBody: true});
+      $tooltipProvider.options({animation: false});
     }
 
 })();
