@@ -70,7 +70,7 @@
                                       aria-hidden="true"></span>
                             </a>
                             <a ng-if="!dataSet.active && isAdmin && !isResearcher" ng-click="DatasetCatalog.openEnable(property.propertyValue)" tooltip="Enable dataset"
-                                tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right">
+                               tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right">
                                     <span class="cm-icon-button glyphicon glyphicon-ban-circle caret-margin cancel-color"
                                           aria-hidden="true"></span>
                             </a>
@@ -105,12 +105,13 @@
         </div>
     </div>
     <div class="f-right">
-        <button ng-show="isResearcher" ng-disabled="objectIdList.length === 0" ng-click="DatasetCatalog.exportToRequest(objectIdList)"
-                class="download-button dataset-download-button dataset-background" tooltip="Export selected Datasets to a new Data Access Request Application Form" tooltip-class="tooltip-class" tooltip-trigger
-                tooltip-placement="top">
-            <span>Apply for Access</span>
-            <span class="cm-icon-button" aria-hidden="true"></span>
+        <button ng-show="isResearcher"
+                ng-disabled="objectIdList.length === 0"
+                ng-click="DatasetCatalog.exportToRequest(objectIdList)"
+                class="download-button dataset-background apply-dataset"
+                ng-class="{'disabled': objectIdList.length === 0}"
+                tooltip="Request Access for selected Datasets" tooltip-class="tooltip-class" tooltip-trigger
+                tooltip-placement="top" tooltip-animation="false"> Apply for Access
         </button>
     </div>
 </div>
-
