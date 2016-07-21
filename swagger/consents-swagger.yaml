@@ -823,7 +823,7 @@ paths:
             '200':
               description: 'Returns a DARModalDetailsDTO initialized with the DAR associated with the provided Id.'
   '/dar/find/{id}':
-    delete:
+    get:
       summary: describeSpecificFields
       description: Returns the requested fields present in the DAR identified by the ID
       parameters:
@@ -847,7 +847,7 @@ paths:
         '404':
           description: The requested DAR couldn't be found.
   '/dar/find/{id}/consent':
-    delete:
+    get:
       summary: describeConsentForDAR
       description: Returns the consent related to this DAR.
       parameters:
