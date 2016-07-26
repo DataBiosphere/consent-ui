@@ -71,14 +71,18 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-4 control-label vote-label access-color">Rationale</label>
+                                <span ng-if="election.finalVote == '1'">
+                                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-4 control-label vote-label access-color">Comments:</label>
+                                </span>
+                                <span ng-if="election.finalVote != '1'">
+                                   <label class="col-lg-2 col-md-2 col-sm-2 col-xs-4 control-label vote-label access-color">Rationale:</label>
+                                </span>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
                                     <input type="text" ng-model="election.finalRationale"  ng-change="setEnableDARButton()"
-                                           ng-disabled="election.finalVote"
                                            cm-focus="{{!AccessReviewResults.voteForm.vote || AccessReviewResults.voteForm.vote == 'true' ? 'false' : 'true'}}"
                                            name="inputRationale"
                                            class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
-                                           placeholder="Describe your rationale here (be as specific as possible).">
+                                           placeholder="Describe here your rationale or comments  (be as specific as possible).">
                                 </div>
                             </div>
 
@@ -143,12 +147,14 @@
                             </div>
                         </div>
                         <div class="row">
-                            <label
-                                class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label access-color">Rationale: </label>
-
+                                <span ng-if="vm.vote.vote == '1'">
+                                    <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label access-color">Comments:</label>
+                                </span>
+                                <span ng-if="vm.vote.vote == '0' || vm.vote.vote == null">
+                                    <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label access-color">Rationale:</label>
+                                </span>
                             <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">
-                                <span ng-if="vm.vote.vote == '1'">---</span>
-                                <span ng-if="vm.vote.vote == '0'">{{vm.vote.rationale}}</span>
+                                <span ng-if="vm.vote.vote != 'null'">{{vm.vote.rationale}}</span>
                                 <span ng-if="vm.vote.vote == null"></span>
                             </div>
                         </div>
@@ -222,16 +228,18 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label
-                                    class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale</label>
-
+                                <span ng-if="rpElection.finalVote == '1'">
+                                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Comment:</label>
+                                </span>
+                                <span ng-if="rpElection.finalVote != '1'">
+                                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale:</label>
+                                </span>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
                                     <input type="text" ng-model="rpElection.finalRationale" ng-change="setEnableRPButton()"
-                                           ng-disabled="rpElection.finalVote"
                                            cm-focus="{{!AccessReviewResults.rpVoteForm.vote || AccessReviewResults.rpVoteForm.vote == 'true' ? 'false' : 'true'}}"
                                            name="inputRationale"
                                            class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
-                                           placeholder="Describe your rationale here (be as specific as possible).">
+                                           placeholder="Describe here your rationale or comments (be as specific as possible).">
                                 </div>
                             </div>
 
@@ -293,12 +301,14 @@
                             </div>
                         </div>
                         <div class="row">
-                            <label
-                                class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label access-color">Rationale: </label>
-
+                            <span ng-if="vm.vote.vote == '1'">
+                                <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label access-color">Comments:</label>
+                            </span>
+                            <span ng-if="vm.vote.vote != '1'">
+                                <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label access-color">Rationale:</label>
+                            </span>
                             <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">
-                                <span ng-if="vm.vote.vote == '1'">---</span>
-                                <span ng-if="vm.vote.vote == '0'">{{vm.vote.rationale}}</span>
+                                <span ng-if="vm.vote.vote != 'null'">{{vm.vote.rationale}}</span>
                                 <span ng-if="vm.vote.vote == null"></span>
                             </div>
                         </div>
