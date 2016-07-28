@@ -734,15 +734,14 @@ paths:
         - name: dar
           in: body
           description: The fields that represent a DAR, json format.
+          required: true
           schema:
-            type: string
+            $ref: '#/definitions/DataAccessRequest'
       tags:
         - Data Access Request
       responses:
         '200':
           description: Returns the created Data Access Request, json file.
-          schema:
-            $ref: '#/definitions/DataAccessRequest'
         '500':
           description: Internal Server Error.
     get:
@@ -1923,6 +1922,111 @@ definitions:
         description: The datetime the election was created/updated (the last updated).
   DataAccessRequest:
     type: object
+    properties:
+      investigator:
+        type: string
+        description: 'Describes the name of the Principal Investigator.'
+      institution:
+        type: string
+        description: 'Describes the name of Institution.'
+      department:
+        type: string
+        description: 'Describes the name of the Institution Department.'
+      division:
+        type: string
+        description: 'Describes the name of the Division.'
+      address1:
+        type: string
+        description: 'Describes the principal address.'
+      address2:
+        type: string
+        description: 'Describes the secondary address. Optional.'
+      city:
+        type: string
+        description: 'Describes the name of the City.'
+      state:
+        type: string
+        description: 'Describes the name of the State.'
+      zipcode:
+        type: string
+        description: 'Describes the Zip Code number.'
+      country:
+        type: string
+        description: 'Describes the name of the Country.'
+      projectTitle:
+        type: string
+        description: 'Describes the Project Title.'
+      datasetId:
+        type: array
+        items:
+          type: string
+        description: 'Array of Dataset Ids.'
+      rus:
+        type: string
+        description: 'Describes the Research Use Statement.'
+      non_tech_rus:
+        type: string
+        description: 'Describes the Non Technical Summary.'
+      diseases:
+        type: boolean
+        description: 'Defines if the purpose of the study is disease-related.'
+      methods:
+        type: boolean
+        description: 'Defines if the purpose of the study is for Methods development.'
+      controls:
+        type: boolean
+        description: 'Defines if the purpose of the study is to increase the number of controls available for a comparison group.'
+      population:
+        type: boolean
+        description: 'Defines if the purpose of the study is to understand variation in the general population.'
+      other:
+        type: boolean
+        description: 'Defines if the purpose of the study is other than the above. If TRUE, triggers MANUAL REVIEW.'
+      othertext:
+        type: string
+        description: 'Describes above field.'
+      ontologies:
+        type: array
+        items:
+          type: string
+        description: 'Array of Ontologies.'
+      forProfit:
+        type: boolean
+        description: 'Describes if data will be used for commercial purposes.'
+      oneGender:
+        type: boolean
+        description: 'Describes if study is gender specific.'
+      pediatric:
+        type: boolean
+        description: 'Describes if study is restricted to a pediatric population.'
+      illegalbehave:
+        type: boolean
+        description: 'If TRUE, triggers MANUAL REVIEW.'
+      addiction:
+        type: boolean
+        description: 'If TRUE, triggers MANUAL REVIEW.'
+      sexualdiseases:
+        type: boolean
+        description: 'If TRUE, triggers MANUAL REVIEW.'
+      stigmatizediseases:
+        type: boolean
+        description: 'If TRUE, triggers MANUAL REVIEW.'
+      vulnerablepop:
+        type: boolean
+        description: 'If TRUE, triggers MANUAL REVIEW.'
+      popmigration:
+        type: boolean
+        description: 'If TRUE, triggers MANUAL REVIEW.'
+      psychtraits:
+        type: boolean
+        description: 'If TRUE, triggers MANUAL REVIEW.'
+      nothealth:
+        type: boolean
+        description: 'If TRUE, triggers MANUAL REVIEW.'
+      userId:
+        type: integer
+        format: int32
+        description: 'Describes the id of the User (Researcher).'
   DataAccessRequestManage:
     type: object
     properties:
