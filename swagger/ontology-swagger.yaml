@@ -87,6 +87,29 @@ paths:
           default:
             description: Unexpected error
 
+
+  '/validate/userestriction':
+
+      post:
+        summary: validate
+        description: The Validate service will check If the posted Use Restriction has the correct format and content.
+        parameters:
+          - name: body
+            in: body
+            description: Restriction
+            required: true
+            schema:
+              type: array
+              items:
+                $ref: '#/definitions/Restriction'
+        tags:
+          - Validate
+        responses:
+          '200':
+            description: Successful validation. True for valid restriction and False for invalid.
+          default:
+            description: Unexpected error
+
   '/autocomplete':
 
     get:
@@ -112,7 +135,26 @@ paths:
         - Autocomplete
       responses:
         '200':
-          description: The consent association representation is present in the body of the response.
+          description: Array of results.
+        default:
+          description: Unexpected error
+
+  '/search':
+
+    get:
+      summary: search
+      description: Find ontologies based on the id.
+      parameters:
+        - name: id
+          in: query
+          description: The ontology id which the service us to find it (e.g. DOID_4).
+          required: true
+          type: string
+      tags:
+        - Search
+      responses:
+        '200':
+          description: The given id was found. Json result with ontology information.
         default:
           description: Unexpected error
 
