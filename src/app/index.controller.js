@@ -88,7 +88,7 @@
         $rootScope.$on('$stateChangeStart', function (event, next, toParams) {
             var authorizedRoles = next.data.authorizedRoles;
             if ($rootScope.currentUser === null) {
-                if(next.name === "home" || next.name === "home_help" || next.name === "home_about") {
+                if(next.name === "home" || next.name === "home_help" || next.name === "home_about"|| next.name === "home_register") {
                        return;
                 }
                 else if(sessionStorage.getItem('currentUser') !== null && $state.current.name === "") {
