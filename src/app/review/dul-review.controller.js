@@ -38,7 +38,6 @@
         };
 
         $scope.positiveVote = function () {
-            $scope.rationale = null;
             $scope.setEnableVoteButton();
 
         };

@@ -123,14 +123,12 @@
 
         $scope.positiveVote = function () {
             $scope.selection.voteStatus = true;
-            $scope.selection.rationale = null;
             $scope.setEnableDARButton();
         };
 
 
         $scope.positiveRPVote = function () {
             $scope.selection.rpVoteStatus = true;
-            $scope.selection.rpRationale = null;
             $scope.setEnableRPButton();
 
         };
