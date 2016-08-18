@@ -46,6 +46,7 @@
             var wasChairperson =  user.was(USER_ROLES.chairperson);
             $scope.wasMember = user.was(USER_ROLES.member);
             var wasDataOwner = user.was(USER_ROLES.dataOwner);
+            var wasResearcher = user.was(USER_ROLES.researcher);
 
             $scope.$on("changeChairpersonRoleAlert", function (event, arg) {
                 $scope.$apply(function () {
@@ -120,6 +121,17 @@
                 }
             };
 
+            $scope.researcherChanged = function (checkState) {
+                if(wasResearcher){
+                    if (!checkState) {
+                        $scope.changeResearcherRoleAlert();
+                    }
+                    else {
+                        $scope.closeAlert(3);
+                    }
+                }
+            }
+
 
             var l = $scope.user.roles.length;
             while (l--) {
@@ -189,6 +201,16 @@
                 title: 'Warning!',
                 msg: 'In order to have only one Chairperson in the system, the current Chairperson is going to become an Alumni.',
                 alertType: 1
+            });
+        };
+
+        $scope.changeResearcherRoleAlert = function (index) {
+            $scope.alerts.splice(index, 1);
+            $scope.alerts.push({
+                type: 'danger',
+                title: 'Warning!',
+                msg: 'By removing the researcher role, the user Data Access Requests will be canceled, and all the elections related to them.',
+                alertType: 3
             });
         };
 
