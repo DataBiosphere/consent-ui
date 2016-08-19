@@ -1,0 +1,10 @@
+<div ng-include src="'app/header/header.html'"></div>
+<div class="container ">
+    <div class="row ">
+        <h2 class="main-title" ng-class="{'access-color': isAccessElection, 'dul-color': isDataUseLimitations}">
+            Sorry, something went wrong when trying to access the election page.<br>
+            <div class="main-title-description" style="padding-top: 10px; ">Please, return to your console and check if the election is still open. Thanks!</div>
+        </h2>
+        <a class="btn btn-primary vote-button" style="float: left !important; margin-top: 15px;" ng-click="goToConsole()" ng-class="{'access-background': isAccessElection, 'dul-background': isDataUseLimitations}">Your Console</a>
+    </div>
+</div>
