@@ -19,24 +19,6 @@
             $rootScope.formData = {};
         }
 
-        $scope.step1isValidated = function () {
-            if ($scope.form.step1.$valid) {
-                return true;
-            }
-        };
-
-        $scope.step2isValidated = function () {
-            if ($scope.form.step2.$valid) {
-                return true;
-            }
-        };
-
-        $scope.step3isValidated = function () {
-            if($scope.form.step3.$valid) {
-                return true;
-            }
-        };
-
         $scope.$watch("form.step1.$valid", function (value1) {
             if ($state.current.url === "/step1") {
                 $scope.step1isValidated = value1;

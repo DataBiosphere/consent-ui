@@ -62,15 +62,18 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label
-                                    class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale</label>
-
+                                <span ng-if="selection.voteStatus == '1'">
+                                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Comments</label>
+                                </span>
+                                <span ng-if="selection.voteStatus != '1'">
+                                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale</label>
+                                </span>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
                                     <input type="text" ng-model="selection.rationale"
-                                           ng-disabled="selection.voteStatus == true" ng-change="setEnableDARButton()"
+                                           ng-change="setEnableDARButton()"
                                            name="inputRationale"
                                            class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
-                                           placeholder="Describe your rationale here (be as specific as possible).">
+                                           placeholder="Describe here your rationale or comments (be as specific as possible).">
                                 </div>
                             </div>
 
@@ -157,15 +160,17 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label
-                                    class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale</label>
-
+                                <span ng-if="selection.rpVoteStatus == '1'">
+                                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Comments</label>
+                                </span>
+                                <span ng-if="selection.rpVoteStatus != '1'">
+                                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale</label>
+                                </span>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
                                     <input type="text" ng-model="selection.rpRationale" ng-change="setEnableRPButton()"
-                                           ng-disabled="selection.rpVoteStatus == true"
                                            name="inputRationale"
                                            class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
-                                           placeholder="Describe your rationale here (be as specific as possible).">
+                                           placeholder="Describe here your rationale or comments (be as specific as possible).">
                                 </div>
                             </div>
                             <div class="row">

@@ -46,11 +46,15 @@
                 </div>
                 <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label vote-label dul-color">Date: </label>
                 <div class="voteDate col-lg-4 col-md-4 col-sm-4 col-xs-4 vote-label">{{election.finalVoteDate}}</div>
-                <label
-                    class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label vote-label dul-color">Rationale: </label>
+
+                <span ng-if="election.finalVote == '1'">
+                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label vote-label dul-color">Comments:</label>
+                </span>
+                <span ng-if="election.finalVote != '1'">
+                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label vote-label dul-color">Rationale:</label>
+                </span>
                 <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">
-                    <span ng-if="election.finalVote == '1'">---</span>
-                    <span ng-if="election.finalVote == '0'">{{election.finalRationale}}</span>
+                    <span ng-if="election.finalVote != 'null'">{{election.finalRationale}}</span>
                     <span ng-if="election.finalVote == 'null'">----</span>
                 </div>
             </div>
@@ -88,10 +92,14 @@
                                 <span ng-if="vm.vote.createDate != null && vm.vote.updateDate == null">{{vm.vote.createDate}}</span>
                                 <span ng-if="vm.vote.createDate != null && vm.vote.updateDate != null">{{vm.vote.updateDate}}</span>
                             </div>
-                            <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Rationale: </label>
+                            <span ng-if="vm.vote.vote == '1'">
+                                <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Comments:</label>
+                            </span>
+                            <span ng-if="vm.vote.vote != '1'">
+                                <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label dul-color">Rationale:</label>
+                            </span>
                             <div class="inputRationale col-lg-10 col-md-10 col-sm-9 col-xs-9 vote-label">
-                                <span ng-if="vm.vote.vote == '1'">---</span>
-                                <span ng-if="vm.vote.vote == '0'">{{vm.vote.rationale}}</span>
+                                <span ng-if="vm.vote.vote != 'null'">{{vm.vote.rationale}}</span>
                                 <span ng-if="vm.vote.vote == 'null'">----</span>
                             </div>
 
