@@ -53,7 +53,7 @@
                                 </div>
 
                                 <div class="checkbox">
-                                    <input id="RESEARCHER" type="checkbox" class="checkbox-inline user-checkbox" ng-model="checkModel.RESEARCHER" add-role-edit  ng-click="replaceChairpersonAlert()" ng-disabled="checkModel.MEMBER || checkModel.CHAIRPERSON">
+                                    <input id="RESEARCHER" type="checkbox" class="checkbox-inline user-checkbox" ng-model="checkModel.RESEARCHER" add-role-edit  ng-change="researcherChanged(checkModel.RESEARCHER)" ng-disabled="checkModel.MEMBER || checkModel.CHAIRPERSON">
                                     <label class="regular-checkbox rp-choice-questions" for="RESEARCHER">Researcher</label>
                                 </div>
 
