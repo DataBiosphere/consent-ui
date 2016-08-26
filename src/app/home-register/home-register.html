@@ -18,7 +18,6 @@
             <li><a class="navbar-duos-link" href="#/home_about"><div class="navbar-duos-icon navbar-duos-icon-about"></div>About</a></li>
             <li><a class="navbar-duos-link" href="#/home_help"><div class="navbar-duos-icon navbar-duos-icon-help"></div>Help</a></li>
             <li><a class="navbar-duos-button" href="#/login">Sign In</a>
-            <li><a class="navbar-duos-link-join" href="#/home_register">Join DUOS</a></li>
         </ul>
     </div>
 </nav>
@@ -36,9 +35,8 @@
             </div>
         </div>
         <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12 pos-relative">
-            <div class="custom-g-signin2 g-signin2 signInRegister" data-onsuccess="onSignIn" data-theme="dark">
-            </div>
-            <div ng-if="!form.name" class="signInDisableButton"></div>
+            <div class="custom-g-signin2 g-signin2 signInRegister" data-onsuccess="onSignIn" data-theme="dark"></div>
+            <div ng-if="!form.name" class="signInDisabledButton"></div>
         </div>
      </div>
 </div>
