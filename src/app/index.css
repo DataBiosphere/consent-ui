@@ -916,6 +916,17 @@ small {
     margin-bottom: 0;
 }
 
+.control-data {
+    font-size: 15px; 
+    text-align: left;
+    font-weight: 500;
+    color: black;
+    width: 100%;
+    padding-top: 7px;
+    margin-bottom: 15px;
+    border-top: 1px solid #cccccc;
+}
+
 .response-label {
     padding: 7px 0 0 15px;
     text-align: left;
@@ -1207,6 +1218,12 @@ input[type=checkbox]:checked + label:before{
     padding-right: 15px;
     display: inline !important;
 }
+
+.bonafide-icon{
+    font-size: 1.8rem;
+    padding: 10px 3px 0 0;
+}
+ 
 
 /*///////////////////////////////////////////////////////DAC CONSOLES*/
 

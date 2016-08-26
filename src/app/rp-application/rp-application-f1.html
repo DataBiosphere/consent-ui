@@ -1,5 +1,10 @@
 <ng-form name="step1">
     <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <!--<span class="admin-alerts rp-alerts">
+        <alert type="danger" class="alert-title cancel-color">
+                <h4>Please submit <a href="#/researcher_profile" class="hover-color">Your Profile</a> to be able to create a Data Access Request</h4>
+            </alert>
+        </span>-->
         <div class="cm-subtitle access-color no-padding"><h3>1. Researcher Information</h3></div>
         <div class="form-group">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
@@ -15,7 +20,7 @@
         </div>
         <div class="form-group">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-                <label class="control-label rp-title-question">1.2 Applicant Organization</label>
+                <label class="control-label rp-title-question">1.2 Organization Information</label>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <label class="control-label">Institution Name
@@ -63,14 +68,9 @@
                 <input ng-model="formData.city" type="text" name="inputCity" id="inputCity"ng-class="step1.inputCity.$invalid && showValidationMessages  ?   'form-control required-field-error' : 'form-control'  "
                        required="required" ng-disabled="true">
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <label class="control-label">State
-                <span class="cancel-color required-field-error-span" ng-show="step1.inputState.$invalid && showValidationMessages">
-                    <span>* Required field</span>
-                </span>
-                </label>
-                <input ng-model="formData.state" type="text" name="inputState" id="inputState" ng-class="step1.inputState.$invalid && showValidationMessages  ?   'form-control required-field-error' : 'form-control'  "
-                       required="required" ng-disabled="true">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <label class="control-label">State</label>
+                <input ng-model="formData.state" type="text" name="inputState" id="inputState"  class="form-control" ng-disabled="true">
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                 <label class="control-label">Zip/Postal Code

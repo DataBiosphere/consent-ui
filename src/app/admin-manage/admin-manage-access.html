@@ -7,11 +7,10 @@
                 <div class="main-title-description">Select and manage Data Access Request for DAC review</div>
             </h2>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12  search-reviewed no-padding">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 search-reviewed no-padding">
             <div class="search-text">
                 <i class="glyphicon glyphicon-search access-color"></i>
-                <input type="search" class="form-control users-search" placeholder="Enter search term..."
-                       ng-model="searchAccess"/>
+                <input type="search" class="form-control users-search" placeholder="Enter search term..." ng-model="searchAccess" />
             </div>
         </div>
     </div>
@@ -22,11 +21,9 @@
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-box-subtitle access-color">Project title</div>
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle access-color">Date</div>
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pvotes-box-subtitle f-center access-color">+ Info</div>
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle f-center access-color">Election
-                    status
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle f-center access-color">Election status
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle f-center access-color">Election
-                    actions
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle f-center access-color">Election actions
                 </div>
             </div>
             <div class="admin-box-body">
@@ -35,24 +32,22 @@
                     <div ng-if="!dar.isCanceled" class="row pvotes-main-list">
                         <div class="row pvotes-main-list" ng-class="{'list-highlighted': dar.needsApproval}">
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">
-                                <div ng-if="dar.dataSetElectionResult == 'Denied'" class="cancel-color glyphicon glyphicon-download-alt" ng-click="dar.electionStatus != 'Closed' || AdminManageAccess.downloadDataSetVotesDetail(dar.dataRequestId)" ng-show="dar.needsApproval" tooltip="Download Summary" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right"></div>
-                                <div ng-if="dar.dataSetElectionResult == 'Approved'" class="dataset-color glyphicon glyphicon-download-alt" ng-click="dar.electionStatus != 'Closed' || AdminManageAccess.downloadDataSetVotesDetail(dar.dataRequestId)" ng-show="dar.needsApproval" tooltip="Download Summary" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right"></div>
-                                <div
-                                ng-class="{'access-color': dar.needsApproval, 'cancel-color': dar.dataSetElectionResult == 'Denied','dataset-color': dar.dataSetElectionResult == 'Approved'}"
-                                class="glyphicon glyphicon-exclamation-sign"
-                                tooltip="{{dar.dataSetElectionResult}}"
-                                tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right"
-                                ng-show="dar.needsApproval"></div>
+                                <div ng-class="{'access-color': dar.needsApproval, 'cancel-color': dar.dataSetElectionResult == 'Denied','dataset-color': dar.dataSetElectionResult == 'Approved'}"
+                                    class="glyphicon glyphicon-exclamation-sign" tooltip="{{dar.dataSetElectionResult}}" tooltip-class="tooltip-class"
+                                    tooltip-trigger tooltip-placement="right" ng-show="dar.needsApproval"></div>
                                 <span class="list-highlighted-item">{{dar.frontEndId}}</span>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id">{{dar.projectTitle}}</div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{dar.createDate |
-                                date:'yyyy-MM-dd'}}
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{dar.createDate | date:'yyyy-MM-dd'}}
                             </div>
                             <a href="" class="admin-manage-buttons col-lg-1 col-md-1 col-sm-1 col-xs-1 no-padding">
                                 <div class="enabled hover-color" ng-click="AdminManageAccess.openRUS(dar.rus)">
-                                    <span>RUS</span>
+                                    <span>Summary</span>
                                 </div>
+                                 <!--<div class="enabled hover-color" ng-click="AdminManageAccess.openApplication()">
+                                    <span>Summary</span>
+                                </div>-->
+                               
                             </a>
 
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list bold">
@@ -61,33 +56,31 @@
                                 <span ng-if="dar.electionStatus == 'Canceled'">Canceled</span>
                                 <span ng-if="dar.electionStatus == 'Closed' || dar.electionStatus == 'PendingApproval'"><a ui-sref="access_results_record({electionId: '{{dar.electionId}}', referenceId: '{{dar.dataRequestId}}'})">Reviewed</a></span>
                             </div>
-                            <div>
-                                <a class="admin-manage-buttons col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                                    <div ng-if="dar.electionStatus != 'Open' &&  dar.electionStatus != 'Final' && dar.electionStatus != 'PendingApproval'"
-                                         class="create hover-color"
-                                         ng-click="AdminManageAccess.openCreate(dar.dataRequestId)">
-                                        <span>Create</span>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 no-padding">
+                                <div class="row no-margin">
+                                    <a href="" class="admin-manage-buttons col-lg-10 col-md-10 col-sm-10 col-xs-9">
+                                        <div ng-if="dar.electionStatus != 'Open' &&  dar.electionStatus != 'Final' && dar.electionStatus != 'PendingApproval'" class="create hover-color"
+                                            ng-click="AdminManageAccess.openCreate(dar.dataRequestId)">Create</div>
+                                        <div ng-if="dar.electionStatus == 'PendingApproval'" class="disabled">
+                                            <span>Create</span>
+                                        </div>
+                                        <div ng-if="dar.electionStatus == 'Open'||  dar.electionStatus == 'Final'" class="cancel hover-color" ng-click="AdminManageAccess.openCancel(dar)">
+                                            <span>Cancel</span>
+                                        </div>
+                                    </a>
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 bonafide-icon">
+                                        <span class="glyphicon glyphicon-thumbs-up dataset-color" ng-if="false" tooltip="Bonafide researcher" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="left"></span>
+                                        <span class="glyphicon glyphicon-thumbs-down cancel-color" ng-if="false" tooltip="Non-Bonafide researcher" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="left"></span>
+                                        <span class="glyphicon glyphicon-hand-right hover-color" ng-if="true" tooltip="Researcher review pending" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="left"></span>
+                                        <span class="glyphicon glyphicon-hand-right dismiss-color" ng-if="false"></span>
                                     </div>
-                                    <div ng-if="dar.electionStatus == 'PendingApproval'"
-                                         class="disabled">
-                                        <span>Create</span>
-                                    </div>
-
-                                    <div ng-if="dar.electionStatus == 'Open'||  dar.electionStatus == 'Final'"
-                                         class="cancel hover-color" ng-click="AdminManageAccess.openCancel(dar)">
-                                        <span>Cancel</span>
-                                    </div>
-                                </a>
+                                </div>
                             </div>
                         </div>
                         <hr class="pvotes-separator">
                     </div>
                 </div>
-                <div dir-pagination-controls
-                     max-size="10"
-                     direction-links="true"
-                     boundary-links="true"
-                     class="pvotes-pagination">
+                <div dir-pagination-controls max-size="10" direction-links="true" boundary-links="true" class="pvotes-pagination">
                 </div>
             </div>
         </div>

@@ -1,0 +1,142 @@
+<div ng-include src="'app/header/header.html'"></div>
+<div class="container">
+    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <h2 class="cm-title common-color">
+            <div id="dacUser">Researcher review</div>
+            <small>Should this user be classified as Bonafide Researcher?</small>
+        </h2>
+        <hr class="section-separator">
+    </div>
+
+    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+        <div class="jumbotron box-vote">
+            <h3 class="cm-results-subtitle common-color">Your vote</h3>
+            <hr class="box-separator">
+            <form class="form-horizontal" id="voteForm">
+                <div class="form-group first-form-group">
+                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label common-color">Vote</label>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
+                        <div class="radio-inline">
+                            <input type="radio" ng-model="" ng-click="" ng-value="true" class="regular-radio" id="bonafidePositive" name="bonafideVote">
+                            <label for="bonafidePositive"></label>
+                            <label for="bonafidePositive" class="radio-button-text">Yes</label>
+
+                            <input type="radio" ng-model="" ng-click="" ng-value="false" class="regular-radio" id="bonafideNegative" name="bonafideVote">
+                            <label for="bonafideNegative"></label>
+                            <label for="bonafideNegative" class="radio-button-text">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span ng-if="voteStatus == '1'">
+                            <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label common-color">Comments</label>
+                        </span>
+
+                    <span ng-if="voteStatus != '1'">
+                            <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label common-color">Rationale</label>
+                        </span>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
+                        <input type="text" ng-model="" ng-change="" name="inputRationale" class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
+                            placeholder="Describe here your rationale or comments (be as specific as possible).">
+                    </div>
+                </div>
+                <div class="form-group form-group-bottom">
+                    <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-6 col-sm-offset-6 col-xs-6 col-xs-offset-6">
+                        <button ng-disabled="" ng-click="" class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button common-background">
+                                Vote
+                            </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 no-padding">
+        <form name="researcherForm" novalidate>
+            <div class="form-group">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label class="control-label">Full Name</label>
+                    <div class="control-data" id="researcherName">Name</div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label class="control-label">Academic/Business Email Address</label>
+                    <div class="control-data" id="researcherAcademicEmail">Email</div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <label class="control-label">Institution Name</label>
+                    <div class="control-data" id="researcherInstitution">Name</div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <label class="control-label">Department</label>
+                    <div class="control-data" id="researcherInstitution">Department</div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <label class="control-label">Division</label>
+                    <div class="control-data" id="researcherInstitution">Division</div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label class="control-label">Street Address 1</label>
+                    <div class="control-data" id="researcherAddress1">Address</div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label class="control-label">Street Address 2</label>
+                    <div class="control-data" id="researcherAddress2">Address</div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label class="control-label">City</label>
+                    <div class="control-data" id="researcherCity">City</div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label class="control-label">State</label>
+                    <div class="control-data" id="researcherState">State</div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label class="control-label">Zip/Postal Code</label>
+                    <div class="control-data" id="researcherZip">Zip/Postal Code</div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label class="control-label">Country</label>
+                    <div class="control-data" id="researcherCountry">Country</div>
+                </div>
+
+                <div class="col-xs-12" ng-class="{'col-lg-12 col-md-12 col-sm-12': true, 'col-lg-6 col-md-6 col-sm-6': some}">
+                    <label class="control-label">Is this researcher the Principal Investigator?</label>
+                    <div class="control-data" id="researcherisThePI">Yes</div>
+                </div>
+                <!--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <label class="control-label">Does the resercher have a Principal Investigator?</label>
+                <div class="control-data" id="researcherhavePI">Yes</div>
+            </div>-->
+
+                <!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <label class="control-label">Principal Investigator Name</label>
+                <div class="control-data" id="researcherPIName">Name</div>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <label class="control-label">Principal Investigator Email Address</label>
+                <div class="control-data" id="researcherPIEmail">Email</div>
+            </div>-->
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label">eRA Commons ID</label>
+                    <div class="control-data" id="researcherEraCommons">link</div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label">Pubmed ID of a publication</label>
+                    <div class="control-data" id="researcherPubmedID">link</div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label">URL of a scientific publication</label>
+                    <div class="control-data" id="researcherScientificURL">link</div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

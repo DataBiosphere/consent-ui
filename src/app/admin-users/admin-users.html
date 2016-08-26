@@ -11,8 +11,7 @@
             <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
                 <div class="search-text">
                     <i class="glyphicon glyphicon-search common-color"></i>
-                    <input type="search" class="form-control users-search" placeholder="Enter search term..."
-                           ng-model="searchUsers"/>
+                    <input type="search" class="form-control users-search" placeholder="Enter search term..." ng-model="searchUsers" />
                 </div>
             </div>
             <a class="col-lg-5 col-md-5 col-sm-5 col-xs-5 admin-add-button common-background" ng-click="AdminUsers.addUser()">
@@ -24,20 +23,19 @@
     <div class="jumbotron box-vote-singleresults box-vote-no-margin">
         <div class="row">
             <div class="pvotes-box-head">
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-box-subtitle common-color">User Name</div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-box-subtitle common-color">Google account id
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-box-subtitle common-color">User Roles</div>
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle common-color f-center">Edit User
-                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle common-color">User Name</div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-box-subtitle common-color">Google account id</div>
+                <div class="col-lg-4 col-md-4 col-sm-3 col-xs-3 pvotes-box-subtitle common-color">User Roles</div>
+                <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2 pvotes-box-subtitle common-color f-center">Edit User</div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-box-subtitle common-color f-center">Researcher Review</div>
             </div>
             <div class="admin-box-body">
                 <hr class="pvotes-main-separator">
                 <div dir-paginate="user in AdminUsers.usersList.dul | filter: searchUsers | itemsPerPage:8">
-                    <div class="row pvotes-main-list admin-users-list">
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id">{{user.displayName}}</div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">{{user.email}}</div>
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id">
+                    <div class="row pvotes-main-list">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{user.displayName}}</div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id">{{user.email}}</div>
+                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-3 pvotes-list-id">
                             <span class="admin-users-list" ng-repeat="role in user.roles">
                                 <span class="enabled default-color" ng-if="role.name == 'Admin'">Admin</span>
                                 <span class="enabled default-color" ng-if="role.name == 'Member'">Member</span>
@@ -47,20 +45,27 @@
                                 <span class="enabled default-color" ng-if="role.name == 'DataOwner'">Data Owner</span>
                             </span>
                         </div>
-                        <a href="" class="admin-manage-buttons col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                            <div ng-click="AdminUsers.editUser(user.email)" class="create hover-color">Edit</div>
+                        <a href="" class="admin-manage-buttons col-lg-1 col-md-1 col-sm-2 col-xs-2 no-padding">
+                            <div ng-click="AdminUsers.editUser(user.email)" class="enabled">Edit</div>
                         </a>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 no-padding">
+                            <div class="row no-margin">
+                                <a ui-sref="researcher_review({dacUserId: '{{user.dacUserId}}'})" class="admin-manage-buttons col-lg-10 col-md-10 col-sm-10 col-xs-9">
+                                    <div ng-class="{'enabled': true, 'editable': somethingElse, 'disabled': someOtherCondition}">Review</div>
+                                </a>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 bonafide-icon">
+                                    <span class="glyphicon glyphicon-thumbs-up dataset-color" ng-if="false" tooltip="Bonafide researcher" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="left"></span>
+                                    <span class="glyphicon glyphicon-thumbs-down cancel-color" ng-if="false" tooltip="Non-Bonafide researcher" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="left"></span>
+                                    <span class="glyphicon glyphicon-hand-right hover-color" ng-if="true" tooltip="Researcher review pending" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="left"></span>
+                                    <span class="glyphicon glyphicon-hand-right dismiss-color" ng-if="false"></span>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                     <hr class="pvotes-separator">
                 </div>
-            </div>
-            <div dir-pagination-controls
-                 max-size="8"
-                 direction-links="true"
-                 boundary-links="true"
-                 class="pvotes-pagination">
+                <div dir-pagination-controls max-size="8" direction-links="true" boundary-links="true" class="pvotes-pagination"></div>
             </div>
         </div>
     </div>
-</div>
-
