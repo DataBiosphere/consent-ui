@@ -20,7 +20,7 @@
                 <input type="email" class="form-control" name="profileAcademicEmail" id="profileAcademicEmail" ng-model="formData.academicEmail"  ng-class="researcherForm.profileAcademicEmail.$invalid && showValidationMessages ? 'form-control required-field-error' : 'form-control'" required>
             </div>
             <span class="cancel-color required-field-error-span" ng-show="researcherForm.profileAcademicEmail.$invalid && showValidationMessages">
-                <span>Email Address is empty or in invalid format</span>
+                <span>Email Address is empty or has invalid format</span>
             </span>
 
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -112,8 +112,11 @@
 
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <label class="control-label">Principal Investigator Email Address*</label>
-                <input type="text" class="form-control" name="profilePIEmail" id="profilePIEmail" ng-model="formData.piEmail" ng-required="formData.havePI === true" ng-required="formData.havePI === true" ng-class="researcherForm.profilePIEmail.$invalid && showValidationMessages ? 'form-control required-field-error' : 'form-control'">
+                <input type="email" class="form-control" name="profilePIEmail" id="profilePIEmail" ng-model="formData.piEmail" ng-required="formData.havePI === true" ng-required="formData.havePI === true" ng-class="researcherForm.profilePIEmail.$invalid && showValidationMessages ? 'form-control required-field-error' : 'form-control'">
             </div>
+            <span class="cancel-color required-field-error-span" ng-show="researcherForm.profilePIEmail.$invalid && showValidationMessages">
+                <span>Email Address is empty or has invalid format</span>
+            </span>
 
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <label class="control-label">eRA Commons ID <span class="italic">(optional)</span></label>
@@ -152,13 +155,13 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 multi-step-pager">
                 <li class="italic default-color">*Required field</li>
                 <li ng-if="!formData.completed" class="f-right multi-step-next">
-                    <a   ng-disabled="researcherForm.$invalid" href="" ng-click="ResearcherProfile.submit();" class="common-background">Submit</a>
+                    <a ng-disabled="researcherForm.$invalid" href="" ng-click="ResearcherProfile.submit();" class="common-background">Submit</a>
                 </li>
                 <li ng-if="!formData.completed" class="f-right multi-step-save">
-                    <a  href="" ng-click="ResearcherProfile.saveProfile();" class="common-color">Continue later</a>
+                    <a href="" ng-click="ResearcherProfile.saveProfile();" class="common-color">Continue later</a>
                 </li>
                 <li ng-if="formData.completed" class="f-right multi-step-next">
-                    <a   href="" ng-click="ResearcherProfile.submit();" class="common-background">Update</a>
+                    <a href="" ng-click="ResearcherProfile.submit();" class="common-background">Update</a>
                 </li>
             </div>
         </ul>
