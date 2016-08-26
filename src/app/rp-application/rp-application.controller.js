@@ -5,7 +5,7 @@
         .controller('RPApplication', RPApplication);
 
     /* ngInject */
-    function RPApplication($state, $scope, $modal, cmRPService, $rootScope, gwasUrl) {
+    function RPApplication($state, $scope, $modal, cmRPService, $rootScope, gwasUrl, cmResearcherService) {
 
         var vm = this;
         vm.$state = $state;
@@ -13,10 +13,27 @@
         vm.partialSave = partialSave;
         $scope.showValidationMessages = false;
         $scope.atLeastOneCheckboxChecked = false;
-        $scope.formData = {};
-        if ($rootScope.formData !== undefined && $rootScope.formData.userId !== undefined) {
-            $scope.formData = $rootScope.formData;
-            $rootScope.formData = {};
+        init();
+
+        function init(){
+          $scope.formData = {};
+          if ($rootScope.formData !== undefined && $rootScope.formData.userId !== undefined) {
+             $scope.formData = $rootScope.formData;
+             $rootScope.formData = {};
+          }
+          cmResearcherService.getResearcherPropertiesForDAR($rootScope.currentUser.dacUserId).then(
+              function (data) {
+                $scope.formData.investigator = data.investigator;
+                $scope.formData.institution = data.institution;
+                $scope.formData.department = data.department;
+                $scope.formData.division = data.division;
+                $scope.formData.address1 = data.address1;
+                $scope.formData.address2 = data.address2;
+                $scope.formData.city = data.city;
+                $scope.formData.zipcode = data.zipcode;
+                $scope.formData.country = data.country;
+                $scope.formData.state = data.state;
+          });
         }
 
         $scope.$watch("form.step1.$valid", function (value1) {

@@ -30,6 +30,14 @@
                     return $resource(apiUrl + "dacuser/validateDelegation", {},{
                     post: {method: 'POST',  params: {role: 'role'}}
                     });
+        })
+
+        .factory('RegisterUserResource', function ($resource, apiUrl) {
+            return $resource(apiUrl + "user", {}, {
+                post: {
+                    method: 'POST'
+                }
+            });
         });
 })();
 

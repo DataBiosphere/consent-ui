@@ -1,0 +1,17 @@
+<div class="modal-alerts">
+    <div class="modal-content">
+        <div class="modal-header admin-modal-header">
+            <button type="button" class="modal-close-btn close" ng-click="SaveProfileModal.cancel()"><span aria-hidden="true">&times;</span></button>
+            <h2 ng-if="!submit" class="pvotes-box-title common-color">Continue later?
+                <small>Are you sure you want to leave this page? Please remember that you need to submit your Profile information to be able to create a Data Access Request.</small>
+            </h2>
+            <h2 ng-if="submit" class="pvotes-box-title common-color">Submit
+                <small>Are you sure you want to submit your Profile information?</small>
+            </h2>
+        </div>
+        <div class="modal-footer admin-modal-footer">
+            <button type="button" class="btn dismiss-background" ng-click='SaveProfileModal.cancel()'>Cancel</button>
+            <button type="button" class="btn common-background" ng-click='SaveProfileModal.ok()'>Yes</button>
+        </div>
+    </div>
+</div>

@@ -111,6 +111,10 @@ small {
     text-align: center;
 }
 
+.no-style-list {
+    list-style: none;
+}
+
 .default-color {
     color: #777777 !important;
 }
@@ -257,6 +261,14 @@ small {
     margin-right: 10px;
 }
 
+.home-control-label{
+    font-size: 15px;
+    font-weight: 500;
+    color:#2899BC;
+    padding: 0;
+    margin-bottom: 8px;
+    }
+
 /**/
 
 /***************************************************Nav*/
@@ -378,6 +390,18 @@ small {
     display: inline;
     vertical-align: top;
     font-weight: normal;
+}
+
+.navbar-duos-link-join{
+    color: #5BB0CA !important;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px 10px;
+    transition: all 0.3s ease !important;
+}
+
+.navbar-duos-link-join:hover{
+    color: #ffffff !important;
 }
 
 .navbar-duos-icon{
@@ -2779,6 +2803,22 @@ input[type="checkbox"][disabled] + label {
     text-align: center !important;
 }
 
+.signInRegister {
+    position: absolute;
+    top: 0;
+    left: 5px;
+}
+
+.signInDisableButton{
+    position: absolute;
+    top: 0;
+    left: 15px;
+    height: 36px;
+    width: 120px;
+    margin: 15px 0;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
 /*///////////////////////////////////////////////////////DATASET CATALOG*/
 
 .search-catalog {
@@ -3288,6 +3328,15 @@ tags-input .tags .tag-item{
 
 /***************************************************Tooltip*/
 
+.tooltip-icon{
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.tooltip-icon:hover{
+    color: #2FA4E7;
+}
+
 .tooltip.tooltip-class .tooltip-inner{
     font-family: 'Roboto', sans-serif !important;
     font-size: 13px !important;
@@ -3298,10 +3347,20 @@ tags-input .tags .tag-item{
     z-index: 200000;
 }
 
-.tooltip.tooltip-class .tooltip-arrow {
+.tooltip.tooltip-class .tooltip-arrow,
+.tooltip.tooltip-class-dark .tooltip-arrow {
     display: none;
 }
 
+.tooltip.tooltip-class-dark .tooltip-inner{
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 12px !important;
+    color: #333333;
+    background: #eeeeee;
+    box-shadow: 2px 2px 2px rgba(0,0,0,.175);
+    padding: 5px 5px!important;
+    z-index: 200000;
+}
 
 .select-table-btn{
     width: 100%;
@@ -3346,3 +3405,5 @@ tags-input .tags .tag-item{
 .select-table-list option{
     padding: 0 10px !important;
 }
+
+
