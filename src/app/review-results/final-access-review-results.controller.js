@@ -10,6 +10,7 @@
             cmLoginUserService.redirect($rootScope.currentUser);
             return;
         }
+
         $scope.vote = {};
         $scope.voteAgreement = {};
         $scope.logVote = logVote;

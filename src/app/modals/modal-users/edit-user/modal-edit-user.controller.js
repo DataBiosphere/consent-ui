@@ -130,7 +130,7 @@
                         $scope.closeAlert(3);
                     }
                 }
-            }
+            };
 
 
             var l = $scope.user.roles.length;

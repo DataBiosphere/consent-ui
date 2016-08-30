@@ -6,6 +6,10 @@
 
     function ReviewResults($sce, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, electionReview, rpElectionReview, dar, apiUrl, cmEmailService, cmRPService, dar_id, cmFilesService) {
 
+        if(electionReview.election.status === "Canceled"){
+            $state.go($state.go("access_review_not_found"));
+        }
+
         var vm = this;
         vm.openApplication = openApplication;
         $scope.electionType = 'access';

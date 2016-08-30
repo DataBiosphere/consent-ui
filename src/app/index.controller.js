@@ -107,5 +107,19 @@
                 }
             }
         });
+
+        $rootScope.$on('$stateChangeError', function (evt, toState, error){
+            switch(toState.name){
+                case ("access_review" || "access_review_results" || "final_access_review_results"):
+                    $state.go("access_review_not_found");
+                    break;
+                case ("dul_review" || "dul_review_results"):
+                    $state.go("dul_review_not_found");
+                    break;
+                default:
+                    $state.go("not_found");
+                    break;
+            }
+        });
     });
 })();
