@@ -67,7 +67,8 @@
 
         <div class="form-group">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-                <label ng-class="showValidationMessages ? 'cancel-color control-label' : 'control-label'" >Are you the Principal Investigator?*
+                <label ng-class="researcherForm.isThePI.$invalid && showValidationMessages ? 'cancel-color control-label' : 'control-label'">Are you the Principal Investigator?*
+
                         <span class="glyphicon glyphicon-question-sign tooltip-icon" tooltip-class="tooltip-class-dark" tooltip-trigger tooltip-placement="right"
                         tooltip="This information is required in order to classify users as bonafide researchers as part of the process of Data Access approvals."></span></label>
             </div>
@@ -77,7 +78,7 @@
                     <label for="isThePI"></label>
                     <label for="isThePI" class="radio-button-text">Yes</label>
 
-                    <input ng-model="formData.isThePI" ng-value=false type="radio" class="regular-radio" id="isNotThePI" name="isThePI" ng-click="ResearcherProfile.clearNotRelatedPIFields();">
+                    <input ng-model="formData.isThePI" ng-value=false type="radio" class="regular-radio" id="isNotThePI" name="isThePI" ng-click="ResearcherProfile.clearNotRelatedPIFields();" required>
                     <label for="isNotThePI"></label>
                     <label for="isNotThePI" class="radio-button-text">No</label>
                 </div>
@@ -89,15 +90,15 @@
                 <span>* Required field</span>
             </span>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-                <label ng-class="showValidationMessages ? 'cancel-color control-label' : 'control-label'">Do you have a Principal Investigator?*</label>
+                <label ng-class="researcherForm.havePI.$invalid && showValidationMessages ? 'cancel-color control-label' : 'control-label'">Do you have a Principal Investigator?*</label>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
                 <div class="radio-inline"  ng-disabled="formData.isThePI != false">
-                    <input ng-model="formData.havePI" ng-value=true type="radio" class="regular-radio" id="doHavePI" name="havePI" ng-click="ResearcherProfile.clearCommonsFields();" ng-disabled="formData.isThePI != false">
+                    <input ng-model="formData.havePI" ng-value=true type="radio" class="regular-radio" id="doHavePI" name="havePI" ng-click="ResearcherProfile.clearCommonsFields();" ng-disabled="formData.isThePI != false" ng-required="formData.isThePI == false">
                     <label for="doHavePI"></label>
                     <label for="doHavePI" class="radio-button-text">Yes</label>
 
-                    <input ng-model="formData.havePI" ng-value=false type="radio" class="regular-radio" id="doNotHavePI" name="havePI" ng-click="ResearcherProfile.clearNoHasPIFields();" ng-disabled="formData.isThePI != false">
+                    <input ng-model="formData.havePI" ng-value=false type="radio" class="regular-radio" id="doNotHavePI" name="havePI" ng-click="ResearcherProfile.clearNoHasPIFields();" ng-disabled="formData.isThePI != false" ng-required="formData.isThePI == false">
                     <label for="doNotHavePI"></label>
                     <label for="doNotHavePI" class="radio-button-text">No</label>
                 </div>

@@ -27,9 +27,11 @@
           function (data) {
             $rootScope.setCurrentUser(data);
             $state.go('researcher_profile');
-          }, function () {
-             alert("User already exists.");
-             $state.go('login');
+          }, function (error) {
+              if(error.status === 409 && user.displayName !== null &&  user.displayName !== undefined &&  user.displayName !== ''){
+                 alert("User already exists.");
+                 $state.go('login');
+              }
           });
     }
 
@@ -44,10 +46,6 @@
     }
 
     window.onSignIn = onSignIn;
-    window.onbeforeunload = function(){
-      gapi.auth2.getAuthInstance().signOut();
-    };
-
 
 }
 
