@@ -41,15 +41,10 @@
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{dar.createDate | date:'yyyy-MM-dd'}}
                             </div>
                             <a href="" class="admin-manage-buttons col-lg-1 col-md-1 col-sm-1 col-xs-1 no-padding">
-                                <div class="enabled hover-color" ng-click="AdminManageAccess.openRUS(dar.rus)">
+                                <div class="enabled hover-color" ng-click="AdminManageAccess.openApplication(dar.dataRequestId)">
                                     <span>Summary</span>
                                 </div>
-                                 <!--<div class="enabled hover-color" ng-click="AdminManageAccess.openApplication()">
-                                    <span>Summary</span>
-                                </div>-->
-                               
                             </a>
-
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list bold">
                                 <span ng-if="dar.electionStatus == 'un-reviewed'">Un-reviewed</span>
                                 <span ng-if="dar.electionStatus == 'Open' || dar.electionStatus == 'Final'">Open</span>
@@ -69,10 +64,10 @@
                                         </div>
                                     </a>
                                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 bonafide-icon">
-                                        <span class="glyphicon glyphicon-thumbs-up dataset-color" ng-if="false" tooltip="Bonafide researcher" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="left"></span>
-                                        <span class="glyphicon glyphicon-thumbs-down cancel-color" ng-if="false" tooltip="Non-Bonafide researcher" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="left"></span>
-                                        <span class="glyphicon glyphicon-hand-right hover-color" ng-if="true" tooltip="Researcher review pending" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="left"></span>
-                                        <span class="glyphicon glyphicon-hand-right dismiss-color" ng-if="false"></span>
+                                        <span class="glyphicon glyphicon-thumbs-up dataset-color" ng-if="dar.ownerUser.researcherIsApproved === 'APPROVED'" tooltip="Bonafide researcher" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="left"></span>
+                                        <span class="glyphicon glyphicon-thumbs-down cancel-color" ng-if="dar.ownerUser.researcherIsApproved === 'REJECTED'" tooltip="Non-Bonafide researcher" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="left"></span>
+                                        <span class="glyphicon glyphicon-hand-right hover-color" ng-if="dar.ownerUser.researcherIsApproved === 'PENDING'" tooltip="Researcher review pending" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="left"></span>
+                                        <span class="glyphicon glyphicon-hand-right dismiss-color" ng-if="dar.ownerUser.researcherIsApproved === null"></span>
                                     </div>
                                 </div>
                             </div>

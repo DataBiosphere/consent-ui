@@ -2,6 +2,6 @@
     'use strict';
 
     angular
-        .module('cmResearcherReview', ['ui.router', 'ui.bootstrap', 'cmResearcher']);
+        .module('cmResearcherReview', ['ui.router', 'ui.bootstrap', 'cmResearcher', 'cmUser']);
 
 })();

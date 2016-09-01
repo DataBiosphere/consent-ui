@@ -16,7 +16,7 @@
                     <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label access-color">Principal Investigator</label>
                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">{{summary.principalInvestigator}}</div>
                 </div>
-                 <div class="row">
+                 <div ng-if = "calledFromAdmin" class="row">
                     <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label access-color">Researcher</label>
                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">PLACE HERE RESEARCHER NAME</div>
                 </div>

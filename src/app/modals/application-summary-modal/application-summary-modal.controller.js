@@ -5,8 +5,9 @@
         .controller('ApplicationModal', ApplicationModal);
 
     /* ngInject */
-    function ApplicationModal($modalInstance, $scope, darDetails) {
+    function ApplicationModal($modalInstance, $scope, darDetails, calledFromAdmin) {
 
+        $scope.calledFromAdmin = calledFromAdmin;
         $scope.summary = darDetails;
         var vm = this;
 

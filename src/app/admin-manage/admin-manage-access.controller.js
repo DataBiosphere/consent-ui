@@ -12,6 +12,7 @@
         vm.openCancel = openCancel;
         vm.openRUS = openRUS;
         vm.downloadDataSetVotesDetail = downloadDataSetVotesDetail;
+        vm.openApplication = openApplication;
 
         init();
 
@@ -81,6 +82,25 @@
 
         function downloadDataSetVotesDetail(dataRequestId){
             cmElectionService.downloadDatasetVotesForDARElection(dataRequestId);
+        }
+
+        function openApplication(dar_id) {
+            $scope.dataRequestId = dar_id;
+            $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/application-summary-modal/application-summary-modal.html',
+                controller: 'ApplicationModal',
+                controllerAs: 'ApplicationModal',
+                scope: $scope,
+                resolve: {
+                    darDetails: function () {
+                        return cmRPService.getDarModalSummary(dar_id);
+                    },
+                    calledFromAdmin: function() {
+                        return true;
+                    }
+                }
+            });
         }
 
     }

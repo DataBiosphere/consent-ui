@@ -39,7 +39,6 @@
 
         $scope.positiveVote = function () {
             $scope.setEnableVoteButton();
-
         };
 
         $scope.downloadDUL = function(){
