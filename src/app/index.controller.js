@@ -108,7 +108,7 @@
             }
         });
 
-        $rootScope.$on('$stateChangeError', function (evt, toState, error){
+        $rootScope.$on('$stateChangeError', function (evt, toState){
             switch(toState.name){
                 case ("access_review" || "access_review_results" || "final_access_review_results"):
                     $state.go("access_review_not_found");

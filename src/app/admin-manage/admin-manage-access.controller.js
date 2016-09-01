@@ -10,7 +10,6 @@
         var vm = this;
         vm.openCreate = openCreate;
         vm.openCancel = openCancel;
-        vm.openRUS = openRUS;
         vm.downloadDataSetVotesDetail = downloadDataSetVotesDetail;
         vm.openApplication = openApplication;
 
@@ -64,22 +63,6 @@
             });
         }
 
-
-        function openRUS(rus) {
-            $scope.rus = rus;
-            var modalInstance = $modal.open({
-                animation: false,
-                templateUrl: 'app/modals/extra-info-modal.html',
-                controller: 'Modal',
-                controllerAs: 'Modal',
-                scope: $scope
-            });
-
-            modalInstance.result.then(function () {
-            }, function () {
-            });
-        }
-
         function downloadDataSetVotesDetail(dataRequestId){
             cmElectionService.downloadDatasetVotesForDARElection(dataRequestId);
         }
@@ -93,8 +76,11 @@
                 controllerAs: 'ApplicationModal',
                 scope: $scope,
                 resolve: {
-                    darDetails: function () {
+                    darDetails: function() {
                         return cmRPService.getDarModalSummary(dar_id);
+                    },
+                    dar_id: function(){
+                        return dar_id;
                     },
                     calledFromAdmin: function() {
                         return true;

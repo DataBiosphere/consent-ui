@@ -51,7 +51,7 @@
                             scope: $scope
                         });
                         modalInstance.result.then(function () {
-                           $state.go('admin_console');
+                           $state.go('admin_users');
                         });
                     },
                     //error

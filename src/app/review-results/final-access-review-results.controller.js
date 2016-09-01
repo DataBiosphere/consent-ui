@@ -77,7 +77,7 @@
                         function () {
                             $scope.alreadyVote = true;
                             if($scope.agreementAlreadyVote || $scope.hideMatch){
-                                    $state.go('chair_console');
+                                $state.go('chair_console');
                             } else{
                                 $scope.reminderDARAlert();
                             }
@@ -143,6 +143,12 @@
                 resolve: {
                     darDetails: function () {
                         return cmRPService.getDarModalSummary(referenceId);
+                    },
+                    dar_id: function(){
+                        return referenceId;
+                    },
+                    calledFromAdmin: function() {
+                        return false;
                     }
                 }
             });
@@ -299,8 +305,8 @@
             cmElectionService.findDataAccessElectionReview(electionId, false).$promise.then(function (data) {
                 showAccessData(data);
                 cmElectionService.findRPElectionReview(electionId, false).
-                    $promise.then(function (data) {
-                       if(data.election !== undefined){
+                $promise.then(function (data) {
+                    if(data.election !== undefined){
                         $scope.electionRP = data.election;
                         if (data.election.finalRationale === null) {
                             $scope.electionRP.finalRationale = '';
@@ -309,10 +315,10 @@
                         $scope.rpVoteAccessList = chunk(data.reviewVote, 2);
                         $scope.chartRP = getGraphData(data.reviewVote);
                         $scope.showRPaccordion = true;
-                      }else{
-                          $scope.showRPaccordion = false;
-                      }
-                    });
+                    }else{
+                        $scope.showRPaccordion = false;
+                    }
+                });
 
                 cmElectionService.findLastElectionReviewByReferenceId(data.consent.consentId).$promise.then(function (data) {
                     $scope.electionReview = data;

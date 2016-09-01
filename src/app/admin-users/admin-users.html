@@ -50,13 +50,17 @@
                         </a>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 no-padding">
                             <div class="row no-margin">
-                                <a ui-sref="researcher_review({dacUserId: '{{user.dacUserId}}'})" class="admin-manage-buttons col-lg-10 col-md-10 col-sm-10 col-xs-9">
-                                    <div ng-class="{'enabled': user.researcher && user.completed, 'editable': user.researcher && user.completed && user.status !== 'Pending', 'disabled': user.researcher == false}">Review</div>
+                                <a ng-if="user.researcher !== false && (user.completed)" ui-sref="researcher_review({dacUserId: '{{user.dacUserId}}'})" class="admin-manage-buttons col-lg-10 col-md-10 col-sm-10 col-xs-9">
+                                    <div ng-class="{'enabled': user.researcher && user.completed && user.status === 'pending' || user.status === null, 'editable': user.researcher && user.completed && user.status !== 'pending', 'disabled': user.researcher == false || !(user.completed)}">Review</div>
+                                </a>
+                                <a ng-if="user.researcher == false || !(user.completed)" class="admin-manage-buttons col-lg-10 col-md-10 col-sm-10 col-xs-9">
+                                    <div ng-class="{'disabled': user.researcher == false || !(user.completed)}">Review</div>
                                 </a>
                                 <div ng-if="user.researcher == true" class="col-lg-2 col-md-2 col-sm-2 col-xs-3 bonafide-icon">
-                                    <span class="glyphicon glyphicon-thumbs-up dataset-color" ng-if="user.status === 'approved'" tooltip="Bonafide researcher" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="left"></span>
-                                    <span class="glyphicon glyphicon-thumbs-down cancel-color" ng-if="user.status === 'rejected'" tooltip="Non-Bonafide researcher" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="left"></span>
-                                    <span class="glyphicon glyphicon-hand-right hover-color" ng-if="user.status === 'pending'" tooltip="Researcher review pending" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="left"></span>
+                                    <span class="glyphicon glyphicon-thumbs-up dataset-color" ng-if="user.status === 'approved'  && user.completed" tooltip="Bonafide researcher" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="left"></span>
+                                    <span class="glyphicon glyphicon-thumbs-down cancel-color" ng-if="user.status === 'rejected'  && user.completed" tooltip="Non-Bonafide researcher" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="left"></span>
+                                    <span class="glyphicon glyphicon-hand-right hover-color" ng-if="user.status === 'pending' && user.completed" tooltip="Researcher review pending" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="left"></span>
+                                    <span class="glyphicon glyphicon-hand-right dismiss-color" ng-if="!(user.completed)"></span>
                                 </div>
                                 <div ng-if="user.researcher == false" class="col-lg-2 col-md-2 col-sm-2 col-xs-3 bonafide-icon">
                                     <span class="glyphicon glyphicon-hand-right dismiss-color"></span>

@@ -95,6 +95,12 @@
                 resolve: {
                     darDetails: function () {
                         return cmRPService.getDarModalSummary(dar_id);
+                    },
+                    dar_id: function(){
+                        return dar_id;
+                    },
+                    calledFromAdmin: function() {
+                        return false;
                     }
                 }
             });

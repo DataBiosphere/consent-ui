@@ -5,7 +5,7 @@
         .controller('ApplicationModal', ApplicationModal);
 
     /* ngInject */
-    function ApplicationModal($modalInstance, $scope, darDetails, calledFromAdmin) {
+    function ApplicationModal($modalInstance, $scope, darDetails, calledFromAdmin, cmElectionService, dar_id) {
 
         $scope.calledFromAdmin = calledFromAdmin;
         $scope.summary = darDetails;
@@ -17,6 +17,10 @@
 
         vm.cancel = function () {
             $modalInstance.dismiss('cancel');
+        };
+
+        vm.downloadDetail = function downloadDataSetVotesDetail(){
+            cmElectionService.downloadDatasetVotesForDARElection(dar_id);
         };
 
         vm.singleModel = 0;

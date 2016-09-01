@@ -917,14 +917,14 @@ small {
 }
 
 .control-data {
-    font-size: 15px; 
+    font-size: 16px;
+    height: 30px;
     text-align: left;
-    font-weight: 500;
     color: black;
     width: 100%;
-    padding-top: 7px;
+    padding: 5px 0;
     margin-bottom: 15px;
-    border-top: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
 }
 
 .response-label {
@@ -1223,7 +1223,7 @@ input[type=checkbox]:checked + label:before{
     font-size: 1.8rem;
     padding: 10px 3px 0 0;
 }
- 
+
 
 /*///////////////////////////////////////////////////////DAC CONSOLES*/
 
@@ -2150,7 +2150,7 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 }
 
 .modal-add-dul .admin-modal-header,
-.modal-add-dataset. admin-modal-header {
+.modal-add-dataset .admin-modal-header {
     padding: 20px 20px 0 20px !important;
 }
 
@@ -2556,7 +2556,7 @@ input[type="checkbox"][disabled] + label {
 }
 
 .alert-success {
-    background-color: rgba(21, 188, 25, 0.1));
+    background-color: rgba(21, 188, 25, 0.1);
     border: none;
 }
 
@@ -2834,7 +2834,7 @@ input[type="checkbox"][disabled] + label {
 
 .signInRegister .abcRioButton{
     width: 210px !important;
-} 
+}
 
 .signInRegister .abcRioButtonContents{
     display: none !important;
@@ -3191,8 +3191,8 @@ tags-input .tags .tag-item {
     height: 26px;
     line-height: 25px;
     border-radius: 3px;
-    background: rgba(96, 59, 155, 0.2)
-color: #603B9B;
+    background: rgba(96, 59, 155, 0.2);
+    color: #603B9B;
     font-weight: 500;
     border: none !important;
 }

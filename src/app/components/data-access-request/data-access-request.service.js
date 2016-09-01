@@ -39,6 +39,12 @@
             dataAccessRequestManageResource.List(({userId: vm.userId})).$promise.then(
                 function (data) {
                     vm.dars = data;
+                    data.forEach(function(dar){
+                       dar.ownerUser.roles.forEach(function(role) {
+                       if(role.name === 'Researcher'){
+                           dar.status = role.status;
+                       }});
+                    });
                 });
         }
 

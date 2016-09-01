@@ -64,10 +64,11 @@
                                         </div>
                                     </a>
                                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 bonafide-icon">
-                                        <span class="glyphicon glyphicon-thumbs-up dataset-color" ng-if="dar.ownerUser.researcherIsApproved === 'APPROVED'" tooltip="Bonafide researcher" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="left"></span>
-                                        <span class="glyphicon glyphicon-thumbs-down cancel-color" ng-if="dar.ownerUser.researcherIsApproved === 'REJECTED'" tooltip="Non-Bonafide researcher" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="left"></span>
-                                        <span class="glyphicon glyphicon-hand-right hover-color" ng-if="dar.ownerUser.researcherIsApproved === 'PENDING'" tooltip="Researcher review pending" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="left"></span>
-                                        <span class="glyphicon glyphicon-hand-right dismiss-color" ng-if="dar.ownerUser.researcherIsApproved === null"></span>
+                                        <a ng-if="dar.status !== null" ui-sref="researcher_review({dacUserId: '{{dar.ownerUser.dacUserId}}'})">
+                                        <span class="glyphicon glyphicon-thumbs-up dataset-color" ng-if="dar.status === 'approved'" tooltip="Bonafide researcher" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="left"></span>
+                                        <span class="glyphicon glyphicon-thumbs-down cancel-color" ng-if="dar.status === 'rejected'" tooltip="Non-Bonafide researcher" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="left"></span>
+                                        <span class="glyphicon glyphicon-hand-right hover-color" ng-if="dar.status === 'pending'" tooltip="Researcher review pending" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="left"></span>
+                                        <span class="glyphicon glyphicon-hand-right dismiss-color" ng-if="dar.status === null"></span>
                                     </div>
                                 </div>
                             </div>

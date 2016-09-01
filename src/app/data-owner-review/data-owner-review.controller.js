@@ -47,6 +47,12 @@
                 resolve: {
                     darDetails: function () {
                         return cmRPService.getDarModalSummary(referenceId);
+                    },
+                    dar_id: function(){
+                        return referenceId;
+                    },
+                    calledFromAdmin: function() {
+                        return false;
                     }
                 }
             });
