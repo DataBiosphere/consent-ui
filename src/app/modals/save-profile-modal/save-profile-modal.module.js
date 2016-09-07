@@ -2,6 +2,6 @@
     'use strict';
 
     angular
-        .module('cmSaveProfileModal', ['ui.bootstrap']);
+        .module('cmSaveProfileModal', ['ui.bootstrap', 'cmUser']);
 
 })();

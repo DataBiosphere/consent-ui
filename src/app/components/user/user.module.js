@@ -26,6 +26,15 @@
             });
         })
 
+        .factory('UpdateUserNameResource', function ($resource, apiUrl) {
+            return $resource(apiUrl + "dacuser/name/:userId", {}, {
+                updateUserName: {
+                    method: 'PUT',
+                    params:{userId: '@userId'}
+                }
+            });
+        })
+
         .factory('UpdateUserStatusResource', function ($resource, apiUrl) {
             return $resource(apiUrl + "dacuser/status/:userId", {}, {
                 update: {
