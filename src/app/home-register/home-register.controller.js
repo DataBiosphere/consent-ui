@@ -23,16 +23,22 @@
     function onSignIn(googleUser) {
        $rootScope.accessToken = googleUser.getAuthResponse().access_token;
        var user = getUser();
-       cmUserService.registerUser(user).$promise.then(
-          function (data) {
-            $rootScope.setCurrentUser(data);
-            $state.go('researcher_profile');
-          }, function (error) {
-              if(error.status === 409 && user.displayName !== null &&  user.displayName !== undefined &&  user.displayName !== ''){
-                 alert("User already exists.");
-                 $state.go('login');
-              }
-          });
+       if(isDisplayNameNotNull(user)) {
+           cmUserService.registerUser(user).$promise.then(
+               function (data) {
+                   $rootScope.setCurrentUser(data);
+                   $state.go('researcher_profile');
+               }, function (error) {
+                   if (error.status === 409 && isDisplayNameNotNull(user)) {
+                       alert("User already exists.");
+                       $state.go('login');
+                   }
+               });
+       }
+    }
+
+    function isDisplayNameNotNull(user){
+       return user.displayName !== null &&  user.displayName !== undefined &&  user.displayName !== '';
     }
 
     function getUser(){

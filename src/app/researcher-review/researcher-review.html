@@ -1,0 +1,168 @@
+<div ng-include src="'app/header/header.html'"></div>
+<div class="container">
+    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <h2 class="cm-title common-color">
+            <div id="dacUser">Researcher review</div>
+            <small>Should this user be classified as Bonafide Researcher?</small>
+        </h2>
+        <hr class="section-separator">
+    </div>
+
+    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+        <div class="jumbotron box-vote">
+            <h3 class="cm-results-subtitle common-color">Your vote</h3>
+            <hr class="box-separator">
+            <form class="form-horizontal" id="voteForm">
+                <div class="form-group first-form-group">
+                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label common-color">Vote</label>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
+                        <div class="radio-inline">
+                            <input type="radio" ng-model="status" value="approved" ng-click="setEnableVoteButton();" class="regular-radio" id="bonafidePositive" name="bonafideVote">
+                            <label for="bonafidePositive"></label>
+                            <label for="bonafidePositive" class="radio-button-text">Yes</label>
+
+                            <input type="radio" ng-model="status" value="rejected" ng-click="setEnableVoteButton();" class="regular-radio" id="bonafideNegative" name="bonafideVote">
+                            <label for="bonafideNegative"></label>
+                            <label for="bonafideNegative" class="radio-button-text">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span ng-if="status == 'approved'">
+                            <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label common-color">Comments</label>
+                        </span>
+
+                    <span ng-if="status != 'approved'">
+                            <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label common-color">Rationale</label>
+                        </span>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
+                        <input type="text" name="inputRationale" ng-model="rationale" ng-change="setEnableVoteButton()" class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
+                               placeholder="Describe here your rationale or comments (be as specific as possible).">
+                    </div>
+                </div>
+                <div class="form-group form-group-bottom">
+                    <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-6 col-sm-offset-6 col-xs-6 col-xs-offset-6">
+                        <button ng-disabled="enableVoteButton == false" ng-click="logStatus()" class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button common-background">
+                            Vote
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 no-padding">
+        <form name="researcherForm" novalidate>
+            <div class="row form-group">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label class="control-label">Full Name</label>
+                    <div class="control-data" name="profileName" id="profileName">{{formData.profileName}}</div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label class="control-label">Academic/Business Email Address</label>
+                    <div class="control-data" name="profileAcademicEmail" id="profileAcademicEmail">{{formData.academicEmail}}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <label class="control-label">Institution Name</label>
+                    <div class="control-data"  name="profileInstitution" id="profileInstitution">{{formData.institution}}</div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <label class="control-label">Department</label>
+                    <div class="control-data"  name="profileDepartment" id="profileDepartment">{{formData.department}}</div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <label class="control-label">Division</label>
+                    <div class="control-data" name="profileDivision" id="profileDivision">{{formData.division}}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label class="control-label">Street Address 1</label>
+                    <div class="control-data" name="profileAddress1" id="profileAddress1">{{formData.address1}}</div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label class="control-label">Street Address 2</label>
+                    <div class="control-data" name="profileAddress2" id="profileAddress2">{{formData.address2}}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label class="control-label">City</label>
+                    <div class="control-data" name="profileCity" id="profileCity">{{formData.city}}</div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label class="control-label">State</label>
+                    <div class="control-data" name="profileState" id="profileState">{{formData.state}}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label class="control-label">Zip/Postal Code</label>
+                    <div class="control-data" name="profileZip" id="profileZip">{{formData.zipcode}}</div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label class="control-label">Country</label>
+                    <div class="control-data" name="profileCountry" id="profileCountry">{{formData.country}}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12" ng-class="formData.isThePI == true ? 'col-lg-12 col-md-12 col-sm-12':'col-lg-6 col-md-6 col-sm-6'">
+                    <label class="control-label">Is this researcher the Principal Investigator?</label>
+                    <div class="control-data">{{formData.piValue}}</div>
+                </div>
+
+                <div ng-show="formData.isThePI == false">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <label class="control-label">Does the resercher have a Principal Investigator?</label>
+                        <div class="control-data" id="researcherhavePI">{{formData.havePIValue}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-show="formData.havePI == true">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label">Principal Investigator Name</label>
+                    <div class="control-data" name="profilePIName" id="profilePIName">{{formData.piName}}</div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label">Principal Investigator Email Address</label>
+                    <div class="control-data"  name="profilePIEmail" id="profilePIEmail">{{formData.piEmail}}</div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label">eRA Commons ID</label>
+                    <div class="control-data" name="profileEraCommons">{{formData.eRACommonsID}}</div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label">Pubmed ID of a publication</label>
+                    <div class="control-data" name="profilePubmedID">{{formData.pubmedID}}</div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label">URL of a scientific publication</label>
+                    <div class="control-data" name="profileScientificURL">{{formData.scientificURL}}</div>
+                </div>
+            </div>
+
+            <div class="row" ng-show="formData.isThePI == true || formData.havePI == false">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label">eRA Commons ID</label>
+                    <div class="control-data" name="profileEraCommons">{{formData.eRACommonsID}}</div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label">Pubmed ID of a publication</label>
+                    <div class="control-data" name="profilePubmedID">{{formData.pubmedID}}</div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label">URL of a scientific publication</label>
+                    <div class="control-data" name="profileScientificURL">{{formData.scientificURL}}</div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

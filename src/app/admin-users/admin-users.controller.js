@@ -18,6 +18,16 @@
         function init() {
             cmUserService.findUsers().then(
                 function (data) {
+                    data.forEach(function(user){
+                        user.researcher = false;
+                        user.roles.forEach(function(role) {
+                            if(role.name === 'Researcher'){
+                                user.status = role.status;
+                                user.completed = role.profileCompleted;
+                                user.researcher = true;
+                            }
+                        });
+                    });
                     vm.usersList.dul = data;
                 });
         }
@@ -49,7 +59,7 @@
                     user: function (cmUserService) {
                         return cmUserService.findUser(email);
                     }
-              }
+                }
             });
 
             modalInstance.result.then(function () {

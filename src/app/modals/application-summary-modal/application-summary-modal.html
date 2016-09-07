@@ -3,7 +3,7 @@
         <div class="modal-header admin-modal-header">
             <button type="button" class="modal-close-btn close" ng-click="ApplicationModal.cancel()"><span aria-hidden="true">&times;</span></button>
             <h2 class="pvotes-box-title access-color">Application Summary
-                <small class="bold">Data Access Request Application Summary</small>
+                <small>Data Access Request Application Summary</small>
             </h2>
         </div>
         <div>
@@ -15,6 +15,10 @@
                 <div class="row">
                     <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label access-color">Principal Investigator</label>
                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">{{summary.principalInvestigator}}</div>
+                </div>
+                <div ng-if="calledFromAdmin" class="row">
+                    <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label access-color">Researcher</label>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">{{summary.researcherName}}</div>
                 </div>
                 <div class="row">
                     <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label access-color">Institution Name</label>
@@ -32,6 +36,12 @@
                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">
                         <ul>
                             <li ng-repeat="(key, data) in summary.datasetDetail"><b>{{key }}</b>{{"   " + data}}</li>
+                            <div ng-if="calledFromAdmin && summary.needDOApproval != 'Approval not needed.'">{{summary.needDOApproval}}</div>
+                            <div ng-if="calledFromAdmin && (summary.needDOApproval === 'Approved by Data Owner(s).' || summary.needDOApproval === 'Denied by Data Owner(s).')">
+                                <span class="glyphicon glyphicon-download-alt access-color" style="margin-right: 10px;">
+                                </span>
+                                <a ng-click="ApplicationModal.downloadDetail()" style="cursor: pointer">Download Datasets Vote Summary</a>
+                            </div>
                         </ul>
                     </div>
                 </div>
