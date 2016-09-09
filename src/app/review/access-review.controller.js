@@ -45,6 +45,7 @@
 
         function openApplication() {
             $scope.dataRequestId = dar_id;
+            $scope.electionStatus = election.electionStatus;
             $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/application-summary-modal/application-summary-modal.html',

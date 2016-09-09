@@ -284,6 +284,7 @@
         }
 
         $scope.openApplication = function openApplication() {
+            $scope.electionStatus = 'Closed';
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/application-summary-modal/application-summary-modal.html',

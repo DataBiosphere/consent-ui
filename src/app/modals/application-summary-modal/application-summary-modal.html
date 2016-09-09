@@ -16,9 +16,16 @@
                     <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label access-color">Principal Investigator</label>
                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">{{summary.principalInvestigator}}</div>
                 </div>
-                <div ng-if="calledFromAdmin" class="row">
+                <div class="row">
                     <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label access-color">Researcher</label>
-                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">{{summary.researcherName}}</div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 response-label">{{summary.researcherName}}
+                        <div ng-if = "electionStatus != 'Closed'">
+                            <B>Status: </B>{{summary.status}}
+                            <div ng-if="ApplicationModal.rationaleCheck() && summary.status === bonafideResearcher"><b>Comment: </b>{{summary.rationale}}</div>
+                            <div ng-if="ApplicationModal.rationaleCheck() && summary.status !== bonafideResearcher"><b>Rationale: </b>{{summary.rationale}}</div>
+                        </div>
+
+                    </div>
                 </div>
                 <div class="row">
                     <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label access-color">Institution Name</label>
