@@ -9,7 +9,18 @@
 
         $scope.calledFromAdmin = calledFromAdmin;
         $scope.summary = darDetails;
+        $scope.bonafideResearcher = "Bonafide researcher";
+        $scope.nonBonafide = "Non-Bonafide researcher";
+        $scope.pendingForReview = "Pending for review";
+
         var vm = this;
+        if(darDetails.status === "pending"){
+            darDetails.status = $scope.pendingForReview;
+        } else if(darDetails.status === "rejected") {
+            darDetails.status = $scope.nonBonafide;
+        } else {
+            darDetails.status = $scope.bonafideResearcher;
+        }
 
         vm.ok = function () {
             $modalInstance.close();
@@ -30,6 +41,13 @@
             researcher: false
         };
 
+        vm.rationaleCheck = function () {
+            if($scope.summary.rationale !== null && $scope.summary.rationale !== '' && $scope.summary.rationale !== undefined) {
+                return true;
+            } else {
+                return false;
+            }
+        };
     }
 
 })();

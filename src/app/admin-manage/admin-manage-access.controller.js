@@ -67,8 +67,9 @@
             cmElectionService.downloadDatasetVotesForDARElection(dataRequestId);
         }
 
-        function openApplication(dar_id) {
+        function openApplication(dar_id, electionStatus) {
             $scope.dataRequestId = dar_id;
+            $scope.electionStatus = electionStatus;
             $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/application-summary-modal/application-summary-modal.html',
