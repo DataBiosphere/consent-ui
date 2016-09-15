@@ -36,12 +36,11 @@
                     },
                     election: function ($stateParams, cmElectionService) {
                         if ($stateParams.consentId !== null) {
-                            return cmElectionService.findElection($stateParams.consentId);
+                            return cmElectionService.findElection($stateParams.consentId).$promise;
                         }
                     }
 
                 }
-
             })
             // route to show our basic form (/form)
             .state('access_review', {

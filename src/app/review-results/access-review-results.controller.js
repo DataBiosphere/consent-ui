@@ -6,6 +6,10 @@
 
     function ReviewResults($sce, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, electionReview, rpElectionReview, dar, apiUrl, cmEmailService, cmRPService, dar_id, cmFilesService) {
 
+        if(electionReview.election.status === "Canceled"){
+            $state.go($state.go("access_review_not_found"));
+        }
+
         var vm = this;
         vm.openApplication = openApplication;
         $scope.electionType = 'access';
@@ -82,6 +86,7 @@
 
         function openApplication() {
             $scope.dataRequestId = dar_id;
+            $scope.electionStatus = 'Open';
             $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/application-summary-modal/application-summary-modal.html',
@@ -91,6 +96,12 @@
                 resolve: {
                     darDetails: function () {
                         return cmRPService.getDarModalSummary(dar_id);
+                    },
+                    dar_id: function(){
+                        return dar_id;
+                    },
+                    calledFromAdmin: function() {
+                        return false;
                     }
                 }
             });

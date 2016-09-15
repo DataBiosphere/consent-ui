@@ -17,7 +17,7 @@
     /* ngInject */
     function routeConfig($urlRouterProvider) {
         $urlRouterProvider.when('', '/home');
-        $urlRouterProvider.otherwise("components/HtmlResource/404.html");
+        $urlRouterProvider.otherwise("components/not-found-pages/common-404.html");
     }
 
     /* ngInject */

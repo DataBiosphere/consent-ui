@@ -284,6 +284,7 @@
         }
 
         $scope.openApplication = function openApplication() {
+            $scope.electionStatus = 'Closed';
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/application-summary-modal/application-summary-modal.html',
@@ -293,6 +294,12 @@
                 resolve: {
                     darDetails: function () {
                         return cmRPService.getDarModalSummary($scope.darElection.referenceId);
+                    },
+                    dar_id: function(){
+                        return $scope.darElection.referenceId;
+                    },
+                    calledFromAdmin: function() {
+                        return false;
                     }
                 }
             });

@@ -26,10 +26,45 @@
             });
         })
 
+        .factory('UpdateUserNameResource', function ($resource, apiUrl) {
+            return $resource(apiUrl + "dacuser/name/:userId", {}, {
+                updateUserName: {
+                    method: 'PUT',
+                    params:{userId: '@userId'}
+                }
+            });
+        })
+
+        .factory('UpdateUserStatusResource', function ($resource, apiUrl) {
+            return $resource(apiUrl + "dacuser/status/:userId", {}, {
+                update: {
+                    method: 'PUT',
+                    params: {userId: '@userId'}
+                },
+                get: {
+                    method: 'GET',
+                    params: {userId: '@userId'}
+                }
+            });
+        })
+
         .factory('validateUserDelegationResource', function ($resource, apiUrl) {
                     return $resource(apiUrl + "dacuser/validateDelegation", {},{
-                    post: {method: 'POST',  params: {role: 'role'}}
-                    });
+                    post: {method: 'POST',  params: {role: 'role'}}});
+        })
+
+        .factory('RegisterUserResource', function ($resource, apiUrl) {
+            return $resource(apiUrl + "user", {}, {
+                post: {
+                    method: 'POST'
+                }
+            });
+         })
+        .factory('UserStatusResource', function ($resource, apiUrl) {
+            return $resource(apiUrl + "dacuser/status/:userId", {}, {
+                get: {
+                    method: 'GET',
+                    params: {userId: '@userId'}
+                }});
         });
 })();
-

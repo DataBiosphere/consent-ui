@@ -88,7 +88,7 @@
         $rootScope.$on('$stateChangeStart', function (event, next, toParams) {
             var authorizedRoles = next.data.authorizedRoles;
             if ($rootScope.currentUser === null) {
-                if(next.name === "home" || next.name === "home_help" || next.name === "home_about") {
+                if(next.name === "home" || next.name === "home_help" || next.name === "home_about"|| next.name === "home_register") {
                        return;
                 }
                 else if(sessionStorage.getItem('currentUser') !== null && $state.current.name === "") {
@@ -105,6 +105,20 @@
                 if (!cmAuthenticateService.isAuthorized(authorizedRoles, $rootScope.currentUser.roles)) {
                     event.preventDefault();
                 }
+            }
+        });
+
+        $rootScope.$on('$stateChangeError', function (evt, toState){
+            switch(toState.name){
+                case ("access_review" || "access_review_results" || "final_access_review_results"):
+                    $state.go("access_review_not_found");
+                    break;
+                case ("dul_review" || "dul_review_results"):
+                    $state.go("dul_review_not_found");
+                    break;
+                default:
+                    $state.go("not_found");
+                    break;
             }
         });
     });

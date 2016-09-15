@@ -38,6 +38,7 @@
 
 
         function openApplication(){
+             $scope.electionStatus = 'Closed';
              $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/application-summary-modal/application-summary-modal.html',
@@ -47,6 +48,12 @@
                 resolve: {
                     darDetails: function () {
                         return cmRPService.getDarModalSummary(referenceId);
+                    },
+                    dar_id: function(){
+                        return referenceId;
+                    },
+                    calledFromAdmin: function() {
+                        return false;
                     }
                 }
             });

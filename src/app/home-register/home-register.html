@@ -1,0 +1,42 @@
+<script src="https://apis.google.com/js/api:client.js"></script>
+<nav class="row navbar navbar-duos" role="navigation">
+    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 no-padding">
+        <button type="button" class="navbar-toggle" ng-click="navbarCollapsed = !navbarCollapsed">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+
+        <a href="#/home" class="navbar-duos-brand">
+            <img src="../assets/images/duos_logo.svg" alt="DUOS Logo">
+        </a>
+    </div>
+
+    <div class="collapse navbar-collapse no-padding col-lg-10 col-md-10 col-sm-9 col-xs-12 navbar-right" collapse="navbarCollapsed">
+        <ul class="no-margin">
+            <li><a class="navbar-duos-link" href="#/home_about"><div class="navbar-duos-icon navbar-duos-icon-about"></div>About</a></li>
+            <li><a class="navbar-duos-link" href="#/home_help"><div class="navbar-duos-icon navbar-duos-icon-help"></div>Help</a></li>
+            <li><a class="navbar-duos-button" href="#/login">Sign In</a>
+        </ul>
+    </div>
+</nav>
+
+<div class="row home">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+        <div class="home-title">
+            <h1>Join DUOS</h1></div>
+        <div class="home-title-description">Sign up to DUOS to find genomic datasets of interest and to submit Data Access Requests.</div>
+        <hr class="home-line">
+        <div class="row">
+            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
+                <label class="home-control-label col-lg-12 col-md-12 col-sm-12 col-xs-12">Full Name</label>
+                <input class="form-control col-lg-12 col-md-12 col-sm-12 col-xs-12" type="text" ng-model="form.name">
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12 pos-relative">
+            <div class="custom-g-signin2 g-signin2 signInRegister" data-onsuccess="onSignIn" data-theme="dark"></div>
+            <div ng-if="!form.name" class="signInDisabledButton"></div>
+        </div>
+     </div>
+</div>
