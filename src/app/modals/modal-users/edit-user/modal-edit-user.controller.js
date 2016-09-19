@@ -7,6 +7,8 @@
     /* ngInject */
     function ModalUsers($modalInstance, cmUserService, $scope, user, USER_ROLES) {
 
+        $scope.emailPreference = false;
+
         init();
 
         function init() {
@@ -147,6 +149,14 @@
 
         $scope.edit = function (user) {
             var map = {};
+            var roles = user.roles;
+            for (var i = 0; i < roles.length; i++) {
+              if (roles[i].name === USER_ROLES.admin ) {
+                roles[i].emailPreference =  !$scope.emailPreference;
+                break;
+              }
+            }
+
             map.updatedUser = user;
             if($scope.delegateDacUser.needsDelegation){
                 map.userToDelegate = JSON.parse($scope.alternativeDACMemberUser);
