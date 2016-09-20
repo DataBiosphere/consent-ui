@@ -1927,7 +1927,7 @@ definitions:
     properties:
       associationType:
         type: string
-        description: 'Defines the type of the association. Possible values: sample, sampleSet.'
+        description: 'Defines the type of the association. Possible values: sample, sampleSet, workspace.'
       elements:
         type: array
         items:
@@ -2510,5 +2510,5 @@ definitions:
       path:
         type: string
         description: Field to be updated. Available values are displayName or roles.
-        
-        
+
+
