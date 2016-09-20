@@ -22,6 +22,7 @@
 
     function onSignIn(googleUser) {
        $rootScope.accessToken = googleUser.getAuthResponse().access_token;
+       var email = googleUser.getBasicProfile().getEmail();
        var user = getUser();
        if(isDisplayNameNotNull(user)) {
            cmUserService.registerUser(user).$promise.then(
@@ -31,7 +32,7 @@
                }, function (error) {
                    if (error.status === 409 && isDisplayNameNotNull(user)) {
                        alert("User already exists.");
-                       $state.go('login');
+                       cmLoginUserService.loginUser(email, $rootScope.accessToken);
                    }
                });
        }
@@ -51,7 +52,16 @@
       return user;
     }
 
+    function signOut() {
+       cmLoginUserService.logoutUser();
+    }
+
     window.onSignIn = onSignIn;
+    window.signOut = signOut;
+
+
+
+
 
 }
 
