@@ -192,6 +192,9 @@
             cmRPService.getDarFields(electionReview.election.referenceId, "rus").then(function (data) {
                 $scope.dar = data;
             });
+            cmRPService.getDarFields(electionReview.election.referenceId, "dar_code").then(function (data) {
+                $scope.darCode = data.dar_code;
+            });
             $scope.electionAccess = electionReview.election;
             if (electionReview.election.finalRationale === null) {
                 $scope.electionAccess.finalRationale = '';
