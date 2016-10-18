@@ -55,7 +55,7 @@
                         <li><a href="#/summary_votes" class="f-left">Votes Statistics</a></li>
                         <hr>
                         <li ng-show="$root.currentUser.memberStatus !== 'RESEARCHER'">
-                            <a href="#/reviewed_cases" class="f-left">Reviewed Cases Record</a>
+                            <a ui-sref="reviewed_cases({menu: true})" class="f-left">Reviewed Cases Record</a>
                         </li>
                     </ul>
                 </li>

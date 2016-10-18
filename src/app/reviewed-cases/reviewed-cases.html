@@ -31,7 +31,7 @@
                     <hr class="pvotes-main-separator">
                 </div>
                 <div class="pvotes-box-body">
-                    <div dir-paginate="election in ReviewedCases.electionsList.dul | filter: searchDULcases | itemsPerPage:5" pagination-id="dulCases">
+                    <div dir-paginate="election in ReviewedCases.electionsList.dul | filter: searchDULcases | itemsPerPage:5" pagination-id="dulCases" current-page="currentDulPage">
                         <hr class="pvotes-separator">
                         <div class="row pvotes-main-list reviewed-cases-list">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">{{election.displayId}}</div>
@@ -82,7 +82,7 @@
                     <hr class="pvotes-main-separator">
                 </div>
                 <div class="pvotes-box-body" id="searchTextResults">
-                    <div dir-paginate="election in ReviewedCases.electionsList.access | filter: searchAccessCases | itemsPerPage:5" pagination-id="accessCases">
+                    <div dir-paginate="election in ReviewedCases.electionsList.access | filter: searchAccessCases | itemsPerPage:5" pagination-id="accessCases" current-page="currentDarPage">
                         <hr class="pvotes-separator">
                         <div class="row pvotes-main-list admin-users-list">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">{{election.displayId}}</div>

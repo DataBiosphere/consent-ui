@@ -7,14 +7,11 @@
 
     function DulResultsRecord($sce, $scope, $state, electionReview, apiUrl, cmFilesService) {
 
-
-
-
         if( typeof electionReview === 'undefined'){
             $state.go('reviewed_cases');
             return;
         }
-
+        $scope.consentName = electionReview.consent.name;
         $scope.chartData = {
             'dulTotal': [
                 ['Results', 'Votes'],
