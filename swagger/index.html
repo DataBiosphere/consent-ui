@@ -55,11 +55,14 @@
         supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
         onComplete: function(swaggerApi){
             var clientId;
+            var host;
             $.get('./swagger-config.json').then(function(result) {
                 clientId = result.clientId;
+                host = result.apiUrl;
                 if(typeof initOAuth == "function") {
                     initOAuth({
                         clientId: clientId,
+                        host: host,
                         clientSecret: "your-client-secret-if-required",
                         appName: "your-app-name",
                         scopeSeparator: " ",
