@@ -7,18 +7,18 @@ info:
     name: BSD
     url: 'http://opensource.org/licenses/BSD-3-Clause'
   termsOfService: 'https://github.com/broadinstitute/consent'
-host: consent-ontology.dsde-consent-dev.broadinstitute.org
+host: consent-ontology.dsde-dev.broadinstitute.org
 schemes:
   - https
-  
+
 paths:
 
   '/translate':
-  
+
     post:
       summary: translate
       description: The Translate service will render an English-language version of a consent or research purpose.
-      produces: 
+      produces:
         - text/plain
       parameters:
         - name: for
@@ -43,7 +43,7 @@ paths:
           description: Unexpected error
 
   '/match':
-  
+
     post:
       summary: match
       description: The Match service will render a response of true or false between a Consent and a Research Purpose.
@@ -63,8 +63,8 @@ paths:
           description: Successful matching.
         default:
           description: Unexpected error
-          
-            
+
+
   '/validate/userestriction':
 
       post:
@@ -88,7 +88,7 @@ paths:
             description: Unexpected error
 
   '/autocomplete':
-  
+
     get:
       summary: autocomplete
       description: Ontologies can be queried based on term; type and count. This provides an easy filtering mechanism that allows users to select ontology terms that are applicable to consents or research purposes.
@@ -117,7 +117,7 @@ paths:
           description: Unexpected error
 
   '/search':
-  
+
     get:
       summary: search
       description: Find ontologies based on the id.
@@ -155,7 +155,7 @@ definitions:
       purpose:
         type: object
         properties:
-          type: 
+          type:
             type: string
           operands:
             type: array
@@ -165,7 +165,7 @@ definitions:
       consent:
         type: object
         properties:
-          type: 
+          type:
             type: string
           operands:
             type: array
