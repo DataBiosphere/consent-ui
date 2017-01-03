@@ -1,6 +1,6 @@
 {
-    "apiUrl": "https://consent.dsde-consent-dev.broadinstitute.org/api/",
-    "ontologyApiUrl": "https://consent-ontology.dsde-consent-dev.broadinstitute.org/",
+    "apiUrl": "https://consent.dsde-dev.broadinstitute.org/api/",
+    "ontologyApiUrl": "https://consent-ontology.dsde-dev.broadinstitute.org/",
     "clientId": "115985227940951446074",
     "gwasUrl":"http://epi.grants.cancer.gov/dac/examples.html"
 
