@@ -25,7 +25,8 @@ COPY package.json /app/
 COPY protractor.conf.js /app/
 COPY swagger /app/swagger
 
-# Some dependencies require n v0.12.7
+# Some dependencies require node v0.12.7
+RUN npm install #-g npm
 RUN npm cache clean -f \
     && npm install -g n \
     && n 0.12.7
