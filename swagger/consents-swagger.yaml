@@ -16,8 +16,8 @@ securityDefinitions:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
     flow: implicit
     scopes:
-      profile: profile
-      email: email
+      profile: Basic Profile Information
+      email: Email Address
 paths:
   '/consent/associations/{associationType}/{id}':
     get:
