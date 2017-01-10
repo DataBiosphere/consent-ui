@@ -2,6 +2,8 @@
 set -euox pipefail
 IFS=$'\n\t'
 
+# This is broken for running locally - something about node versions.
+
 # Make sure only root can run our script
 if [ "$EUID" -ne 0 ]
   then echo "Please run as root"

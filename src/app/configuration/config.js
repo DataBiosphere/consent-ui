@@ -1,5 +1,5 @@
 angular.module('ConsentConfiguration', [])
-    .value('apiUrl', "")
-    .value('ontologyApiUrl', "")
-    .value('clientId', "")
-    .value('gwasUrl', "");
+    .constant('apiUrl', G_APIURL)
+    .constant('ontologyApiUrl', G_ONTOLOGYAPIURL)
+    .constant('clientId', G_CLIENTID)
+    .constant('gwasUrl', "http://epi.grants.cancer.gov/dac/examples.html");
