@@ -59,6 +59,7 @@
             $.get('./swagger-config.json').then(function(result) {
                 clientId = result.clientId;
                 host = result.apiUrl;
+                window.swaggerUi.api.setHost(host);
                 if(typeof initOAuth == "function") {
                     initOAuth({
                         clientId: clientId,
