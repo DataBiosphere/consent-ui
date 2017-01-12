@@ -32,13 +32,13 @@ RUN npm cache clean -f \
 
 #install bower and gulp, and local gulp
 WORKDIR /app
-RUN npm install -g wrench \
-    && npm install -g bower \
-    && npm install -g gulp \
-    && npm install -g http-server \
-    && npm install --save-dev gulp \
-    && npm install \
-    && bower install --allow-root
+RUN npm install -g wrench
+RUN npm install -g bower
+RUN npm install -g gulp
+RUN npm install -g http-server
+RUN npm install --save-dev gulp
+RUN npm install
+RUN bower install --allow-root
 
 RUN gulp
 
