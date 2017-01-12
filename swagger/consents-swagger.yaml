@@ -7,7 +7,6 @@ info:
     name: BSD
     url: 'http://opensource.org/licenses/BSD-3-Clause'
   termsOfService: 'https://github.com/broadinstitute/consent'
-host: consent.dsde-dev.broadinstitute.org
 schemes:
   - https
 basePath: /api
@@ -17,8 +16,8 @@ securityDefinitions:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
     flow: implicit
     scopes:
-      profile: profile
-      email: email
+      profile: Basic Profile Information
+      email: Email Address
 paths:
   '/consent/associations/{associationType}/{id}':
     get:
