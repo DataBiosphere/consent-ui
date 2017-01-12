@@ -15,7 +15,7 @@ To run consent-ui app :
  2. change to consent-ui folder.
  3. pull configurations for broadinstitute/firecloud-develop, local branch 
     ```
-    TODO
+    APP_NAME=consent-ui ENV=local OUTPUT_DIR=./target/config ../firecloud-develop/configure.rb
     ```
  4. run the compose 
     ```
