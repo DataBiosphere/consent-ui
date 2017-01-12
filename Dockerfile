@@ -32,13 +32,13 @@ COPY karma.conf.js /app/
 COPY package.json /app/
 COPY protractor.conf.js /app/
 
-RUN npm install -g wrench \
-    && npm install -g bower \
-    && npm install -g gulp \
-    && npm install -g http-server \
-    && npm install --save-dev gulp \
-    && npm install \
-    && bower install --allow-root
+RUN npm install -g wrench
+RUN npm install -g bower
+RUN npm install -g gulp
+RUN npm install -g http-server
+RUN npm install --save-dev gulp
+RUN npm install
+RUN bower install --allow-root
 
 # Copy source files to the app directory
 COPY src /app/src
