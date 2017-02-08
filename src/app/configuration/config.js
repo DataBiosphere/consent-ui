@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('ConsentConfiguration', [])
     .constant('apiUrl', G_APIURL)
     .constant('ontologyApiUrl', G_ONTOLOGYAPIURL)
