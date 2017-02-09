@@ -39,7 +39,12 @@ function browserSyncInit(baseDir, browser) {
     startPath: '/',
     server: server,
     browser: browser,
-    port: 8000
+    port: 443,
+    // host: local.broadinstitute.org,
+    https: {
+      key: "/etc/ssl/private/server.key",
+      cert: "/etc/ssl/certs/server.crt"
+    }
   });
 }
 
@@ -52,11 +57,6 @@ gulp.task('serve', ['watch'], function () {
 });
 
 gulp.task('serve:dist', ['build'], function () {
-  browserSyncInit(conf.paths.dist);
-});
-
-// TODO: Not really sure this works. Remove if not.
-gulp.task('serve:watch:dist', ['watch'], function () {
   browserSyncInit(conf.paths.dist);
 });
 
