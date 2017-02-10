@@ -39,8 +39,9 @@ function browserSyncInit(baseDir, browser) {
     startPath: '/',
     server: server,
     browser: browser,
+    open: false,
     port: 443,
-    // host: local.broadinstitute.org,
+    host: "local.broadinstitute.org",
     https: {
       key: "/etc/ssl/private/server.key",
       cert: "/etc/ssl/certs/server.crt"
