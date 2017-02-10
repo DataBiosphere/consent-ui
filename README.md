@@ -16,11 +16,11 @@ To run the consent-ui app:
   * `brew install npm`
   * `sudo ./build.sh` 
 
-3. pull configurations from broadinstitute/firecloud-develop, local branch, or generate manually: 
+3. Pull configurations from broadinstitute/firecloud-develop, local branch, or generate manually: 
     ```
     APP_NAME=consent-ui ENV=local OUTPUT_DIR=config ../firecloud-develop/configure.rb
     ```
-4. run the docker compose file 
+4. Run the docker compose file 
     ```
     docker-compose -p consent-ui -f config/docker-compose.yaml up
     ```
