@@ -1,4 +1,3 @@
-FROM phusion/baseimage:latest
 FROM node
 
 MAINTAINER Belatrix Team <belatrix@broadinstitute.org>

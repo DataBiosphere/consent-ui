@@ -3,21 +3,24 @@ Consent-UI
 
 [![Build Status](https://travis-ci.com/broadinstitute/consent-ui.svg?token=3ve6QNemvC5zpJzsoKzf&branch=develop)](https://travis-ci.com/broadinstitute/consent-ui)
 
-consent-ui is an angularJS application that requires running consent and
-consent-ontology services.
+consent-ui is an angularJS application that requires running consent and consent-ontology services.
 
-If consent-ws web services app is not running, you will need to get it running first. 
-Please refer to consent-ws README.md to do so. 
+To run the consent-ui app:
 
-To run consent-ui app :
+1. Check out code
+    ```
+    git clone git@github.com:broadinstitute/consent-ui.git
+    cd consent-ui
+    ```
+2. One time commands - only need to install npm once and build once. 
+  * `brew install npm`
+  * `sudo ./build.sh` 
 
- 1. git clone git@github.com:broadinstitute/consent-ui.git
- 2. change to consent-ui folder.
- 3. pull configurations for broadinstitute/firecloud-develop, local branch 
+3. Pull configurations from broadinstitute/firecloud-develop, local branch, or generate manually: 
     ```
-    APP_NAME=consent-ui ENV=local OUTPUT_DIR=./target/config ../firecloud-develop/configure.rb
+    APP_NAME=consent-ui ENV=local OUTPUT_DIR=config ../firecloud-develop/configure.rb
     ```
- 4. run the compose 
+4. Run the docker compose file 
     ```
-    docker-compose -f compose.yaml up
+    docker-compose -p consent-ui -f config/docker-compose.yaml up
     ```
