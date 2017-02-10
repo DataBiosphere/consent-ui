@@ -15,11 +15,7 @@ To run the consent-ui app:
     ```bash
     APP_NAME=consent-ui ENV=local OUTPUT_DIR=config ../firecloud-develop/configure.rb
     ```
-3. build (only necessary when running locally under docker)
-    ```bash
-    sudo ./build.sh
-    ```
-4. run the docker compose file 
+3. run the docker compose file 
     ```bash
     docker-compose -p consent-ui -f config/docker-compose.yaml up
     ```
