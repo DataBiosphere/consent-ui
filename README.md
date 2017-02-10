@@ -7,13 +7,14 @@ consent-ui is an angularJS application that requires running consent and consent
 
 To run the consent-ui app:
 
-1. ```
+1. Check out code
+    ```
     git clone git@github.com:broadinstitute/consent-ui.git
     cd consent-ui
     ```
-2. One time set up commands - only need to install npm once and build once. 
-  - `brew install npm`
-  - `sudo ./build.sh` 
+2. One time commands - only need to install npm once and build once. 
+  * `brew install npm`
+  * `sudo ./build.sh` 
 
 3. pull configurations from broadinstitute/firecloud-develop, local branch, or generate manually: 
     ```
