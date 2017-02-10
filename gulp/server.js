@@ -36,16 +36,14 @@ function browserSyncInit(baseDir, browser) {
   // server.middleware = proxyMiddleware('/users', {target: 'http://jsonplaceholder.typicode.com', proxyHost: 'jsonplaceholder.typicode.com'});
 
   browserSync.instance = browserSync.init({
-    startPath: '/',
     server: server,
-    browser: browser,
     open: false,
     port: 443,
-    host: "local.broadinstitute.org",
     https: {
       key: "/etc/ssl/private/server.key",
       cert: "/etc/ssl/certs/server.crt"
-    }
+    },
+    files: ["/app/dist/*"]
   });
 }
 
