@@ -28,10 +28,10 @@ WORKDIR /app
 RUN npm install n
 RUN npm install -g wrench
 RUN npm install -g bower
-RUN npm install -g gulp
 RUN npm install -g jshint
+RUN npm install -g gulp
 RUN npm install -g http-server
-RUN npm install --save-dev gulp
+#RUN npm install --save-dev gulp
 RUN npm install
 RUN bower install --allow-root
 RUN gulp
