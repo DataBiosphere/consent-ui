@@ -1,14 +1,13 @@
-FROM node
+FROM node:alpine
 
-MAINTAINER Belatrix Team <belatrix@broadinstitute.org>
+MAINTAINER Catalog Team <catalog-team@broadinstitute.org>
 
 USER root
 
-#base setup
-RUN apt-get update \
-    && apt-get install -y \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# Git required for bower
+RUN apk update && \
+    apk upgrade && \
+    apk add --no-cache bash git openssh
 
 # Copy source files to the app directory
 COPY gulp /app/gulp
@@ -24,21 +23,17 @@ COPY package.json /app/
 COPY protractor.conf.js /app/
 COPY swagger /app/swagger
 
-# Some dependencies require n v0.12.7
-RUN npm cache clean -f \
-    && npm install -g n \
-    && n 0.12.7
-
-#install bower and gulp, and local gulp
+#install required npm packages
 WORKDIR /app
+RUN npm install n
 RUN npm install -g wrench
 RUN npm install -g bower
 RUN npm install -g gulp
+RUN npm install -g jshint
 RUN npm install -g http-server
 RUN npm install --save-dev gulp
 RUN npm install
 RUN bower install --allow-root
-
 RUN gulp
 
 EXPOSE 8000

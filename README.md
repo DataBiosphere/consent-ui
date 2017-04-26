@@ -14,7 +14,7 @@ To run the consent-ui app:
     ```
 2. One time commands - only need to install npm once and build once. 
   * `brew install npm`
-  * `sudo ./build.sh` 
+  * `./build.sh` 
 
 3. Pull configurations from broadinstitute/firecloud-develop, local branch, or generate manually: 
     ```
@@ -24,3 +24,12 @@ To run the consent-ui app:
     ```
     docker-compose -p consent-ui -f config/docker-compose.yaml up
     ```
+
+### Notes
+* `./build.sh` was written for osx and does an update of node to the current stable version.
+* To update all of the packages in `package.json` to their latest versions, run 
+    ```
+    npm install npm-check-updates
+    ncu -u
+    ```
+    
