@@ -4,10 +4,11 @@ IFS=$'\n\t'
 
 npm install n
 n stable
-npm install wrench
+npm install fs-readdir-recursive
 npm install bower
 npm install jshint
 npm install gulp
 bower install
 npm install
-gulp
+gulp clean
+gulp build
