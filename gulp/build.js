@@ -40,7 +40,7 @@ gulp.task('html', ['inject', 'partials'], function () {
 
   return gulp.src(path.join(conf.paths.tmp, '/serve/*.html'))
     .pipe($.inject(partialsInjectFile, partialsInjectOptions))
-    .pipe($.useref())
+    .pipe(assetsFilter)
     .pipe($.rev())
     .pipe(jsFilter)
     .pipe($.ngAnnotate())
