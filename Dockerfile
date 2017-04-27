@@ -31,7 +31,6 @@ RUN npm install -g bower
 RUN npm install -g jshint
 RUN npm install -g gulp
 RUN npm install -g http-server
-#RUN npm install --save-dev gulp
 RUN npm install
 RUN bower install --allow-root
 RUN gulp clean
