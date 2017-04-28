@@ -23,18 +23,28 @@ COPY package.json /app/
 COPY protractor.conf.js /app/
 COPY swagger /app/swagger
 
-#install required npm packages
+# Install required build packages
 WORKDIR /app
-RUN npm install n
-RUN npm install -g fs-readdir-recursive
-RUN npm install -g bower
-RUN npm install -g jshint
-RUN npm install -g gulp
-RUN npm install -g http-server
-RUN npm install
-RUN bower install --allow-root
-RUN gulp clean
-RUN gulp build
+RUN npm install -g fs-readdir-recursive && \
+    npm install -g bower && \
+    npm install -g jshint && \
+    npm install -g gulp && \
+    npm install
+
+# Package, build to dist directory
+RUN bower install --allow-root && \
+    gulp clean && \
+    gulp build
+
+# Clean up global dev dependencies after build
+RUN npm uninstall -g fs-readdir-recursive && \
+    npm uninstall -g bower && \
+    npm uninstall -g jshint && \
+    npm uninstall -g gulp
+
+# Force clean and add production dependency
+RUN rm -Rf node_modules && \
+    npm install -g http-server
 
 EXPOSE 8000
 
