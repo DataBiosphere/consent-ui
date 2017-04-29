@@ -1,13 +1,11 @@
 language: node_js
 node_js:
-  - node
+  - 0.10
 script:
-  - npm install -g fs-readdir-recursive
-  - npm install -g bower
-  - npm install -g jshint
+  - npm install -g wrench
   - npm install -g gulp
+  - npm install -g bower
   - bower install
-  - gulp clean
   - gulp build
 after_script:
   - node_modules/.bin/karma start karma.conf.js

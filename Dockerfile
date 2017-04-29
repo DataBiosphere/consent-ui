@@ -1,13 +1,14 @@
-FROM node:alpine
+FROM node
 
-MAINTAINER Catalog Team <catalog-team@broadinstitute.org>
+MAINTAINER Belatrix Team <belatrix@broadinstitute.org>
 
 USER root
 
-# Git required for bower
-RUN apk update && \
-    apk upgrade && \
-    apk add --no-cache bash git openssh
+#base setup
+RUN apt-get update \
+    && apt-get install -y \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Copy source files to the app directory
 COPY gulp /app/gulp
@@ -23,28 +24,22 @@ COPY package.json /app/
 COPY protractor.conf.js /app/
 COPY swagger /app/swagger
 
-# Install required build packages
+# Some dependencies require n v0.12.7
+RUN npm cache clean -f \
+    && npm install -g n \
+    && n 0.12.7
+
+#install bower and gulp, and local gulp
 WORKDIR /app
-RUN npm install -g fs-readdir-recursive && \
-    npm install -g bower && \
-    npm install -g jshint && \
-    npm install -g gulp && \
-    npm install
+RUN npm install -g wrench
+RUN npm install -g bower
+RUN npm install -g gulp
+RUN npm install -g http-server
+RUN npm install --save-dev gulp
+RUN npm install
+RUN bower install --allow-root
 
-# Package, build to dist directory
-RUN bower install --allow-root && \
-    gulp clean && \
-    gulp build
-
-# Clean up global dev dependencies after build
-RUN npm uninstall -g fs-readdir-recursive && \
-    npm uninstall -g bower && \
-    npm uninstall -g jshint && \
-    npm uninstall -g gulp
-
-# Force clean and add production dependency
-RUN rm -Rf node_modules && \
-    npm install -g http-server
+RUN gulp
 
 EXPOSE 8000
 

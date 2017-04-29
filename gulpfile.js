@@ -1,19 +1,19 @@
 /**
  *  Welcome to your gulpfile!
- *  The gulp tasks are split in several files in the gulp directory
+ *  The gulp tasks are splitted in several files in the gulp directory
  *  because putting all here was really too long
  */
 
 'use strict';
 
 var gulp = require('gulp');
-var reader = require('fs-readdir-recursive');
+var wrench = require('wrench');
 
 /**
  *  This will load all js or coffee files in the gulp directory
  *  in order to load all gulp tasks
  */
-reader('./gulp').filter(function(file) {
+wrench.readdirSyncRecursive('./gulp').filter(function(file) {
   return (/\.(js|coffee)$/i).test(file);
 }).map(function(file) {
   require('./gulp/' + file);

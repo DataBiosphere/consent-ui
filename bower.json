@@ -1,5 +1,5 @@
 {
-  "name": "consent-management",
+  "name": "ConsentManagement",
   "version": "0.0.0",
   "dependencies": {
     "angular-animate": "~1.4.0",
