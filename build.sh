@@ -12,12 +12,9 @@ fi
 # Get the user so we can reset ownership after we're done.
 USER=`ls -ld ./ | awk '{print $3}'`
 
-npm install -g n
-n 0.12.7
 npm install -g wrench
 npm install -g bower
 npm install -g gulp
-npm install --save-dev gulp
 npm install
 bower install --allow-root
 gulp
