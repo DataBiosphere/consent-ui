@@ -4,7 +4,7 @@ MAINTAINER Catalog Team <catalog-team@broadinstitute.org>
 
 USER root
 
-# Git required for bower
+# base setup
 RUN apt-get update && \
     apt-get install -y && \
     apt-get clean &&  \
