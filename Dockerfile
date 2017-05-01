@@ -1,13 +1,15 @@
-FROM node:alpine
+FROM node
 
 MAINTAINER Catalog Team <catalog-team@broadinstitute.org>
 
 USER root
 
 # Git required for bower
-RUN apk update && \
-    apk upgrade && \
-    apk add --no-cache bash git openssh
+RUN apt-get update && \
+    apt-get install -y && \
+#    apt-get install git-all -y && \
+    apt-get clean &&  \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Copy source files to the app directory
 COPY gulp /app/gulp
@@ -23,9 +25,12 @@ COPY package.json /app/
 COPY protractor.conf.js /app/
 COPY swagger /app/swagger
 
-# Install build tools
+# Some dependencies require n v0.12.7
 WORKDIR /app
-RUN npm install -g wrench && \
+RUN npm cache clean -f && \
+    npm install -g n && \
+    n 0.12.7 && \
+    npm install -g wrench && \
     npm install -g bower && \
     npm install -g gulp
 RUN npm install
