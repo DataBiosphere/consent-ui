@@ -44,7 +44,8 @@ RUN npm uninstall -g wrench && \
     npm uninstall -g gulp
 
 ## Clean up old source files after build
-RUN rm -Rf bower_components && \
+RUN rm -Rf .tmp && \
+    rm -Rf bower_components && \
     rm -Rf gulp && \
     rm -Rf e2e && \
     rm -Rf node_modules && \
@@ -54,6 +55,8 @@ RUN rm -Rf bower_components && \
     rm -f .jshintrc && \
     rm -f .yo-rc.json && \
     rm -f bower.json && \
+    rm -f gulpfile.js && \
+    rm -f karma.conf.js && \
     rm -f package.json && \
     rm -f protractor.conf.js
 
