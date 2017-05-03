@@ -2,7 +2,7 @@
   "name": "ConsentManagement",
   "version": "0.0.0",
   "dependencies": {
-    "coveralls": "^2.11.9"
+    "http-server": "0.9.0"
   },
   "scripts": {
     "test": "gulp test"
