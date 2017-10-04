@@ -309,7 +309,7 @@ small {
 .navbar-duos li {
     display: inline-block !important;
     margin: 0 20px 0 0;
-    padding: 22px 0 15px 0;
+    padding: 24px 0 18px 0;
 }
 
 @media screen and (max-width: 765px) {
@@ -373,7 +373,7 @@ small {
 }
 
 .navbar-duos-brand img{
-    margin: 17px 40px 0 0;
+    margin: 21px 40px 0 0;
     padding: 0;
 }
 
