@@ -15,7 +15,7 @@
 
         <div class="collapse navbar-collapse no-padding" collapse="navbarCollapsed">
 
-            <ul class="navbar-right no-margin">
+            <ul ng-show="$root.currentUser !== null" class="navbar-right no-margin">
                 <li class="dropdown user-li" dropdown is-open="status.isopen">
                     <a role="button" class="dropdown-toggle" data-toggle="dropdown" href="#" dropdown-toggle ng-disabled="disabled">
                         <div id="dacUser">{{$root.currentUser.displayName}} <span class="caret caret-margin"></span></div>
@@ -26,8 +26,15 @@
                         <li><a href onclick="signOut();">Sign out</a></li>
                     </ul>
                 </li>
-            </ul>
-
+            </ul>                              
+            <div class="collapse navbar-collapse no-padding col-lg-10 col-md-10 col-sm-9 col-xs-12 navbar-right" collapse="navbarCollapsed">
+                <ul ng-show="$root.currentUser === null" class="no-margin">
+                    <li><a class="navbar-duos-link" href="#/home_about"><div class="navbar-duos-icon navbar-duos-icon-about"></div>About</a></li>
+                    <li><a class="navbar-duos-link" href="#/home_help"><div class="navbar-duos-icon navbar-duos-icon-help"></div>Help</a></li>
+                    <li><a class="navbar-duos-button" href="#/login">Sign In</a>
+                    <li><a class="navbar-duos-link-join" href="#/home_register">Join DUOS</a></li>
+                </ul>
+            </div>
             <ul class="navbar-left no-margin">
                 <li ng-repeat="rol in $root.currentUser.roles" ng-show="'{{rol.name}}' === '{{$root.userRoles.chairperson}}'">
                     <a href="#/chair_console">DAC Console</a>
@@ -58,13 +65,13 @@
                             <a ui-sref="reviewed_cases({menu: true})" class="f-left">Reviewed Cases Record</a>
                         </li>
                     </ul>
-                </li>
-                <li><a href="#/dataset_catalog">Dataset Catalog</a></li>
+                </li>   
+                <li><a ng-show="$root.currentUser !== null" href="#/dataset_catalog">Dataset Catalog</a></li>
                 <li class="dropdown" dropdown on-toggle="toggled(open)">
-                    <a role="button" class="dropdown-toggle" href="#" dropdown-toggle>
+                    <a ng-show="$root.currentUser !== null" role="button" class="dropdown-toggle" href="#" dropdown-toggle>
                         <div>Request Help <span class="caret caret-margin"></span></div>
-                    </a>
-                    <ul class="dropdown-menu user-dropdown" role="menu">
+                    </a>                    
+                        <ul class="dropdown-menu user-dropdown" role="menu">
                         <li><a href="" class="f-left" ng-click="Header.helpMeModal()">Create a Report</a></li>
                         <hr>
                         <li><a href="#/help_me" class="f-left">List of Reports</a></li>
