@@ -24,11 +24,10 @@ COPY package.json /app/
 COPY protractor.conf.js /app/
 COPY swagger /app/swagger
 
-# Some dependencies require n v0.12.7
 WORKDIR /app
 RUN npm cache clean -f && \
     npm install -g n && \
-    n 0.12.7 && \
+    n stable && \
     npm install -g wrench && \
     npm install -g bower && \
     npm install -g gulp

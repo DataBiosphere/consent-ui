@@ -13,7 +13,7 @@ fi
 USER=`ls -ld ./ | awk '{print $3}'`
 
 npm install -g n
-n 0.12.7
+n stable
 npm install -g wrench
 npm install -g bower
 npm install -g gulp
