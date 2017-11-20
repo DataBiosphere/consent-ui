@@ -5,7 +5,7 @@
         .service('cmLoginUserService', cmLoginUserService);
 
     /* ngInject */
-    function cmLoginUserService(clientId, $rootScope, $location, USER_ROLES, $state, cmAuthenticateService, GetUserResource, cmResearcherService) {
+    function cmLoginUserService(clientId, $rootScope, $location, USER_ROLES, $state, cmAuthenticateService, GetUserResource) {
 
 
         function loginUser(email, accessToken) {
@@ -35,7 +35,7 @@
                 } else if (cmAuthenticateService.isAuthorized(USER_ROLES.admin, data.roles)) {
                     $state.go('admin_console');
                 } else if (cmAuthenticateService.isAuthorized(USER_ROLES.researcher, data.roles)) {
-                    redirectResearcher();
+                    $state.go('researcher_console');
                 } else if (cmAuthenticateService.isAuthorized(USER_ROLES.alumni, data.roles)) {
                     $state.go('summary_votes');
                 } else if (cmAuthenticateService.isAuthorized(USER_ROLES.dataOwner, data.roles)) {
@@ -75,17 +75,6 @@
                     $location.path("/login");
                     $rootScope.$apply();
                 });
-        }
-
-        function redirectResearcher() {
-            cmResearcherService.getResearcherPropertiesForDAR($rootScope.currentUser.dacUserId).then(
-                function (data) {
-                   if(data.completed === 'true') {
-                      $state.go('dataset_catalog');                            
-                   } else {
-                      $state.go('researcher_profile');  
-                   }
-            });    
         }
 
         return {
