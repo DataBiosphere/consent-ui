@@ -1,6 +1,6 @@
 FROM node
 
-MAINTAINER Catalog Team <catalog-team@broadinstitute.org>
+MAINTAINER Catalog Team <workbench-catalog@broadinstitute.org>
 
 USER root
 
