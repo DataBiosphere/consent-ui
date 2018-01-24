@@ -16,6 +16,10 @@
             $scope.useRestriction = JSON.stringify(consent.useRestriction);
         }
 
+        if(typeof consent.dataUse === 'object'){
+            $scope.dataUse = JSON.stringify(consent.dataUse);
+        }
+
         if (consent !== undefined) {
             $scope.consent = consent;
             $scope.file = new Object({});
@@ -33,11 +37,19 @@
             try{
                 JSON.parse($scope.useRestriction);
             }catch(err){
-                $scope.duplicateEntryAlert(0, "Unable to process JSON");
+                $scope.duplicateEntryAlert(0, "Unable to process Structured Limitations JSON");
+                $scope.disableButton = false;
+                return;
+            }
+            try{
+                JSON.parse($scope.dataUse);
+            }catch(err){
+                $scope.duplicateEntryAlert(0, "Unable to process Data Use JSON");
                 $scope.disableButton = false;
                 return;
             }
             consent.useRestriction = $scope.useRestriction;
+            consent.dataUse = $scope.dataUse;
             cmConsentService.postConsent(consent).$promise.then(
                 function (value) {
                     cmConsentService.postDul($scope.file, value.consentId, $scope.file.name).$promise.then(
@@ -65,11 +77,19 @@
             try{
                 JSON.parse($scope.useRestriction);
             }catch(err){
-                $scope.duplicateEntryAlert(0, "Unable to process JSON");
+                $scope.duplicateEntryAlert(0, "Unable to process Structured Limitations JSON");
+                $scope.disableButton = false;
+                return;
+            }
+            try{
+                JSON.parse($scope.dataUse);
+            }catch(err){
+                $scope.duplicateEntryAlert(0, "Unable to process Data Use JSON");
                 $scope.disableButton = false;
                 return;
             }
             consent.useRestriction = $scope.useRestriction;
+            consent.dataUse = $scope.dataUse;
             cmConsentService.updateConsent(consent).$promise.then(
                 function () {
                     if ($scope.file.type !== undefined) {

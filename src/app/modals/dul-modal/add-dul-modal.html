@@ -47,11 +47,23 @@
                         <textarea ng-model="useRestriction"
                                   name="inputSDUL"
                                   class="form-control col-lg-12 vote-input"
-                                  placeholder="Structured string of the Data Use Limitations (JSON format)" required>
+                                  placeholder='Structured string of the Data Use Limitations (JSON format, e.g. {"type":"everything"})' required>
                         </textarea>
 
                         </div>
                     </div>
+
+                    <div class="form-group admin-form-group ">
+                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-4 control-label dul-color">Data Use</label>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 admin-input">
+                        <textarea ng-model="dataUse"
+                                  name="inputDU"
+                                  class="form-control col-lg-12 vote-input"
+                                  placeholder='Structured string of the Data Use Questions/Answers (JSON format, e.g. {"generalUse":true})' required>
+                        </textarea>
+                        </div>
+                    </div>
+
                     <div class="admin-modal-footer">
                         <div class="alert-form-group">
                             <div class="admin-alerts no-margin">
