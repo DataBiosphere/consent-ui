@@ -22,10 +22,10 @@ To run the consent-ui app:
 
 2. One time commands - only need to install npm once and build once:
   
-  ```bash
-  brew install npm
-  npm install
-  ``` 
+    ```bash
+    brew install npm
+    npm install
+    ``` 
   
 4. Run the docker compose file:
 
