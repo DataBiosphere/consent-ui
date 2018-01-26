@@ -34,17 +34,8 @@
 
         vm.ok = function (consent) {
             $scope.disableButton = true;
-            try{
-                JSON.parse($scope.useRestriction);
-            }catch(err){
-                $scope.duplicateEntryAlert(0, "Unable to process Structured Limitations JSON");
-                $scope.disableButton = false;
-                return;
-            }
-            try{
-                JSON.parse($scope.dataUse);
-            }catch(err){
-                $scope.duplicateEntryAlert(0, "Unable to process Data Use JSON");
+            if (!isValidJson($scope.useRestriction, "Unable to process Structured Limitations JSON") ||
+                !isValidJson($scope.dataUse, "Unable to process Data Use JSON")) {
                 $scope.disableButton = false;
                 return;
             }
@@ -74,17 +65,8 @@
 
         vm.edit = function (consent) {
             $scope.disableButton = true;
-            try{
-                JSON.parse($scope.useRestriction);
-            }catch(err){
-                $scope.duplicateEntryAlert(0, "Unable to process Structured Limitations JSON");
-                $scope.disableButton = false;
-                return;
-            }
-            try{
-                JSON.parse($scope.dataUse);
-            }catch(err){
-                $scope.duplicateEntryAlert(0, "Unable to process Data Use JSON");
+            if (!isValidJson($scope.useRestriction, "Unable to process Structured Limitations JSON") ||
+                !isValidJson($scope.dataUse, "Unable to process Data Use JSON")) {
                 $scope.disableButton = false;
                 return;
             }
@@ -156,6 +138,16 @@
                 msg: 'Problem with the file UpLoad.',
                 alertType: 1
             });
+        }
+
+        function isValidJson(obj, error) {
+            try {
+                JSON.parse(obj);
+                return true;
+            } catch (err) {
+                $scope.duplicateEntryAlert(0, error);
+                return false;
+            }
         }
 
         $scope.closeAlert = function (index) {
