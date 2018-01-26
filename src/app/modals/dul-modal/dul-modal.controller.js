@@ -16,6 +16,10 @@
             $scope.useRestriction = JSON.stringify(consent.useRestriction);
         }
 
+        if(typeof consent.dataUse === 'object'){
+            $scope.dataUse = JSON.stringify(consent.dataUse);
+        }
+
         if (consent !== undefined) {
             $scope.consent = consent;
             $scope.file = new Object({});
@@ -30,14 +34,13 @@
 
         vm.ok = function (consent) {
             $scope.disableButton = true;
-            try{
-                JSON.parse($scope.useRestriction);
-            }catch(err){
-                $scope.duplicateEntryAlert(0, "Unable to process JSON");
+            if (!isValidJson($scope.useRestriction, "Unable to process Structured Limitations JSON") ||
+                !isValidJson($scope.dataUse, "Unable to process Data Use JSON")) {
                 $scope.disableButton = false;
                 return;
             }
             consent.useRestriction = $scope.useRestriction;
+            consent.dataUse = $scope.dataUse;
             cmConsentService.postConsent(consent).$promise.then(
                 function (value) {
                     cmConsentService.postDul($scope.file, value.consentId, $scope.file.name).$promise.then(
@@ -62,14 +65,13 @@
 
         vm.edit = function (consent) {
             $scope.disableButton = true;
-            try{
-                JSON.parse($scope.useRestriction);
-            }catch(err){
-                $scope.duplicateEntryAlert(0, "Unable to process JSON");
+            if (!isValidJson($scope.useRestriction, "Unable to process Structured Limitations JSON") ||
+                !isValidJson($scope.dataUse, "Unable to process Data Use JSON")) {
                 $scope.disableButton = false;
                 return;
             }
             consent.useRestriction = $scope.useRestriction;
+            consent.dataUse = $scope.dataUse;
             cmConsentService.updateConsent(consent).$promise.then(
                 function () {
                     if ($scope.file.type !== undefined) {
@@ -113,7 +115,7 @@
             } else if (message.indexOf("name") > -1) {
                 message = "There is a Data Use Limitation already registered with this name.";
             } else if (message.indexOf("Unable to process JSON") > -1){
-                message = "Structured Limitations has invalid format. Please write it as a JSON.";
+                message = "Structured Limitations or Data Use has invalid format. Please write it as valid JSON.";
             }
             else {
                 tle = "Error, unable to create a new Data Use Limitation! ";
@@ -136,6 +138,16 @@
                 msg: 'Problem with the file UpLoad.',
                 alertType: 1
             });
+        }
+
+        function isValidJson(obj, error) {
+            try {
+                JSON.parse(obj);
+                return true;
+            } catch (err) {
+                $scope.duplicateEntryAlert(0, error);
+                return false;
+            }
         }
 
         $scope.closeAlert = function (index) {
