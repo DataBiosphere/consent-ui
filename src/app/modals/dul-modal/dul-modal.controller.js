@@ -133,7 +133,7 @@
             } else if (message.indexOf("name") > -1) {
                 message = "There is a Data Use Limitation already registered with this name.";
             } else if (message.indexOf("Unable to process JSON") > -1){
-                message = "Structured Limitations has invalid format. Please write it as a JSON.";
+                message = "Structured Limitations or Data Use has invalid format. Please write it as valid JSON.";
             }
             else {
                 tle = "Error, unable to create a new Data Use Limitation! ";
