@@ -32,3 +32,16 @@ To run the consent-ui app:
     ```bash
     npm run up
     ```
+
+## Docker
+Consent-UI is packaged into a docker image that is stored in the cloud in the [Consent-UI Dockerhub Repo](https://hub.docker.com/r/broadinstitute/consent-ui).
+```
+# to build the consent-ui image
+./build.sh -d build
+
+# to build the consent-ui image and push it to dockerhub
+./build.sh -d push
+
+# to pull the image from dockerhub
+docker pull broadinstitute/consent-ui
+```
