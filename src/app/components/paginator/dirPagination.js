@@ -476,7 +476,6 @@
         return {
 
             registerInstance: function (instanceId) {
-                console.log("instanceId: " + instanceId);
                 if (typeof instances[instanceId] === 'undefined') {
                     instances[instanceId] = {
                         asyncMode: false
