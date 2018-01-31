@@ -48,7 +48,6 @@ RUN rm -Rf .tmp && \
     rm -Rf e2e && \
     rm -Rf node_modules && \
     rm -Rf src && \
-    rm -Rf swagger && \
     rm -f .bowerrc && \
     rm -f .jshintrc && \
     rm -f .yo-rc.json && \
