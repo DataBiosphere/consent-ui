@@ -56,3 +56,6 @@ crashlytics-build.properties
 /target
 /compose.yaml
 /config/
+/package-lock.json
+.DS_Store
+src/swagger/

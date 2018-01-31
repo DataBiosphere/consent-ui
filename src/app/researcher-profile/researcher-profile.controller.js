@@ -7,7 +7,6 @@
 
     /* ngInject */
     function ResearcherProfile($modal, $state, $scope, $rootScope,  cmResearcherService) {
-
         var vm = this;
         vm.saveProfile = saveProfile;
         vm.update = update;
@@ -49,7 +48,7 @@
             });
 
             modalInstance.result.then(function () {
-                $state.go('researcher_console');
+                $state.go('dataset_catalog');
             }, function () {
             });
         }
@@ -67,7 +66,7 @@
                     scope: $scope
                 });
                 modalInstance.result.then(function () {
-                    $state.go('researcher_console');
+                    $state.go('dataset_catalog');
                     }, function () {
                 });
              }else{

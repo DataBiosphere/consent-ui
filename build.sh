@@ -1,27 +1,40 @@
-#!/bin/bash
-set -euox pipefail
-IFS=$'\n\t'
+#!/usr/bin/env bash
 
-# Make sure only root can run our script
-if [ "$EUID" -ne 0 ]
-  then echo "Please run as root"
-  exit
-fi
+set -ex
 
-# NPM needs global permissions, and fails terribly without root.
-# Get the user so we can reset ownership after we're done.
-USER=`ls -ld ./ | awk '{print $3}'`
+function docker_cmd() {
+	if [ $DOCKER_CMD = "build" ] || [ $DOCKER_CMD = "push" ]; then
+		if [ "$ENV" != "dev" ] && [ "$ENV" != "alpha" ] && [ "$ENV" != "staging" ] && [ "$ENV" != "perf" ]; then
+			DOCKER_TAG=${BRANCH}
+		else
+			GIT_SHA=$(git rev-parse origin/$BRANCH)
+			echo GIT_SHA=$GIT_SHA > env.properties
+			DOCKER_TAG=${GIT_SHA:0:12}
+		fi
+		echo "building $REPO:$DOCKER_TAG..."
+		docker build -t $REPO:$DOCKER_TAG .
 
-npm install -g n
-n 0.12.7
-npm install -g wrench
-npm install -g bower
-npm install -g gulp
-npm install --save-dev gulp
-npm install
-bower install --allow-root
-gulp
+		if [ $DOCKER_CMD = "push" ]; then
+			echo "pushing $REPO:$DOCKER_TAG..."
+			docker push $REPO:$DOCKER_TAG
+		fi
+	else
+		echo "Not a valid docker option! Choose either build or push (which includes build)"
+	fi
+}
 
-chown -R $USER .tmp
-chown -R $USER dist
-chown $USER package.json
+PROJECT=consent-ui
+BRANCH=${BRANCH:-$(git rev-parse --abbrev-ref HEAD)}
+REPO=broadinstitute/$PROJECT
+ENV=${ENV:-""}
+
+while [ "$1" != "" ]; do
+    case $1 in
+        -d | --docker) shift
+                       echo $1
+                       DOCKER_CMD=$1
+                       docker_cmd
+                       ;;
+    esac
+    shift
+done

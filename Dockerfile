@@ -1,14 +1,14 @@
 FROM node
 
-MAINTAINER Belatrix Team <belatrix@broadinstitute.org>
+MAINTAINER Catalog Team <workbench-catalog@broadinstitute.org>
 
 USER root
 
-#base setup
-RUN apt-get update \
-    && apt-get install -y \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# base setup
+RUN apt-get update && \
+    apt-get install -y && \
+    apt-get clean &&  \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Copy source files to the app directory
 COPY gulp /app/gulp
@@ -23,22 +23,43 @@ COPY karma.conf.js /app/
 COPY package.json /app/
 COPY protractor.conf.js /app/
 
-# Some dependencies require n v0.12.7
-RUN npm cache clean -f \
-    && npm install -g n \
-    && n 0.12.7
-
-#install bower and gulp, and local gulp
 WORKDIR /app
-RUN npm install -g wrench
-RUN npm install -g bower
-RUN npm install -g gulp
-RUN npm install -g http-server
-RUN npm install --save-dev gulp
+RUN npm cache clean -f && \
+    npm install -g n && \
+    n stable && \
+    npm install -g wrench && \
+    npm install -g bower && \
+    npm install -g gulp
 RUN npm install
-RUN bower install --allow-root
 
-RUN gulp
+# Package, build to dist directory
+RUN bower install --allow-root && \
+    gulp
+
+## Clean up global dev dependencies after build
+RUN npm uninstall -g wrench && \
+    npm uninstall -g bower && \
+    npm uninstall -g gulp
+
+## Clean up old source files after build
+RUN rm -Rf .tmp && \
+    rm -Rf bower_components && \
+    rm -Rf gulp && \
+    rm -Rf e2e && \
+    rm -Rf node_modules && \
+    rm -Rf src && \
+    rm -Rf swagger && \
+    rm -f .bowerrc && \
+    rm -f .jshintrc && \
+    rm -f .yo-rc.json && \
+    rm -f bower.json && \
+    rm -f gulpfile.js && \
+    rm -f karma.conf.js && \
+    rm -f package.json && \
+    rm -f protractor.conf.js
+
+## Add the single production dependency
+RUN npm install -g http-server
 
 EXPOSE 8000
 
