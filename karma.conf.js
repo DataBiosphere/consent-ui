@@ -60,10 +60,11 @@ module.exports = function(config) {
 
         reporters: ['progress', 'coverage'],
 
-        coverageReporter : {
-            type : 'lcov',
-            dir : 'coverage/',
-            subdir: '.'
+        coverageReporter: {
+            reporters: [
+                // generates ./coverage/lcov.info
+                {type:'lcovonly', subdir: '.'}
+            ]
         },
 
         preprocessors: {

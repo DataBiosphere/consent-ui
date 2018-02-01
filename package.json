@@ -5,6 +5,7 @@
     "http-server": "0.9.0"
   },
   "scripts": {
+    "report-coverage": "codecov",
     "postinstall": "bower install; gulp",
     "test": "gulp test",
     "up": "docker-compose -p consent-ui -f config/docker-compose.yaml up"

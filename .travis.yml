@@ -1,7 +1,9 @@
-language: node_js
+language:
+    node_js
 node_js:
   - "9"
 script:
+  - npm install -g codecov
   - npm install -g n
   - npm install -g wrench
   - npm install -g bower
@@ -11,4 +13,6 @@ script:
   - gulp
 after_script:
   - node_modules/.bin/karma start karma.conf.js
-  - COVERALLS_SERVICE_NAME=travis-pro cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js && rm -rf coverage
+#  - COVERALLS_SERVICE_NAME=travis-pro cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js && rm -rf coverage
+  - istanbul cover ./node_modules/mocha/bin/_mocha --reporter lcovonly -- -R spec
+  - codecov
