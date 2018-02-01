@@ -2,6 +2,7 @@ Consent-UI
 ==========
 
 [![Build Status](https://travis-ci.org/DataBiosphere/consent-ui.svg?branch=develop)](https://travis-ci.org/DataBiosphere/consent-ui)
+[![codecov](https://codecov.io/gh/DataBiosphere/consent-ui/branch/develop/graph/badge.svg)](https://codecov.io/gh/DataBiosphere/consent-ui)
 
 consent-ui is an angularJS application that requires running consent and consent-ontology services.
 
