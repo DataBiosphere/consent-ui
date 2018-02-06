@@ -58,4 +58,3 @@ crashlytics-build.properties
 /config/
 /package-lock.json
 .DS_Store
-src/swagger/

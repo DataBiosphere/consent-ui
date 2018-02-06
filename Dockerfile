@@ -22,7 +22,6 @@ COPY gulpfile.js /app/
 COPY karma.conf.js /app/
 COPY package.json /app/
 COPY protractor.conf.js /app/
-COPY swagger /app/swagger
 
 WORKDIR /app
 RUN npm cache clean -f && \
@@ -49,7 +48,6 @@ RUN rm -Rf .tmp && \
     rm -Rf e2e && \
     rm -Rf node_modules && \
     rm -Rf src && \
-    rm -Rf swagger && \
     rm -f .bowerrc && \
     rm -f .jshintrc && \
     rm -f .yo-rc.json && \
