@@ -4,12 +4,13 @@
     angular.module('cmReviewResults')
         .controller('DulReviewResults', DulReviewResults);
 
-    function DulReviewResults($sce, apiUrl, $scope, cmEmailService, $modal, $state, cmElectionService, electionReview, cmFilesService) {
+    function DulReviewResults($sce, apiUrl, $scope, $rootScope, cmEmailService, $modal, $state, cmElectionService, electionReview, cmFilesService) {
 
         if(typeof electionReview.election === 'undefined'){
             $state.go("dul_review_not_found");
         }
 
+        $scope.hasAdminRole = $rootScope.hasAdminRole;
         $scope.chartData = {
             'dul': [
                 ['Results', 'Votes'],

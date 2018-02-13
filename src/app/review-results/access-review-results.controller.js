@@ -12,9 +12,7 @@
 
         var vm = this;
         vm.openApplication = openApplication;
-        $scope.hasAdminRole = function() {
-            return ($rootScope.currentUser.roles.filter(function(r) {return r.name === $rootScope.userRoles.admin}).length > 0);
-        };
+        $scope.hasAdminRole = $rootScope.hasAdminRole;
         $scope.electionType = 'access';
         $scope.election = electionReview.election;
         $scope.voteList = chunk(electionReview.reviewVote, 2);

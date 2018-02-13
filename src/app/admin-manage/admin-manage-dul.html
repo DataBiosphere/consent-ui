@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list bold">
                             <span ng-if="election.electionStatus == 'un-reviewed'">Un-reviewed</span>
-                            <span ng-if="election.electionStatus == 'Open'">Open</span>
+                            <span ng-if="election.electionStatus == 'Open'"><a ui-sref="dul_review_results({consentId: '{{election.consentId}}'})">Open</a></span>
                             <span ng-if="election.electionStatus == 'Canceled'">Canceled</span>
                             <span ng-if="election.electionStatus == 'Closed'"><a ui-sref="dul_results_record({electionId: '{{election.electionId}}'})">Reviewed</a></span>
                         </div>
