@@ -3,7 +3,7 @@
     <div class="row fsi-row-lg-level fsi-row-md-level title-wrapper">
         <img src="assets/images/icon_access.png" alt="Data Access Request icon" class="cm-icons main-icon-title">
         <h2 class="main-title margin-sm access-color">
-            Collect votes for Data Access Congruence Review
+            {{ hasAdminRole ? "Review" : "Collect"}} Votes for Data Access Congruence Review
         </h2>
     </div>
     <accordion>
@@ -319,7 +319,7 @@
     </accordion>
 
     <div class="form-group form-group-bottom">
-       <a href="#/chair_console" class="btn vote-button vote-button-dismiss vote-button-bigger">
+       <a href='{{ hasAdminRole ? "#/admin_console" : "#/chair_console"}}' class="btn vote-button vote-button-dismiss vote-button-bigger">
             Back to Console
         </a>
     </div>

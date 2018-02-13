@@ -44,7 +44,7 @@
                     referenceId: null
                 },
                 data: {
-                    authorizedRoles: [USER_ROLES.chairperson]
+                    authorizedRoles: [USER_ROLES.chairperson, USER_ROLES.admin]
                 },
                 resolve: {
                     electionReview: function ($stateParams, cmElectionService) {
