@@ -94,7 +94,42 @@
                     }
                 }
 
-            });
+            })
+
+            .state('access_preview_results', {
+                name: 'access_preview_results',
+                url: '/access_preview_results/:referenceId',
+                templateUrl: 'app/review-results/access-preview-results.html',
+                controller: 'AccessPreviewResults',
+                controllerAs: 'AccessPreviewResults',
+                params: {
+                    referenceId: null
+                },
+                data: {
+                    authorizedRoles: [USER_ROLES.chairperson, USER_ROLES.admin]
+                },
+                resolve: {
+                    dar: function ($stateParams, cmRPService) {
+                        if ($stateParams.referenceId !== null) {
+                            return cmRPService.getDarFields($stateParams.referenceId, "rus");
+                        }
+                    },
+                    rp: function ($stateParams, cmRPService) {
+                        if ($stateParams.referenceId !== null) {
+                            return cmRPService.getDarFields($stateParams.referenceId, "translated_restriction");
+                        }
+                    },
+                    dar_id: function ($stateParams) {
+                        return $stateParams.referenceId;
+                    },
+                    consent: function ($stateParams, cmRPService) {
+                        if ($stateParams.referenceId !== null) {
+                            return cmRPService.getDarConsent($stateParams.referenceId);
+                        }
+                    }
+                }
+            })
+        ;
 
     }
 })();
