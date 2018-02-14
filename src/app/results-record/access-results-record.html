@@ -17,7 +17,10 @@
             <div id="prf" class="panel-body cm-boxbody">
                 {{dar.rus}}
                 <hr style="margin: 10px 0">
-                <a ng-show="hasUseRestriction" ng-click="download(DarFileTitle, sDAR)" class="italic hover-color" style="cursor: pointer;" >
+                <a ng-show="hasUseRestriction" ng-click="download('machine-readable-DAR.json', mrDAR)" class="italic hover-color" style="cursor: pointer;" >
+                    Download DAR machine-readable format
+                </a><br>
+                <a ng-show="hasUseRestriction" ng-click="download('structured-DAR.txt', sDAR)" class="italic hover-color" style="cursor: pointer;" >
                     Download DAR structured format
                 </a>
             </div>
@@ -30,7 +33,10 @@
             <div id="dul" class="panel-body cm-boxbody">
                 <a style="cursor:pointer;" ng-click="downloadDUL()">{{dulName}}</a>
                 <hr style="margin: 10px 0">
-                <a ng-click="download(DulFileTitle, sDUL)" class="italic hover-color" style="cursor: pointer">
+                <a ng-click="download('machine-readable-DUL.json', mrDUL)" class="italic hover-color" style="cursor: pointer">
+                    Download DUL machine-readable format
+                </a><br>
+                <a ng-click="download('structured-DUL.txt', sDUL)" class="italic hover-color" style="cursor: pointer">
                     Download DUL structured format
                 </a>
             </div>
