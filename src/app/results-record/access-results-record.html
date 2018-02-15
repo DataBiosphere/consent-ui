@@ -17,13 +17,13 @@
             <div id="prf" class="panel-body cm-boxbody">
                 {{dar.rus}}
                 <hr style="margin: 10px 0">
-                <div class="translated-restriction">
+                <div class="translated-restriction" ng-show="hasUseRestriction">
                     {{sDAR}}
+                    <hr style="margin: 10px 0">
+                    <a ng-click="download('machine-readable-DAR.json', mrDAR)" class="italic hover-color" style="cursor: pointer;" >
+                        Download DAR machine-readable format
+                    </a>
                 </div>
-                <hr style="margin: 10px 0">
-                <a ng-show="hasUseRestriction" ng-click="download('machine-readable-DAR.json', mrDAR)" class="italic hover-color" style="cursor: pointer;" >
-                    Download DAR machine-readable format
-                </a>
             </div>
         </div>
 
