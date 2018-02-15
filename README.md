@@ -20,14 +20,8 @@ To run the consent-ui app:
     RUN_CONTEXT=local APP_NAME=consent-ui ENV=dev OUTPUT_DIR=$PWD/../consent-ui/config ./configure.rb
     ```
 
-3. One time commands - only need to install npm once and build once:
   
-    ```bash
-    brew install npm
-    npm install
-    ``` 
-  
-4. Run the docker compose file:
+3. Run the docker compose file:
 
     ```bash
     npm run up
