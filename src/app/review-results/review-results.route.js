@@ -129,6 +129,27 @@
                     }
                 }
             })
+
+            .state('dul_preview_results', {
+                name: 'dul_preview_results',
+                url: '/dul_preview_results/:consentId',
+                params: {
+                    consentId: null
+                },
+                templateUrl: 'app/review-results/dul-preview-results.html',
+                controller: 'DulPreviewResults',
+                controllerAs: 'DulPreviewResults',
+                data: {
+                    authorizedRoles: [USER_ROLES.chairperson, USER_ROLES.admin]
+                },
+                resolve: {
+                    consent: function ($stateParams, cmConsentService) {
+                        if ($stateParams.consentId !== null) {
+                            return cmConsentService.findConsent($stateParams.consentId);
+                        }
+                    }
+                }
+            })
         ;
 
     }

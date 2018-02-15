@@ -11,6 +11,7 @@
         $scope.rus = dar.rus;
         $scope.dar_id = dar_id;
         $scope.consent = consent;
+        $scope.dataUseLetter = $scope.consent.dataUseLetter;
         $scope.downloadUrl = apiUrl + 'consent/' + $scope.consent.consentId + '/dul';
         $scope.dulName = $scope.consent.dulName;
 
