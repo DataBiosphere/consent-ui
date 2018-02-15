@@ -207,7 +207,7 @@
 
             // this data is used to construct structured_ files
             $scope.mrDAR = JSON.stringify(electionReview.election.useRestriction, null, 2);
-            $scope.sDAR = electionReview.election.translatedUseRestriction;
+            $scope.sDAR = electionReview.election.translatedUseRestriction.replace(/<br>/g, "\n");
             $scope.mrDUL = JSON.stringify(electionReview.consent.useRestriction, null, 2);
             $scope.sDUL = electionReview.consent.translatedUseRestriction;
 
@@ -218,7 +218,7 @@
         };
 
         $scope.download = function download(fileName, text) {
-            downloadFileService.downloadFile(fileName, text.replace(/<br>/g, "\n"));
+            downloadFileService.downloadFile(fileName, text);
         };
 
         function showDULData(electionReview) {
