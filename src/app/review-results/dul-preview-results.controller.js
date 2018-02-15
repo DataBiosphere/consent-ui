@@ -7,6 +7,7 @@
     function DulPreviewResults($sce, apiUrl, $scope, $rootScope, $modal, $state, consent, cmFilesService) {
         $scope.hasAdminRole = $rootScope.hasAdminRole;
         $scope.consent = consent;
+        $scope.consentName = consent.name;
         $scope.downloadUrl = apiUrl + 'consent/' + $scope.consent.consentId + '/dul';
         $scope.dulName = $scope.consent.dulName;
         $scope.dataUseLetter = $scope.consent.dataUseLetter;
