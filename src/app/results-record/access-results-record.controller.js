@@ -217,9 +217,7 @@
             cmFilesService.getDULFile($scope.electionReview.consent.consentId, $scope.electionReview.consent.dulName);
         };
 
-        $scope.download = function download(fileName, text) {
-            downloadFileService.downloadFile(fileName, text);
-        };
+        $scope.download = downloadFileService.downloadFile;
 
         function showDULData(electionReview) {
             $scope.election = electionReview.election;
