@@ -1,0 +1,72 @@
+<div ng-include src="'app/header/header.html'"></div>
+<div class="container">
+    <div class="row fsi-row-lg-level fsi-row-md-level title-wrapper">
+        <img src="assets/images/icon_access.png" alt="Data Access Request icon" class="cm-icons main-icon-title">
+        <h2 class="main-title margin-sm access-color">
+            Data Access Congruence Preview | {{consentName}}
+        </h2>
+    </div>
+    <accordion close-others="false">
+        <accordion-group class="accordion" is-open="true">
+            <accordion-heading>
+                <h3 class="access-color pos-relative">
+                    <div class="accordion-title">1. Should data access be granted to this applicant?</div>
+                    <i class="pull-right glyphicon"
+                       ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
+                </h3>
+            </accordion-heading>
+            <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
+                    <div class="panel-heading cm-boxhead access-color">
+                        <h4>Research Purpose
+                            <a class="enabled hover-color application-link" ng-click="AccessPreviewResults.openApplication()">Application summary</a>
+                        </h4>
+                    </div>
+                    <div id="rp" class="panel-body cm-boxbody">{{rus}}</div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
+                    <div class="panel-heading cm-boxhead access-color">
+                        <h4>Data Use Limitations</h4>
+                    </div>
+                    <div id="dul" class="panel-body cm-boxbody" ng-if="dataUseLetter">
+                        <a style="cursor:pointer;" ng-click="downloadDUL()">{{dulName}}</a>
+                    </div>
+                </div>
+            </div>
+
+        </accordion-group>
+
+        <accordion-group class="accordion" is-open="true">
+            <accordion-heading>
+                <h3 class="access-color pos-relative">
+                    <div class="accordion-title">2. Was the research purpose accurately converted to a structured format?</div>
+                    <i class="pull-right glyphicon"
+                       ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
+                </h3>
+            </accordion-heading>
+
+            <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
+                    <div class="panel-heading cm-boxhead access-color">
+                        <h4>Research Purpose
+                            <a class="enabled hover-color application-link" ng-click="AccessPreviewResults.openApplication()">Application summary</a>
+                        </h4>
+                    </div>
+                    <div id="rpurpose" class="panel-body cm-boxbody">{{rus}}</div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
+                    <div class="panel-heading cm-boxhead access-color">
+                        <h4>Structured Research Purpose</h4>
+                    </div>
+                    <div id="srp" class="panel-body cm-boxbody translated-restriction" ng-bind-html="rp"></div>
+                </div>
+            </div>
+        </accordion-group>
+    </accordion>
+
+    <div class="form-group form-group-bottom">
+       <a href='{{ hasAdminRole ? "#/admin_console" : "#/chair_console"}}' class="btn vote-button vote-button-dismiss vote-button-bigger">
+            Back to Console
+        </a>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<div ng-include src="'app/header/header.html'"></div>
+<div class="container">
+    <div class="row fsi-row-lg-level fsi-row-md-level title-wrapper">
+        <img src="assets/images/icon_dul.png" alt="Data Use Limitations icon" class="cm-icons main-icon-title">
+        <h2 class="main-title margin-sm dul-color">
+            Data Use Limitations Congruence Preview | {{consentName}}<br>
+            <div class="main-title-description">Were the data use limitations accurately converted to a structured format?</div>
+        </h2>
+    </div>
+    <hr class="section-separator">
+    <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
+            <div class="panel-heading cm-boxhead dul-color">
+                <h4>Data Use Limitations</h4>
+            </div>
+            <div id="dul" class="panel-body cm-boxbody" ng-if="dataUseLetter">
+                <a style="cursor:pointer;" ng-click="downloadDUL()">{{dulName}}</a>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
+            <div class="panel-heading cm-boxhead dul-color">
+                <h4>Structured Limitations</h4>
+            </div>
+            <div id="ssdur" class="panel-body cm-boxbody translated-restriction" ng-bind-html="structuredDataUseLetter"></div>
+        </div>
+    </div>
+    <div class="form-group form-group-bottom">
+        <a href='{{ hasAdminRole ? "#/admin_console" : "#/chair_console"}}' class="btn vote-button vote-button-dismiss vote-button-bigger" style="margin-right: 15px;">
+            Back to Console
+        </a>
+    </div>
+
+</div>

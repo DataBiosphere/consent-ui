@@ -4,12 +4,13 @@
     angular.module('cmReviewResults')
         .controller('DulReviewResults', DulReviewResults);
 
-    function DulReviewResults($sce, apiUrl, $scope, cmEmailService, $modal, $state, cmElectionService, electionReview, cmFilesService) {
+    function DulReviewResults($sce, apiUrl, $scope, $rootScope, cmEmailService, $modal, $state, cmElectionService, electionReview, cmFilesService) {
 
         if(typeof electionReview.election === 'undefined'){
             $state.go("dul_review_not_found");
         }
 
+        $scope.hasAdminRole = $rootScope.hasRole($rootScope.userRoles.admin);
         $scope.chartData = {
             'dul': [
                 ['Results', 'Votes'],
@@ -69,6 +70,7 @@
         $scope.dul = electionReview.consent.dataUseLetter;
         $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
         $scope.dulName = electionReview.consent.dulName;
+        $scope.consentName = electionReview.consent.name;
         $scope.structuredDataUseLetter = $sce.trustAsHtml(electionReview.election.translatedUseRestriction);
         $scope.positiveVote = positiveVote;
         $scope.logVote = logVote;
