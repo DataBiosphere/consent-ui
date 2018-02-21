@@ -55,8 +55,8 @@
             }
         };
 
-        $rootScope.hasAdminRole = function() {
-            return ($rootScope.currentUser.roles.filter(function(r) {return r.name === $rootScope.userRoles.admin}).length > 0);
+        $rootScope.hasRole = function(role) {
+            return ($rootScope.currentUser.roles.filter(function(r) {return r.name === role}).length > 0);
         };
 
         $rootScope.loadScript = function (url, type, charset) {

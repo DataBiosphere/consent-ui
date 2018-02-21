@@ -10,7 +10,7 @@
             $state.go("dul_review_not_found");
         }
 
-        $scope.hasAdminRole = $rootScope.hasAdminRole;
+        $scope.hasAdminRole = $rootScope.hasRole($rootScope.userRoles.admin);
         $scope.chartData = {
             'dul': [
                 ['Results', 'Votes'],

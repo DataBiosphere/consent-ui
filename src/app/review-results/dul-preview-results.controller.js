@@ -5,7 +5,7 @@
         .controller('DulPreviewResults', DulPreviewResults);
 
     function DulPreviewResults($sce, apiUrl, $scope, $rootScope, $modal, $state, consent, cmFilesService) {
-        $scope.hasAdminRole = $rootScope.hasAdminRole;
+        $scope.hasAdminRole = $rootScope.hasRole($rootScope.userRoles.admin);
         $scope.consent = consent;
         $scope.consentName = consent.name;
         $scope.downloadUrl = apiUrl + 'consent/' + $scope.consent.consentId + '/dul';

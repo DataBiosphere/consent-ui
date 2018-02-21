@@ -14,7 +14,7 @@
         vm.openApplication = openApplication;
         $scope.consent = consent;
         $scope.consentName = consent.name;
-        $scope.hasAdminRole = $rootScope.hasAdminRole;
+        $scope.hasAdminRole = $rootScope.hasRole($rootScope.userRoles.admin);
         $scope.electionType = 'access';
         $scope.election = electionReview.election;
         $scope.voteList = chunk(electionReview.reviewVote, 2);

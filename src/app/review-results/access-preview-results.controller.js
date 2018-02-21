@@ -6,7 +6,7 @@
 
     function AccessPreviewResults($sce, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, dar, rp, dar_id, consent, apiUrl, cmRPService, cmFilesService) {
 
-        $scope.hasAdminRole = $rootScope.hasAdminRole;
+        $scope.hasAdminRole = $rootScope.hasRole($rootScope.userRoles.admin);
         $scope.dar = dar;
         $scope.rus = dar.rus;
         $scope.dar_id = dar_id;
@@ -46,7 +46,7 @@
                     },
                     calledFromAdmin: function() {
                         // return false;
-                        return $scope.hasAdminRole;
+                        return $rootScope.hasRole($rootScope.userRoles.admin);
                     }
                 }
             });
