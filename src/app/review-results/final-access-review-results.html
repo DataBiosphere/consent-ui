@@ -143,7 +143,7 @@
                             <span class="access-color" ng-if="match == '1'"><b>YES</b></span>
                             <span class="access-color" ng-if="match == '0'"><b>NO</b></span>
                             <span class="access-color" ng-if="match == null"><b>---</b></span>
-                            <span class="cancel-color"" ng-if="match == '-1'">Automated Vote System Failure. Please report this issue via the "Request Help" link</span>
+                            <span class="cancel-color" ng-if="match == '-1'">Automated Vote System Failure. Please report this issue via the "Request Help" link</span>
                         </div>
                         <div ng-show="alertOn == true;" class="votes-alerts final-alert no-margin no-padding">
                             <alert ng-repeat="alert in alertsAgree" type="danger"
@@ -231,7 +231,7 @@
                                 <span ng-if="match == '1'">YES</span>
                                 <span ng-if="match == '0'">NO</span>
                                 <span ng-if="match == null"></span>
-                                <span ng-if="match == '-1'">Automated Vote System Failure. Please report this issue via the "Request Help" link</span>
+                                <span class="cancel-color" ng-if="match == '-1'">Automated Vote System Failure. Please report this issue via the "Request Help" link</span>
                             </div>
                         </div>
                         <div class="row">
