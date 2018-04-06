@@ -1,26 +1,5 @@
 <script src="https://apis.google.com/js/api:client.js"></script>
-<nav class="row navbar navbar-duos" role="navigation">
-    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 no-padding">
-        <button type="button" class="navbar-toggle" ng-click="navbarCollapsed = !navbarCollapsed">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-
-        <a href="#/home" class="navbar-duos-brand">
-            <img src="../assets/images/duos_logo.svg" alt="DUOS Logo">
-        </a>
-    </div>
-
-    <div class="collapse navbar-collapse no-padding col-lg-10 col-md-10 col-sm-9 col-xs-12 navbar-right" collapse="navbarCollapsed">
-        <ul class="no-margin">
-            <li><a class="navbar-duos-link" href="#/home_about"><div class="navbar-duos-icon navbar-duos-icon-about"></div>About</a></li>
-            <li><a class="navbar-duos-link" href="#/home_help"><div class="navbar-duos-icon navbar-duos-icon-help"></div>Help</a></li>
-            <li><a class="navbar-duos-button" href="#/login">Sign In</a>
-        </ul>
-    </div>
-</nav>
+<div ng-include src="'app/header/header.html'"></div>
 
 <div class="row home">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
