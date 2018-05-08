@@ -115,6 +115,10 @@ small {
     list-style: none;
 }
 
+.display-inline {
+    display: inline !important;
+}
+
 .default-color {
     color: #777777 !important;
 }
