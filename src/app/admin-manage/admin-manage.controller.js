@@ -40,12 +40,14 @@
         }
 
         function openCancel(election) {
-
+            $scope.electionArchived = true;
+            $scope.electionType = 'dul';
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/cancel-modal.html',
                 controller: 'Modal',
                 controllerAs: 'Modal',
+                scope: $scope,                                
                 resolve: {
                     election: function () {
                         vm.selectedElection = election;
