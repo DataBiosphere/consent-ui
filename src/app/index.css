@@ -1074,6 +1074,12 @@ small {
     font-size: 13px;
 }
 
+.regular-checkbox.normal {
+    font-weight: normal;
+    font-size: 15px;
+    color: #777777;
+}
+
 .regular-checkbox:before {
     content: "";
     width: 18px;

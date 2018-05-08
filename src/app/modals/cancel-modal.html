@@ -5,10 +5,12 @@
             <h2 class="pvotes-box-title cancel-color">Cancel election?
                 <small>Are you sure you want to cancel the current election process? The current election will be stopped without logging a result.</small>
             </h2>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="checkbox">
-                    <input ng-model="updatedNeedsApproval" id="archiveElection" type="checkbox" class="checkbox-inline" checked="checked" name="updatedNeedsApproval">
-                    <label class="regular-checkbox" for="archiveElection">Archive election</label>
+            <div class="form-group">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="checkbox">
+                        <input ng-model="checked" ng-init="checked=true" id="archiveCanceledElection" type="checkbox" class="checkbox-inline" name="archiveCanceledElection">
+                        <label class="regular-checkbox normal" for="archiveCanceledElection">Archive election</label>
+                    </div>
                 </div>
             </div>
         </div>
