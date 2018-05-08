@@ -2,9 +2,11 @@
     <div class="modal-content">
         <div class="modal-header admin-modal-header">
             <button type="button" class="modal-close-btn close" ng-click="Modal.cancel()"><span aria-hidden="true">&times;</span></button>
-                    <h2 class="pvotes-box-title cancel-color">Cancel election?
-                        <small>Are you sure you want to cancel the current election process? <span ng-show="electionType == 'dul'" class="no-padding display-inline">The current election will be stopped without logging a result.</span></small>
-                    </h2>
+                <h2 class="pvotes-box-title cancel-color">Cancel election?
+                    <small>Are you sure you want to cancel the current election process?
+                        <span ng-show="electionType == 'dul'" class="no-padding display-inline">The current election will be stopped without logging a result.</span>
+                    </small>
+                </h2>
             <div class="form-group" ng-show="electionType == 'dul'">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="checkbox">

@@ -13,6 +13,7 @@
         vm.openCreate = openCreate;
         vm.openCancel = openCancel;
         vm.openDelete = openDelete;
+        vm.openArchive = openArchive;
 
         vm.addDul = addDul;
         vm.editDul = editDul;
@@ -67,7 +68,6 @@
         }
 
         function openDelete(consentId) {
-
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/delete-consent-modal.html',
@@ -79,6 +79,26 @@
                 cmConsentService.deleteConsent(consentId).then(function () {
                     init();
                 });
+            });
+        }
+
+        function openArchive(election) { 
+            $scope.electionArchived = true;
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/archive-modal.html',
+                controller: 'Modal',
+                controllerAs: 'Modal',
+                scope: $scope,                                
+                resolve: {
+                    election: function () {
+                        vm.selectedElection = election;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function () {
+                init();
             });
         }
 
@@ -119,6 +139,5 @@
             }, function () {
             });
         }
-
     }
 })();
