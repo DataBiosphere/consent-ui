@@ -61,6 +61,7 @@
                 electionToUpdate.status = 'Canceled';
                 electionToUpdate.referenceId = vm.selectedElection.consentId;
                 electionToUpdate.electionId = vm.selectedElection.electionId;
+                electionToUpdate.archived =  $scope.electionArchived;
                 cmElectionService.updateElection(electionToUpdate).$promise.then(function () {
                     init();
                 });
