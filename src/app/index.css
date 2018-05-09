@@ -115,6 +115,10 @@ small {
     list-style: none;
 }
 
+.display-inline {
+    display: inline !important;
+}
+
 .default-color {
     color: #777777 !important;
 }
@@ -977,6 +981,43 @@ small {
     cursor: default !important;
 }
 
+/***************************************************Tables*/
+
+.cell-header {
+    font-style: italic;
+    font-size: 16px;
+    padding: 5px 10px;
+    font-weight: 500;
+}
+
+.cell-body {
+    color: #777777;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 2px 10px;
+}
+
+.cell-body.text {
+    padding-top: 12px
+}
+
+.cell-body.flagged {
+    padding-right: 60px;
+}
+
+.cell-body.flagged::after {
+    content: 'Archived';
+    background-color: #777777;
+    color: #ffffff;
+    font-size: 11px;
+    font-style: italic;
+    padding: 5px;
+    margin-top: -4px;
+    position: absolute;
+    right: 0;
+}
+
 /***************************************************Buttons, Radios & Checkboxes*/
 
 .button-holder {
@@ -1072,6 +1113,12 @@ small {
     padding-left: 25px !important;
     margin-right: 15px;
     font-size: 13px;
+}
+
+.regular-checkbox.normal {
+    font-weight: normal;
+    font-size: 15px;
+    color: #777777;
 }
 
 .regular-checkbox:before {
@@ -2054,6 +2101,39 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 .manage-wrapper{
     position: relative;
     margin-right: 30px !important;
+}
+
+.icon-actions {
+    position: absolute;
+    right: 10px;
+    margin-top: 4px;
+}
+
+.icon-actions a {
+    margin-left: 10px;
+}
+
+.icon-actions .glyphicon {
+    font-size: 1.15em;
+    text-shadow: 1px 1px 0 #ffffff;
+    color: #777777;
+    padding-top: 8px;
+}
+
+.icon-actions .glyphicon-inbox.activated {
+    color: #C16B0C;
+}
+
+.icon-actions a:hover .glyphicon{
+    color: #2FA4E7;
+    cursor: pointer;
+}
+
+.icon-actions a[disabled] .glyphicon,
+.icon-actions a[disabled]:hover .glyphicon {
+    color: #cccccc !important;
+    cursor: default !important;
+    pointer-events: none; /*disable tooltip as well*/
 }
 
 .remove-dul-col{
@@ -3437,4 +3517,50 @@ tags-input .tags .tag-item{
     padding: 0 10px !important;
 }
 
+/***************************************************8 col grid*/
 
+.grid-row {
+    display: inline-block;
+    width: 100%;
+    margin: 0; 
+    padding: 0;
+}
+
+.grid-row.pushed {
+    padding-right: 70px;
+    position: relative;
+}
+
+.grid-row .col-1, .grid-row .col-2, .grid-row .col-3, .grid-row .col-4, .grid-row .col-5, .grid-row .col-6, .grid-row .col-7{
+    position: relative;
+    min-height: 1px;
+    float: left;
+}
+
+.grid-row .col-1 {
+    width: 14.285%;
+}
+
+.grid-row .col-2 {
+    width: 28.57%;
+}
+
+.grid-row .col-3 {
+    width: 42.855%;
+}
+
+.grid-row .col-4 {
+    width: 57.14%;
+}
+
+.grid-row .col-5 {
+    width: 71.425%;
+}
+
+.grid-row .col-6 {
+    width: 85.71%;
+}
+
+.grid-row .col-7 {
+    width: 100%;
+}
