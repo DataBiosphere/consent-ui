@@ -13,7 +13,6 @@
         vm.openCreate = openCreate;
         vm.openCancel = openCancel;
         vm.openDelete = openDelete;
-        vm.openArchive = openArchive;
 
         vm.addDul = addDul;
         vm.editDul = editDul;
