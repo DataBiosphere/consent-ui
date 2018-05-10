@@ -990,9 +990,19 @@ small {
     font-weight: 500;
 }
 
-.cell-header .icon-sort {
-    font-size: 10px;
-    margin-left: 10px;
+.cell-sort:hover {
+    cursor: pointer;
+}
+
+.cell-sort:hover .sort-icon {
+    color: #2FA4E7;
+}
+
+.cell-sort .sort-icon {
+    color: #777777;
+    font-size: 11px;
+    margin: 3px 0 0 5px;
+    vertical-align: top;
 }
 
 .cell-body {

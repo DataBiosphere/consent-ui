@@ -17,11 +17,6 @@
         vm.addDul = addDul;
         vm.editDul = editDul;
 
-        $scope.sort = function(keyname){
-            $scope.sortBy = keyname;   //set the sortBy to the param passed
-            $scope.reverse = !$scope.reverse; //if true make it false and vice versa
-        }
-
         init();
 
         function init() {
