@@ -55,7 +55,7 @@
                 }
             });
 
-            modalInstance.result.then(function () {
+            modalInstance.result.then(function ($scope) {
                 var electionToUpdate = {};
                 electionToUpdate.status = 'Canceled';
                 electionToUpdate.referenceId = vm.selectedElection.consentId;
