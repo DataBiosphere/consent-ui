@@ -990,6 +990,11 @@ small {
     font-weight: 500;
 }
 
+.cell-header .icon-sort {
+    font-size: 10px;
+    margin-left: 10px;
+}
+
 .cell-body {
     color: #777777;
     white-space: nowrap;
@@ -3517,7 +3522,7 @@ tags-input .tags .tag-item{
     padding: 0 10px !important;
 }
 
-/***************************************************8 col grid*/
+/***************************************************7 col grid*/
 
 .grid-row {
     display: inline-block;

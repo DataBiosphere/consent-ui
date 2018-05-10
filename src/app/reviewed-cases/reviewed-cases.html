@@ -26,8 +26,14 @@
 
         <div class="jumbotron box-vote-singleresults box-vote-no-margin">
             <div class="grid-row">
-                <div class="col-3 cell-header dul-color">Consent id</div>
-                <div class="col-1 cell-header dul-color">Election N°</div>
+                <div class="col-3 cell-header dul-color" ng-click="sort('displayId')">Consent id
+                    <span class="glyphicon icon-sort" ng-class="{'glyphicon-sort-by-attributes':reverse,'glyphicon-sort-by-attributes-alt':!reverse}"></span>
+                    <!-- <span class="glyphicon glyphicons-sorting"></span> -->
+                </div>
+                <div class="col-1 cell-header dul-color" ng-click="sort('version')">Election N°
+                    <span class="glyphicon icon-sort" ng-class="{'glyphicon-sort-by-attributes':reverse,'glyphicon-sort-by-attributes-alt':!reverse}"></span>
+                    <!-- <span class="glyphicon glyphicons-sorting"></span> -->
+                </div>
                 <div class="col-1 cell-header dul-color">Result Date</div>
                 <div class="col-1 cell-header f-center dul-color">Final Result</div>
                 <div class="col-1 cell-header f-center dul-color">Record</div>
@@ -35,7 +41,7 @@
             
             <hr class="pvotes-main-separator">
 
-            <div dir-paginate="election in ReviewedCases.electionsList.dul | filter: searchDULcases | itemsPerPage:5" pagination-id="dulCases" current-page="currentDulPage">
+            <div dir-paginate="election in ReviewedCases.electionsList.dul | orderBy:sortBy:reverse | filter: searchDULcases | itemsPerPage:5" pagination-id="dulCases" current-page="currentDulPage">
                 <div class="grid-row">
                     <div class="col-3 cell-body text" ng-class="{flagged : election.electionArchived}">{{election.displayId}}</div>
                     <div class="col-1 cell-body text">{{election.version}}</div>

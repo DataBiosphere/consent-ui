@@ -34,6 +34,11 @@
             $rootScope.currentDarPage = num;
         });
 
+        $scope.sort = function(keyname){
+            $scope.sortBy = keyname;
+            $scope.reverse = !$scope.reverse;
+        }
+
         init();
 
         function init() {
