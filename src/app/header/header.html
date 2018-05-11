@@ -54,14 +54,14 @@
                 <li ng-repeat="rol in $root.currentUser.roles" ng-show="'{{rol.name}}' === '{{$root.userRoles.researcher}}'">
                     <a href="" ng-click="Header.goToRP()"> Request Application</a>
                 </li>
-                <li class="dropdown" dropdown on-toggle="toggled(open)">
+                <li class="dropdown" dropdown on-toggle="toggled(open)" ng-show="$root.currentUser !== null">
                     <a role="button" class="dropdown-toggle" href="#" dropdown-toggle>
                         <div>Statistics <span class="caret caret-margin"></span></div>
                     </a>
                     <ul class="dropdown-menu user-dropdown" role="menu">
                         <li><a href="#/summary_votes" class="f-left">Votes Statistics</a></li>
                         <hr>
-                        <li ng-show="showStatistics($root.currentUser.roles, $root.userRoles)">
+                        <li ng-show="roles.showStatistics($root.currentUser.roles, $root.userRoles)">
                             <a ui-sref="reviewed_cases({menu: true})" class="f-left">Reviewed Cases Record</a>
                         </li>
                     </ul>

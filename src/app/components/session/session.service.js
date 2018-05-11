@@ -81,14 +81,35 @@
             cmResearcherService.getResearcherPropertiesForDAR($rootScope.currentUser.dacUserId).then(
                 function (data) {
                    if(data.completed === 'true') {
-                      $state.go('dataset_catalog');                            
+                      $state.go('dataset_catalog');
                    } else {
-                      $state.go('researcher_profile');  
+                      $state.go('researcher_profile');
                    }
-            });    
+            });
+        }
+
+        function showStatistics(roles, rootRoles){
+            return containsOtherThanResearcherAndDataOwner(roles, rootRoles);
+        }
+
+        function containsOtherThanResearcherAndDataOwner(roles, rootRoles){
+            var i;
+            if(!Boolean(roles)){
+                return false;
+            }
+            for (i = 0; i < roles.length; i++) {
+                if(roles[i].name !== rootRoles.researcher && roles[i].name !== rootRoles.dataOwner){
+                    return true;
+                }
+            }
+            return false;
         }
 
         return {
+            showStatistics: function (roles, rootRoles) {
+               return showStatistics(roles, rootRoles);
+            },
+
             loginUser: function (email, accessToken) {
                 return loginUser(email, accessToken);
             },
