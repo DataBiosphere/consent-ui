@@ -48,10 +48,8 @@
                         <span ng-if="election.finalVoteString == 'Yes'" class="dul-color">YES</span>
                         <span ng-if="election.finalVoteString == 'No'">NO</span>
                     </div>
-                    <div class="col-1 cell-body">
-                        <a class="admin-manage-buttons" ui-sref="dul_results_record({electionId: '{{election.electionId}}'})">
-                            <div class="create hover-color">Record</div>
-                        </a>
+                    <div class="col-1 cell-body f-center">
+                        <button class="cell-button hover-color" ui-sref="dul_results_record({electionId: '{{election.electionId}}'})">Record</button>
                     </div>
                 </div>
                 <hr class="pvotes-separator">
@@ -97,10 +95,8 @@
                         <span ng-if="election.finalVote == true" class="access-color">YES</span>
                         <span ng-if="election.finalVote == false">NO</span>
                     </div>
-                    <div class="col-1 cell-body">
-                        <a class="admin-manage-buttons" ui-sref="access_results_record({electionId: '{{election.electionId}}', referenceId: '{{election.referenceId}}'})">
-                            <div class="create hover-color">Record</div>
-                        </a>
+                    <div class="col-1 cell-body f-center">
+                        <button class="cell-button hover-color" ui-sref="access_results_record({electionId: '{{election.electionId}}', referenceId: '{{election.referenceId}}'})">Record</button>
                     </div>
                 </div>
                 <hr class="pvotes-separator">
