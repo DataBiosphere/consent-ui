@@ -4,8 +4,8 @@
             <button type="button" class="modal-close-btn close" ng-click="Modal.cancel()"><span aria-hidden="true">&times;</span></button>
             <h2 class="pvotes-box-title dul-color">Archive election?
                 <small>Are you sure you want to archive this election? 
-                    <span ng-show="election.electionStatus == 'Open'" class="no-padding display-inline">The current election will be stopped without logging a result and this case will no longer be available for DAC Review.</span>
-                    <span ng-show="election.electionStatus == 'Closed'" class="no-padding display-inline">This election result will no longer be valid.</span>
+                    <span ng-show="status == 'Open'" class="no-padding display-inline">The current election will be stopped without logging a result and this case will no longer be available for DAC Review.</span>
+                    <span ng-show="status == 'Closed'" class="no-padding display-inline">This election result will no longer be valid.</span>
                 </small>
             </h2>
         </div>

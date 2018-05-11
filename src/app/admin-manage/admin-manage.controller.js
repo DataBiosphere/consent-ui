@@ -8,7 +8,7 @@
     function AdminManage($modal, cmConsentService, cmElectionService, $scope) {
 
         var vm = this;
-        vm.electionsList = {'dul': []};
+        vm.electionsList = { 'dul': [] };
 
         vm.openCreate = openCreate;
         vm.openCancel = openCancel;
@@ -81,28 +81,29 @@
             });
         }
 
-        function openArchive(election) { 
-            $scope.electionArchived = true;
+        function openArchive(election) {
+            $scope.status = election.electionStatus;
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/archive-modal.html',
                 controller: 'Modal',
                 controllerAs: 'Modal',
-                scope: $scope,                                
-                resolve: {
-                    election: function () {
-                        vm.selectedElection = election;
-                    }
-                }
+                scope: $scope
             });
 
             modalInstance.result.then(function () {
-                init();
+                var electionToUpdate = {};
+                election.electionStatus === 'Open' ? electionToUpdate.status = 'Canceled' : election.electionStatus;
+                electionToUpdate.referenceId = election.consentId;
+                electionToUpdate.electionId = election.electionId;
+                electionToUpdate.archived = true;
+                cmElectionService.updateElection(electionToUpdate).$promise.then(function () {
+                    init();
+                });
             });
         }
 
         function addDul() {
-
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/dul-modal/add-dul-modal.html',

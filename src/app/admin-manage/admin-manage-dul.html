@@ -38,7 +38,7 @@
 
         <div dir-paginate="election in AdminManage.electionsList.dul | filter: searchDUL | itemsPerPage:10">
             <div class="grid-row pushed">
-                <div class="col-2 cell-body text" ng-class="{flagged : election.electionArchived}">{{election.consentName}}</div>
+                <div class="col-2 cell-body text" ng-class="{flagged : election.archived}">{{election.consentName}}</div>
                 <div class="col-1 cell-body text">
                     <span ng-show="election.electionStatus == 'un-reviewed'">- -</span>
                     <span ng-show="election.electionStatus != 'un-reviewed'">{{election.version}}</span>
@@ -71,8 +71,8 @@
                     </a>
                 </div>
                 <div class="icon-actions">
-                    <a ng-disabled="election.electionStatus == 'un-reviewed' || election.electionArchived" ng-click="AdminManage.openArchive(election.consentId)">
-                        <span class="glyphicon glyphicon-inbox caret-margin" ng-class="{activated : election.electionArchived}" aria-hidden="true" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right" tooltip="Archive election"></span>
+                    <a ng-disabled="election.electionStatus == 'un-reviewed' || election.archived" ng-click="AdminManage.openArchive(election)">
+                        <span class="glyphicon glyphicon-inbox caret-margin" ng-class="{activated : election.archived}" aria-hidden="true" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right" tooltip="Archive election"></span>
                     </a>
                     <a ng-disabled="election.electionStatus != 'un-reviewed'" ng-click="AdminManage.openDelete(election.consentId)">
                         <span class="glyphicon glyphicon-trash caret-margin" aria-hidden="true" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right" tooltip="Delete record"></span>
