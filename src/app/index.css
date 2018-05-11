@@ -982,6 +982,7 @@ small {
 }
 
 /***************************************************Tables*/
+/*Eventually refactor code in every table of the site with these classes and remove unused code*/
 
 .cell-header {
     font-style: italic;
@@ -1017,6 +1018,42 @@ small {
     position: absolute;
     right: 0;
 }
+
+.cell-button {
+    width: 100%;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    height: 28px;
+    line-height: 13px;
+    margin-top: 4px;
+    color: #777777;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    transition: background 0.3s ease;
+    background: rgba(204, 204, 204, 0.2);
+    box-shadow: 2px 2px rgba(204, 204, 204, 0.5);
+}
+
+.cell-button:hover {
+    background: #2FA4E7;
+    color: #ffffff !important;
+}
+
+.cell-button.cancel-color:hover {
+    background: #D13B07 !important;
+}
+
+.cell-button[disabled] {
+    color: #cccccc !important;
+    cursor: default !important;
+    pointer-events: none; /*disable tooltip as well*/
+    background: transparent;
+    box-shadow: none;
+}
+
 
 /***************************************************Buttons, Radios & Checkboxes*/
 
@@ -2109,8 +2146,10 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     margin-top: 4px;
 }
 
-.icon-actions a {
+.icon-actions button {
     margin-left: 10px;
+    border: none;
+    background: transparent;
 }
 
 .icon-actions .glyphicon {
@@ -2120,20 +2159,21 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     padding-top: 8px;
 }
 
-.icon-actions .glyphicon-inbox.activated {
-    color: #C16B0C;
-}
-
-.icon-actions a:hover .glyphicon{
+.icon-actions button:hover .glyphicon{
     color: #2FA4E7;
     cursor: pointer;
 }
 
-.icon-actions a[disabled] .glyphicon,
-.icon-actions a[disabled]:hover .glyphicon {
-    color: #cccccc !important;
+.icon-actions button[disabled] .glyphicon,
+.icon-actions button[disabled]:hover .glyphicon {
+    color: #cccccc;
     cursor: default !important;
     pointer-events: none; /*disable tooltip as well*/
+}
+
+.icon-actions .glyphicon-inbox.activated,
+.icon-actions button[disabled] .glyphicon-inbox.activated{
+    color: #C16B0C !important;
 }
 
 .remove-dul-col{
@@ -3526,7 +3566,7 @@ tags-input .tags .tag-item{
     padding: 0;
 }
 
-.grid-row.pushed {
+.grid-row.pushed-2 {
     padding-right: 70px;
     position: relative;
 }
