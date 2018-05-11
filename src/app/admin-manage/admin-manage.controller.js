@@ -24,8 +24,9 @@
             cmConsentService.findConsentManage(vm);
         }
 
-        function openCreate(consentId) {
-            $scope.consentId = consentId;
+        function openCreate(election) {
+            $scope.consentId = election.consentId;
+            $scope.election = election;
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/create-election-modal/create-modal.html',

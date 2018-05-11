@@ -4,7 +4,7 @@
             <button type="button" class="modal-close-btn close" ng-disabled="disableNoButton" ng-click="ModalCreate.cancel()"><span aria-hidden="true">&times;</span></button>
             <h2 class="pvotes-box-title dul-color">Create election?
                 <small>Are you sure you want the DAC to vote on this case?
-                    <span ng-show="election.electionStatus == 'Closed' && !election.electionArchived" class="no-padding display-inline">The previous election will be archived and it's result will no longer be valid.</span>
+                    <span ng-show="election.electionStatus == 'Closed' && !election.archived" class="no-padding display-inline">The previous election will be archived and it's result will no longer be valid.</span>
                 </small>
             </h2>
             <div class="admin-alerts admin-create-alerts">

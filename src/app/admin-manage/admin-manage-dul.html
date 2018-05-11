@@ -58,7 +58,7 @@
                 
                 <div class="col-1 cell-body">
                     <a class="admin-manage-buttons">
-                        <div ng-if="election.electionStatus != 'Open' && election.editable" class="create hover-color" ng-click="AdminManage.openCreate(election.consentId)">
+                        <div ng-if="election.electionStatus != 'Open' && election.editable" class="create hover-color" ng-click="AdminManage.openCreate(election)">
                             <span>Create</span>
                         </div>
                         <!-- Not sure when election.editable is true, remove if necessary 
