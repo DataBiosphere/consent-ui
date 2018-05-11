@@ -92,19 +92,22 @@
         }
 
         function openArchive(election) {
-            $scope.status = election.electionStatus;
-            var modalInstance = $modal.open({
-                animation: false,
-                templateUrl: 'app/modals/archive-modal.html',
-                controller: 'Modal',
-                controllerAs: 'Modal',
-                scope: $scope
-            });
-
-            modalInstance.result.then(function () {
-                updateElection(election.electionStatus === 'Open' ? 'Canceled' : election.electionStatus,
-                    election.consentId, election.electionId, true);
-            });
+            if(!election.archived) {
+                $scope.status = election.electionStatus;
+                var modalInstance = $modal.open({
+                    animation: false,
+                    templateUrl: 'app/modals/archive-modal.html',
+                    controller: 'Modal',
+                    controllerAs: 'Modal',
+                    scope: $scope
+                });
+    
+                modalInstance.result.then(function () {
+                    updateElection(election.electionStatus === 'Open' ? 'Canceled' : election.electionStatus,
+                        election.consentId, election.electionId, true);
+                });
+            }
+            
         }
 
         function addDul() {
