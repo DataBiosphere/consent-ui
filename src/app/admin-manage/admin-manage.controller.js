@@ -37,7 +37,11 @@
             });
 
             modalInstance.result.then(function () {
-                init();
+                if (election.electionStatus == 'Closed' && !election.archived) {
+                    updateElection(election.electionStatus, election.consentId, election.electionId, true);
+                } else {
+                    init();
+                }                
             });
         }
 
@@ -56,13 +60,18 @@
             });
 
             modalInstance.result.then(function () {
-                var electionToUpdate = {};
-                electionToUpdate.status = 'Canceled';
-                electionToUpdate.referenceId = vm.selectedElection.consentId;
-                electionToUpdate.electionId = vm.selectedElection.electionId;
-                cmElectionService.updateElection(electionToUpdate).$promise.then(function () {
-                    init();
-                });
+                updateElection('Canceled', vm.selectedElection.consentId, vm.selectedElection.electionId, false);
+            });
+        }
+
+        function updateElection(status, consentId, electionId, archived) {
+            var electionToUpdate = {};
+            electionToUpdate.status = status;
+            electionToUpdate.referenceId = consentId;
+            electionToUpdate.electionId = electionId;
+            electionToUpdate.archived = archived;
+            cmElectionService.updateElection(electionToUpdate).$promise.then(function () {
+                init();
             });
         }
 
@@ -93,14 +102,8 @@
             });
 
             modalInstance.result.then(function () {
-                var electionToUpdate = {};
-                election.electionStatus === 'Open' ? electionToUpdate.status = 'Canceled' : election.electionStatus;
-                electionToUpdate.referenceId = election.consentId;
-                electionToUpdate.electionId = election.electionId;
-                electionToUpdate.archived = true;
-                cmElectionService.updateElection(electionToUpdate).$promise.then(function () {
-                    init();
-                });
+                updateElection(election.electionStatus === 'Open' ? 'Canceled' : election.electionStatus,
+                    election.consentId, election.electionId, true);
             });
         }
 
