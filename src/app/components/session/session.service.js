@@ -93,16 +93,15 @@
         }
 
         function containsOtherThanResearcherAndDataOwner(roles, rootRoles){
-            var i;
             if(!Boolean(roles)){
                 return false;
             }
-            for (i = 0; i < roles.length; i++) {
-                if(roles[i].name !== rootRoles.researcher && roles[i].name !== rootRoles.dataOwner){
-                    return true;
-                }
-            }
-            return false;
+
+            var rolesNotAllowed = [rootRoles.researcher, rootRoles.dataOwner];
+
+            return roles.filter(function(role){
+                    return rolesNotAllowed.indexOf(role.name) !== -1}
+                ).length === 0;
         }
 
         return {
