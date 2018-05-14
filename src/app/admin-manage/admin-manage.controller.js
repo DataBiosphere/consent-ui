@@ -92,7 +92,7 @@
         }
 
         function openArchive(election) {
-            if(!election.archived) {
+            if(!election.archived && election.electionStatus !== 'un-reviewed') {
                 $scope.status = election.electionStatus;
                 var modalInstance = $modal.open({
                     animation: false,
