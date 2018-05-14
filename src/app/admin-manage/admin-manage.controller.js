@@ -36,12 +36,15 @@
 
             });
 
-            modalInstance.result.then(function () {
-                if (election.electionStatus == 'Closed' && !election.archived) {
-                    updateElection(election.electionStatus, election.consentId, election.electionId, true);
-                } else {
-                    init();
-                }                
+            modalInstance.result.then(function (result) {
+                if (result !== 'cancel') {
+                    if (election.electionStatus == 'Closed' && !election.archived) {
+                        updateElection(election.electionStatus, election.consentId, election.electionId, true);
+                    } else {
+                        init();
+                    }
+                }  
+                       
             });
         }
 
@@ -59,8 +62,10 @@
                 }
             });
 
-            modalInstance.result.then(function () {
-                updateElection('Canceled', vm.selectedElection.consentId, vm.selectedElection.electionId, false);
+            modalInstance.result.then(function (result) {
+                if (result !== 'cancel') {
+                    updateElection('Canceled', vm.selectedElection.consentId, vm.selectedElection.electionId, false);
+                }
             });
         }
 
@@ -84,10 +89,12 @@
                 controllerAs: 'Modal'
             });
 
-            modalInstance.result.then(function () {
-                cmConsentService.deleteConsent(consentId).then(function () {
-                    init();
-                });
+            modalInstance.result.then(function (result) {
+                if (result !== 'cancel') {
+                    cmConsentService.deleteConsent(consentId).then(function () {
+                        init();
+                    });
+                }     
             });
         }
 
@@ -102,9 +109,11 @@
                     scope: $scope
                 });
     
-                modalInstance.result.then(function () {
-                    updateElection(election.electionStatus === 'Open' ? 'Canceled' : election.electionStatus,
+                modalInstance.result.then(function (result) {
+                    if (result !== 'cancel') {
+                        updateElection(election.electionStatus === 'Open' ? 'Canceled' : election.electionStatus,
                         election.consentId, election.electionId, true);
+                    }                    
                 });
             }
             
