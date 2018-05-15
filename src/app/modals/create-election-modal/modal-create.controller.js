@@ -29,7 +29,7 @@
 
         vm.cancel = function () {
             $state.go('admin_manage');
-            $modalInstance.close();
+            $modalInstance.dismiss('cancel');
         };
 
         vm.singleModel = 0;

@@ -36,36 +36,35 @@
 
             });
 
-            modalInstance.result.then(function (result) {
-                if (result !== 'cancel') {
-                    if (election.electionStatus == 'Closed' && !election.archived) {
-                        updateElection(election.electionStatus, election.consentId, election.electionId, true);
-                    } else {
-                        init();
-                    }
-                }  
-                       
+            modalInstance.result.then(function () {
+                if (election.electionStatus == 'Closed' && !election.archived) {
+                    updateElection(election.electionStatus, election.consentId, election.electionId, true);
+                } else {
+                    init();
+                }
+
+
             });
         }
 
         function openCancel(election) {
-
+            $scope.electionArchived = true;
+            $scope.electionType = 'dul';
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/cancel-modal.html',
                 controller: 'Modal',
                 controllerAs: 'Modal',
+                scope: $scope,
                 resolve: {
                     election: function () {
                         vm.selectedElection = election;
                     }
                 }
             });
+            modalInstance.result.then(function ($scope) {
+                updateElection('Canceled', vm.selectedElection.consentId, vm.selectedElection.electionId, $scope.electionArchived);
 
-            modalInstance.result.then(function (result) {
-                if (result !== 'cancel') {
-                    updateElection('Canceled', vm.selectedElection.consentId, vm.selectedElection.electionId, false);
-                }
             });
         }
 
@@ -81,7 +80,6 @@
         }
 
         function openDelete(consentId) {
-
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/delete-consent-modal.html',
@@ -89,34 +87,30 @@
                 controllerAs: 'Modal'
             });
 
-            modalInstance.result.then(function (result) {
-                if (result !== 'cancel') {
-                    cmConsentService.deleteConsent(consentId).then(function () {
-                        init();
-                    });
-                }     
+            modalInstance.result.then(function () {
+                cmConsentService.deleteConsent(consentId).then(function () {
+                    init();
+                });
             });
         }
 
+
         function openArchive(election) {
-            if(!election.archived && election.electionStatus !== 'un-reviewed') {
-                $scope.status = election.electionStatus;
-                var modalInstance = $modal.open({
-                    animation: false,
-                    templateUrl: 'app/modals/archive-modal.html',
-                    controller: 'Modal',
-                    controllerAs: 'Modal',
-                    scope: $scope
-                });
-    
-                modalInstance.result.then(function (result) {
-                    if (result !== 'cancel') {
-                        updateElection(election.electionStatus === 'Open' ? 'Canceled' : election.electionStatus,
-                        election.consentId, election.electionId, true);
-                    }                    
-                });
-            }
-            
+            $scope.status = election.electionStatus;
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/archive-modal.html',
+                controller: 'Modal',
+                controllerAs: 'Modal',
+                scope: $scope
+            });
+
+            modalInstance.result.then(function () {
+                updateElection(election.electionStatus === 'Open' ? 'Canceled' : election.electionStatus,
+                    election.consentId, election.electionId, true);
+
+            });
+
         }
 
         function addDul() {
@@ -155,6 +149,5 @@
             }, function () {
             });
         }
-
     }
 })();
