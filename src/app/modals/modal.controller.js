@@ -5,12 +5,12 @@
         .controller('Modal', Modal);
 
     /* ngInject */
-    function Modal($modalInstance) {
+    function Modal($modalInstance, $scope) {
 
         var vm = this;
 
         vm.ok = function () {
-            $modalInstance.close();
+            $modalInstance.close($scope);
         };
 
         vm.cancel = function () {

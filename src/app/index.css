@@ -115,6 +115,10 @@ small {
     list-style: none;
 }
 
+.display-inline {
+    display: inline !important;
+}
+
 .default-color {
     color: #777777 !important;
 }
@@ -1072,6 +1076,12 @@ small {
     padding-left: 25px !important;
     margin-right: 15px;
     font-size: 13px;
+}
+
+.regular-checkbox.normal {
+    font-weight: normal;
+    font-size: 15px;
+    color: #777777;
 }
 
 .regular-checkbox:before {

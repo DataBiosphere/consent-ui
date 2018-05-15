@@ -40,12 +40,14 @@
         }
 
         function openCancel(election) {
-
+            $scope.electionArchived = true;
+            $scope.electionType = 'dul';
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/cancel-modal.html',
                 controller: 'Modal',
                 controllerAs: 'Modal',
+                scope: $scope,                                
                 resolve: {
                     election: function () {
                         vm.selectedElection = election;
@@ -53,11 +55,12 @@
                 }
             });
 
-            modalInstance.result.then(function () {
+            modalInstance.result.then(function ($scope) {
                 var electionToUpdate = {};
                 electionToUpdate.status = 'Canceled';
                 electionToUpdate.referenceId = vm.selectedElection.consentId;
                 electionToUpdate.electionId = vm.selectedElection.electionId;
+                electionToUpdate.archived =  $scope.electionArchived;
                 cmElectionService.updateElection(electionToUpdate).$promise.then(function () {
                     init();
                 });
@@ -65,7 +68,6 @@
         }
 
         function openDelete(consentId) {
-
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/delete-consent-modal.html',
@@ -79,6 +81,7 @@
                 });
             });
         }
+
 
         function addDul() {
 
@@ -117,6 +120,5 @@
             }, function () {
             });
         }
-
     }
 })();
