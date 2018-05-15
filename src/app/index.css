@@ -1002,7 +1002,7 @@ small {
 .cell-sort .sort-icon {
     color: #777777;
     font-size: 11px;
-    margin: 3px 0 0 5px;
+    margin: 5px 0 0 5px;
     vertical-align: top;
 }
 
@@ -3572,7 +3572,7 @@ tags-input .tags .tag-item{
     padding: 0 10px !important;
 }
 
-/***************************************************8 col grid*/
+/***************************************************7 col grid*/
 
 .grid-row {
     display: inline-block;
