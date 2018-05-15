@@ -42,7 +42,7 @@
             <div dir-paginate="election in ReviewedCases.electionsList.dul | orderBy:sortBy:reverse | filter: searchDULcases | itemsPerPage:5" pagination-id="dulCases" current-page="currentDulPage">
                 <div class="grid-row">
                     <div class="col-3 cell-body text" ng-class="{flagged : election.archived}">{{election.displayId}}</div>
-                    <div class="col-1 cell-body text">{{election.version}}</div>
+                    <div class="col-1 cell-body text">{{election.version < 10 ? '0' + election.version : election.version}}</div>
                     <div class="col-1 cell-body text">{{election.finalVoteDate}}</div>
                     <div class="col-1 cell-body text f-center bold">
                         <span ng-if="election.finalVoteString == 'Yes'" class="dul-color">YES</span>
