@@ -88,13 +88,12 @@
             });
         }
 
-        function showStatistics(roles, rootRoles){
-            return containsOtherThanResearcherAndDataOwner(roles, rootRoles);
-        }
 
-        function containsOtherThanResearcherAndDataOwner(roles, rootRoles){
-            if(!Boolean(roles)){
+        function showStatistics(roles, rootRoles){
+            if(!Boolean(roles)) {
                 return false;
+            } else if (cmAuthenticateService.isAuthorized(rootRoles.admin, roles)) {
+                return true
             }
 
             var rolesNotAllowed = [rootRoles.researcher, rootRoles.dataOwner];
