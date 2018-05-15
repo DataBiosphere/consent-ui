@@ -46,6 +46,7 @@
             postObject.finalVote = election.finalVote;
             postObject.status = election.status;
             postObject.finalRationale = election.finalRationale;
+            postObject.archived = election.archived;
             return ElectionUpdateResource.update({electionId: election.electionId}, postObject);
         }
 
