@@ -5,7 +5,7 @@
         .controller('Header', Header);
 
     /* ngInject */
-    function Header($scope, $state, $modal) {
+    function Header($scope, $state, $modal, cmLoginUserService) {
 
         var vm = this;
         vm.helpMeModal = helpMeModal;
@@ -16,7 +16,7 @@
         };
 
         $scope.navbarCollapsed = true;
-
+        $scope.roles = cmLoginUserService;
 
         function goToRP() {
             $state.go('rp_application.step1', {}, { reload: true });
@@ -35,25 +35,6 @@
             });
         }
 
-        $scope.showStatistics = function(roles, rootRoles){
-            if(containsOtherThanResearcherAndDataOwner(roles, rootRoles)){
-                return true;
-            }
-            return false;
-        };
-
-        function containsOtherThanResearcherAndDataOwner(roles, rootRoles){
-            var i;
-            if(!Boolean(roles)){
-                return false;
-            }
-            for (i = 0; i < roles.length; i++) {
-                if(roles[i].name !== rootRoles.researcher && roles[i].name !== rootRoles.dataOwner){
-                    return true;
-                }
-            }
-            return false;
-        }
     }
 
 })();

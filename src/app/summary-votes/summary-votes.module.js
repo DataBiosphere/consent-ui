@@ -2,6 +2,6 @@
     'use strict';
 
     angular
-        .module('cmSummaryVotes', ['ui.router', 'cmChart','cmUserRoles','cmPendingCase']);
+        .module('cmSummaryVotes', ['ui.router', 'cmChart','cmUserRoles','cmPendingCase', 'cmSession']);
 
 })();
