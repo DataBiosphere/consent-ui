@@ -90,17 +90,18 @@
 
 
         function showStatistics(roles, rootRoles){
+            var visible = false;
             if(!Boolean(roles)) {
-                return false;
+                visible =false;
             } else if (cmAuthenticateService.isAuthorized(rootRoles.admin, roles)) {
-                return true
-            }
-
-            var rolesNotAllowed = [rootRoles.researcher, rootRoles.dataOwner];
-
-            return roles.filter(function(role){
+                visible = true
+            }  else {
+                var rolesNotAllowed = [rootRoles.researcher, rootRoles.dataOwner];
+                visible = roles.filter(function(role){
                     return rolesNotAllowed.indexOf(role.name) !== -1}
                 ).length === 0;
+            }
+            return visible;
         }
 
         return {
