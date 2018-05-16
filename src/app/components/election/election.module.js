@@ -62,5 +62,9 @@
         .factory('DarElectionDatasetVotes', function($resource, apiUrl){
             return $resource(apiUrl+"dataRequest/:requestId/election/dataSetVotes", {}, {
                 get:{method: 'GET', params: {requestId: '@requestId'}}});
+        })
+        .factory('ElectionVote', function($resource, apiUrl){
+            return $resource(apiUrl+"election/vote/:voteId", {}, {
+                get:{method: 'GET', params: {voteId: '@voteId'}}});
         });
 })();

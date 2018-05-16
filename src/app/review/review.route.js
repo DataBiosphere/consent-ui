@@ -35,8 +35,8 @@
                         }
                     },
                     election: function ($stateParams, cmElectionService) {
-                        if ($stateParams.consentId !== null) {
-                            return cmElectionService.findElection($stateParams.consentId).$promise;
+                        if ($stateParams.voteId !== null) {
+                            return cmElectionService.findElectionByVoteId($stateParams.voteId).$promise;
                         }
                     }
 
