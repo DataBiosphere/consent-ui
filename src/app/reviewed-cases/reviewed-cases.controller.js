@@ -45,9 +45,6 @@
             vm.electionsList.dul = transformElectionResultData(reviewedConsents);
             vm.electionsList.access = transformElectionResultData(reviewedDRs);
 
-            vm.electionsList.dul.forEach(election => {
-                election.ct = String(election.displayId) + ' ' + String(election.version < 10 ? '0' + election.version : election.version);
-            });
         }
     }
 
