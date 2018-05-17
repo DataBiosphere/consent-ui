@@ -56,7 +56,7 @@
         };
 
         $rootScope.hasRole = function(role) {
-            return ($rootScope.currentUser.roles.filter(function(r) {return r.name === role}).length > 0);
+            return ($rootScope.currentUser.roles.filter(function(r) {return r.name === role;}).length > 0);
         };
 
         $rootScope.loadScript = function (url, type, charset) {

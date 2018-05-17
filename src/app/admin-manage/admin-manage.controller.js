@@ -37,7 +37,7 @@
             });
 
             modalInstance.result.then(function () {
-                if (election.electionStatus == 'Closed' && !election.archived) {
+                if (election.electionStatus === 'Closed' && !election.archived) {
                     updateElection(election.electionStatus, election.consentId, election.electionId, true);
                 } else {
                     init();
