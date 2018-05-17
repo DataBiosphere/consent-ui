@@ -981,6 +981,95 @@ small {
     cursor: default !important;
 }
 
+/***************************************************Tables*/
+/*Eventually refactor code in every table of the site with these classes and remove unused code*/
+
+.cell-header {
+    font-style: italic;
+    font-size: 16px;
+    padding: 5px 10px;
+    font-weight: 500;
+}
+
+.cell-sort:hover {
+    cursor: pointer;
+}
+
+.cell-sort:hover .sort-icon {
+    color: #2FA4E7;
+}
+
+.cell-sort .sort-icon {
+    color: #777777;
+    font-size: 10px;
+    margin-left: 5px;
+    vertical-align: 20%;
+}
+
+.cell-body {
+    color: #777777;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 2px 10px;
+}
+
+.cell-body.text {
+    padding-top: 12px
+}
+
+.cell-body.flagged {
+    padding-right: 60px;
+}
+
+.cell-body.flagged::after {
+    content: 'Archived';
+    background-color: #777777;
+    color: #ffffff;
+    font-size: 11px;
+    font-style: italic;
+    padding: 5px;
+    margin-top: -4px;
+    position: absolute;
+    right: 0;
+}
+
+.cell-button {
+    width: 100%;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    height: 28px;
+    line-height: 13px;
+    margin-top: 4px;
+    color: #777777;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    transition: background 0.3s ease;
+    background: rgba(204, 204, 204, 0.2);
+    box-shadow: 2px 2px rgba(204, 204, 204, 0.5);
+}
+
+.cell-button:hover {
+    background: #2FA4E7;
+    color: #ffffff !important;
+}
+
+.cell-button.cancel-color:hover {
+    background: #D13B07 !important;
+}
+
+.cell-button[disabled] {
+    color: #cccccc !important;
+    cursor: default !important;
+    pointer-events: none; /*disable tooltip as well*/
+    background: transparent;
+    box-shadow: none;
+}
+
+
 /***************************************************Buttons, Radios & Checkboxes*/
 
 .button-holder {
@@ -2064,6 +2153,42 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
 .manage-wrapper{
     position: relative;
     margin-right: 30px !important;
+}
+
+.icon-actions {
+    position: absolute;
+    right: 10px;
+    margin-top: 4px;
+}
+
+.icon-actions button {
+    margin-left: 10px;
+    border: none;
+    background: transparent;
+}
+
+.icon-actions .glyphicon {
+    font-size: 1.15em;
+    text-shadow: 1px 1px 0 #ffffff;
+    color: #777777;
+    padding-top: 8px;
+}
+
+.icon-actions button:hover .glyphicon{
+    color: #2FA4E7;
+    cursor: pointer;
+}
+
+.icon-actions button[disabled] .glyphicon,
+.icon-actions button[disabled]:hover .glyphicon {
+    color: #cccccc;
+    cursor: default !important;
+    pointer-events: none; /*disable tooltip as well*/
+}
+
+.icon-actions .glyphicon-inbox.activated,
+.icon-actions button[disabled] .glyphicon-inbox.activated{
+    color: #C16B0C !important;
 }
 
 .remove-dul-col{
@@ -3447,4 +3572,50 @@ tags-input .tags .tag-item{
     padding: 0 10px !important;
 }
 
+/***************************************************7 col grid*/
 
+.grid-row {
+    display: inline-block;
+    width: 100%;
+    margin: 0; 
+    padding: 0;
+}
+
+.grid-row.pushed-2 {
+    padding-right: 70px;
+    position: relative;
+}
+
+.grid-row .col-1, .grid-row .col-2, .grid-row .col-3, .grid-row .col-4, .grid-row .col-5, .grid-row .col-6, .grid-row .col-7{
+    position: relative;
+    min-height: 1px;
+    float: left;
+}
+
+.grid-row .col-1 {
+    width: 14.285%;
+}
+
+.grid-row .col-2 {
+    width: 28.57%;
+}
+
+.grid-row .col-3 {
+    width: 42.855%;
+}
+
+.grid-row .col-4 {
+    width: 57.14%;
+}
+
+.grid-row .col-5 {
+    width: 71.425%;
+}
+
+.grid-row .col-6 {
+    width: 85.71%;
+}
+
+.grid-row .col-7 {
+    width: 100%;
+}
