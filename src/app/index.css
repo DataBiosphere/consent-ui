@@ -271,7 +271,7 @@ small {
     color:#2899BC;
     padding: 0;
     margin-bottom: 8px;
-    }
+}
 
 /**/
 
@@ -991,6 +991,21 @@ small {
     font-weight: 500;
 }
 
+.cell-sort:hover {
+    cursor: pointer;
+}
+
+.cell-sort:hover .sort-icon {
+    color: #2FA4E7;
+}
+
+.cell-sort .sort-icon {
+    color: #777777;
+    font-size: 10px;
+    margin-left: 5px;
+    vertical-align: 20%;
+}
+
 .cell-body {
     color: #777777;
     white-space: nowrap;
@@ -1700,21 +1715,21 @@ a .urgent:hover, a .pending:hover, a .editable:hover, a .enabled:hover {
     cursor: pointer !important;
 }
 
- .apply-dataset{
+.apply-dataset{
     margin-top: 25px;
 }
 
- .apply-dataset.disabled,
- .apply-dataset.disabled:hover{
+.apply-dataset.disabled,
+.apply-dataset.disabled:hover{
     background: #eeeeee !important;
     color: #cccccc !important;
     border: none !important;
     padding: 10px 15px 7px 15px !important;
 }
 
- .apply-dataset.disabled:hover{
+.apply-dataset.disabled:hover{
     cursor: default !important;
- }
+}
 
 .multi-step-pager li button{
     padding: 8px 15px 7px 15px !important;
@@ -3557,12 +3572,12 @@ tags-input .tags .tag-item{
     padding: 0 10px !important;
 }
 
-/***************************************************8 col grid*/
+/***************************************************7 col grid*/
 
 .grid-row {
     display: inline-block;
     width: 100%;
-    margin: 0; 
+    margin: 0;
     padding: 0;
 }
 

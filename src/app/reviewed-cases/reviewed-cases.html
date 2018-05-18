@@ -22,38 +22,39 @@
             </div>
         </div>
         <div class="jumbotron box-vote-singleresults box-vote-no-margin">
-            <div class="row">
-                <div class="pvotes-box-head row fsi-row-lg-level fsi-row-md-level">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-box-subtitle dul-color">Consent id</div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-box-subtitle dul-color">Result Date</div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 center-text pvotes-box-subtitle dul-color">Final Result</div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 center-text pvotes-box-subtitle dul-color">Record</div>
-                    <hr class="pvotes-main-separator">
+            <div class="grid-row">
+                <div class="col-3 cell-header cell-sort dul-color" ng-click="sort('displayId')">Consent id
+                    <span class="glyphicon sort-icon glyphicon-sort"></span>
                 </div>
-                <div class="pvotes-box-body">
-                    <div dir-paginate="election in ReviewedCases.electionsList.dul | filter: searchDULcases | itemsPerPage:5" pagination-id="dulCases" current-page="currentDulPage">
-                        <hr class="pvotes-separator">
-                        <div class="row pvotes-main-list reviewed-cases-list">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">{{election.displayId}}</div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id">{{election.finalVoteDate}}</div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id center-text bold">
-                                <span ng-if="election.finalVoteString == 'Yes'" class="dul-color">YES</span>
-                                <span ng-if="election.finalVoteString == 'No'">NO</span>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 btn-record">
-                                <a ui-sref="dul_results_record({electionId: '{{election.electionId}}'})">Record</a>
-                            </div>
-                        </div>
+                <div class="col-1 cell-header cell-sort dul-color" ng-click="sort('version')">Election N°
+                    <span class="glyphicon sort-icon glyphicon-sort"></span>
+                </div>
+                <div class="col-1 cell-header dul-color">Result Date</div>
+                <div class="col-1 cell-header f-center dul-color">Final Result</div>
+                <div class="col-1 cell-header f-center dul-color">Record</div>
+            </div>
+            <hr class="pvotes-main-separator">
+            <div dir-paginate="election in ReviewedCases.electionsList.dul | orderBy:sortBy:reverse | filter: searchDULcases | itemsPerPage:5" pagination-id="dulCases" current-page="currentDulPage">
+                <div class="grid-row">
+                    <div class="col-3 cell-body text" ng-class="{flagged : election.archived}">{{election.displayId}}</div>
+                    <div class="col-1 cell-body text">{{election.version < 10 ? '0' + election.version : election.version}}</div>
+                    <div class="col-1 cell-body text">{{election.finalVoteDate}}</div>
+                    <div class="col-1 cell-body text f-center bold">
+                        <span ng-if="election.finalVoteString == 'Yes'" class="dul-color">YES</span>
+                        <span ng-if="election.finalVoteString == 'No'">NO</span>
                     </div>
-                    <hr class="pvotes-separator">
+                    <div class="col-1 cell-body f-center">
+                        <button class="cell-button hover-color" ui-sref="dul_results_record({electionId: '{{election.electionId}}'})">Record</button>
+                    </div>
                 </div>
-                <div dir-pagination-controls
-                     max-size="5"
-                     direction-links="true"
-                     boundary-links="true"
-                     class="pvotes-pagination"
-                     pagination-id="dulCases">
-                </div>
+                <hr class="pvotes-separator">
+            </div>
+            <div dir-pagination-controls
+                 max-size="5"
+                 direction-links="true"
+                 boundary-links="true"
+                 class="pvotes-pagination"
+                 pagination-id="dulCases">
             </div>
         </div>
     </div>
@@ -72,39 +73,33 @@
             </div>
         </div>
         <div class="jumbotron box-vote-singleresults box-vote-no-margin">
-            <div class="row">
-                <div class="pvotes-box-head row fsi-row-lg-level fsi-row-md-level">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-box-subtitle access-color">Data Request Id</div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-box-subtitle access-color">Result Date</div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 center-text pvotes-box-subtitle access-color">Final Result</div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 center-text pvotes-box-subtitle access-color">Record
+            <div class="grid-row">
+                <div class="col-4 cell-header access-color">Data Request id</div>
+                <div class="col-1 cell-header access-color">Result Date</div>
+                <div class="col-1 cell-header f-center access-color">Final Result</div>
+                <div class="col-1 cell-header f-center access-color">Record</div>
+            </div>
+            <hr class="pvotes-main-separator">
+            <div dir-paginate="election in ReviewedCases.electionsList.access | filter: searchAccessCases | itemsPerPage:5" pagination-id="accessCases" current-page="currentDarPage">
+                <div class="grid-row">
+                    <div class="col-4 cell-body text">{{election.displayId}}</div>
+                    <div class="col-1 cell-body text">{{election.finalVoteDate}}</div>
+                    <div class="col-1 cell-body text f-center bold">
+                        <span ng-if="election.finalVote == true" class="access-color">YES</span>
+                        <span ng-if="election.finalVote == false">NO</span>
                     </div>
-                    <hr class="pvotes-main-separator">
-                </div>
-                <div class="pvotes-box-body" id="searchTextResults">
-                    <div dir-paginate="election in ReviewedCases.electionsList.access | filter: searchAccessCases | itemsPerPage:5" pagination-id="accessCases" current-page="currentDarPage">
-                        <hr class="pvotes-separator">
-                        <div class="row pvotes-main-list admin-users-list">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">{{election.displayId}}</div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id">{{election.finalVoteDate}}</div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pvotes-list-id center-text bold">
-                                <span ng-if="election.finalVote == true" class="access-color">YES</span>
-                                <span ng-if="election.finalVote == false">NO</span>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 btn-edit">
-                                <a ui-sref="access_results_record({electionId: '{{election.electionId}}', referenceId: '{{election.referenceId}}'})">Record</a>
-                            </div>
-                        </div>
+                    <div class="col-1 cell-body f-center">
+                        <button class="cell-button hover-color" ui-sref="access_results_record({electionId: '{{election.electionId}}', referenceId: '{{election.referenceId}}'})">Record</button>
                     </div>
-                    <hr class="pvotes-separator">
                 </div>
-                <div dir-pagination-controls
-                     max-size="5"
-                     direction-links="true"
-                     boundary-links="true"
-                     class="pvotes-pagination"
-                     pagination-id="accessCases">
-                </div>
+                <hr class="pvotes-separator">
+            </div>
+            <div dir-pagination-controls
+                 max-size="5"
+                 direction-links="true"
+                 boundary-links="true"
+                 class="pvotes-pagination"
+                 pagination-id="accessCases">
             </div>
         </div>
     </div>
