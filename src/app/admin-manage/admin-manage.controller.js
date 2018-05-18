@@ -8,11 +8,12 @@
     function AdminManage($modal, cmConsentService, cmElectionService, $scope) {
 
         var vm = this;
-        vm.electionsList = {'dul': []};
+        vm.electionsList = { 'dul': [] };
 
         vm.openCreate = openCreate;
         vm.openCancel = openCancel;
         vm.openDelete = openDelete;
+        vm.openArchive = openArchive;
 
         vm.addDul = addDul;
         vm.editDul = editDul;
@@ -23,8 +24,9 @@
             cmConsentService.findConsentManage(vm);
         }
 
-        function openCreate(consentId) {
-            $scope.consentId = consentId;
+        function openCreate(election) {
+            $scope.consentId = election.consentId;
+            $scope.election = election;
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/create-election-modal/create-modal.html',
@@ -35,7 +37,13 @@
             });
 
             modalInstance.result.then(function () {
-                init();
+                if (election.electionStatus === 'Closed' && !election.archived) {
+                    updateElection(election.electionStatus, election.consentId, election.electionId, true);
+                } else {
+                    init();
+                }
+
+
             });
         }
 
@@ -47,23 +55,27 @@
                 templateUrl: 'app/modals/cancel-modal.html',
                 controller: 'Modal',
                 controllerAs: 'Modal',
-                scope: $scope,                                
+                scope: $scope,
                 resolve: {
                     election: function () {
                         vm.selectedElection = election;
                     }
                 }
             });
-
             modalInstance.result.then(function ($scope) {
-                var electionToUpdate = {};
-                electionToUpdate.status = 'Canceled';
-                electionToUpdate.referenceId = vm.selectedElection.consentId;
-                electionToUpdate.electionId = vm.selectedElection.electionId;
-                electionToUpdate.archived =  $scope.electionArchived;
-                cmElectionService.updateElection(electionToUpdate).$promise.then(function () {
-                    init();
-                });
+                updateElection('Canceled', vm.selectedElection.consentId, vm.selectedElection.electionId, $scope.electionArchived);
+
+            });
+        }
+
+        function updateElection(status, consentId, electionId, archived) {
+            var electionToUpdate = {};
+            electionToUpdate.status = status;
+            electionToUpdate.referenceId = consentId;
+            electionToUpdate.electionId = electionId;
+            electionToUpdate.archived = archived;
+            cmElectionService.updateElection(electionToUpdate).$promise.then(function () {
+                init();
             });
         }
 
@@ -83,8 +95,25 @@
         }
 
 
-        function addDul() {
+        function openArchive(election) {
+            $scope.status = election.electionStatus;
+            var modalInstance = $modal.open({
+                animation: false,
+                templateUrl: 'app/modals/archive-modal.html',
+                controller: 'Modal',
+                controllerAs: 'Modal',
+                scope: $scope
+            });
 
+            modalInstance.result.then(function () {
+                updateElection(election.electionStatus === 'Open' ? 'Canceled' : election.electionStatus,
+                    election.consentId, election.electionId, true);
+
+            });
+
+        }
+
+        function addDul() {
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/dul-modal/add-dul-modal.html',
