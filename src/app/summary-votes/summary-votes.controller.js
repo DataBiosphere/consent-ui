@@ -5,16 +5,16 @@
         .controller('SummaryVotes', SummaryVotes);
 
     /* ngInject */
-    function SummaryVotes(apiUrl, cmPendingCaseService, cmStatFilesService) {
+    function SummaryVotes($scope, apiUrl, cmPendingCaseService, cmStatFilesService, cmLoginUserService) {
         var vm = this;
         vm.getFile = getFile;
 
          function getFile(fileType){
                    cmStatFilesService.getFile(fileType);
                 }
+    $scope.roles = cmLoginUserService;
 
-
-        var data = {
+    var data = {
             'accessTotal': [
                 ['Results', 'Votes'],
                 ['Reviewed cases', 0],

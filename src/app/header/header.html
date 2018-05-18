@@ -26,7 +26,7 @@
                         <li><a href onclick="signOut();">Sign out</a></li>
                     </ul>
                 </li>
-            </ul>                              
+            </ul>
             <div class="collapse navbar-collapse no-padding col-lg-10 col-md-10 col-sm-9 col-xs-12 navbar-right" collapse="navbarCollapsed">
                 <ul ng-show="$root.currentUser === null" class="no-margin">
                     <li><a class="navbar-duos-link" href="#/home_about"><div class="navbar-duos-icon navbar-duos-icon-about"></div>About</a></li>
@@ -54,23 +54,23 @@
                 <li ng-repeat="rol in $root.currentUser.roles" ng-show="'{{rol.name}}' === '{{$root.userRoles.researcher}}'">
                     <a href="" ng-click="Header.goToRP()"> Request Application</a>
                 </li>
-                <li class="dropdown" dropdown on-toggle="toggled(open)" ng-show="showStatistics($root.currentUser.roles, $root.userRoles)">
+                <li class="dropdown" dropdown on-toggle="toggled(open)" ng-show="$root.currentUser !== null">
                     <a role="button" class="dropdown-toggle" href="#" dropdown-toggle>
                         <div>Statistics <span class="caret caret-margin"></span></div>
                     </a>
                     <ul class="dropdown-menu user-dropdown" role="menu">
                         <li><a href="#/summary_votes" class="f-left">Votes Statistics</a></li>
                         <hr>
-                        <li ng-show="$root.currentUser.memberStatus !== 'RESEARCHER'">
+                        <li ng-show="roles.showStatistics($root.currentUser.roles, $root.userRoles)">
                             <a ui-sref="reviewed_cases({menu: true})" class="f-left">Reviewed Cases Record</a>
                         </li>
                     </ul>
-                </li>   
+                </li>
                 <li><a ng-show="$root.currentUser !== null" href="#/dataset_catalog">Dataset Catalog</a></li>
                 <li class="dropdown" dropdown on-toggle="toggled(open)">
                     <a ng-show="$root.currentUser !== null" role="button" class="dropdown-toggle" href="#" dropdown-toggle>
                         <div>Request Help <span class="caret caret-margin"></span></div>
-                    </a>                    
+                    </a>
                         <ul class="dropdown-menu user-dropdown" role="menu">
                         <li><a href="" class="f-left" ng-click="Header.helpMeModal()">Create a Report</a></li>
                         <hr>
