@@ -4,7 +4,7 @@
     angular.module('cmReviewResults')
         .controller('AccessPreviewResults', AccessPreviewResults);
 
-    function AccessPreviewResults($sce, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, dar, rp, dar_id, consent, apiUrl, cmRPService, cmFilesService) {
+    function AccessPreviewResults($sce, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, dar, rp, dar_id, consent, apiUrl, cmRPService, cmFilesService, dar_title) {
 
         $scope.hasAdminRole = $rootScope.hasRole($rootScope.userRoles.admin);
         $scope.dar = dar;

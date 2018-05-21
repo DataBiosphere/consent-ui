@@ -69,7 +69,12 @@
                     },
                     dar_id: function ($stateParams) {
                             return $stateParams.referenceId;
-                    }
+                    },
+                    dar_title: function ($stateParams, cmRPService) {
+                        if ($stateParams.referenceId !== null) {
+                            return cmRPService.getDarFields($stateParams.referenceId, "projectTitle");
+                        }
+                    },
                 }
             })
 
@@ -130,6 +135,11 @@
                     consent: function ($stateParams, cmRPService) {
                         if ($stateParams.referenceId !== null) {
                             return cmRPService.getDarConsent($stateParams.referenceId);
+                        }
+                    },
+                    dar_title: function ($stateParams, cmRPService) {
+                        if ($stateParams.referenceId !== null) {
+                            return cmRPService.getDarFields($stateParams.referenceId, "projectTitle");
                         }
                     }
                 }

@@ -195,6 +195,9 @@
             cmRPService.getDarFields(electionReview.election.referenceId, "dar_code").then(function (data) {
                 $scope.darCode = data.dar_code;
             });
+            cmRPService.getDarFields(electionReview.election.referenceId, "projectTitle").then(function (data) {
+                $scope.projectTitle = data.projectTitle;
+            });
             $scope.electionAccess = electionReview.election;
             if (electionReview.election.finalRationale === null) {
                 $scope.electionAccess.finalRationale = '';
