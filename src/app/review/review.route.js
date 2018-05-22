@@ -87,7 +87,7 @@
                     dar_id: function($stateParams){
                         return $stateParams.darId;
                     },
-                    dar_title: function ($stateParams, cmRPService) {
+                    request: function ($stateParams, cmRPService) {
                         if ($stateParams.darId !== null) {
                             return cmRPService.getDarFields($stateParams.darId, "projectTitle");
                         }

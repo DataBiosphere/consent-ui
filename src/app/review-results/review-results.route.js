@@ -70,7 +70,7 @@
                     dar_id: function ($stateParams) {
                             return $stateParams.referenceId;
                     },
-                    dar_title: function ($stateParams, cmRPService) {
+                    request: function ($stateParams, cmRPService) {
                         if ($stateParams.referenceId !== null) {
                             return cmRPService.getDarFields($stateParams.referenceId, "projectTitle");
                         }
@@ -137,7 +137,7 @@
                             return cmRPService.getDarConsent($stateParams.referenceId);
                         }
                     },
-                    dar_title: function ($stateParams, cmRPService) {
+                    request: function ($stateParams, cmRPService) {
                         if ($stateParams.referenceId !== null) {
                             return cmRPService.getDarFields($stateParams.referenceId, "projectTitle");
                         }
