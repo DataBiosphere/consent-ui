@@ -100,7 +100,7 @@
                     <div dir-paginate="pendingCase in ChairConsole.electionsList.access | filter: searchAccessCases | itemsPerPage:5" pagination-id="accessCases">
                         <hr class="pvotes-separator">
                         <div class="row pvotes-main-list">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4 pvotes-list-id">{{pendingCase.frontEndId}} --  -- Title:  {{pendingCase.projectTitle}}</div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4 pvotes-list-id">{{pendingCase.frontEndId}}</div>
                             <a ui-sref="access_review({darId: '{{pendingCase.referenceId}}', voteId: '{{pendingCase.voteId}}', rpVoteId:'{{pendingCase.rpVoteId}}'})" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                                 <div class="voteButton {{pendingCase.alreadyVoted ? 'editable' : 'enabled'}}" ng-show="pendingCase.electionStatus !== 'Final'" >
                                     <span ng-if="pendingCase.alreadyVoted == false && pendingCase.electionStatus !== 'Final'">Vote</span>
