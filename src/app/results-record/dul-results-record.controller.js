@@ -69,9 +69,9 @@
         if (electionReview.election.finalRationale === 'null') {
             $scope.election.finalRationale = '';
         }
-        $scope.dul = electionReview.consent.dataUseLetter;
+        $scope.dul = electionReview.election.dataUseLetter;
         $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
-        $scope.dulName = electionReview.consent.dulName;
+        $scope.dulName = electionReview.election.dulName;
         $scope.structuredDataUseLetter = $sce.trustAsHtml(electionReview.election.translatedUseRestriction);
 
         $scope.finalRationale = electionReview.election.finalRationale;
