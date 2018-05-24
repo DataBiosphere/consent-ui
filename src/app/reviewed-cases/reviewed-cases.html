@@ -32,6 +32,7 @@
                 </div>
                 <div class="pvotes-box-body">
                     <div dir-paginate="election in ReviewedCases.electionsList.dul | filter: searchDULcases | itemsPerPage:5" pagination-id="dulCases" current-page="currentDulPage">
+                        {{ election }}
                         <hr class="pvotes-separator">
                         <div class="row pvotes-main-list reviewed-cases-list">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">{{election.displayId}}</div>

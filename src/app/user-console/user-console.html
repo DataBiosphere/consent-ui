@@ -35,6 +35,7 @@
                 </div>
                 <div class="pvotes-box-body">
                     <div dir-paginate="pendingCase in UserConsole.electionsList.dul | filter: searchDULCases | itemsPerPage:5" pagination-id="dulCases">
+                        Consent Group Name: <b>{{ pendingCase.consentGroupName }}</b>
                         <hr class="pvotes-separator">
                         <div class="row pvotes-main-list">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4 pvotes-list-id">{{pendingCase.frontEndId}}</div>
