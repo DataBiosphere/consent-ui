@@ -74,7 +74,8 @@
         </div>
         <div class="jumbotron box-vote-singleresults box-vote-no-margin">
             <div class="grid-row">
-                <div class="col-4 cell-header access-color">Data Request id</div>
+                <div class="col-2 cell-header access-color">Data Request id</div>
+                <div class="col-2 cell-header access-color">Project Title</div>
                 <div class="col-1 cell-header access-color">Result Date</div>
                 <div class="col-1 cell-header f-center access-color">Final Result</div>
                 <div class="col-1 cell-header f-center access-color">Record</div>
@@ -82,7 +83,8 @@
             <hr class="pvotes-main-separator">
             <div dir-paginate="election in ReviewedCases.electionsList.access | filter: searchAccessCases | itemsPerPage:5" pagination-id="accessCases" current-page="currentDarPage">
                 <div class="grid-row">
-                    <div class="col-4 cell-body text">{{election.displayId}}</div>
+                    <div class="col-2 cell-body text" title="{{election.displayId}}">{{election.displayId}}</div>
+                    <div class="col-2 cell-body text" title="{{election.projectTitle}}">{{election.projectTitle}}</div>
                     <div class="col-1 cell-body text">{{election.finalVoteDate}}</div>
                     <div class="col-1 cell-body text f-center bold">
                         <span ng-if="election.finalVote == true" class="access-color">YES</span>

@@ -53,6 +53,7 @@
         $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
         $scope.dulName = electionReview.consent.dulName;
         $scope.dar = dar.rus;
+        $scope.request = request;
         $scope.status = electionReview.election.status;
         $scope.isFormDisabled = $scope.chartData.accessChart[3][1] > 0;
         /*ALERTS*/

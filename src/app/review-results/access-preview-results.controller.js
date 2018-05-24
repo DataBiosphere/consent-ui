@@ -8,6 +8,7 @@
 
         $scope.hasAdminRole = $rootScope.hasRole($rootScope.userRoles.admin);
         $scope.dar = dar;
+        $scope.request = request;
         $scope.rus = dar.rus;
         $scope.dar_id = dar_id;
         $scope.consent = consent;

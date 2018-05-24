@@ -82,7 +82,9 @@
         $scope.selection = {};
         $scope.downloadUrl = apiUrl + 'consent/' + consent.consentId + '/dul';
         $scope.consent = consent;
+        $scope.consentName = consent.name;
         $scope.dar = dar;
+        $scope.request = request;
         $scope.selection.voteStatus = vote.vote;
         $scope.isFormDisabled = (election.status === 'Closed');
         $scope.selection.rationale = vote.rationale;

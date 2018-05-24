@@ -610,6 +610,14 @@ small {
     padding: 5px 0 0 3px;
 }
 
+.main-title-case{
+    font-size: 22px;
+    margin: 12px 0 0 2px;
+    display: block;
+    color: #333333;
+    font-weight: 300;
+}
+
 .cm-title, .cm-title-admin, .cm-subtitle, .cm-subtitle-ultimate, .cm-user-name, .cm-results-subtitle, .cm-box-title {
     color: #777777;
 }
