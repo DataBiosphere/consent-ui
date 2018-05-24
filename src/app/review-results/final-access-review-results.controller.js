@@ -47,7 +47,7 @@
         init();
 
         $scope.downloadDUL = function(){
-            cmFilesService.getDULFile($scope.electionReview.consent.consentId, $scope.electionReview.consent.dulName);
+            cmFilesService.getDULFile($scope.electionReview.consent.consentId, $scope.electionReview.election.dulName);
         };
 
         function logVote() {
@@ -358,7 +358,7 @@
                 $scope.election.finalRationale = '';
             }
             $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
-            $scope.dulName = electionReview.consent.dulName;
+            $scope.dulName = electionReview.election.dulName;
             $scope.status = electionReview.election.status;
             $scope.voteList = chunk(electionReview.reviewVote, 2);
             $scope.chartDataDUL = getGraphData(electionReview.reviewVote);

@@ -12,8 +12,8 @@
             return;
         }
         $scope.downloadUrl = apiUrl + 'consent/' + consent.consentId + '/dul';
-        $scope.consentDulName = consent.dulName;
-        $scope.consentSDul = $sce.trustAsHtml(consent.translatedUseRestriction);
+        $scope.consentDulName = election.dulName;
+        $scope.consentSDul = $sce.trustAsHtml(election.translatedUseRestriction);
         $scope.voteStatus = vote.vote;
         $scope.isFormDisabled = (election.status === 'Closed');
         $scope.rationale = vote.rationale;
@@ -42,7 +42,7 @@
         };
 
         $scope.downloadDUL = function(){
-            cmFilesService.getDULFile(consent.consentId, consent.dulName);
+            cmFilesService.getDULFile(consent.consentId, election.dulName);
         };
 
         $scope.logVote = function () {

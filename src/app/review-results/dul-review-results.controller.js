@@ -67,9 +67,9 @@
             $scope.election.finalRationale = '';
         }
 
-        $scope.dul = electionReview.consent.dataUseLetter;
+        $scope.dul = electionReview.election.dataUseLetter;
         $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
-        $scope.dulName = electionReview.consent.dulName;
+        $scope.dulName = electionReview.election.dulName;
         $scope.consentName = electionReview.consent.name;
         $scope.structuredDataUseLetter = $sce.trustAsHtml(electionReview.election.translatedUseRestriction);
         $scope.positiveVote = positiveVote;
