@@ -81,7 +81,7 @@
         $scope.chartData = getGraphData(electionReview.reviewVote);
 
         $scope.downloadDUL = function(){
-            cmFilesService.getDULFile(electionReview.consent.consentId, electionReview.consent.dulName);
+            cmFilesService.getDulFileByElectionId(electionReview.consent.consentId, electionReview.election.dulName, electionReview.election.electionId);
         };
 
         function chunk(arr, size) {

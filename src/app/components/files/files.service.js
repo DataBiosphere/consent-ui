@@ -6,9 +6,13 @@
 
     /* ngInject */
     function cmFilesService($http, apiUrl) {
-//
         function getDULFile(consentId, fileName) {
             var consentUrl = apiUrl + 'consent/' + consentId + '/dul';
+            getFile(consentUrl, fileName);
+        }
+
+        function getDulFileByElectionId(consentId, fileName, electionId) {
+            var consentUrl = apiUrl + 'consent/' + consentId + '/dul?electionId=' + electionId;
             getFile(consentUrl, fileName);
         }
 
@@ -49,6 +53,9 @@
         }
 
         return {
+            getDulFileByElectionId: function(consentId, fileName, electionId){
+                return getDulFileByElectionId(consentId, fileName, electionId);
+            },
             getDULFile: function (consentId, fileName) {
                 return getDULFile(consentId, fileName);
             },
