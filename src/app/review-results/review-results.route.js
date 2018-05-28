@@ -148,6 +148,11 @@
                     authorizedRoles: [USER_ROLES.chairperson, USER_ROLES.admin]
                 },
                 resolve: {
+                    electionReview: function ($stateParams, cmElectionService) {
+                        if ($stateParams.consentId !== null) {
+                            return cmElectionService.findElectionReview($stateParams.consentId, 'TranslateDUL').$promise;
+                        }
+                    },
                     consent: function ($stateParams, cmConsentService) {
                         if ($stateParams.consentId !== null) {
                             return cmConsentService.findConsent($stateParams.consentId);

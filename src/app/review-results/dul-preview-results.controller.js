@@ -4,14 +4,26 @@
     angular.module('cmReviewResults')
         .controller('DulPreviewResults', DulPreviewResults);
 
-    function DulPreviewResults($sce, apiUrl, $scope, $rootScope, $modal, $state, consent, cmFilesService) {
+    function DulPreviewResults($sce, apiUrl, $scope, $rootScope, $modal, $state, consent, cmFilesService, electionReview) {
         $scope.hasAdminRole = $rootScope.hasRole($rootScope.userRoles.admin);
         $scope.consent = consent;
+        $scope.election = electionReview.election;
+        var dulName;
+        if (typeof electionReview.election === 'undefined'){
+            dulName = $scope.consent.dulName;
+            $scope.dataUseLetter = $scope.consent.dataUseLetter;
+            $scope.structuredDataUseLetter = $sce.trustAsHtml($scope.consent.translatedUseRestriction);
+
+        } else {
+            dulName = electionReview.election.dulName;
+            $scope.dataUseLetter = electionReview.election.dataUseLetter;
+            $scope.structuredDataUseLetter = $sce.trustAsHtml(electionReview.election.translatedUseRestriction);
+        }
         $scope.consentName = consent.name;
         $scope.downloadUrl = apiUrl + 'consent/' + $scope.consent.consentId + '/dul';
-        $scope.dulName = $scope.consent.dulName;
+        $scope.dulName = dulName;
         $scope.dataUseLetter = $scope.consent.dataUseLetter;
-        $scope.structuredDataUseLetter = $sce.trustAsHtml($scope.consent.translatedUseRestriction);
+        // $scope.structuredDataUseLetter = $sce.trustAsHtml($scope.consent.translatedUseRestriction);
         $scope.downloadDUL = function(){
             cmFilesService.getDULFile($scope.consent.consentId, $scope.consent.dulName);
         };
