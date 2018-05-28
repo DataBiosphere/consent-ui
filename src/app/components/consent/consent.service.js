@@ -27,6 +27,14 @@
             ConsentManageResource.List().$promise.then(
                 function (data) {
                     vm.electionsList.dul = data;
+
+                    var regex = new RegExp('-', 'g');
+                    vm.electionsList.dul.forEach(function(election) {
+                        var str = election.consentName;
+                        str = str.replace(regex, ' ');
+                        election.ct = election.consentName + ' ' + election.version;
+                        election.cts = str + ' ' + election.version;
+                    });
                 });
         }
 
