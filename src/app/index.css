@@ -3580,7 +3580,7 @@ tags-input .tags .tag-item{
     padding: 0 10px !important;
 }
 
-/***************************************************7 col grid*/
+/***************************************************8 col grid*/
 
 .grid-row {
     display: inline-block;
@@ -3594,36 +3594,40 @@ tags-input .tags .tag-item{
     position: relative;
 }
 
-.grid-row .col-1, .grid-row .col-2, .grid-row .col-3, .grid-row .col-4, .grid-row .col-5, .grid-row .col-6, .grid-row .col-7{
+.grid-row .col-1, .grid-row .col-2, .grid-row .col-3, .grid-row .col-4, .grid-row .col-5, .grid-row .col-6, .grid-row .col-7, .grid-row .col-8{
     position: relative;
     min-height: 1px;
     float: left;
 }
 
 .grid-row .col-1 {
-    width: 14.285%;
+    width: 12.5%;
 }
 
 .grid-row .col-2 {
-    width: 28.57%;
+    width: 25%;
 }
 
 .grid-row .col-3 {
-    width: 42.855%;
+    width: 37.5%;
 }
 
 .grid-row .col-4 {
-    width: 57.14%;
+    width: 50%;
 }
 
 .grid-row .col-5 {
-    width: 71.425%;
+    width: 62.5%;
 }
 
 .grid-row .col-6 {
-    width: 85.71%;
+    width: 75%;
 }
 
 .grid-row .col-7 {
+    width: 87.5%;
+}
+
+.grid-row .col-8 {
     width: 100%;
 }
