@@ -5,13 +5,14 @@
     angular.module('cmResultsRecord')
         .controller('AccessResultsRecord', AccessResultsRecord);
 
-    function AccessResultsRecord($scope, $state, $modal, cmElectionService, downloadFileService, apiUrl, cmRPService, cmVoteService, cmMatchService, darElection, electionId, hasUseRestriction, cmFilesService) {
+    function AccessResultsRecord($scope, $state, $modal, cmElectionService, downloadFileService, apiUrl, cmRPService, cmVoteService, cmMatchService, darElection, electionId, hasUseRestriction, cmFilesService, $rootScope) {
 
         /*ACCORDION*/
         $scope.oneAtATime = false;
         $scope.electionId = electionId;
         $scope.darElection = darElection;
         $scope.hasUseRestriction = hasUseRestriction;
+        $rootScope.path = 'access-results-record';
 
         if ($scope.electionId === null) {
             $state.go('reviewed_cases');
@@ -219,7 +220,14 @@
         $scope.downloadDUL = function(){
             cmFilesService.getDULFile($scope.electionReview.consent.consentId, $scope.electionReview.consent.dulName);
         };
-
+        $scope.back = function() {
+            if($rootScope.pathFrom === 'admin_manage_access') {
+                $state.go('admin_manage_access');
+            } else if($rootScope.pathFrom === 'reviewed_cases') {
+                $state.go('reviewed_cases');
+            }
+            $rootScope.pathFrom = undefined;
+        }
         $scope.download = downloadFileService.downloadFile;
 
         function showDULData(electionReview) {

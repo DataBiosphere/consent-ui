@@ -34,7 +34,7 @@
                     <hr class="pvotes-main-separator">
                 </div>
                 <div class="pvotes-box-body">
-                    <div dir-paginate="pendingCase in UserConsole.electionsList.dul | filter: searchDULCases | itemsPerPage:5" pagination-id="dulCases">
+                    <div dir-paginate="pendingCase in UserConsole.electionsList.dul | filter: searchDULCases | itemsPerPage:5" pagination-id="dulCases" current-page="UserConsole.currentDULPage">
                         <hr class="pvotes-separator">
                         <div class="row pvotes-main-list">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4 pvotes-list-id">{{pendingCase.frontEndId}}</div>
@@ -44,7 +44,7 @@
                                 <span ng-if="pendingCase.status == 'editable'">Editable</span>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pvotes-list">{{pendingCase.logged}}</div>
-                            <a ui-sref="dul_review({consentId: '{{pendingCase.referenceId}}', voteId: '{{pendingCase.voteId}}'})" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <a ng-click="UserConsole.openDULReview(pendingCase.referenceId, pendingCase.voteId)" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                                 <div class="{{pendingCase.status}}">
                                     <span ng-if="pendingCase.alreadyVoted == false">Vote</span>
                                     <span ng-if="pendingCase.alreadyVoted == true">Edit</span>
@@ -94,7 +94,7 @@
                     <hr class="pvotes-main-separator">
                 </div>
                 <div class="pvotes-box-body">
-                    <div dir-paginate="pendingCase in UserConsole.electionsList.access | filter: searchAccessCases | itemsPerPage:5" pagination-id="accessCases">
+                    <div dir-paginate="pendingCase in UserConsole.electionsList.access | filter: searchAccessCases | itemsPerPage:5" pagination-id="accessCases" current-page="UserConsole.currentAccessPage">
                         <hr class="pvotes-separator">
                         <div class="row pvotes-main-list">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4 pvotes-list-id">{{pendingCase.frontEndId}}</div>
@@ -104,7 +104,7 @@
                                 <span ng-if="pendingCase.status == 'editable'">Editable</span>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pvotes-list">{{pendingCase.logged}}</div>
-                            <a ui-sref="access_review({darId: '{{pendingCase.referenceId}}', voteId: '{{pendingCase.voteId}}',rpVoteId:'{{pendingCase.rpVoteId}}'  })" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <a ng-click="UserConsole.openAccessReview(pendingCase.referenceId, pendingCase.voteId, pendingCase.rpVoteId)" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                                 <div class="{{pendingCase.status}}">
                                     <span ng-if="pendingCase.alreadyVoted == false">Vote</span>
                                     <span ng-if="pendingCase.alreadyVoted == true">Edit</span>

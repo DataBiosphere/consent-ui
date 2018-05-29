@@ -10,7 +10,7 @@
             cmLoginUserService.redirect($rootScope.currentUser);
             return;
         }
-
+        $rootScope.path = 'final-access-review-results';
         $scope.vote = {};
         $scope.voteAgreement = {};
         $scope.logVote = logVote;

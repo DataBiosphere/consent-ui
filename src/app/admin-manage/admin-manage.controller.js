@@ -5,7 +5,7 @@
         .controller('AdminManage', AdminManage);
 
     /* ngInject */
-    function AdminManage($modal, cmConsentService, cmElectionService, $scope) {
+    function AdminManage($modal, $state, $rootScope, cmConsentService, cmElectionService, $scope) {
 
         var vm = this;
         vm.electionsList = { 'dul': [] };
@@ -14,13 +14,18 @@
         vm.openCancel = openCancel;
         vm.openDelete = openDelete;
         vm.openArchive = openArchive;
-
+        vm.open = open;
         vm.addDul = addDul;
         vm.editDul = editDul;
-
+        vm.currentDULPage = 1;
+        $rootScope.pathFrom = 'admin_manage';
         init();
 
         function init() {
+            if($rootScope.currentDULPage !== undefined) {
+                vm.currentDULPage = $rootScope.currentDULPage;
+                $rootScope.currentDULPage = undefined;
+            }
             cmConsentService.findConsentManage(vm);
         }
 
@@ -148,6 +153,18 @@
                 init();
             }, function () {
             });
+        }
+
+        function open(consentId, url, electionId) {
+            $rootScope.currentDULPage = vm.currentDULPage;
+            if(electionId === null) {
+                $state.go(url, { consentId: consentId });
+            } else {
+                $state.go(url, { electionId: electionId });
+            }
+            
+
+            
         }
     }
 })();

@@ -6,7 +6,7 @@
         .controller('ResearcherReview', ResearcherReview);
 
     /* ngInject */
-    function ResearcherReview($stateParams, cmResearcherService, $scope, cmUserService, $state, $modal) {
+    function ResearcherReview($stateParams, cmResearcherService, $scope, cmUserService, $state, $modal, $rootScope) {
 
         var dacUserId = $stateParams.dacUserId;
         $scope.status = 'pending';
@@ -51,7 +51,11 @@
                             scope: $scope
                         });
                         modalInstance.result.then(function () {
-                           $state.go('admin_users');
+                          if($rootScope.pathFrom === 'admin_manage_access') {
+                              $state.go('admin_manage_access');
+                          } else {
+                            $state.go('admin_users');
+                          }                           
                         });
                     },
                     //error

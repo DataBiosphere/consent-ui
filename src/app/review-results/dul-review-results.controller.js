@@ -66,7 +66,7 @@
         if (electionReview.election.finalRationale === 'null') {
             $scope.election.finalRationale = '';
         }
-
+        $rootScope.path = 'dul-review-results';
         $scope.dul = electionReview.consent.dataUseLetter;
         $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
         $scope.dulName = electionReview.consent.dulName;
@@ -83,11 +83,19 @@
         $scope.finalVote = electionReview.election.finalVote;
         $scope.voteList = chunk(electionReview.reviewVote, 2);
         $scope.chartData = getGraphData(electionReview.reviewVote);
-
+    
         $scope.downloadDUL = function(){
             cmFilesService.getDULFile(electionReview.consent.consentId, electionReview.consent.dulName);
         };
 
+        $scope.back = function() {
+            if($rootScope.pathFrom === 'admin_manage') {
+                $state.go('admin_manage');
+            } else if($rootScope.pathFrom === 'chair_console') {
+                $state.go('chair_console');
+            }
+            $rootScope.pathFrom = undefined;
+        }
         $scope.$watch('chartData.dul', function () {
             if ($scope.chartData.dul !== 'undefined') {
                 $scope.isFormDisabled = $scope.chartData.dul[3][1] > 0 || $scope.status !== 'Open';

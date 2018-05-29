@@ -4,7 +4,7 @@
     angular.module('cmReviewResults')
         .controller('AccessReviewResults', ReviewResults);
 
-    function ReviewResults($sce, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, consent, electionReview, rpElectionReview, dar, apiUrl, cmEmailService, cmRPService, dar_id, cmFilesService, dar_title) {
+    function ReviewResults($sce, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, consent, electionReview, rpElectionReview, dar, apiUrl, cmEmailService, cmRPService, dar_id, cmFilesService) {
 
         if(electionReview.election.status === "Canceled"){
             $state.go($state.go("access_review_not_found"));
@@ -20,7 +20,7 @@
         $scope.voteList = chunk(electionReview.reviewVote, 2);
         $scope.darOriginalFinalVote = electionReview.election.finalVote;
         $scope.darOriginalFinalRationale = electionReview.election.finalRationale;
-
+        $rootScope.path = 'access-review-results';
         if (typeof electionReview === 'undefined') {
             cmLoginUserService.redirect($rootScope.currentUser);
             return;
@@ -77,6 +77,15 @@
                 $scope.enableDARButton = true;
             }
         };
+
+        $scope.back = function() {
+            if($rootScope.pathFrom === 'admin_manage_access') {
+                $state.go('admin_manage_access');
+            } else if($rootScope.pathFrom === 'chair_console') {
+                $state.go('chair_console');
+            }
+            $rootScope.pathFrom = undefined;
+        }
 
         $scope.setEnableRPButton = function(){
            if($scope.rpOriginalFinalVote !== undefined && (rpElectionReview.election.finalVote === $scope.rpOriginalFinalVote && rpElectionReview.election.finalRationale === $scope.rpOriginalFinalRationale)){

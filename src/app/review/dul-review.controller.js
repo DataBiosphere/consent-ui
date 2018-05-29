@@ -11,6 +11,7 @@
             cmLoginUserService.redirect($rootScope.currentUser);
             return;
         }
+        $rootScope.path = 'dul-review';
         $scope.downloadUrl = apiUrl + 'consent/' + consent.consentId + '/dul';
         $scope.consentDulName = consent.dulName;
         $scope.consentSDul = $sce.trustAsHtml(consent.translatedUseRestriction);
