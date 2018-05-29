@@ -3582,16 +3582,32 @@ tags-input .tags .tag-item{
 
 /***************************************************8 col grid*/
 
-.grid-row {
+.grid-row,
+.grid-9-row {
     display: inline-block;
     width: 100%;
     margin: 0;
     padding: 0;
 }
 
-.grid-row.pushed-2 {
+.grid-row.pushed-2,
+.grid-9-row.pushed-2 {
     padding-right: 70px;
     position: relative;
+}
+
+.grid-9-row .col-1, .grid-9-row .col-2 {
+    position: relative;
+    min-height: 1px;
+    float: left;
+}
+
+.grid-9-row .col-1 {
+    width: 11.11%;
+}
+
+.grid-9-row .col-2 {
+    width: 22.22%;
 }
 
 .grid-row .col-1, .grid-row .col-2, .grid-row .col-3, .grid-row .col-4, .grid-row .col-5, .grid-row .col-6, .grid-row .col-7, .grid-row .col-8{
