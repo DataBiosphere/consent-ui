@@ -340,7 +340,7 @@
                 $scope.dar = data;
             });
             cmRPService.getDarFields(electionReview.election.referenceId, "projectTitle").then(function (data) {
-                $scope.dar_title = data.projectTitle;
+                $scope.projectTitle = data.projectTitle;
             });
             $scope.electionAccess = electionReview.election;
             if (electionReview.election.finalRationale === null) {

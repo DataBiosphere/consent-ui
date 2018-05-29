@@ -8,7 +8,7 @@
         </h2>
     </div>
     <hr class="section-separator">
-    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="row">
             <h2 class="col-lg-8 col-md-8 col-sm-8 col-xs-12 pvotes-box-title dul-color">
                 <img src="assets/images/icon_dul.png" alt="DUL icon" class="pvotes-icons">Data Use Limitations Reviewed Cases
@@ -26,7 +26,7 @@
                 <div class="col-3 cell-header cell-sort dul-color" ng-click="sort('displayId')">Consent id
                     <span class="glyphicon sort-icon glyphicon-sort"></span>
                 </div>
-                <div class="col-1 cell-header cell-sort dul-color" ng-click="sort('version')">Election N°
+                <div class="col-2 cell-header cell-sort dul-color" ng-click="sort('version')">Election N°
                     <span class="glyphicon sort-icon glyphicon-sort"></span>
                 </div>
                 <div class="col-1 cell-header dul-color">Result Date</div>
@@ -37,7 +37,7 @@
             <div dir-paginate="election in ReviewedCases.electionsList.dul | orderBy:sortBy:reverse | filter: searchDULcases | itemsPerPage:5" pagination-id="dulCases" current-page="currentDulPage">
                 <div class="grid-row">
                     <div class="col-3 cell-body text" ng-class="{flagged : election.archived}">{{election.displayId}}</div>
-                    <div class="col-1 cell-body text">{{election.version < 10 ? '0' + election.version : election.version}}</div>
+                    <div class="col-2 cell-body text">{{election.version < 10 ? '0' + election.version : election.version}}</div>
                     <div class="col-1 cell-body text">{{election.finalVoteDate}}</div>
                     <div class="col-1 cell-body text f-center bold">
                         <span ng-if="election.finalVoteString == 'Yes'" class="dul-color">YES</span>
@@ -59,7 +59,7 @@
         </div>
     </div>
 
-    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="row">
             <h2 class="col-lg-8 col-md-8 col-sm-8 col-xs-12 pvotes-box-title access-color">
                 <img src="assets/images/icon_access.png" alt="Access icon" class="pvotes-icons">Data Access Reviewed Cases
@@ -74,7 +74,8 @@
         </div>
         <div class="jumbotron box-vote-singleresults box-vote-no-margin">
             <div class="grid-row">
-                <div class="col-4 cell-header access-color">Data Request id</div>
+                <div class="col-2 cell-header access-color">Data Request id</div>
+                <div class="col-3 cell-header access-color">Project Title</div>
                 <div class="col-1 cell-header access-color">Result Date</div>
                 <div class="col-1 cell-header f-center access-color">Final Result</div>
                 <div class="col-1 cell-header f-center access-color">Record</div>
@@ -82,7 +83,8 @@
             <hr class="pvotes-main-separator">
             <div dir-paginate="election in ReviewedCases.electionsList.access | filter: searchAccessCases | itemsPerPage:5" pagination-id="accessCases" current-page="currentDarPage">
                 <div class="grid-row">
-                    <div class="col-4 cell-body text">{{election.displayId}}</div>
+                    <div class="col-2 cell-body text" title="{{election.displayId}}">{{election.displayId}}</div>
+                    <div class="col-3 cell-body text" title="{{election.projectTitle}}">{{election.projectTitle}}</div>
                     <div class="col-1 cell-body text">{{election.finalVoteDate}}</div>
                     <div class="col-1 cell-body text f-center bold">
                         <span ng-if="election.finalVote == true" class="access-color">YES</span>
