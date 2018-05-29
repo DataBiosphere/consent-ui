@@ -86,6 +86,11 @@
                     },
                     dar_id: function($stateParams){
                         return $stateParams.darId;
+                    },
+                    request: function ($stateParams, cmRPService) {
+                        if ($stateParams.darId !== null) {
+                            return cmRPService.getDarFields($stateParams.darId, "projectTitle");
+                        }
                     }
                 }
             });
