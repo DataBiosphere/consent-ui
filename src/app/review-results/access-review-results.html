@@ -3,7 +3,8 @@
     <div class="row fsi-row-lg-level fsi-row-md-level title-wrapper">
         <img src="assets/images/icon_access.png" alt="Data Access Request icon" class="cm-icons main-icon-title">
         <h2 class="main-title margin-sm access-color">
-            {{ hasAdminRole ? "" : "Collect"}} Votes for Data Access Congruence Review | {{consentName}}
+            {{ hasAdminRole ? "" : "Collect"}} Votes for Data Access Congruence Review
+            <span class="main-title-case"><b>{{request.projectTitle}}</b> | {{consentName}}</span>
         </h2>
     </div>
     <accordion>

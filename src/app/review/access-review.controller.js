@@ -4,7 +4,7 @@
     angular.module('cmReview')
         .controller('DarReview', DarReview);
 
-    function DarReview($sce, $scope, $modal, $state, $rootScope, USER_ROLES, vote, rpVote, dar, election, consent, cmVoteService, apiUrl, cmAuthenticateService, cmLoginUserService, cmRPService, dar_id, cmFilesService) {
+    function DarReview($sce, $scope, $modal, $state, $rootScope, USER_ROLES, vote, rpVote, dar, election, consent, cmVoteService, apiUrl, cmAuthenticateService, cmLoginUserService, cmRPService, dar_id, cmFilesService, request) {
 
         var vm = this;
         vm.openApplication = openApplication;
@@ -82,7 +82,9 @@
         $scope.selection = {};
         $scope.downloadUrl = apiUrl + 'consent/' + consent.consentId + '/dul';
         $scope.consent = consent;
+        $scope.consentName = consent.name;
         $scope.dar = dar;
+        $scope.request = request;
         $scope.selection.voteStatus = vote.vote;
         $scope.isFormDisabled = (election.status === 'Closed');
         $scope.selection.rationale = vote.rationale;
