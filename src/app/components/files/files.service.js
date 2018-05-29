@@ -6,6 +6,7 @@
 
     /* ngInject */
     function cmFilesService($http, apiUrl) {
+
         function getDULFile(consentId, fileName) {
             var consentUrl = apiUrl + 'consent/' + consentId + '/dul';
             getFile(consentUrl, fileName);
@@ -36,7 +37,6 @@
                         var downloadElement = angular.element('<a/>');
                         downloadElement.css({ display: 'none' });
                         angular.element(document.body).append(downloadElement);
-
                         if (isIE) {
                             downloadElement.attr({
                                 href: window.navigator.msSaveOrOpenBlob(blob, fileName)
