@@ -227,7 +227,7 @@
                 $state.go('reviewed_cases');
             }
             $rootScope.pathFrom = undefined;
-        }
+        };
         $scope.download = downloadFileService.downloadFile;
 
         function showDULData(electionReview) {

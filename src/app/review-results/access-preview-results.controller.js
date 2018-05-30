@@ -33,7 +33,7 @@
                 $state.go('chair_onsole');
             }
             $rootScope.pathFrom = undefined;
-        }
+        };
         var vm = this;
         vm.openApplication = openApplication;
         function openApplication() {

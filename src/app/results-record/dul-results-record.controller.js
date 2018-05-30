@@ -92,7 +92,7 @@
                 $state.go('reviewed_cases');
             }
             $rootScope.pathFrom = undefined;
-        }
+        };
 
         function chunk(arr, size) {
             var newArr = [];

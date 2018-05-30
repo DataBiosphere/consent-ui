@@ -86,7 +86,7 @@
                 $state.go('chair_console');
             }
             $rootScope.pathFrom = undefined;
-        }
+        };
 
         $scope.setEnableRPButton = function(){
            if($scope.rpOriginalFinalVote !== undefined && (rpElectionReview.election.finalVote === $scope.rpOriginalFinalVote && rpElectionReview.election.finalRationale === $scope.rpOriginalFinalRationale)){

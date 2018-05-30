@@ -95,7 +95,8 @@
                 $state.go('chair_console');
             }
             $rootScope.pathFrom = undefined;
-        }
+        };
+        
         $scope.$watch('chartData.dul', function () {
             if ($scope.chartData.dul !== 'undefined') {
                 $scope.isFormDisabled = $scope.chartData.dul[3][1] > 0 || $scope.status !== 'Open';

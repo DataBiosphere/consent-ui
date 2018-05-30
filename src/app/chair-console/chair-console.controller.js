@@ -24,11 +24,9 @@
         init();
 
         function init() {
-            if (($rootScope.path === 'dul-review' || $rootScope.path === 'dul-review-results')
-                && $rootScope.currentDULPage !== undefined) {
+            if (($rootScope.path === 'dul-review' || $rootScope.path === 'dul-review-results') && $rootScope.currentDULPage !== undefined) {
                 vm.currentDULPage = $rootScope.currentDULPage;
-            } else if (($rootScope.path === 'access-review' || $rootScope.path === 'access-review-results' || $rootScope.path === 'final-access-review-results')
-                && $rootScope.currentAccessPage !== undefined) {
+            } else if (($rootScope.path === 'access-review' || $rootScope.path === 'access-review-results' || $rootScope.path === 'final-access-review-results') && $rootScope.currentAccessPage !== undefined) {
                 vm.currentAccessPage = $rootScope.currentAccessPage;
             }
             $rootScope.currentAccessPage = undefined;
@@ -46,10 +44,10 @@
 
         function openDULReviewResult(consentId) {
             $rootScope.currentDULPage = vm.currentDULPage;
-            $state.go('dul_review_results', { consentId: consentId });
+            $state.go('dul_review_results', { consentId: consentId});
         }
 
-        function openAccessReviewResult(referenceId, electionId, ) {
+        function openAccessReviewResult(referenceId, electionId) {
             $rootScope.currentAccessPage = vm.currentAccessPage;
             $state.go('access_review_results', { referenceId: referenceId, electionId: electionId });
         }
