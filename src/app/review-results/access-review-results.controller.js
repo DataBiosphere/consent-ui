@@ -4,7 +4,7 @@
     angular.module('cmReviewResults')
         .controller('AccessReviewResults', ReviewResults);
 
-    function ReviewResults($sce, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, consent, electionReview, rpElectionReview, dar, apiUrl, cmEmailService, cmRPService, dar_id, cmFilesService) {
+    function ReviewResults($sce, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, consent, electionReview, rpElectionReview, dar, apiUrl, cmEmailService, cmRPService, dar_id, cmFilesService, request) {
 
         if(electionReview.election.status === "Canceled"){
             $state.go($state.go("access_review_not_found"));
@@ -53,6 +53,7 @@
         $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
         $scope.dulName = electionReview.consent.dulName;
         $scope.dar = dar.rus;
+        $scope.request = request;
         $scope.status = electionReview.election.status;
         $scope.isFormDisabled = $scope.chartData.accessChart[3][1] > 0;
         /*ALERTS*/

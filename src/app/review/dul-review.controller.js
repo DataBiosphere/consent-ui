@@ -14,6 +14,8 @@
         $scope.downloadUrl = apiUrl + 'consent/' + consent.consentId + '/dul';
         $scope.consentDulName = election.dulName;
         $scope.consentSDul = $sce.trustAsHtml(election.translatedUseRestriction);
+        $scope.consentName = consent.name;
+        $scope.consentGroupName = consent.groupName;
         $scope.voteStatus = vote.vote;
         $scope.isFormDisabled = (election.status === 'Closed');
         $scope.rationale = vote.rationale;

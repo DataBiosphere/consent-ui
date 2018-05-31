@@ -339,6 +339,9 @@
             cmRPService.getDarFields(electionReview.election.referenceId, "rus").then(function (data) {
                 $scope.dar = data;
             });
+            cmRPService.getDarFields(electionReview.election.referenceId, "projectTitle").then(function (data) {
+                $scope.projectTitle = data.projectTitle;
+            });
             $scope.electionAccess = electionReview.election;
             if (electionReview.election.finalRationale === null) {
                 $scope.electionAccess.finalRationale = '';

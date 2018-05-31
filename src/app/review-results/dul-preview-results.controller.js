@@ -22,6 +22,7 @@
         $scope.consentName = consent.name;
         $scope.downloadUrl = apiUrl + 'consent/' + $scope.consent.consentId + '/dul';
         $scope.dulName = dulName;
+        $scope.consentGroupName = consent.groupName;
         $scope.dataUseLetter = $scope.consent.dataUseLetter;
         $scope.downloadDUL = function(){
             cmFilesService.getDULFile($scope.consent.consentId, $scope.consent.dulName);

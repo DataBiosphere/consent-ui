@@ -610,6 +610,14 @@ small {
     padding: 5px 0 0 3px;
 }
 
+.main-title-case{
+    font-size: 22px;
+    margin: 12px 0 0 2px;
+    display: block;
+    color: #333333;
+    font-weight: 300;
+}
+
 .cm-title, .cm-title-admin, .cm-subtitle, .cm-subtitle-ultimate, .cm-user-name, .cm-results-subtitle, .cm-box-title {
     color: #777777;
 }
@@ -3572,50 +3580,70 @@ tags-input .tags .tag-item{
     padding: 0 10px !important;
 }
 
-/***************************************************7 col grid*/
+/***************************************************NEW grids*/
 
-.grid-row {
+.grid-row,
+.grid-9-row {
     display: inline-block;
     width: 100%;
     margin: 0;
     padding: 0;
 }
 
-.grid-row.pushed-2 {
+.grid-row.pushed-2,
+.grid-9-row.pushed-2 {
     padding-right: 70px;
     position: relative;
 }
 
-.grid-row .col-1, .grid-row .col-2, .grid-row .col-3, .grid-row .col-4, .grid-row .col-5, .grid-row .col-6, .grid-row .col-7{
+.grid-9-row .col-1, .grid-9-row .col-2 {
+    position: relative;
+    min-height: 1px;
+    float: left;
+}
+
+.grid-9-row .col-1 {
+    width: 11.11%;
+}
+
+.grid-9-row .col-2 {
+    width: 22.22%;
+}
+
+.grid-row .col-1, .grid-row .col-2, .grid-row .col-3, .grid-row .col-4, .grid-row .col-5, .grid-row .col-6, .grid-row .col-7, .grid-row .col-8{
     position: relative;
     min-height: 1px;
     float: left;
 }
 
 .grid-row .col-1 {
-    width: 14.285%;
+    width: 12.5%;
 }
 
 .grid-row .col-2 {
-    width: 28.57%;
+    width: 25%;
 }
 
 .grid-row .col-3 {
-    width: 42.855%;
+    width: 37.5%;
 }
 
 .grid-row .col-4 {
-    width: 57.14%;
+    width: 50%;
 }
 
 .grid-row .col-5 {
-    width: 71.425%;
+    width: 62.5%;
 }
 
 .grid-row .col-6 {
-    width: 85.71%;
+    width: 75%;
 }
 
 .grid-row .col-7 {
+    width: 87.5%;
+}
+
+.grid-row .col-8 {
     width: 100%;
 }
