@@ -23,21 +23,23 @@
         <div class="jumbotron box-vote-singleresults box-vote-no-margin">
             <div class="row">
                 <div class="pvotes-box-head  fsi-row-lg-level fsi-row-md-level">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4 pvotes-box-subtitle dul-color">Consent id</div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pvotes-box-subtitle dul-color">Consent id</div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3 pvotes-box-subtitle dul-color">Consent Group Name</div>
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 center-text pvotes-box-subtitle dul-color">Review/Vote
                         <div ng-show="ChairConsole.totalDulPendingVotes > 0" id="dulPendingVoteCases" class="pcases-small-tag">{{ChairConsole.totalDulPendingVotes}}</div>
                     </div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 center-text pvotes-box-subtitle dul-color">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 center-text pvotes-box-subtitle dul-color">
                         Logged
                     </div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 center-text pvotes-box-subtitle dul-color">Actions </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 center-text pvotes-box-subtitle dul-color">Actions </div>
                     <hr class="pvotes-main-separator">
                 </div>
                 <div class="pvotes-box-body">
                     <div dir-paginate="pendingCase in ChairConsole.electionsList.dul | filter: searchDULCases | itemsPerPage:5" pagination-id="dulCases" current-page="ChairConsole.currentDULPage">
                         <hr class="pvotes-separator">
                         <div class="row pvotes-main-list">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-4 pvotes-list-id">{{pendingCase.frontEndId}}</div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pvotes-list-id" title="{{pendingCase.frontEndId}}">{{pendingCase.frontEndId}}</div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3 pvotes-list-id" title="{{pendingCase.consentGroupName}}">{{pendingCase.consentGroupName}}</div>
                             <a ng-click="ChairConsole.openDULReview(pendingCase.referenceId, pendingCase.voteId)" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                                 <div class="voteButton {{pendingCase.alreadyVoted ? 'editable' : 'enabled'}}">
                                     <span ng-if="pendingCase.alreadyVoted == false">Vote</span>

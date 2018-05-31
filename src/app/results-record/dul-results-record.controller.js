@@ -80,6 +80,7 @@
         $scope.finalVote = electionReview.election.finalVote;
         $scope.voteList = chunk(electionReview.reviewVote, 2);
         $scope.chartData = getGraphData(electionReview.reviewVote);
+        $scope.consentGroupName = electionReview.consent.groupName;
 
         $scope.downloadDUL = function(){
             cmFilesService.getDULFile(electionReview.consent.consentId, electionReview.consent.dulName);
