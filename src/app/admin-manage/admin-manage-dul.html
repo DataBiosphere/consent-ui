@@ -23,8 +23,9 @@
     </div>
 
     <div class="jumbotron box-vote-singleresults box-vote-no-margin">
-        <div class="grid-row pushed-2">
+        <div class="grid-9-row pushed-2">
             <div class="col-2 cell-header dul-color">Consent id</div>
+            <div class="col-2 cell-header dul-color">Consent Group Name</div>
             <div class="col-1 cell-header dul-color">Election N°</div>
             <div class="col-1 cell-header dul-color">Date</div>
             <div class="col-1 cell-header f-center dul-color">Edit Record</div>
@@ -35,8 +36,9 @@
         <hr class="pvotes-main-separator">
 
         <div dir-paginate="election in AdminManage.electionsList.dul | filter: searchDUL | itemsPerPage:10">
-            <div class="grid-row pushed-2">
-                <div class="col-2 cell-body text" ng-class="{flagged : election.archived}">{{election.consentName}}</div>
+            <div class="grid-9-row pushed-2">
+                <div class="col-2 cell-body text" ng-class="{flagged : election.archived}" title="{{election.consentName}}">{{election.consentName}}</div>
+                <div class="col-2 cell-body text" title="{{election.groupName}}">{{election.groupName}}</div>
                 <div class="col-1 cell-body text">
                     <span ng-show="election.electionStatus == 'un-reviewed'">- -</span>
                     <span ng-show="election.electionStatus != 'un-reviewed'">{{election.version}}</span>
