@@ -106,6 +106,27 @@
                     </label>
                 </div>
             </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
+                <div class="checkbox">
+                    <input ng-model="formData.hmb" id="checkHmb" type="checkbox" class="checkbox-inline rp-checkbox" name="checkHmb" ng-disabled="formData.dar_code != null">
+                    <label class="regular-checkbox rp-choice-questions" for="checkHmb">
+                        <span>2.4.5 Health/medical/biomedical research: </span>
+                        The primary purpose of the study is to investigate a health/medical/biomedical (or biological) phenomenon or condition.
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
+                <div class="checkbox">
+                    <input ng-model="formData.poa" id="checkPoa" type="checkbox" class="checkbox-inline rp-checkbox" name="checkPoa" ng-disabled="formData.dar_code != null">
+                    <label class="regular-checkbox rp-choice-questions" for="checkPoa">
+                        <span>2.4.6 Population origins or ancestry research: </span>
+                        This outcome of this study is expected to provide new knowledge about the origins of a certain population or its ancestry.
+                    </label>
+                </div>
+            </div>
+
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
                 <div class="checkbox">
                     <input ng-model="formData.other" id="checkOther" type="checkbox" class="checkbox-inline rp-checkbox" name="checkOther" ng-disabled="formData.dar_code != null">
