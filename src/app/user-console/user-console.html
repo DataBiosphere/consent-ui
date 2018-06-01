@@ -37,7 +37,7 @@
                 <div class="pvotes-box-body">
                     <div dir-paginate="pendingCase in UserConsole.electionsList.dul | filter: searchDULCases | itemsPerPage:5" pagination-id="dulCases" current-page="UserConsole.currentDULPage">
                         <hr class="pvotes-separator">
-                        <div class="row pvotes-main-list">
+                        <div class="row pvotes-main-list" ng-class="{'list-highlighted': false}">
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pvotes-list-id" title="{{pendingCase.frontEndId}}">{{pendingCase.frontEndId}}</div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3 pvotes-list-id" title="{{pendingCase.consentGroupName}}">{{pendingCase.consentGroupName}}</div>
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list bold">
@@ -94,7 +94,7 @@
                 <div class="pvotes-box-body">
                     <div dir-paginate="pendingCase in UserConsole.electionsList.access | filter: searchAccessCases | itemsPerPage:5" pagination-id="accessCases" current-page="UserConsole.currentAccessPage">
                         <hr class="pvotes-separator">
-                        <div class="row pvotes-main-list">
+                        <div class="row pvotes-main-list" ng-class="{'list-highlighted': false}">
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pvotes-list-id" title="{{pendingCase.frontEndId}}">{{pendingCase.frontEndId}}</div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3 pvotes-list-id" title="{{pendingCase.projectTitle}}">{{pendingCase.projectTitle}}</div>
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list {{pendingCase.status}}">

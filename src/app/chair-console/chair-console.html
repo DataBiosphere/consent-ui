@@ -37,7 +37,7 @@
                 <div class="pvotes-box-body">
                     <div dir-paginate="pendingCase in ChairConsole.electionsList.dul | filter: searchDULCases | itemsPerPage:5" pagination-id="dulCases" current-page="ChairConsole.currentDULPage">
                         <hr class="pvotes-separator">
-                        <div class="row pvotes-main-list">
+                        <div class="row pvotes-main-list" ng-class="{'list-highlighted': false}">
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pvotes-list-id" title="{{pendingCase.frontEndId}}">{{pendingCase.frontEndId}}</div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3 pvotes-list-id" title="{{pendingCase.consentGroupName}}">{{pendingCase.consentGroupName}}</div>
                             <a ng-click="ChairConsole.openDULReview(pendingCase.referenceId, pendingCase.voteId)" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
@@ -101,7 +101,7 @@
                 <div class="pvotes-box-body">
                     <div dir-paginate="pendingCase in ChairConsole.electionsList.access | filter: searchAccessCases | itemsPerPage:5" pagination-id="accessCases" current-page="ChairConsole.currentAccessPage">
                         <hr class="pvotes-separator">
-                        <div class="row pvotes-main-list">
+                        <div class="row pvotes-main-list" ng-class="{'list-highlighted': true}">
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pvotes-list-id" title="{{pendingCase.frontEndId}}">{{pendingCase.frontEndId}}</div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3 pvotes-list-id" title="{{pendingCase.projectTitle}}">{{pendingCase.projectTitle}}</div>
                             <a ng-click="ChairConsole.openAccessReview(pendingCase.referenceId, pendingCase.voteId, pendingCase.rpVoteId)" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">

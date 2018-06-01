@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="jumbotron box-vote-singleresults box-vote-no-margin">
-            <div class="grid-row">
+            <div class="grid-row row-header">
                 <div class="col-2 cell-header cell-sort dul-color" ng-click="sort('displayId')">Consent id
                     <span class="glyphicon sort-icon glyphicon-sort"></span>
                 </div>
@@ -38,7 +38,7 @@
             </div>
             <hr class="pvotes-main-separator">
             <div dir-paginate="election in ReviewedCases.electionsList.dul | orderBy:sortBy:reverse | filter: searchDULcases | itemsPerPage:5" pagination-id="dulCases" current-page="currentDulPage">
-                <div class="grid-row">
+                <div class="grid-row" ng-class="{'list-highlighted': false}">
                     <div class="col-2 cell-body text" ng-class="{flagged : election.archived}" title="{{election.displayId}}">{{election.displayId}}</div>
                     <div class="col-2 cell-body text" title="{{election.consentGroupName}}">{{election.consentGroupName}}</div>
                     <div class="col-1 cell-body text">{{election.version < 10 ? '0' + election.version : election.version}}</div>
@@ -77,7 +77,7 @@
             </div>
         </div>
         <div class="jumbotron box-vote-singleresults box-vote-no-margin">
-            <div class="grid-row">
+            <div class="grid-row row-header">
                 <div class="col-2 cell-header access-color">Data Request id</div>
                 <div class="col-3 cell-header access-color">Project Title</div>
                 <div class="col-1 cell-header access-color">Result Date</div>
@@ -86,7 +86,7 @@
             </div>
             <hr class="pvotes-main-separator">
             <div dir-paginate="election in ReviewedCases.electionsList.access | filter: searchAccessCases | itemsPerPage:5" pagination-id="accessCases" current-page="currentDarPage">
-                <div class="grid-row">
+                <div class="grid-row" ng-class="{'list-highlighted': false}">
                     <div class="col-2 cell-body text" title="{{election.displayId}}">{{election.displayId}}</div>
                     <div class="col-3 cell-body text" title="{{election.projectTitle}}">{{election.projectTitle}}</div>
                     <div class="col-1 cell-body text">{{election.finalVoteDate}}</div>

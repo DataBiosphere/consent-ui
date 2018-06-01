@@ -55,6 +55,10 @@ p{
     margin-bottom: 3px;
 }
 
+a {
+    cursor: pointer;
+}
+
 a, input, button {
     outline: 0 !important;
     text-decoration: none !important;
@@ -1221,6 +1225,7 @@ input[type=checkbox]:checked + label:before{
     transition: background 0.3s ease;
     font-size: 14px;
     font-weight: 500;
+    cursor: pointer;
 }
 
 .vote-button {
@@ -1239,13 +1244,19 @@ input[type=checkbox]:checked + label:before{
     background: rgba(204, 204, 204, 0.5) !important;
 }
 
-.vote-button-bigger{
-    margin-top: 10px;
-    padding: 10px 20px 8px 20px;
+.vote-button-back{
+    color: white;
+    background: #777777;
 }
 
-@media (max-width: 800px){
-    .vote-button-bigger { margin-right: 0;}
+.vote-button-back .glyphicon {
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.vote-button-bigger{
+    margin-top: 10px;
+    padding: 12px 20px 10px 17px;
 }
 
 .vote-reminder {
@@ -1338,8 +1349,10 @@ input[type=checkbox]:checked + label:before{
     margin: 0!important;
 }
 
-.list-highlighted{
-    background-color: rgba(96, 59, 155, 0.05);
+.grid-row:not(.row-header):hover,
+.grid-9-row:not(.row-header):hover,
+.list-highlighted {
+    background-color: rgba(220, 220, 220, 0.5);
 }
 
 .list-highlighted .glyphicon-exclamation-sign{
@@ -3584,10 +3597,12 @@ tags-input .tags .tag-item{
 
 .grid-row,
 .grid-9-row {
-    display: inline-block;
+    display: inline-flex;
     width: 100%;
     margin: 0;
     padding: 0;
+    min-height: 43px;
+    transition: all 0.3s ease;
 }
 
 .grid-row.pushed-2,
