@@ -35,7 +35,7 @@
 
         <hr class="pvotes-main-separator">
 
-        <div dir-paginate="election in AdminManage.electionsList.dul | filter: searchDUL | itemsPerPage:10">
+        <div dir-paginate="election in AdminManage.electionsList.dul | filter: searchDUL | itemsPerPage:10" current-page="AdminManage.currentDULPage">
             <div class="grid-9-row pushed-2">
                 <div class="col-2 cell-body text" ng-class="{flagged : election.archived}" title="{{election.consentName}}">{{election.consentName}}</div>
                 <div class="col-2 cell-body text" title="{{election.groupName}}">{{election.groupName}}</div>
@@ -48,10 +48,10 @@
                     <button class="cell-button hover-color" ng-disabled="election.electionStatus != 'un-reviewed' || !election.editable" ng-click="AdminManage.editDul(election.consentId)">Edit</button>
                 </div>
                 <div class="col-1 cell-body text f-center bold">
-                    <span ng-if="election.electionStatus == 'un-reviewed'"><a ui-sref="dul_preview_results({consentId: '{{election.consentId}}'})">Un-reviewed</a></span>
-                    <span ng-if="election.electionStatus == 'Open'"><a ui-sref="dul_review_results({consentId: '{{election.consentId}}'})">Open</a></span>
-                    <span ng-if="election.electionStatus == 'Canceled'"><a ui-sref="dul_preview_results({consentId: '{{election.consentId}}'})">Canceled</a></span>
-                    <span ng-if="election.electionStatus == 'Closed'"><a ui-sref="dul_results_record({electionId: '{{election.electionId}}'})">Reviewed</a></span>
+                    <span ng-if="election.electionStatus == 'un-reviewed'"><a ng-click="AdminManage.open(election.consentId, 'dul_preview_results', null)">Un-reviewed</a></span>
+                    <span ng-if="election.electionStatus == 'Open'"><a ng-click="AdminManage.open(election.consentId, 'dul_review_results', null)">Open</a></span>
+                    <span ng-if="election.electionStatus == 'Canceled'"><a ng-click="AdminManage.open(election.consentId, 'dul_preview_results', null)">Canceled</a></span>
+                    <span ng-if="election.electionStatus == 'Closed'"><a ng-click="AdminManage.open(null, 'dul_results_record', election.electionId)">Reviewed</a></span>
                 </div>
                 <div class="col-1 cell-body f-center">
                     <button ng-if="election.electionStatus != 'Open' && election.editable" ng-disabled="!election.editable" class="cell-button hover-color" ng-click="AdminManage.openCreate(election)">Create</button>

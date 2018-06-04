@@ -1,11 +1,15 @@
 <div ng-include src="'app/header/header.html'"></div>
 <div class="container">
     <div class="row fsi-row-lg-level fsi-row-md-level title-wrapper">
-        <img src="assets/images/icon_access.png" alt="Data Access Request icon" class="cm-icons main-icon-title">
-        <h2 class="main-title margin-sm access-color">
-            Data Access Congruence Preview
-            <span class="main-title-case"><b>{{request.projectTitle}}</b> | {{consentName}}</span>
-        </h2>
+        <div class="col-lg-10 col-md-9 col-sm-9 col-xs-12 no-padding">
+            <img src="assets/images/icon_access.png" alt="Data Access Request icon" class="cm-icons main-icon-title">
+            <h2 class="main-title margin-sm access-color">Data Access Congruence Preview
+                <span class="main-title-case"><b>{{request.projectTitle}}</b> | {{consentName}}</span>
+            </h2>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12 no-padding">
+            <a ng-click="back()" class="btn vote-button vote-button-back vote-button-bigger"><i class="glyphicon glyphicon-chevron-left"></i>Back</a>
+        </div>
     </div>
     <accordion close-others="false">
         <accordion-group class="accordion" is-open="true">
@@ -34,7 +38,6 @@
                     </div>
                 </div>
             </div>
-
         </accordion-group>
 
         <accordion-group class="accordion" is-open="true">
@@ -64,10 +67,4 @@
             </div>
         </accordion-group>
     </accordion>
-
-    <div class="form-group form-group-bottom">
-       <a href='{{ hasAdminRole ? "#/admin_console" : "#/chair_console"}}' class="btn vote-button vote-button-dismiss vote-button-bigger">
-            Back to Console
-        </a>
-    </div>
 </div>

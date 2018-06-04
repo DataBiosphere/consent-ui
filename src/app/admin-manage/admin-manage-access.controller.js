@@ -5,18 +5,26 @@
         .controller('AdminManageAccess', AdminManageAccess);
 
     /* ngInject */
-    function AdminManageAccess($modal, cmRPService, $scope, cmElectionService) {
+    function AdminManageAccess($state, $modal, cmRPService, $scope, cmElectionService, $rootScope) {
 
         var vm = this;
         vm.openCreate = openCreate;
         vm.openCancel = openCancel;
+        vm.openPreviewResult = openPreviewResult;
         vm.downloadDataSetVotesDetail = downloadDataSetVotesDetail;
         vm.openApplication = openApplication;
-
+        vm.openResearcherReview = openResearcherReview;
+        vm.open = open;
+        vm.currentDARPage = 1;
+        $rootScope.pathFrom = 'admin_manage_access';
         init();
 
 
         function init() {
+            if($rootScope.currentDARPage !== undefined) {
+                vm.currentDARPage = $rootScope.currentDARPage;
+                $rootScope.currentDARPage = undefined;
+            }
             cmRPService.getDataAccessManage(vm);
         }
 
@@ -65,6 +73,21 @@
 
         function downloadDataSetVotesDetail(dataRequestId){
             cmElectionService.downloadDatasetVotesForDARElection(dataRequestId);
+        }
+
+        function openPreviewResult(url, dataRequestId) {
+            $rootScope.currentDARPage = vm.currentDARPage;
+            $state.go(url,{referenceId: dataRequestId});
+        }
+
+        function openResearcherReview(url, dacUserId){
+            $rootScope.currentDARPage = vm.currentDARPage;
+            $state.go(url,{dacUserId: dacUserId});
+        }
+
+        function open(url, electionId, referenceId){
+            $rootScope.currentDARPage = vm.currentDARPage;
+            $state.go(url, {electionId: electionId, referenceId: referenceId});
         }
 
         function openApplication(dar_id, electionStatus) {

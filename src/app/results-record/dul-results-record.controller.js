@@ -5,12 +5,13 @@
         .controller('DulResultsRecord', DulResultsRecord);
 
 
-    function DulResultsRecord($sce, $scope, $state, electionReview, apiUrl, cmFilesService) {
+    function DulResultsRecord($sce, $scope, $state, electionReview, apiUrl, cmFilesService, $rootScope) {
 
         if( typeof electionReview === 'undefined'){
             $state.go('reviewed_cases');
             return;
         }
+        $rootScope.path = 'dul-results-record';
         $scope.consentName = electionReview.consent.name;
         $scope.chartData = {
             'dulTotal': [
@@ -83,6 +84,11 @@
 
         $scope.downloadDUL = function(){
             cmFilesService.getDulFileByElectionId(electionReview.consent.consentId, electionReview.election.dulName, electionReview.election.electionId);
+        };
+
+        $scope.back = function() {
+            $state.go($rootScope.pathFrom);
+            $rootScope.pathFrom = undefined;
         };
 
         function chunk(arr, size) {
