@@ -6,7 +6,7 @@
         .controller('ResearcherReview', ResearcherReview);
 
     /* ngInject */
-    function ResearcherReview($stateParams, cmResearcherService, $scope, cmUserService, $state, $modal) {
+    function ResearcherReview($stateParams, cmResearcherService, $scope, cmUserService, $state, $modal, $rootScope) {
 
         var dacUserId = $stateParams.dacUserId;
         $scope.status = 'pending';
@@ -51,7 +51,7 @@
                             scope: $scope
                         });
                         modalInstance.result.then(function () {
-                           $state.go('admin_users');
+                          $state.go($rootScope.pathFrom);
                         });
                     },
                     //error

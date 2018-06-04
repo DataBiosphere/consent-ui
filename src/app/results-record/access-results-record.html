@@ -1,11 +1,18 @@
 <div ng-include src="'app/header/header.html'"></div>
 <div class="container">
     <div class="row fsi-row-lg-level fsi-row-md-level title-wrapper">
-        <img src="assets/images/icon_access.png" alt="Data Access Request icon" class="cm-icons main-icon-title">
-        <h2 class="main-title margin-sm access-color">
-            Data Access - Results Record
-            <span class="main-title-case"><b>{{projectTitle}}</b> | {{darCode}}</span>
-        </h2>
+        <div class="col-lg-10 col-md-9 col-sm-9 col-xs-12 no-padding">
+            <img src="assets/images/icon_access.png" alt="Data Access Request icon" class="cm-icons main-icon-title">
+            <h2 class="main-title margin-sm access-color">
+                Data Access - Results Record
+                <span class="main-title-case"><b>{{projectTitle}}</b> | {{darCode}}</span>
+            </h2>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12 no-padding">
+            <a ng-click="back()" class="btn vote-button vote-button-back vote-button-bigger">
+                <i class="glyphicon glyphicon-chevron-left"></i>Back
+            </a>
+        </div>
     </div>
     <h3 class="access-color" style="font-style: italic;">Was the researcher allowed to access this research study?</h3>
     <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
@@ -129,7 +136,6 @@
             </div>
         </div>
     </div>
-
     <h3 class="access-color">Data Access Voting Results</h3>
     <accordion close-others="oneAtATime">
         <accordion-group class="accordion">

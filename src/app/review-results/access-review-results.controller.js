@@ -20,7 +20,7 @@
         $scope.voteList = chunk(electionReview.reviewVote, 2);
         $scope.darOriginalFinalVote = electionReview.election.finalVote;
         $scope.darOriginalFinalRationale = electionReview.election.finalRationale;
-
+        $rootScope.path = 'access-review-results';
         if (typeof electionReview === 'undefined') {
             cmLoginUserService.redirect($rootScope.currentUser);
             return;
@@ -77,6 +77,11 @@
             }else{
                 $scope.enableDARButton = true;
             }
+        };
+
+        $scope.back = function() {
+            $state.go($rootScope.pathFrom);
+            $rootScope.pathFrom = undefined;
         };
 
         $scope.setEnableRPButton = function(){

@@ -9,7 +9,7 @@
 
         var vm = this;
         vm.electionsList = {'dul': [], 'access': []};
-
+        $rootScope.pathFrom = 'reviewed_cases';
         if($stateParams.menu !== true && $rootScope.currentDulPage !== undefined){
              $scope.currentDulPage = $rootScope.currentDulPage;
              $rootScope.currentDulPage = 1;

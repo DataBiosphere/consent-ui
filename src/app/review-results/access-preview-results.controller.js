@@ -16,7 +16,7 @@
         $scope.dataUseLetter = $scope.consent.dataUseLetter;
         $scope.downloadUrl = apiUrl + 'consent/' + $scope.consent.consentId + '/dul';
         $scope.dulName = $scope.consent.dulName;
-
+        $rootScope.path = 'access-preview-results';
         $scope.downloadDUL = function(){
             cmFilesService.getDULFile($scope.consent.consentId, $scope.consent.dulName);
         };
@@ -26,7 +26,10 @@
         } else {
             $scope.rp = $sce.trustAsHtml(rp.translated_restriction);
         }
-
+        $scope.back = function() {
+            $state.go($rootScope.pathFrom);
+            $rootScope.pathFrom = undefined;
+        };
         var vm = this;
         vm.openApplication = openApplication;
         function openApplication() {

@@ -8,6 +8,7 @@
 
         var vm = this;
         vm.openApplication = openApplication;
+        $rootScope.path = 'access-review';
         initEnableRPButton();
         initEnableDARButton();
 
@@ -78,7 +79,7 @@
         } else {
                 $scope.rp = $sce.trustAsHtml(election.translatedUseRestriction);
         }
-
+        $rootScope.path = 'access-review';
         $scope.selection = {};
         $scope.downloadUrl = apiUrl + 'consent/' + consent.consentId + '/dul';
         $scope.consent = consent;
