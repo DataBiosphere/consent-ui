@@ -17,7 +17,7 @@
         vm.currentAccessPage = 1;
         vm.openDULReview = openDULReview;
         vm.openAccessReview = openAccessReview;
-
+        $rootScope.pathFrom = 'user_console';
         init();
 
         function init() {
