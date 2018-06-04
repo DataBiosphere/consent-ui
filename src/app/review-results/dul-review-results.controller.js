@@ -69,7 +69,7 @@
         $rootScope.path = 'dul-review-results';
         $scope.dul = electionReview.consent.dataUseLetter;
         $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
-        $scope.dulName = electionReview.consent.dulName;
+        $scope.dulName = electionReview.election.dulName;
         $scope.consentName = electionReview.consent.name;
         $scope.consentGroupName = electionReview.consent.groupName;
         $scope.structuredDataUseLetter = $sce.trustAsHtml(electionReview.election.translatedUseRestriction);

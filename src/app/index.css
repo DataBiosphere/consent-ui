@@ -1349,10 +1349,8 @@ input[type=checkbox]:checked + label:before{
     margin: 0!important;
 }
 
-.grid-row:not(.row-header):hover,
-.grid-9-row:not(.row-header):hover,
-.list-highlighted {
-    background-color: rgba(220, 220, 220, 0.5);
+.list-highlighted{
+    background-color: rgba(96, 59, 155, 0.05);
 }
 
 .list-highlighted .glyphicon-exclamation-sign{
@@ -3597,12 +3595,10 @@ tags-input .tags .tag-item{
 
 .grid-row,
 .grid-9-row {
-    display: inline-flex;
+    display: inline-block;
     width: 100%;
     margin: 0;
     padding: 0;
-    min-height: 43px;
-    transition: all 0.3s ease;
 }
 
 .grid-row.pushed-2,

@@ -23,7 +23,7 @@
     </div>
 
     <div class="jumbotron box-vote-singleresults box-vote-no-margin">
-        <div class="grid-9-row pushed-2 row-header">
+        <div class="grid-9-row pushed-2">
             <div class="col-2 cell-header dul-color">Consent id</div>
             <div class="col-2 cell-header dul-color">Consent Group Name</div>
             <div class="col-1 cell-header dul-color">Election N°</div>
@@ -36,7 +36,7 @@
         <hr class="pvotes-main-separator">
 
         <div dir-paginate="election in AdminManage.electionsList.dul | filter: searchDUL | itemsPerPage:10" current-page="AdminManage.currentDULPage">
-            <div class="grid-9-row pushed-2" ng-class="{'list-highlighted': false}">
+            <div class="grid-9-row pushed-2">
                 <div class="col-2 cell-body text" ng-class="{flagged : election.archived}" title="{{election.consentName}}">{{election.consentName}}</div>
                 <div class="col-2 cell-body text" title="{{election.groupName}}">{{election.groupName}}</div>
                 <div class="col-1 cell-body text">

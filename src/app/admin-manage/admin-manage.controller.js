@@ -158,10 +158,7 @@
                 $state.go(url, { consentId: consentId });
             } else {
                 $state.go(url, { electionId: electionId });
-            }
-            
-
-            
+            }            
         }
     }
 })();
