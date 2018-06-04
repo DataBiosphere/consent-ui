@@ -221,11 +221,7 @@
             cmFilesService.getDULFile($scope.electionReview.consent.consentId, $scope.electionReview.consent.dulName);
         };
         $scope.back = function() {
-            if($rootScope.pathFrom === 'admin_manage_access') {
-                $state.go('admin_manage_access');
-            } else if($rootScope.pathFrom === 'reviewed_cases') {
-                $state.go('reviewed_cases');
-            }
+            $state.go($rootScope.pathFrom);
             $rootScope.pathFrom = undefined;
         };
         $scope.download = downloadFileService.downloadFile;

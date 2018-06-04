@@ -89,11 +89,7 @@
         };
 
         $scope.back = function() {
-            if($rootScope.pathFrom === 'admin_manage') {
-                $state.go('admin_manage');
-            } else if($rootScope.pathFrom === 'chair_console') {
-                $state.go('chair_console');
-            }
+            $state.go($rootScope.pathFrom);
             $rootScope.pathFrom = undefined;
         };
         

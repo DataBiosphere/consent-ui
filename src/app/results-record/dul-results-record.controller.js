@@ -86,11 +86,7 @@
         };
 
         $scope.back = function() {
-            if($rootScope.pathFrom === 'admin_manage') {
-                $state.go('admin_manage');
-            } else if($rootScope.pathFrom === 'reviewed_cases') {
-                $state.go('reviewed_cases');
-            }
+            $state.go($rootScope.pathFrom);
             $rootScope.pathFrom = undefined;
         };
 
