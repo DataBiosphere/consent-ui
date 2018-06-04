@@ -27,11 +27,7 @@
             $scope.rp = $sce.trustAsHtml(rp.translated_restriction);
         }
         $scope.back = function() {
-            if($rootScope.pathFrom === 'admin_manage_access') {
-                $state.go('admin_manage_access');
-            } else if($rootScope.pathFrom === 'chair_onsole') {
-                $state.go('chair_onsole');
-            }
+            $state.go($rootScope.pathFrom);
             $rootScope.pathFrom = undefined;
         };
         var vm = this;
