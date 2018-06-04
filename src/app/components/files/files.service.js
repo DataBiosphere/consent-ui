@@ -12,6 +12,11 @@
             getFile(consentUrl, fileName);
         }
 
+        function getDulFileByElectionId(consentId, fileName, electionId) {
+            var consentUrl = apiUrl + 'consent/' + consentId + '/dul?electionId=' + electionId;
+            getFile(consentUrl, fileName);
+        }
+
         function getOntologyFile(fileName, fileUrl) {
             var encodeURI = encodeURIComponent(fileUrl);
             var ontologyUrl = apiUrl + 'ontology/file?fileUrl=' + encodeURI + '&fileName=' + fileName;
@@ -32,7 +37,6 @@
                         var downloadElement = angular.element('<a/>');
                         downloadElement.css({ display: 'none' });
                         angular.element(document.body).append(downloadElement);
-                        
                         if (isIE) {
                             downloadElement.attr({
                                 href: window.navigator.msSaveOrOpenBlob(blob, fileName)
@@ -49,6 +53,9 @@
         }
 
         return {
+            getDulFileByElectionId: function(consentId, fileName, electionId){
+                return getDulFileByElectionId(consentId, fileName, electionId);
+            },
             getDULFile: function (consentId, fileName) {
                 return getDULFile(consentId, fileName);
             },
