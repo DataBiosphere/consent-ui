@@ -51,11 +51,7 @@
                             scope: $scope
                         });
                         modalInstance.result.then(function () {
-                          if($rootScope.pathFrom === 'admin_manage_access') {
-                              $state.go('admin_manage_access');
-                          } else {
-                            $state.go('admin_users');
-                          }                           
+                          $state.go($rootScope.pathFrom);
                         });
                     },
                     //error
