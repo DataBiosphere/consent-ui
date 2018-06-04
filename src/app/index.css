@@ -1349,7 +1349,7 @@ input[type=checkbox]:checked + label:before{
     margin: 0!important;
 }
 
-.list-highlighted {
+.list-highlighted{
     background-color: rgba(96, 59, 155, 0.05);
 }
 
