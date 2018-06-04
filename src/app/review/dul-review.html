@@ -1,12 +1,23 @@
 <div ng-include src="'app/header/header.html'"></div>
 <div class="container">
     <div class="row fsi-row-lg-level fsi-row-md-level title-wrapper">
-        <img src="assets/images/icon_dul.png" alt="Data Use Limitations icon" class="cm-icons main-icon-title">
-        <h2 class="main-title margin-sm dul-color">
-            Data Use Limitations Congruence Review<br>
-            <div class="main-title-description">Were the data use limitations accurately converted to a structured format?</div>
-        </h2>
+        <div class="col-lg-10 col-md-9 col-sm-9 col-xs-12 no-padding">
+            <img src="assets/images/icon_dul.png" alt="Data Use Limitations icon" class="cm-icons main-icon-title">
+            <h2 class="main-title margin-sm dul-color">
+                Data Use Limitations Congruence Review
+                <span class="main-title-case"><b>{{consentGroupName}}</b> | {{consentName}}</span>
+            </h2>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12 no-padding">
+            <a href="#/user_console" ng-repeat="rol in $root.currentUser.roles" ng-show="'{{rol.name}}' === '{{$root.userRoles.member}}'" class="btn vote-button vote-button-back vote-button-bigger">
+                <i class="glyphicon glyphicon-chevron-left"></i>Back
+            </a>
+            <a href="#/chair_console" ng-repeat="rol in $root.currentUser.roles" ng-show="'{{rol.name}}' === '{{$root.userRoles.chairperson}}'" class="btn vote-button vote-button-back vote-button-bigger">
+                <i class="glyphicon glyphicon-chevron-left"></i>Back
+            </a>
+        </div>
     </div>
+    <h3 class="dul-color" style="font-style: italic;">Were the data use limitations accurately converted to a structured format?</h3>
     <hr class="section-separator">
     <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
@@ -75,18 +86,5 @@
                 </fieldset>
             </form>
         </div>
-    </div>
-    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 f-right">
-        <a href="#/user_console" ng-repeat="rol in $root.currentUser.roles"
-           ng-show="'{{rol.name}}' === '{{$root.userRoles.member}}'"
-           class="btn vote-button vote-button-dismiss vote-button-bigger">
-            Back to Console
-        </a>
-
-        <a href="#/chair_console" ng-repeat="rol in $root.currentUser.roles"
-           ng-show="'{{rol.name}}' === '{{$root.userRoles.chairperson}}'"
-           class="btn vote-button vote-button-dismiss vote-button-bigger">
-            Back to Console
-        </a>
     </div>
 </div>

@@ -38,7 +38,6 @@
                 controller: 'ModalCreate',
                 controllerAs: 'ModalCreate',
                 scope: $scope
-
             });
 
             modalInstance.result.then(function () {
@@ -47,8 +46,6 @@
                 } else {
                     init();
                 }
-
-
             });
         }
 
@@ -67,9 +64,9 @@
                     }
                 }
             });
+
             modalInstance.result.then(function ($scope) {
                 updateElection('Canceled', vm.selectedElection.consentId, vm.selectedElection.electionId, $scope.electionArchived);
-
             });
         }
 
