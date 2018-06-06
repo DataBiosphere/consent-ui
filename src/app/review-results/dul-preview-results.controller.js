@@ -22,7 +22,7 @@
         $scope.consentName = consent.name;
         $scope.downloadUrl = apiUrl + 'consent/' + $scope.consent.consentId + '/dul';
         $scope.dulName = dulName;
-        $scope.consentGroupName = consent.groupName;
+        $scope.consentGroupName = $sce.trustAsHtml(consent.groupName);
         $scope.dataUseLetter = $scope.consent.dataUseLetter;
         $scope.structuredDataUseLetter = $sce.trustAsHtml($scope.consent.translatedUseRestriction);
         $rootScope.path = 'dul-preview-results';

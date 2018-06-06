@@ -5,7 +5,7 @@
         .service('cmPendingCaseService', cmPendingCaseService);
 
     /* ngInject */
-    function cmPendingCaseService(DARUnReviewed, ConsentUnReviewed, DataRequestPendingCases, ConsentPendingCases, MatchSummaryCases ,ConsentSummaryCases, DataRequestSummaryCases, DataOwnerUnReviewed) {
+    function cmPendingCaseService(DARUnReviewed, ConsentUnReviewed, DataRequestPendingCases, ConsentPendingCases, MatchSummaryCases ,ConsentSummaryCases, DataRequestSummaryCases, DataOwnerUnReviewed, $sce) {
 
         /**
          * Finding data request pending cases for the specified user id
@@ -39,6 +39,7 @@
                     vm.electionsList.dul = data;
                     vm.electionsList.dul.forEach(
                         function countCollectVotes(dul) {
+                            dul.consentGroupName = $sce.trustAsHtml(dul.consentGroupName);
                             if (dul.alreadyVoted === false) {
                                 vm.totalDulPendingVotes += 1;
                             }

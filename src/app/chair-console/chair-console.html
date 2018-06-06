@@ -39,7 +39,7 @@
                         <hr class="pvotes-separator">
                         <div class="row pvotes-main-list">
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pvotes-list-id" title="{{pendingCase.frontEndId}}">{{pendingCase.frontEndId}}</div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3 pvotes-list-id" title="{{pendingCase.consentGroupName}}">{{pendingCase.consentGroupName}}</div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3 pvotes-list-id" ng-class="{empty : !pendingCase.consentGroupName}" title="{{pendingCase.consentGroupName}}">{{pendingCase.consentGroupName}}</div>
                             <a ng-click="ChairConsole.openDULReview(pendingCase.referenceId, pendingCase.voteId)" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                                 <div class="voteButton {{pendingCase.alreadyVoted ? 'editable' : 'enabled'}}">
                                     <span ng-if="pendingCase.alreadyVoted == false">Vote</span>

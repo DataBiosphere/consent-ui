@@ -5,7 +5,7 @@
         .controller('ReviewedCases', ReviewedCases);
 
     /* ngInject */
-    function ReviewedCases(reviewedConsents, reviewedDRs, $scope, $rootScope, $stateParams) {
+    function ReviewedCases(reviewedConsents, reviewedDRs, $scope, $rootScope, $stateParams, $sce) {
 
         var vm = this;
         vm.electionsList = {'dul': [], 'access': []};
@@ -49,6 +49,7 @@
             vm.electionsList.dul.forEach(function(election) {
                 var str = election.displayId;
                 str = str.replace(regex, ' ');
+                election.consentGroupName = $sce.trustAsHtml(election.consentGroupName);
                 election.ct = String(election.displayId) + ' ' + String(election.version < 10 ? '0' + election.version : election.version);
                 election.cts = str + ' ' + String(election.version < 10 ? '0' + election.version : election.version);
             });
