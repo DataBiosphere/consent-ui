@@ -5,7 +5,7 @@
         .service('cmConsentService', cmConsentService);
 
     /* ngInject */
-    function cmConsentService(ConsentInvalidRestriction, ConsentResource, DeleteConsentResource, ConsentDulResource, ConsentManageResource, CreateConsentResource, CreateDulResource, UpdateConsentResource) {
+    function cmConsentService(ConsentInvalidRestriction, ConsentResource, DeleteConsentResource, ConsentDulResource, ConsentManageResource, CreateConsentResource, CreateDulResource, UpdateConsentResource, $sce) {
 
         /**
          * Find data for the consent related to the consentId sent as a parameter
@@ -34,6 +34,7 @@
                         str = str.replace(regex, ' ');
                         election.ct = election.consentName + ' ' + election.version;
                         election.cts = str + ' ' + election.version;
+                        election.groupName = $sce.trustAsHtml(election.groupName);
                     });
                 });
         }

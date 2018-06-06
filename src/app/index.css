@@ -1046,6 +1046,12 @@ small {
     right: 0;
 }
 
+.empty::before {
+    content: '- -';
+    color: #777777;
+    font-size: 14px;
+}
+
 .cell-button {
     width: 100%;
     text-align: center;
