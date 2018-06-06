@@ -71,7 +71,7 @@
         $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
         $scope.dulName = electionReview.election.dulName;
         $scope.consentName = electionReview.consent.name;
-        $scope.consentGroupName = electionReview.consent.groupName;
+        $scope.consentGroupName =  $sce.trustAsHtml(electionReview.consent.groupName);
         $scope.structuredDataUseLetter = $sce.trustAsHtml(electionReview.election.translatedUseRestriction);
         $scope.positiveVote = positiveVote;
         $scope.logVote = logVote;
