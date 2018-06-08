@@ -70,9 +70,9 @@
         if (electionReview.election.finalRationale === 'null') {
             $scope.election.finalRationale = '';
         }
-        $scope.dul = electionReview.election.dataUseLetter;
+        $scope.dul = electionReview.election.dataUseLetter !== "" ? electionReview.election.dataUseLetter : electionReview.consent.dataUseLetter;
         $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
-        $scope.dulName = electionReview.election.dulName;
+        $scope.dulName = electionReview.election.dulName !== "" ? electionReview.election.dulName : electionReview.consent.dataUseLetter;
         $scope.structuredDataUseLetter = $sce.trustAsHtml(electionReview.election.translatedUseRestriction);
 
         $scope.finalRationale = electionReview.election.finalRationale;
