@@ -13,11 +13,21 @@
         }
         $rootScope.path = 'dul-review';
         $scope.downloadUrl = apiUrl + 'consent/' + consent.consentId + '/dul';
-        $scope.consentDulName = election.dulName;
-        $scope.consentSDul = $sce.trustAsHtml(election.translatedUseRestriction);
+
+        // $scope.structuredDataUseLetter = $sce.trustAsHtml(
+        //     electionReview.election.translatedUseRestriction !== "" ? electionReview.election.translatedUseRestriction : electionReview.consent.translatedUseRestriction
+        // );
+        // $scope.dul = electionReview.election.dataUseLetter !== "" ? electionReview.election.dataUseLetter : electionReview.consent.dataUseLetter;
+        // $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
+        // $scope.dulName = electionReview.election.dulName !== "" ? electionReview.election.dulName : electionReview.consent.dataUseLetter;
+
+        $scope.dulName = election.dulName !== "" ? election.dulName : consent.dulName;
+        $scope.structuredDul = $sce.trustAsHtml(
+            election.translatedUseRestriction !== "" ? election.translatedUseRestriction : consent.translatedUseRestriction
+        );
+        //consentSdul  y consentDulName html
         $scope.consentName = consent.name;
         $scope.consentGroupName = $sce.trustAsHtml(consent.groupName);
-        
         $scope.voteStatus = vote.vote;
         $scope.isFormDisabled = (election.status === 'Closed');
         $scope.rationale = vote.rationale;
