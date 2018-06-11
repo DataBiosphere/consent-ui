@@ -73,8 +73,9 @@
         $scope.dul = electionReview.election.dataUseLetter !== "" ? electionReview.election.dataUseLetter : electionReview.consent.dataUseLetter;
         $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
         $scope.dulName = electionReview.election.dulName !== "" ? electionReview.election.dulName : electionReview.consent.dataUseLetter;
-        $scope.structuredDataUseLetter = $sce.trustAsHtml(electionReview.election.translatedUseRestriction);
-
+        $scope.structuredDataUseLetter = $sce.trustAsHtml(
+            electionReview.election.translatedUseRestriction !== "" ? electionReview.election.translatedUseRestriction : electionReview.consent.translatedUseRestriction
+        );
         $scope.finalRationale = electionReview.election.finalRationale;
         $scope.status = electionReview.election.status;
         $scope.finalVote = electionReview.election.finalVote;
