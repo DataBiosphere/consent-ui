@@ -78,7 +78,7 @@
             $scope.structuredDataUseLetter = $sce.trustAsHtml(electionReview.election.translatedUseRestriction);
         } else {
             $scope.dul = electionReview.consent.dataUseLetter;
-            $scope.dulName = electionReview.consent.dataUseLetter;
+            $scope.dulName = electionReview.consent.dulName;
             $scope.structuredDataUseLetter = $sce.trustAsHtml(electionReview.consent.translatedUseRestriction);
         }
 
