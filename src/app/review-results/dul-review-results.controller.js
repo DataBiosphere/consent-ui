@@ -67,14 +67,22 @@
             $scope.election.finalRationale = '';
         }
         $rootScope.path = 'dul-review-results';
-        $scope.dul = electionReview.election.dataUseLetter !== "" ? electionReview.election.dataUseLetter : electionReview.consent.dataUseLetter;
+
+        // if both values, dulName and StructuredDataUseLetter, are missing in election,
+        // then consent's correct values will be displayed
+        if (cmElectionService.hasElectionValues($scope.election.dulName, $scope.election.translatedUseRestriction)) {
+            $scope.dul = $scope.election.dataUseLetter;
+            $scope.dulName = $scope.election.dulName;
+            $scope.structuredDataUseLetter = $sce.trustAsHtml($scope.election.translatedUseRestriction);
+        } else {
+            $scope.dul = electionReview.consent.dataUseLetter;
+            $scope.dulName = electionReview.consent.dataUseLetter;
+            $scope.structuredDataUseLetter = $sce.trustAsHtml(electionReview.consent.translatedUseRestriction);
+        }
+
         $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
-        $scope.dulName = electionReview.election.dulName !== "" ? electionReview.election.dulName : electionReview.consent.dataUseLetter;
         $scope.consentName = electionReview.consent.name;
         $scope.consentGroupName =  $sce.trustAsHtml(electionReview.consent.groupName);
-        $scope.structuredDataUseLetter = $sce.trustAsHtml(
-            electionReview.election.translatedUseRestriction !== "" ? electionReview.election.translatedUseRestriction : electionReview.consent.translatedUseRestriction
-        );
         $scope.positiveVote = positiveVote;
         $scope.logVote = logVote;
         $scope.electionType = null;
@@ -86,7 +94,6 @@
         $scope.finalVote = electionReview.election.finalVote;
         $scope.voteList = chunk(electionReview.reviewVote, 2);
         $scope.chartData = getGraphData(electionReview.reviewVote);
-
         $scope.downloadDUL = function(){
             cmFilesService.getDULFile(electionReview.consent.consentId, electionReview.consent.dulName);
         };

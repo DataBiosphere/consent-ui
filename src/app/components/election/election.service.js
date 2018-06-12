@@ -151,6 +151,10 @@
             return DataSetElection.get();
         }
 
+        function hasElectionValues(dulName, sDul) {
+            return ((dulName !== null && dulName !== '' && dulName !== undefined) || (sDul !== null && sDul !== '' && sDul !== undefined));
+        }
+
         return {
             findElectionById: function(electionId){
                 return getElectionById(electionId);
@@ -201,8 +205,11 @@
             createDARElection: function (requestId) {
                 return createDARElection(requestId);
             },
-            isDataSetElectionOpen: function(){
+            isDataSetElectionOpen: function() {
                 return isDataSetElectionOpen();
+            },
+            hasElectionValues: function(dulName, sDul) {
+                return hasElectionValues(dulName, sDul);
             }
         };
     }

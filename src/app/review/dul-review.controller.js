@@ -4,7 +4,8 @@
     angular.module('cmReview')
         .controller('DulReview', DulReview);
 
-    function DulReview($sce, $scope, $modal, $state, $rootScope, USER_ROLES, vote, consent, election, cmVoteService,cmLoginUserService, apiUrl, cmAuthenticateService, cmFilesService){
+    function DulReview($sce, $scope, $modal, $state, $rootScope, USER_ROLES, vote, consent, election, cmVoteService,
+                       cmLoginUserService, apiUrl, cmAuthenticateService, cmFilesService, cmElectionService){
         if (typeof vote === 'undefined' ||
             typeof consent === 'undefined' ||
             typeof election === 'undefined') {
@@ -14,18 +15,16 @@
         $rootScope.path = 'dul-review';
         $scope.downloadUrl = apiUrl + 'consent/' + consent.consentId + '/dul';
 
-        // $scope.structuredDataUseLetter = $sce.trustAsHtml(
-        //     electionReview.election.translatedUseRestriction !== "" ? electionReview.election.translatedUseRestriction : electionReview.consent.translatedUseRestriction
-        // );
-        // $scope.dul = electionReview.election.dataUseLetter !== "" ? electionReview.election.dataUseLetter : electionReview.consent.dataUseLetter;
-        // $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
-        // $scope.dulName = electionReview.election.dulName !== "" ? electionReview.election.dulName : electionReview.consent.dataUseLetter;
+        // if both values, dulName and StructuredDataUseLetter, are missing in election,
+        // then consent's correct values will be displayed
+        if (cmElectionService.hasElectionValues(election.dulName, election.translatedUseRestriction)) {
+            $scope.dulName = election.dulName;
+            $scope.structuredDul = $sce.trustAsHtml(election.translatedUseRestriction);
+        } else {
+            $scope.dulName = consent.dulName;
+            $scope.structuredDul = $sce.trustAsHtml(consent.translatedUseRestriction);
+        }
 
-        $scope.dulName = election.dulName !== "" ? election.dulName : consent.dulName;
-        $scope.structuredDul = $sce.trustAsHtml(
-            election.translatedUseRestriction !== "" ? election.translatedUseRestriction : consent.translatedUseRestriction
-        );
-        //consentSdul  y consentDulName html
         $scope.consentName = consent.name;
         $scope.consentGroupName = $sce.trustAsHtml(consent.groupName);
         $scope.voteStatus = vote.vote;

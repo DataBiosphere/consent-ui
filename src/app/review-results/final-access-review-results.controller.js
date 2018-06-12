@@ -361,6 +361,7 @@
                 $scope.election.finalRationale = '';
             }
             $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
+
             $scope.dulName = electionReview.election.dulName;
             $scope.status = electionReview.election.status;
             $scope.voteList = chunk(electionReview.reviewVote, 2);
