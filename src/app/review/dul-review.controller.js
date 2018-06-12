@@ -4,7 +4,8 @@
     angular.module('cmReview')
         .controller('DulReview', DulReview);
 
-    function DulReview($sce, $scope, $modal, $state, $rootScope, USER_ROLES, vote, consent, election, cmVoteService,cmLoginUserService, apiUrl, cmAuthenticateService, cmFilesService){
+    function DulReview($sce, $scope, $modal, $state, $rootScope, USER_ROLES, vote, consent, election, cmVoteService,
+                       cmLoginUserService, apiUrl, cmAuthenticateService, cmFilesService, cmElectionService){
         if (typeof vote === 'undefined' ||
             typeof consent === 'undefined' ||
             typeof election === 'undefined') {
@@ -13,11 +14,19 @@
         }
         $rootScope.path = 'dul-review';
         $scope.downloadUrl = apiUrl + 'consent/' + consent.consentId + '/dul';
-        $scope.consentDulName = election.dulName;
-        $scope.consentSDul = $sce.trustAsHtml(election.translatedUseRestriction);
+
+        // if both values, dulName and StructuredDataUseLetter, are missing in election,
+        // then consent's correct values will be displayed
+        if (cmElectionService.hasElectionValues(election.dulName, election.translatedUseRestriction)) {
+            $scope.dulName = election.dulName;
+            $scope.structuredDul = $sce.trustAsHtml(election.translatedUseRestriction);
+        } else {
+            $scope.dulName = consent.dulName;
+            $scope.structuredDul = $sce.trustAsHtml(consent.translatedUseRestriction);
+        }
+
         $scope.consentName = consent.name;
         $scope.consentGroupName = $sce.trustAsHtml(consent.groupName);
-        
         $scope.voteStatus = vote.vote;
         $scope.isFormDisabled = (election.status === 'Closed');
         $scope.rationale = vote.rationale;

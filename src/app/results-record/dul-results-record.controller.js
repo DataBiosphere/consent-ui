@@ -5,7 +5,7 @@
         .controller('DulResultsRecord', DulResultsRecord);
 
 
-    function DulResultsRecord($sce, $scope, $state, electionReview, apiUrl, cmFilesService, $rootScope) {
+    function DulResultsRecord($sce, $scope, $state, electionReview, apiUrl, cmFilesService, $rootScope, cmElectionService) {
 
         if( typeof electionReview === 'undefined'){
             $state.go('reviewed_cases');
@@ -70,11 +70,19 @@
         if (electionReview.election.finalRationale === 'null') {
             $scope.election.finalRationale = '';
         }
-        $scope.dul = electionReview.election.dataUseLetter;
-        $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
-        $scope.dulName = electionReview.election.dulName;
-        $scope.structuredDataUseLetter = $sce.trustAsHtml(electionReview.election.translatedUseRestriction);
+        // if both values, dulName and StructuredDataUseLetter, are missing in election,
+        // then consent's correct values will be displayed
+        if (cmElectionService.hasElectionValues(electionReview.election.dulName, electionReview.election.translatedUseRestriction)) {
+            $scope.dul = electionReview.election.dataUseLetter;
+            $scope.dulName = electionReview.election.dulName;
+            $scope.structuredDataUseLetter = $sce.trustAsHtml(electionReview.election.translatedUseRestriction);
+        } else {
+            $scope.dul = electionReview.consent.dataUseLetter;
+            $scope.dulName = electionReview.consent.dulName;
+            $scope.structuredDataUseLetter = $sce.trustAsHtml(electionReview.consent.translatedUseRestriction);
+        }
 
+        $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
         $scope.finalRationale = electionReview.election.finalRationale;
         $scope.status = electionReview.election.status;
         $scope.finalVote = electionReview.election.finalVote;
