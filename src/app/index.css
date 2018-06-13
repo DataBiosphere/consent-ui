@@ -622,6 +622,10 @@ small {
     font-weight: 300;
 }
 
+.pipe::after {
+    content: ' | ';
+}
+
 .cm-title, .cm-title-admin, .cm-subtitle, .cm-subtitle-ultimate, .cm-user-name, .cm-results-subtitle, .cm-box-title {
     color: #777777;
 }
@@ -1044,6 +1048,10 @@ small {
     margin-top: -4px;
     position: absolute;
     right: 0;
+}
+
+.empty::before {
+    content: '- -';
 }
 
 .cell-button {
