@@ -123,6 +123,10 @@ small {
     display: inline !important;
 }
 
+.display-inline-block {
+    display: inline-block !important;
+}
+
 .default-color {
     color: #777777 !important;
 }
