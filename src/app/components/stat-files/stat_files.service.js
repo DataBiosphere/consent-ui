@@ -49,9 +49,55 @@
                     }
                 });
         }
+    
+        function getDARsReport(fileType) {
+            $http({
+                url: apiUrl + 'dataRequest/' + fileType,
+                method: "GET"
+            }).
+                success(function (data) {
+                    var blob = new Blob([data], { type: 'text/plain' });
+                    if (blob.size !== 0) {
+                        var isIE = /*@cc_on!@*/false || !!document.documentMode;
+                        var downloadElement = angular.element('<a/>');
+                        downloadElement.css({ display: 'none' });
+                        angular.element(document.body).append(downloadElement);
+                        if (isIE) {
+                            if (fileType === 'reviewed') {
+                                downloadElement.attr({
+                                    href: window.navigator.msSaveOrOpenBlob(blob, "ReviewedDataAccessRequests.tsv")
+                                });
+                            }
+                            if (fileType === 'approved') {
+                                downloadElement.attr({
+                                    href: window.navigator.msSaveOrOpenBlob(blob, "ApprovedDataAccessRequests.tsv")
+                                });
+                            }
+                        } else {
+                            if (fileType === 'reviewed') {
+                                downloadElement.attr({
+                                    href: (window.URL || window.webkitURL).createObjectURL(blob),
+                                    target: '_blank',
+                                    download: "ReviewedDataAccessRequests.tsv"
+                                })[0].click();
+                            }
+                            if (fileType === 'approved') {
+                                downloadElement.attr({
+                                    href: (window.URL || window.webkitURL).createObjectURL(blob),
+                                    target: '_blank',
+                                    download: "ApprovedDataAccessRequests.tsv"
+                                })[0].click();
+                            }
+                        }
+                    }
+                });
+        }
         return {
             getFile: function (fileType) {
                 return getFile(fileType);
+            },
+            getDARsReport: function(reportType) {
+                return getDARsReport(reportType);
             }
         };
     }
