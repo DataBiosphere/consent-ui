@@ -8,10 +8,16 @@
     function SummaryVotes($scope, apiUrl, cmPendingCaseService, cmStatFilesService, cmLoginUserService) {
         var vm = this;
         vm.getFile = getFile;
+        vm.getDARsReport = getDARsReport;
 
-         function getFile(fileType){
-                   cmStatFilesService.getFile(fileType);
-                }
+        function getFile(fileType){
+           cmStatFilesService.getFile(fileType);
+        }
+
+        function getDARsReport(fileType, fileName) {
+            cmStatFilesService.getDARsReport(fileType, fileName);
+         }
+
     $scope.roles = cmLoginUserService;
 
     var data = {

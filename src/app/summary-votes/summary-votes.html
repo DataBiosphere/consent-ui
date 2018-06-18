@@ -8,7 +8,7 @@
         </h2>
     </div>
     <hr class="section-separator">
-    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="row stats-title">
             <h2 class="col-lg-10 col-md-9 col-sm-8 col-xs-12 pvotes-box-title dul-color">
                 <img src="assets/images/icon_dul.png" alt="Translation icon" class="pvotes-icons">Data Use Limitations Statistics<br>
@@ -49,7 +49,10 @@
         </h3>
         <div class="row fsi-row-lg-level fsi-row-md-level">
             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 jumbotron box-vote-stats">
-                <h4 class="cm-results-subtitle">All cases</h4>
+                <h4 class="cm-results-subtitle display-inline-block">All cases</h4>
+                <div class="no-padding f-right display-inline-block">
+                    <button ng-click="SummaryVotes.getDARsReport('reviewed', 'ReviewedDataAccessRequests.tsv')" class="btn vote-reminder access-color">Download all cases</button>
+                </div>
                 <div class="row">
                     <hr class="box-separator-white separator-margin">
                     <div cm-chart cm-chart-data="SummaryVotes.chartData.accessTotal"
@@ -58,7 +61,10 @@
                 </div>
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 jumbotron box-vote-stats">
-                <h4 class="cm-results-subtitle">Reviewed cases results</h4>
+                <h4 class="cm-results-subtitle display-inline-block">Reviewed cases results</h4>
+                <div class="no-padding f-right display-inline-block">
+                    <button ng-click="SummaryVotes.getDARsReport('approved', 'ApprovedDataAccessRequests.tsv')" class="btn vote-reminder access-color">Download approved cases</button>
+                </div>
                 <div class="row">
                     <hr class="box-separator-white separator-margin">
                     <div cm-chart cm-chart-data="SummaryVotes.chartData.accessReviewed"
