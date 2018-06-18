@@ -137,6 +137,8 @@
                 $scope.formData.population !== true &&
                 $scope.formData.diseases !== true &&
                 $scope.formData.methods !== true &&
+                $scope.formData.hmb !== true &&
+                $scope.formData.poa !== true &&
                 $scope.formData.other !== true
             ) {
                 $scope.atLeastOneCheckboxChecked = false;
