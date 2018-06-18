@@ -50,7 +50,7 @@
                 });
         }
     
-        function getDARsReport(fileType) {
+        function getDARsReport(fileType, fileName) {
             $http({
                 url: apiUrl + 'dataRequest/' + fileType,
                 method: "GET"
@@ -63,31 +63,15 @@
                         downloadElement.css({ display: 'none' });
                         angular.element(document.body).append(downloadElement);
                         if (isIE) {
-                            if (fileType === 'reviewed') {
-                                downloadElement.attr({
-                                    href: window.navigator.msSaveOrOpenBlob(blob, "ReviewedDataAccessRequests.tsv")
-                                });
-                            }
-                            if (fileType === 'approved') {
-                                downloadElement.attr({
-                                    href: window.navigator.msSaveOrOpenBlob(blob, "ApprovedDataAccessRequests.tsv")
-                                });
-                            }
+                            downloadElement.attr({
+                                href: window.navigator.msSaveOrOpenBlob(blob, fileName)
+                            });
                         } else {
-                            if (fileType === 'reviewed') {
-                                downloadElement.attr({
-                                    href: (window.URL || window.webkitURL).createObjectURL(blob),
-                                    target: '_blank',
-                                    download: "ReviewedDataAccessRequests.tsv"
-                                })[0].click();
-                            }
-                            if (fileType === 'approved') {
-                                downloadElement.attr({
-                                    href: (window.URL || window.webkitURL).createObjectURL(blob),
-                                    target: '_blank',
-                                    download: "ApprovedDataAccessRequests.tsv"
-                                })[0].click();
-                            }
+                            downloadElement.attr({
+                                href: (window.URL || window.webkitURL).createObjectURL(blob),
+                                target: '_blank',
+                                download: fileName
+                            })[0].click();
                         }
                     }
                 });
@@ -96,8 +80,8 @@
             getFile: function (fileType) {
                 return getFile(fileType);
             },
-            getDARsReport: function(reportType) {
-                return getDARsReport(reportType);
+            getDARsReport: function(reportType, fileName) {
+                return getDARsReport(reportType, fileName);
             }
         };
     }

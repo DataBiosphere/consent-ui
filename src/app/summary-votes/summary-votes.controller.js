@@ -14,8 +14,8 @@
            cmStatFilesService.getFile(fileType);
         }
 
-        function getDARsReport(fileType) {
-            cmStatFilesService.getDARsReport(fileType);
+        function getDARsReport(fileType, fileName) {
+            cmStatFilesService.getDARsReport(fileType, fileName);
          }
 
     $scope.roles = cmLoginUserService;
