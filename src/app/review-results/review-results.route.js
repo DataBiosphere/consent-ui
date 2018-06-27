@@ -47,11 +47,6 @@
                     authorizedRoles: [USER_ROLES.chairperson, USER_ROLES.admin]
                 },
                 resolve: {
-                    consent: function ($stateParams, cmRPService) {
-                        if ($stateParams.referenceId !== null) {
-                            return cmRPService.getDarConsent($stateParams.referenceId);
-                        }
-                    },
                     electionReview: function ($stateParams, cmElectionService) {
                         if ($stateParams.electionId !== null) {
                             return cmElectionService.findDataAccessElectionReview($stateParams.electionId, false).$promise;
