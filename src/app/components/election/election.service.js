@@ -147,7 +147,7 @@
         }
 
         function findConsentElectionByDarElection(requestElectionId) {
-            return ElectionConsentResource.get({requestElectionId: requestElectionId});
+            return ElectionConsentResource.get({requestElectionId: requestElectionId}).$promise;
         }
 
         return {

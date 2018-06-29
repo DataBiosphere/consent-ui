@@ -13,12 +13,12 @@
         $scope.dar_id = dar_id;
         $scope.consent = consent;
         $scope.consentName = consent.name;
-        $scope.dataUseLetter = consentElection !== undefined ? consentElection.dataUseLetter : $scope.consent.dataUseLetter;
+        $scope.dataUseLetter = consentElection !== undefined && consentElection.dulName !== undefined ? consentElection.dataUseLetter : $scope.consent.dataUseLetter;
         $scope.downloadUrl = apiUrl + 'consent/' + $scope.consent.consentId + '/dul';
-        $scope.dulName = consentElection !== undefined ? consentElection.dulName : $scope.consent.dulName;
+        $scope.dulName = consentElection !== undefined && consentElection.dulName !== undefined ? consentElection.dulName : $scope.consent.dulName;
         $rootScope.path = 'access-preview-results';
         $scope.downloadDUL = function(){
-            if(consentElection !== undefined) {
+            if(consentElection !== undefined && consentElection.dulName !== undefined) {
                 cmFilesService.getDULFile($scope.consent.consentId, consentElection.dulName);
             }
             else {
