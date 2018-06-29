@@ -218,7 +218,7 @@
         }
 
         $scope.downloadDUL = function(){
-            cmFilesService.getDULFile($scope.electionReview.consent.consentId, $scope.electionReview.associatedConsent.dulName);
+            cmFilesService.getDULFile($scope.electionReview.consent.consentId, $scope.electionReview.election.dulName);
         };
         $scope.back = function() {
             $state.go($rootScope.pathFrom);

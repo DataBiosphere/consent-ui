@@ -15,7 +15,7 @@
 
         function initConsentElection() {
           cmElectionService.findConsentElectionByDarElection(vote.electionId)
-            .$promise.then(
+          .then(
                 function (consentELection) {
                    if(consentELection.dulName !== null && consentELection.dulName !== undefined) {
                     $scope.dulName = consentELection.dulName;
