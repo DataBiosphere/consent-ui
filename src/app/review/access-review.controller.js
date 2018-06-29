@@ -4,14 +4,26 @@
     angular.module('cmReview')
         .controller('DarReview', DarReview);
 
-    function DarReview($sce, $scope, $modal, $state, $rootScope, USER_ROLES, vote, rpVote, dar, darElection, consent, cmVoteService, apiUrl, cmAuthenticateService, cmLoginUserService, cmRPService, dar_id, cmFilesService, request) {
+    function DarReview($sce, $scope, $modal, $state, $rootScope, USER_ROLES, vote, rpVote, dar, election, consent, cmVoteService, apiUrl, cmAuthenticateService, cmLoginUserService, cmRPService, dar_id, cmFilesService, request, cmElectionService) {
 
         var vm = this;
         vm.openApplication = openApplication;
         $rootScope.path = 'access-review';
         initEnableRPButton();
         initEnableDARButton();
+        initConsentElection();
 
+        function initConsentElection() {
+          cmElectionService.findConsentElectionByDarElection(vote.electionId)
+            .$promise.then(
+                function (consentELection) {
+                   if(consentELection.dulName !== null && consentELection.dulName !== undefined) {
+                    $scope.dulName = consentELection.dulName;
+                   } else {
+                    $scope.dulName = consent.dulName;
+                   }
+                });
+        }
         function initEnableRPButton(){
            if(rpVote !== undefined && (rpVote.vote !== undefined && rpVote.vote !== null)){
                 $scope.enableRPButton  = false;
@@ -46,7 +58,7 @@
 
         function openApplication() {
             $scope.dataRequestId = dar_id;
-            $scope.electionStatus = darElection.election.electionStatus;
+            $scope.electionStatus = election.electionStatus;
             $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/application-summary-modal/application-summary-modal.html',
@@ -69,15 +81,15 @@
 
         if (typeof vote === 'undefined' ||
             typeof consent === 'undefined' ||
-            typeof darElection === 'undefined' ||
+            typeof election === 'undefined' ||
             typeof dar === 'undefined') {
             cmLoginUserService.redirect($rootScope.currentUser);
             return;
         }
-        if (darElection.election.translatedUseRestriction === null) {
+        if (election.translatedUseRestriction === null) {
             $scope.rp = "This includes sensitive research objectives that requires manual review.";
         } else {
-                $scope.rp = $sce.trustAsHtml(darElection.election.translatedUseRestriction);
+                $scope.rp = $sce.trustAsHtml(election.translatedUseRestriction);
         }
         $rootScope.path = 'access-review';
         $scope.selection = {};
@@ -87,9 +99,8 @@
         $scope.dar = dar;
         $scope.request = request;
         $scope.selection.voteStatus = vote.vote;
-        $scope.isFormDisabled = (darElection.election.status === 'Closed');
+        $scope.isFormDisabled = (election.status === 'Closed');
         $scope.selection.rationale = vote.rationale;
-        $scope.dulName = darElection.dulName !== null ? darElection.dulName : consent.dulName;
         if(rpVote !== undefined){
              $scope.selection.rpRationale = rpVote.rationale;
              $scope.selection.rpVoteStatus = rpVote.vote;
@@ -144,12 +155,7 @@
         };
 
         $scope.downloadDUL = function(){
-           if(darElection.dulName !== null) {
-            cmFilesService.getDULFile(consent.consentId, darElection.dulName);
-           } 
-           else {
-            cmFilesService.getDULFile(consent.consentId, consent.dulName);
-           }
+            cmFilesService.getDULFile(consent.consentId, $scope.dulName);
         };
 
         $scope.logRPVote = function () {
@@ -158,10 +164,10 @@
                 var result;
                 if (rpVote.createDate === null) {
                     $scope.isNew = true;
-                    result = cmVoteService.postDarVote(darElection.election.referenceId, rpVote).$promise;
+                    result = cmVoteService.postDarVote(election.referenceId, rpVote).$promise;
                 } else {
                     $scope.isNew = false;
-                    result = cmVoteService.updateDarVote(darElection.election.referenceId, rpVote).$promise;
+                    result = cmVoteService.updateDarVote(election.referenceId, rpVote).$promise;
                 }
                 $scope.logRpVote = true;
                 result.then(
@@ -201,10 +207,10 @@
                 var result;
                 if (vote.createDate === null) {
                     $scope.isNew = true;
-                    result = cmVoteService.postDarVote(darElection.election.referenceId, vote).$promise;
+                    result = cmVoteService.postDarVote(election.referenceId, vote).$promise;
                 } else {
                     $scope.isNew = false;
-                    result = cmVoteService.updateDarVote(darElection.election.referenceId, vote).$promise;
+                    result = cmVoteService.updateDarVote(election.referenceId, vote).$promise;
                 }
                 $scope.logAccessVote = true;
                 $scope.electionType = 'access';

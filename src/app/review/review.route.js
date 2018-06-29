@@ -68,7 +68,7 @@
                             return cmRPService.getDarConsent($stateParams.darId);
                         }
                     },
-                    darElection: function ($stateParams, cmElectionService) {
+                    election: function ($stateParams, cmElectionService) {
                         if ($stateParams.darId !== null) {
                             return cmElectionService.findDarElection($stateParams.darId);
                         }
