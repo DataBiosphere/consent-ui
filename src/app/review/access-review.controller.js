@@ -4,7 +4,7 @@
     angular.module('cmReview')
         .controller('DarReview', DarReview);
 
-    function DarReview($sce, $scope, $modal, $state, $rootScope, USER_ROLES, vote, rpVote, dar, election, consent, cmVoteService, apiUrl, cmAuthenticateService, cmLoginUserService, cmRPService, dar_id, cmFilesService, request) {
+    function DarReview($sce, $scope, $modal, $state, $rootScope, USER_ROLES, vote, rpVote, dar, darElection, consent, cmVoteService, apiUrl, cmAuthenticateService, cmLoginUserService, cmRPService, dar_id, cmFilesService, request) {
 
         var vm = this;
         vm.openApplication = openApplication;
@@ -46,7 +46,7 @@
 
         function openApplication() {
             $scope.dataRequestId = dar_id;
-            $scope.electionStatus = election.electionStatus;
+            $scope.electionStatus = darElection.election.electionStatus;
             $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/application-summary-modal/application-summary-modal.html',
@@ -69,15 +69,15 @@
 
         if (typeof vote === 'undefined' ||
             typeof consent === 'undefined' ||
-            typeof election === 'undefined' ||
+            typeof darElection === 'undefined' ||
             typeof dar === 'undefined') {
             cmLoginUserService.redirect($rootScope.currentUser);
             return;
         }
-        if (election.translatedUseRestriction === null) {
+        if (darElection.election.translatedUseRestriction === null) {
             $scope.rp = "This includes sensitive research objectives that requires manual review.";
         } else {
-                $scope.rp = $sce.trustAsHtml(election.translatedUseRestriction);
+                $scope.rp = $sce.trustAsHtml(darElection.election.translatedUseRestriction);
         }
         $rootScope.path = 'access-review';
         $scope.selection = {};
@@ -87,9 +87,9 @@
         $scope.dar = dar;
         $scope.request = request;
         $scope.selection.voteStatus = vote.vote;
-        $scope.isFormDisabled = (election.status === 'Closed');
+        $scope.isFormDisabled = (darElection.election.status === 'Closed');
         $scope.selection.rationale = vote.rationale;
-
+        $scope.dulName = darElection.dulName !== null ? darElection.dulName : consent.dulName;
         if(rpVote !== undefined){
              $scope.selection.rpRationale = rpVote.rationale;
              $scope.selection.rpVoteStatus = rpVote.vote;
@@ -144,7 +144,12 @@
         };
 
         $scope.downloadDUL = function(){
+           if(darElection.dulName !== null) {
+            cmFilesService.getDULFile(consent.consentId, darElection.dulName);
+           } 
+           else {
             cmFilesService.getDULFile(consent.consentId, consent.dulName);
+           }
         };
 
         $scope.logRPVote = function () {
@@ -153,10 +158,10 @@
                 var result;
                 if (rpVote.createDate === null) {
                     $scope.isNew = true;
-                    result = cmVoteService.postDarVote(election.referenceId, rpVote).$promise;
+                    result = cmVoteService.postDarVote(darElection.election.referenceId, rpVote).$promise;
                 } else {
                     $scope.isNew = false;
-                    result = cmVoteService.updateDarVote(election.referenceId, rpVote).$promise;
+                    result = cmVoteService.updateDarVote(darElection.election.referenceId, rpVote).$promise;
                 }
                 $scope.logRpVote = true;
                 result.then(
@@ -196,10 +201,10 @@
                 var result;
                 if (vote.createDate === null) {
                     $scope.isNew = true;
-                    result = cmVoteService.postDarVote(election.referenceId, vote).$promise;
+                    result = cmVoteService.postDarVote(darElection.election.referenceId, vote).$promise;
                 } else {
                     $scope.isNew = false;
-                    result = cmVoteService.updateDarVote(election.referenceId, vote).$promise;
+                    result = cmVoteService.updateDarVote(darElection.election.referenceId, vote).$promise;
                 }
                 $scope.logAccessVote = true;
                 $scope.electionType = 'access';

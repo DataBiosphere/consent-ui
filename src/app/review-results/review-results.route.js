@@ -103,12 +103,13 @@
 
             .state('access_preview_results', {
                 name: 'access_preview_results',
-                url: '/access_preview_results/:referenceId',
+                url: '/access_preview_results/:referenceId/:electionId',
                 templateUrl: 'app/review-results/access-preview-results.html',
                 controller: 'AccessPreviewResults',
                 controllerAs: 'AccessPreviewResults',
                 params: {
-                    referenceId: null
+                    referenceId: null,
+                    electionId: null
                 },
                 data: {
                     authorizedRoles: [USER_ROLES.chairperson, USER_ROLES.admin]
@@ -136,6 +137,11 @@
                         if ($stateParams.referenceId !== null) {
                             return cmRPService.getDarFields($stateParams.referenceId, "projectTitle");
                         }
+                    },
+                    consentElection: function ($stateParams, cmElectionService) {
+                        if ($stateParams.electionId !== null) {
+                            return cmElectionService.findConsentElectionByDarElection($stateParams.electionId);
+                        }
                     }
                 }
             })
@@ -162,7 +168,7 @@
                         if ($stateParams.consentId !== null) {
                             return cmConsentService.findConsent($stateParams.consentId);
                         }
-                    }
+                    },
                 }
             })
         ;

@@ -4,7 +4,7 @@
     angular.module('cmReviewResults')
         .controller('AccessPreviewResults', AccessPreviewResults);
 
-    function AccessPreviewResults($sce, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, dar, rp, dar_id, consent, apiUrl, cmRPService, cmFilesService, request) {
+    function AccessPreviewResults($sce, $scope, $rootScope, $modal, $state, dar, rp, dar_id, consent, apiUrl, cmRPService, cmFilesService, request, consentElection) {
 
         $scope.hasAdminRole = $rootScope.hasRole($rootScope.userRoles.admin);
         $scope.dar = dar;
@@ -13,12 +13,17 @@
         $scope.dar_id = dar_id;
         $scope.consent = consent;
         $scope.consentName = consent.name;
-        $scope.dataUseLetter = $scope.consent.dataUseLetter;
+        $scope.dataUseLetter = consentElection !== undefined ? consentElection.dataUseLetter : $scope.consent.dataUseLetter;
         $scope.downloadUrl = apiUrl + 'consent/' + $scope.consent.consentId + '/dul';
-        $scope.dulName = $scope.consent.dulName;
+        $scope.dulName = consentElection !== undefined ? consentElection.dulName : $scope.consent.dulName;
         $rootScope.path = 'access-preview-results';
         $scope.downloadDUL = function(){
-            cmFilesService.getDULFile($scope.consent.consentId, $scope.consent.dulName);
+            if(consentElection !== undefined) {
+                cmFilesService.getDULFile($scope.consent.consentId, consentElection.dulName);
+            }
+            else {
+                cmFilesService.getDULFile($scope.consent.consentId, $scope.consent.dulName);
+            }
         };
 
         if ($scope.consent.requiresManualReview) {
