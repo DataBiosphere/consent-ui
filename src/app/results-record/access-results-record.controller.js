@@ -157,7 +157,6 @@
 
 
         function init() {
-
             cmVoteService.getDarFinalAccessVote($scope.electionId)
                 .then(function (data) {
                     $scope.finalDACVote = data;
@@ -181,7 +180,7 @@
                       }
                     });
 
-                cmElectionService.findElectionReviewById(data.consent.electionId, data.associatedConsent.consentId).$promise.then(function (data) {
+                cmElectionService.findElectionReviewById(data.associatedConsent.electionId, data.associatedConsent.consentId).$promise.then(function (data) {
                     $scope.electionReview = data;
                     showDULData(data);
                     vaultVote(data.consent.consentId);
