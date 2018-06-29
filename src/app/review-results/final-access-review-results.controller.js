@@ -47,7 +47,7 @@
         init();
 
         $scope.downloadDUL = function(){
-            cmFilesService.getDULFile($scope.electionReview.associatedConsent.consentId, $scope.electionReview.election.dulName);
+            cmFilesService.getDULFile($scope.electionReview.consent.consentId, $scope.electionReview.election.dulName);
         };
 
         function logVote() {
