@@ -168,7 +168,7 @@
                         if ($stateParams.consentId !== null) {
                             return cmConsentService.findConsent($stateParams.consentId);
                         }
-                    },
+                    }
                 }
             })
         ;
