@@ -9,7 +9,7 @@
         $scope.consent = consent;
         $scope.election = electionReview.election;
         var dulName;
-        if (typeof electionReview.election === 'undefined'){
+        if (typeof electionReview.election === 'undefined' || $scope.consent.updated){
             dulName = $scope.consent.dulName;
             $scope.dataUseLetter = $scope.consent.dataUseLetter;
             $scope.structuredDataUseLetter = $sce.trustAsHtml($scope.consent.translatedUseRestriction);
