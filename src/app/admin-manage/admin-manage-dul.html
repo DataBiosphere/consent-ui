@@ -37,8 +37,7 @@
 
         <div dir-paginate="election in AdminManage.electionsList.dul | filter: searchDUL | itemsPerPage:10" current-page="AdminManage.currentDULPage">
             <div class="grid-9-row pushed-2">
-                <!--<div class="col-2 cell-body text" ng-class="{flagged : election.archived}" title="{{election.consentName}}">{{election.consentName}}</div>-->
-                <div class="col-2 cell-body text" ng-class="{flagged : election.archived}" title="{{election.consentName}}"><a>{{election.consentName}}</a></div>
+                <div class="col-2 cell-body text" ng-class="{flagged : election.archived}" title="{{election.consentName}}"><a ng-click="AdminManage.open(election.consentId, 'dul_preview_results', null)">{{election.consentName}}</a></div>
                 <div class="col-2 cell-body text" ng-class="{empty : !election.groupName}" title="{{election.groupName}}">{{election.groupName}}</div>
                 <div class="col-1 cell-body text" ng-class="{empty : !election.version}">{{election.version}}</div>
                 <div class="col-1 cell-body text">{{election.createDate | date:'yyyy-MM-dd'}}</div>
