@@ -56,8 +56,8 @@
         }
 
        function downloadList(dataSet){
-           let dataSetId = null;
-           dataSet.properties.forEach(property => {
+           var dataSetId = null;
+           dataSet.properties.forEach(function(property) {
                if(property.propertyName === 'Dataset ID') {
                     dataSetId = property.propertyValue;
                }
