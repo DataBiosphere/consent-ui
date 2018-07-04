@@ -36,7 +36,6 @@
                         election.ct = election.consentName + ' ' + election.version;
                         election.cts = str + ' ' + election.version;
                         election.groupName = $sce.trustAsHtml(election.groupName);
-                        election.updateStatus = election.updateStatus;
                     });
                 });
         }
