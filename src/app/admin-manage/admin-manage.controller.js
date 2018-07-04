@@ -152,7 +152,7 @@
             });
         }
 
-        function open(consentId, url, electionId) {
+        function open(consentId, url, electionId, showConsent) {
             cmConsentService.setShowConsent(showConsent);
             $rootScope.currentDULPage = vm.currentDULPage;
             if (electionId === null) {
