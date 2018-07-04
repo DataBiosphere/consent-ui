@@ -62,7 +62,7 @@
                     dataSetId = property.propertyValue;
                }
            });
-           cmFilesService.getApprovedUsersFile('DatasetApprovedUsers.tsv', dataSetId);
+           cmFilesService.getApprovedUsersFile(dataSetId + '-ApprovedRequestors.tsv', dataSetId);
        } 
        vm.download = function (objectIdList) {
             cmDatasetService.downloadDataSets(objectIdList).then(function (value) {
