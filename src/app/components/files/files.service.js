@@ -23,6 +23,10 @@
             getFile(ontologyUrl, fileName);
         }
 
+        function getApprovedUsersFile(fileName, dataSetId) {
+            var datasetUrl = apiUrl + 'dataset/' + dataSetId + '/approved/users';
+            getFile(datasetUrl, fileName);
+        }
         function getFile(url, fileName) {
             $http({
                 url: url,
@@ -61,6 +65,9 @@
             },
             getOntologyFile: function (fileName, fileUrl) {
                 return getOntologyFile(fileName, fileUrl);
+            },
+            getApprovedUsersFile: function (fileName, fileUrl) {
+                return getApprovedUsersFile(fileName, fileUrl);
             }
         };
     }
