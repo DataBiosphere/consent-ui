@@ -157,7 +157,6 @@
 
 
         function init() {
-
             cmVoteService.getDarFinalAccessVote($scope.electionId)
                 .then(function (data) {
                     $scope.finalDACVote = data;
@@ -181,7 +180,7 @@
                       }
                     });
 
-                cmElectionService.findLastElectionReviewByReferenceId(data.consent.consentId).$promise.then(function (data) {
+                cmElectionService.findElectionReviewById(data.associatedConsent.electionId, data.associatedConsent.consentId).$promise.then(function (data) {
                     $scope.electionReview = data;
                     showDULData(data);
                     vaultVote(data.consent.consentId);
@@ -212,13 +211,13 @@
             // this data is used to construct structured_ files
             $scope.mrDAR = JSON.stringify(electionReview.election.useRestriction, null, 2);
             $scope.sDAR = electionReview.election.translatedUseRestriction.replace(/<br>/g, "\n");
-            $scope.mrDUL = JSON.stringify(electionReview.consent.useRestriction, null, 2);
-            $scope.sDUL = electionReview.consent.translatedUseRestriction;
+            $scope.mrDUL = JSON.stringify(electionReview.associatedConsent.useRestriction, null, 2);
+            $scope.sDUL = electionReview.associatedConsent.translatedUseRestriction;
 
         }
 
         $scope.downloadDUL = function(){
-            cmFilesService.getDULFile($scope.electionReview.consent.consentId, $scope.electionReview.consent.dulName);
+            cmFilesService.getDULFile($scope.electionReview.consent.consentId, $scope.electionReview.election.dulName);
         };
         $scope.back = function() {
             $state.go($rootScope.pathFrom);
@@ -232,7 +231,7 @@
                 $scope.election.finalRationale = '';
             }
             $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
-            $scope.dulName = electionReview.consent.dulName;
+            $scope.dulName = electionReview.election.dulName;
             $scope.status = electionReview.election.status;
             $scope.voteList = chunk(electionReview.reviewVote, 2);
             $scope.chartDataDUL = getGraphData(electionReview.reviewVote);

@@ -12,6 +12,10 @@
                 update:{method: 'PUT', params: {electionId: '@electionId'}},
                 get:{method: 'GET', params: {electionId: '@electionId'}}});
         })
+        .factory('ElectionConsentResource', function($resource, apiUrl){
+            return $resource(apiUrl+"election/consent/:requestElectionId", {}, {
+                get:{method: 'GET', params: {requestElectionId: '@requestElectionId'}}});
+        })
         .factory('LastElectionReview', function($resource, apiUrl){
             return $resource(apiUrl+"electionReview/last/:electionId", {}, {
                 get:{method: 'GET', params: {electionId: '@electionId'}}});
