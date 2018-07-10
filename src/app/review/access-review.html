@@ -1,5 +1,5 @@
 <div ng-include src="'app/header/header.html'"></div>
-<div class="container">
+<div class="container container-wide">
     <div class="row fsi-row-lg-level fsi-row-md-level title-wrapper">
         <div class="col-lg-10 col-md-9 col-sm-9 col-xs-12 no-padding">
             <img src="assets/images/icon_access.png" alt="Data Access Request icon" class="cm-icons main-icon-title">
@@ -17,14 +17,15 @@
         </div>
     </div>
     <accordion>
-        <accordion-group class="accordion" is-open="openAccordion">
+        <accordion-group class="accordion" is-open="true">
             <accordion-heading>
-                <h3 class="access-color pos-relative">
-                    <div class="accordion-title">1. Should data access be granted to this applicant?</div>
-                    <i class="pull-right glyphicon"
-                       ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
-                </h3>
+                <a data-toggle="collapse" ng-click="isQ1Expanded=!isQ1Expanded">
+                    <h3 class="access-color italic"><span ng-if="showRPaccordion">Q1.</span> Should data access be granted to this applicant?
+                        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': isQ1Expanded, 'glyphicon-chevron-down': !isQ1Expanded}"></i>
+                    </h3>
+                </a>
             </accordion-heading>
+            <h4 class="hint">Please review the Application Summary, Data Use Limitations, and DAC Votes to determine if the researcher should be granted access to the data</h4>
             <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
                     <div class="panel-heading cm-boxhead access-color">
@@ -45,18 +46,17 @@
                 </div>
             </div>
             <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
-                <div class="jumbotron box-vote">
-                    <h3 class="cm-results-subtitle access-color">Your vote</h3>
+                <div class="jumbotron box-vote access-background-lighter">
+                    <h4 class="box-vote-title access-color italic"><span ng-if="showRPaccordion">Q1.</span> Should data access be granted to this applicant?</h4>
                     <hr class="box-separator">
                     <form class="form-horizontal" id="voteForm">
                         <fieldset ng-disabled="isFormDisabled">
                             <div class="form-group first-form-group">
                                 <label
-                                    class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Vote</label>
+                                    class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Your vote*</label>
 
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
                                     <div class="radio-inline">
-
                                         <input type="radio" ng-model="selection.voteStatus" ng-click="positiveVote()"
                                                class="regular-radio" id="inputVotePositive"
                                                ng-value="true" name="inputVote">
@@ -83,7 +83,8 @@
                                            ng-change="setEnableDARButton()"
                                            name="inputRationale"
                                            class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
-                                           placeholder="Describe here your rationale or comments (be as specific as possible).">
+                                           title="Optional: describe your rationale or add comments here (please be as specific as possible)"
+                                           placeholder="Optional: describe your rationale or add comments here (please be as specific as possible)">
                                 </div>
                             </div>
 
@@ -115,15 +116,16 @@
         </accordion-group>
     </accordion>
 
-    <accordion close-others="oneAtATime" ng-if="showRPaccordion">
+    <accordion ng-if="showRPaccordion">
         <accordion-group class="accordion">
             <accordion-heading>
-                <h3 class="access-color pos-relative">
-                    <div class="accordion-title">2. Was the research purpose accurately converted to a structured format?</div>
-                    <i class="pull-right glyphicon"
-                       ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
-                </h3>
+                <a data-toggle="collapse" ng-click="isQ2Expanded=!isQ2Expanded">
+                    <h3 class="access-color italic">Q2. Was the research purpose accurately converted to a structured format?
+                        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': isQ2Expanded, 'glyphicon-chevron-down': !isQ2Expanded}"></i>
+                    </h3>
+                </a>
             </accordion-heading>
+            <h4 class="hint">Please review the Research Purpose and determine if it was appropriately converted to a Structured Research Purpose</h4>
             <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
                     <div class="panel-heading cm-boxhead access-color">
@@ -143,14 +145,14 @@
             </div>
 
             <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
-                <div class="jumbotron box-vote">
-                    <h3 class="cm-results-subtitle access-color">Your vote</h3>
+                <div class="jumbotron box-vote access-background-lighter">
+                    <h4 class="box-vote-title access-color italic">Q2. Was the research purpose accurately converted to a structured format?</h4>
                     <hr class="box-separator">
                     <form class="form-horizontal" id="voteRPForm">
                         <fieldset ng-disabled="isFormDisabled">
                             <div class="form-group first-form-group">
                                 <label
-                                    class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Vote</label>
+                                    class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Your vote*</label>
 
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
                                     <div class="radio-inline">
@@ -180,7 +182,8 @@
                                     <input type="text" ng-model="selection.rpRationale" ng-change="setEnableRPButton()"
                                            name="inputRationale"
                                            class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
-                                           placeholder="Describe here your rationale or comments (be as specific as possible).">
+                                           title="Optional: describe your rationale or add comments here (please be as specific as possible)"
+                                           placeholder="Optional: describe your rationale or add comments here (please be as specific as possible)">
                                 </div>
                             </div>
                             <div class="row">

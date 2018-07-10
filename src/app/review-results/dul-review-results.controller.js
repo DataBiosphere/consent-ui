@@ -42,20 +42,22 @@
                 slices: {
                     0: {color: '#C16B0C'},
                     1: {color: '#D1B6A1'},
-                    2: {color: '#c9c9c9'}
+                    2: {color: '#FFFFFF'}
                 },
                 legend: {
                     position: 'right',
                     textStyle: {
-                        color: '#777777',
+                        fontName: 'Roboto',
+                        color: '#333333',
                         bold: true,
-                        fontSize: 14
+                        fontSize: 15
                     },
                     alignment: 'start'
                 },
                 tooltip: {
                     textStyle: {
-                        color: 'black',
+                        fontName: 'Roboto',
+                        color: '#333333',
                         fontSize: 14
                     }
                 }

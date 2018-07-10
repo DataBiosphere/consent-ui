@@ -91,14 +91,17 @@
                 legend: {
                     position: 'right',
                     textStyle: {
-                        color: '#777777',
-                        fontSize: 14
+                        fontName: 'Roboto',
+                        color: '#333333',
+                        bold: true,
+                        fontSize: 15
                     },
                     alignment: 'start'
                 },
                 tooltip: {
                     textStyle: {
-                        color: 'black',
+                        fontName: 'Roboto',
+                        color: '#333333',
                         fontSize: 14
                     }
                 }
@@ -128,14 +131,17 @@
                 legend: {
                     position: 'right',
                     textStyle: {
-                        color: '#777777',
-                        fontSize: 14
+                        fontName: 'Roboto',
+                        color: '#333333',
+                        bold: true,
+                        fontSize: 15
                     },
                     alignment: 'start'
                 },
                 tooltip: {
                     textStyle: {
-                        color: 'black',
+                        fontName: 'Roboto',
+                        color: '#333333',
                         fontSize: 14
                     }
                 }
@@ -165,14 +171,17 @@
                 legend: {
                     position: 'right',
                     textStyle: {
-                        color: '#777777',
-                        fontSize: 14
+                        fontName: 'Roboto',
+                        color: '#333333',
+                        bold: true,
+                        fontSize: 15
                     },
                     alignment: 'start'
                 },
                 tooltip: {
                     textStyle: {
-                        color: 'black',
+                        fontName: 'Roboto',
+                        color: '#333333',
                         fontSize: 14
                     }
                 }
@@ -202,14 +211,17 @@
                 legend: {
                     position: 'right',
                     textStyle: {
-                        color: '#777777',
-                        fontSize: 14
+                        fontName: 'Roboto',
+                        color: '#333333',
+                        bold: true,
+                        fontSize: 15
                     },
                     alignment: 'start'
                 },
                 tooltip: {
                     textStyle: {
-                        color: 'black',
+                        fontName: 'Roboto',
+                        color: '#333333',
                         fontSize: 14
                     }
                 }
@@ -239,14 +251,17 @@
                 legend: {
                     position: 'right',
                     textStyle: {
-                        color: '#777777',
-                        fontSize: 14
+                        fontName: 'Roboto',
+                        color: '#333333',
+                        bold: true,
+                        fontSize: 15
                     },
                     alignment: 'start'
                 },
                 tooltip: {
                     textStyle: {
-                        color: 'black',
+                        fontName: 'Roboto',
+                        color: '#333333',
                         fontSize: 14
                     }
                 }
@@ -276,14 +291,17 @@
                 legend: {
                     position: 'right',
                     textStyle: {
-                        color: '#777777',
-                        fontSize: 14
+                        fontName: 'Roboto',
+                        color: '#333333',
+                        bold: true,
+                        fontSize: 15
                     },
                     alignment: 'start'
                 },
                 tooltip: {
                     textStyle: {
-                        color: 'black',
+                        fontName: 'Roboto',
+                        color: '#333333',
                         fontSize: 14
                     }
                 }
@@ -313,14 +331,17 @@
                 legend: {
                     position: 'right',
                     textStyle: {
-                        color: '#777777',
-                        fontSize: 14
+                        fontName: 'Roboto',
+                        color: '#333333',
+                        bold: true,
+                        fontSize: 15
                     },
                     alignment: 'start'
                 },
                 tooltip: {
                     textStyle: {
-                        color: 'black',
+                        fontName: 'Roboto',
+                        color: '#333333',
                         fontSize: 14
                     }
                 }
@@ -350,14 +371,17 @@
                 legend: {
                     position: 'right',
                     textStyle: {
-                        color: '#777777',
-                        fontSize: 14
+                        fontName: 'Roboto',
+                        color: '#333333',
+                        bold: true,
+                        fontSize: 15
                     },
                     alignment: 'start'
                 },
                 tooltip: {
                     textStyle: {
-                        color: 'black',
+                        fontName: 'Roboto',
+                        color: '#333333',
                         fontSize: 14
                     }
                 }

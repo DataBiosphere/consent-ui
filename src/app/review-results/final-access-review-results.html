@@ -1,5 +1,5 @@
 <div ng-include src="'app/header/header.html'"></div>
-<div class="container">
+<div class="container container-wide">
     <div class="row fsi-row-lg-level fsi-row-md-level title-wrapper">
         <div class="col-lg-10 col-md-9 col-sm-9 col-xs-12 no-padding">
             <img src="assets/images/icon_access.png" alt="Data Access Request icon" class="cm-icons main-icon-title">
@@ -13,7 +13,10 @@
             </a>
         </div>
     </div>
-    <h3 class="access-color" style="font-style: italic;">Is the researcher going to be allowed to access this research study?</h3>
+    <div class="accordion-title access-color">Does the DAC grant this researcher permission to access the data?</div>
+    <hr class="section-separator">
+    <h4 class="hint" ng-if="hasUseRestriction">Please review the Application Summary and Data Use Limitations to answer the two questions below.<br>You may review other DAC votes related to this data access request below the questions on this page.</h4>
+    <h4 class="hint" ng-if="!hasUseRestriction">Please review the Application Summary and Data Use Limitations to answer the question below.<br>You may review other DAC votes related to this data access request below the question on this page.</h4>
     <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
             <div class="panel-heading cm-boxhead access-color">
@@ -35,17 +38,14 @@
     <hr class="section-separator">
 
     <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
-        <div class="jumbotron box-vote-results"
+        <div class="jumbotron box-vote-results access-background-lighter"
              ng-class="{'col-lg-6 col-md-6 col-sm-12 col-xs-12': hasUseRestriction, 'col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 center-margin' : !hasUseRestriction}">
-            <h3 class="cm-results-subtitle access-color">
-                Final Access decision</br>
-                <small>Is the researcher going to be allowed to access this research study?</small>
-            </h3>
+            <h4 class="box-vote-title access-color italic"><span ng-if="hasUseRestriction">Q1.</span> Does the DAC grant this researcher permission to access the data?</h4>
             <hr class="box-separator-white">
             <form class="form-horizontal" id="voteForm">
                 <div class="form-group first-form-group">
                     <label
-                        class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Vote</label>
+                        class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Your vote*</label>
 
                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
                         <div class="radio-inline">
@@ -53,30 +53,30 @@
                                    ng-value="true" class="regular-radio" id="inputVotePositive"
                                    name="inputVote">
                             <label for="inputVotePositive"></label>
+                            <label for="inputVotePositive" class="radio-button-text">Yes</label>
 
-                            <div class="radio-button-text">Yes</div>
                             <input type="radio" ng-model="vote.vote" ng-click="setEnableFinalButton()"
                                    ng-value="false" class="regular-radio" id="inputVoteNegative"
                                    name="inputVote">
                             <label for="inputVoteNegative"></label>
-
-                            <div class="radio-button-text">No</div>
+                            <label for="inputVoteNegative" class="radio-button-text">No</label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <span ng-if="vote.vote == '1'">
-                        <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Comments:</label>
+                        <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Comments</label>
                     </span>
                     <span ng-if="vote.vote != '1'">
-                        <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale:</label>
+                        <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale</label>
                     </span>
                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
                         <input type="text" ng-model="vote.rationale" ng-change="setEnableFinalButton()"
                                cm-focus="{{!FinalAccessReviewResults.voteForm.vote || FinalAccessReviewResults.voteForm.vote == 'true' ? 'false' : 'true'}}"
                                name="inputRationale"
                                class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
-                               placeholder="Describe here your rationale or comments (be as specific as possible).">
+                               title="Optional: describe your rationale or add comments here (please be as specific as possible)"
+                               placeholder="Optional: describe your rationale or add comments here (please be as specific as possible)">
                     </div>
                 </div>
 
@@ -98,17 +98,14 @@
                 </div>
             </form>
         </div>
-        <div ng-show="hasUseRestriction" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 jumbotron box-vote-results">
-            <h3 class="cm-results-subtitle access-color">
-                Decision agreement</br>
-                <small>Were the Final votes of the DAC and the Vault consistent?</small>
-            </h3>
+        <div ng-show="hasUseRestriction" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 jumbotron box-vote-results access-background-lighter">
+            <h4 class="box-vote-title access-color italic">Q2. Is the DAC decision consistent with the DUOS Matching Algorithm decision?</h4>
             <hr class="box-separator-white">
 
             <form class="form-horizontal" id="voteAgreement">
                 <div class="form-group first-form-group">
                     <label
-                        class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Vote</label>
+                        class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Your vote*</label>
 
                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
                         <div class="radio-inline">
@@ -116,30 +113,30 @@
                                    ng-value="true" class="regular-radio" id="inputAgreement"
                                    name="inputAgreement">
                             <label for="inputAgreement"></label>
+                            <label for="inputAgreement" class="radio-button-text">Yes</label>
 
-                            <div class="radio-button-text">Yes</div>
                             <input type="radio" ng-model="voteAgreement.vote" ng-click="setEnableAgreementButton()"
                                    ng-value="false" class="regular-radio" id="inputDisagreement"
                                    name="inputDisagreement">
                             <label for="inputDisagreement"></label>
-
-                            <div class="radio-button-text">No</div>
+                            <label for="inputDisagreement" class="radio-button-text">No</label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <span ng-if="voteAgreement.vote == '1'">
-                        <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Comments:</label>
+                        <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Comments</label>
                     </span>
                     <span ng-if="voteAgreement.vote == '0' || voteAgreement.vote == null">
-                        <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale:</label>
+                        <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale</label>
                     </span>
                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
                         <input type="text" ng-model="voteAgreement.rationale" ng-change="setEnableAgreementButton()"
                                name="inputRationale"
                                class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
-                               placeholder="Describe here your rationale or comments (be as specific as possible).">
-                    </div>
+                               title="Optional: describe your rationale or add comments here (please be as specific as possible)"
+                               placeholder="Optional: describe your rationale or add comments here (please be as specific as possible)">
+                        </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
@@ -147,7 +144,7 @@
                             <span class="access-color" ng-if="electionAccess.finalVote == '1'"><b>YES</b></span>
                             <span class="access-color" ng-if="electionAccess.finalVote == '0'"><b>NO</b></span>
                             <span class="access-color" ng-if="electionAccess.finalVote == 'null'"><b>---</b></span>
-                            Vault Decision:
+                            DUOS Matching Algorithm Decision:
                             <span class="access-color" ng-if="match == '1'"><b>YES</b></span>
                             <span class="access-color" ng-if="match == '0'"><b>NO</b></span>
                             <span class="access-color" ng-if="match == null"><b>---</b></span>
@@ -172,21 +169,21 @@
         </div>
     </div>
 
-    <h3 class="access-color">Data Access Voting Results</h3>
-    <accordion close-others="oneAtATime">
+    <h3 class="cm-subtitle">Data Access Committee Voting Results</h3>
+    <accordion>
         <accordion-group class="accordion">
             <accordion-heading>
-                <h3 class="access-color">
-                    <div class="accordion-title">1. Should data access be granted to this applicant?</div>
-                    <i class="pull-right glyphicon"
-                       ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
-                </h3>
+                <a data-toggle="collapse" ng-click="isQ1Expanded=!isQ1Expanded">
+                    <h3 class="access-color italic"><span ng-if="hasUseRestriction">Q1.</span> Should data access be granted to this applicant?
+                        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': isQ1Expanded, 'glyphicon-chevron-down': !isQ1Expanded}"></i>
+                    </h3>
+                </a>
             </accordion-heading>
             <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-lightresults no-padding">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <div class="cm-title-record access-color">DAC Decision</div>
+                            <h4 class="box-vote-title access-color">DAC Decision</h4>
                             <hr class="box-separator">
                             <div class="row results-box">
                                 <label
@@ -224,7 +221,7 @@
                 </div>
                 <div ng-show="hasUseRestriction"
                      class="col-lg-4 col-md-4 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2 jumbotron box-vote-lightresults no-padding">
-                    <div class="cm-title-record access-color">Vault Decision</div>
+                    <h4 class="box-vote-title access-color">DAC Decision</h4>
                     <hr class="box-separator">
                     <div class="results-box">
                         <div class="row">
@@ -287,16 +284,14 @@
         </accordion-group>
     </accordion>
 
-    <accordion close-others="oneAtATime" ng-if="showRPaccordion">
+    <accordion ng-if="showRPaccordion">
         <accordion-group class="accordion">
             <accordion-heading>
-                <h3 class="access-color">
-                    <div class="accordion-title">2. Was the research purpose accurately converted to a structured
-                        format?
-                    </div>
-                    <i class="pull-right glyphicon"
-                       ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
-                </h3>
+                <a data-toggle="collapse" ng-click="isQ2Expanded=!isQ2Expanded">
+                    <h3 class="access-color italic">Q2. Was the research purpose accurately converted to a structured format?
+                        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': isQ2Expanded, 'glyphicon-chevron-down': !isQ2Expanded}"></i>
+                    </h3>
+                </a>
             </accordion-heading>
             <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-lightresults no-padding">
@@ -378,17 +373,14 @@
         </accordion-group>
     </accordion>
 
-    <accordion close-others="oneAtATime">
+    <accordion>
         <accordion-group class="accordion">
             <accordion-heading>
-                <h3 class="dul-color">Data Use Limitations Voting Results<br>
-
-                    <div class="cm-inside-box-title">Were Data Use Limitations correctly converted into a
-                        machine-readable format?
-                    </div>
-                    <i class="pull-right glyphicon"
-                       ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
-                </h3>
+                <a data-toggle="collapse" ng-click="isDULExpanded=!isDULExpanded">
+                    <h3 class="dul-color italic">Were the data use limitations in the Data Use Letter accurately converted to structured limitations?
+                        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': isDULExpanded, 'glyphicon-chevron-down': !isDULExpanded}"></i>
+                    </h3>
+                </a>
             </accordion-heading>
             <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-lightresults no-padding">

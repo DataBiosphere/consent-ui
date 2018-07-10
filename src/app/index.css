@@ -51,6 +51,20 @@ html, body {
     padding-bottom: 100px; /* must be same height as the footer */
 }
 
+@media (min-width: 1200px) and (max-width: 1600px) {
+    .container-wide {
+        width: 100%;
+        padding-right: 50px;
+        padding-left: 50px;
+    }
+}
+
+@media (min-width: 1601px) {
+    .container-wide {
+        width: 1500px;
+    }
+}
+
 p{
     margin-bottom: 3px;
 }
@@ -151,12 +165,20 @@ small {
     background: #C16B0C !important;
 }
 
+.dul-background-lighter {
+    background: rgba(194, 107, 12, .2) !important;
+}
+
 .access-color {
     color: #603B9B !important;
 }
 
 .access-background {
     background: #603B9B !important;
+}
+
+.access-background-lighter {
+    background: rgba(96, 59, 155, .2) !important;
 }
 
 .dataset-color {
@@ -626,6 +648,17 @@ small {
     font-weight: 300;
 }
 
+.hint {
+    margin: 20px 15px 15px 15px;
+    color: #333333;
+    font-weight: 300;
+    line-height: 24px;
+}
+
+.panel-body .hint {
+    margin: 10px 15px 10px 15px;
+}
+
 .pipe::after {
     content: ' | ';
 }
@@ -898,6 +931,13 @@ small {
     .box-vote-lightresults, .box-vote-results, .box-vote-singleresults, .box-vote-stats { margin: 10px 0 20px 0 !important;}
 }
 
+.box-vote-title {
+    margin: 10px 0;
+    font-size: 22px;
+    line-height: 28px;
+    font-weight: 500;
+}
+
 .first-form-group {
     margin-top: 15px;
 }
@@ -911,6 +951,7 @@ small {
 }
 
 .vote-label, .vote-update, .control-label{
+    font-size: 15px;
     color: #777777;
     padding: 10px 0 0 0;
 }
@@ -984,21 +1025,8 @@ small {
 }
 
 .box-vote-disabled {
-    color: #cccccc !important;
-    background: #eeeeee !important;
-}
-
-.box-vote-disabled, .box-vote-disabled h3, .box-vote-disabled label, .box-vote-disabled div, .box-vote-disabled input, .box-vote-disabled small {
-    color: #cccccc !important;
-}
-
-.box-vote-disabled hr, .box-vote-disabled label {
-    border-color: #cccccc !important;
-}
-
-.box-vote-disabled button, .box-vote-disabled button:hover {
-    background: #cccccc !important;
-    cursor: default !important;
+    opacity: 0.65 !important;
+    cursor: not-allowed;
 }
 
 /***************************************************Tables*/
@@ -1093,7 +1121,6 @@ small {
     box-shadow: none;
 }
 
-
 /***************************************************Buttons, Radios & Checkboxes*/
 
 .button-holder {
@@ -1135,27 +1162,13 @@ small {
     padding: 5px 0 0 0 !important;
 }
 
-.radio-inline label {
-    display: inline;
-    margin-bottom: 0 !important;
-}
-
-.radio-inline input{
-    float: left !important;
-}
-
-.radio-inline + .radio-inline{
-    margin: 0 !important;
-}
-
 .regular-radio {
     display: none;
 }
 
 .regular-radio + label {
     -webkit-appearance: none;
-    background-color: #fafafa;
-    border: 1px solid #cccccc;
+    background-color: #ffffff;
     padding: 9px;
     border-radius: 50px;
     display: inline-block;
@@ -1173,13 +1186,9 @@ small {
     background: #2FA4E7;
 }
 
-.regular-radio:checked + label {
-    background-color: #ffffff;
-    border: 1px solid #cccccc;
-    box-shadow: 0 0 2px 2px rgba(47, 164, 231, 0.3);
-}
-
-.regular-radio + label:active, .regular-radio:checked + label:active {
+.regular-radio:checked + label,
+.regular-radio + label:active,
+.regular-radio:checked + label:active {
     box-shadow: 0 0 2px 2px rgba(47, 164, 231, 0.3);
 }
 
@@ -1205,8 +1214,18 @@ small {
     position: absolute;
     left: 0;
     background-color: #ffffff;
-    border: 1px solid #999999;
     border-radius: 3px;
+}
+
+.form-control,
+.regular-checkbox:before,
+.regular-radio:checked + label,
+.regular-radio + label {
+    border: 1px solid #999999;
+}
+
+.form-control[placeholder] {
+    text-overflow: ellipsis;
 }
 
 input[type=checkbox]{
@@ -1250,7 +1269,6 @@ input[type=checkbox]:checked + label:before{
     .vote-button-more-margin{ margin-top: 15px;}
 }
 
-
 .vote-button-dismiss{
     color: #777777;
     background: rgba(204, 204, 204, 0.5) !important;
@@ -1279,7 +1297,7 @@ input[type=checkbox]:checked + label:before{
     box-shadow: 2px 2px rgb(204, 204, 204) !important;
 }
 
-.vote-button:hover, .vote-reminder:hover {
+.vote-button:hover:enabled, .vote-reminder:hover:enabled {
     background: #2FA4E7 !important;
     border: 0 !important;
     color: #ffffff !important;
@@ -1295,7 +1313,7 @@ input[type=checkbox]:checked + label:before{
 .radio-button-text, .radio-choices-text {
     font-size: 14px !important;
     font-weight: 500;
-    color: #777777;
+    color: #333333;
     display: inline;
 }
 
@@ -3268,18 +3286,19 @@ td:first-child .checkbox label{
     background-color: #ffffff;
 }
 
-accordion .panel-group{
+.accordion .panel-heading h3{
+    margin: 10px 10px 5px 10px;
+}
+
+.accordion .panel-group{
     margin-bottom: 10px !important;
 }
 
-.accordion h3{
-    margin: 10px 0 5px 0!important;
-}
-
 .accordion-title{
-    font-size: 22px;
+    font-size: 24px;
+    font-weight: 500;
     font-style: italic;
-    padding: 5px 0 5px 0;
+    padding: 10px 15px 5px 15px;
     display: inline;
     position: relative;
 }

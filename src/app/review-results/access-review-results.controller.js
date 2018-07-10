@@ -159,7 +159,7 @@
             $scope.alertsDAR.splice(index, 1);
             $scope.alertsDAR.push({
                 title: 'Remember to log a vote on:',
-                msg: ' 2. Was the research purpose accurately converted to a structured format?'
+                msg: ' Q2. Was the research purpose accurately converted to a structured format?'
             });
         };
 
@@ -167,7 +167,7 @@
             $scope.alertsRP.splice(index, 1);
             $scope.alertsRP.push({
                 title: 'Remember to log a vote on:',
-                msg: ' 1. Should data access be granted to this applicant?'
+                msg: ' Q1. Should data access be granted to this applicant?'
             });
         };
 
@@ -319,19 +319,21 @@
                 slices: {
                     0: {color: '#603B9B'},
                     1: {color: '#AC9EC6'},
-                    2: {color: '#c9c9c9'}
+                    2: {color: '#FFFFFF'}
                 },
                 legend: {
                     position: 'right',
                     textStyle: {
-                        color: '#777777',
+                        fontName: 'Roboto',
+                        color: '#333333',
                         bold: true,
-                        fontSize: 14
+                        fontSize: 15
                     },
                     alignment: 'start'
                 },
                 tooltip: {
                     textStyle: {
+                        fontName: 'Roboto',
                         color: '#333333',
                         fontSize: 14
                     }
@@ -358,19 +360,21 @@
                 slices: {
                     0: {color: '#603B9B'},
                     1: {color: '#AC9EC6'},
-                    2: {color: '#c9c9c9'}
+                    2: {color: '#FFFFFF'}
                 },
                 legend: {
                     position: 'right',
                     textStyle: {
-                        color: '#777777',
+                        fontName: 'Roboto',
+                        color: '#333333',
                         bold: true,
-                        fontSize: 14
+                        fontSize: 15
                     },
                     alignment: 'start'
                 },
                 tooltip: {
                     textStyle: {
+                        fontName: 'Roboto',
                         color: '#333333',
                         fontSize: 14
                     }

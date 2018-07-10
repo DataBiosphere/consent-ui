@@ -1,5 +1,5 @@
 <div ng-include src="'app/header/header.html'"></div>
-<div class="container">
+<div class="container container-wide">
     <div class="row fsi-row-lg-level fsi-row-md-level title-wrapper">
         <div class="col-lg-10 col-md-9 col-sm-9 col-xs-12 no-padding">
             <img src="assets/images/icon_access.png" alt="Data Access Request icon" class="cm-icons main-icon-title">
@@ -11,14 +11,14 @@
             <a ng-click="back()" class="btn vote-button vote-button-back vote-button-bigger"><i class="glyphicon glyphicon-chevron-left"></i>Back</a>
         </div>
     </div>
-    <accordion close-others="false">
+    <accordion>
         <accordion-group class="accordion" is-open="true">
             <accordion-heading>
-                <h3 class="access-color pos-relative">
-                    <div class="accordion-title">1. Should data access be granted to this applicant?</div>
-                    <i class="pull-right glyphicon"
-                       ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
-                </h3>
+                <a data-toggle="collapse" ng-click="isQ1Expanded=!isQ1Expanded">
+                    <h3 class="access-color italic">Q1. Should data access be granted to this applicant?
+                        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': isQ1Expanded, 'glyphicon-chevron-down': !isQ1Expanded}"></i>
+                    </h3>
+                </a>
             </accordion-heading>
             <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
@@ -40,15 +40,14 @@
             </div>
         </accordion-group>
 
-        <accordion-group class="accordion" is-open="true">
+        <accordion-group class="accordion">
             <accordion-heading>
-                <h3 class="access-color pos-relative">
-                    <div class="accordion-title">2. Was the research purpose accurately converted to a structured format?</div>
-                    <i class="pull-right glyphicon"
-                       ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
-                </h3>
+                <a data-toggle="collapse" ng-click="isQ2Expanded=!isQ2Expanded">
+                    <h3 class="access-color italic">Q2. Was the research purpose accurately converted to a structured format?
+                        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': isQ2Expanded, 'glyphicon-chevron-down': !isQ2Expanded}"></i>
+                    </h3>
+                </a>
             </accordion-heading>
-
             <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
                     <div class="panel-heading cm-boxhead access-color">
