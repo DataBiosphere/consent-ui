@@ -5,7 +5,7 @@
         .service('cmElectionService', cmElectionService);
 
     /* ngInject */
-    function cmElectionService(apiUrl, $http, RPElectionReviewResource, DarElectionResource, ElectionReviewResource, ElectionResource, ElectionUpdateResource, ElectionReviewedConsents, ElectionReviewedDRs, ElectionReview, LastElectionReview, DataAccessElectionReviewResource, DataSetElection, ElectionVote) {
+    function cmElectionService(apiUrl, $http, RPElectionReviewResource, DarElectionResource, ElectionReviewResource, ElectionResource, ElectionUpdateResource, ElectionReviewedConsents, ElectionReviewedDRs, ElectionReview, LastElectionReview, DataAccessElectionReviewResource, DataSetElection, ElectionVote, ElectionConsentResource) {
 
         /**
          * Find data for the election related to the consentId sent as a parameter
@@ -138,17 +138,16 @@
             return ElectionReviewedDRs.List().$promise;
         }
 
-        /**
-         * Find all data needed to display an election Review Access for an specific election id
-         * @param electionId
-         */
-        function findLastElectionReviewByReferenceId(id) {
-            return LastElectionReview.get({electionId: id});
+        function findElectionReviewById(electionId, referenceId) {
+            return electionId !== undefined ? ElectionReview.get({electionId: electionId}) : LastElectionReview.get({electionId: referenceId});
         }
-
 
         function isDataSetElectionOpen() {
             return DataSetElection.get();
+        }
+
+        function findConsentElectionByDarElection(requestElectionId) {
+            return ElectionConsentResource.get({requestElectionId: requestElectionId}).$promise;
         }
 
         return {
@@ -191,10 +190,6 @@
             findReviewedDRs: function () {
                 return getReviewedDRs();
             },
-
-            findLastElectionReviewByReferenceId: function (id) {
-                return findLastElectionReviewByReferenceId(id);
-            },
             findReviewedElections: function (electionId) {
                 return findElectionReviewByElectionId(electionId);
             },
@@ -203,6 +198,12 @@
             },
             isDataSetElectionOpen: function(){
                 return isDataSetElectionOpen();
+            },
+            findElectionReviewById: function(electionId, referenceId){
+                return findElectionReviewById(electionId, referenceId);
+            },
+            findConsentElectionByDarElection: function(requestElectionId){
+                return findConsentElectionByDarElection(requestElectionId);
             }
         };
     }

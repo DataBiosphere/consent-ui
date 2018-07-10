@@ -4,7 +4,7 @@
     angular.module('cmReviewResults')
         .controller('AccessReviewResults', ReviewResults);
 
-    function ReviewResults($sce, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, consent, electionReview, rpElectionReview, dar, apiUrl, cmEmailService, cmRPService, dar_id, cmFilesService, request) {
+    function ReviewResults($sce, $scope, $rootScope, $modal, $state, cmElectionService, cmLoginUserService, electionReview, rpElectionReview, dar, apiUrl, cmEmailService, cmRPService, dar_id, cmFilesService, request) {
 
         if(electionReview.election.status === "Canceled"){
             $state.go($state.go("access_review_not_found"));
@@ -12,8 +12,7 @@
 
         var vm = this;
         vm.openApplication = openApplication;
-        $scope.consent = consent;
-        $scope.consentName = consent.name;
+        $scope.consentName = electionReview.associatedConsent.name;
         $scope.hasAdminRole = $rootScope.hasRole($rootScope.userRoles.admin);
         $scope.electionType = 'access';
         $scope.election = electionReview.election;
@@ -50,8 +49,8 @@
         $scope.buttonDisabled = false;
         $scope.chartData = getAccessGraphData(electionReview.reviewVote);
 
-        $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
-        $scope.dulName = electionReview.consent.dulName;
+        $scope.downloadUrl = apiUrl + 'consent/' + electionReview.associatedConsent.consentId + '/dul';
+        $scope.dulName = electionReview.associatedConsent.dulName;
         $scope.dar = dar.rus;
         $scope.request = request;
         $scope.status = electionReview.election.status;
@@ -151,7 +150,7 @@
         };
 
         $scope.downloadDUL = function(){
-            cmFilesService.getDULFile(electionReview.consent.consentId, electionReview.consent.dulName);
+            cmFilesService.getDULFile(electionReview.associatedConsent.consentId, electionReview.associatedConsent.dulName);
         };
 
 

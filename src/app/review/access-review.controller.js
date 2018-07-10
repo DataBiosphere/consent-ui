@@ -4,14 +4,26 @@
     angular.module('cmReview')
         .controller('DarReview', DarReview);
 
-    function DarReview($sce, $scope, $modal, $state, $rootScope, USER_ROLES, vote, rpVote, dar, election, consent, cmVoteService, apiUrl, cmAuthenticateService, cmLoginUserService, cmRPService, dar_id, cmFilesService, request) {
+    function DarReview($sce, $scope, $modal, $state, $rootScope, USER_ROLES, vote, rpVote, dar, election, consent, cmVoteService, apiUrl, cmAuthenticateService, cmLoginUserService, cmRPService, dar_id, cmFilesService, request, cmElectionService) {
 
         var vm = this;
         vm.openApplication = openApplication;
         $rootScope.path = 'access-review';
         initEnableRPButton();
         initEnableDARButton();
+        initConsentElection();
 
+        function initConsentElection() {
+          cmElectionService.findConsentElectionByDarElection(vote.electionId)
+          .then(
+                function (consentELection) {
+                   if(consentELection.dulName !== null && consentELection.dulName !== undefined) {
+                    $scope.dulName = consentELection.dulName;
+                   } else {
+                    $scope.dulName = consent.dulName;
+                   }
+                });
+        }
         function initEnableRPButton(){
            if(rpVote !== undefined && (rpVote.vote !== undefined && rpVote.vote !== null)){
                 $scope.enableRPButton  = false;
@@ -89,7 +101,6 @@
         $scope.selection.voteStatus = vote.vote;
         $scope.isFormDisabled = (election.status === 'Closed');
         $scope.selection.rationale = vote.rationale;
-
         if(rpVote !== undefined){
              $scope.selection.rpRationale = rpVote.rationale;
              $scope.selection.rpVoteStatus = rpVote.vote;
@@ -144,7 +155,7 @@
         };
 
         $scope.downloadDUL = function(){
-            cmFilesService.getDULFile(consent.consentId, consent.dulName);
+            cmFilesService.getDULFile(consent.consentId, $scope.dulName);
         };
 
         $scope.logRPVote = function () {

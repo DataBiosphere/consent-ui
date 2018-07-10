@@ -6,7 +6,7 @@
         .controller('DatasetCatalog', DatasetCatalog);
 
     /* ngInject */
-    function DatasetCatalog($scope, $state, $modal, $rootScope, cmDatasetService, cmAuthenticateService, cmRPService,  USER_ROLES) {
+    function DatasetCatalog($scope, $state, $modal, $rootScope, cmDatasetService, cmAuthenticateService, cmRPService,  USER_ROLES, cmFilesService) {
 
         var vm = this;
         vm.openDelete = openDelete;
@@ -14,7 +14,7 @@
         vm.openEnable = openEnable;
         vm.associate = associate;
         vm.showSdul = showSdul;
-
+        vm.downloadList = downloadList;
         $scope.actionType = null;
 
         vm.dataSetList = {'catalog': [], 'dictionary': []};
@@ -55,6 +55,15 @@
             });
         }
 
+       function downloadList(dataSet){
+           var dataSetId = null;
+           dataSet.properties.forEach(function(property) {
+               if(property.propertyName === 'Dataset ID') {
+                    dataSetId = property.propertyValue;
+               }
+           });
+           cmFilesService.getApprovedUsersFile(dataSetId + '-ApprovedRequestors.tsv', dataSetId);
+       } 
        vm.download = function (objectIdList) {
             cmDatasetService.downloadDataSets(objectIdList).then(function (value) {
                     var isIE = /*@cc_on!@*/false || !!document.documentMode;

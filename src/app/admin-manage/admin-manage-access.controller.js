@@ -10,7 +10,6 @@
         var vm = this;
         vm.openCreate = openCreate;
         vm.openCancel = openCancel;
-        vm.openPreviewResult = openPreviewResult;
         vm.downloadDataSetVotesDetail = downloadDataSetVotesDetail;
         vm.openApplication = openApplication;
         vm.openResearcherReview = openResearcherReview;
@@ -73,11 +72,6 @@
 
         function downloadDataSetVotesDetail(dataRequestId){
             cmElectionService.downloadDatasetVotesForDARElection(dataRequestId);
-        }
-
-        function openPreviewResult(url, dataRequestId) {
-            $rootScope.currentDARPage = vm.currentDARPage;
-            $state.go(url,{referenceId: dataRequestId});
         }
 
         function openResearcherReview(url, dacUserId){
