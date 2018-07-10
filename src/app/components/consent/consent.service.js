@@ -6,7 +6,8 @@
 
     /* ngInject */
     function cmConsentService(ConsentInvalidRestriction, ConsentResource, DeleteConsentResource, ConsentDulResource, ConsentManageResource, CreateConsentResource, CreateDulResource, UpdateConsentResource, $sce) {
-
+        // Variable to display consent data in dul preview results
+        var showConsent = false;
         /**
          * Find data for the consent related to the consentId sent as a parameter
          * @param consentId
@@ -76,13 +77,30 @@
             return DeleteConsentResource.Delete({consentId: consentId}).$promise;
         }
 
+        function setShowConsent(show) {
+            showConsent = show;
+        }
+
+        function getShowConsent() {
+            return showConsent;
+        }
+
         return {
+            setShowConsent: function(show) {
+                return setShowConsent(show);
+            },
+
+            getShowConsent: function() {
+                return getShowConsent();
+            },
+
             findConsent: function (id) {
                 return findConsentById(id);
             },
             findDataUseLetterForConsent: function (id) {
                 return findDulForConsent(id);
             },
+
             findConsentManage: function (vm) {
                 return findConsentManage(vm);
             },
