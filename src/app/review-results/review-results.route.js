@@ -47,11 +47,6 @@
                     authorizedRoles: [USER_ROLES.chairperson, USER_ROLES.admin]
                 },
                 resolve: {
-                    consent: function ($stateParams, cmRPService) {
-                        if ($stateParams.referenceId !== null) {
-                            return cmRPService.getDarConsent($stateParams.referenceId);
-                        }
-                    },
                     electionReview: function ($stateParams, cmElectionService) {
                         if ($stateParams.electionId !== null) {
                             return cmElectionService.findDataAccessElectionReview($stateParams.electionId, false).$promise;
@@ -108,12 +103,13 @@
 
             .state('access_preview_results', {
                 name: 'access_preview_results',
-                url: '/access_preview_results/:referenceId',
+                url: '/access_preview_results/:referenceId/:electionId',
                 templateUrl: 'app/review-results/access-preview-results.html',
                 controller: 'AccessPreviewResults',
                 controllerAs: 'AccessPreviewResults',
                 params: {
-                    referenceId: null
+                    referenceId: null,
+                    electionId: null
                 },
                 data: {
                     authorizedRoles: [USER_ROLES.chairperson, USER_ROLES.admin]
@@ -140,6 +136,11 @@
                     request: function ($stateParams, cmRPService) {
                         if ($stateParams.referenceId !== null) {
                             return cmRPService.getDarFields($stateParams.referenceId, "projectTitle");
+                        }
+                    },
+                    consentElection: function ($stateParams, cmElectionService) {
+                        if ($stateParams.electionId !== null) {
+                            return cmElectionService.findConsentElectionByDarElection($stateParams.electionId);
                         }
                     }
                 }

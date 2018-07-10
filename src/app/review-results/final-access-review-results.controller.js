@@ -321,7 +321,7 @@
                     }
                 });
 
-                cmElectionService.findLastElectionReviewByReferenceId(data.consent.consentId).$promise.then(function (data) {
+                cmElectionService.findElectionReviewById(data.associatedConsent.electionId, data.associatedConsent.consentId).$promise.then(function (data) {
                     $scope.electionReview = data;
                     showDULData(data);
                     vaultVote(data.consent.consentId);
