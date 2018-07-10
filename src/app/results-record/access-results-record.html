@@ -19,16 +19,13 @@
     <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
             <div class="panel-heading cm-boxhead access-color">
-                <h4>Research Purpose
-                    <a class="enabled hover-color application-link" ng-click="openApplication()">Application summary</a>
-                </h4>
+                <h4>Research Purpose</h4>
             </div>
             <div id="prf" class="panel-body cm-boxbody">
-                {{dar.rus}}
-                <hr style="margin: 10px 0">
+                <div style="margin-bottom: 10px;">{{dar.rus}}</div>
+                <button class="col-lg-6 col-md-6 col-sm-8 col-xs-12 btn vote-reminder hover-color" ng-click="">Download Full Application</button>
                 <div ng-show="hasUseRestriction">
                     <div class="translated-restriction">{{sDAR}}</div>
-                    <hr style="margin: 10px 0">
                     <a ng-click="download('machine-readable-DAR.json', mrDAR)" class="italic hover-color" style="cursor: pointer;" >
                         Download DAR machine-readable format
                     </a>
@@ -41,13 +38,11 @@
                 <h4>Data Use Limitations</h4>
             </div>
             <div id="dul" class="panel-body cm-boxbody">
-                <a style="cursor:pointer;" ng-click="downloadDUL()">{{dulName}}</a>
-                <hr style="margin: 10px 0">
-                <div class="translated-restriction">{{sDUL}}</div>
-                <hr style="margin: 10px 0">
-                <a ng-click="download('machine-readable-DUL.json', mrDUL)" class="italic hover-color" style="cursor: pointer">
-                    Download DUL machine-readable format
-                </a>
+                <div class="row no-margin">
+                    <button class="col-lg-6 col-md-6 col-sm-8 col-xs-12 btn vote-reminder hover-color" ng-click="downloadDUL()">Download Data Use Letter</button>
+                </div>
+                <div class="translated-restriction" style="margin-top: 10px;">{{sDUL}}</div>
+                <a ng-click="download('machine-readable-DUL.json', mrDUL)" class="italic hover-color">Download DUL machine-readable format</a>
             </div>
         </div>
     </div>

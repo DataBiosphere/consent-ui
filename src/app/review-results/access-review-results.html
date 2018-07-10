@@ -27,18 +27,19 @@
             <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
                     <div class="panel-heading cm-boxhead access-color">
-                        <h4>Research Purpose
-                            <a class="enabled hover-color application-link" ng-click="AccessReviewResults.openApplication()">Application summary</a>
-                        </h4>
+                        <h4>Research Purpose</h4>
                     </div>
-                    <div id="rp" class="panel-body cm-boxbody">{{dar}}</div>
+                    <div id="rp" class="panel-body cm-boxbody">
+                        <div style="margin-bottom: 10px;">{{dar}}</div>
+                        <button class="col-lg-6 col-md-6 col-sm-8 col-xs-12 btn vote-reminder hover-color" ng-click="">Download Full Application</button>
+                    </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
                     <div class="panel-heading cm-boxhead access-color">
                         <h4>Data Use Limitations</h4>
                     </div>
                     <div id="dul" class="panel-body cm-boxbody">
-                        <a style="cursor:pointer;" ng-click="downloadDUL()">{{dulName}}</a>
+                        <button class="col-lg-6 col-md-6 col-sm-8 col-xs-12 btn vote-reminder hover-color" ng-click="downloadDUL()">Download Data Use Letter</button>
                     </div>
                 </div>
             </div>
@@ -186,11 +187,12 @@
             <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
                     <div class="panel-heading cm-boxhead access-color">
-                        <h4>Research Purpose
-                            <a class="enabled hover-color application-link" ng-click="AccessReviewResults.openApplication()">Application summary</a>
-                        </h4>
+                        <h4>Research Purpose</h4>
                     </div>
-                    <div id="rpurpose" class="panel-body cm-boxbody">{{dar}}</div>
+                    <div id="rpurpose" class="panel-body cm-boxbody">
+                        <div style="margin-bottom: 10px;">{{dar}}</div>
+                        <button class="col-lg-6 col-md-6 col-sm-8 col-xs-12 btn vote-reminder hover-color" ng-click="">Download Full Application</button>
+                    </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
                     <div class="panel-heading cm-boxhead access-color">

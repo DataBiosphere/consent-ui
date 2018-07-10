@@ -1293,7 +1293,7 @@ input[type=checkbox]:checked + label:before{
     height: 28px;
     line-height: 13px;
     margin-bottom: 4px;
-    background: rgba(204, 204, 204, 0.5) !important;
+    background: rgba(204, 204, 204, 0.3) !important;
     box-shadow: 2px 2px rgb(204, 204, 204) !important;
 }
 
