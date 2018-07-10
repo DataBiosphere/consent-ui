@@ -1380,13 +1380,13 @@ input[type=checkbox]:checked + label:before{
 }
 
 .list-highlighted{
-    background-color: rgba(96, 59, 155, 0.05);
+    background-color: rgba(204, 204, 204, 0.25);
 }
 
 .list-highlighted .glyphicon-exclamation-sign{
-    margin: 0 10px 0 5px;
+    margin: 0 5px 0 0;
     font-size: 1.2em;
-    line-height: 22px;
+    line-height: 20px;
 }
 
 .list-highlighted .glyphicon-download-alt{
@@ -3626,7 +3626,8 @@ tags-input .tags .tag-item{
 
 .grid-row,
 .grid-9-row {
-    display: inline-block;
+    display: inline-flex;
+    min-height: 43px;
     width: 100%;
     margin: 0;
     padding: 0;
