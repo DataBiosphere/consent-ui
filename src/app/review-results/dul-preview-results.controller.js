@@ -24,7 +24,6 @@
         $scope.downloadUrl = apiUrl + 'consent/' + $scope.consent.consentId + '/dul';
         $scope.dulName = dulName;
         $scope.consentGroupName = $sce.trustAsHtml(consent.groupName);
-        $scope.dataUseLetter = $scope.consent.dataUseLetter;
         $rootScope.path = 'dul-preview-results';
         $scope.downloadDUL = function(){
             cmFilesService.getDULFile($scope.consent.consentId, $scope.consent.dulName);
