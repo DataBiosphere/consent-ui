@@ -10,7 +10,6 @@
         $scope.dar = dar;
         $scope.request = request;
         $scope.rus = dar.rus;
-        $scope.dar_id = dar_id;
         $scope.consent = consent;
         $scope.consentName = consent.name;
         $scope.dataUseLetter = consentElection !== undefined && consentElection.dataUseLetter !== undefined ? consentElection.dataUseLetter : $scope.consent.dataUseLetter;

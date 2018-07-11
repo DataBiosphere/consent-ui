@@ -998,6 +998,21 @@ small {
     color: #777777;
 }
 
+.dar-summary {
+    margin: 0 0 10px 0;
+}
+
+.dar-summary .control-label,
+.dar-summary .response-label {
+    text-align: left;
+    padding: 0;
+    margin-bottom: 2px;
+}
+
+.dar-summary ul{
+    margin-left: 15px;
+}
+
 .vote-update, .vote-ultimate-update {
     display: inline-block;
     font-size: 14px;
@@ -2463,7 +2478,8 @@ input:-webkit-autofill {
     margin: 0 15px 0 15px !important;
 }
 
-.app-summary-modal-content .alert-danger{
+.app-summary-modal-content .alert-danger,
+.dar-summary .alert-danger{
     padding: 15px 20px;
     margin-top: 10px;
     font-weight: 500;
