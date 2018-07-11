@@ -17,6 +17,9 @@
         $scope.downloadUrl = apiUrl + 'consent/' + $scope.consent.consentId + '/dul';
         $scope.dulName = consentElection !== undefined && consentElection.dulName !== undefined ? consentElection.dulName : $scope.consent.dulName;
         $rootScope.path = 'access-preview-results';
+        cmRPService.describeDar($rootScope.currentUser.dacUserId, dar_id).then(function (data) {
+             $scope.darInfo = data;
+        });
         $scope.downloadDUL = function(){
             if(consentElection !== undefined && consentElection.dulName !== undefined) {
                 cmFilesService.getDULFile($scope.consent.consentId, consentElection.dulName);

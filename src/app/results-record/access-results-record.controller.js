@@ -12,6 +12,9 @@
         $scope.electionId = electionId;
         $scope.darElection = darElection;
         $scope.hasUseRestriction = hasUseRestriction;
+        cmRPService.describeDar($rootScope.currentUser.dacUserId, $scope.darElection.referenceId).then(function (data) {
+            $scope.darInfo = data;
+        });
         $rootScope.path = 'access-results-record';
 
         if ($scope.electionId === null) {

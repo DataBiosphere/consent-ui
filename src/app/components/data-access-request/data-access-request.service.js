@@ -6,7 +6,35 @@
 
     /* ngInject */
 
-    function cmDataAccessRequest(dataAccessInvalidUseRestriction, dataAccessRequestResource, partialDARFromCatalogResource, dataAccessRequestCancel, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields, dataAccessRequestManageResource, updateDataAccessRequestResource, darModalSummary, partialDataAccessRequestManageResource, partialDataAccessRequestResource, postPartialDarResource, restrictionDataAccessRequestResource) {
+    function cmDataAccessRequest(dataAccessInvalidUseRestriction, dataAccessRequestResource, partialDARFromCatalogResource, dataAccessRequestCancel, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields, dataAccessRequestManageResource, updateDataAccessRequestResource, darModalSummary, partialDataAccessRequestManageResource, partialDataAccessRequestResource, postPartialDarResource, restrictionDataAccessRequestResource, cmResearcherService) {
+
+        function describeDar(userId, darId) {
+            var darInfo = {};
+
+            return new Promise(function(resolve) {
+                cmResearcherService.getPropertiesByResearcherId(userId).then(
+                    function (data) {
+                        darInfo.pi = data.piName;
+                        darInfo.profileName = data.profileName;
+                        darInfo.institution = data.institution;
+                        darInfo.department = data.department;
+                        darInfo.city = data.city;
+                        darInfo.country = data.country;
+                    }
+                ).then(
+                    getDarModalSummary(darId).then(
+                    function (data) {
+                        darInfo.status = data.status;
+                        darInfo.adminComment = data.rationale;
+                        darInfo.purposeStatements = data.purposeStatements;
+                        darInfo.researchType = data.researchType;
+                        darInfo.diseases = data.diseases;
+                        darInfo.manualReview = data.purposeStatements[0].manualReview;
+                        resolve(darInfo)
+                    }
+                ));
+            });
+        }
 
         function findDarConsent(id) {
             return darConsent.get({id: id}).$promise;
@@ -92,6 +120,9 @@
         }
 
         return {
+            describeDar: function(userId, darId) {
+                return describeDar(userId, darId);
+            },
 
             getPartialDarRequest: function(id){
                 return partialDarRequestGet(id);

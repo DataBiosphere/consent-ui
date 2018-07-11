@@ -31,6 +31,36 @@
                     </div>
                     <div id="rp" class="panel-body cm-boxbody">
                         <div style="margin-bottom: 10px;">{{dar}}</div>
+                        <!--DAR values-->
+                        <div style="..."><strong>Admin comment:</strong> {{darInfo.adminComment}}</div>
+                        <div style="..."><strong>City:</strong> {{darInfo.city}}</div>
+                        <div style="..."><strong>Country:</strong> {{darInfo.country}}</div>
+                        <div style="..."><strong>Department:</strong> {{darInfo.department}}</div>
+                        <div style="..."><strong>Institution:</strong> {{darInfo.institution}}</div>
+                        <div style="..."><strong>Manual Review:</strong> {{darInfo.manualReview}}</div>
+                        <div style="..."><strong>Pi Name:</strong> {{darInfo.pi}}</div>
+                        <div style="..."><strong>Profile/researcher Name:</strong> {{darInfo.profileName}}</div>
+                        <div style="..."><strong>Purpose Statement:</strong>
+                            <li ng-repeat="purpose in darInfo.purposeStatements">
+                                <span><strong>Purpose Title:</strong></span>
+                                {{purpose.title}}
+                                <span><strong>Purpose Description:</strong></span>
+                                {{purpose.description}}</li>
+                        </div>
+                        <div style="..."><strong>Research Type:</strong>
+                            <li ng-repeat="type in darInfo.researchType">
+                                <span><strong>Research Title:</strong></span>
+                                {{type.title}}
+                                <span><strong>Research Description:</strong></span>
+                                {{type.description}}
+                            </li>
+                        </div>
+                        <div style="..."><strong>Researcher Bonafide Status:</strong> {{darInfo.status}}</div>
+                        <div style="..."><strong>Diseases:</strong></div>
+                        <li ng-repeat="disease in darInfo.diseases">{{disease}}</li>
+                    </div>
+                    <!-- End of DAR values-->
+
                         <button class="col-lg-6 col-md-6 col-sm-8 col-xs-12 btn vote-reminder hover-color" ng-click="">Download Full Application</button>
                     </div>
                 </div>
