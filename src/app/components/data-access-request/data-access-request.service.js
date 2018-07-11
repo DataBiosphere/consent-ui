@@ -14,7 +14,7 @@
             return new Promise(function(resolve) {
                 cmResearcherService.getPropertiesByResearcherId(userId).then(
                     function (data) {
-                        darInfo.pi = data.isThePI ? data.piName : data.profileName;
+                        if (data.isThePI) darInfo.pi= data.profileName; else darInfo.pi= data.piName;
                         darInfo.havePI = data.havePI;
                         darInfo.profileName = data.profileName;
                         darInfo.institution = data.institution;
@@ -32,7 +32,7 @@
                         darInfo.diseases = data.diseases;
                         darInfo.purposeManualReview = data.purposeStatements[0].manualReview;
                         darInfo.researchTypeManualReview = data.researchType[0].manualReview;
-                        resolve(darInfo)
+                        resolve(darInfo);
                     }
                 ));
             });
