@@ -23,7 +23,7 @@
             while(authRolesCount--){
                 var i = uRolesCount;
                 while(i--){
-                    if (userRoles[i] === USER_ROLES.all || (userRoles[i].name === authorizedRoles[authRolesCount]))  {
+                    if (authorizedRoles[authRolesCount] === USER_ROLES.all || userRoles[i].name === authorizedRoles[authRolesCount])  {
                         return true;
                     }
                 }
