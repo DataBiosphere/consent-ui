@@ -10,31 +10,27 @@
 
         function describeDar(userId, darId) {
             var darInfo = {};
-
             return new Promise(function(resolve) {
-                cmResearcherService.getPropertiesByResearcherId(userId).then(
-                    function (data) {
-                        if (data.isThePI) {darInfo.pi= data.profileName;} else {darInfo.pi= data.piName;}
+                getDarModalSummary(darId).then(function(data){
+                    darInfo.researcherId = data.userId;
+                    darInfo.status = data.status;
+                    darInfo.adminComment = data.rationale;
+                    darInfo.purposeStatements = data.purposeStatements;
+                    darInfo.researchType = data.researchType;
+                    darInfo.diseases = data.diseases;
+                    darInfo.purposeManualReview = data.purposeStatements[0].manualReview;
+                    darInfo.researchTypeManualReview = data.researchType[0].manualReview;
+                    cmResearcherService.getResearcherPropertiesForDAR(darInfo.researcherId).then(function(data){
+                        if (data.isThePI) darInfo.pi= data.profileName; else darInfo.pi= data.piName;
                         darInfo.havePI = data.havePI;
                         darInfo.profileName = data.profileName;
                         darInfo.institution = data.institution;
                         darInfo.department = data.department;
                         darInfo.city = data.city;
                         darInfo.country = data.country;
-                    }
-                ).then(
-                    getDarModalSummary(darId).then(
-                    function (data) {
-                        darInfo.status = data.status;
-                        darInfo.adminComment = data.rationale;
-                        darInfo.purposeStatements = data.purposeStatements;
-                        darInfo.researchType = data.researchType;
-                        darInfo.diseases = data.diseases;
-                        darInfo.purposeManualReview = data.purposeStatements[0].manualReview;
-                        darInfo.researchTypeManualReview = data.researchType[0].manualReview;
                         resolve(darInfo);
-                    }
-                ));
+                    });
+                })
             });
         }
 
