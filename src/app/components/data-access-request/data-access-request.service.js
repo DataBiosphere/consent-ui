@@ -21,7 +21,7 @@
                     darInfo.purposeManualReview = data.purposeStatements[0].manualReview;
                     darInfo.researchTypeManualReview = data.researchType[0].manualReview;
                     cmResearcherService.getResearcherPropertiesForDAR(darInfo.researcherId).then(function(data){
-                        if (data.isThePI) darInfo.pi= data.profileName; else darInfo.pi= data.piName;
+                        if (data.isThePI) {darInfo.pi= data.profileName;} else {darInfo.pi= data.piName;}
                         darInfo.havePI = data.havePI;
                         darInfo.profileName = data.profileName;
                         darInfo.institution = data.institution;
@@ -30,7 +30,7 @@
                         darInfo.country = data.country;
                         resolve(darInfo);
                     });
-                })
+                });
             });
         }
 
