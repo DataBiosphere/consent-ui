@@ -999,18 +999,17 @@ small {
 }
 
 .dar-summary {
-    margin: 0 0 10px 0;
+    margin: 0 0 5px 0;
 }
 
 .dar-summary .control-label,
 .dar-summary .response-label {
     text-align: left;
-    padding: 0;
-    margin-bottom: 2px;
+    padding-left: 0;
 }
 
 .dar-summary ul{
-    margin-left: 15px;
+    margin: 0 0 0 15px;
 }
 
 .vote-update, .vote-ultimate-update {

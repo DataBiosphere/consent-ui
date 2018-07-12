@@ -18,21 +18,115 @@
     <h4 class="hint" ng-if="hasUseRestriction">Please review the Application Summary and Data Use Limitations to answer the two questions below.<br>You may review other DAC votes related to this data access request below the questions on this page.</h4>
     <h4 class="hint" ng-if="!hasUseRestriction">Please review the Application Summary and Data Use Limitations to answer the question below.<br>You may review other DAC votes related to this data access request below the question on this page.</h4>
     <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 panel panel-primary cm-boxes">
             <div class="panel-heading cm-boxhead access-color">
-                <h4>Research Purpose</h4>
+                <h4>Application Summary</h4>
             </div>
-            <div id="rp" class="panel-body cm-boxbody">
-                <div style="margin-bottom: 10px;">{{dar.rus}}</div>
-                <button class="col-lg-6 col-md-6 col-sm-8 col-xs-12 btn vote-reminder hover-color" ng-click="">Download Full Application</button>
+            <div id="rp" class="panel-body">
+                <div class="row dar-summary">
+                    <div class="control-label access-color">Research Purpose</div>
+                    <div class="response-label">{{dar.rus}}</div>
+                </div>
+
+                <div ng-if="true" class="row dar-summary">
+                    <div class="control-label access-color">Structured Research Purpose</div>
+                    <div class="response-label">structured version variable here</div>
+                    <a href="" class="italic hover-color">Download DAR machine-readable format</a>
+                </div>
+
+                <div ng-if="true" class="row dar-summary">
+                    <div class="control-label access-color">Purpose Statement</div>
+                    <div class="response-label">
+                        <ul>
+                            <!-- <li ng-repeat="purpose in darInfo.purposeStatements" ng-class="{'cancel-color': purpose.manualReview}"><b>{{purpose.title}}</b> {{purpose.description}}</li> -->
+                        </ul>
+                    </div>
+                    <!-- <div ng-if="darInfo.purposeManualReview === true && darInfo.researchTypeManualReview === false" class="dar-summary"> -->
+                    <div ng-if="true" class="dar-summary">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert-danger cancel-color">
+                            This research involves studying a sensitive population and requires manual review.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row dar-summary">
+                    <div class="control-label access-color">Type of Research</div>
+                    <div class="response-label">
+                        <ul>
+                            <!-- <li ng-repeat="type in darInfo.researchType" ng-class="{'cancel-color': type.manualReview}"><b>{{type.title}}</b> {{type.description}}</li> -->
+                        </ul>
+                    </div>
+                </div>
+                <!-- <div ng-if="darInfo.researchTypeManualReview === true" class="row dar-summary"> -->
+                <div ng-if="true" class="row dar-summary">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert-danger cancel-color">
+                        This research requires manual review.
+                    </div>
+                </div>
+
+                <div ng-if="true" class="row dar-summary">
+                    <div class="control-label access-color">Disease area(s)</div>
+                    <div class="response-label">
+                        <ul>
+                            <!-- <li ng-repeat="disease in darInfo.diseases">{{disease}}</li> -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- <div ng-if="havePI" class="row no-margin"> -->
+                <div class="row no-margin">
+                    <label class="control-label access-color">Principal Investigator:</label>
+                    <span class="response-label no-padding">{{darInfo.pi}}</span>
+                </div>
+                
+                <div class="row no-margin">
+                    <label class="control-label access-color">Researcher:</label>
+                    <span class="response-label no-padding">{{darInfo.profileName}}</span>
+                    <div ng-if="true" class="row no-margin">
+                        <label class="control-label no-padding">Status:</label>
+                        <span class="response-label no-padding">{{darInfo.status}} - </span>
+                        <label class="control-label no-padding">Comment:</label>
+                        <span class="response-label no-padding">{{darInfo.adminComment}}</span>
+                    </div>
+                </div>
+
+                <div class="row no-margin">
+                    <label class="control-label access-color">Institution:</label>
+                    <span class="response-label no-padding">{{darInfo.institution}}</span>
+                </div>
+
+                <div class="row no-margin">
+                    <label class="control-label access-color">Department:</label>
+                    <span class="response-label no-padding">{{darInfo.department}}</span>
+                </div>
+
+                <div class="row no-margin">
+                    <label class="control-label access-color">City:</label>
+                    <span class="response-label no-padding">{{darInfo.city}}</span>
+                </div>
+
+                <div class="row no-margin">
+                    <label class="control-label access-color">Country:</label>
+                    <span class="response-label no-padding">{{darInfo.country}}</span>
+                </div>
+
+                <button class="col-lg-6 col-md-6 col-sm-6 col-xs-12 btn vote-reminder hover-color" style="margin-top: 15px;" ng-click="">Download Full Application</button>
             </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
-            <div class="panel-heading cm-boxhead access-color">
+
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 panel panel-primary cm-boxes">
+            <div class="panel-heading cm-boxhead dul-color">
                 <h4>Data Use Limitations</h4>
             </div>
             <div id="dul" class="panel-body cm-boxbody">
-                <button class="col-lg-6 col-md-6 col-sm-8 col-xs-12 btn vote-reminder hover-color" ng-click="downloadDUL()">Download Data Use Letter</button>
+                <div class="row no-margin">
+                    <button class="col-lg-6 col-md-6 col-sm-6 col-xs-12 btn vote-reminder hover-color" ng-click="downloadDUL()">Download Data Use Letter</button>
+                </div>
+                <div class="row dar-summary">
+                    <div class="control-label dul-color">Structured Limitations</div>
+                    <div class="response-label">structured version variable here</div>
+                    <a href="" class="italic hover-color">Download DUL machine-readable format</a>
+                </div>
             </div>
         </div>
     </div>

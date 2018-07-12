@@ -14,7 +14,7 @@
             return new Promise(function(resolve) {
                 cmResearcherService.getPropertiesByResearcherId(userId).then(
                     function (data) {
-                        if (data.isThePI) darInfo.pi= data.profileName; else darInfo.pi= data.piName;
+                        if (data.isThePI) {darInfo.pi= data.profileName;} else {darInfo.pi= data.piName;}
                         darInfo.havePI = data.havePI;
                         darInfo.profileName = data.profileName;
                         darInfo.institution = data.institution;
