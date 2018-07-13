@@ -86,7 +86,8 @@
                                 <!--REMOVE LINE-->  <strong>Has purpose statements? = {{darInfo.hasPurposeStatements}}</strong><!--REMOVE LINE-->
                                 <div class="response-label">
                                     <ul>
-                                        <li ng-repeat="purpose in darInfo.purposeStatements" ng-class="{'cancel-color': purpose.manualReview}"><b>{{purpose.title}}</b> {{purpose.description}}</li>
+                                        <!-- <li ng-repeat="purpose in darInfo.purposeStatements" ng-class="{'cancel-color': purpose.manualReview}"><b>{{purpose.title}}</b> {{purpose.description}}</li> -->
+                                        <li ng-repeat="purpose in darInfo.purposeStatements"><b>{{purpose.title}}</b> {{purpose.description}}</li>
                                     </ul>
                                 </div>
                                 <div ng-if="darInfo.purposeManualReview === true && darInfo.researchTypeManualReview === false" class="dar-summary">
