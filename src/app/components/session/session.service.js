@@ -27,6 +27,7 @@
         function redirect(data) {
             if(( Boolean($rootScope.returnToState) && $rootScope.returnToState !== 'login') && cmAuthenticateService.hasValidRole($rootScope.returnToStateAuthorizedRoles, data.roles)){
                 $state.go($rootScope.returnToState, $rootScope.returnToStateParams);
+                $rootScope.returnToState = null;
             } else {
                 if (cmAuthenticateService.isAuthorized(USER_ROLES.chairperson, data.roles)) {
                     $state.go('chair_console');
