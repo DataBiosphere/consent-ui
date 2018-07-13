@@ -4,7 +4,7 @@
     angular.module('cmReviewResults')
         .controller('FinalAccessReviewResults', FinalAccessReviewResults);
 
-    function FinalAccessReviewResults($scope, $rootScope, $modal, $state, cmElectionService, cmRPService, cmVoteService, cmLoginUserService, apiUrl, cmMatchService, electionId, referenceId, hasUseRestriction, cmFilesService) {
+    function FinalAccessReviewResults($sce, $scope, $rootScope, $modal, $state, cmElectionService, cmRPService, cmVoteService, cmLoginUserService, apiUrl, cmMatchService, electionId, referenceId, hasUseRestriction, cmFilesService) {
 
         if (electionId === null || referenceId === null) {
             cmLoginUserService.redirect($rootScope.currentUser);
@@ -354,6 +354,7 @@
             if (electionReview.election.finalRationale === null) {
                 $scope.electionAccess.finalRationale = '';
             }
+            $scope.sDar = $sce.trustAsHtml($scope.electionAccess.translatedUseRestriction);
             $scope.status = electionReview.election.status;
             $scope.voteAccessList = chunk(electionReview.reviewVote, 2);
             $scope.chartDataAccess = getGraphData(electionReview.reviewVote);
@@ -368,6 +369,7 @@
             if (electionReview.election.finalRationale === null) {
                 $scope.election.finalRationale = '';
             }
+            $scope.sDul = $sce.trustAsHtml($scope.election.translatedUseRestriction);
             $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
             $scope.dulName = electionReview.election.dulName;
             $scope.status = electionReview.election.status;

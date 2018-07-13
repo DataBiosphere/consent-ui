@@ -5,7 +5,7 @@
     angular.module('cmResultsRecord')
         .controller('AccessResultsRecord', AccessResultsRecord);
 
-    function AccessResultsRecord($scope, $state, $modal, cmElectionService, downloadFileService, apiUrl, cmRPService, cmVoteService, cmMatchService, darElection, electionId, hasUseRestriction, cmFilesService, $rootScope) {
+    function AccessResultsRecord($sce, $scope, $state, $modal, cmElectionService, downloadFileService, apiUrl, cmRPService, cmVoteService, cmMatchService, darElection, electionId, hasUseRestriction, cmFilesService, $rootScope) {
 
         /*ACCORDION*/
         $scope.oneAtATime = false;
@@ -219,9 +219,9 @@
 
             // this data is used to construct structured_ files
             $scope.mrDAR = JSON.stringify(electionReview.election.useRestriction, null, 2);
-            $scope.sDAR = electionReview.election.translatedUseRestriction.replace(/<br>/g, "\n");
+            $scope.sDAR = $sce.trustAsHtml(electionReview.election.translatedUseRestriction);
             $scope.mrDUL = JSON.stringify(electionReview.associatedConsent.useRestriction, null, 2);
-            $scope.sDUL = electionReview.associatedConsent.translatedUseRestriction;
+            $scope.sDUL = $sce.trustAsHtml(electionReview.associatedConsent.translatedUseRestriction);
 
         }
 

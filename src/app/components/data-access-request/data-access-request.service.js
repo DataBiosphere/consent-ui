@@ -19,7 +19,7 @@
                     darInfo.hasPurposeStatements = data.purposeStatements.length > 0;
                     darInfo.purposeStatements = data.purposeStatements;
                     darInfo.researchType = data.researchType;
-                    darInfo.hasDiseases = data.diseases > 0;
+                    darInfo.hasDiseases = data.diseases.length > 0;
                     darInfo.diseases = data.diseases;
                     darInfo.purposeManualReview = data.purposeStatements[0].manualReview;
                     darInfo.researchTypeManualReview = data.researchType[0].manualReview;

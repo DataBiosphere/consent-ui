@@ -30,7 +30,7 @@
 
                 <div ng-if="true" class="row dar-summary">
                     <div class="control-label access-color">Structured Research Purpose</div>
-                    <div class="response-label">{{electionAccess.translatedUseRestriction}}</div>
+                    <div class="response-label" ng-bind-html="sDar"></div>
                     <a ng-click="download('machine-readable-DAR.json', mrDAR)" class="italic hover-color">Download DAR machine-readable format</a>
                 </div>
 
@@ -84,7 +84,7 @@
                     <div class="row no-margin">
                         <label class="control-label no-padding">Status:</label>
                         <span class="response-label no-padding">{{darInfo.status}}</span>
-                        <span ng-if="darInfo.hasAdminComment"> - 
+                        <span ng-if="darInfo.hasAdminComment"> -
                             <label class="control-label no-padding">Comment:</label>
                             <span class="response-label no-padding">{{darInfo.adminComment}}</span>
                         </span>
@@ -125,7 +125,7 @@
                 </div>
                 <div class="row dar-summary">
                     <div class="control-label dul-color">Structured Limitations</div>
-                    <div class="response-label">{{election.translatedUseRestriction}}</div>
+                    <div class="response-label" ng-bind-html="sDul"></div>
                     <a ng-click="download('machine-readable-DUL.json', mrDUL)"  class="italic hover-color">Download DUL machine-readable format</a>
                 </div>
             </div>

@@ -26,10 +26,11 @@
                     <div class="control-label access-color">Research Purpose</div>
                     <div class="response-label">{{dar.rus}}</div>
                 </div>
-
-                <div ng-if="hasUseRestriction" class="row dar-summary">
+                <!--<div ng-if="hasUseRestriction" class="row dar-summary">-->
+                <div class="row dar-summary">
                     <div class="control-label access-color">Structured Research Purpose</div>
-                    <div class="response-label">{{sDAR}}</div>
+                    <div class="response-label" ng-bind-html="sDAR"></div>
+                    <a ng-click="download('machine-readable-DAR.json', mrDAR)" class="italic hover-color">Download DAR machine-readable format</a>
                     <a ng-click="download('machine-readable-DAR.json', mrDAR)" class="italic hover-color">Download DAR machine-readable format</a>
                 </div>
 
@@ -83,7 +84,7 @@
                     <div class="row no-margin">
                         <label class="control-label no-padding">Status:</label>
                         <span class="response-label no-padding">{{darInfo.status}}</span>
-                        <span ng-if="darInfo.hasAdminComment"> - 
+                        <span ng-if="darInfo.hasAdminComment"> -
                             <label class="control-label no-padding">Comment:</label>
                             <span class="response-label no-padding">{{darInfo.adminComment}}</span>
                         </span>
@@ -109,7 +110,7 @@
                     <label class="control-label access-color">Country:</label>
                     <span class="response-label no-padding">{{darInfo.country}}</span>
                 </div>
-    
+
                 <button class="col-lg-6 col-md-6 col-sm-6 col-xs-12 btn vote-reminder hover-color" style="margin-top: 15px;" ng-click="">Download Full Application</button>
             </div>
         </div>
@@ -124,11 +125,11 @@
                 </div>
                 <div class="row dar-summary">
                     <div class="control-label dul-color">Structured Limitations</div>
-                    <div class="response-label">{{sDUL}}</div>
+                    <div class="response-label" ng-bind-html="sDUL"></div>
                     <a ng-click="download('machine-readable-DUL.json', mrDUL)" class="italic hover-color">Download DUL machine-readable format</a>
                 </div>
             </div>
-        </div>       
+        </div>
     </div>
     <hr class="section-separator">
 
