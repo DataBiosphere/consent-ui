@@ -33,59 +33,60 @@
                     <a ng-click="download('machine-readable-DAR.json', mrDAR)" class="italic hover-color">Download DAR machine-readable format</a>
                 </div>
 
-                <div ng-if="true" class="row dar-summary">
+                <div ng-if="darInfo.hasPurposeStatements" class="row dar-summary">
                     <div class="control-label access-color">Purpose Statement</div>
                     <div class="response-label">
                         <ul>
-                            <!-- <li ng-repeat="purpose in darInfo.purposeStatements" ng-class="{'cancel-color': purpose.manualReview}"><b>{{purpose.title}}</b> {{purpose.description}}</li> -->
+                            <li ng-repeat="purpose in darInfo.purposeStatements" ng-class="{'cancel-color': purpose.manualReview}"><b>{{purpose.title}}</b> {{purpose.description}}</li>
                         </ul>
                     </div>
-                    <!-- <div ng-if="darInfo.purposeManualReview === true && darInfo.researchTypeManualReview === false" class="dar-summary"> -->
-                    <div ng-if="true" class="dar-summary">
+                    <!-- {{darInfo.purposeManualReview}} -->
+                    <div ng-if="darInfo.purposeManualReview && darInfo.researchTypeManualReview === false" class="dar-summary">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert-danger cancel-color">
                             This research involves studying a sensitive population and requires manual review.
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="row dar-summary">
                     <div class="control-label access-color">Type of Research</div>
                     <div class="response-label">
                         <ul>
-                            <!-- <li ng-repeat="type in darInfo.researchType" ng-class="{'cancel-color': type.manualReview}"><b>{{type.title}}</b> {{type.description}}</li> -->
+                            <li ng-repeat="type in darInfo.researchType" ng-class="{'cancel-color': type.manualReview}"><b>{{type.title}}</b> {{type.description}}</li>
                         </ul>
                     </div>
                 </div>
-                <!-- <div ng-if="darInfo.researchTypeManualReview === true" class="row dar-summary"> -->
-                <div ng-if="true" class="row dar-summary">
+                <!-- {{darInfo.researchTypeManualReview}} -->
+                <div ng-if="darInfo.researchTypeManualReview" class="row dar-summary">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert-danger cancel-color">
                         This research requires manual review.
                     </div>
                 </div>
 
-                <div ng-if="true" class="row dar-summary">
+                <div ng-if="darInfo.hasDiseases" class="row dar-summary">
                     <div class="control-label access-color">Disease area(s)</div>
                     <div class="response-label">
                         <ul>
-                            <!-- <li ng-repeat="disease in darInfo.diseases">{{disease}}</li> -->
+                            <li ng-repeat="disease in darInfo.diseases">{{disease}}</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- <div ng-if="havePI" class="row no-margin"> -->
-                <div class="row no-margin">
+                <div ng-if="darInfo.havePI" class="row no-margin">
                     <label class="control-label access-color">Principal Investigator:</label>
                     <span class="response-label no-padding">{{darInfo.pi}}</span>
                 </div>
-                
+
                 <div class="row no-margin">
                     <label class="control-label access-color">Researcher:</label>
                     <span class="response-label no-padding">{{darInfo.profileName}}</span>
-                    <div ng-if="true" class="row no-margin">
+                    <div class="row no-margin">
                         <label class="control-label no-padding">Status:</label>
-                        <span class="response-label no-padding">{{darInfo.status}} - </span>
-                        <label class="control-label no-padding">Comment:</label>
-                        <span class="response-label no-padding">{{darInfo.adminComment}}</span>
+                        <span class="response-label no-padding">{{darInfo.status}}</span>
+                        <span ng-if="darInfo.hasAdminComment"> - 
+                            <label class="control-label no-padding">Comment:</label>
+                            <span class="response-label no-padding">{{darInfo.adminComment}}</span>
+                        </span>
                     </div>
                 </div>
 
@@ -108,7 +109,7 @@
                     <label class="control-label access-color">Country:</label>
                     <span class="response-label no-padding">{{darInfo.country}}</span>
                 </div>
-
+    
                 <button class="col-lg-6 col-md-6 col-sm-6 col-xs-12 btn vote-reminder hover-color" style="margin-top: 15px;" ng-click="">Download Full Application</button>
             </div>
         </div>

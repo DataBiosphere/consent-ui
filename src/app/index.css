@@ -624,8 +624,16 @@ small {
     line-height: 24px;
 }
 
+.panel-body {
+    font-size: 15px;
+}
+
 .panel-body .hint {
     margin: 10px 15px 10px 15px;
+}
+
+.panel-body .vote-reminder {
+    margin: 10px 0;
 }
 
 .pipe::after {

@@ -30,19 +30,19 @@
 
                 <div ng-if="true" class="row dar-summary">
                     <div class="control-label access-color">Structured Research Purpose</div>
-                    <div class="response-label">structured version variable here</div>
-                    <a href="" class="italic hover-color">Download DAR machine-readable format</a>
+                    <div class="response-label">{{electionAccess.translatedUseRestriction}}</div>
+                    <a ng-click="download('machine-readable-DAR.json', mrDAR)" class="italic hover-color">Download DAR machine-readable format</a>
                 </div>
 
-                <div ng-if="true" class="row dar-summary">
+                <div ng-if="darInfo.hasPurposeStatements" class="row dar-summary">
                     <div class="control-label access-color">Purpose Statement</div>
                     <div class="response-label">
                         <ul>
-                             <li ng-repeat="purpose in darInfo.purposeStatements" ng-class="{'cancel-color': purpose.manualReview}"><b>{{purpose.title}}</b> {{purpose.description}}</li>
+                            <li ng-repeat="purpose in darInfo.purposeStatements" ng-class="{'cancel-color': purpose.manualReview}"><b>{{purpose.title}}</b> {{purpose.description}}</li>
                         </ul>
                     </div>
-                     <div ng-if="darInfo.purposeManualReview === true && darInfo.researchTypeManualReview === false" class="dar-summary">
-                    <div ng-if="true" class="dar-summary">
+                    <!-- {{darInfo.purposeManualReview}} -->
+                    <div ng-if="darInfo.purposeManualReview && darInfo.researchTypeManualReview === false" class="dar-summary">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert-danger cancel-color">
                             This research involves studying a sensitive population and requires manual review.
                         </div>
@@ -53,28 +53,27 @@
                     <div class="control-label access-color">Type of Research</div>
                     <div class="response-label">
                         <ul>
-                             <li ng-repeat="type in darInfo.researchType" ng-class="{'cancel-color': type.manualReview}"><b>{{type.title}}</b> {{type.description}}</li>
+                            <li ng-repeat="type in darInfo.researchType" ng-class="{'cancel-color': type.manualReview}"><b>{{type.title}}</b> {{type.description}}</li>
                         </ul>
                     </div>
                 </div>
-                 <div ng-if="darInfo.researchTypeManualReview === true" class="row dar-summary">
-                <div ng-if="true" class="row dar-summary">
+                <!-- {{darInfo.researchTypeManualReview}} -->
+                <div ng-if="darInfo.researchTypeManualReview" class="row dar-summary">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert-danger cancel-color">
                         This research requires manual review.
                     </div>
                 </div>
 
-                <div ng-if="true" class="row dar-summary">
+                <div ng-if="darInfo.hasDiseases" class="row dar-summary">
                     <div class="control-label access-color">Disease area(s)</div>
                     <div class="response-label">
                         <ul>
-                             <li ng-repeat="disease in darInfo.diseases">{{disease}}</li>
+                            <li ng-repeat="disease in darInfo.diseases">{{disease}}</li>
                         </ul>
                     </div>
                 </div>
 
-                 <div ng-if="havePI" class="row no-margin">
-                <div class="row no-margin">
+                <div ng-if="darInfo.havePI" class="row no-margin">
                     <label class="control-label access-color">Principal Investigator:</label>
                     <span class="response-label no-padding">{{darInfo.pi}}</span>
                 </div>
@@ -82,11 +81,13 @@
                 <div class="row no-margin">
                     <label class="control-label access-color">Researcher:</label>
                     <span class="response-label no-padding">{{darInfo.profileName}}</span>
-                    <div ng-if="true" class="row no-margin">
+                    <div class="row no-margin">
                         <label class="control-label no-padding">Status:</label>
-                        <span class="response-label no-padding">{{darInfo.status}} - </span>
-                        <label class="control-label no-padding">Comment:</label>
-                        <span class="response-label no-padding">{{darInfo.adminComment}}</span>
+                        <span class="response-label no-padding">{{darInfo.status}}</span>
+                        <span ng-if="darInfo.hasAdminComment"> - 
+                            <label class="control-label no-padding">Comment:</label>
+                            <span class="response-label no-padding">{{darInfo.adminComment}}</span>
+                        </span>
                     </div>
                 </div>
 
@@ -124,8 +125,8 @@
                 </div>
                 <div class="row dar-summary">
                     <div class="control-label dul-color">Structured Limitations</div>
-                    <div class="response-label">structured version variable here</div>
-                    <a href="" class="italic hover-color">Download DUL machine-readable format</a>
+                    <div class="response-label">{{election.translatedUseRestriction}}</div>
+                    <a ng-click="download('machine-readable-DUL.json', mrDUL)"  class="italic hover-color">Download DUL machine-readable format</a>
                 </div>
             </div>
         </div>
@@ -196,11 +197,21 @@
         <div ng-show="hasUseRestriction" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 jumbotron box-vote-results access-background-lighter">
             <h4 class="box-vote-title access-color italic">Q2. Is the DAC decision consistent with the DUOS Matching Algorithm decision?</h4>
             <hr class="box-separator-white">
+            <div ng-show="alertOn == null;" class="agreement-data">
+                <label>DAC Decision: </label>
+                <span class="access-color" ng-if="electionAccess.finalVote == '1'"><b>YES</b></span>
+                <span class="access-color" ng-if="electionAccess.finalVote == '0'"><b>NO</b></span>
+                <span class="access-color" ng-if="electionAccess.finalVote == 'null'"><b>---</b></span>
+                <label>DUOS Matching Algorithm Decision: </label>
+                <span class="access-color" ng-if="match == '1'"><b>YES</b></span>
+                <span class="access-color" ng-if="match == '0'"><b>NO</b></span>
+                <span class="access-color" ng-if="match == null"><b>---</b></span>
+                <span class="cancel-color" ng-if="match == '-1'">Automated Vote System Failure. Please report this issue via the "Request Help" link</span>
+            </div>
 
             <form class="form-horizontal" id="voteAgreement">
-                <div class="form-group first-form-group">
-                    <label
-                        class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Your vote*</label>
+                <div class="form-group">
+                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Your vote*</label>
 
                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
                         <div class="radio-inline">
@@ -235,16 +246,6 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
-                        <div ng-show="alertOn == null;" class="agreement-data default-color">DAC Decision:
-                            <span class="access-color" ng-if="electionAccess.finalVote == '1'"><b>YES</b></span>
-                            <span class="access-color" ng-if="electionAccess.finalVote == '0'"><b>NO</b></span>
-                            <span class="access-color" ng-if="electionAccess.finalVote == 'null'"><b>---</b></span>
-                            DUOS Matching Algorithm Decision:
-                            <span class="access-color" ng-if="match == '1'"><b>YES</b></span>
-                            <span class="access-color" ng-if="match == '0'"><b>NO</b></span>
-                            <span class="access-color" ng-if="match == null"><b>---</b></span>
-                            <span class="cancel-color" ng-if="match == '-1'">Automated Vote System Failure. Please report this issue via the "Request Help" link</span>
-                        </div>
                         <div ng-show="alertOn == true;" class="votes-alerts final-alert no-margin no-padding">
                             <alert ng-repeat="alert in alertsAgree" type="danger"
                                    class="alert-title cancel-color f-left col-lg-12 col-md-12 col-sm-12 col-xs-12">
