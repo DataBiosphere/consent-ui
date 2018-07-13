@@ -20,7 +20,7 @@
         $scope.darOriginalFinalVote = electionReview.election.finalVote;
         $scope.darOriginalFinalRationale = electionReview.election.finalRationale;
         $rootScope.path = 'access-review-results';
-        cmRPService.describeDar($rootScope.currentUser.dacUserId, dar_id).then(function (data) {
+        cmRPService.describeDar(dar_id).then(function (data) {
             $scope.darInfo = data;
         });
         if (typeof electionReview === 'undefined') {

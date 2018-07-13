@@ -34,7 +34,7 @@
                                 <label class="control-label access-color">PI:</label>
                                 <span class="response-label no-padding">{{darInfo.pi}}</span>
                             </div>
-                            
+
                             <div class="row no-margin">
                                 <label class="control-label access-color">Researcher:</label>
                                 <span class="response-label no-padding">{{darInfo.profileName}}</span>
@@ -46,6 +46,7 @@
                                     <span class="response-label no-padding">{{darInfo.status}}</span>
                                 </div>
                                 <div class="row no-margin">
+                                    <!--REMOVE LINE--><strong>Has admin comment? {{darInfo.hasAdminComment}}</strong><!--REMOVE LINE-->
                                     <label class="control-label no-padding">Comment:</label>
                                     <span class="response-label no-padding">{{darInfo.adminComment}}</span>
                                 </div>
@@ -82,6 +83,7 @@
 
                             <div ng-if="true" class="row dar-summary">
                                 <div class="control-label access-color">Purpose Statement</div>
+                                <!--REMOVE LINE-->  <strong>Has purpose statements? = {{darInfo.hasPurposeStatements}}</strong><!--REMOVE LINE-->
                                 <div class="response-label">
                                     <ul>
                                         <li ng-repeat="purpose in darInfo.purposeStatements" ng-class="{'cancel-color': purpose.manualReview}"><b>{{purpose.title}}</b> {{purpose.description}}</li>
@@ -93,7 +95,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row dar-summary">
                                 <div class="control-label access-color">Type of Research</div>
                                 <div class="response-label">
@@ -110,6 +112,7 @@
 
                             <div ng-if="true" class="row dar-summary">
                                 <div class="control-label access-color">Disease area(s)</div>
+                                <!--REMOVE LINE--> <strong>Has diseases? = {{darInfo.hasDiseases}}</strong><!--REMOVE LINE-->
                                 <div class="response-label">
                                     <ul>
                                         <li ng-repeat="disease in darInfo.diseases">{{disease}}</li>
@@ -119,7 +122,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 panel panel-primary cm-boxes">
                     <div class="panel-heading cm-boxhead dul-color">
                         <h4>Data Use Limitations</h4>

@@ -24,7 +24,7 @@
         $scope.alertsAgree = [];
         $scope.referenceId = referenceId;
         $scope.electionId = electionId;
-        cmRPService.describeDar($rootScope.currentUser.dacUserId, $scope.darElection.referenceId).then(function (data) {
+        cmRPService.describeDar($scope.referenceId).then(function (data) {
             $scope.darInfo = data;
         });
         $scope.reminderDARAlert = function (index) {

@@ -8,7 +8,7 @@
 
         var vm = this;
         vm.openApplication = openApplication;
-        cmRPService.describeDar($rootScope.currentUser.dacUserId, dar_id).then(function (data) {
+        cmRPService.describeDar(dar_id).then(function (data) {
             $scope.darInfo = data;
         });
         $rootScope.path = 'access-review';

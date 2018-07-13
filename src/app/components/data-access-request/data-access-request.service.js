@@ -8,21 +8,24 @@
 
     function cmDataAccessRequest(dataAccessInvalidUseRestriction, dataAccessRequestResource, partialDARFromCatalogResource, dataAccessRequestCancel, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields, dataAccessRequestManageResource, updateDataAccessRequestResource, darModalSummary, partialDataAccessRequestManageResource, partialDataAccessRequestResource, postPartialDarResource, restrictionDataAccessRequestResource, cmResearcherService) {
 
-        function describeDar(userId, darId) {
+        function describeDar(darId) {
             var darInfo = {};
             return new Promise(function(resolve) {
                 getDarModalSummary(darId).then(function(data){
                     darInfo.researcherId = data.userId;
                     darInfo.status = data.status;
+                    darInfo.hasAdminComment = data.rationale !== null;
                     darInfo.adminComment = data.rationale;
+                    darInfo.hasPurposeStatements = data.purposeStatements.length > 0;
                     darInfo.purposeStatements = data.purposeStatements;
                     darInfo.researchType = data.researchType;
+                    darInfo.hasDiseases = data.diseases > 0;
                     darInfo.diseases = data.diseases;
                     darInfo.purposeManualReview = data.purposeStatements[0].manualReview;
                     darInfo.researchTypeManualReview = data.researchType[0].manualReview;
                     cmResearcherService.getResearcherPropertiesForDAR(darInfo.researcherId).then(function(data){
-                        if (data.isThePI) darInfo.pi= data.profileName; else darInfo.pi= data.piName;
-                        darInfo.havePI = data.havePI;
+                        darInfo.pi = data.isThePI !== true ? data.profileName : data.piName;
+                        darInfo.havePI = data.havePI !== undefined;
                         darInfo.profileName = data.profileName;
                         darInfo.institution = data.institution;
                         darInfo.department = data.department;
@@ -30,7 +33,7 @@
                         darInfo.country = data.country;
                         resolve(darInfo);
                     });
-                })
+                });
             });
         }
 
@@ -118,8 +121,8 @@
         }
 
         return {
-            describeDar: function(userId, darId) {
-                return describeDar(userId, darId);
+            describeDar: function(darId) {
+                return describeDar(darId);
             },
 
             getPartialDarRequest: function(id){
