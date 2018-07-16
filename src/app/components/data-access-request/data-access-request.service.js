@@ -21,8 +21,8 @@
                     darInfo.researchType = data.researchType;
                     darInfo.hasDiseases = data.diseases.length > 0;
                     darInfo.diseases = data.diseases;
-                    darInfo.purposeManualReview = data.purposeStatements[0].manualReview;
-                    darInfo.researchTypeManualReview = data.researchType[0].manualReview;
+                    // darInfo.purposeManualReview = data.purposeStatements[0].manualReview;
+                    // darInfo.researchTypeManualReview = data.researchType[0].manualReview;
                     cmResearcherService.getResearcherPropertiesForDAR(darInfo.researcherId).then(function(data){
                         darInfo.pi = data.isThePI === true ? data.profileName : data.piName;
                         darInfo.havePI = data.havePI;

@@ -4,7 +4,9 @@
         <div class="col-lg-10 col-md-9 col-sm-9 col-xs-12 no-padding">
             <img src="assets/images/icon_access.png" alt="Data Access Request icon" class="cm-icons main-icon-title">
             <h2 class="main-title margin-sm access-color">Final voting for Data Access Review
-                <span class="main-title-case"><b>{{projectTitle}}</b></span>
+                <span class="main-title-case"><b>{{projectTitle}}</b> 
+                    <!--ADD CONSENT NAME-->
+                    <!-- | {{consentName}}</span> -->
             </h2>
         </div>
         <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12 no-padding">
@@ -41,7 +43,6 @@
                             <li ng-repeat="purpose in darInfo.purposeStatements" ng-class="{'cancel-color': purpose.manualReview}"><b>{{purpose.title}}</b> {{purpose.description}}</li>
                         </ul>
                     </div>
-                    <!-- {{darInfo.purposeManualReview}} -->
                     <div ng-if="darInfo.purposeManualReview && darInfo.researchTypeManualReview === false" class="dar-summary">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert-danger cancel-color">
                             This research involves studying a sensitive population and requires manual review.
@@ -57,7 +58,6 @@
                         </ul>
                     </div>
                 </div>
-                <!-- {{darInfo.researchTypeManualReview}} -->
                 <div ng-if="darInfo.researchTypeManualReview" class="row dar-summary">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert-danger cancel-color">
                         This research requires manual review.

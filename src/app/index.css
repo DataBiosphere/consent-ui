@@ -698,10 +698,15 @@ small {
     font-weight: 500;
 }
 
+.cm-user-name, .cm-box-title {	
+    font-size: 17px;	
+    padding: 5px 0 5px 15px;	
+    display: inline;	
+}
+
 .stats-box-title {
     padding: 15px 10px 10px 10px;
 }
-
 
 .cm-results-subtitle {
     padding: 0 0 5px 0 !important;
@@ -923,6 +928,11 @@ small {
 
 .dar-summary ul {
     margin: 0 0 0 15px;
+}
+
+.dar-summary a {
+    display: block;
+    padding-top: 5px;
 }
 
 .vote-update {
