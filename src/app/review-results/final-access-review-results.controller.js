@@ -315,6 +315,7 @@
 
             cmElectionService.findDataAccessElectionReview(electionId, false).$promise.then(function (data) {
                 showAccessData(data);
+                $scope.consentName = data.consent.consentId;
                 cmElectionService.findRPElectionReview(electionId, false).
                 $promise.then(function (data) {
                     if(data.election !== undefined){
