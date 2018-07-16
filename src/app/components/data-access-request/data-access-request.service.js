@@ -17,12 +17,16 @@
                     darInfo.hasAdminComment = data.rationale !== null;
                     darInfo.adminComment = data.rationale;
                     darInfo.hasPurposeStatements = data.purposeStatements.length > 0;
-                    darInfo.purposeStatements = data.purposeStatements;
-                    darInfo.researchType = data.researchType;
+                    if(darInfo.hasPurposeStatements) {
+                        darInfo.purposeStatements = data.purposeStatements;
+                        darInfo.purposeManualReview = data.purposeStatements[0].manualReview;
+                    }
                     darInfo.hasDiseases = data.diseases.length > 0;
-                    darInfo.diseases = data.diseases;
-                    // darInfo.purposeManualReview = data.purposeStatements[0].manualReview;
-                    // darInfo.researchTypeManualReview = data.researchType[0].manualReview;
+                    if (darInfo.hasDiseases) {
+                        darInfo.diseases = data.diseases;
+                    }
+                    darInfo.researchType = data.researchType;
+                    darInfo.researchTypeManualReview = data.researchType[0].manualReview;
                     cmResearcherService.getResearcherPropertiesForDAR(darInfo.researcherId).then(function(data){
                         darInfo.pi = data.isThePI === true ? data.profileName : data.piName;
                         darInfo.havePI = data.havePI;

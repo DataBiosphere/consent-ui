@@ -220,9 +220,6 @@
             // this data is used to construct structured_ files
             $scope.mrDAR = JSON.stringify(electionReview.election.useRestriction, null, 2);
             $scope.sDAR = $sce.trustAsHtml(electionReview.election.translatedUseRestriction);
-            $scope.mrDUL = JSON.stringify(electionReview.associatedConsent.useRestriction, null, 2);
-            $scope.sDUL = $sce.trustAsHtml(electionReview.associatedConsent.translatedUseRestriction);
-
         }
 
         $scope.downloadDUL = function(){
@@ -244,7 +241,8 @@
             $scope.status = electionReview.election.status;
             $scope.voteList = chunk(electionReview.reviewVote, 2);
             $scope.chartDataDUL = getGraphData(electionReview.reviewVote);
-
+            $scope.mrDUL = JSON.stringify(electionReview.election.useRestriction, null, 2);
+            $scope.sDUL = $sce.trustAsHtml(electionReview.election.translatedUseRestriction);
         }
 
         function chunk(arr, size) {

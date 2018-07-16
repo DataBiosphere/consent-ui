@@ -42,6 +42,7 @@
                 get:{method: 'GET', params: {electionId: '@electionId', isFinalAccess: 'isFinalAccess'}}});
         })
 
+
         .factory('ElectionReviewedConsents', function($resource, apiUrl){
             return $resource(apiUrl+"consent/cases/closed", {},
                 {
