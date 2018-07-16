@@ -29,7 +29,7 @@
                     darInfo.researchTypeManualReview = data.researchType[0].manualReview;
                     cmResearcherService.getResearcherPropertiesForDAR(darInfo.researcherId).then(function(data){
                         darInfo.pi = data.isThePI === true ? data.profileName : data.piName;
-                        darInfo.havePI = data.havePI;
+                        darInfo.havePI = data.havePI === 'true';
                         darInfo.profileName = data.profileName;
                         darInfo.institution = data.institution;
                         darInfo.department = data.department;
