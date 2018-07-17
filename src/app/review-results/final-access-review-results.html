@@ -18,7 +18,7 @@
     <h4 class="hint" ng-if="hasUseRestriction">Please review the Application Summary and Data Use Limitations to answer the two questions below.<br>You may review other DAC votes related to this data access request below the questions on this page.</h4>
     <h4 class="hint" ng-if="!hasUseRestriction">Please review the Application Summary and Data Use Limitations to answer the question below.<br>You may review other DAC votes related to this data access request below the question on this page.</h4>
     <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 panel panel-primary cm-boxes">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
             <div class="panel-heading cm-boxhead access-color">
                 <h4>Application Summary</h4>
             </div>
@@ -113,7 +113,7 @@
             </div>
         </div>
 
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 panel panel-primary cm-boxes">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
             <div class="panel-heading cm-boxhead dul-color">
                 <h4>Data Use Limitations</h4>
             </div>
@@ -274,7 +274,7 @@
                 </a>
             </accordion-heading>
             <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
-                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-lightresults no-padding">
+                <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 jumbotron box-vote-results no-padding">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <h4 class="box-vote-title access-color">DAC Decision</h4>
@@ -314,8 +314,8 @@
                     </div>
                 </div>
                 <div ng-show="hasUseRestriction"
-                     class="col-lg-4 col-md-4 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2 jumbotron box-vote-lightresults no-padding">
-                    <h4 class="box-vote-title access-color">DAC Decision</h4>
+                     class="col-lg-5 col-md-5 col-sm-12 col-xs-12 jumbotron box-vote-results no-padding">
+                    <h4 class="box-vote-title access-color">DUOS Matching Algorithm Decision</h4>
                     <hr class="box-separator">
                     <div class="results-box">
                         <div class="row">
@@ -337,7 +337,7 @@
                 </div>
             </div>
 
-            <div class="row fsi-row-lg-level fsi-row-md-level vote-row" ng-repeat="row in voteAccessList">
+            <div class="row fsi-row-lg-level fsi-row-md-level no-margin" ng-repeat="row in voteAccessList">
                 <div id="voteResultsList" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill no-padding" ng-repeat="vm in row">
                     <div class="jumbotron box-vote-singleresults" ng-if="vm.vote.type == 'DAC'">
                         <div class="row">
@@ -388,7 +388,7 @@
                 </a>
             </accordion-heading>
             <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
-                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-lightresults no-padding">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-results no-padding">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <div class="cm-title-record access-color">DAC Decision</div>
@@ -427,7 +427,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row fsi-row-lg-level fsi-row-md-level vote-row" ng-repeat="row in rpVoteAccessList">
+            <div class="row fsi-row-lg-level fsi-row-md-level no-margin" ng-repeat="row in rpVoteAccessList">
                 <div id="voteResultsListRP" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill no-padding" ng-repeat="vm in row">
                     <div class="jumbotron box-vote-singleresults">
                         <div class="row">
@@ -477,7 +477,7 @@
                 </a>
             </accordion-heading>
             <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
-                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-lightresults no-padding">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-results no-padding">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <div class="cm-title-record dul-color">DAC Decision</div>
@@ -517,7 +517,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row fsi-row-lg-level fsi-row-md-level vote-row" ng-repeat="row in voteList">
+            <div class="row fsi-row-lg-level fsi-row-md-level no-margin" ng-repeat="row in voteList">
                 <div id="voteResultsListDul" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill no-padding" ng-repeat="vm in row">
                     <div class="jumbotron box-vote-singleresults">
                         <div class="row">

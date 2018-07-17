@@ -28,12 +28,12 @@
             <h4 class="hint">Please review the Application Summary, Data Use Limitations, and DAC Votes to determine if the researcher should be granted access to the data</h4>
 
             <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
-                <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12 panel panel-primary cm-boxes">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
                     <div class="panel-heading cm-boxhead access-color">
                         <h4>Application Summary</h4>
                     </div>
                     <div id="rp" class="panel-body row">
-                        <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
+                        <div class="col-lg-4 col-md-5 col-sm-5 col-xs-12">
                             <div ng-if="darInfo.havePI" class="row no-margin">
                                 <label class="control-label access-color">PI:</label>
                                 <span class="response-label no-padding">{{darInfo.pi}}</span>
@@ -72,10 +72,10 @@
                                 <span class="response-label no-padding">{{darInfo.country}}</span>
                             </div>
 
-                            <button class="col-lg-12 col-md-12 col-sm-12 col-xs-12 btn vote-reminder hover-color" style="margin-top: 15px;" ng-click="">Download Full Application</button>
+                            <button class="col-lg-12 col-md-12 col-sm-12 col-xs-12 btn vote-reminder hover-color" ng-click="">Download Full Application</button>
                         </div>
 
-                        <div class="col-lg-8 col-md-7 col-sm-6 col-xs-12">
+                        <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
                             <div class="row dar-summary">
                                 <div class="control-label access-color">Research Purpose</div>
                                 <div class="response-label">{{dar.rus}}</div>
@@ -121,12 +121,12 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 panel panel-primary cm-boxes">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
                     <div class="panel-heading cm-boxhead dul-color">
                         <h4>Data Use Limitations</h4>
                     </div>
                     <div id="dul" class="panel-body cm-boxbody">
-                        <button class="col-lg-8 col-md-8 col-sm-10 col-xs-12 btn vote-reminder hover-color" ng-click="downloadDUL()">Download Data Use Letter</button>
+                        <button class="col-lg-8 col-md-8 col-sm-6 col-xs-12 btn vote-reminder hover-color" ng-click="downloadDUL()">Download Data Use Letter</button>
                     </div>
                 </div>
             </div>
@@ -215,12 +215,12 @@
             <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
                     <div class="panel-heading cm-boxhead access-color">
-                        <h4>Research Purpose
-                            <a class="enabled hover-color application-link" ng-click="DarReview.openApplication()">Application
-                                summary</a>
-                        </h4>
+                        <h4>Research Purpose</h4>
                     </div>
-                    <div id="rpurpose" class="panel-body cm-boxbody">{{dar.rus}}</div>
+                    <div id="rpurpose" class="panel-body cm-boxbody">
+                        <div style="margin-bottom: 10px;">{{dar.rus}}</div>
+                        <button class="col-lg-6 col-md-6 col-sm-6 col-xs-12 btn vote-reminder hover-color" ng-click="">Download Full Application</button>
+                    </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
                     <div class="panel-heading cm-boxhead access-color">
