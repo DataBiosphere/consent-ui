@@ -86,7 +86,7 @@
                                         <li ng-repeat="purpose in darInfo.purposeStatements" ng-class="{'cancel-color': purpose.manualReview}"><b>{{purpose.title}}</b> {{purpose.description}}</li>
                                     </ul>
                                 </div>
-                                <div ng-if="darInfo.purposeManualReview && darInfo.researchTypeManualReview === false" class="dar-summary">
+                                <div ng-if="darInfo.purposeManualReview && !darInfo.researchTypeManualReview" class="dar-summary">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert-danger cancel-color">
                                         This research involves studying a sensitive population and requires manual review.
                                     </div>
@@ -132,21 +132,19 @@
             <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 jumbotron box-vote-results">
                     <h4 class="box-vote-title access-color">Vote Results</h4>
-                        <hr class="box-separator-white">
+                    <hr class="box-separator-white">
                     <div class="row">
                         <div cm-chart cm-chart-data="chartData.accessChart"
                              cm-chart-options="chartOptions.accessChart" class="result_chart"></div>
                     </div>
                 </div>
-                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-results"
-                     ng-class="{'box-vote-disabled' : isFormDisabled}">
-                     <h4 class="box-vote-title access-color italic">Q1. Should data access be granted to this applicant?</h4>
-                     <hr class="box-separator-white">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-results" ng-class="{'box-vote-disabled' : isFormDisabled}">
+                    <h4 class="box-vote-title access-color italic">Q1. Should data access be granted to this applicant?</h4>
+                    <hr class="box-separator-white">
                     <fieldset ng-disabled="isFormDisabled">
                         <form class="form-horizontal" name="voteForm">
                             <div class="form-group first-form-group">
-                                <label
-                                    class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Your vote*</label>
+                                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Your vote*</label>
 
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
                                     <div class="radio-inline">

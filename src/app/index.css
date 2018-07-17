@@ -698,14 +698,43 @@ small {
     font-weight: 500;
 }
 
-.cm-user-name, .cm-box-title {	
-    font-size: 17px;	
-    padding: 5px 0 5px 15px;	
-    display: inline;	
+.cm-user-name {
+    font-size: 17px;
+    padding: 5px 0 5px 15px;
+    display: inline;
 }
 
 .stats-box-title {
     padding: 15px 10px 10px 10px;
+}
+
+.stats-box-title .cm-inside-box-title {
+    font-size: 20px !important;
+}
+
+.cm-inside-box-title {
+    font-size: 17px;
+    font-style: italic;
+    padding: 5px 0 5px 0;
+    display: inline;
+    color: #777777;
+}
+
+.cm-inside-box-title span {
+    font-weight: 700 !important;
+    font-style: italic;
+}
+
+.cm-inside-box-title-margin {
+    margin-top: 45px;
+}
+
+.cm-box-title {
+    font-weight: normal !important;
+}
+
+.cm-box-title span {
+    font-weight: 500 !important;
 }
 
 .cm-results-subtitle {

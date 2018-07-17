@@ -27,7 +27,7 @@
                     }
                     if (data.researchType.length > 0) {
                         darInfo.researchType = data.researchType;
-                        darInfo.researchTypeManualReview = requiresManualReview(darInfo.researchType)
+                        darInfo.researchTypeManualReview = requiresManualReview(darInfo.researchType);
                     }
                     cmResearcherService.getResearcherPropertiesForDAR(darInfo.researcherId).then(function(data){
                         darInfo.pi = data.isThePI === true ? data.profileName : data.piName;
