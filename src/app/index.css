@@ -632,7 +632,7 @@ small {
     margin: 10px 15px 10px 15px;
 }
 
-.panel-body .vote-reminder {
+.panel-body .download-pdf {
     margin: 10px 0;
 }
 
@@ -1195,7 +1195,7 @@ input[type=checkbox]:checked+label:before {
     top: 21px;
 }
 
-.vote-button, .vote-reminder {
+.vote-button, .vote-reminder, .download-pdf {
     border: 0 !important;
     transition: background 0.3s ease;
     font-size: 14px;
@@ -1230,7 +1230,7 @@ input[type=checkbox]:checked+label:before {
     padding: 12px 20px 10px 17px;
 }
 
-.vote-reminder {
+.vote-reminder, .download-pdf {
     height: 28px;
     line-height: 13px;
     margin-bottom: 4px;
@@ -1238,7 +1238,7 @@ input[type=checkbox]:checked+label:before {
     box-shadow: 2px 2px rgb(204, 204, 204) !important;
 }
 
-.vote-button:hover:enabled, .vote-reminder:hover:enabled {
+.vote-button:hover:enabled, .vote-reminder:hover:enabled, .download-pdf:hover:enabled {
     background: #2FA4E7 !important;
     border: 0 !important;
     color: #ffffff !important;
