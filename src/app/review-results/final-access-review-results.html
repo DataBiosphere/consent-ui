@@ -4,7 +4,7 @@
         <div class="col-lg-10 col-md-9 col-sm-9 col-xs-12 no-padding">
             <img src="assets/images/icon_access.png" alt="Data Access Request icon" class="cm-icons main-icon-title">
             <h2 class="main-title margin-sm access-color">Final voting for Data Access Review
-                <span class="main-title-case"><b>{{projectTitle}}</b>  | {{consentName}}</span>
+                <span class="main-title-case"><b>{{projectTitle}}</b> | {{consentName}}</span>
             </h2>
         </div>
         <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12 no-padding">
@@ -28,7 +28,7 @@
                     <div class="response-label">{{dar.rus}}</div>
                 </div>
 
-                <div ng-if="true" class="row dar-summary">
+                <div class="row dar-summary">
                     <div class="control-label access-color">Structured Research Purpose</div>
                     <div class="response-label" ng-bind-html="sDar"></div>
                     <a ng-click="download('machine-readable-DAR.json', mrDAR)" class="italic hover-color">Download DAR machine-readable format</a>
@@ -41,7 +41,7 @@
                             <li ng-repeat="purpose in darInfo.purposeStatements" ng-class="{'cancel-color': purpose.manualReview}"><b>{{purpose.title}}</b> {{purpose.description}}</li>
                         </ul>
                     </div>
-                    <div ng-if="darInfo.purposeManualReview && darInfo.researchTypeManualReview === false" class="dar-summary">
+                    <div ng-if="darInfo.purposeManualReview && !darInfo.researchTypeManualReview" class="dar-summary">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert-danger cancel-color">
                             This research involves studying a sensitive population and requires manual review.
                         </div>
@@ -109,7 +109,8 @@
                     <span class="response-label no-padding">{{darInfo.country}}</span>
                 </div>
 
-                <button class="col-lg-6 col-md-6 col-sm-6 col-xs-12 btn vote-reminder hover-color" style="margin-top: 15px;" ng-click="">Download Full Application</button>
+                <!--IMPLEMENT THIS FEATURE IN BTRX-277-->
+                <!-- <button class="col-lg-6 col-md-6 col-sm-6 col-xs-12 btn download-pdf hover-color" ng-click="">Download Full Application</button> -->
             </div>
         </div>
 
@@ -119,7 +120,7 @@
             </div>
             <div id="dul" class="panel-body cm-boxbody">
                 <div class="row no-margin">
-                    <button class="col-lg-6 col-md-6 col-sm-6 col-xs-12 btn vote-reminder hover-color" ng-click="downloadDUL()">Download Data Use Letter</button>
+                    <button class="col-lg-6 col-md-6 col-sm-6 col-xs-12 btn download-pdf hover-color" ng-click="downloadDUL()">Download Data Use Letter</button>
                 </div>
                 <div class="row dar-summary">
                     <div class="control-label dul-color">Structured Limitations</div>

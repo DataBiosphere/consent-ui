@@ -632,7 +632,7 @@ small {
     margin: 10px 15px 10px 15px;
 }
 
-.panel-body .vote-reminder {
+.panel-body .download-pdf {
     margin: 10px 0;
 }
 
@@ -698,14 +698,43 @@ small {
     font-weight: 500;
 }
 
-.cm-user-name, .cm-box-title {	
-    font-size: 17px;	
-    padding: 5px 0 5px 15px;	
-    display: inline;	
+.cm-user-name {
+    font-size: 17px;
+    padding: 5px 0 5px 15px;
+    display: inline;
 }
 
 .stats-box-title {
     padding: 15px 10px 10px 10px;
+}
+
+.stats-box-title .cm-inside-box-title {
+    font-size: 20px !important;
+}
+
+.cm-inside-box-title {
+    font-size: 17px;
+    font-style: italic;
+    padding: 5px 0 5px 0;
+    display: inline;
+    color: #777777;
+}
+
+.cm-inside-box-title span {
+    font-weight: 700 !important;
+    font-style: italic;
+}
+
+.cm-inside-box-title-margin {
+    margin-top: 45px;
+}
+
+.cm-box-title {
+    font-weight: normal !important;
+}
+
+.cm-box-title span {
+    font-weight: 500 !important;
 }
 
 .cm-results-subtitle {
@@ -883,6 +912,11 @@ small {
 .admin-input {
     padding-right: 0px !important;
 }
+
+.admin-input textarea {	
+    resize: vertical;	
+    max-height: 150px;	
+}	
 
 .control-label {
     text-align: right;
@@ -1161,7 +1195,7 @@ input[type=checkbox]:checked+label:before {
     top: 21px;
 }
 
-.vote-button, .vote-reminder {
+.vote-button, .vote-reminder, .download-pdf {
     border: 0 !important;
     transition: background 0.3s ease;
     font-size: 14px;
@@ -1196,7 +1230,7 @@ input[type=checkbox]:checked+label:before {
     padding: 12px 20px 10px 17px;
 }
 
-.vote-reminder {
+.vote-reminder, .download-pdf {
     height: 28px;
     line-height: 13px;
     margin-bottom: 4px;
@@ -1204,7 +1238,7 @@ input[type=checkbox]:checked+label:before {
     box-shadow: 2px 2px rgb(204, 204, 204) !important;
 }
 
-.vote-button:hover:enabled, .vote-reminder:hover:enabled {
+.vote-button:hover:enabled, .vote-reminder:hover:enabled, .download-pdf:hover:enabled {
     background: #2FA4E7 !important;
     border: 0 !important;
     color: #ffffff !important;
@@ -2377,6 +2411,10 @@ input[type="checkbox"][disabled]+label {
 .alert-danger {
     background-color: rgba(209, 59, 7, 0.1);
     border: none;
+}
+
+.alert-danger hr {	
+    border-color: #cccccc !important;	
 }
 
 .alert-form-group {
