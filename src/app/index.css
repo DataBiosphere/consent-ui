@@ -913,6 +913,11 @@ small {
     padding-right: 0px !important;
 }
 
+.admin-input textarea {	
+    resize: vertical;	
+    max-height: 150px;	
+}	
+
 .control-label {
     text-align: right;
     font-weight: 500;
@@ -2406,6 +2411,10 @@ input[type="checkbox"][disabled]+label {
 .alert-danger {
     background-color: rgba(209, 59, 7, 0.1);
     border: none;
+}
+
+.alert-danger hr {	
+    border-color: #cccccc !important;	
 }
 
 .alert-form-group {
