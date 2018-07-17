@@ -32,7 +32,7 @@
                             <label>Last updated date:</label>
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 admin-input response-label">
-                            <label>{{timeout.updateDate | date:'yyyy-MM-dd'}}</label>
+                            <label>{{timeout.updateDate | date:dateFormat}}</label>
                         </div>
                     </div>
                     <div class="form-group admin-form-group" ng-if="timeout.updateDate == null && timeout.createDate != null ">
@@ -40,7 +40,7 @@
                             <label>Last updated date:</label>
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 admin-input response-label">
-                            <label>{{timeout.createDate | date:'yyyy-MM-dd'}}</label>
+                            <label>{{timeout.createDate | date:dateFormat}}</label>
                         </div>
                     </div>
                     <div class="form-group admin-form-group">
