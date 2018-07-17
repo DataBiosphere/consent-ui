@@ -42,7 +42,7 @@
                     <div class="col-2 cell-body text" ng-class="{flagged : election.archived}" title="{{election.displayId}}">{{election.displayId}}</div>
                     <div class="col-2 cell-body text" ng-class="{empty : !election.consentGroupName}" title="{{election.consentGroupName}}">{{election.consentGroupName}}</div>
                     <div class="col-1 cell-body text">{{election.version < 10 ? '0' + election.version : election.version}}</div>
-                    <div class="col-1 cell-body text">{{election.finalVoteDate | date:'yyyy-MM-dd'}}</div>
+                    <div class="col-1 cell-body text">{{election.finalVoteDate | date:dateFormat}}</div>
                     <div class="col-1 cell-body text f-center bold">
                         <span ng-if="election.finalVoteString == 'Yes'" class="dul-color">YES</span>
                         <span ng-if="election.finalVoteString == 'No'">NO</span>
@@ -89,7 +89,7 @@
                 <div class="grid-row">
                     <div class="col-2 cell-body text" title="{{election.displayId}}">{{election.displayId}}</div>
                     <div class="col-3 cell-body text" title="{{election.projectTitle}}">{{election.projectTitle}}</div>
-                    <div class="col-1 cell-body text">{{election.finalVoteDate | date:'yyyy-MM-dd'}}</div>
+                    <div class="col-1 cell-body text">{{election.finalVoteDate | date:dateFormat}}</div>
                     <div class="col-1 cell-body text f-center bold">
                         <span ng-if="election.finalVote == true" class="access-color">YES</span>
                         <span ng-if="election.finalVote == false">NO</span>

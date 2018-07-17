@@ -35,7 +35,7 @@
                         <div class="row pvotes-main-list no-margin">
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{dar.frontEndId}}</div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pvotes-list-id">{{dar.projectTitle}}</div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{dar.createDate | date:'yyyy-MM-dd'}}</div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{dar.createDate | date:dateFormat}}</div>
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list bold">
                                 <span ng-if="dar.electionStatus === 'un-reviewed'">Submitted</span>
                                 <span ng-if="dar.electionStatus === 'Open' || dar.electionStatus === 'Final' || dar.electionStatus === 'PendingApproval'">In review</span>
@@ -94,7 +94,7 @@
                                 </a>
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{pdar.partial_dar_code}}</div>
                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 pvotes-list-id">{{pdar.projectTitle}}</div>
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{pdar.createDate | date:'yyyy-MM-dd'}}</div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{pdar.createDate | date:dateFormat}}</div>
                                 <a class="admin-manage-buttons col-lg-2 col-md-2 col-sm-2 col-xs-2 no-padding">
                                     <div class="enabled hover-color" ng-click="ResearcherConsole.resume(pdar.dataRequestId)">
                                         <span>Resume</span>

@@ -202,7 +202,7 @@
                                     class="col-lg-2 col-md-2 col-sm-4 col-xs-4 control-label vote-label access-color">Date: </label>
 
                                 <div class="voteDate col-lg-4 col-md-4 col-sm-8 col-xs-8 vote-label">
-                                    {{electionAccess.finalVoteDate | date:'yyyy-MM-dd'}}
+                                    {{electionAccess.finalVoteDate | date:dateFormat}}
                                 </div>
                                 <span ng-if="electionAccess.finalVote == '1'">
                                     <label class="col-lg-3 col-md-3 col-sm-4 col-xs-4 control-label vote-label access-color">Comment:</label>
@@ -240,7 +240,7 @@
                         <div class="row">
                             <label class="col-lg-4 col-md-4 col-sm-2 col-xs-4 control-label vote-label access-color">Date: </label>
 
-                            <div class="voteDate col-lg-8 col-md-8 col-sm-3 col-xs-3 vote-label">{{createDate | date:'yyyy-MM-dd'}}</div>
+                            <div class="voteDate col-lg-8 col-md-8 col-sm-3 col-xs-3 vote-label">{{createDate | date:dateFormat}}</div>
                         </div>
                     </div>
                 </div>
@@ -266,8 +266,8 @@
 
                             <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">
                                 <span ng-if="vm.vote.createDate == null">---</span>
-                                <span ng-if="vm.vote.createDate != null && vm.vote.updateDate == null">{{vm.vote.createDate | date:'yyyy-MM-dd'}}</span>
-                                <span ng-if="vm.vote.createDate != null && vm.vote.updateDate != null">{{vm.vote.updateDate | date:'yyyy-MM-dd'}}</span>
+                                <span ng-if="vm.vote.createDate != null && vm.vote.updateDate == null">{{vm.vote.createDate | date:dateFormat}}</span>
+                                <span ng-if="vm.vote.createDate != null && vm.vote.updateDate != null">{{vm.vote.updateDate | date:dateFormat}}</span>
                             </div>
 
                             <span ng-if="vm.vote.vote == '1'">
@@ -317,7 +317,7 @@
                                     class="col-lg-2 col-md-2 col-sm-4 col-xs-4 control-label vote-label access-color">Date: </label>
 
                                 <div class="voteDate col-lg-4 col-md-4 col-sm-8 col-xs-8 vote-label">
-                                    {{electionRP.finalVoteDate | date:'yyyy-MM-dd'}}
+                                    {{electionRP.finalVoteDate | date:dateFormat}}
                                 </div>
                                 <span ng-if="electionRP.finalVote == '1'">
                                     <label class="col-lg-3 col-md-3 col-sm-4 col-xs-4 control-label vote-label access-color">Comments:</label>
@@ -358,8 +358,8 @@
 
                             <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">
                                 <span ng-if="vm.vote.createDate == null">---</span>
-                                <span ng-if="vm.vote.createDate != null && vm.vote.updateDate == null">{{vm.vote.createDate | date:'yyyy-MM-dd'}}</span>
-                                <span ng-if="vm.vote.createDate != null && vm.vote.updateDate != null">{{vm.vote.updateDate | date:'yyyy-MM-dd'}}</span>
+                                <span ng-if="vm.vote.createDate != null && vm.vote.updateDate == null">{{vm.vote.createDate | date:dateFormat}}</span>
+                                <span ng-if="vm.vote.createDate != null && vm.vote.updateDate != null">{{vm.vote.updateDate | date:dateFormat}}</span>
                             </div>
                             <span ng-if="vm.vote.vote == '1'">
                                 <label class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label vote-label access-color">Comments:</label>
@@ -408,7 +408,7 @@
                                 <label class="col-lg-2 col-md-2 col-sm-4 col-xs-4 control-label vote-label dul-color">Date: </label>
 
                                 <div class="voteDate col-lg-4 col-md-4 col-sm-8 col-xs-8 vote-label">
-                                    {{election.finalVoteDate | date:'yyyy-MM-dd'}}
+                                    {{election.finalVoteDate | date:dateFormat}}
                                 </div>
                             </div>
                             <div class="row">
@@ -454,8 +454,8 @@
 
                             <div class="voteDate col-lg-4 col-md-4 col-sm-9 col-xs-9 vote-label">
                                 <span ng-if="vm.vote.createDate == null">---</span>
-                                <span ng-if="vm.vote.createDate != null && vm.vote.updateDate == null">{{vm.vote.createDate | date:'yyyy-MM-dd'}}</span>
-                                <span ng-if="vm.vote.createDate != null && vm.vote.updateDate != null">{{vm.vote.updateDate | date:'yyyy-MM-dd'}}</span>
+                                <span ng-if="vm.vote.createDate != null && vm.vote.updateDate == null">{{vm.vote.createDate | date:dateFormat}}</span>
+                                <span ng-if="vm.vote.createDate != null && vm.vote.updateDate != null">{{vm.vote.updateDate | date:dateFormat}}</span>
                             </div>
                         </div>
                         <div class="row">

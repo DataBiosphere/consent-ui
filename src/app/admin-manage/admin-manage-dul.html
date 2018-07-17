@@ -40,7 +40,7 @@
                 <div class="col-2 cell-body text" ng-class="{flagged : election.archived}" title="{{election.consentName}}">{{election.consentName}}</div>
                 <div class="col-2 cell-body text" ng-class="{empty : !election.groupName}" title="{{election.groupName}}">{{election.groupName}}</div>
                 <div class="col-1 cell-body text" ng-class="{empty : !election.version}">{{election.version}}</div>
-                <div class="col-1 cell-body text">{{election.createDate | date:'yyyy-MM-dd'}}</div>
+                <div class="col-1 cell-body text">{{election.createDate | date:dateFormat}}</div>
                 <div class="col-1 cell-body f-center">
                     <button class="cell-button hover-color" ng-disabled="election.electionStatus != 'un-reviewed' || !election.editable" ng-click="AdminManage.editDul(election.consentId)">Edit</button>
                 </div>
