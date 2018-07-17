@@ -19,14 +19,17 @@
                     darInfo.hasPurposeStatements = data.purposeStatements.length > 0;
                     if(darInfo.hasPurposeStatements) {
                         darInfo.purposeStatements = data.purposeStatements;
-                        darInfo.purposeManualReview = data.purposeStatements[0].manualReview;
+                        darInfo.purposeManualReview = getManualReview(darInfo.purposeStatements);
                     }
                     darInfo.hasDiseases = data.diseases.length > 0;
                     if (darInfo.hasDiseases) {
                         darInfo.diseases = data.diseases;
                     }
-                    darInfo.researchType = data.researchType;
-                    darInfo.researchTypeManualReview = data.researchType[0].manualReview;
+                    darInfo.hasResearchType = data.researchType.length > 0;
+                    if (darInfo.hasResearchType) {
+                        darInfo.researchType = data.researchType;
+                        darInfo.researchTypeManualReview = getManualReview(data.researchType)
+                    }
                     cmResearcherService.getResearcherPropertiesForDAR(darInfo.researcherId).then(function(data){
                         darInfo.pi = data.isThePI === true ? data.profileName : data.piName;
                         darInfo.havePI = data.havePI === 'true';
@@ -39,6 +42,16 @@
                     });
                 });
             });
+        }
+
+        function getManualReview (object) {
+            var manualReview = false;
+            object.forEach(function(element) {
+                if (element.manualReview === true) {
+                    manualReview = true;
+                }
+            });
+            return manualReview;
         }
 
         function findDarConsent(id) {
