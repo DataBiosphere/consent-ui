@@ -1,62 +1,151 @@
 <div ng-include src="'app/header/header.html'"></div>
-<div class="container">
+<div class="container container-wide">
     <div class="row fsi-row-lg-level fsi-row-md-level title-wrapper">
         <div class="col-lg-10 col-md-9 col-sm-9 col-xs-12 no-padding">
             <img src="assets/images/icon_access.png" alt="Data Access Request icon" class="cm-icons main-icon-title">
             <h2 class="main-title margin-sm access-color">Data Access Congruence Preview
-                <span class="main-title-case"><b>{{request.projectTitle}}</b> | {{consentName}}</span>
+                <span class="main-title-case">
+                    <b>{{request.projectTitle}}</b> | {{consentName}}</span>
             </h2>
         </div>
         <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12 no-padding">
-            <a ng-click="back()" class="btn vote-button vote-button-back vote-button-bigger"><i class="glyphicon glyphicon-chevron-left"></i>Back</a>
+            <a ng-click="back()" class="btn vote-button vote-button-back vote-button-bigger">
+                <i class="glyphicon glyphicon-chevron-left"></i>Back</a>
         </div>
     </div>
-    <accordion close-others="false">
+    <accordion>
         <accordion-group class="accordion" is-open="true">
             <accordion-heading>
-                <h3 class="access-color pos-relative">
-                    <div class="accordion-title">1. Should data access be granted to this applicant?</div>
-                    <i class="pull-right glyphicon"
-                       ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
-                </h3>
+                <a data-toggle="collapse" ng-click="isQ1Expanded=!isQ1Expanded">
+                    <h3 class="access-color italic">Q1. Should data access be granted to this applicant?
+                        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': isQ1Expanded, 'glyphicon-chevron-down': !isQ1Expanded}"></i>
+                    </h3>
+                </a>
             </accordion-heading>
             <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
                     <div class="panel-heading cm-boxhead access-color">
-                        <h4>Research Purpose
-                            <a class="enabled hover-color application-link" ng-click="AccessPreviewResults.openApplication()">Application summary</a>
-                        </h4>
+                        <h4>Application Summary</h4>
                     </div>
-                    <div id="rp" class="panel-body cm-boxbody">{{rus}}</div>
+                    <div id="rp" class="panel-body row">
+                        <div class="col-lg-4 col-md-5 col-sm-5 col-xs-12">
+                            <div ng-if="darInfo.havePI" class="row no-margin">
+                                <label class="control-label access-color">PI:</label>
+                                <span class="response-label no-padding">{{darInfo.pi}}</span>
+                            </div>
+
+                            <div class="row no-margin">
+                                <label class="control-label access-color">Researcher:</label>
+                                <span class="response-label no-padding">{{darInfo.profileName}}</span>
+                            </div>
+                            <div class="row no-margin">
+                                <label class="control-label no-padding">Status:</label>
+                                <span class="response-label no-padding">{{darInfo.status}}</span>
+                            </div>
+                            <div ng-if="darInfo.hasAdminComment" class="row no-margin">
+                                <label class="control-label no-padding">Comment:</label>
+                                <span class="response-label no-padding">{{darInfo.adminComment}}</span>
+                            </div>
+
+                            <div class="row no-margin">
+                                <label class="control-label access-color">Institution:</label>
+                                <span class="response-label no-padding">{{darInfo.institution}}</span>
+                            </div>
+
+                            <div class="row no-margin">
+                                <label class="control-label access-color">Department:</label>
+                                <span class="response-label no-padding">{{darInfo.department}}</span>
+                            </div>
+
+                            <div class="row no-margin">
+                                <label class="control-label access-color">City:</label>
+                                <span class="response-label no-padding">{{darInfo.city}}</span>
+                            </div>
+
+                            <div class="row no-margin">
+                                <label class="control-label access-color">Country:</label>
+                                <span class="response-label no-padding">{{darInfo.country}}</span>
+                            </div>
+
+                            <!--IMPLEMENT THIS FEATURE IN BTRX-277-->
+                            <!-- <button class="col-lg-6 col-md-6 col-sm-6 col-xs-12 btn download-pdf hover-color" ng-click="">Download Full Application</button> -->
+                        </div>
+
+                        <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
+                            <div class="row dar-summary">
+                                <div class="control-label access-color">Research Purpose</div>
+                                <div class="response-label">{{rus}}</div>
+                            </div>
+
+                            <div ng-if="darInfo.hasPurposeStatements" class="row dar-summary">
+                                <div class="control-label access-color">Purpose Statement</div>
+                                <div class="response-label">
+                                    <ul>
+                                        <li ng-repeat="purpose in darInfo.purposeStatements" ng-class="{'cancel-color': purpose.manualReview}"><b>{{purpose.title}}</b> {{purpose.description}}</li>
+                                    </ul>
+                                </div>
+                                <div ng-if="darInfo.purposeManualReview && !darInfo.researchTypeManualReview" class="dar-summary">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert-danger cancel-color">
+                                        This research involves studying a sensitive population and requires manual review.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row dar-summary">
+                                <div class="control-label access-color">Type of Research</div>
+                                <div class="response-label">
+                                    <ul>
+                                        <li ng-repeat="type in darInfo.researchType" ng-class="{'cancel-color': type.manualReview}"><b>{{type.title}}</b> {{type.description}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div ng-if="darInfo.researchTypeManualReview" class="row dar-summary">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert-danger cancel-color">
+                                    This research requires manual review.
+                                </div>
+                            </div>
+
+                            <div ng-if="darInfo.hasDiseases" class="row dar-summary">
+                                <div class="control-label access-color">Disease area(s)</div>
+                                <div class="response-label">
+                                    <ul>
+                                        <li ng-repeat="disease in darInfo.diseases">{{disease}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
-                    <div class="panel-heading cm-boxhead access-color">
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
+                    <div class="panel-heading cm-boxhead dul-color">
                         <h4>Data Use Limitations</h4>
                     </div>
                     <div id="dul" class="panel-body cm-boxbody" ng-if="dataUseLetter">
-                        <a style="cursor:pointer;" ng-click="downloadDUL()">{{dulName}}</a>
+                        <button class="col-lg-8 col-md-8 col-sm-6 col-xs-12 btn download-pdf hover-color" ng-click="downloadDUL()">Download Data Use Letter</button>
                     </div>
                 </div>
             </div>
         </accordion-group>
 
-        <accordion-group class="accordion" is-open="true">
+        <accordion-group class="accordion">
             <accordion-heading>
-                <h3 class="access-color pos-relative">
-                    <div class="accordion-title">2. Was the research purpose accurately converted to a structured format?</div>
-                    <i class="pull-right glyphicon"
-                       ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
-                </h3>
+                <a data-toggle="collapse" ng-click="isQ2Expanded=!isQ2Expanded">
+                    <h3 class="access-color italic">Q2. Was the research purpose accurately converted to a structured format?
+                        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': isQ2Expanded, 'glyphicon-chevron-down': !isQ2Expanded}"></i>
+                    </h3>
+                </a>
             </accordion-heading>
-
             <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
                     <div class="panel-heading cm-boxhead access-color">
-                        <h4>Research Purpose
-                            <a class="enabled hover-color application-link" ng-click="AccessPreviewResults.openApplication()">Application summary</a>
-                        </h4>
+                        <h4>Research Purpose</h4>
                     </div>
-                    <div id="rpurpose" class="panel-body cm-boxbody">{{rus}}</div>
+                    <div id="rpurpose" class="panel-body cm-boxbody">
+                        <div style="margin-bottom: 10px;">{{rus}}</div>
+                        <!--IMPLEMENT THIS FEATURE IN BTRX-277-->
+                        <!-- <button class="col-lg-6 col-md-6 col-sm-6 col-xs-12 btn download-pdf hover-color" ng-click="">Download Full Application</button> -->
+                    </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
                     <div class="panel-heading cm-boxhead access-color">

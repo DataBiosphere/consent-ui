@@ -5,13 +5,16 @@
     angular.module('cmResultsRecord')
         .controller('AccessResultsRecord', AccessResultsRecord);
 
-    function AccessResultsRecord($scope, $state, $modal, cmElectionService, downloadFileService, apiUrl, cmRPService, cmVoteService, cmMatchService, darElection, electionId, hasUseRestriction, cmFilesService, $rootScope) {
+    function AccessResultsRecord($sce, $scope, $state, $modal, cmElectionService, downloadFileService, apiUrl, cmRPService, cmVoteService, cmMatchService, darElection, electionId, hasUseRestriction, cmFilesService, $rootScope) {
 
         /*ACCORDION*/
         $scope.oneAtATime = false;
         $scope.electionId = electionId;
         $scope.darElection = darElection;
         $scope.hasUseRestriction = hasUseRestriction;
+        cmRPService.describeDar($scope.darElection.referenceId).then(function (data) {
+            $scope.darInfo = data;
+        });
         $rootScope.path = 'access-results-record';
 
         if ($scope.electionId === null) {
@@ -55,19 +58,21 @@
                 slices: {
                     0: {color: '#C16B0C'},
                     1: {color: '#D1B6A1'},
-                    2: {color: '#c9c9c9'}
+                    2: {color: '#FFFFFF'}
                 },
                 legend: {
                     position: 'right',
                     textStyle: {
-                        color: '#777777',
+                        fontName: 'Roboto',
+                        color: '#333333',
                         bold: true,
-                        fontSize: 14
+                        fontSize: 15
                     },
                     alignment: 'start'
                 },
                 tooltip: {
                     textStyle: {
+                        fontName: 'Roboto',
                         color: '#333333',
                         fontSize: 14
                     }
@@ -95,19 +100,21 @@
                 slices: {
                     0: {color: '#603B9B'},
                     1: {color: '#AC9EC6'},
-                    2: {color: '#c9c9c9'}
+                    2: {color: '#FFFFFF'}
                 },
                 legend: {
                     position: 'right',
                     textStyle: {
-                        color: '#777777',
+                        fontName: 'Roboto',
+                        color: '#333333',
                         bold: true,
-                        fontSize: 14
+                        fontSize: 15
                     },
                     alignment: 'start'
                 },
                 tooltip: {
                     textStyle: {
+                        fontName: 'Roboto',
                         color: '#333333',
                         fontSize: 14
                     }
@@ -135,19 +142,21 @@
                 slices: {
                     0: {color: '#603B9B'},
                     1: {color: '#AC9EC6'},
-                    2: {color: '#c9c9c9'}
+                    2: {color: '#FFFFFF'}
                 },
                 legend: {
                     position: 'right',
                     textStyle: {
-                        color: '#777777',
+                        fontName: 'Roboto',
+                        color: '#333333',
                         bold: true,
-                        fontSize: 14
+                        fontSize: 15
                     },
                     alignment: 'start'
                 },
                 tooltip: {
                     textStyle: {
+                        fontName: 'Roboto',
                         color: '#333333',
                         fontSize: 14
                     }
@@ -210,10 +219,7 @@
 
             // this data is used to construct structured_ files
             $scope.mrDAR = JSON.stringify(electionReview.election.useRestriction, null, 2);
-            $scope.sDAR = electionReview.election.translatedUseRestriction.replace(/<br>/g, "\n");
-            $scope.mrDUL = JSON.stringify(electionReview.associatedConsent.useRestriction, null, 2);
-            $scope.sDUL = electionReview.associatedConsent.translatedUseRestriction;
-
+            $scope.sDAR = $sce.trustAsHtml(electionReview.election.translatedUseRestriction);
         }
 
         $scope.downloadDUL = function(){
@@ -235,7 +241,8 @@
             $scope.status = electionReview.election.status;
             $scope.voteList = chunk(electionReview.reviewVote, 2);
             $scope.chartDataDUL = getGraphData(electionReview.reviewVote);
-
+            $scope.mrDUL = JSON.stringify(electionReview.election.useRestriction, null, 2);
+            $scope.sDUL = $sce.trustAsHtml(electionReview.election.translatedUseRestriction);
         }
 
         function chunk(arr, size) {

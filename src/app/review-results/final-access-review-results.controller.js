@@ -4,7 +4,7 @@
     angular.module('cmReviewResults')
         .controller('FinalAccessReviewResults', FinalAccessReviewResults);
 
-    function FinalAccessReviewResults($scope, $rootScope, $modal, $state, cmElectionService, cmRPService, cmVoteService, cmLoginUserService, apiUrl, cmMatchService, electionId, referenceId, hasUseRestriction, cmFilesService) {
+    function FinalAccessReviewResults($sce, $scope, $rootScope, $modal, $state, cmElectionService, cmRPService, cmVoteService, cmLoginUserService, apiUrl, cmMatchService, electionId, referenceId, hasUseRestriction, cmFilesService, downloadFileService) {
 
         if (electionId === null || referenceId === null) {
             cmLoginUserService.redirect($rootScope.currentUser);
@@ -24,7 +24,9 @@
         $scope.alertsAgree = [];
         $scope.referenceId = referenceId;
         $scope.electionId = electionId;
-
+        cmRPService.describeDar($scope.referenceId).then(function (data) {
+            $scope.darInfo = data;
+        });
         $scope.reminderDARAlert = function (index) {
             $scope.alertsDAR.splice(index, 1);
             $scope.alertsDAR.push({
@@ -49,6 +51,8 @@
         $scope.downloadDUL = function(){
             cmFilesService.getDULFile($scope.electionReview.consent.consentId, $scope.electionReview.election.dulName);
         };
+
+        $scope.download = downloadFileService.downloadFile;
 
         function logVote() {
             $scope.electionType = 'access';
@@ -194,19 +198,21 @@
                 slices: {
                     0: {color: '#603B9B'},
                     1: {color: '#AC9EC6'},
-                    2: {color: '#c9c9c9'}
+                    2: {color: '#FFFFFF'}
                 },
                 legend: {
                     position: 'right',
                     textStyle: {
-                        color: '#777777',
+                        fontName: 'Roboto',
+                        color: '#333333',
                         bold: true,
-                        fontSize: 14
+                        fontSize: 15
                     },
                     alignment: 'start'
                 },
                 tooltip: {
                     textStyle: {
+                        fontName: 'Roboto',
                         color: '#333333',
                         fontSize: 14
                     }
@@ -233,19 +239,21 @@
                 slices: {
                     0: {color: '#C16B0C'},
                     1: {color: '#D1B6A1'},
-                    2: {color: '#c9c9c9'}
+                    2: {color: '#FFFFFF'}
                 },
                 legend: {
                     position: 'right',
                     textStyle: {
-                        color: '#777777',
+                        fontName: 'Roboto',
+                        color: '#333333',
                         bold: true,
-                        fontSize: 14
+                        fontSize: 15
                     },
                     alignment: 'start'
                 },
                 tooltip: {
                     textStyle: {
+                        fontName: 'Roboto',
                         color: '#333333',
                         fontSize: 14
                     }
@@ -272,19 +280,21 @@
                 slices: {
                     0: {color: '#603B9B'},
                     1: {color: '#AC9EC6'},
-                    2: {color: '#c9c9c9'}
+                    2: {color: '#FFFFFF'}
                 },
                 legend: {
                     position: 'right',
                     textStyle: {
-                        color: '#777777',
+                        fontName: 'Roboto',
+                        color: '#333333',
                         bold: true,
-                        fontSize: 14
+                        fontSize: 15
                     },
                     alignment: 'start'
                 },
                 tooltip: {
                     textStyle: {
+                        fontName: 'Roboto',
                         color: '#333333',
                         fontSize: 14
                     }
@@ -320,7 +330,7 @@
                         $scope.showRPaccordion = false;
                     }
                 });
-
+                $scope.consentName = data.associatedConsent.name;
                 cmElectionService.findElectionReviewById(data.associatedConsent.electionId, data.associatedConsent.consentId).$promise.then(function (data) {
                     $scope.electionReview = data;
                     showDULData(data);
@@ -346,6 +356,8 @@
             if (electionReview.election.finalRationale === null) {
                 $scope.electionAccess.finalRationale = '';
             }
+            $scope.sDar = $sce.trustAsHtml(electionReview.election.translatedUseRestriction);
+            $scope.mrDAR = JSON.stringify(electionReview.election.useRestriction, null, 2);
             $scope.status = electionReview.election.status;
             $scope.voteAccessList = chunk(electionReview.reviewVote, 2);
             $scope.chartDataAccess = getGraphData(electionReview.reviewVote);
@@ -360,6 +372,8 @@
             if (electionReview.election.finalRationale === null) {
                 $scope.election.finalRationale = '';
             }
+            $scope.sDul = $sce.trustAsHtml(electionReview.election.translatedUseRestriction);
+            $scope.mrDUL = JSON.stringify(electionReview.election.useRestriction, null, 2);
             $scope.downloadUrl = apiUrl + 'consent/' + electionReview.consent.consentId + '/dul';
             $scope.dulName = electionReview.election.dulName;
             $scope.status = electionReview.election.status;

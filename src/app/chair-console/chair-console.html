@@ -46,9 +46,9 @@
                                     <span ng-if="pendingCase.alreadyVoted == true">Edit</span>
                                 </div>
                             </a>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 pvotes-list">{{pendingCase.logged}}</div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list">{{pendingCase.logged}}</div>
                             <a ng-click="ChairConsole.openDULReviewResult(pendingCase.referenceId)"
-                               class="col-lg-2 col-md-2 col-sm-2 col-xs-3 no-padding">
+                               class="col-lg-2 col-md-2 col-sm-2 col-xs-2 no-padding">
                                 <div class="collectButton {{pendingCase.alreadyVoted ? 'enabled' : 'disabled'}} ">
                                     <span ng-if="pendingCase.alreadyVoted == false">---</span>
                                     <span ng-if="pendingCase.alreadyVoted == true">Collect Votes</span>

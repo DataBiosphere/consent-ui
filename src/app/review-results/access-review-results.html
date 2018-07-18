@@ -1,10 +1,10 @@
 <div ng-include src="'app/header/header.html'"></div>
-<div class="container">
+<div class="container container-wide">
     <div class="row fsi-row-lg-level fsi-row-md-level title-wrapper">
         <div class="col-lg-10 col-md-9 col-sm-9 col-xs-12 no-padding">
             <img src="assets/images/icon_access.png" alt="Data Access Request icon" class="cm-icons main-icon-title">
             <h2 class="main-title margin-sm access-color">
-                {{ hasAdminRole ? "" : "Collect"}} Votes for Data Access Congruence Review
+                Collect votes for Data Access Congruence Review
                 <span class="main-title-case"><b>{{request.projectTitle}}</b> | {{consentName}}</span>
             </h2>
         </div>
@@ -15,52 +15,137 @@
         </div>
     </div>
     <accordion>
-        <accordion-group class="accordion"  is-open="openAccordion">
+        <accordion-group class="accordion" is-open="true">
             <accordion-heading>
-                <h3 class="access-color pos-relative">
-                    <div class="accordion-title">1. Should data access be granted to this applicant?</div>
-                    <i class="pull-right glyphicon"
-                       ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
-                </h3>
+                <a data-toggle="collapse" ng-click="isQ1Expanded=!isQ1Expanded">
+                    <h3 class="access-color italic"><span ng-if="showRPaccordion">Q1.</span> Should data access be granted to this applicant?
+                        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': isQ1Expanded, 'glyphicon-chevron-down': !isQ1Expanded}"></i>
+                    </h3>
+                </a>
             </accordion-heading>
+            <h4 class="hint">Please review the Application Summary, Data Use Limitations, and DAC Votes to determine if the researcher should be granted access to the data</h4>
+
             <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
-                    <div class="panel-heading cm-boxhead access-color">
-                        <h4>Research Purpose
-                            <a class="enabled hover-color application-link" ng-click="AccessReviewResults.openApplication()">Application summary</a>
-                        </h4>
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
+                        <div class="panel-heading cm-boxhead access-color">
+                        <h4>Application Summary</h4>
                     </div>
-                    <div id="rp" class="panel-body cm-boxbody">{{dar}}</div>
+                    <div id="rp" class="panel-body row">
+                        <div class="col-lg-4 col-md-5 col-sm-5 col-xs-12">
+                            <div ng-if="darInfo.havePI" class="row no-margin">
+                                <label class="control-label access-color">PI:</label>
+                                <span class="response-label no-padding">{{darInfo.pi}}</span>
+                            </div>
+
+                            <div class="row no-margin">
+                                <label class="control-label access-color">Researcher:</label>
+                                <span class="response-label no-padding">{{darInfo.profileName}}</span>
+                            </div>
+                            <div class="row no-margin">
+                                <label class="control-label no-padding">Status:</label>
+                                <span class="response-label no-padding">{{darInfo.status}}</span>
+                            </div>
+                            <div ng-if="darInfo.hasAdminComment" class="row no-margin">
+                                <label class="control-label no-padding">Comment:</label>
+                                <span class="response-label no-padding">{{darInfo.adminComment}}</span>
+                            </div>
+
+                            <div class="row no-margin">
+                                <label class="control-label access-color">Institution:</label>
+                                <span class="response-label no-padding">{{darInfo.institution}}</span>
+                            </div>
+
+                            <div class="row no-margin">
+                                <label class="control-label access-color">Department:</label>
+                                <span class="response-label no-padding">{{darInfo.department}}</span>
+                            </div>
+
+                            <div class="row no-margin">
+                                <label class="control-label access-color">City:</label>
+                                <span class="response-label no-padding">{{darInfo.city}}</span>
+                            </div>
+
+                            <div class="row no-margin">
+                                <label class="control-label access-color">Country:</label>
+                                <span class="response-label no-padding">{{darInfo.country}}</span>
+                            </div>
+
+                            <!--IMPLEMENT THIS FEATURE IN BTRX-277-->
+                            <!-- <button class="col-lg-6 col-md-6 col-sm-6 col-xs-12 btn download-pdf hover-color" ng-click="">Download Full Application</button> -->
+                        </div>
+
+                        <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
+                            <div class="row dar-summary">
+                                <div class="control-label access-color">Research Purpose</div>
+                                <div class="response-label">{{dar}}</div>
+                            </div>
+
+                            <div ng-if="darInfo.hasPurposeStatements" class="row dar-summary">
+                                <div class="control-label access-color">Purpose Statement</div>
+                                <div class="response-label">
+                                    <ul>
+                                        <li ng-repeat="purpose in darInfo.purposeStatements" ng-class="{'cancel-color': purpose.manualReview}"><b>{{purpose.title}}</b> {{purpose.description}}</li>
+                                    </ul>
+                                </div>
+                                <div ng-if="darInfo.purposeManualReview && !darInfo.researchTypeManualReview" class="dar-summary">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert-danger cancel-color">
+                                        This research involves studying a sensitive population and requires manual review.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row dar-summary">
+                                <div class="control-label access-color">Type of Research</div>
+                                <div class="response-label">
+                                    <ul>
+                                        <li ng-repeat="type in darInfo.researchType" ng-class="{'cancel-color': type.manualReview}"><b>{{type.title}}</b> {{type.description}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div ng-if="darInfo.researchTypeManualReview" class="row dar-summary">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert-danger cancel-color">
+                                    This research requires manual review.
+                                </div>
+                            </div>
+
+                            <div ng-if="darInfo.hasDiseases" class="row dar-summary">
+                                <div class="control-label access-color">Disease area(s)</div>
+                                <div class="response-label">
+                                    <ul>
+                                        <li ng-repeat="disease in darInfo.diseases">{{disease}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
-                    <div class="panel-heading cm-boxhead access-color">
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
+                    <div class="panel-heading cm-boxhead dul-color">
                         <h4>Data Use Limitations</h4>
                     </div>
                     <div id="dul" class="panel-body cm-boxbody">
-                        <a style="cursor:pointer;" ng-click="downloadDUL()">{{dulName}}</a>
+                        <button class="col-lg-8 col-md-8 col-sm-6 col-xs-12 btn download-pdf hover-color" ng-click="downloadDUL()">Download Data Use Letter</button>
                     </div>
                 </div>
             </div>
-            <h3 class="cm-subtitle">Data Access Committee Votes</h3>
 
             <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 jumbotron box-vote-results">
-                    <h3 class="cm-results-subtitle access-color">Vote Results</h3>
+                    <h4 class="box-vote-title access-color">Vote Results</h4>
                     <hr class="box-separator-white">
                     <div class="row">
                         <div cm-chart cm-chart-data="chartData.accessChart"
                              cm-chart-options="chartOptions.accessChart" class="result_chart"></div>
                     </div>
                 </div>
-                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-results"
-                     ng-class="{'box-vote-disabled' : isFormDisabled}">
-                    <h3 class="cm-results-subtitle access-color">Final decision</h3>
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-results" ng-class="{'box-vote-disabled' : isFormDisabled}">
+                    <h4 class="box-vote-title access-color italic"><span ng-if="showRPaccordion">Q1. </span>Should data access be granted to this applicant?</h4>
                     <hr class="box-separator-white">
                     <fieldset ng-disabled="isFormDisabled">
                         <form class="form-horizontal" name="voteForm">
                             <div class="form-group first-form-group">
-                                <label
-                                    class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Vote</label>
+                                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Your vote*</label>
 
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
                                     <div class="radio-inline">
@@ -80,17 +165,18 @@
                             </div>
                             <div class="form-group">
                                 <span ng-if="election.finalVote == '1'">
-                                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-4 control-label vote-label access-color">Comments:</label>
+                                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-4 control-label vote-label access-color">Comments</label>
                                 </span>
                                 <span ng-if="election.finalVote != '1'">
-                                   <label class="col-lg-2 col-md-2 col-sm-2 col-xs-4 control-label vote-label access-color">Rationale:</label>
+                                   <label class="col-lg-2 col-md-2 col-sm-2 col-xs-4 control-label vote-label access-color">Rationale</label>
                                 </span>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
-                                    <input type="text" ng-model="election.finalRationale"  ng-change="setEnableDARButton()"
+                                    <input type="text" ng-model="election.finalRationale" ng-change="setEnableDARButton()"
                                            cm-focus="{{!AccessReviewResults.voteForm.vote || AccessReviewResults.voteForm.vote == 'true' ? 'false' : 'true'}}"
                                            name="inputRationale"
                                            class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
-                                           placeholder="Describe here your rationale or comments  (be as specific as possible).">
+                                           title="Optional: describe your rationale or add comments here (please be as specific as possible)"
+                                           placeholder="Optional: describe your rationale or add comments here (please be as specific as possible)">
                                 </div>
                             </div>
 
@@ -119,7 +205,8 @@
                 </div>
             </div>
 
-            <div class="row fsi-row-lg-level fsi-row-md-level vote-row" ng-repeat="row in voteList">
+            <h3 class="cm-subtitle">Data Access Committee Votes</h3>
+            <div class="row fsi-row-lg-level fsi-row-md-level no-margin" ng-repeat="row in voteList">
                 <div id="voteResultsList" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill no-padding" ng-repeat="vm in row">
                     <div class="jumbotron box-vote-singleresults">
                         <div class="row">
@@ -172,24 +259,26 @@
         </accordion-group>
     </accordion>
 
-    <accordion close-others="oneAtATime" ng-if="showRPaccordion" >
-        <accordion-group class="accordion" >
+    <accordion ng-if="showRPaccordion">
+        <accordion-group class="accordion">
             <accordion-heading>
-                <h3 class="access-color pos-relative">
-                    <div class="accordion-title">2. Was the research purpose accurately converted to a structured format?</div>
-                    <i class="pull-right glyphicon"
-                       ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
-                </h3>
+                <a data-toggle="collapse" ng-click="isQ2Expanded=!isQ2Expanded">
+                    <h3 class="access-color italic">Q2. Was the research purpose accurately converted to a structured format?
+                        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': isQ2Expanded, 'glyphicon-chevron-down': !isQ2Expanded}"></i>
+                    </h3>
+                </a>
             </accordion-heading>
-
+            <h4 class="hint">Please review the Research Purpose, Structured Research Purpose, and DAC votes to determine if the Research Purpose was appropriately converted to a Structured Research Purpose</h4>
             <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
                     <div class="panel-heading cm-boxhead access-color">
-                        <h4>Research Purpose
-                            <a class="enabled hover-color application-link" ng-click="AccessReviewResults.openApplication()">Application summary</a>
-                        </h4>
+                        <h4>Research Purpose</h4>
                     </div>
-                    <div id="rpurpose" class="panel-body cm-boxbody">{{dar}}</div>
+                    <div id="rpurpose" class="panel-body cm-boxbody">
+                        <div style="margin-bottom: 10px;">{{dar}}</div>
+                        <!--IMPLEMENT THIS FEATURE IN BTRX-277-->
+                        <!-- <button class="col-lg-6 col-md-6 col-sm-6 col-xs-12 btn download-pdf hover-color" ng-click="">Download Full Application</button> -->
+                    </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-primary cm-boxes">
                     <div class="panel-heading cm-boxhead access-color">
@@ -198,11 +287,9 @@
                     <div id="srp" class="panel-body cm-boxbody translated-restriction" ng-bind-html="rp"></div>
                 </div>
             </div>
-            <h3 class="cm-subtitle">Data Access Committee Votes</h3>
-
             <div class="row fsi-row-lg-level fsi-row-md-level no-margin">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 jumbotron box-vote-results">
-                    <h3 class="cm-results-subtitle access-color">Vote Results</h3>
+                    <h4 class="box-vote-title access-color">Vote Results</h4>
                     <hr class="box-separator-white">
                     <div class="row">
                         <div cm-chart cm-chart-data="rpChartData.RPChart"
@@ -211,13 +298,13 @@
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-results"
                      ng-class="{'box-vote-disabled' : isRPFormDisabled}">
-                    <h3 class="cm-results-subtitle access-color">Final decision</h3>
+                    <h4 class="box-vote-title access-color italic">Q2. Was the research purpose accurately converted to a structured format?</h4>
                     <hr class="box-separator-white">
                     <fieldset ng-disabled="isRPFormDisabled">
                         <form class="form-horizontal" name="rpVoteForm">
                             <div class="form-group first-form-group">
                                 <label
-                                    class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Vote</label>
+                                    class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Your vote*</label>
 
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8">
                                     <div class="radio-inline">
@@ -237,17 +324,18 @@
                             </div>
                             <div class="form-group">
                                 <span ng-if="rpElection.finalVote == '1'">
-                                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Comment:</label>
+                                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Comment</label>
                                 </span>
                                 <span ng-if="rpElection.finalVote != '1'">
-                                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale:</label>
+                                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale</label>
                                 </span>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
                                     <input type="text" ng-model="rpElection.finalRationale" ng-change="setEnableRPButton()"
                                            cm-focus="{{!AccessReviewResults.rpVoteForm.vote || AccessReviewResults.rpVoteForm.vote == 'true' ? 'false' : 'true'}}"
                                            name="inputRationale"
                                            class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
-                                           placeholder="Describe here your rationale or comments (be as specific as possible).">
+                                           title="Optional: describe your rationale or add comments here (please be as specific as possible)"
+                                           placeholder="Optional: describe your rationale or add comments here (please be as specific as possible)">
                                 </div>
                             </div>
 
@@ -276,7 +364,8 @@
                 </div>
             </div>
 
-            <div class="row fsi-row-lg-level fsi-row-md-level vote-row" ng-repeat="row in rpVoteList">
+            <h3 class="cm-subtitle">Data Access Committee Votes</h3>
+            <div class="row fsi-row-lg-level fsi-row-md-level no-margin" ng-repeat="row in rpVoteList">
                 <div id="voteResultsListRP" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fill no-padding" ng-repeat="vm in row">
                     <div class="jumbotron box-vote-singleresults">
                         <div class="row">
