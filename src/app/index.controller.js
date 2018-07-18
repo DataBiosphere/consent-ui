@@ -46,6 +46,7 @@
         $rootScope.clientId = clientId;
         $rootScope.currentUser = null;
         $rootScope.userRoles = USER_ROLES;
+        $rootScope.dateFormat = 'yyyy-MM-dd';
         $rootScope.setCurrentUser = function (user) {
             $rootScope.currentUser = user;
             sessionStorage.setItem('currentUser', JSON.stringify(user));
