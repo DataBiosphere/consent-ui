@@ -140,7 +140,7 @@
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 jumbotron box-vote-results" ng-class="{'box-vote-disabled' : isFormDisabled}">
-                    <h4 class="box-vote-title access-color italic">Q1. Should data access be granted to this applicant?</h4>
+                    <h4 class="box-vote-title access-color italic"><span ng-if="showRPaccordion">Q1. </span>Should data access be granted to this applicant?</h4>
                     <hr class="box-separator-white">
                     <fieldset ng-disabled="isFormDisabled">
                         <form class="form-horizontal" name="voteForm">

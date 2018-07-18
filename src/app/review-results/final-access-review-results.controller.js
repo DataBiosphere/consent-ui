@@ -330,7 +330,7 @@
                         $scope.showRPaccordion = false;
                     }
                 });
-                $scope.consentName = data.associatedConsent.name
+                $scope.consentName = data.associatedConsent.name;
                 cmElectionService.findElectionReviewById(data.associatedConsent.electionId, data.associatedConsent.consentId).$promise.then(function (data) {
                     $scope.electionReview = data;
                     showDULData(data);

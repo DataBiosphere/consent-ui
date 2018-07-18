@@ -29,7 +29,7 @@
                 <div class="row dar-summary">
                     <div class="control-label access-color">Structured Research Purpose</div>
                     <div class="response-label" ng-bind-html="sDAR"></div>
-                    <a ng-click="download('machine-readable-DAR.json', mrDAR)" class="italic hover-color">Download DAR machine-readable format</a>
+                    <a ng-if="hasUseRestriction" ng-click="download('machine-readable-DAR.json', mrDAR)" class="italic hover-color">Download DAR machine-readable format</a>
                 </div>
 
                 <div ng-if="darInfo.hasPurposeStatements" class="row dar-summary">
