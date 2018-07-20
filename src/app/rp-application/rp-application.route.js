@@ -19,8 +19,23 @@
             })
 
             .state('rp_application.step1', {
-                url: '/step1',
-                templateUrl: 'app/rp-application/rp-application-f1.html'
+                url: '/step1?token',
+                templateUrl: 'app/rp-application/rp-application-f1.html',
+                controller: 'RPApplication',
+                params: {
+                    token: null
+                },
+                data: {
+                    authorizedRoles: [USER_ROLES.researcher]
+                },
+                resolve: {
+                    token: function ($stateParams, cmAuthenticateNihService) {
+                        if ($stateParams.token !== null) {
+                            cmAuthenticateNihService.setERAbyUserId($stateParams.token);
+                            return $stateParams.token;
+                        }
+                    }
+                }
             })
 
             .state('rp_application.step2', {

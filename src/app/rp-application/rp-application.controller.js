@@ -6,7 +6,6 @@
 
     /* ngInject */
     function RPApplication($state, $scope, $modal, cmRPService, $rootScope, gwasUrl, cmResearcherService) {
-
         var vm = this;
         vm.$state = $state;
         vm.attestAndSave = attestAndSave;
