@@ -225,12 +225,17 @@
         $scope.downloadDUL = function(){
             cmFilesService.getDULFile($scope.electionReview.consent.consentId, $scope.electionReview.election.dulName);
         };
+
         $scope.back = function() {
             $state.go($rootScope.pathFrom);
             $rootScope.pathFrom = undefined;
         };
         $scope.download = downloadFileService.downloadFile;
 
+        $scope.downloadDAR = function() {
+            cmFilesService.getDARFile($scope.darElection.referenceId);
+        };
+       
         function showDULData(electionReview) {
             $scope.election = electionReview.election;
             if (electionReview.election.finalRationale === null) {

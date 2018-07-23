@@ -81,6 +81,10 @@
             }
         };
 
+        $scope.downloadDAR = function() {
+            cmFilesService.getDARFile(dar_id);
+        }; 
+
         $scope.back = function() {
             $state.go($rootScope.pathFrom);
             $rootScope.pathFrom = undefined;

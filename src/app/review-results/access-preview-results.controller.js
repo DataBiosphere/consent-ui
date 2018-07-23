@@ -37,6 +37,11 @@
             $state.go($rootScope.pathFrom);
             $rootScope.pathFrom = undefined;
         };
+        
+        $scope.downloadDAR = function() {
+            cmFilesService.getDARFile(dar_id);
+        };
+         
         var vm = this;
         vm.openApplication = openApplication;
         function openApplication() {

@@ -46,6 +46,10 @@
             $scope.alerts.splice(index, 1);
         };
 
+        $scope.downloadDAR = function() {
+            cmFilesService.getDARFile(referenceId);
+        }; 
+
         init();
 
         $scope.downloadDUL = function(){
