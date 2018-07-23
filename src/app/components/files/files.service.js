@@ -60,7 +60,7 @@
                         } else {
                             downloadElement.attr({
                                 href: (window.URL || window.webkitURL).createObjectURL(blob),
-                                target: '_blank',
+                                target: '_self',
                                 download: fileName
                             })[0].click();
                         }
