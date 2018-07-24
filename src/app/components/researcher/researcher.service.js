@@ -21,6 +21,7 @@
         }
 
         function getResearcherPropertiesForDAR(userId) {
+            console.log("llama get");
             return ResearcherGetResource.get({userId: userId}).$promise;
         }
 

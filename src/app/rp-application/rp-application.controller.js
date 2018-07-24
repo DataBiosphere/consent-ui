@@ -24,7 +24,10 @@
             cmResearcherService.getResearcherPropertiesForDAR($rootScope.currentUser.dacUserId).then(
                 function (data) {
                     JSON.parse(data.completed);
-                    if(data.completed === 'true') {
+                    $scope.formData.eraStatus = data.eraStatus;
+                    $scope.formData.eraDate = data.eraDate;
+                    // verifyEraAuthExpirationDate();
+                    if (data.completed === 'true') {
                         $scope.formData.investigator = data.investigator;
                         $scope.formData.institution = data.institution;
                         $scope.formData.department = data.department;
@@ -105,7 +108,7 @@
                 }
             }else{
                 $scope.darAction = "send";
-                if ($scope.step1isValidated && $scope.step2isValidated && $scope.step3isValidated && $scope.atLeastOneCheckboxChecked) {
+                if ($scope.formData.eraStatus && $scope.step1isValidated && $scope.step2isValidated && $scope.step3isValidated && $scope.atLeastOneCheckboxChecked) {
                     $scope.showValidationMessages = false;
                     openResearchConsole();
                 } else {
