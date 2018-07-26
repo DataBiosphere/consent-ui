@@ -5,23 +5,19 @@
         .service('cmAuthenticateNihService', cmAuthenticateNihService);
 
     /* ngInject */
-    function cmAuthenticateNihService(NIHAccountLinkResource ,ERARegisterResearcher) {
-
-        function setERAbyUserId (eraToken) {
-            // return NIHAccountLinkResource.get({userId: '3333', eraToken:eraToken});
-            return ERARegisterResearcher.post({userId: '3333', eraToken:eraToken});
-        }
-
-        function getERAStatusByUserId (userId){
-            return "return is registered, date, remainingDays";
+    function cmAuthenticateNihService() {
+        function expirationCount (regDate, expDate) {
+            var count = new Date(parseInt(expDate) - parseInt(regDate));
+            if (count > 0) {
+                return count.getDate();
+            } else {
+                return 0;
+            }
         }
 
         return {
-            setERAbyUserId: function(token) {
-                return setERAbyUserId(token);
-            },
-            setERAdata: function(userId) {
-                return getERAStatusByUserId(userId);
+            expirationCount: function(regDate, expDate) {
+                return expirationCount(regDate, expDate);
             }
         };
     }

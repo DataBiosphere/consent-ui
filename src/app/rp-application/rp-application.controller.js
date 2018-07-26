@@ -5,44 +5,53 @@
         .controller('RPApplication', RPApplication);
 
     /* ngInject */
-    function RPApplication($state, $scope, $modal, cmRPService, $rootScope, gwasUrl, cmResearcherService) {
+    function RPApplication($state, $scope, $modal, cmRPService, $rootScope, gwasUrl, cmResearcherService, cmAuthenticateNihService, $window) {
         var vm = this;
+        var it = 0;
         vm.$state = $state;
         vm.attestAndSave = attestAndSave;
         vm.partialSave = partialSave;
+        vm.redirectToNihLogin = redirectToNihLogin;
         $scope.showValidationMessages = false;
         $scope.atLeastOneCheckboxChecked = false;
         $scope.completed = true;
+        vm.expirationDate = cmAuthenticateNihService;
         init();
 
         function init(){
-            $scope.formData = {};
-            if ($rootScope.formData !== undefined && $rootScope.formData.userId !== undefined) {
-                $scope.formData = $rootScope.formData;
-                $rootScope.formData = {};
+            // console.log("TOKEN????", token);
+            it++;
+            if (it === 1) {
+                console.log("llamando a INIT");
+                $scope.formData = {};
+                if ($rootScope.formData !== undefined && $rootScope.formData.userId !== undefined) {
+                    $scope.formData = $rootScope.formData;
+                    $rootScope.formData = {};
+                }
+
+                cmResearcherService.getResearcherPropertiesForDAR($rootScope.currentUser.dacUserId).then(
+                    function (data) {
+                        JSON.parse(data.completed);
+                        $scope.formData.eraStatus = data.eraStatus;
+                        $scope.formData.eraDate = data.eraDate;
+                        $scope.eraEpirationCount = cmAuthenticateNihService.expirationCount(data.eraDate, data.eraExpiration);
+                        if (data.completed === 'true') {
+                            $scope.formData.investigator = data.investigator;
+                            $scope.formData.institution = data.institution;
+                            $scope.formData.department = data.department;
+                            $scope.formData.division = data.division;
+                            $scope.formData.address1 = data.address1;
+                            $scope.formData.address2 = data.address2;
+                            $scope.formData.city = data.city;
+                            $scope.formData.zipcode = data.zipcode;
+                            $scope.formData.country = data.country;
+                            $scope.formData.state = data.state;
+                        }
+                        if(data.completed !== undefined){
+                            $scope.completed = JSON.parse(data.completed);
+                        }
+                    });
             }
-            cmResearcherService.getResearcherPropertiesForDAR($rootScope.currentUser.dacUserId).then(
-                function (data) {
-                    JSON.parse(data.completed);
-                    $scope.formData.eraStatus = data.eraStatus;
-                    $scope.formData.eraDate = data.eraDate;
-                    // verifyEraAuthExpirationDate();
-                    if (data.completed === 'true') {
-                        $scope.formData.investigator = data.investigator;
-                        $scope.formData.institution = data.institution;
-                        $scope.formData.department = data.department;
-                        $scope.formData.division = data.division;
-                        $scope.formData.address1 = data.address1;
-                        $scope.formData.address2 = data.address2;
-                        $scope.formData.city = data.city;
-                        $scope.formData.zipcode = data.zipcode;
-                        $scope.formData.country = data.country;
-                        $scope.formData.state = data.state;
-                    }
-                    if(data.completed !== undefined){
-                        $scope.completed = JSON.parse(data.completed);
-                    }
-                });
         }
 
         $scope.$watch("form.step1.$valid", function (value1) {
@@ -101,14 +110,14 @@
             $scope.formData.userId = $rootScope.currentUser.dacUserId;
             if($scope.formData.dar_code  !== undefined) {
                 $scope.darAction = "edit";
-                if ($scope.step1isValidated !== false && $scope.step2isValidated !== false && $scope.step3isValidated !== false && $scope.atLeastOneCheckboxChecked !== false) {
+                if ($scope.eraEpirationCount !== 0 && $scope.step1isValidated !== false && $scope.step2isValidated !== false && $scope.step3isValidated !== false && $scope.atLeastOneCheckboxChecked !== false) {
                     openResearchConsole();
                 } else {
                     $scope.showValidationMessages = true;
                 }
             }else{
                 $scope.darAction = "send";
-                if ($scope.formData.eraStatus && $scope.step1isValidated && $scope.step2isValidated && $scope.step3isValidated && $scope.atLeastOneCheckboxChecked) {
+                if ($scope.eraEpirationCount !== 0 && $scope.step1isValidated && $scope.step2isValidated && $scope.step3isValidated && $scope.atLeastOneCheckboxChecked) {
                     $scope.showValidationMessages = false;
                     openResearchConsole();
                 } else {
@@ -132,6 +141,10 @@
             });
         }
 
+        function redirectToNihLogin() {
+            var landingUrl = "http://mock-nih.dev.test.firecloud.org/link-nih-account/index.html?redirect-url=http://localhost:443/#/rp_application/nih?token%3D%7Btoken%7D";
+            $window.location.href = landingUrl;
+        }
 
         function verifyCheckboxes() {
 

@@ -17,25 +17,9 @@
                     authorizedRoles: [USER_ROLES.researcher]
                 }
             })
-
             .state('rp_application.step1', {
-                url: '/step1?token',
-                templateUrl: 'app/rp-application/rp-application-f1.html',
-                controller: 'RPApplication',
-                params: {
-                    token: null
-                },
-                data: {
-                    authorizedRoles: [USER_ROLES.researcher]
-                },
-                resolve: {
-                    token: function ($stateParams, cmAuthenticateNihService) {
-                        if ($stateParams.token !== null) {
-                            cmAuthenticateNihService.setERAbyUserId($stateParams.token);
-                            return $stateParams.token;
-                        }
-                    }
-                }
+                url: '/step1',
+                templateUrl: 'app/rp-application/rp-application-f1.html'
             })
 
             .state('rp_application.step2', {
@@ -51,6 +35,34 @@
             .state('rp_application.step4', {
                 url: '/step4',
                 templateUrl: 'app/rp-application/rp-application-f4.html'
+            })
+            .state('rp_application.nih', {
+                url: '/nih?token',
+                // templateUrl: 'app/rp-application/rp-application-f1.html',
+                params: {
+                    token: null
+                },
+                data: {
+                    authorizedRoles: [USER_ROLES.researcher]
+                },
+                resolve: {
+
+                    token: function ($stateParams, cmResearcherService, $window, $rootScope) {
+                        console.log("llamado a route de nih");
+                        if ($stateParams.token !== null) {
+                            var eraProperties = {};
+                            var registerDate= new Date();
+
+                        eraProperties.eraToken = $stateParams.token;
+                        eraProperties.eraDate = registerDate.getTime();
+                        eraProperties.eraExpiration = new Date().setDate(registerDate.getDate()+30);
+                        window.location= "http://" + $window.location.host + "#/rp_application/step1";
+
+                        return cmResearcherService.updateResearcherProperties(eraProperties, $rootScope.currentUser.dacUserId, false);
+
+                        }
+                    }
+                }
             });
     }
 
