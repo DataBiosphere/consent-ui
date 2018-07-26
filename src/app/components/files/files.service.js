@@ -27,6 +27,17 @@
             var datasetUrl = apiUrl + 'dataset/' + dataSetId + '/approved/users';
             getFile(datasetUrl, fileName);
         }
+
+        function getDARFile(darId) {
+            var darUrl = apiUrl + 'dataRequest/' + darId + '/pdf';
+            getFile(darUrl, null);
+        }
+
+        function getFileNameFromHttpResponse(httpResponse) {
+            var contentDispositionHeader = httpResponse.headers('Content-Disposition');
+            return contentDispositionHeader.split(';')[1].trim().split('=')[1];
+        }
+
         function getFile(url, fileName) {
             $http({
                 url: url,
@@ -34,6 +45,7 @@
                 responseType: 'arraybuffer'
             }).
                 then(function (response) {
+                    fileName = fileName === null ? getFileNameFromHttpResponse(response) : fileName;
                     var isIE = /*@cc_on!@*/false || !!document.documentMode;
                     var contentType = response.headers()["content-type"];
                     var blob = new Blob([response.data], { type: contentType });
@@ -57,7 +69,7 @@
         }
 
         return {
-            getDulFileByElectionId: function(consentId, fileName, electionId){
+            getDulFileByElectionId: function (consentId, fileName, electionId) {
                 return getDulFileByElectionId(consentId, fileName, electionId);
             },
             getDULFile: function (consentId, fileName) {
@@ -68,6 +80,9 @@
             },
             getApprovedUsersFile: function (fileName, fileUrl) {
                 return getApprovedUsersFile(fileName, fileUrl);
+            },
+            getDARFile: function (darId) {
+                return getDARFile(darId);
             }
         };
     }

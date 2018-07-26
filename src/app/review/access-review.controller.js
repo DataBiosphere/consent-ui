@@ -35,6 +35,10 @@
             }
         }
 
+        $scope.downloadDAR = function() {
+            cmFilesService.getDARFile(dar_id);
+        };
+
         function initEnableDARButton(){
             if(vote.vote !== undefined && vote.vote !== null){
                 $scope.enableDARButton = false;
