@@ -5,7 +5,7 @@
         .controller('RPApplication', RPApplication);
 
     /* ngInject */
-    function RPApplication($state, $scope, $modal, cmRPService, $rootScope, gwasUrl, cmResearcherService) {
+    function RPApplication($state, $scope, $modal, cmRPService, $rootScope, gwasUrl, cmResearcherService,  $window) {
 
         var vm = this;
         vm.$state = $state;
@@ -14,6 +14,8 @@
         $scope.showValidationMessages = false;
         $scope.atLeastOneCheckboxChecked = false;
         $scope.completed = true;
+        $scope.openProfile = openProfile;
+        $scope.linkedinAuth = linkedinAuth;
         init();
 
         function init(){
@@ -36,6 +38,14 @@
                         $scope.formData.zipcode = data.zipcode;
                         $scope.formData.country = data.country;
                         $scope.formData.state = data.state;
+                        if($scope.formData.dar_code  === undefined) {
+                            $scope.showLinkedinProfile = true;
+                            $scope.formData.linkedinProfile = data.linkedinProfile;
+                            $scope.isLinkedinAuthorized = data.linkedinProfile ? true : false;  
+                        } else {
+                            $scope.isLinkedinAuthorized = true;
+                            $scope.showLinkedinProfile =  $scope.formData.linkedinProfile ? true : false;  
+                        }
                     }
                     if(data.completed !== undefined){
                         $scope.completed = JSON.parse(data.completed);
@@ -72,6 +82,10 @@
         $scope.openGWAS = function() {
             $scope.url = gwasUrl;
         };
+
+        function openProfile() {
+            $window.open($scope.formData.linkedinProfile,'_blank');
+        }
 
         function openResearchConsole() {
             $scope.showValidationMessages = false;
@@ -157,6 +171,34 @@
         $scope.search_ontologies = function (partial) {
             return cmRPService.getAutoCompleteOT(partial);
         };
+
+        $scope.removeLinkedinProfile = function() {
+            $scope.isLinkedinAuthorized = false;
+            $scope.formData.linkedinProfile = undefined;
+        };
+
+        // Handle the successful return from the API call
+        function onSuccess(data) {
+            $scope.formData.linkedinProfile = data.publicProfileUrl;
+            $scope.$apply(
+                $scope.isLinkedinAuthorized = true
+            );
+        }  
+
+        // Use the API call wrapper to request the member's basic profile data
+        function getProfileData() {
+            IN.API.Raw("/people/~:(public-profile-url)").result(onSuccess).error(onError);
+        }
+
+                // Handle an error response from the API call
+        function onError() {
+            $scope.formData.linkedinProfile = undefined;
+        }
+
+        function linkedinAuth() {
+            IN.UI.Authorize().params({ "scope": ["r_basicprofile", "r_emailaddress"] }).place();
+            IN.Event.on(IN, "auth", getProfileData);
+        }
     }
 
 })();

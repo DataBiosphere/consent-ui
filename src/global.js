@@ -2,3 +2,4 @@
 var G_APIURL = "";
 var G_ONTOLOGYAPIURL = "";
 var G_CLIENTID = "";
+var G_LINKEDINAPIKEY = "";
