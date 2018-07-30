@@ -4,7 +4,7 @@
     angular.module('cmChart')
         .directive('cmChart', cmChartDirective);
 
-    google.load("visualization", "1", {packages: ["corechart"]});
+    google.charts.load('current', { packages: ['corechart'] });
 
     /* ngInject */
     function cmChartDirective() {
