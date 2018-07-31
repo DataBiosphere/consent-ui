@@ -17,19 +17,26 @@
                 <input ng-model="formData.investigator" type="text" name="inputInvestigator" id="inputInvestigator" ng-disabled="true"
                        ng-class="step1.inputInvestigator.$invalid && showValidationMessages  ?   'form-control required-field-error' : 'form-control'  " required="required">
             </div>
-            <div class="display-inline-block" style="padding: 0 15px;">
+
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                 <label class="control-label">NIH eRA Commons ID*
                     <span class="cancel-color required-field-error-span" ng-show="false">Required field</span>
                 </label>
-                <a ng-click="RPApplication.redirectToNihLogin()" target="_blank" class="auth-button eRACommons">
-                    <div class="logo"></div>
-                    <span>Authenticate your account</span>
-                </a>
-            </div>
-            <div class="display-inline-block" ng-show="formData.eraStatus">
-                <div ng-show="eraExpirationCount !== 0" class="default-color">Your NIH eRA Commons authentication will expire in {{eraExpirationCount}} days</div>
-                <div ng-show="eraExpirationCount === 0" class="default-color">Your NIH eRA Commons authentication expired</div>
-                <a ng-click="RPApplication.redirectToNihLogin()" target="_blank" class="hover-color auth-link">Re-authenticate your account</a>
+                <!-- <div ng-show="formData.eraStatus"> -->
+                <div ng-show="true">
+                    <a ng-click="RPApplication.redirectToNihLogin()" target="_blank" class="auth-button eRACommons">
+                        <div class="logo"></div>
+                        <span>Authenticate your account</span>
+                    </a>
+                </div>
+                <div ng-show="!formData.eraStatus">
+                    <a href="{{formData.eraLink}}" class="hover-color auth-link">{{formData.eraId}}</a>
+                </div>
+                <div ng-show="formData.eraStatus">
+                    <div ng-show="eraExpirationCount !== 0" class="default-color">Your authentication will expire in X{{eraExpirationCount}} days</div>
+                    <div ng-show="eraExpirationCount === 0" class="default-color">Your authentication expired</div>
+                    <a ng-click="RPApplication.redirectToNihLogin()" target="_blank" class="hover-color auth-link">Re-authenticate your account</a>
+                </div>
             </div>
         </div>
         <div class="form-group">

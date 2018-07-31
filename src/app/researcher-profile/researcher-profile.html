@@ -24,7 +24,7 @@
                 <span>Email Address is empty or has invalid format</span>
             </span>
 
-            <div class="display-inline-block" style="padding: 0 15px;">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                 <label class="control-label">NIH eRA Commons ID <span class="italic">(optional)</span></label>
                 <!-- <div ng-show="formData.eraStatus"> -->
                 <div ng-show="true">
@@ -36,12 +36,11 @@
                 <div ng-show="!formData.eraStatus">
                     <a href="{{formData.eraLink}}" class="hover-color auth-link">{{formData.eraId}}</a>
                 </div>
-            </div>
-
-            <div class="display-inline-block" ng-show="formData.eraStatus">
-                <div ng-show="eraExpirationCount !== 0" class="default-color">Your NIH eRA Commons authentication will expire in {{eraExpirationCount}} days</div>
-                <div ng-show="eraExpirationCount === 0" class="default-color">Your NIH eRA Commons authentication expired</div>
-                <a ng-click="RPApplication.redirectToNihLogin()" target="_blank" class="hover-color auth-link">Re-authenticate your account</a>
+                <div ng-show="formData.eraStatus">
+                    <div ng-show="eraExpirationCount !== 0" class="default-color">Your authentication will expire in X{{eraExpirationCount}} days</div>
+                    <div ng-show="eraExpirationCount === 0" class="default-color">Your authentication expired</div>
+                    <a ng-click="RPApplication.redirectToNihLogin()" target="_blank" class="hover-color auth-link">Re-authenticate your account</a>
+                </div>
             </div>
 
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -141,7 +140,7 @@
             </span>
 
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <label class="control-label">eRA Commons ID <span class="italic">(optional)</span></label>
+                <label class="control-label">NIH eRA Commons ID <span class="italic">(optional)</span></label>
                 <input type="text" class="form-control" name="profileEraCommons" id="profileEraCommons" ng-model="formData.eRACommonsID">
             </div>
 
