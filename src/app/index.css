@@ -1302,6 +1302,12 @@ input[type=checkbox]:checked+label:before {
     color: #00609f !important;
 }
 
+.auth-clear {
+    position: absolute;
+    right: 0;
+    top: 30px;
+}
+
 /***************************************************Charts*/
 
 .result_chart {

@@ -18,11 +18,11 @@
                        ng-class="step1.inputInvestigator.$invalid && showValidationMessages  ?   'form-control required-field-error' : 'form-control'  " required="required">
             </div>
 
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 rp-group">
                 <label class="control-label">NIH eRA Commons ID*
                     <span class="cancel-color required-field-error-span" ng-show="false">Required field</span>
                 </label>
-                 <div ng-show="!formData.eraStatus">
+                <div ng-show="!formData.eraStatus">
                     <a ng-click="RPApplication.redirectToNihLogin()" target="_blank" class="auth-button eRACommons">
                         <div class="logo"></div>
                         <span>Authenticate your account</span>
@@ -30,9 +30,10 @@
                 </div>
                 <div ng-show="formData.eraStatus">
                     <a href="{{formData.eraLink}}" class="hover-color auth-link">{{formData.eraId}}</a>
-                    <button ng-click="deleteNihAccount()">Delete Account</button>
-                    <div ng-show="eraExpirationCount !== 0" class="default-color">Your authentication will expire in {{eraExpirationCount}} days</div>
-                    <div ng-show="eraExpirationCount === 0" class="default-color">Your authentication expired</div>
+                    <button type="button" class="close auth-clear" ng-click="deleteNihAccount()" tooltip-class="tooltip-class-dark" tooltip-trigger tooltip-placement="left"
+                    tooltip="Clear account"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                    <div ng-show="eraExpirationCount !== 0" class="default-color">Your NIH authentication will expire in {{eraExpirationCount}} days</div>
+                    <div ng-show="eraExpirationCount === 0" class="default-color">Your NIH authentication expired</div>
                 </div>
             </div>
         </div>
