@@ -1254,6 +1254,60 @@ input[type=checkbox]:checked+label:before {
     vertical-align: 20% !important;
 }
 
+.auth-button.orcid {
+    height: 34px;
+    width: 240px;/**/
+    border: none;
+    border-radius: 3px;
+    display: block;
+    border: 1px solid #d3d3d3;
+    padding: 3px;
+    text-align: center;
+    margin-top: 3px;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 1px 1px 3px #999;
+    cursor: pointer;
+    color: #999;
+    font-weight: 500;
+    font-size: 0.9em;
+    transition: all 0.2s ease;
+}
+
+.auth-button.orcid:hover {
+    box-shadow: 1px 1px 5px #00609f;
+}
+
+.auth-button.orcid .logo {
+    height: 24px;/**/
+    width: 24px;/**/
+    background-size: cover !important;
+    background: url(../assets/images/orcid-logo.png) no-repeat;/**/
+    display: inline-block;
+}
+
+.auth-button.orcid span {
+    vertical-align: 40%;/**/
+}
+
+.auth-link {
+    float: left;
+    font-weight: 500;
+    font-style: italic;
+    display: inline;
+    padding-top: 5px;
+    transition: all 0.2s ease;
+}
+
+.auth-link:hover {
+    color: #00609f !important;
+}
+
+.auth-clear {
+    float: left;
+    margin: 2px 0 0 15px;
+}
+
 /***************************************************Charts*/
 
 .result_chart {

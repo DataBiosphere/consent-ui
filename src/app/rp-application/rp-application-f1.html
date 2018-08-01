@@ -10,12 +10,28 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
                 <label class="control-label rp-title-question">1.1 Principal Investigator<span>By typing in the name of the principal investigator, I certify that he or she is aware of this research study.</span></label>
             </div>
-        <span class="cancel-color required-field-error-span" ng-show="step1.inputInvestigator.$invalid && showValidationMessages">
-            <span>* Required field</span>
-        </span>
+            <span class="cancel-color required-field-error-span" ng-show="step1.inputInvestigator.$invalid && showValidationMessages">
+                <span>* Required field</span>
+            </span>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
                 <input ng-model="formData.investigator" type="text" name="inputInvestigator" id="inputInvestigator" ng-disabled="true"
                        ng-class="step1.inputInvestigator.$invalid && showValidationMessages  ?   'form-control required-field-error' : 'form-control'  " required="required">
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 rp-group">
+                <label class="control-label">ORCID iD*
+                    <span class="cancel-color required-field-error-span" ng-show="false">Required field</span>
+                </label>
+                <div ng-show="true">
+                    <a ng-click="ResearcherProfile.openORCID()" target="_blank" class="auth-button orcid">
+                        <div class="logo"></div>
+                        <span>Register or Connect your ORCID iD</span>
+                    </a>
+                </div>
+                <div ng-show="false">
+                    <a href="{{formData.orcidLink}}" class="hover-color auth-link">{{formData.orcidId}}</a>
+                    <button type="button" class="close auth-clear" ng-click="" tooltip-class="tooltip-class-dark" tooltip-trigger tooltip-placement="right"
+                    tooltip="Clear account"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                </div>
             </div>
         </div>
         <div class="form-group">
