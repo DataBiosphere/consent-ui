@@ -6,8 +6,9 @@
         .controller('ResearcherProfile', ResearcherProfile);
 
     /* ngInject */
-    function ResearcherProfile($modal, $state, $scope, $rootScope,  cmResearcherService) {
+    function ResearcherProfile($modal, $state, $scope, $rootScope, $window,  cmResearcherService) {
         var vm = this;
+        var count = 0;
         vm.saveProfile = saveProfile;
         vm.update = update;
         vm.clearNotRelatedPIFields = clearNotRelatedPIFields;
@@ -15,10 +16,12 @@
         vm.clearCommonsFields = clearCommonsFields;
         vm.submit = submit;
         vm.update = update;
+        vm.openORCID = openORCID;
         $scope.formData = {};
         $scope.exists = false;
         $scope.formData.isThePI = true;
         $scope.showValidationMessages = false;
+        console.log('contador en ResearcherProfile ', count);
         init();
 
         function init(){
@@ -97,9 +100,20 @@
         }
 
         function update(){
+            console.log(count);
             $scope.formData.completed = true;
             cmResearcherService.updateResearcherProperties($scope.formData, $scope.userId, true);
         }
+
+        function openORCID() {
+            var oauthWindow;
+            if(count >= 12) {
+                // oauthWindow = $window.open("https://sandbox.orcid.org/oauth/authorize?client_id=APP-SOXHBRBGFICVEHU3response_type=code&scope=/authenticate&show_login=false&redirect_uri=https://yourwebsite.edu/RedirectURI", "_blank", "toolbar=no, scrollbars=yes, width=500, height=600, top=500, left=500");
+            }
+            count++;
+            console.log('openORCID ', count);
+        }
+
     }
 
 })();
