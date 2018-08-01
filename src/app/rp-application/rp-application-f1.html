@@ -30,10 +30,10 @@
                 </div>
                 <div ng-show="formData.eraStatus">
                     <a href="{{formData.eraLink}}" class="hover-color auth-link">{{formData.eraId}}</a>
-                    <button type="button" class="close auth-clear" ng-click="deleteNihAccount()" tooltip-class="tooltip-class-dark" tooltip-trigger tooltip-placement="left"
+                    <button type="button" class="close auth-clear" ng-click="deleteNihAccount()" tooltip-class="tooltip-class-dark" tooltip-trigger tooltip-placement="right"
                     tooltip="Clear account"><span class="glyphicon glyphicon-remove-circle"></span></button>
-                    <div ng-show="eraExpirationCount !== 0" class="default-color">Your NIH authentication will expire in {{eraExpirationCount}} days</div>
-                    <div ng-show="eraExpirationCount === 0" class="default-color">Your NIH authentication expired</div>
+                    <div ng-show="eraExpirationCount !== 0" class="default-color display-inline-block">Your NIH authentication will expire in {{eraExpirationCount}} days</div>
+                    <div ng-show="eraExpirationCount === 0" class="default-color display-inline-block">Your NIH authentication expired</div>
                 </div>
             </div>
         </div>

@@ -913,10 +913,10 @@ small {
     padding-right: 0px !important;
 }
 
-.admin-input textarea {	
-    resize: vertical;	
-    max-height: 150px;	
-}	
+.admin-input textarea {
+    resize: vertical;
+    max-height: 150px;
+}
 
 .control-label {
     text-align: right;
@@ -1291,10 +1291,11 @@ input[type=checkbox]:checked+label:before {
 }
 
 .auth-link {
+    float: left;
     font-weight: 500;
     font-style: italic;
-    display: block;
-    padding-top: 3px;
+    display: inline;
+    padding-top: 5px;
     transition: all 0.2s ease;
 }
 
@@ -1303,9 +1304,8 @@ input[type=checkbox]:checked+label:before {
 }
 
 .auth-clear {
-    position: absolute;
-    right: 0;
-    top: 30px;
+    float: left;
+    margin: 2px 0 0 15px;
 }
 
 /***************************************************Charts*/
@@ -2467,8 +2467,8 @@ input[type="checkbox"][disabled]+label {
     border: none;
 }
 
-.alert-danger hr {	
-    border-color: #cccccc !important;	
+.alert-danger hr {
+    border-color: #cccccc !important;
 }
 
 .alert-form-group {
