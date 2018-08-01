@@ -5,53 +5,52 @@
         .controller('RPApplication', RPApplication);
 
     /* ngInject */
-    function RPApplication($state, $scope, $modal, cmRPService, $rootScope, gwasUrl, cmResearcherService, cmAuthenticateNihService, $window) {
+    function RPApplication($state, $scope, $modal, cmRPService, $rootScope, gwasUrl, cmResearcherService, cmAuthenticateNihService, $window, $stateParams) {
         var vm = this;
-        var it = 0;
-        vm.$state = $state;
+        // vm.token = $state.params.token();
+        vm.token = $state.params.token !== undefined ? $state.params.token : null;
         vm.attestAndSave = attestAndSave;
         vm.partialSave = partialSave;
         vm.redirectToNihLogin = redirectToNihLogin;
         $scope.showValidationMessages = false;
         $scope.atLeastOneCheckboxChecked = false;
         $scope.completed = true;
-        vm.expirationDate = cmAuthenticateNihService;
+        vm.nihService= cmAuthenticateNihService;
         init();
 
         function init(){
-            // console.log("TOKEN????", token);
-            it++;
-            if (it === 1) {
-                console.log("llamando a INIT");
-                $scope.formData = {};
-                if ($rootScope.formData !== undefined && $rootScope.formData.userId !== undefined) {
-                    $scope.formData = $rootScope.formData;
-                    $rootScope.formData = {};
-                }
-
-                cmResearcherService.getResearcherPropertiesForDAR($rootScope.currentUser.dacUserId).then(
-                    function (data) {
-                        JSON.parse(data.completed);
-                        $scope.formData.eraStatus = data.eraStatus;
-                        $scope.formData.eraDate = data.eraDate;
-                        $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(data.eraDate, data.eraExpiration);
-                        if (data.completed === 'true') {
-                            $scope.formData.investigator = data.investigator;
-                            $scope.formData.institution = data.institution;
-                            $scope.formData.department = data.department;
-                            $scope.formData.division = data.division;
-                            $scope.formData.address1 = data.address1;
-                            $scope.formData.address2 = data.address2;
-                            $scope.formData.city = data.city;
-                            $scope.formData.zipcode = data.zipcode;
-                            $scope.formData.country = data.country;
-                            $scope.formData.state = data.state;
-                        }
-                        if(data.completed !== undefined){
-                            $scope.completed = JSON.parse(data.completed);
-                        }
-                    });
+            console.log("llamando a INIT");
+            getNihToken(vm.token);
+            $scope.formData = {};
+            if ($rootScope.formData !== undefined && $rootScope.formData.userId !== undefined) {
+                $scope.formData = $rootScope.formData;
+                $rootScope.formData = {};
             }
+
+            cmResearcherService.getResearcherPropertiesForDAR($rootScope.currentUser.dacUserId).then(
+                function (data) {
+                    JSON.parse(data.completed);
+                    $scope.formData.eraDate = data.eraDate;
+                    $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(data.eraDate, data.eraExpiration);
+                    $scope.formData.eraStatus = $scope.eraExpirationCount !== 0;
+                    $scope.formData.eraId = "leouuuu";
+                    $scope.formData.eraLink = "link.bla";
+                    if (data.completed === 'true') {
+                        $scope.formData.investigator = data.investigator;
+                        $scope.formData.institution = data.institution;
+                        $scope.formData.department = data.department;
+                        $scope.formData.division = data.division;
+                        $scope.formData.address1 = data.address1;
+                        $scope.formData.address2 = data.address2;
+                        $scope.formData.city = data.city;
+                        $scope.formData.zipcode = data.zipcode;
+                        $scope.formData.country = data.country;
+                        $scope.formData.state = data.state;
+                    }
+                    if(data.completed !== undefined){
+                        $scope.completed = JSON.parse(data.completed);
+                    }
+                });
         }
 
         $scope.$watch("form.step1.$valid", function (value1) {
@@ -145,6 +144,36 @@
             var landingUrl = "http://mock-nih.dev.test.firecloud.org/link-nih-account/index.html?redirect-url=http://localhost:443/#/rp_application/nih?token%3D%7Btoken%7D";
             $window.location.href = landingUrl;
         }
+
+        function getNihToken (token) {
+            if (token) {
+                console.log("token recibido ", token);
+                var eraProperties = {};
+                var registerDate = new Date();
+
+                eraProperties.eraToken = token;
+                eraProperties.eraDate = registerDate.getTime();
+                eraProperties.eraExpiration = new Date().setDate(registerDate.getDate() + 30);
+
+                cmResearcherService.verifyNihToken(eraProperties, $rootScope.currentUser.dacUserId).then(
+                        function(resolve) {
+                            console.log("ok", resolve);
+                        },
+                        function(reject) {
+                            console.log("not ok", reject);
+                        }
+                    );
+                    $state.go('rp_application.step1');
+                // return true;
+            }
+        }
+
+        $scope.deleteNihAccount = function () {
+            console.log("delete!!!!!");
+            cmAuthenticateNihService.eliminateAccount($rootScope.currentUser.dacUserId).then(function() {
+                $state.go('rp_application.step1', {}, {reload:true});
+            });
+        };
 
         function verifyCheckboxes() {
 

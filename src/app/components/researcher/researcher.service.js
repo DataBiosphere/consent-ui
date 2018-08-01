@@ -5,7 +5,7 @@
         .service('cmResearcherService', cmResearcherService);
 
     /* ngInject */
-    function cmResearcherService(ResearcherResource, ResearcherGetResource) {
+    function cmResearcherService(ResearcherResource, ResearcherGetResource, ResearcherNihResource) {
 
 
         function getPropertiesByResearcherId(userId) {
@@ -17,7 +17,13 @@
         }
 
         function updateResearcherProperties(researcherProperties, userId, validate) {
+            console.log("llamando update del Researcher");
             return ResearcherResource.update({userId: userId, validate: validate}, researcherProperties);
+        }
+
+        function verifyNihToken(researcherProperties, userId) {
+            console.log("Validando NIH");
+            return ResearcherNihResource.update({userId: userId, token: researcherProperties.eraToken}, researcherProperties).$promise;
         }
 
         function getResearcherPropertiesForDAR(userId) {
@@ -37,6 +43,9 @@
             },
             getResearcherPropertiesForDAR: function (userId) {
                 return getResearcherPropertiesForDAR(userId);
+            },
+            verifyNihToken: function(researcherProperties, userId) {
+                return verifyNihToken(researcherProperties, userId);
             }
         };
     }

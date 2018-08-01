@@ -22,20 +22,17 @@
                 <label class="control-label">NIH eRA Commons ID*
                     <span class="cancel-color required-field-error-span" ng-show="false">Required field</span>
                 </label>
-                <!-- <div ng-show="formData.eraStatus"> -->
-                <div ng-show="true">
+                 <div ng-show="!formData.eraStatus">
                     <a ng-click="RPApplication.redirectToNihLogin()" target="_blank" class="auth-button eRACommons">
                         <div class="logo"></div>
                         <span>Authenticate your account</span>
                     </a>
                 </div>
-                <div ng-show="!formData.eraStatus">
-                    <a href="{{formData.eraLink}}" class="hover-color auth-link">{{formData.eraId}}</a>
-                </div>
                 <div ng-show="formData.eraStatus">
-                    <div ng-show="eraExpirationCount !== 0" class="default-color">Your authentication will expire in X{{eraExpirationCount}} days</div>
+                    <a href="{{formData.eraLink}}" class="hover-color auth-link">{{formData.eraId}}</a>
+                    <button ng-click="deleteNihAccount()">Delete Account</button>
+                    <div ng-show="eraExpirationCount !== 0" class="default-color">Your authentication will expire in {{eraExpirationCount}} days</div>
                     <div ng-show="eraExpirationCount === 0" class="default-color">Your authentication expired</div>
-                    <a ng-click="RPApplication.redirectToNihLogin()" target="_blank" class="hover-color auth-link">Re-authenticate your account</a>
                 </div>
             </div>
         </div>

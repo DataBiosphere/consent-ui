@@ -8,9 +8,9 @@
                 });
 
             }).
-        factory('ERARegisterResearcher', function($resource, apiUrl){
-            return $resource(apiUrl + "nihlogin/:userId/:eraToken", {}, {
-                post: {method: 'POST', params: {userId: '@userId', eraToken: '@eraToken'}}
+        factory('NIHDeleteAccount', function($resource, apiUrl){
+            return $resource(apiUrl + "nih-login/:userId", {}, {
+                delete: {method: 'DELETE', params: {userId: '@userId'}}
         })
     });
     // angular.module('cmAuthenticateNih',['ngResource'] )

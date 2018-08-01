@@ -38,7 +38,7 @@
             })
             .state('rp_application.nih', {
                 url: '/nih?token',
-                // templateUrl: 'app/rp-application/rp-application-f1.html',
+                templateUrl: 'app/rp-application/rp-application-f1.html',
                 params: {
                     token: null
                 },
@@ -48,17 +48,15 @@
                 resolve: {
 
                     token: function ($stateParams, cmResearcherService, $window, $rootScope) {
-                        console.log("llamado a route de nih");
                         if ($stateParams.token !== null) {
-                            var eraProperties = {};
-                            var registerDate= new Date();
+                            console.log("llamado a route de nih");
 
-                        eraProperties.eraToken = $stateParams.token;
-                        eraProperties.eraDate = registerDate.getTime();
-                        eraProperties.eraExpiration = new Date().setDate(registerDate.getDate()+30);
-                        window.location= "http://" + $window.location.host + "#/rp_application/step1";
-
-                        return cmResearcherService.updateResearcherProperties(eraProperties, $rootScope.currentUser.dacUserId, false);
+                            // window.location= "http://" + $window.location.host + "#/rp_application/step1";
+                            // $window.location.href("http://" + $window.location.host + "#/rp_application/step1")
+                            // $state.go('rp_application.step1');
+                            return $stateParams;
+                            // return cmResearcherService.verifyNihToken(eraProperties, $rootScope.currentUser.dacUserId);
+                        // return cmResearcherService.updateResearcherProperties(eraProperties, $rootScope.currentUser.dacUserId, false);
 
                         }
                     }
