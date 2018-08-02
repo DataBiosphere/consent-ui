@@ -119,7 +119,7 @@
             IN.API.Raw("/people/~:(public-profile-url)").result(onSuccess).error(onError);
         }
 
-                // Handle an error response from the API call
+        // Handle an error response from the API call
         function onError() {
             $scope.formData.linkedinProfile = undefined;
         }
