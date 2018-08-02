@@ -1290,12 +1290,15 @@ input[type=checkbox]:checked+label:before {
     vertical-align: 50%;
 }
 
-.auth-link {
+.auth-link,
+.auth-id {
     float: left;
     font-weight: 500;
-    font-style: italic;
     display: inline;
     padding-top: 5px;
+}
+
+.auth-link {
     transition: all 0.2s ease;
 }
 
