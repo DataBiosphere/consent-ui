@@ -5,23 +5,25 @@
         .controller('RPApplication', RPApplication);
 
     /* ngInject */
-    function RPApplication($state, $scope, $modal, cmRPService, $rootScope, gwasUrl, cmResearcherService, cmAuthenticateNihService, $window, $stateParams) {
+    function RPApplication($state, $scope, $modal, cmRPService, $rootScope, gwasUrl, cmResearcherService, cmAuthenticateNihService, $window) {
         var vm = this;
-        // vm.token = $state.params.token();
+        var persistDarInfo = $state.params.persistInfo;
         vm.token = $state.params.token !== undefined ? $state.params.token : null;
+        getNihToken(vm.token);
         vm.attestAndSave = attestAndSave;
         vm.partialSave = partialSave;
         vm.redirectToNihLogin = redirectToNihLogin;
         $scope.showValidationMessages = false;
         $scope.atLeastOneCheckboxChecked = false;
         $scope.completed = true;
-        vm.nihService= cmAuthenticateNihService;
         init();
 
-        function init(){
-            console.log("llamando a INIT");
-            getNihToken(vm.token);
+        function init() {
             $scope.formData = {};
+            Object.defineProperty($scope.formData, "add", {
+                set : function (property, value) {$scope.formData.property = value;}
+            });
+
             if ($rootScope.formData !== undefined && $rootScope.formData.userId !== undefined) {
                 $scope.formData = $rootScope.formData;
                 $rootScope.formData = {};
@@ -32,10 +34,10 @@
                     JSON.parse(data.completed);
                     $scope.formData.eraDate = data.eraDate;
                     $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(data.eraDate, data.eraExpiration);
-                    $scope.formData.eraStatus = $scope.eraExpirationCount !== 0;
-                    $scope.formData.eraId = "leouuuu";
-                    $scope.formData.eraLink = "link.bla";
-                    if (data.completed === 'true') {
+                    $scope.formData.eraStatus = data.eraStatus;
+                    $scope.formData.eraId = data.jti;
+                    $scope.formData.eraLink = data.jti;
+                    if (data.completed === 'true' && !persistDarInfo) {
                         $scope.formData.investigator = data.investigator;
                         $scope.formData.institution = data.institution;
                         $scope.formData.department = data.department;
@@ -47,19 +49,25 @@
                         $scope.formData.country = data.country;
                         $scope.formData.state = data.state;
                     }
-                    if(data.completed !== undefined){
+                    if (data.completed !== undefined) {
                         $scope.completed = JSON.parse(data.completed);
+                    }
+                    if (persistDarInfo) {
+                        retrieveTempDarInfo($scope.formData);
                     }
                 });
         }
 
         $scope.$watch("form.step1.$valid", function (value1) {
-            if ($state.current.url === "/step1") {
+            if ($state.current.url === "/step1?token") {
+                console.log("value1 ", value1);
                 $scope.step1isValidated = value1;
             }
         });
 
         $scope.$watch("form.step2.$valid", function (value2) {
+            console.log("value2 ", value2);
+
             if ($state.current.url === "/step2") {
                 $scope.step2isValidated = value2;
             }
@@ -107,16 +115,18 @@
         function attestAndSave() {
             verifyCheckboxes();
             $scope.formData.userId = $rootScope.currentUser.dacUserId;
-            if($scope.formData.dar_code  !== undefined) {
+            if ($scope.formData.dar_code  !== undefined) {
                 $scope.darAction = "edit";
-                if ($scope.eraExpirationCount !== 0 && $scope.step1isValidated !== false && $scope.step2isValidated !== false && $scope.step3isValidated !== false && $scope.atLeastOneCheckboxChecked !== false) {
+                if ($scope.formData.eraStatus && $scope.eraExpirationCount !== 0 && $scope.step1isValidated !== false &&
+                    $scope.step2isValidated !== false && $scope.step3isValidated !== false && $scope.atLeastOneCheckboxChecked !== false) {
                     openResearchConsole();
                 } else {
                     $scope.showValidationMessages = true;
                 }
-            }else{
+            } else {
                 $scope.darAction = "send";
-                if ($scope.eraExpirationCount !== 0 && $scope.step1isValidated && $scope.step2isValidated && $scope.step3isValidated && $scope.atLeastOneCheckboxChecked) {
+                if ($scope.formData.eraStatus && $scope.eraExpirationCount !== 0 && $scope.step1isValidated &&
+                    $scope.step2isValidated && $scope.step3isValidated && $scope.atLeastOneCheckboxChecked) {
                     $scope.showValidationMessages = false;
                     openResearchConsole();
                 } else {
@@ -141,43 +151,43 @@
         }
 
         function redirectToNihLogin() {
-            var landingUrl = "http://mock-nih.dev.test.firecloud.org/link-nih-account/index.html?redirect-url=http://localhost:443/#/rp_application/nih?token%3D%7Btoken%7D";
+            var landingUrl = "http://mock-nih.dev.test.firecloud.org/link-nih-account/index.html?redirect-url=http://localhost:443/#/rp_application/step1?token%3D%7Btoken%7D";
+            $window.localStorage.setItem("tempDar", JSON.stringify($scope.formData));
             $window.location.href = landingUrl;
         }
 
         function getNihToken (token) {
             if (token) {
-                console.log("token recibido ", token);
-                var eraProperties = {};
-                var registerDate = new Date();
-
-                eraProperties.eraToken = token;
-                eraProperties.eraDate = registerDate.getTime();
-                eraProperties.eraExpiration = new Date().setDate(registerDate.getDate() + 30);
-
-                cmResearcherService.verifyNihToken(eraProperties, $rootScope.currentUser.dacUserId).then(
-                        function(resolve) {
-                            console.log("ok", resolve);
-                        },
-                        function(reject) {
-                            console.log("not ok", reject);
-                        }
-                    );
-                    $state.go('rp_application.step1');
-                // return true;
+                cmAuthenticateNihService.verifyNihToken(token, $rootScope.currentUser.dacUserId)
+                .then(function(result) {
+                    retrieveTempDarInfo(result);
+                });
             }
         }
 
         $scope.deleteNihAccount = function () {
-            console.log("delete!!!!!");
             cmAuthenticateNihService.eliminateAccount($rootScope.currentUser.dacUserId).then(function() {
-                $state.go('rp_application.step1', {}, {reload:true});
+                $window.localStorage.setItem("tempDar", JSON.stringify($scope.formData));
+                $state.go('rp_application.step1', {persistInfo: true}, {reload:true});
             });
         };
 
+        function retrieveTempDarInfo (result) {
+            var tempDar = JSON.parse($window.localStorage.getItem("tempDar"));
+            $window.localStorage.clear();
+            $scope.formData = tempDar;
+            $scope.formData.eraDate = result.eraDate === undefined ? null : result.eraDate;
+            $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(result.eraDate, result.eraExpiration);
+            $scope.formData.eraStatus = result.eraStatus;
+            $scope.formData.eraId = result.jti;
+            $scope.formData.eraLink = result.jti;
+        }
+
         function verifyCheckboxes() {
 
-            if ($scope.formData.controls !== true &&
+            if ($scope.formData.eraStatus &&
+                $scope.eraExpirationCount !== 0 &&
+                $scope.formData.controls !== true &&
                 $scope.formData.population !== true &&
                 $scope.formData.diseases !== true &&
                 $scope.formData.methods !== true &&

@@ -2,22 +2,17 @@
     'use strict';
 
     angular.module('cmAuthenticateNih',['ngResource'] )
-        .factory('NIHAccountLinkResource', function($resource, apiUrl) {
-                return $resource(apiUrl + "nihlogin/:userId/:eraToken", {}, {
-                    get: {method: 'GET', params: {userId: '@userId', token: '@eraToken'}}
-                });
-
-            }).
+        .factory('NIHVerifyAccount', function($resource, apiUrl) {
+            var algo = $resource(apiUrl + "nih-login/:userId/:token", {}, {
+                update: {
+                    method:'POST', isArray:false, params: {userId:'@userId', jwt:'@token'}
+                }
+            });
+            return algo;
+        }).
         factory('NIHDeleteAccount', function($resource, apiUrl){
             return $resource(apiUrl + "nih-login/:userId", {}, {
                 delete: {method: 'DELETE', params: {userId: '@userId'}}
         })
     });
-    // angular.module('cmAuthenticateNih',['ngResource'] )
-    //     .factory('NIHAccountLinkResource', function($resource, apiUrl) {
-    //         return $resource(apiUrl + "nihlogin/:userId/:eraToken", {}, {
-    //             post: {method: 'POST', params: {userId: '@userId', token: '@eraToken'}}
-    //         });
-    //     });
-
 })();

@@ -21,14 +21,6 @@
                 method: 'GET', params: {userId: '@userId'}
             }
         });
-    })
-    .factory('ResearcherNihResource', function($resource, apiUrl) {
-        var algo = $resource(apiUrl + "nih-login/:userId/:token", {}, {
-            update: {
-                method:'POST', isArray:false, params: {userId:'@userId', jwt:'@token'}
-            }
-        });
-        return algo;
     });
 
 })();

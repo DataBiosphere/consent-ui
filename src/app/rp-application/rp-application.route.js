@@ -18,8 +18,15 @@
                 }
             })
             .state('rp_application.step1', {
-                url: '/step1',
-                templateUrl: 'app/rp-application/rp-application-f1.html'
+                url: '/step1?token',
+                templateUrl: 'app/rp-application/rp-application-f1.html',
+                params: {
+                    token: null,
+                    persistInfo: false
+                },
+                data: {
+                    authorizedRoles: [USER_ROLES.researcher]
+                }
             })
 
             .state('rp_application.step2', {
@@ -35,32 +42,6 @@
             .state('rp_application.step4', {
                 url: '/step4',
                 templateUrl: 'app/rp-application/rp-application-f4.html'
-            })
-            .state('rp_application.nih', {
-                url: '/nih?token',
-                templateUrl: 'app/rp-application/rp-application-f1.html',
-                params: {
-                    token: null
-                },
-                data: {
-                    authorizedRoles: [USER_ROLES.researcher]
-                },
-                resolve: {
-
-                    token: function ($stateParams, cmResearcherService, $window, $rootScope) {
-                        if ($stateParams.token !== null) {
-                            console.log("llamado a route de nih");
-
-                            // window.location= "http://" + $window.location.host + "#/rp_application/step1";
-                            // $window.location.href("http://" + $window.location.host + "#/rp_application/step1")
-                            // $state.go('rp_application.step1');
-                            return $stateParams;
-                            // return cmResearcherService.verifyNihToken(eraProperties, $rootScope.currentUser.dacUserId);
-                        // return cmResearcherService.updateResearcherProperties(eraProperties, $rootScope.currentUser.dacUserId, false);
-
-                        }
-                    }
-                }
             });
     }
 
