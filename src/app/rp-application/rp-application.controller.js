@@ -60,14 +60,11 @@
 
         $scope.$watch("form.step1.$valid", function (value1) {
             if ($state.current.url === "/step1?token") {
-                console.log("value1 ", value1);
-                $scope.step1isValidated = value1;
+                $scope.step1isValidated = value1 && !!$scope.formData.eraStatus;
             }
         });
 
         $scope.$watch("form.step2.$valid", function (value2) {
-            console.log("value2 ", value2);
-
             if ($state.current.url === "/step2") {
                 $scope.step2isValidated = value2;
             }
@@ -135,7 +132,7 @@
             }
         }
 
-        function partialSave(){
+        function partialSave() {
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/partial-dar-modals/save-confirmation-partial-dar.html',
@@ -151,13 +148,13 @@
         }
 
         function redirectToNihLogin() {
-            var landingUrl = "http://mock-nih.dev.test.firecloud.org/link-nih-account/index.html?redirect-url=http://localhost:443/#/rp_application/step1?token%3D%7Btoken%7D";
+            var landingUrl = "http://mock-nih.dev.test.firecloud.org/link-nih-account/index.html?redirect-url=http://localhost:443/#/rp_application?token%3D%7Btoken%7D";
             $window.localStorage.setItem("tempDar", JSON.stringify($scope.formData));
             $window.location.href = landingUrl;
         }
 
         function getNihToken (token) {
-            if (token) {
+            if (token && $window.localStorage.getItem("tempDar") !== null) {
                 cmAuthenticateNihService.verifyNihToken(token, $rootScope.currentUser.dacUserId)
                 .then(function(result) {
                     retrieveTempDarInfo(result);
@@ -173,21 +170,21 @@
         };
 
         function retrieveTempDarInfo (result) {
-            var tempDar = JSON.parse($window.localStorage.getItem("tempDar"));
-            $window.localStorage.clear();
-            $scope.formData = tempDar;
-            $scope.formData.eraDate = result.eraDate === undefined ? null : result.eraDate;
-            $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(result.eraDate, result.eraExpiration);
-            $scope.formData.eraStatus = result.eraStatus;
-            $scope.formData.eraId = result.jti;
-            $scope.formData.eraLink = result.jti;
+            if ($window.localStorage.getItem("tempDar") !== null) {
+                var tempDar = JSON.parse($window.localStorage.getItem("tempDar"));
+                $window.localStorage.clear();
+                $scope.formData = tempDar;
+                $scope.formData.eraDate = result.eraDate === undefined ? null : result.eraDate;
+                $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(result.eraDate, result.eraExpiration);
+                $scope.formData.eraStatus = result.eraStatus;
+                $scope.formData.eraId = result.jti;
+                $scope.formData.eraLink = result.jti;
+            }
         }
 
         function verifyCheckboxes() {
 
-            if ($scope.formData.eraStatus &&
-                $scope.eraExpirationCount !== 0 &&
-                $scope.formData.controls !== true &&
+            if ($scope.formData.controls !== true &&
                 $scope.formData.population !== true &&
                 $scope.formData.diseases !== true &&
                 $scope.formData.methods !== true &&

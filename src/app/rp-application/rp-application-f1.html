@@ -18,9 +18,9 @@
                        ng-class="step1.inputInvestigator.$invalid && showValidationMessages  ?   'form-control required-field-error' : 'form-control'  " required="required">
             </div>
 
-            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 rp-group">
+            <div ng-show="formData.eraStatus !== true && completed === true"class="col-lg-12 col-md-12 col-sm-6 col-xs-12 rp-group">
                 <label class="control-label">NIH eRA Commons ID*
-                    <span class="cancel-color required-field-error-span" ng-show="false">Required field</span>
+                    <span class="cancel-color required-field-error-span" ng-show="!formData.eraStatus && showValidationMessages">Required field</span>
                 </label>
                 <div ng-show="!formData.eraStatus">
                     <a ng-click="RPApplication.redirectToNihLogin()" target="_blank" class="auth-button eRACommons">

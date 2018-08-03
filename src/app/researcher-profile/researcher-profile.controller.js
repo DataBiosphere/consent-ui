@@ -8,6 +8,9 @@
     /* ngInject */
     function ResearcherProfile($modal, $state, $scope, $rootScope,  cmResearcherService, cmAuthenticateNihService, $window) {
         var vm = this;
+        var persistDarInfo = $state.params.persistInfo;
+        vm.eraToken = $state.params.token !== undefined ? $state.params.token : null;
+        getNihToken(vm.eraToken);
         vm.saveProfile = saveProfile;
         vm.update = update;
         vm.clearNotRelatedPIFields = clearNotRelatedPIFields;
@@ -15,7 +18,6 @@
         vm.clearCommonsFields = clearCommonsFields;
         vm.submit = submit;
         vm.update = update;
-        vm.eraToken = $state.params.token !== undefined ? $state.params.token : null;
         vm.redirectToNihLogin = redirectToNihLogin;
         $scope.formData = {};
         $scope.exists = false;
@@ -24,8 +26,7 @@
         init();
 
         function init(){
-            if($rootScope.currentUser !== undefined && $rootScope.currentUser.dacUserId !== null) {
-                getNihToken(vm.eraToken);
+            if ($rootScope.currentUser !== undefined && $rootScope.currentUser.dacUserId !== null && !persistDarInfo) {
                 $scope.formData = cmResearcherService.getPropertiesByResearcherId($rootScope.currentUser.dacUserId).then(
                     function (data) {
                         if(data.completed !== undefined) { $scope.exists = true;}
@@ -38,6 +39,8 @@
 
                         $scope.formData.profileName = $rootScope.currentUser.displayName;
                     });
+            } else if (persistDarInfo) {
+                retrieveTempDarInfo($scope.formData);
             }
         }
 
@@ -80,35 +83,39 @@
              }
         }
 
+        function redirectToNihLogin() {
+            var landingUrl = "http://mock-nih.dev.test.firecloud.org/link-nih-account/index.html?redirect-url=http://localhost:443/#/researcher_profile?token%3D%7Btoken%7D";
+            $window.localStorage.setItem("tempDar", JSON.stringify($scope.formData));
+            $window.location.href = landingUrl;
+        }
+
         function getNihToken (token) {
-            if (token) {
-                var eraProperties = {};
-                eraProperties.eraToken = token;
+            if (token && $window.localStorage.getItem("tempDar") !== null) {
                 cmAuthenticateNihService.verifyNihToken(token, $rootScope.currentUser.dacUserId)
-                    .then(
-                        function(resolve) {
-                            console.log("ok", resolve);
-                            return "ok";
-                        },
-                        function(reject) {
-                            console.log("not ok", reject);
-                            return "not ok";
-                        }
-                    );
-                $state.go('researcher_profile', {}, {reload:true});
+                    .then(function(result) {
+                        retrieveTempDarInfo(result);
+                    });
             }
         }
 
         $scope.deleteNihAccount = function () {
-            console.log("delete!!!!!");
             cmAuthenticateNihService.eliminateAccount($rootScope.currentUser.dacUserId).then(function() {
-                $state.go('researcher_profile', {}, {reload:true});
+                $window.localStorage.setItem("tempDar", JSON.stringify($scope.formData));
+                $state.go('researcher_profile', {persistInfo: true}, {reload:true});
             });
         };
 
-        function redirectToNihLogin() {
-            var landingUrl = "http://mock-nih.dev.test.firecloud.org/link-nih-account/index.html?redirect-url=http://localhost:443/#/researcher_profile/nih?token%3D%7Btoken%7D";
-            $window.location.href = landingUrl;
+        function retrieveTempDarInfo (result) {
+            if ($window.localStorage.getItem("tempDar") !== null) {
+                var tempDar = JSON.parse($window.localStorage.getItem("tempDar"));
+                $window.localStorage.clear();
+                $scope.formData = tempDar;
+                $scope.formData.eraDate = result.eraDate === undefined ? null : result.eraDate;
+                $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(result.eraDate, result.eraExpiration);
+                $scope.formData.eraStatus = result.eraStatus;
+                $scope.formData.eraId = result.jti;
+                $scope.formData.eraLink = result.jti;
+            }
         }
 
         function clearNoHasPIFields(){

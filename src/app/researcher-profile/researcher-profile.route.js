@@ -10,34 +10,18 @@
         $stateProvider
             .state('researcher_profile', {
                 name: 'researcher_profile',
-                url: '/researcher_profile',
-                templateUrl: 'app/researcher-profile/researcher-profile.html',
-                controller: 'ResearcherProfile',
-                controllerAs: 'ResearcherProfile',
-                data: {
-                    authorizedRoles: [USER_ROLES.researcher]
-                }
-            })
-            .state('researcher_profile.nih', {
-                name: 'nih',
-                url: '/nih?token',
+                url: '/researcher_profile?token',
                 templateUrl: 'app/researcher-profile/researcher-profile.html',
                 controller: 'ResearcherProfile',
                 controllerAs: 'ResearcherProfile',
                 params: {
-                    token: null
+                    token: null,
+                    persistInfo: false
                 },
                 data: {
                     authorizedRoles: [USER_ROLES.researcher]
-                },
-                resolve: {
-                    token: function ($stateParams) {
-                        if ($stateParams.token !== null) {
-                            return $stateParams;
-                        }
-                    }
                 }
-            });
+            })
     }
 
 })();

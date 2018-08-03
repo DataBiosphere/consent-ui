@@ -13,6 +13,6 @@
         factory('NIHDeleteAccount', function($resource, apiUrl){
             return $resource(apiUrl + "nih-login/:userId", {}, {
                 delete: {method: 'DELETE', params: {userId: '@userId'}}
-        })
+        });
     });
 })();
