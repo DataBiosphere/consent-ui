@@ -134,6 +134,10 @@ small {
     list-style: none;
 }
 
+.display-block {
+    display: block !important;
+}
+
 .display-inline {
     display: inline !important;
 }
