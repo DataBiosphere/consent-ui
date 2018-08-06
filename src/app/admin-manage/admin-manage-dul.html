@@ -51,7 +51,7 @@
                     <span ng-if="election.electionStatus == 'un-reviewed'"><a ng-click="AdminManage.open(election.consentId, 'dul_preview_results', null, false)">Un-reviewed</a></span>
                     <span ng-if="election.electionStatus == 'Open'"><a ng-click="AdminManage.open(election.consentId, 'dul_review_results', null, false)">Open</a></span>
                     <span ng-if="election.electionStatus == 'Canceled'"><a ng-click="AdminManage.open(election.consentId, 'dul_preview_results', null, false)">Canceled</a></span>
-                    <span ng-if="election.electionStatus == 'Closed'"><a ng-click="AdminManage.open(null, 'dul_results_record', election.electionId, false)">Reviewed</a></span>
+                    <span ng-if="election.electionStatus == 'Closed'"><a ng-click="AdminManage.open(null, 'dul_results_record', election.electionId, false)">{{election.vote}}</a></span>
                 </div>
                 <div class="col-1 cell-body f-center">
                     <button ng-if="election.electionStatus != 'Open'" ng-disabled="!election.editable" class="cell-button hover-color" ng-click="AdminManage.openCreate(election)">Create</button>
