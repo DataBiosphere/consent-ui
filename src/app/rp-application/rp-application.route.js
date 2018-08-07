@@ -17,15 +17,21 @@
                     authorizedRoles: [USER_ROLES.researcher]
                 }
             })
-            .state('rp_application.step1', {
+            .state('rp_application.step1token', {
                 url: '/step1?token',
                 templateUrl: 'app/rp-application/rp-application-f1.html',
                 params: {
-                    token: null,
-                    persistInfo: false
+                    token: null
                 },
                 data: {
                     authorizedRoles: [USER_ROLES.researcher]
+                }
+            })
+            .state('rp_application.step1', {
+                url: '/step1',
+                templateUrl: 'app/rp-application/rp-application-f1.html',
+                params: {
+                    persistInfo: false
                 }
             })
 

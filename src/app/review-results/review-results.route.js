@@ -117,7 +117,8 @@
                 resolve: {
                     dar: function ($stateParams, cmRPService) {
                         if ($stateParams.referenceId !== null) {
-                            return cmRPService.getDarFields($stateParams.referenceId, "rus");
+                            // return cmRPService.getDarFields($stateParams.referenceId, "rus");
+                            return cmRPService.describeCreatedDar($stateParams.referenceId);
                         }
                     },
                     rp: function ($stateParams, cmRPService) {

@@ -6,7 +6,7 @@
         .controller('ResearcherProfile', ResearcherProfile);
 
     /* ngInject */
-    function ResearcherProfile($modal, $state, $scope, $rootScope,  cmResearcherService, cmAuthenticateNihService, $window) {
+    function ResearcherProfile($modal, $state, $scope, $rootScope,  cmResearcherService, cmAuthenticateNihService, $window, nihUrl) {
         var vm = this;
         var persistDarInfo = $state.params.persistInfo;
         vm.eraToken = $state.params.token !== undefined ? $state.params.token : null;
@@ -29,13 +29,13 @@
             if ($rootScope.currentUser !== undefined && $rootScope.currentUser.dacUserId !== null && !persistDarInfo) {
                 $scope.formData = cmResearcherService.getPropertiesByResearcherId($rootScope.currentUser.dacUserId).then(
                     function (data) {
-                        if(data.completed !== undefined) { $scope.exists = true;}
-                        if(data.isThePI !== undefined) { data.isThePI = JSON.parse(data.isThePI);}
-                        if(data.havePI !== undefined) { data.havePI = JSON.parse(data.havePI);}
-                        if(data.eraStatus !== undefined) { data.eraStatus = JSON.parse(data.eraStatus);}
+                        if (data.completed !== undefined) { $scope.exists = true;}
+                        if (data.isThePI !== undefined) { data.isThePI = JSON.parse(data.isThePI);}
+                        if (data.havePI !== undefined) { data.havePI = JSON.parse(data.havePI);}
+                        if (data.eraStatus !== undefined) { data.eraStatus = JSON.parse(data.eraStatus);}
                         $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(data.eraDate, data.eraExpiration);
                         $scope.formData = data;
-                        $scope.formData.eraId = data.jti;
+                        $scope.formData.nihUsername = data.nihUsername;
 
                         $scope.formData.profileName = $rootScope.currentUser.displayName;
                     });
@@ -84,7 +84,7 @@
         }
 
         function redirectToNihLogin() {
-            var landingUrl = "http://mock-nih.dev.test.firecloud.org/link-nih-account/index.html?redirect-url=http://localhost:443/#/researcher_profile?token%3D%7Btoken%7D";
+            var landingUrl = nihUrl + $window.location.href + "?token%3D%7Btoken%7D";
             $window.localStorage.setItem("tempDar", JSON.stringify($scope.formData));
             $window.location.href = landingUrl;
         }
@@ -113,8 +113,7 @@
                 $scope.formData.eraDate = result.eraDate === undefined ? null : result.eraDate;
                 $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(result.eraDate, result.eraExpiration);
                 $scope.formData.eraStatus = result.eraStatus;
-                $scope.formData.eraId = result.jti;
-                $scope.formData.eraLink = result.jti;
+                $scope.formData.nihUsername = result.nihUsername;
             }
         }
 

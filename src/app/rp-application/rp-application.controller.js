@@ -5,7 +5,7 @@
         .controller('RPApplication', RPApplication);
 
     /* ngInject */
-    function RPApplication($state, $scope, $modal, cmRPService, $rootScope, gwasUrl, cmResearcherService, cmAuthenticateNihService, $window) {
+    function RPApplication($state, $scope, $modal, cmRPService, $rootScope, gwasUrl, cmResearcherService, cmAuthenticateNihService, $window, nihUrl) {
         var vm = this;
         var persistDarInfo = $state.params.persistInfo;
         vm.token = $state.params.token !== undefined ? $state.params.token : null;
@@ -35,8 +35,7 @@
                     $scope.formData.eraDate = data.eraDate;
                     $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(data.eraDate, data.eraExpiration);
                     $scope.formData.eraStatus = data.eraStatus;
-                    $scope.formData.eraId = data.jti;
-                    $scope.formData.eraLink = data.jti;
+                    $scope.formData.nihUsername = data.nihUsername;
                     if (data.completed === 'true' && !persistDarInfo) {
                         $scope.formData.investigator = data.investigator;
                         $scope.formData.institution = data.institution;
@@ -148,7 +147,7 @@
         }
 
         function redirectToNihLogin() {
-            var landingUrl = "http://mock-nih.dev.test.firecloud.org/link-nih-account/index.html?redirect-url=http://localhost:443/#/rp_application?token%3D%7Btoken%7D";
+            var landingUrl = nihUrl + $window.location.href + "?token%3D%7Btoken%7D";
             $window.localStorage.setItem("tempDar", JSON.stringify($scope.formData));
             $window.location.href = landingUrl;
         }
@@ -166,6 +165,7 @@
             cmAuthenticateNihService.eliminateAccount($rootScope.currentUser.dacUserId).then(function() {
                 $window.localStorage.setItem("tempDar", JSON.stringify($scope.formData));
                 $state.go('rp_application.step1', {persistInfo: true}, {reload:true});
+
             });
         };
 
@@ -177,8 +177,7 @@
                 $scope.formData.eraDate = result.eraDate === undefined ? null : result.eraDate;
                 $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(result.eraDate, result.eraExpiration);
                 $scope.formData.eraStatus = result.eraStatus;
-                $scope.formData.eraId = result.jti;
-                $scope.formData.eraLink = result.jti;
+                $scope.formData.nihUsername = result.nihUsername;
             }
         }
 

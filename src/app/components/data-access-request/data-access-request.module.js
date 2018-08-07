@@ -62,7 +62,10 @@
                 {get: {method: 'GET'}, params: {id: '@id'}}
             );
         })
-
+        .factory('getDarFromMongo', function ($resource, apiUrl) {
+            return $resource(apiUrl + "dar/:darId", {},
+                {get: {method: 'GET'}, params: {darId: '@darId'}});
+        })
         // Partial DAR Requests
         .factory('partialDataAccessRequestManageResource', function ($resource, apiUrl) {
             return $resource(apiUrl + "dar/partials/manage?userId=:userId", {},

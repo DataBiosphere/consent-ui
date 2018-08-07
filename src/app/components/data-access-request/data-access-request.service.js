@@ -7,7 +7,7 @@
 
         /* ngInject */
 
-        function cmDataAccessRequest(dataAccessInvalidUseRestriction, dataAccessRequestResource, partialDARFromCatalogResource, dataAccessRequestCancel, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields, dataAccessRequestManageResource, updateDataAccessRequestResource, darModalSummary, partialDataAccessRequestManageResource, partialDataAccessRequestResource, postPartialDarResource, restrictionDataAccessRequestResource, cmResearcherService) {
+        function cmDataAccessRequest(dataAccessInvalidUseRestriction, dataAccessRequestResource, partialDARFromCatalogResource, dataAccessRequestCancel, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields, dataAccessRequestManageResource, updateDataAccessRequestResource, darModalSummary, partialDataAccessRequestManageResource, partialDataAccessRequestResource, postPartialDarResource, restrictionDataAccessRequestResource, cmResearcherService, getDarFromMongo) {
 
             function describeDar(darId) {
                 var darInfo = {};
@@ -44,10 +44,16 @@
                         darInfo.department = data.department;
                         darInfo.city = data.city;
                         darInfo.country = data.country;
+                        darInfo.haveEraId = !!data.nihUsername;
+                        darInfo.nihUsername = darInfo.haveEraId ? data.nihUsername : null;
                         return new Promise(function (resolve) {
                             resolve(darInfo);
                         });
                     });
+            }
+
+            function describeCreatedDar (darId) {
+                return getDarFromMongo.get({darId: darId}).$promise;
             }
 
             function requiresManualReview(object) {
@@ -218,7 +224,11 @@
                 },
                 findInvalidDataAccessUseRestriction: function (vm) {
                     return findInvalidDataAccessUseRestriction(vm);
+                },
+                describeCreatedDar: function (darId) {
+                    return describeCreatedDar (darId);
                 }
+
             };
 
         }
