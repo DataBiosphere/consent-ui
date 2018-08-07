@@ -10,15 +10,23 @@
         function cmDataAccessRequest(dataAccessInvalidUseRestriction, dataAccessRequestResource, partialDARFromCatalogResource, dataAccessRequestCancel, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields, dataAccessRequestManageResource, updateDataAccessRequestResource, darModalSummary, partialDataAccessRequestManageResource, partialDataAccessRequestResource, postPartialDarResource, restrictionDataAccessRequestResource, cmResearcherService, getDarFromMongo) {
 
             function describeDar(darId) {
-                var darInfo = {};
                 return getDarModalSummary(darId)
                     .then(function (data) {
-
+                        var darInfo = {};
                         darInfo.researcherId = data.userId;
+                        darInfo.profileName = data.researcherName;
                         darInfo.status = data.status;
+                        darInfo.haveEraId = data.havenihUserName;
+                        darInfo.nihUsername = data.nihUserName;
                         darInfo.hasAdminComment = data.rationale !== null;
                         darInfo.adminComment = data.rationale;
                         darInfo.hasPurposeStatements = data.purposeStatements.length > 0;
+                        darInfo.institution = data.institutionName;
+                        darInfo.department = data.department;
+                        darInfo.city = data.city;
+                        darInfo.country = data.country;
+                        darInfo.havePI = data.havePi;
+                        darInfo.pi = data.isThePi === true ? data.researcherName : data.principalInvestigator;
 
                         if (darInfo.hasPurposeStatements) {
                             darInfo.purposeStatements = data.purposeStatements;
@@ -34,21 +42,7 @@
                             darInfo.researchType = data.researchType;
                             darInfo.researchTypeManualReview = requiresManualReview(darInfo.researchType);
                         }
-                        return cmResearcherService.getResearcherPropertiesForDAR(darInfo.researcherId);
-                    })
-                    .then(function (data) {
-                        darInfo.pi = data.isThePI === 'true' ? data.profileName : data.piName;
-                        darInfo.havePI = data.havePI === 'true' || data.isThePI === 'true';
-                        darInfo.profileName = data.profileName;
-                        darInfo.institution = data.institution;
-                        darInfo.department = data.department;
-                        darInfo.city = data.city;
-                        darInfo.country = data.country;
-                        darInfo.haveEraId = !!data.nihUsername;
-                        darInfo.nihUsername = darInfo.haveEraId ? data.nihUsername : null;
-                        return new Promise(function (resolve) {
-                            resolve(darInfo);
-                        });
+                        return darInfo;
                     });
             }
 

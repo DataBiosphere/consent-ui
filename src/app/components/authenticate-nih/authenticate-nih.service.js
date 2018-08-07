@@ -5,7 +5,7 @@
         .service('cmAuthenticateNihService', cmAuthenticateNihService);
 
     /* ngInject */
-    function cmAuthenticateNihService(NIHDeleteAccount, NIHVerifyAccount, $window) {
+    function cmAuthenticateNihService(NIHDeleteAccount, NIHVerifyAccount) {
 
         function verifyNihToken(token, userId) {
             return NIHVerifyAccount.update({userId: userId, token: token},{}).$promise;

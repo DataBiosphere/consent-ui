@@ -47,6 +47,8 @@
                         $scope.formData.zipcode = data.zipcode;
                         $scope.formData.country = data.country;
                         $scope.formData.state = data.state;
+                        $scope.formData.isThePi = data.isThePi;
+                        $scope.formData.havePI = data.havePI;
                     }
                     if (data.completed !== undefined) {
                         $scope.completed = JSON.parse(data.completed);
