@@ -49,7 +49,7 @@
                                 <span ng-if="dar.electionStatus == 'un-reviewed'"><a ng-click="AdminManageAccess.open('access_preview_results', dar.electionId, dar.dataRequestId)">Un-reviewed</a></span>
                                 <span ng-if="dar.electionStatus == 'Open' || dar.electionStatus == 'Final'"><a ng-click="AdminManageAccess.open('access_review_results', dar.electionId, dar.dataRequestId)">Open</a></span>
                                 <span ng-if="dar.electionStatus == 'Canceled'"><a ng-click="AdminManageAccess.open('access_preview_results', dar.electionId, dar.dataRequestId)">Canceled</a></span>
-                                <span ng-if="dar.electionStatus == 'Closed' || dar.electionStatus == 'PendingApproval'"><a ng-click="AdminManageAccess.open('access_results_record', dar.electionId, dar.dataRequestId)">Reviewed</a></span>
+                                <span ng-if="dar.electionStatus == 'Closed' || dar.electionStatus == 'PendingApproval'"><a ng-click="AdminManageAccess.open('access_results_record', dar.electionId, dar.dataRequestId)">{{!dar.electionVote ? 'Denied' : 'Approved' }}</a></span>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 no-padding">
                                 <div class="row no-margin">
