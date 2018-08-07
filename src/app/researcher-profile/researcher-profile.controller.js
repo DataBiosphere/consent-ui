@@ -89,6 +89,8 @@
             $window.location.href = landingUrl;
         }
 
+        // This method intercepts nih token, validates it and stores it if its ok.
+        // Will retrieve form's data before redirection using localStorage "tempDar" key.
         function getNihToken (token) {
             if (token && $window.localStorage.getItem("tempDar") !== null) {
                 cmAuthenticateNihService.verifyNihToken(token, $rootScope.currentUser.dacUserId)
@@ -98,6 +100,8 @@
             }
         }
 
+        // This method also retains form data when the page reloads to show era credentials ui effect after deleting ERA credentials.
+        // In order to reload persisting info, a param for this purpose is passed in state.go.
         $scope.deleteNihAccount = function () {
             cmAuthenticateNihService.eliminateAccount($rootScope.currentUser.dacUserId).then(function() {
                 $window.localStorage.setItem("tempDar", JSON.stringify($scope.formData));
@@ -105,6 +109,8 @@
             });
         };
 
+        // Using local storage, this method retrieves form info data before any redirection from ERA Commons authentication
+        // Used Local Storage is cleared after its use.
         function retrieveTempDarInfo (result) {
             if ($window.localStorage.getItem("tempDar") !== null) {
                 var tempDar = JSON.parse($window.localStorage.getItem("tempDar"));

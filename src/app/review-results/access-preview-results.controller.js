@@ -8,8 +8,6 @@
 
         $scope.hasAdminRole = $rootScope.hasRole($rootScope.userRoles.admin);
         $scope.dar = dar;
-        $scope.nihUsername = dar.nihUsername;
-        $scope.haveEraId = !!dar.nihUsername;
         $scope.request = request;
         $scope.rus = dar.rus;
         $scope.consent = consent;

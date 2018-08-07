@@ -7,7 +7,7 @@
 
         /* ngInject */
 
-        function cmDataAccessRequest(dataAccessInvalidUseRestriction, dataAccessRequestResource, partialDARFromCatalogResource, dataAccessRequestCancel, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields, dataAccessRequestManageResource, updateDataAccessRequestResource, darModalSummary, partialDataAccessRequestManageResource, partialDataAccessRequestResource, postPartialDarResource, restrictionDataAccessRequestResource, cmResearcherService, getDarFromMongo) {
+        function cmDataAccessRequest(dataAccessInvalidUseRestriction, dataAccessRequestResource, partialDARFromCatalogResource, dataAccessRequestCancel, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields, dataAccessRequestManageResource, updateDataAccessRequestResource, darModalSummary, partialDataAccessRequestManageResource, partialDataAccessRequestResource, postPartialDarResource, restrictionDataAccessRequestResource) {
 
             function describeDar(darId) {
                 return getDarModalSummary(darId)
@@ -44,10 +44,6 @@
                         }
                         return darInfo;
                     });
-            }
-
-            function describeCreatedDar (darId) {
-                return getDarFromMongo.get({darId: darId}).$promise;
             }
 
             function requiresManualReview(object) {
@@ -218,11 +214,7 @@
                 },
                 findInvalidDataAccessUseRestriction: function (vm) {
                     return findInvalidDataAccessUseRestriction(vm);
-                },
-                describeCreatedDar: function (darId) {
-                    return describeCreatedDar (darId);
                 }
-
             };
 
         }

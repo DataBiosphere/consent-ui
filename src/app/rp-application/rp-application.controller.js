@@ -9,6 +9,7 @@
         var vm = this;
         var persistDarInfo = $state.params.persistInfo;
         vm.token = $state.params.token !== undefined ? $state.params.token : null;
+        vm.reviewMode = false;
         getNihToken(vm.token);
         vm.attestAndSave = attestAndSave;
         vm.partialSave = partialSave;
@@ -26,37 +27,35 @@
 
             if ($rootScope.formData !== undefined && $rootScope.formData.userId !== undefined) {
                 $scope.formData = $rootScope.formData;
+                vm.reviewMode = true;
                 $rootScope.formData = {};
+            } else {
+                cmResearcherService.getResearcherPropertiesForDAR($rootScope.currentUser.dacUserId).then(
+                    function (data) {
+                        $scope.formData.eraDate = data.eraDate;
+                        $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(data.eraDate, data.eraExpiration);
+                        $scope.formData.eraStatus = data.eraStatus;
+                        $scope.formData.nihUsername = data.nihUsername;
+                        if (data.completed === 'true' && !persistDarInfo) {
+                            $scope.formData.investigator = data.investigator;
+                            $scope.formData.institution = data.institution;
+                            $scope.formData.department = data.department;
+                            $scope.formData.division = data.division;
+                            $scope.formData.address1 = data.address1;
+                            $scope.formData.address2 = data.address2;
+                            $scope.formData.city = data.city;
+                            $scope.formData.zipcode = data.zipcode;
+                            $scope.formData.country = data.country;
+                            $scope.formData.state = data.state;
+                        }
+                        if (data.completed !== undefined) {
+                            $scope.completed = JSON.parse(data.completed);
+                        }
+                        if (persistDarInfo) {
+                            retrieveTempDarInfo($scope.formData);
+                        }
+                    });
             }
-
-            cmResearcherService.getResearcherPropertiesForDAR($rootScope.currentUser.dacUserId).then(
-                function (data) {
-                    JSON.parse(data.completed);
-                    $scope.formData.eraDate = data.eraDate;
-                    $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(data.eraDate, data.eraExpiration);
-                    $scope.formData.eraStatus = data.eraStatus;
-                    $scope.formData.nihUsername = data.nihUsername;
-                    if (data.completed === 'true' && !persistDarInfo) {
-                        $scope.formData.investigator = data.investigator;
-                        $scope.formData.institution = data.institution;
-                        $scope.formData.department = data.department;
-                        $scope.formData.division = data.division;
-                        $scope.formData.address1 = data.address1;
-                        $scope.formData.address2 = data.address2;
-                        $scope.formData.city = data.city;
-                        $scope.formData.zipcode = data.zipcode;
-                        $scope.formData.country = data.country;
-                        $scope.formData.state = data.state;
-                        $scope.formData.isThePi = data.isThePi;
-                        $scope.formData.havePI = data.havePI;
-                    }
-                    if (data.completed !== undefined) {
-                        $scope.completed = JSON.parse(data.completed);
-                    }
-                    if (persistDarInfo) {
-                        retrieveTempDarInfo($scope.formData);
-                    }
-                });
         }
 
         $scope.$watch("form.step1.$valid", function (value1) {
@@ -154,6 +153,8 @@
             $window.location.href = landingUrl;
         }
 
+        // This method intercepts nih token, validates it and stores it if its ok.
+        // Will retrieve form's data before redirection using localStorage "tempDar" key.
         function getNihToken (token) {
             if (token && $window.localStorage.getItem("tempDar") !== null) {
                 cmAuthenticateNihService.verifyNihToken(token, $rootScope.currentUser.dacUserId)
@@ -163,6 +164,8 @@
             }
         }
 
+        // This method also retains form data when the page reloads to show era credentials ui effect after deleting ERA credentials.
+        // In order to reload persisting info, a param for this purpose is passed in state.go.
         $scope.deleteNihAccount = function () {
             cmAuthenticateNihService.eliminateAccount($rootScope.currentUser.dacUserId).then(function() {
                 $window.localStorage.setItem("tempDar", JSON.stringify($scope.formData));
@@ -171,6 +174,8 @@
             });
         };
 
+        // Using local storage, this method retrieves form info data before any redirection from ERA Commons authentication
+        // Used Local Storage is cleared after its use.
         function retrieveTempDarInfo (result) {
             if ($window.localStorage.getItem("tempDar") !== null) {
                 var tempDar = JSON.parse($window.localStorage.getItem("tempDar"));

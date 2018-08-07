@@ -7,6 +7,7 @@
     /* ngInject */
     function cmResearcherService(ResearcherResource, ResearcherGetResource) {
 
+
         function getPropertiesByResearcherId(userId) {
             return ResearcherResource.List({userId: userId}).$promise;
         }
