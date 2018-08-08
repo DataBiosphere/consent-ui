@@ -44,7 +44,6 @@
     /* ngInject */
     function ApplicationController($rootScope, USER_ROLES, clientId, linkedinApiKey, cmLoginUserService) {
         $rootScope.clientId = clientId;
-        $rootScope.linkedinApiKey = linkedinApiKey;
         $rootScope.currentUser = null;
         $rootScope.userRoles = USER_ROLES;
         $rootScope.dateFormat = 'yyyy-MM-dd';
