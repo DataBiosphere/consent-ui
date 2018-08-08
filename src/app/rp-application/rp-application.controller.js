@@ -34,7 +34,7 @@
                     function (data) {
                         $scope.formData.eraDate = data.eraDate;
                         $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(data.eraDate, data.eraExpiration);
-                        $scope.formData.eraStatus = data.eraStatus;
+                        $scope.formData.eraAuthorized = data.eraAuthorized;
                         $scope.formData.nihUsername = data.nihUsername;
                         if (data.completed === 'true' && !persistDarInfo) {
                             $scope.formData.investigator = data.investigator;
@@ -60,7 +60,7 @@
 
         $scope.$watch("form.step1.$valid", function (value1) {
             if ($state.current.url === "/step1?token") {
-                $scope.step1isValidated = value1 && !!$scope.formData.eraStatus;
+                $scope.step1isValidated = value1 && !!$scope.formData.eraAuthorized;
             }
         });
 
@@ -114,7 +114,7 @@
             $scope.formData.userId = $rootScope.currentUser.dacUserId;
             if ($scope.formData.dar_code  !== undefined) {
                 $scope.darAction = "edit";
-                if ($scope.formData.eraStatus && $scope.eraExpirationCount !== 0 && $scope.step1isValidated !== false &&
+                if ($scope.formData.eraAuthorized && $scope.eraExpirationCount !== 0 && $scope.step1isValidated !== false &&
                     $scope.step2isValidated !== false && $scope.step3isValidated !== false && $scope.atLeastOneCheckboxChecked !== false) {
                     openResearchConsole();
                 } else {
@@ -122,7 +122,7 @@
                 }
             } else {
                 $scope.darAction = "send";
-                if ($scope.formData.eraStatus && $scope.eraExpirationCount !== 0 && $scope.step1isValidated &&
+                if ($scope.formData.eraAuthorized && $scope.eraExpirationCount !== 0 && $scope.step1isValidated &&
                     $scope.step2isValidated && $scope.step3isValidated && $scope.atLeastOneCheckboxChecked) {
                     $scope.showValidationMessages = false;
                     openResearchConsole();
@@ -148,7 +148,7 @@
         }
 
         function redirectToNihLogin() {
-            var landingUrl = nihUrl + $window.location.href + "?token%3D%7Btoken%7D";
+            var landingUrl = nihUrl.concat($window.location.origin + "/#/rp_application/step1?token%3D%7Btoken%7D");
             $window.localStorage.setItem("tempDar", JSON.stringify($scope.formData));
             $window.location.href = landingUrl;
         }
@@ -183,7 +183,7 @@
                 $scope.formData = tempDar;
                 $scope.formData.eraDate = result.eraDate === undefined ? null : result.eraDate;
                 $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(result.eraDate, result.eraExpiration);
-                $scope.formData.eraStatus = result.eraStatus;
+                $scope.formData.eraAuthorized = result.eraAuthorized;
                 $scope.formData.nihUsername = result.nihUsername;
             }
         }

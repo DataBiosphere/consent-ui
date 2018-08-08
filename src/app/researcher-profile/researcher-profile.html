@@ -26,13 +26,13 @@
 
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                 <label class="control-label">NIH eRA Commons ID <span class="italic">(optional)</span></label>
-                <div ng-show="!formData.eraStatus">
+                <div ng-show="!formData.eraAuthorized">
                     <a ng-click="ResearcherProfile.redirectToNihLogin()" target="_blank" class="auth-button eRACommons">
                         <div class="logo"></div>
                         <span>Authenticate your account</span>
                     </a>
                 </div>
-                <div ng-show="formData.eraStatus">
+                <div ng-show="formData.eraAuthorized">
                     <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 no-padding">
                         <div class="auth-id">{{formData.nihUsername}}</div>
                         <button type="button" class="close auth-clear" ng-click="deleteNihAccount()" tooltip-class="tooltip-class-dark" tooltip-trigger tooltip-placement="right"
