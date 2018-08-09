@@ -15,7 +15,7 @@
                 controller: 'ResearcherProfile',
                 controllerAs: 'ResearcherProfile',
                 params: {
-                    token: null,
+                    token: null
                 },
                 data: {
                     authorizedRoles: [USER_ROLES.researcher]

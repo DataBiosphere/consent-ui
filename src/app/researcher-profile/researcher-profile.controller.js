@@ -85,8 +85,6 @@
 
         function redirectToNihLogin() {
             var landingUrl = nihUrl.concat($window.location.origin + "/#/researcher_profile?token%3D%7Btoken%7D");
-            // var landingUrl = nihUrl.concat("http://localhost:443/" + "/rp_application/step1?token%3D%7Btoken%7D");
-
             $window.localStorage.setItem("tempDar", JSON.stringify($scope.formData));
             $window.location.href = landingUrl;
         }

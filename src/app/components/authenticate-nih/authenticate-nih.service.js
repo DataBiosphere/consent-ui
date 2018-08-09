@@ -8,7 +8,7 @@
     function cmAuthenticateNihService(NIHDeleteAccount, NIHVerifyAccount) {
 
         function verifyNihToken(token, userId) {
-            return NIHVerifyAccount.update({userId: userId, token: token},{}).$promise;
+            return NIHVerifyAccount.post({userId: userId, token: token},{}).$promise;
         }
 
         function eliminateAccount (userId) {

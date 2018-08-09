@@ -3,12 +3,11 @@
 
     angular.module('cmAuthenticateNih',['ngResource'] )
         .factory('NIHVerifyAccount', function($resource, apiUrl) {
-            var algo = $resource(apiUrl + "nih-login/:userId/:token", {}, {
-                update: {
+            return $resource(apiUrl + "nih-login/:userId/:token", {}, {
+                post: {
                     method:'POST', isArray:false, params: {userId:'@userId', jwt:'@token'}
                 }
             });
-            return algo;
         }).
         factory('NIHDeleteAccount', function($resource, apiUrl){
             return $resource(apiUrl + "nih-login/:userId", {}, {
