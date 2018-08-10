@@ -59,8 +59,8 @@
         }
 
         $scope.$watch("form.step1.$valid", function (value1) {
-            if ($state.current.url === "/step1?token") {
-                $scope.step1isValidated = value1 && !!$scope.formData.eraAuthorized;
+            if ($state.current.url === "/step1?token" || $state.current.url === "/step1") {
+                $scope.step1isValidated = value1 && $scope.formData.eraAuthorized === 'true';
             }
         });
 
@@ -114,7 +114,7 @@
             $scope.formData.userId = $rootScope.currentUser.dacUserId;
             if ($scope.formData.dar_code  !== undefined) {
                 $scope.darAction = "edit";
-                if ($scope.formData.eraAuthorized && $scope.eraExpirationCount !== 0 && $scope.step1isValidated !== false &&
+                if ($scope.formData.eraAuthorized === 'true' && $scope.eraExpirationCount !== 0 && $scope.step1isValidated !== false &&
                     $scope.step2isValidated !== false && $scope.step3isValidated !== false && $scope.atLeastOneCheckboxChecked !== false) {
                     openResearchConsole();
                 } else {
@@ -122,7 +122,7 @@
                 }
             } else {
                 $scope.darAction = "send";
-                if ($scope.formData.eraAuthorized && $scope.eraExpirationCount !== 0 && $scope.step1isValidated &&
+                if ($scope.formData.eraAuthorized === 'true' && $scope.eraExpirationCount !== 0 && $scope.step1isValidated &&
                     $scope.step2isValidated && $scope.step3isValidated && $scope.atLeastOneCheckboxChecked) {
                     $scope.showValidationMessages = false;
                     openResearchConsole();
@@ -149,7 +149,9 @@
 
         function redirectToNihLogin() {
             var landingUrl = nihUrl.concat($window.location.origin + "/#/rp_application/step1?token%3D%7Btoken%7D");
+            var steps = {step2isValidated: $scope.step2isValidated, step3isValidated: $scope.step3isValidated};
             $window.localStorage.setItem("tempDar", JSON.stringify($scope.formData));
+            $window.localStorage.setItem("tempSteps", JSON.stringify(steps));
             $window.location.href = landingUrl;
         }
 
@@ -168,7 +170,9 @@
         // In order to reload persisting info, a param for this purpose is passed in state.go.
         $scope.deleteNihAccount = function () {
             cmAuthenticateNihService.eliminateAccount($rootScope.currentUser.dacUserId).then(function() {
+                var steps = {step2isValidated: $scope.step2isValidated, step3isValidated: $scope.step3isValidated};
                 $window.localStorage.setItem("tempDar", JSON.stringify($scope.formData));
+                $window.localStorage.setItem("tempSteps", JSON.stringify(steps));
                 $state.go('rp_application.step1', {persistInfo: true}, {reload:true});
 
             });
@@ -179,8 +183,11 @@
         function retrieveTempDarInfo (result) {
             if ($window.localStorage.getItem("tempDar") !== null) {
                 var tempDar = JSON.parse($window.localStorage.getItem("tempDar"));
+                var tempSteps = JSON.parse($window.localStorage.getItem("tempSteps"));
                 $window.localStorage.clear();
                 $scope.formData = tempDar;
+                $scope.step2isValidated = tempSteps.step2isValidated;
+                $scope.step3isValidated = tempSteps.step3isValidated;
                 $scope.formData.eraDate = result.eraDate === undefined ? null : result.eraDate;
                 $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(result.eraDate, result.eraExpiration);
                 $scope.formData.eraAuthorized = result.eraAuthorized;
