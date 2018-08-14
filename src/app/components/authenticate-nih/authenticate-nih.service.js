@@ -15,13 +15,22 @@
             return NIHDeleteAccount.delete({userId: userId}).$promise;
         }
 
-        function expirationCount (regDate, expDate) {
-            var count = new Date(parseInt(expDate) - parseInt(regDate));
+        function expirationCount (expDate) {
+            var currentDate = new Date().getTime();
+            var millisecondsPerDay = 24 * 60 * 60 * 1000;
+            var count = (treatAsUTC(parseInt(expDate)) - treatAsUTC(currentDate)) / millisecondsPerDay;
+
             if (count > 0) {
-                return count.getDate();
+                return Math.round(count);
             } else {
                 return 0;
             }
+        }
+
+        function treatAsUTC(date) {
+            var result = new Date(date);
+            result.setMinutes(result.getMinutes() - result.getTimezoneOffset());
+            return result;
         }
 
         return {

@@ -62,6 +62,7 @@
                 {get: {method: 'GET'}, params: {id: '@id'}}
             );
         })
+
         // Partial DAR Requests
         .factory('partialDataAccessRequestManageResource', function ($resource, apiUrl) {
             return $resource(apiUrl + "dar/partials/manage?userId=:userId", {},

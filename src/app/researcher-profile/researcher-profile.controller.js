@@ -33,7 +33,7 @@
                         if (data.isThePI !== undefined) { data.isThePI = JSON.parse(data.isThePI);}
                         if (data.havePI !== undefined) { data.havePI = JSON.parse(data.havePI);}
                         if (data.eraAuthorized !== undefined) { data.eraAuthorized = JSON.parse(data.eraAuthorized);}
-                        $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(data.eraDate, data.eraExpiration);
+                        $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(data.eraExpiration);
                         $scope.formData = data;
                         $scope.formData.nihUsername = data.nihUsername;
 
@@ -117,7 +117,7 @@
                 $window.localStorage.clear();
                 $scope.formData = tempDar;
                 $scope.formData.eraDate = result.eraDate === undefined ? null : result.eraDate;
-                $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(result.eraDate, result.eraExpiration);
+                $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(result.eraExpiration);
                 $scope.formData.eraAuthorized = result.eraAuthorized;
                 $scope.formData.nihUsername = result.nihUsername;
             }

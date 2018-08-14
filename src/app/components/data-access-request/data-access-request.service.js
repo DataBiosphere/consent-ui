@@ -7,14 +7,14 @@
 
         /* ngInject */
 
-        function cmDataAccessRequest(dataAccessInvalidUseRestriction, dataAccessRequestResource, partialDARFromCatalogResource, dataAccessRequestCancel, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields, dataAccessRequestManageResource, updateDataAccessRequestResource, darModalSummary, partialDataAccessRequestManageResource, partialDataAccessRequestResource, postPartialDarResource, restrictionDataAccessRequestResource) {
+        function cmDataAccessRequest(dataAccessInvalidUseRestriction, dataAccessRequestResource, partialDARFromCatalogResource, dataAccessRequestCancel, typeAheadDatasetsResource, typeAheadOntologiesResource, darConsent, darFields, dataAccessRequestManageResource, updateDataAccessRequestResource, darModalSummary, partialDataAccessRequestManageResource, partialDataAccessRequestResource, postPartialDarResource, restrictionDataAccessRequestResource, cmResearcherService) {
 
             function describeDar(darId) {
+                var darInfo = {};
                 return getDarModalSummary(darId)
                     .then(function (data) {
-                        var darInfo = {};
                         darInfo.researcherId = data.userId;
-                        darInfo.profileName = data.researcherName;
+                        // darInfo.profileName = data.researcherName;
                         darInfo.status = data.status;
                         darInfo.haveEraId = data.havenihUserName;
                         darInfo.nihUsername = data.nihUserName;
@@ -25,8 +25,7 @@
                         darInfo.department = data.department;
                         darInfo.city = data.city;
                         darInfo.country = data.country;
-                        darInfo.havePI = data.havePi;
-                        darInfo.pi = data.isThePi === true ? data.researcherName : data.principalInvestigator;
+                        darInfo.principalInvestigator = data.principalInvestigator;
 
                         if (darInfo.hasPurposeStatements) {
                             darInfo.purposeStatements = data.purposeStatements;
@@ -42,7 +41,16 @@
                             darInfo.researchType = data.researchType;
                             darInfo.researchTypeManualReview = requiresManualReview(darInfo.researchType);
                         }
-                        return darInfo;
+                        return cmResearcherService.getResearcherPropertiesForDAR(darInfo.researcherId);
+                    })
+                    .then(function (data) {
+                        darInfo.isThePI = data.isThePI === "true";
+                        darInfo.havePI = data.havePI === "true";
+                        darInfo.pi = darInfo.isThePI === true ? data.profileName : data.piName;
+                        darInfo.profileName = data.profileName;
+                        return new Promise(function (resolve) {
+                            resolve(darInfo);
+                        });
                     });
             }
 

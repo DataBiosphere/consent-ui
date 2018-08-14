@@ -33,7 +33,7 @@
                 cmResearcherService.getResearcherPropertiesForDAR($rootScope.currentUser.dacUserId).then(
                     function (data) {
                         $scope.formData.eraDate = data.eraDate;
-                        $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(data.eraDate, data.eraExpiration);
+                        $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(data.eraExpiration);
                         $scope.formData.eraAuthorized = data.eraAuthorized;
                         $scope.formData.nihUsername = data.nihUsername;
                         if (data.completed === 'true' && !persistDarInfo) {
@@ -181,18 +181,18 @@
         // Using local storage, this method retrieves form info data before any redirection from ERA Commons authentication
         // Used Local Storage is cleared after its use.
         function retrieveTempDarInfo (result) {
-            if ($window.localStorage.getItem("tempDar") !== null) {
+            if ($window.localStorage.getItem("tempDar") !== null && result !== null) {
                 var tempDar = JSON.parse($window.localStorage.getItem("tempDar"));
                 var tempSteps = JSON.parse($window.localStorage.getItem("tempSteps"));
-                $window.localStorage.clear();
                 $scope.formData = tempDar;
                 $scope.step2isValidated = tempSteps.step2isValidated;
                 $scope.step3isValidated = tempSteps.step3isValidated;
                 $scope.formData.eraDate = result.eraDate === undefined ? null : result.eraDate;
-                $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(result.eraDate, result.eraExpiration);
+                $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(result.eraExpiration);
                 $scope.formData.eraAuthorized = result.eraAuthorized;
                 $scope.formData.nihUsername = result.nihUsername;
             }
+            $window.localStorage.clear();
         }
 
         function verifyCheckboxes() {
