@@ -1299,7 +1299,7 @@ input[type=checkbox]:checked+label:before {
     float: left;
     font-weight: 500;
     display: inline;
-    padding-top: 5px;
+    padding-top: 8px;
 }
 
 .auth-link {
@@ -1312,7 +1312,13 @@ input[type=checkbox]:checked+label:before {
 
 .auth-clear {
     float: left;
-    margin: 2px 0 0 15px;
+    margin: 5px 0 0 15px;
+}
+
+.auth-message {
+    padding-top: 8px;
+    font-style: italic;
+    display: block;
 }
 
 /***************************************************Charts*/
