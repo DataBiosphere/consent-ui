@@ -60,7 +60,7 @@
 
         $scope.$watch("form.step1.$valid", function (value1) {
             if ($state.current.url === "/step1?token" || $state.current.url === "/step1") {
-                $scope.step1isValidated = value1 && $scope.formData.eraAuthorized === 'true';
+                $scope.step1isValidated = value1 && $scope.eraExpirationCount >= 0;
             }
         });
 
@@ -114,7 +114,7 @@
             $scope.formData.userId = $rootScope.currentUser.dacUserId;
             if ($scope.formData.dar_code  !== undefined) {
                 $scope.darAction = "edit";
-                if ($scope.formData.eraAuthorized === 'true' && $scope.eraExpirationCount !== 0 && $scope.step1isValidated !== false &&
+                if ($scope.formData.eraAuthorized === 'true' && $scope.eraExpirationCount >= 0 && $scope.step1isValidated !== false &&
                     $scope.step2isValidated !== false && $scope.step3isValidated !== false && $scope.atLeastOneCheckboxChecked !== false) {
                     openResearchConsole();
                 } else {
@@ -122,7 +122,7 @@
                 }
             } else {
                 $scope.darAction = "send";
-                if ($scope.formData.eraAuthorized === 'true' && $scope.eraExpirationCount !== 0 && $scope.step1isValidated &&
+                if ($scope.formData.eraAuthorized === 'true' && $scope.eraExpirationCount >= 0 && $scope.step1isValidated &&
                     $scope.step2isValidated && $scope.step3isValidated && $scope.atLeastOneCheckboxChecked) {
                     $scope.showValidationMessages = false;
                     openResearchConsole();

@@ -23,7 +23,7 @@
             if (count > 0) {
                 return Math.round(count);
             } else {
-                return 0;
+                return -1;
             }
         }
 
