@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 HELP_TEXT="$(cat <<EOF
- Build jar and docker images.
+ Build docker images.
    -d | --docker : (default: no action) provide either "build" or "push" to
            build or push a docker image.  "push" will also perform build.
    -g | --gcr-registry: If this flag is set, will push to the specified GCR repository.
