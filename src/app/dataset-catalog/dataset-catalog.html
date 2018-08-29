@@ -45,7 +45,7 @@
                 <tbody>
                 <tr dir-paginate="dataSet in DatasetCatalog.dataSetList.catalog | filter: searchDataset | itemsPerPage:10"
                     current-page="pagination.current">
-                    <td ng-repeat="property in dataSet.properties" ng-if="property.propertyName =='Dataset ID'">
+                    <td ng-repeat="property in dataSet.properties" ng-if="property.propertyName =='Sample Collection ID'">
                         <div class="checkbox">
                             <input type="checkbox" id="{{property.propertyValue}}"
                                    ng-model="checkMod['field_' + pagination.current + $parent.$parent.$index]"
@@ -54,7 +54,7 @@
                                    for="{{property.propertyValue}}"></label>
                         </div>
                     </td>
-                    <td class="remove-datasets-col" ng-repeat="property in dataSet.properties" ng-if="property.propertyName =='Dataset ID' && isAdmin && !isResearcher">
+                    <td class="remove-datasets-col" ng-repeat="property in dataSet.properties" ng-if="property.propertyName =='Sample Collection ID' && isAdmin && !isResearcher">
                         <a ng-if="dataSet.deletable && isAdmin && !isResearcher" ng-click="DatasetCatalog.openDelete(property.propertyValue)"
                            tooltip="Delete dataset" tooltip-class="tooltip-class" tooltip-trigger
                            tooltip-placement="right">
