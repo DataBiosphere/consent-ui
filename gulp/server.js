@@ -39,7 +39,7 @@ function browserSyncInit(baseDir, browser) {
     server: server,
     open: false,
     port: 443,
-    https: {
+    http: {
       key: "/etc/ssl/private/server.key",
       cert: "/etc/ssl/certs/server.crt"
     },

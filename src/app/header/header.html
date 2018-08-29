@@ -15,20 +15,20 @@
 
         <div class="collapse navbar-collapse no-padding" collapse="navbarCollapsed">
 
-            <ul ng-show="$root.currentUser !== null" class="navbar-right no-margin">
+            <ul ng-if="$root.currentUser !== null" class="navbar-right no-margin">
                 <li class="dropdown user-li" dropdown is-open="status.isopen">
                     <a role="button" class="dropdown-toggle" data-toggle="dropdown" href="#" dropdown-toggle ng-disabled="disabled">
                         <div id="dacUser">{{$root.currentUser.displayName}} <span class="caret caret-margin"></span></div>
                         <small id="dacUserMail"> {{$root.currentUser.email}}</small>
                     </a>
                     <ul class="dropdown-menu user-dropdown" role="menu">
-                        <li ng-repeat="rol in $root.currentUser.roles" ng-show="'{{rol.name}}' === '{{$root.userRoles.researcher}}'"><a href="#/researcher_profile">Your Profile</a></li>
+                        <li ng-repeat="rol in $root.currentUser.roles" ng-if="rol.name === $root.userRoles.researcher"><a href="#/researcher_profile">Your Profile</a></li>
                         <li><a href onclick="signOut();">Sign out</a></li>
                     </ul>
                 </li>
             </ul>
             <div class="collapse navbar-collapse no-padding col-lg-10 col-md-10 col-sm-9 col-xs-12 navbar-right" collapse="navbarCollapsed">
-                <ul ng-show="$root.currentUser === null" class="no-margin">
+                <ul ng-if="$root.currentUser === null" class="no-margin">
                     <li><a class="navbar-duos-link" href="#/home_about"><div class="navbar-duos-icon navbar-duos-icon-about"></div>About</a></li>
                     <li><a class="navbar-duos-link" href="#/home_help"><div class="navbar-duos-icon navbar-duos-icon-help"></div>Help</a></li>
                     <li><a class="navbar-duos-button" href="#/login">Sign In</a>
@@ -36,39 +36,39 @@
                 </ul>
             </div>
             <ul class="navbar-left no-margin">
-                <li ng-repeat="rol in $root.currentUser.roles" ng-show="'{{rol.name}}' === '{{$root.userRoles.chairperson}}'">
+                <li ng-repeat="rol in $root.currentUser.roles" ng-if="rol.name === $root.userRoles.chairperson">
                     <a href="#/chair_console">DAC Console</a>
                 </li>
-                <li ng-repeat="rol in $root.currentUser.roles" ng-show="'{{rol.name}}' === '{{$root.userRoles.member}}'">
+                <li ng-repeat="rol in $root.currentUser.roles" ng-if="rol.name === $root.userRoles.member">
                     <a href="#/user_console">DAC Console</a>
                 </li>
-                <li ng-repeat="rol in $root.currentUser.roles" ng-show="'{{rol.name}}' === '{{$root.userRoles.admin}}'">
+                <li ng-repeat="rol in $root.currentUser.roles" ng-if="rol.name === $root.userRoles.admin">
                     <a href="#/admin_console">Admin Console</a>
                 </li>
-                <li ng-repeat="rol in $root.currentUser.roles" ng-show="'{{rol.name}}' === '{{$root.userRoles.researcher}}'">
+                <li ng-repeat="rol in $root.currentUser.roles" ng-if="rol.name === $root.userRoles.researcher">
                     <a href="#/researcher_console">Researcher Console</a>
                 </li>
-                <li ng-repeat="rol in $root.currentUser.roles" ng-show="'{{rol.name}}' === '{{$root.userRoles.dataOwner}}'">
+                <li ng-repeat="rol in $root.currentUser.roles" ng-if="rol.name === $root.userRoles.dataOwner">
                     <a href="#/data_owner_console">Data Owner Console</a>
                 </li>
-                <li ng-repeat="rol in $root.currentUser.roles" ng-show="'{{rol.name}}' === '{{$root.userRoles.researcher}}'">
+                <li ng-repeat="rol in $root.currentUser.roles" ng-if="rol.name === $root.userRoles.researcher">
                     <a href="" ng-click="Header.goToRP()"> Request Application</a>
                 </li>
-                <li class="dropdown" dropdown on-toggle="toggled(open)" ng-show="$root.currentUser !== null">
+                <li class="dropdown" dropdown on-toggle="toggled(open)" ng-if="$root.currentUser !== null">
                     <a role="button" class="dropdown-toggle" href="#" dropdown-toggle>
                         <div>Statistics <span class="caret caret-margin"></span></div>
                     </a>
                     <ul class="dropdown-menu user-dropdown" role="menu">
                         <li><a href="#/summary_votes" class="f-left">Votes Statistics</a></li>
                         <hr>
-                        <li ng-show="roles.showStatistics($root.currentUser.roles, $root.userRoles)">
+                        <li ng-if="roles.showStatistics($root.currentUser.roles, $root.userRoles)">
                             <a ui-sref="reviewed_cases({menu: true})" class="f-left">Reviewed Cases Record</a>
                         </li>
                     </ul>
                 </li>
-                <li><a ng-show="$root.currentUser !== null" href="#/dataset_catalog">Dataset Catalog</a></li>
+                <li><a ng-if="$root.currentUser !== null" href="#/dataset_catalog">Dataset Catalog</a></li>
                 <li class="dropdown" dropdown on-toggle="toggled(open)">
-                    <a ng-show="$root.currentUser !== null" role="button" class="dropdown-toggle" href="#" dropdown-toggle>
+                    <a ng-if="$root.currentUser !== null" role="button" class="dropdown-toggle" href="#" dropdown-toggle>
                         <div>Request Help <span class="caret caret-margin"></span></div>
                     </a>
                         <ul class="dropdown-menu user-dropdown" role="menu">

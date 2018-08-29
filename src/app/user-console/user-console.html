@@ -49,7 +49,7 @@
                             <a ng-click="UserConsole.openDULReview(pendingCase.referenceId, pendingCase.voteId)" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                                 <div class="{{pendingCase.alreadyVoted ? 'editable' : 'enabled'}}">
                                     <span ng-if="pendingCase.alreadyVoted == false">Vote</span>
-                                    <span ng-if="pendingCase.alreadyVoted == true">Edit</span>
+                                    <span id="btn_Edit" ng-if="pendingCase.alreadyVoted == true">Edit</span>
                                 </div>
                             </a>
                         </div>
