@@ -56,14 +56,14 @@
         }
 
        function downloadList(dataSet){
-           var dataSetId = null;
+           var dataSetId = dataSet.dataSetId;
            dataSet.properties.forEach(function(property) {
-               if(property.propertyName === 'Dataset ID') {
-                    dataSetId = property.propertyValue;
-               }
+               // if(property.propertyName === 'Sample Collection ID') {
+               //      dataSetId = property.propertyValue;
+               // }
            });
            cmFilesService.getApprovedUsersFile(dataSetId + '-ApprovedRequestors.tsv', dataSetId);
-       } 
+       }
        vm.download = function (objectIdList) {
             cmDatasetService.downloadDataSets(objectIdList).then(function (value) {
                     var isIE = /*@cc_on!@*/false || !!document.documentMode;
@@ -75,7 +75,7 @@
                         downloadElement.attr({
                             href: window.navigator.msSaveOrOpenBlob(blob, 'datasets.tsv'),
                         });
-                    } else { 
+                    } else {
                      downloadElement.attr({
                         href: (window.URL || window.webkitURL).createObjectURL(blob),
                         target: '_blank',
@@ -85,8 +85,6 @@
                 }
             );
         };
-        
-        
 
         vm.exportToRequest = function (objectIdList) {
             cmRPService.partialDarFromCatalogPost($rootScope.currentUser.dacUserId, objectIdList).$promise.then(
