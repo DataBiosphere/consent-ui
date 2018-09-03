@@ -42,11 +42,17 @@
 
 
     /* ngInject */
-    function ApplicationController($rootScope, USER_ROLES, clientId, cmLoginUserService) {
+    function ApplicationController($rootScope, USER_ROLES, clientId, linkedinApiKey, cmLoginUserService) {
         $rootScope.clientId = clientId;
         $rootScope.currentUser = null;
         $rootScope.userRoles = USER_ROLES;
         $rootScope.dateFormat = 'yyyy-MM-dd';
+        $.getScript("http://platform.linkedin.com/in.js?async=true", function success() {
+            IN.init({
+                api_key: linkedinApiKey,
+                authorize: true
+            });
+        });
         $rootScope.setCurrentUser = function (user) {
             $rootScope.currentUser = user;
             sessionStorage.setItem('currentUser', JSON.stringify(user));

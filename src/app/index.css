@@ -1254,6 +1254,47 @@ input[type=checkbox]:checked+label:before {
     vertical-align: 20% !important;
 }
 
+.auth-button {
+    margin-top: 3px;
+}
+
+.auth-button.linkedin,
+.auth-button.linkedin:hover {
+    height: 34px;
+    width: 178px;
+    display: block;
+    background-size: cover !important;
+    border: none;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+}
+
+.auth-button.linkedin {
+    background: url(../assets/images/linkedin-sign-in.png) no-repeat;
+}
+
+.auth-button.linkedin:hover {
+    background: url(../assets/images/linkedin-sign-in-hover.png) no-repeat;
+}
+
+.auth-link {
+    float: left;
+    font-weight: 500;
+    font-style: italic;
+    display: inline;
+    padding-top: 5px;
+    transition: all 0.2s ease;
+}
+
+.auth-link:hover {
+    color: #00609f !important;
+}
+
+.auth-clear {
+    float: left;
+    margin: 2px 0 0 15px;
+}
+
 /***************************************************Charts*/
 
 .result_chart {
