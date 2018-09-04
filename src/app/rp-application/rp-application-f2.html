@@ -3,9 +3,9 @@
         <div class="cm-subtitle access-color no-padding"><h3>2. Data Access Request</h3></div>
         <div class="form-group">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 rp-group">
-                <label class="control-label rp-title-question">2.1 Dataset ID
+                <label class="control-label rp-title-question">2.1 Select Dataset(s)
                     <span>
-                        Please type the ID of the datasets you would like to request access to for this study.
+                        Please start typing the Dataset Name, Sample Collection ID, or PI of the dataset(s) for which you would like to request access.
                     </span>
                 </label>
             </div>
@@ -13,7 +13,7 @@
                 <tags-input ng-model="formData.datasetId" ng-disabled="formData.dar_code != null"  ng-required="step2.inputDatasetID.$invalid && showValidationMessages" display-property="concatenation"
                             name ="inputDatasetID"
                             key-property="id"
-                            placeholder="Dataset ID"
+                            placeholder="Dataset Name, Sample Collection ID or PI"
                             min-length="3"
                             min-tags="0"
                             replace-spaces-with-dashes="false"

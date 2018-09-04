@@ -30,7 +30,11 @@
                 $rootScope.formData.datasetDetail.forEach(function(detail){
                     var obj = {};
                     obj.id = detail.datasetId;
-                    obj.concatenation = detail.datasetId + "  " + detail.name;
+                    if (detail.objectId !== undefined && detail.objectId !== null) {
+                        obj.concatenation = detail.objectId + "  " + detail.name;
+                    } else {
+                        obj.concatenation = detail.name;
+                    }
                     $rootScope.formData.datasetId.push(obj);
                 });
                 $state.go('rp_application.step1');
