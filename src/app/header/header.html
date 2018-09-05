@@ -43,7 +43,7 @@
                     <a href="#/user_console">DAC Console</a>
                 </li>
                 <li ng-repeat="rol in $root.currentUser.roles" ng-if="rol.name === $root.userRoles.admin">
-                    <a href="#/admin_console">Admin Console</a>
+                    <a id="adminConsole" href="#/admin_console">Admin Console</a>
                 </li>
                 <li ng-repeat="rol in $root.currentUser.roles" ng-if="rol.name === $root.userRoles.researcher">
                     <a href="#/researcher_console">Researcher Console</a>

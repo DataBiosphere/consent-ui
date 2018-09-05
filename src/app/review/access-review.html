@@ -146,13 +146,13 @@
                                                class="regular-radio" id="inputVotePositive"
                                                ng-value="true" name="inputVote">
                                         <label for="inputVotePositive"></label>
-                                        <label for="inputVotePositive" class="radio-button-text">Yes</label>
+                                        <label id="access-yes" for="inputVotePositive" class="radio-button-text">Yes</label>
 
                                         <input type="radio" ng-model="selection.voteStatus" ng-click="setEnableDARButton()"
                                                ng-value="false" class="regular-radio" id="inputVoteNegative"
                                                name="inputVote">
                                         <label for="inputVoteNegative"></label>
-                                        <label for="inputVoteNegative" class="radio-button-text">No</label>
+                                        <label id="access-no" for="inputVoteNegative" class="radio-button-text">No</label>
                                     </div>
                                 </div>
                             </div>
@@ -164,7 +164,7 @@
                                     <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale</label>
                                 </span>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
-                                    <input type="text" ng-model="selection.rationale"
+                                    <input id="access-rationale" type="text" ng-model="selection.rationale"
                                            ng-change="setEnableDARButton()"
                                            name="inputRationale"
                                            class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
@@ -175,7 +175,7 @@
 
                             <div class="row">
                                 <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-6 col-sm-offset-6 col-xs-6 col-xs-offset-6 f-right no-margin">
-                                    <button ng-disabled="selection.voteStatus === null || enableDARButton === false"
+                                    <button id="access-vote" ng-disabled="selection.voteStatus === null || enableDARButton === false"
                                             ng-click="logVote()"
                                             class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button access-background">
                                         Vote
@@ -246,13 +246,13 @@
                                                ng-value="true" class="regular-radio" id="inputRPPositive"
                                                name="inputVote">
                                         <label for="inputRPPositive"></label>
-                                        <label for="inputRPPositive" class="radio-button-text">Yes</label>
+                                        <label id="rp-yes" for="inputRPPositive" class="radio-button-text">Yes</label>
 
                                         <input type="radio" ng-model="selection.rpVoteStatus" ng-click="setEnableRPButton()"
                                                ng-value="false" class="regular-radio" id="inputRPNegative"
                                                name="inputVote">
                                         <label for="inputRPNegative"></label>
-                                        <label for="inputRPNegative" class="radio-button-text">No</label>
+                                        <label id="rp-no" for="inputRPNegative" class="radio-button-text">No</label>
                                     </div>
                                 </div>
                             </div>
@@ -264,7 +264,7 @@
                                     <label class="col-lg-2 col-md-2 col-sm-2 col-xs-3 control-label vote-label access-color">Rationale</label>
                                 </span>
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
-                                    <input type="text" ng-model="selection.rpRationale" ng-change="setEnableRPButton()"
+                                    <input id="rp-rationale" type="text" ng-model="selection.rpRationale" ng-change="setEnableRPButton()"
                                            name="inputRationale"
                                            class="form-control col-lg-10 col-md-8 col-sm-6 col-xs-6 vote-input"
                                            title="Optional: describe your rationale or add comments here (please be as specific as possible)"
@@ -273,7 +273,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-3 col-lg-offset-9 col-md-3 col-md-offset-9 col-sm-6 col-sm-offset-6 col-xs-6 col-xs-offset-6 f-right no-margin">
-                                    <button ng-disabled="selection.rpVoteStatus === null || enableRPButton === false"
+                                    <button id="rp-vote" ng-disabled="selection.rpVoteStatus === null || enableRPButton === false"
                                             ng-click="logRPVote()"
                                             class="btn btn-primary col-lg-12 col-md-12 col-sm-12 col-xs-12 vote-button access-background">
                                         Vote
