@@ -31,9 +31,9 @@
                     var obj = {};
                     obj.id = detail.datasetId;
                     if (detail.objectId !== undefined && detail.objectId !== null) {
-                        obj.concatenation = detail.objectId + "  " + detail.name;
+                        obj.concatenation = detail.objectId.concat("| ", detail.name, $rootScope.formData.investigator);
                     } else {
-                        obj.concatenation = detail.name;
+                        obj.concatenation = detail.name.concat("| ", $rootScope.formData.investigator);
                     }
                     $rootScope.formData.datasetId.push(obj);
                 });

@@ -63,18 +63,10 @@
                                     scope.checkMod[checkboxModel] = true;
                                 }
                             }
-                            var totalRecord = dataList.length;
-                            while (totalRecord--) {
-                                angular.forEach(dataList[totalRecord].properties, function (obj) {
-                                    if (obj.propertyName === 'Dataset ID') {
-                                        scope.objectIdList.push(obj.propertyValue);
-                                    }
-                                });
-
-
-
-
-                            }
+                            dataList.forEach( function(obj) {
+                                console.log(obj);
+                                    scope.objectIdList.push(obj.dataSetId.toString());
+                            });
                         });
                     } else {
                         scope.$apply(function () {

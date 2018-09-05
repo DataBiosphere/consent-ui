@@ -47,11 +47,11 @@
                     current-page="pagination.current">
                     <td ng-repeat="property in dataSet.properties" ng-if="property.propertyName =='Sample Collection ID'">
                         <div class="checkbox">
-                            <input type="checkbox" id="{{property.propertyValue}}"
+                            <input type="checkbox" id="{{dataSet.dataSetId}}"
                                    ng-model="checkMod['field_' + pagination.current + $parent.$parent.$index]"
                                    class="checkbox-inline user-checkbox" add-object-id>
                             <label class="regular-checkbox rp-choice-questions"
-                                   for="{{property.propertyValue}}"></label>
+                                   for="{{dataSet.dataSetId}}"></label>
                         </div>
                     </td>
                     <td class="remove-datasets-col" ng-repeat="property in dataSet.properties" ng-if="property.propertyName =='Sample Collection ID' && isAdmin && !isResearcher">
