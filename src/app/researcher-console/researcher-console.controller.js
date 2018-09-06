@@ -7,7 +7,7 @@
 
     /* ngInject */
     function ResearcherConsole($modal, $scope, cmRPService, $rootScope, $state) {
-
+        const SEPARATOR = "|";
         var vm = this;
         vm.userId = $rootScope.currentUser.dacUserId;
         vm.openRUS = openRUS;
@@ -31,9 +31,9 @@
                     var obj = {};
                     obj.id = detail.datasetId;
                     if (detail.objectId !== undefined && detail.objectId !== null) {
-                        obj.concatenation = detail.objectId.concat("| ", detail.name, $rootScope.formData.investigator);
+                        obj.concatenation = detail.objectId.concat(SEPARATOR, detail.name, SEPARATOR, $rootScope.formData.investigator);
                     } else {
-                        obj.concatenation = detail.name.concat("| ", $rootScope.formData.investigator);
+                        obj.concatenation = detail.name.concat(SEPARATOR, $rootScope.formData.investigator);
                     }
                     $rootScope.formData.datasetId.push(obj);
                 });
