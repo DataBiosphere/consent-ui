@@ -32,7 +32,7 @@
                     <div ng-if="!dar.isCanceled" class="row pvotes-main-list">
                         <div class="row pvotes-main-list" ng-class="{'list-highlighted': dar.needsApproval}">
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id" title="{{dar.frontEndId}}">
-                                <div ng-class="{'access-color': dar.needsApproval, 'cancel-color': dar.dataSetElectionResult == 'Denied','dataset-color': dar.dataSetElectionResult == 'Approved'}"
+                                <div id="ownerApproval" ng-class="{'access-color': dar.needsApproval, 'cancel-color': dar.dataSetElectionResult == 'Denied','dataset-color': dar.dataSetElectionResult == 'Approved'}"
                                     class="glyphicon glyphicon-exclamation-sign" tooltip="{{dar.dataSetElectionResult}}" tooltip-class="tooltip-class"
                                     tooltip-trigger tooltip-placement="right" ng-show="dar.needsApproval"></div>
                                 <span class="list-highlighted-item">{{dar.frontEndId}}</span>
@@ -46,10 +46,10 @@
                                 </div>
                             </a>
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list bold">
-                                <span ng-if="dar.electionStatus == 'un-reviewed'"><a ng-click="AdminManageAccess.open('access_preview_results', dar.electionId, dar.dataRequestId)">Un-reviewed</a></span>
-                                <span ng-if="dar.electionStatus == 'Open' || dar.electionStatus == 'Final'"><a ng-click="AdminManageAccess.open('access_review_results', dar.electionId, dar.dataRequestId)">Open</a></span>
-                                <span ng-if="dar.electionStatus == 'Canceled'"><a ng-click="AdminManageAccess.open('access_preview_results', dar.electionId, dar.dataRequestId)">Canceled</a></span>
-                                <span ng-if="dar.electionStatus == 'Closed' || dar.electionStatus == 'PendingApproval'"><a ng-click="AdminManageAccess.open('access_results_record', dar.electionId, dar.dataRequestId)">{{!dar.electionVote ? 'Denied' : 'Approved' }}</a></span>
+                                <span ng-if="dar.electionStatus == 'un-reviewed'"><a id="previewUnReviewed" ng-click="AdminManageAccess.open('access_preview_results', dar.electionId, dar.dataRequestId)">Un-reviewed</a></span>
+                                <span ng-if="dar.electionStatus == 'Open' || dar.electionStatus == 'Final'"><a id="previewOpen" ng-click="AdminManageAccess.open('access_review_results', dar.electionId, dar.dataRequestId)">Open</a></span>
+                                <span ng-if="dar.electionStatus == 'Canceled'"><a id="previewCanceled" ng-click="AdminManageAccess.open('access_preview_results', dar.electionId, dar.dataRequestId)">Canceled</a></span>
+                                <span ng-if="dar.electionStatus == 'Closed' || dar.electionStatus == 'PendingApproval'"><a id="previewReviewed" ng-click="AdminManageAccess.open('access_results_record', dar.electionId, dar.dataRequestId)">{{!dar.electionVote ? 'Denied' : 'Approved' }}</a></span>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 no-padding">
                                 <div class="row no-margin">

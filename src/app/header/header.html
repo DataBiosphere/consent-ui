@@ -36,10 +36,10 @@
                 </ul>
             </div>
             <ul class="navbar-left no-margin">
-                <li ng-repeat="rol in $root.currentUser.roles" ng-if="rol.name === $root.userRoles.chairperson">
+                <li  id="chairConsole" ng-repeat="rol in $root.currentUser.roles" ng-if="rol.name === $root.userRoles.chairperson">
                     <a href="#/chair_console">DAC Console</a>
                 </li>
-                <li ng-repeat="rol in $root.currentUser.roles" ng-if="rol.name === $root.userRoles.member">
+                <li id="dacConsole" ng-repeat="rol in $root.currentUser.roles" ng-if="rol.name === $root.userRoles.member">
                     <a href="#/user_console">DAC Console</a>
                 </li>
                 <li ng-repeat="rol in $root.currentUser.roles" ng-if="rol.name === $root.userRoles.admin">
