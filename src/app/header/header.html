@@ -49,7 +49,7 @@
                     <a href="#/researcher_console">Researcher Console</a>
                 </li>
                 <li ng-repeat="rol in $root.currentUser.roles" ng-if="rol.name === $root.userRoles.dataOwner">
-                    <a href="#/data_owner_console">Data Owner Console</a>
+                    <a id="dataOwnerConsole" href="#/data_owner_console">Data Owner Console</a>
                 </li>
                 <li ng-repeat="rol in $root.currentUser.roles" ng-if="rol.name === $root.userRoles.researcher">
                     <a href="" ng-click="Header.goToRP()"> Request Application</a>
