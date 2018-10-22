@@ -34,6 +34,7 @@
                 <thead>
                 <tr>
                     <th></th>
+                    <th class="table-titles dataset-color cell-size">Dataset ID</th>
                     <th ng-repeat="dictionary in DatasetCatalog.dataSetList.dictionary"
                         class="table-titles dataset-color cell-size">{{dictionary.key}}
                     </th>
@@ -47,11 +48,11 @@
                     current-page="pagination.current">
                     <td ng-repeat="property in dataSet.properties" ng-if="property.propertyName =='Sample Collection ID'">
                         <div class="checkbox">
-                            <input type="checkbox" id="{{property.propertyValue}}"
+                            <input type="checkbox" id="{{dataSet.dataSetId}}"
                                    ng-model="checkMod['field_' + pagination.current + $parent.$parent.$index]"
                                    class="checkbox-inline user-checkbox" add-object-id>
                             <label class="regular-checkbox rp-choice-questions"
-                                   for="{{property.propertyValue}}"></label>
+                                   for="{{dataSet.dataSetId}}"></label>
                         </div>
                     </td>
                     <td class="remove-datasets-col" ng-repeat="property in dataSet.properties" ng-if="property.propertyName =='Sample Collection ID' && isAdmin && !isResearcher">
@@ -82,9 +83,10 @@
                             </a>
                         </div>
                     </td>
-
+                    <td  class="table-items cell-size"><p>{{dataSet.alias}}</p></td>
                     <td ng-repeat="property in dataSet.properties" class="table-items cell-size" ng-class="{'dataset-disabled': !dataSet.active}">
-                        <p ng-if="property.propertyName !=='dbGAP' ">{{property.propertyValue}}</p>
+                      
+                      <p ng-if="property.propertyName !=='dbGAP' ">{{property.propertyValue}}</p>
                         <a href="{{property.propertyValue}}" target="_blank"
                            ng-if="property.propertyName =='dbGAP' && property.propertyValue.length > 0  "
                            class="enabled">Link</a>
