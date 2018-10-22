@@ -58,9 +58,9 @@
        function downloadList(dataSet){
            var dataSetId = dataSet.dataSetId;
            dataSet.properties.forEach(function(property) {
-               // if(property.propertyName === 'Sample Collection ID') {
-               //      dataSetId = property.propertyValue;
-               // }
+               if(property.propertyName === 'Sample Collection ID') {
+                    dataSetId = dataSet.dataSetId;
+               }
            });
            cmFilesService.getApprovedUsersFile(dataSetId + '-ApprovedRequestors.tsv', dataSetId);
        }
