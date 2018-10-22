@@ -39,7 +39,7 @@
                     <div ng-repeat="pendingCase in DataOwnerConsole.dataOwnerUnreviewedCases">
                     <hr class="pvotes-separator">
                     <div class="row pvotes-main-list">
-                        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 pvotes-list-id">{{pendingCase.dataSetId}}</div>
+                        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 pvotes-list-id">{{pendingCase.alias}}</div>
                         <div class="col-lg-6 col-md-6 col-sm-5 col-xs-5 pvotes-list-id">{{pendingCase.dataSetName}}</div>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pvotes-list-id">{{pendingCase.darCode}}</div>
                         <a ui-sref="data_owner_review({voteId: '{{pendingCase.voteId}}', referenceId: '{{pendingCase.referenceId}}', dataSetId: '{{pendingCase.dataSetId}}'})" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
