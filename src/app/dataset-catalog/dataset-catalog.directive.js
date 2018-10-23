@@ -64,8 +64,7 @@
                                 }
                             }
                             dataList.forEach( function(obj) {
-                                console.log(obj);
-                                    scope.objectIdList.push(obj.dataSetId.toString());
+                                scope.objectIdList.push(obj.dataSetId.toString());
                             });
                         });
                     } else {

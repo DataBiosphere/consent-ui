@@ -48,7 +48,7 @@
 
         $scope.downloadDAR = function() {
             cmFilesService.getDARFile(referenceId);
-        }; 
+        };
 
         init();
 
@@ -60,7 +60,7 @@
 
         function logVote() {
             $scope.electionType = 'access';
-            if($scope.agreementAlreadyVote || $scope.hideMatch){
+            if ($scope.agreementAlreadyVote){
                 var modalFinalInstance = $modal.open({
                     animation: false,
                     templateUrl: 'app/modals/final-access-vote-modal/final-access-vote-modal.html',
@@ -72,7 +72,7 @@
                     }
                 });
                 modalFinalInstance.result.then(function () {});
-            }else{
+            } else{
                 var modalInstance = $modal.open({
                     animation: false,
                     templateUrl: 'app/modals/final-access-vote-modal.html',
