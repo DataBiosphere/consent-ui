@@ -5,16 +5,14 @@
     angular.module('cmResultsRecord')
         .controller('AccessResultsRecord', AccessResultsRecord);
 
-    function AccessResultsRecord($sce, $scope, $state, $modal, cmElectionService, downloadFileService, apiUrl, cmRPService, cmVoteService, cmMatchService, darElection, electionId, hasUseRestriction, cmFilesService, $rootScope) {
+    function AccessResultsRecord($sce, $scope, $state, $modal, cmElectionService, downloadFileService, apiUrl, cmRPService, cmVoteService, cmMatchService, darElection, electionId, hasUseRestriction, cmFilesService, $rootScope, dar) {
 
         /*ACCORDION*/
         $scope.oneAtATime = false;
         $scope.electionId = electionId;
         $scope.darElection = darElection;
         $scope.hasUseRestriction = hasUseRestriction;
-        cmRPService.describeDar($scope.darElection.referenceId).then(function (data) {
-            $scope.darInfo = data;
-        });
+        $scope.darInfo = dar;
         $rootScope.path = 'access-results-record';
 
         if ($scope.electionId === null) {
@@ -235,7 +233,7 @@
         $scope.downloadDAR = function() {
             cmFilesService.getDARFile($scope.darElection.referenceId);
         };
-       
+
         function showDULData(electionReview) {
             $scope.election = electionReview.election;
             if (electionReview.election.finalRationale === null) {
