@@ -34,11 +34,11 @@
                 <thead>
                 <tr>
                     <th></th>
+                    <th class="table-titles dataset-color cell-size">Dataset ID</th>
                     <th ng-repeat="dictionary in DatasetCatalog.dataSetList.dictionary"
                         class="table-titles dataset-color cell-size">{{dictionary.key}}
                     </th>
                     <th class="table-titles dataset-color cell-size">ConsentId</th>
-                    <th class="table-titles dataset-color cell-size">Dataset ID</th>
                     <th class="table-titles dataset-color cell-size">Structured Data Use Limitations</th>
                     <th ng-show="isAdmin" class="table-titles dataset-color cell-size">Approved Requestors</th>
                 </tr>
@@ -83,8 +83,8 @@
                             </a>
                         </div>
                     </td>
+                    <td  class="table-items cell-size"><p>{{dataSet.alias}}</p></td>
                     <td ng-repeat="property in dataSet.properties" class="table-items cell-size" ng-class="{'dataset-disabled': !dataSet.active}">
-                      
                       <p ng-if="property.propertyName !=='dbGAP' ">{{property.propertyValue}}</p>
                         <a href="{{property.propertyValue}}" target="_blank"
                            ng-if="property.propertyName =='dbGAP' && property.propertyValue.length > 0  "
@@ -93,7 +93,6 @@
                            ng-if="property.propertyName =='dbGAP' && property.propertyValue.length === 0   "
                            class="disabled">Link</a>
                         <td class="table-items cell-size" ng-class="{'dataset-disabled': !dataSet.active}">{{dataSet.consentId}}</td>
-                        <td  class="table-items cell-size"><p>{{dataSet.alias}}</p></td>
                         <td class="table-items cell-size translated-restriction hover-color" ng-class="{'dataset-disabled': !dataSet.active}" ng-click="DatasetCatalog.showSdul(dataSet.translatedUseRestriction)"><span style="cursor: pointer;">Translated Use Restriction</span></td>
                         <!-- IN THE NEXT LINE, REPLACE "false" WITH ACTUAL VARIABLE-->
                         <td ng-show="isAdmin" class="table-items cell-size translated-restriction hover-color" ng-click="DatasetCatalog.downloadList(dataSet)"><span style="cursor: pointer;">Download List</span></td>
