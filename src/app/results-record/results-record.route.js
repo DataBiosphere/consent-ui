@@ -52,6 +52,9 @@
                     },
                     hasUseRestriction: function($stateParams, cmRPService){
                         return cmRPService.hasUseRestriction($stateParams.referenceId);
+                    },
+                    dar: function($stateParams, cmRPService) {
+                        return cmRPService.describeDar($stateParams.referenceId);
                     }
                 }
             });
