@@ -60,7 +60,7 @@
 
         function logVote() {
             $scope.electionType = 'access';
-            if ($scope.agreementAlreadyVote){
+            if ($scope.agreementAlreadyVote || $scope.hideMatch){
                 var modalFinalInstance = $modal.open({
                     animation: false,
                     templateUrl: 'app/modals/final-access-vote-modal/final-access-vote-modal.html',
