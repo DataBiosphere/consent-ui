@@ -9,9 +9,7 @@
 
         var vm = this;
 
-        $scope.DatasetId = dataSet.properties.filter(function (p){
-            return p.propertyName === "Dataset ID";})[0].propertyValue;
-
+        $scope.DatasetId = dataSet.alias;
 
         $scope.DatasetName = dataSet.properties.filter(function (p){
                      return p.propertyName === "Dataset Name";})[0].propertyValue;

@@ -34,10 +34,13 @@
                 <thead>
                 <tr>
                     <th></th>
+                    <th class="table-titles dataset-color cell-size">Dataset ID</th>
                     <th ng-repeat="dictionary in DatasetCatalog.dataSetList.dictionary"
-                        class="table-titles dataset-color cell-size">{{dictionary.key}}
+                       ng-if="dictionary.key !== 'Sample Collection ID'" class="table-titles dataset-color cell-size">{{dictionary.key}}
                     </th>
-                    <th class="table-titles dataset-color cell-size">ConsentId</th>
+
+                    <th class="table-titles dataset-color cell-size">Consent Id</th>
+                    <th class="table-titles dataset-color cell-size">SC-ID</th>
                     <th class="table-titles dataset-color cell-size">Structured Data Use Limitations</th>
                     <th ng-show="isAdmin" class="table-titles dataset-color cell-size">Approved Requestors</th>
                 </tr>
@@ -45,17 +48,17 @@
                 <tbody>
                 <tr dir-paginate="dataSet in DatasetCatalog.dataSetList.catalog | filter: searchDataset | itemsPerPage:10"
                     current-page="pagination.current">
-                    <td ng-repeat="property in dataSet.properties" ng-if="property.propertyName =='Dataset ID'">
+                    <td ng-repeat="property in dataSet.properties" ng-if="property.propertyName =='Sample Collection ID'">
                         <div class="checkbox">
-                            <input type="checkbox" id="{{property.propertyValue}}"
+                            <input type="checkbox" id="{{dataSet.dataSetId}}"
                                    ng-model="checkMod['field_' + pagination.current + $parent.$parent.$index]"
                                    class="checkbox-inline user-checkbox" add-object-id>
                             <label class="regular-checkbox rp-choice-questions"
-                                   for="{{property.propertyValue}}"></label>
+                                   for="{{dataSet.dataSetId}}"></label>
                         </div>
                     </td>
-                    <td class="remove-datasets-col" ng-repeat="property in dataSet.properties" ng-if="property.propertyName =='Dataset ID' && isAdmin && !isResearcher">
-                        <a ng-if="dataSet.deletable && isAdmin && !isResearcher" ng-click="DatasetCatalog.openDelete(property.propertyValue)"
+                    <td class="remove-datasets-col" ng-repeat="property in dataSet.properties" ng-if="property.propertyName =='Sample Collection ID' && isAdmin && !isResearcher">
+                        <a ng-if="dataSet.deletable && isAdmin && !isResearcher" ng-click="DatasetCatalog.openDelete(dataSet.dataSetId)"
                            tooltip="Delete dataset" tooltip-class="tooltip-class" tooltip-trigger
                            tooltip-placement="right">
                             <span class="cm-icon-button glyphicon glyphicon-trash caret-margin default-color"
@@ -66,25 +69,25 @@
                                   aria-hidden="true"></span>
                         </a>
                         <div class="disable-datasets-col">
-                            <a ng-if="dataSet.active && isAdmin && !isResearcher" ng-click="DatasetCatalog.openDisable(property.propertyValue)" tooltip="Disable dataset" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right">
+                            <a ng-if="dataSet.active && isAdmin && !isResearcher" ng-click="DatasetCatalog.openDisable(dataSet.dataSetId)" tooltip="Disable dataset" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right">
                                 <span class="cm-icon-button glyphicon glyphicon-ok-circle caret-margin dataset-color"
                                       aria-hidden="true"></span>
                             </a>
-                            <a ng-if="!dataSet.active && isAdmin && !isResearcher" ng-click="DatasetCatalog.openEnable(property.propertyValue)" tooltip="Enable dataset"
+                            <a ng-if="!dataSet.active && isAdmin && !isResearcher" ng-click="DatasetCatalog.openEnable(dataSet.dataSetId)" tooltip="Enable dataset"
                                tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right">
                                     <span class="cm-icon-button glyphicon glyphicon-ban-circle caret-margin cancel-color"
                                           aria-hidden="true"></span>
                             </a>
                         </div>
                         <div class="approval-datasets-col">
-                            <a ng-if="isAdmin && !isResearcher" ng-click="DatasetCatalog.associate(property.propertyValue, dataSet.needsApproval)" tooltip="Connect with Data Owner" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right">
+                            <a ng-if="isAdmin && !isResearcher" ng-click="DatasetCatalog.associate(dataSet.dataSetId, dataSet.needsApproval)" tooltip="Connect with Data Owner" tooltip-class="tooltip-class" tooltip-trigger tooltip-placement="right">
                                 <span ng-class="dataSet.isAssociatedToDataOwners ? 'cm-icon-button glyphicon glyphicon-link caret-margin dataset-color' : 'cm-icon-button glyphicon glyphicon-link caret-margin default-color'" aria-hidden="true"></span>
                             </a>
                         </div>
                     </td>
-
-                    <td ng-repeat="property in dataSet.properties" class="table-items cell-size" ng-class="{'dataset-disabled': !dataSet.active}">
-                        <p ng-if="property.propertyName !=='dbGAP' ">{{property.propertyValue}}</p>
+                    <td  class="table-items cell-size"><p>{{dataSet.alias}}</p></td>
+                    <td ng-if="property.propertyName !== 'Sample Collection ID'" ng-repeat="property in dataSet.properties" class="table-items cell-size" ng-class="{'dataset-disabled': !dataSet.active}">
+                      <p ng-if="property.propertyName !=='dbGAP' ">{{property.propertyValue}}</p>
                         <a href="{{property.propertyValue}}" target="_blank"
                            ng-if="property.propertyName =='dbGAP' && property.propertyValue.length > 0  "
                            class="enabled">Link</a>
@@ -92,6 +95,7 @@
                            ng-if="property.propertyName =='dbGAP' && property.propertyValue.length === 0   "
                            class="disabled">Link</a>
                         <td class="table-items cell-size" ng-class="{'dataset-disabled': !dataSet.active}">{{dataSet.consentId}}</td>
+                        <td class="table-items cell-size">{{dataSet.properties[1].propertyValue === '' ? "---" : dataSet.properties[1].propertyValue}}</td>
                         <td class="table-items cell-size translated-restriction hover-color" ng-class="{'dataset-disabled': !dataSet.active}" ng-click="DatasetCatalog.showSdul(dataSet.translatedUseRestriction)"><span style="cursor: pointer;">Translated Use Restriction</span></td>
                         <!-- IN THE NEXT LINE, REPLACE "false" WITH ACTUAL VARIABLE-->
                         <td ng-show="isAdmin" class="table-items cell-size translated-restriction hover-color" ng-click="DatasetCatalog.downloadList(dataSet)"><span style="cursor: pointer;">Download List</span></td>
