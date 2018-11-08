@@ -45,6 +45,8 @@
                 </div>
             </div>
 
+            <button type="button" class="close auth-clear" ng-click="ResearcherProfile.verifyUser()" ><span class="glyphicon glyphicon-remove-circle"></span></button>
+
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <label class="control-label">Institution Name*</label>
                 <input type="text" class="form-control" name="profileInstitution" id="profileInstitution" ng-model="formData.institution" ng-class="researcherForm.profileInstitution.$invalid && showValidationMessages ? 'form-control required-field-error' : 'form-control'" required>

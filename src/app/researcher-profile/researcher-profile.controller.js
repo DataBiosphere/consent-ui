@@ -17,6 +17,7 @@
         vm.clearNoHasPIFields = clearNoHasPIFields;
         vm.clearCommonsFields = clearCommonsFields;
         vm.submit = submit;
+        vm.verifyUser = verifyUser;
         vm.update = update;
         vm.redirectToNihLogin = redirectToNihLogin;
         $scope.formData = {};
@@ -42,6 +43,32 @@
             } else if (persistDarInfo) {
                 retrieveTempDarInfo($scope.formData);
             }
+        }
+
+        function verifyUser() {
+            return cmAuthenticateNihService.verifyFcuser().then(
+                () => {return true},
+                () => {return false}
+            );
+        }
+
+        function checkToken (token) {
+            console.log("es usuario? ", verifyUser());
+            // if (verifyUser() === true) {
+            //     cmAuthenticateNihService.verifyNihWithFc(token).then(
+            //         (data) => {
+            //             // guardar en duos
+            //             console.log("FC nih", data)
+            //         },
+            //         (error) => {
+            //             console.log("Error? ", error)
+            //         }
+            //     );
+            // } else {
+            //     console.log("register User to fc")
+            //     //Registrar con fc
+            // }
+
         }
 
         function saveProfile() {
@@ -93,10 +120,11 @@
         // Will retrieve form's data before redirection using localStorage "tempDar" key.
         function getNihToken (token) {
             if (token && $window.localStorage.getItem("tempDar") !== null) {
-                cmAuthenticateNihService.verifyNihToken(token, $rootScope.currentUser.dacUserId)
-                    .then(function(result) {
-                        retrieveTempDarInfo(result);
-                    });
+                checkToken(token);
+                // cmAuthenticateNihService.verifyNihToken(token, $rootScope.currentUser.dacUserId)
+                //     .then(function(result) {
+                //         retrieveTempDarInfo(result);
+                //     });
             }
         }
 

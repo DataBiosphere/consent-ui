@@ -22,7 +22,12 @@
             $provide.factory('OAuth2Interceptor', function OAuth2Interceptor($rootScope, ontologyApiUrl) {
                 return {
                     'request': function (config) {
-                        if ($rootScope && config.url.indexOf(ontologyApiUrl) === -1) {
+                        if (config.url.indexOf('https://firecloud-orchestration.dsde-dev.broadinstitute.org') === 0) {
+                            config.headers.Authorization = 'Bearer ' + $rootScope.accessToken;
+                            delete config.headers.Pragma;
+                            delete config.headers['Cache-Control'];
+                            delete config.headers.Expires;
+                        } else if ($rootScope && config.url.indexOf(ontologyApiUrl) === -1) {
                             config.headers.Authorization = 'Bearer ' + $rootScope.accessToken;
                         } else {
                             delete config.headers.Pragma;

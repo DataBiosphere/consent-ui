@@ -5,10 +5,32 @@
         .service('cmAuthenticateNihService', cmAuthenticateNihService);
 
     /* ngInject */
-    function cmAuthenticateNihService(NIHDeleteAccount, NIHVerifyAccount) {
+    function cmAuthenticateNihService(NIHDeleteAccount, NIHVerifyAccount, FcVerifyAccount, fireCloudUrl, FcAuthenticateNIH) {
+
+        function verifyFcuser() {
+            return FcVerifyAccount.get(fireCloudUrl).$promise
+            //     .then(
+            // () => true, // is Firecloud user
+            //     () => false // is not a Firecloud user
+            // );
+        }
+
+        function registerUserToFc() {
+            // register user to firecloud orchestration behind courtains
+        }
+
+        function verifyNihWithFc(token) {
+            return FcAuthenticateNIH.post({},{jwt: token}).$promise;
+            // return NIHVerifyAccount.post({userId: userId},{jwt: token}).$promise;
+        }
+
 
         function verifyNihToken(token, userId) {
             return NIHVerifyAccount.post({userId: userId, token: token},{}).$promise;
+        }
+
+        function saveNihAccount(nihAccount, userId) {
+            // save obtained data to our backend
         }
 
         function eliminateAccount (userId) {
@@ -34,6 +56,12 @@
         }
 
         return {
+            verifyFcuser: function () {
+                return verifyFcuser();
+            },
+            verifyNihWithFc: function (token) {
+              return verifyNihWithFc(token);
+            },
             verifyNihToken: function (token, userId) {
                 return verifyNihToken(token, userId);
             },
