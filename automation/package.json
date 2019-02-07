@@ -1,0 +1,27 @@
+{
+  "name": "jest-puppeteer-automation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Puppeteer tests",
+  "scripts": {
+    "test": "jest",
+    "test:debug": "node --inspect node_modules/.bin/jest --runInBand"
+  },
+  "devDependencies": {
+    "faker": "^4.1.0",
+    "google-auth-library": "^3.0.1",
+    "googleapis": "^37.1.0",
+    "jest": "^24.0.0",
+    "jest-html-reporter": "^2.4.4",
+    "jest-junit": "^6.2.1",
+    "jest-puppeteer": "^3.9.0",
+    "prettier": "^1.16.3",
+    "puppeteer": "^1.12.1",
+    "rimraf": "^2.6.3"
+  },
+  "jest-html-reporter": {
+    "pageTitle": "Jest Tests",
+    "outputPath": "./test-report.html",
+    "includeFailureMsg": true
+  }
+}
