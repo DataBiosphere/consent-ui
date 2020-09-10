@@ -78,8 +78,8 @@
             if (vote.type === 'FINAL') {
                 {
                     postObject.type = 'FINAL';
-                }
-            }
+                }            }
+
             return FinalAccessDarVoteResource.post({requestId: requestId, voteId: vote.voteId}, postObject);
         }
 

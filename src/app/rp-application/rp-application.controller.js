@@ -5,47 +5,62 @@
         .controller('RPApplication', RPApplication);
 
     /* ngInject */
-    function RPApplication($state, $scope, $modal, cmRPService, $rootScope, gwasUrl, cmResearcherService) {
-
+    function RPApplication($state, $scope, $modal, cmRPService, $rootScope, gwasUrl, cmResearcherService, cmAuthenticateNihService, $window, nihUrl) {
         var vm = this;
-        vm.$state = $state;
+        var persistDarInfo = $state.params.persistInfo;
+        vm.token = $state.params.token !== undefined ? $state.params.token : null;
+        vm.reviewMode = false;
+        getNihToken(vm.token);
         vm.attestAndSave = attestAndSave;
         vm.partialSave = partialSave;
+        vm.redirectToNihLogin = redirectToNihLogin;
         $scope.showValidationMessages = false;
         $scope.atLeastOneCheckboxChecked = false;
         $scope.completed = true;
         init();
 
-        function init(){
+        function init() {
             $scope.formData = {};
+            Object.defineProperty($scope.formData, "add", {
+                set : function (property, value) {$scope.formData.property = value;}
+            });
+
             if ($rootScope.formData !== undefined && $rootScope.formData.userId !== undefined) {
                 $scope.formData = $rootScope.formData;
+                vm.reviewMode = true;
                 $rootScope.formData = {};
+            } else {
+                cmResearcherService.getResearcherPropertiesForDAR($rootScope.currentUser.dacUserId).then(
+                    function (data) {
+                        $scope.formData.eraDate = data.eraDate;
+                        $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(data.eraExpiration);
+                        $scope.formData.eraAuthorized = data.eraAuthorized;
+                        $scope.formData.nihUsername = data.nihUsername;
+                        if (data.completed === 'true' && !persistDarInfo) {
+                            $scope.formData.investigator = data.investigator;
+                            $scope.formData.institution = data.institution;
+                            $scope.formData.department = data.department;
+                            $scope.formData.division = data.division;
+                            $scope.formData.address1 = data.address1;
+                            $scope.formData.address2 = data.address2;
+                            $scope.formData.city = data.city;
+                            $scope.formData.zipcode = data.zipcode;
+                            $scope.formData.country = data.country;
+                            $scope.formData.state = data.state;
+                        }
+                        if (data.completed !== undefined) {
+                            $scope.completed = JSON.parse(data.completed);
+                        }
+                        if (persistDarInfo) {
+                            retrieveTempDarInfo($scope.formData);
+                        }
+                    });
             }
-            cmResearcherService.getResearcherPropertiesForDAR($rootScope.currentUser.dacUserId).then(
-                function (data) {
-                    JSON.parse(data.completed);
-                    if(data.completed === 'true') {
-                        $scope.formData.investigator = data.investigator;
-                        $scope.formData.institution = data.institution;
-                        $scope.formData.department = data.department;
-                        $scope.formData.division = data.division;
-                        $scope.formData.address1 = data.address1;
-                        $scope.formData.address2 = data.address2;
-                        $scope.formData.city = data.city;
-                        $scope.formData.zipcode = data.zipcode;
-                        $scope.formData.country = data.country;
-                        $scope.formData.state = data.state;
-                    }
-                    if(data.completed !== undefined){
-                        $scope.completed = JSON.parse(data.completed);
-                    }
-                });
         }
 
         $scope.$watch("form.step1.$valid", function (value1) {
-            if ($state.current.url === "/step1") {
-                $scope.step1isValidated = value1;
+            if ($state.current.url === "/step1?token" || $state.current.url === "/step1") {
+                $scope.step1isValidated = value1 && $scope.eraExpirationCount >= 0;
             }
         });
 
@@ -97,16 +112,18 @@
         function attestAndSave() {
             verifyCheckboxes();
             $scope.formData.userId = $rootScope.currentUser.dacUserId;
-            if($scope.formData.dar_code  !== undefined) {
+            if ($scope.formData.dar_code  !== undefined) {
                 $scope.darAction = "edit";
-                if ($scope.step1isValidated !== false && $scope.step2isValidated !== false && $scope.step3isValidated !== false && $scope.atLeastOneCheckboxChecked !== false) {
+                if ($scope.formData.eraAuthorized === 'true' && $scope.eraExpirationCount >= 0 && $scope.step1isValidated !== false &&
+                    $scope.step2isValidated !== false && $scope.step3isValidated !== false && $scope.atLeastOneCheckboxChecked !== false) {
                     openResearchConsole();
                 } else {
                     $scope.showValidationMessages = true;
                 }
-            }else{
+            } else {
                 $scope.darAction = "send";
-                if ($scope.step1isValidated && $scope.step2isValidated && $scope.step3isValidated && $scope.atLeastOneCheckboxChecked) {
+                if ($scope.formData.eraAuthorized === 'true' && $scope.eraExpirationCount >= 0 && $scope.step1isValidated &&
+                    $scope.step2isValidated && $scope.step3isValidated && $scope.atLeastOneCheckboxChecked) {
                     $scope.showValidationMessages = false;
                     openResearchConsole();
                 } else {
@@ -115,7 +132,7 @@
             }
         }
 
-        function partialSave(){
+        function partialSave() {
             var modalInstance = $modal.open({
                 animation: false,
                 templateUrl: 'app/modals/partial-dar-modals/save-confirmation-partial-dar.html',
@@ -130,6 +147,53 @@
             });
         }
 
+        function redirectToNihLogin() {
+            var landingUrl = nihUrl.concat($window.location.origin + "/#/rp_application/step1?token%3D%7Btoken%7D");
+            var steps = {step2isValidated: $scope.step2isValidated, step3isValidated: $scope.step3isValidated};
+            $window.localStorage.setItem("tempDar", JSON.stringify($scope.formData));
+            $window.localStorage.setItem("tempSteps", JSON.stringify(steps));
+            $window.location.href = landingUrl;
+        }
+
+        // This method intercepts nih token, validates it and stores it if its ok.
+        // Will retrieve form's data before redirection using localStorage "tempDar" key.
+        function getNihToken (token) {
+            if (token && $window.localStorage.getItem("tempDar") !== null) {
+                cmAuthenticateNihService.verifyNihToken(token, $rootScope.currentUser.dacUserId)
+                .then(function(result) {
+                    retrieveTempDarInfo(result);
+                });
+            }
+        }
+
+        // This method also retains form data when the page reloads to show era credentials ui effect after deleting ERA credentials.
+        // In order to reload persisting info, a param for this purpose is passed in state.go.
+        $scope.deleteNihAccount = function () {
+            cmAuthenticateNihService.eliminateAccount($rootScope.currentUser.dacUserId).then(function() {
+                var steps = {step2isValidated: $scope.step2isValidated, step3isValidated: $scope.step3isValidated};
+                $window.localStorage.setItem("tempDar", JSON.stringify($scope.formData));
+                $window.localStorage.setItem("tempSteps", JSON.stringify(steps));
+                $state.go('rp_application.step1', {persistInfo: true}, {reload:true});
+
+            });
+        };
+
+        // Using local storage, this method retrieves form info data before any redirection from ERA Commons authentication
+        // Used Local Storage is cleared after its use.
+        function retrieveTempDarInfo (result) {
+            if ($window.localStorage.getItem("tempDar") !== null && result !== null) {
+                var tempDar = JSON.parse($window.localStorage.getItem("tempDar"));
+                var tempSteps = JSON.parse($window.localStorage.getItem("tempSteps"));
+                $scope.formData = tempDar;
+                $scope.step2isValidated = tempSteps.step2isValidated;
+                $scope.step3isValidated = tempSteps.step3isValidated;
+                $scope.formData.eraDate = result.eraDate === undefined ? null : result.eraDate;
+                $scope.eraExpirationCount = cmAuthenticateNihService.expirationCount(result.eraExpiration);
+                $scope.formData.eraAuthorized = result.eraAuthorized;
+                $scope.formData.nihUsername = result.nihUsername;
+            }
+            $window.localStorage.clear();
+        }
 
         function verifyCheckboxes() {
 

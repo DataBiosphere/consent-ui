@@ -13,12 +13,19 @@
                 var darInfo = {};
                 return getDarModalSummary(darId)
                     .then(function (data) {
-
                         darInfo.researcherId = data.userId;
+                        // darInfo.profileName = data.researcherName;
                         darInfo.status = data.status;
+                        darInfo.haveEraId = data.havenihUserName;
+                        darInfo.nihUsername = data.nihUserName;
                         darInfo.hasAdminComment = data.rationale !== null;
                         darInfo.adminComment = data.rationale;
                         darInfo.hasPurposeStatements = data.purposeStatements.length > 0;
+                        darInfo.institution = data.institutionName;
+                        darInfo.department = data.department;
+                        darInfo.city = data.city;
+                        darInfo.country = data.country;
+                        darInfo.principalInvestigator = data.principalInvestigator;
 
                         if (darInfo.hasPurposeStatements) {
                             darInfo.purposeStatements = data.purposeStatements;
@@ -37,13 +44,10 @@
                         return cmResearcherService.getResearcherPropertiesForDAR(darInfo.researcherId);
                     })
                     .then(function (data) {
-                        darInfo.pi = data.isThePI === 'true' ? data.profileName : data.piName;
-                        darInfo.havePI = data.havePI === 'true' || data.isThePI === 'true';
+                        darInfo.isThePI = data.isThePI === "true";
+                        darInfo.havePI = data.havePI === "true";
+                        darInfo.pi = darInfo.isThePI === true ? data.profileName : data.piName;
                         darInfo.profileName = data.profileName;
-                        darInfo.institution = data.institution;
-                        darInfo.department = data.department;
-                        darInfo.city = data.city;
-                        darInfo.country = data.country;
                         return new Promise(function (resolve) {
                             resolve(darInfo);
                         });

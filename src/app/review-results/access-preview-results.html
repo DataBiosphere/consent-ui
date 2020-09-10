@@ -47,6 +47,11 @@
                                 <span class="response-label no-padding">{{darInfo.adminComment}}</span>
                             </div>
 
+                            <div ng-if="darInfo.haveEraId" class="row no-margin">
+                                <label class="control-label access-color">NIH eRA Commons ID:</label>
+                                <span class="response-label no-padding">{{darInfo.nihUsername}}</span>
+                            </div>
+
                             <div class="row no-margin">
                                 <label class="control-label access-color">Institution:</label>
                                 <span class="response-label no-padding">{{darInfo.institution}}</span>
@@ -66,7 +71,7 @@
                                 <label class="control-label access-color">Country:</label>
                                 <span class="response-label no-padding">{{darInfo.country}}</span>
                             </div>
-                             <button class="col-lg-12 col-md-12 col-sm-12 col-xs-12 btn download-pdf hover-color" ng-click="downloadDAR()">Download Full Application</button> 
+                             <button class="col-lg-12 col-md-12 col-sm-12 col-xs-12 btn download-pdf hover-color" ng-click="downloadDAR()">Download Full Application</button>
                         </div>
 
                         <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
